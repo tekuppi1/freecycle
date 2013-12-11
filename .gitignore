@@ -1,7 +1,6 @@
 #package
 languages/
 upgrade/
-uploads/
 
 #plugins
 plugins/*.php
