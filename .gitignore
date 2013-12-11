@@ -2,3 +2,16 @@
 languages/
 upgrade/
 uploads/
+
+#plugins
+plugins/*.php
+plugins/akismet
+plugins/buddypress
+plugins/buddypress-translations
+plugins/theme-my-login
+
+#themes
+themes/*.php
+themes/biz-vektor
+themes/twentythirteen
+themes/twentytwelve
