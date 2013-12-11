@@ -1,0 +1,14 @@
+/*
+Theme Name: Freecycle
+Theme URI: http://example.org/themes/dusk/
+Description: Addon of Buddypress
+Version: 1.0
+Author: Kazunori Hashikuchi
+Author URI: http://example.org/
+Template: bp-default
+Tags: buddypress
+*/
+
+.posttitle :hover{
+	color:#4169e1;
+}

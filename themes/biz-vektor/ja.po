@@ -1,0 +1,1361 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: BizVektor Translation Team <info@vektor-inc.co.jp>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+
+msgid ""
+"BizVektor theme will allow you to build a high-quality web site.It is "
+"possible to change the color, to switch to a completely different design. In "
+"addition, it is possible to increase the design by the plug-in."
+msgstr ""
+"BizVektor（ビズベクトル）テーマは管理画面からの設定のみで高品質なビジネスサイ"
+"トを構築する事が出来ます。また、テーマカスタマイザーで色を変更したり、まった"
+"く別のデザインに切り替える事が出来ます。さらに、テーマ拡張プラグインによって"
+"新たに選択出来るデザインを増やす事も出来ます。"
+
+#: 503.php:19
+msgid "Maintenance is now working."
+msgstr "只今メンテナンス作業中です。"
+
+#: archive.php:19
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr "Y年"
+
+#: archive.php:21
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr "Y年n月"
+
+#: archive.php:19
+msgid "Yearly Archives: %s"
+msgstr "年別アーカイブ: %s"
+
+#: archive.php:21
+msgid "Monthly Archives: %s"
+msgstr "月別アーカイブ: %s"
+
+#: archive.php:25
+msgid "Tags : "
+msgstr "タグ : "
+
+msgid "Comment"
+msgstr "コメント"
+
+msgid "&laquo; Older Comments"
+msgstr "&laquo; 古いコメント"
+
+msgid "Newer Comments &raquo;"
+msgstr "新しいコメント &raquo;"
+
+msgid "Meta Keywords"
+msgstr "メタキーワード"
+
+# ############################################################################
+# admin header menu
+# ############################################################################
+msgctxt "BizVektor admin header menu"
+msgid "Managing pages"
+msgstr "管理画面"
+
+msgctxt "BizVektor admin header menu"
+msgid "Visit site"
+msgstr "公開ページを見る"
+
+msgctxt "BizVektor admin header menu"
+msgid "Plugins page"
+msgstr "プラグインの管理"
+
+msgctxt "BizVektor admin header menu"
+msgid "Theme options"
+msgstr "テーマの管理"
+
+msgctxt "BizVektor admin header menu"
+msgid "Customizer"
+msgstr "テーマカスタマイザー"
+
+msgctxt "BizVektor admin header menu"
+msgid "Site title & desctiption"
+msgstr "タイトル・キャッチコピー（説明）"
+
+msgctxt "BizVektor admin header menu"
+msgid "Main visual of homepage"
+msgstr "トップページのメインビジュアル"
+
+msgctxt "BizVektor admin header menu"
+msgid "Setting of front page under the main visual"
+msgstr "トップページのメインビジュアルの下に表示するページの設定"
+
+msgctxt "BizVektor admin header menu"
+msgid "Design setting"
+msgstr "デザインの設定"
+
+msgctxt "BizVektor admin header menu"
+msgid "Contact setting"
+msgstr "連絡先の設定"
+
+msgctxt "BizVektor admin header menu"
+msgid "Home 3PR area"
+msgstr "トップページ3PRエリア"
+
+msgctxt "BizVektor admin header menu"
+msgid "Setting of %1$s & %2$s"
+msgstr "%1$s と %2$s の設定"
+
+msgctxt "BizVektor admin header menu"
+msgid "SEO & GA"
+msgstr "SEOとアクセス解析の設定"
+
+msgctxt "BizVektor admin header menu"
+msgid "Home page setting"
+msgstr "トップページの設定"
+
+msgctxt "BizVektor admin header menu"
+msgid "SNS"
+msgstr "SNS連携の設定"
+
+msgctxt "BizVektor admin header menu"
+msgid "Slide"
+msgstr "スライドショーの設定"
+
+msgctxt "BizVektor admin header menu"
+msgid "Menu setting"
+msgstr "メニューの設定"
+
+msgctxt "BizVektor admin header menu"
+msgid "How to menu setting"
+msgstr "メニューの設定方法"
+
+msgctxt "BizVektor admin header menu"
+msgid "Widget setting"
+msgstr "ウィジェットの設定"
+
+msgctxt "BizVektor admin header menu"
+msgid "Background setting"
+msgstr "背景の設定"
+
+msgctxt "BizVektor admin header menu"
+msgid "Manage of %s"
+msgstr "%s の管理"
+
+msgctxt "BizVektor admin header menu"
+msgid "Entry list of %s"
+msgstr "%s 記事一覧"
+
+msgctxt "BizVektor admin header menu"
+msgid "New post of %s"
+msgstr "%s の新規投稿"
+
+msgctxt "BizVektor admin header menu"
+msgid "Category of %s"
+msgstr "%s のカテゴリー"
+
+msgctxt "BizVektor admin header menu"
+msgid "Manage of page"
+msgstr "ページの管理"
+
+msgctxt "BizVektor admin header menu"
+msgid "Entry list of page"
+msgstr "固定ページのリスト"
+
+msgctxt "BizVektor admin header menu"
+msgid "New post of page"
+msgstr "固定ページの新規追加"
+
+msgctxt "BizVektor admin header menu"
+msgid "Change page list order <br />[ My page order plugin]"
+msgstr "固定ページの並び替え <br />[ My page order プラグイン]"
+
+#: front-page.php:25
+msgid "Posted on"
+msgstr "投稿日"
+
+#: front-page.php:26
+msgid "Category"
+msgstr "カテゴリー"
+
+#: front-page.php:38 page.php:16
+msgid "Edit"
+msgstr "編集"
+
+msgid "Read more"
+msgstr "この記事を読む"
+
+msgid "bt_contact.png"
+msgstr "bt_contact_ja.png"
+
+msgid "bnr_contact.png"
+msgstr "bnr_contact_ja.png"
+
+msgid "Contact us by e-mail"
+msgstr "メールでお問い合わせはこちら"
+
+msgid "Search Result for : %s"
+msgstr "『%s』の検索結果"
+
+msgid "Not found"
+msgstr "ページが見つかりません"
+
+msgid "Yearly archives"
+msgstr "年別アーカイブ"
+
+msgctxt "After year"
+msgid "&nbsp;"
+msgstr "年"
+
+msgid "Add to Hatena Bookmark this entry"
+msgstr "このエントリーをはてなブックマークに追加"
+
+msgctxt "Link to page"
+msgid "Read more"
+msgstr "詳しくはこちら"
+
+msgid "Image of %s"
+msgstr "%sのイメージ"
+
+msgid "Info top （Slug:info-top）"
+msgstr "お知らせトップ（スラッグ:info-top）"
+
+msgid "Don't show contact at the bottom of the page"
+msgstr "ページ下部問い合わせなし"
+
+msgid "No sidebar"
+msgstr "サイドバーなし"
+
+msgid "Child index page"
+msgstr "子ページインデックス"
+
+msgid "Post top"
+msgstr "投稿トップ"
+
+msgid "Sitemap（Slug:info-top）"
+msgstr "サイトマップ（スラッグ：sitemap-page）"
+
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with "
+"different keywords."
+msgstr ""
+"ご指定の検索条件に合う投稿がありませんでした。他のキーワードでもう一度検索し"
+"てみてください。"
+
+msgid "<dt>Tags</dt><dd>%1$s</dd>"
+msgstr "<dt>投稿タグ</dt><dd>%1$s</dd>"
+
+# ############################################################################
+# front-page
+# ############################################################################
+msgid ""
+"* In the page [Settings] &raquo; [Display Settings], if the setting of the "
+"front page is not [page], nothing is displayed in this area."
+msgstr ""
+"※このエリアは「設定」→「表示設定」でフロントページの設定が「固定ページ」以外"
+"の場合は何も表示されません。"
+
+msgid ""
+"* If empty, the body field of a page that you set on the front page does not "
+"display anything."
+msgstr ""
+"※フロントページに設定した固定ページの本文欄が未入力の場合も何も表示されませ"
+"ん。"
+
+msgid ""
+"* If you have set a fixed page to the front page, paging does not appear in "
+"the bottom of the post the list at the bottom."
+msgstr ""
+"※フロントページに固定ページを設定している場合、下部の投稿リストの下にはページ"
+"ングが表示されません。"
+
+msgid "Title display setting"
+msgstr "↑ タイトルの表示設定"
+
+msgid "Change display page"
+msgstr "↑ 表示するページを変更する"
+
+# ---------------
+# Google Analytics setting
+# ---------------
+msgid "Rich theme options item"
+msgstr "豊富なオプション"
+
+msgid ""
+"Not only this part, you can change from theme customizer and theme options "
+"screen various items."
+msgstr ""
+"この部分はテーマオプション画面か、テーマカスタマイザーから変更する事が出来ま"
+"す。"
+
+msgid "Various designs available"
+msgstr "豊富なデザイン"
+
+msgid ""
+"BizVektor will allow you not only can change the color of the site, to "
+"switch to a different design."
+msgstr ""
+"BizVektorはサイトの色を変更出来るだけではなく、違うデザインに切り替える事が出"
+"来ます。"
+
+msgid "Optimized for business web site"
+msgstr "ビジネス用に最適化"
+
+msgid ""
+"It features such as induction to the query and child page list template, a "
+"variety of functions essential to business."
+msgstr ""
+"子ページリスト用テンプレートや問い合わせへの誘導など、ビジネスに必須な様々な"
+"機能を備えています。"
+
+# ############################################################################
+# functions.php
+# ############################################################################
+#: functions.php:96
+msgid "Sidebar(Front page only)"
+msgstr "サイドバー（トップのみ）"
+
+#: functions.php:98
+msgid "This widget area display front page only."
+msgstr ""
+"トップページにのみ表示されるサイドバーウィジェットです。ドラッグ＆ドロップで"
+"必要なものだけ入れてください。バナーやブログパーツなどは、『テキスト』ウィ"
+"ジェットを使用して、ソースコードを張り付けられます。サイドバーウィジェット"
+"（共通）の上に表示されます。"
+
+#: functions.php:105
+msgid "Sidebar(Post content only)"
+msgstr "サイドバー（投稿・問い合わせバナー上）"
+
+#: functions.php:107
+msgid ""
+"This widget area display post content only.It is displayed on the Contact "
+"banner."
+msgstr ""
+"投稿コンテンツのページにのみ表示されるウィジェットです。問い合わせバナーの上"
+"に表示されます。"
+
+#: functions.php:114
+msgid "Sidebar(All pages upper part)"
+msgstr "サイドバー（共通・上）"
+
+#: functions.php:116
+msgid ""
+"This widget area display all pages upper part.It is displayed on the "
+"facebook & twitter banner."
+msgstr ""
+"サイドバーに表示するウィジェットです。facebook,twitterバナーの上に表示されま"
+"す。"
+
+#: functions.php:123
+msgid "Sidebar(All pages under part)"
+msgstr "サイドバー（共通・下）"
+
+#: functions.php:125
+msgid ""
+"This widget area display all pages upper part.It is displayed under the "
+"facebook & twitter banner."
+msgstr ""
+"サイドバーに表示するウィジェットです。facebook,twitterバナーの下に表示されま"
+"す。"
+
+msgctxt "admin menu"
+msgid "category"
+msgstr "カテゴリー"
+
+msgid ""
+"If you want to set a keyword individually to this page, enter a , delimiter "
+"(optional)."
+msgstr ""
+"このページで個別に設定するキーワードを , 区切りで入力して下さい（任意）"
+
+msgctxt "link to seo setting"
+msgid "Theme option"
+msgstr "テーマオプション"
+
+msgid "* keyword to set common to the entire site can be set from %s."
+msgstr "※サイト全体に共通して設定するキーワードは %s から設定出来ます。"
+
+# ---------------
+# Head description
+# ---------------
+msgid "About %s"
+msgstr "%s について。"
+
+msgctxt "Year archive description"
+msgid "Article of %s."
+msgstr "%s 年の記事。"
+
+msgctxt "Archive description"
+msgid "Article of %s."
+msgstr "%s の記事。"
+
+msgid "Your comment is awaiting approval."
+msgstr "あなたのコメントは承認待ちです。"
+
+# ---------------
+# biz_vektor_content_nav
+# ---------------
+msgid "<span class=\"meta-nav\">&larr;</span> 古い投稿"
+msgstr "<span class=\"meta-nav\">&larr;</span> 古い投稿"
+
+msgid "New post <span class=\"meta-nav\">&rarr;</span>"
+msgstr "新しい投稿 <span class=\"meta-nav\">&rarr;</span>"
+
+# ############################################################################
+msgid "Skip menu"
+msgstr "メニューを飛ばす"
+
+msgid "No entry."
+msgstr "記事はありません"
+
+#: inc/theme-options-edit.php:5
+#, php-format
+msgid "%s Theme Options"
+msgstr "%s テーマオプション"
+
+msgid "Theme Options"
+msgstr "テーマオプション"
+
+msgid "Right sidebar"
+msgstr "右サイドバー"
+
+msgid "Left sidebar"
+msgstr "左サイドバー"
+
+msgctxt "Select label"
+msgid "[ Select ]"
+msgstr "[ 選択してください ]"
+
+msgid "Free WordPress Theme BizVektor for business"
+msgstr "無料WordPressテーマ BizVektor(ビズベクトル)"
+
+msgctxt "footer"
+msgid "Vektor,Inc."
+msgstr ""
+"株式会社ベクトル -ウェブサイト制作・WordPressカスタマイズ- [ 愛知県名古屋市 ]"
+
+msgctxt "Font select"
+msgid "serif"
+msgstr "\"ＭＳ Ｐ明朝\",\"Hiragino Mincho Pro W6\",serif"
+
+msgctxt "Font select"
+msgid "Meiryo,Osaka,sans-serif"
+msgstr ""
+"\"ヒラギノ角ゴ Pro W3\",\"Hiragino Kaku Gothic Pro\",\"メイリオ\",Meiryo,"
+"Osaka,\"ＭＳ Ｐゴシック\",\"MS PGothic\",sans-serif"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Design settings"
+msgstr "デザイン設定"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Design"
+msgstr "デザイン"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Header logo image"
+msgstr "ヘッダーロゴ画像"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "URL of header logo image"
+msgstr "ヘッダーロゴ画像URL"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Footer logo image"
+msgstr "フッターロゴ画像"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "URL of footer logo image"
+msgstr "フッターロゴ画像URL"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Layout"
+msgstr "レイアウト"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Font of headings"
+msgstr "見出しの書体"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Font of Menus"
+msgstr "グローバルメニューの書体"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Serif"
+msgstr "明朝"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Sanserif"
+msgstr "ゴシック"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Contact settings"
+msgstr "連絡先の設定"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Message"
+msgstr "お問い合わせメッセージ"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Phone number"
+msgstr "電話番号"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Office hours"
+msgstr "受付時間"
+
+msgctxt "biz-vektor theme-customizer"
+msgid ""
+"Site / Company / Store / Service name. This is displayed in footer let "
+"bottom and footer copyright."
+msgstr ""
+"フッター左下とフッターコピーライトに表示させるサイト名（あるいは企業名・店舗"
+"名・サービス名）"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Company address"
+msgstr "住所"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "The URL of contact page"
+msgstr "問い合わせページのURL"
+
+msgid "3PR area settings"
+msgstr "トップページ3PRエリアの設定"
+
+msgid "Title"
+msgstr "タイトル"
+
+msgid "Description"
+msgstr "概要"
+
+msgid "URL"
+msgstr "リンク先ページのURL"
+
+msgid "Image for PC"
+msgstr "画像URL"
+
+msgid "310px width is recommended."
+msgstr "横 310px 程度推奨"
+
+msgid "Image for smartphone"
+msgstr "スマホ用画像URL"
+
+msgid "120px by 120px is recommended."
+msgstr "120×120px 程度推奨"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Image for PC : 310px width is recommended."
+msgstr "画像（横 310px 程度長方形推奨）"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Image for smartphone : 120px by 120px is recommended."
+msgstr "スマホ用画像（120×120px 程度推奨）"
+
+msgid "Plain"
+msgstr "プレーン"
+
+msgid "Select"
+msgstr "選択して下さい"
+
+msgid "How to set up Menus"
+msgstr "メニューの設定方法"
+
+msgid "*optional"
+msgstr "* 省略可"
+
+msgid "Select image"
+msgstr "画像を選択"
+
+msgid ""
+"* Use this feature when the site name has become longer for the SEO measures."
+msgstr ""
+"* 未記入の場合はサイトのタイトルが表示されます。<br />* SEO対策の為にサイト名"
+"が長くなってしまった場合に使用します。<br />* フッター左下はフッター画像が登"
+"録されている場合はその画像が表示され、ここで入力した内容はフッターロゴ画像の"
+"代替テキストとして反映されます。<br />* フッターのロゴ画像はデザインの設定よ"
+"り登録出来ます。"
+
+msgid "Recommended : less than 60px height"
+msgstr ""
+"【 推奨サイズ　：　高さ60px以下 】　* 60pxより大きい場合は自動的に60pxに縮小"
+"します。"
+
+msgid "Recommended : 180-250px width"
+msgstr "【 推奨サイズ　：　180-250px 】 * 大きい場合は自動的に縮小します。"
+
+msgid "ex) "
+msgstr "【記入例】"
+
+# ############################################################################
+# Theme options / Customizer
+# ############################################################################
+msgid "Theme customizer"
+msgstr "テーマカスタマイザー"
+
+msgid "Thank you for using BizVektor."
+msgstr "BizVektorのご利用ありがとうございます。"
+
+msgid "You can change basic design settings in %s"
+msgstr "デザインなど基本的な設定は %s から行う事が出来ます。"
+
+msgid "You can change other settings in this page."
+msgstr "この画面では更に細かい項目やSNS連携などを設定します。"
+
+# ######################################
+# tab label
+# ######################################
+msgctxt "BizVektor option tab label"
+msgid "Design"
+msgstr "デザイン"
+
+msgctxt "BizVektor option tab label"
+msgid "Contact"
+msgstr "連絡先"
+
+msgctxt "BizVektor option tab label"
+msgid "TopPR"
+msgstr "3PRエリア"
+
+msgctxt "BizVektor option tab label"
+msgid "Homepage"
+msgstr "トップページ"
+
+msgctxt "BizVektor option tab label"
+msgid "Slide"
+msgstr "スライドショー"
+
+msgctxt "BizVektor option tab label"
+msgid "SNS"
+msgstr "SNS連携"
+
+# ######################################
+# Design Setting
+# ######################################
+msgctxt "biz-vektor theme-options-edit"
+msgid "Design settings"
+msgstr "デザインの設定"
+
+msgid "This section is also able to change from %s"
+msgstr "この項目は %s からも設定が可能です"
+
+msgid "Design skin"
+msgstr "デザイン"
+
+msgid ""
+"* If there is a setting item of each design skin, after you save your "
+"changes, you can set from theme customizer."
+msgstr ""
+"各デザイン固有のセッティング項目がある場合は、変更を保存した後で、テーマカス"
+"タマイザーより設定出来ます。"
+
+# ---------------
+# menu divide
+# ---------------
+msgctxt "biz-vektor theme-customizer"
+msgid "Number of header menus"
+msgstr "ヘッダーメニューの数"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "Not specified (left-justified)"
+msgstr "指定なし（左詰め）"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "4"
+msgstr "4分割"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "5"
+msgstr "5分割"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "6"
+msgstr "6分割"
+
+msgctxt "biz-vektor theme-customizer"
+msgid "7"
+msgstr "7分割"
+
+# ---------------
+# layout
+# ---------------
+msgid "You can select 1-column from below: "
+msgstr "* １カラムについては、以下２つの方法で設定できます。"
+
+msgid "[Top page] %s"
+msgstr "【トップページ】 このページの「%s」"
+
+msgid "[page] Edit Page > Page Attributes > Template"
+msgstr "【固定ページ】 各ページ編集画面のテンプレート選択ドロップダウン"
+
+# ---------------
+# Deployment of the sidebar menu
+# ---------------
+msgid "Deployment of the sidebar menu"
+msgstr "サイドバーのメニューの展開"
+
+msgid ""
+"If the site hierarchy is deep, you can choose to hide this menu hierarchy "
+"other than the fixed page you are currently viewing."
+msgstr ""
+"階層が深いサイトの場合、サイドバーのメニュー数が多くなってしまうので、現在表"
+"示している固定ページの子階層以外のメニュー（第３階層以下）を非表示にする事が"
+"出来ます。"
+
+msgid "Display"
+msgstr "表示する"
+
+msgid "Hide"
+msgstr "表示しない"
+
+msgid "It can not be set from the theme customizer."
+msgstr "この項目はテーマカスタマイザーからは設定出来ません。"
+
+# ######################################
+# Contact Information Setting
+# ######################################
+msgid "Please feel free to inquire."
+msgstr "お気軽にお問い合わせください。"
+
+msgid "Weekdays except holidays"
+msgstr "土・日・祝日除く"
+
+msgid "BizVektor, Inc."
+msgstr "BizVektor株式会社"
+
+msgid "This is displayed in footer let bottom and footer copyright."
+msgstr "* フッター左下に表示されます"
+
+msgid ""
+"316, Minami Sakae Building,<br />1-22-16, Sakae, Naka-ku, Nagoya-shi,<br /"
+">Aichi 460-0008 JAPAN<br />TEL / FAX +81-52-228-9176"
+msgstr ""
+"〒000-000<br />愛知県あま市○○○丁目○○番地<br />TEL : 000-000-0000 / FAX : "
+"000-000-0000"
+
+msgid "or"
+msgstr "あるいは"
+
+msgid ""
+"* If you fill in the blank, contact banner will be displayed in the sidebar."
+msgstr "* 入力すると自動的にお問い合わせバナーが表示されます。"
+
+msgid "If not, it does not appear."
+msgstr "空欄の場合はお問い合わせバナーは表示されません。"
+
+# ######################################
+# 3PR area
+# ######################################
+msgid "The display of the 3PR area of a home page."
+msgstr "3PRエリアの表示設定"
+
+msgid "Check this box if you do not want to see the 3PR area on the home page."
+msgstr "チェックを入れると3PRエリアが表示されなくなります。"
+
+msgid "I want to hide the top 3PR area"
+msgstr "3PRエリアを表示しない"
+
+msgid "* It is effective without the image."
+msgstr "* 画像はよくわからなければ空欄でも問題ありません。"
+
+msgid "* You can register image for PC and for smartphone."
+msgstr ""
+"* 画像を設定する場合はPC用（横幅310px程度高さ自由）とスマホ用（120px程度正方"
+"形）の２種類を登録して下さい。"
+
+msgid "PR area"
+msgstr "PRエリア"
+
+# ######################################
+# Information and Blog
+# ######################################
+msgid "Settings of [ %s ] and [ %s ]."
+msgstr "「%s」と「%s」の設定"
+
+msgid "* It does not appear if there is no post at all."
+msgstr "* 記事が１件もない場合は表示されません。"
+
+msgid ""
+"* If the excerpt field is filled, the content will appear in the &quot;"
+"excerpt&quot;. If not, the text will be displayed in a certain number of"
+msgstr ""
+"* 『抜粋』は抜粋欄に記入があればその内容を、なければ本文文頭より一定の文字数"
+"を表示します。"
+
+msgctxt "no link"
+msgid "Plugins page"
+msgstr "プラグイン管理ページ"
+
+msgid ""
+"In the case of corporal, full text will be displayed plug-in [WP Multibyte "
+"Patch] is not activated if the Japanese version."
+msgstr ""
+"<span class=\"alert\">但し、プラグイン『WP Multibyte Patch』が有効化されてい"
+"ないと全文が表示されます。</span>"
+
+msgid "Please enable [WP Multibyte Patch] from the %s."
+msgstr "%s から『WP Multibyte Patch』を有効化して下さい。"
+
+msgid ""
+"<span class=\"alert\">Thumbnail image of the article</span> is displayed."
+msgstr ""
+"<span class=\"alert\">画像は該当する各記事のアイキャッチ画像</span>が表示され"
+"ます。"
+
+msgid ""
+"Eye-catching image, you can register from the widget at the bottom right of "
+"each article edit screen."
+msgstr "アイキャッチ画像は各記事編集画面の右下のウィジェットから登録します。"
+
+msgid ""
+"If you do not have a widget, please check the item of &quot;thumbnail&quot; "
+"at the top right of the screen from the &quot;Screen options&quot; tab."
+msgstr ""
+"ウィジェットが無い場合は、画面右上の「表示」タブより「アイキャッチ画像」の項"
+"目にチェックを入れて下さい。"
+
+msgid "Change the title"
+msgstr "表記の変更"
+
+msgid "Display layout of &quot; %s &quot on the top page."
+msgstr "%s のトップページでの表示レイアウト"
+
+msgid "Display layout of &quot; %s &quot on the archive page."
+msgstr "%s のアーカイブページでの表示レイアウト"
+
+msgid "Title only"
+msgstr "タイトルのみ"
+
+msgid "With excerpt and thumbnail"
+msgstr "抜粋とサムネイル画像あり"
+
+msgid "Number of %s to be displayed on the home page."
+msgstr "トップページでの %s の表示件数"
+
+msgctxt "top page post count"
+msgid "posts"
+msgstr "件"
+
+msgid "If you enter &quot0&quot, this section itself will disappear."
+msgstr "0 にするとタイトルごと表示されなくなります。"
+
+# ######################################
+# SEO and Google Analytics Setting
+# ######################################
+msgid "SEO and Google Analytics Setting"
+msgstr "SEO と Google Analytics の設定"
+
+msgid "&lt;title&gt; tag of homepage"
+msgstr "トップページの&lt;title&gt;タグ"
+
+msgid "title of the site"
+msgstr "サイトタイトル"
+
+msgid "Normally, BizVektor will include the %s in the title tag."
+msgstr "BizVektorは通常 %s が全ページの&lt;title&gt;に入ります。"
+
+msgid ""
+"For example, it appears in the form of <br />&lt;title&gt;page title | site "
+"title&lt;/title&gt;<br /> if fixed page."
+msgstr ""
+"例えば固定ページであれば<br />&lt;title&gt;固定ページ名 | サイトタイトル&lt;/"
+"title&gt; <br />というような形式で出力されます。<br />"
+
+msgid ""
+"However, evaluation of the search engines so bad number of characters in the "
+"&lt;title&gt; is too long, <strong>and incorporate keywords that wants to be "
+"retrieved by most, are summarized as short as possible</strong>, it is "
+"desirable that the %s."
+msgstr ""
+"しかし、&lt;title&gt;の文字数が長くなりすぎると検索エンジンからの評価が逆に悪"
+"くなるので、%s は<strong>一番検索されたいキーワードを盛り込みつつなるべく短く"
+"まとめる</strong>事が望ましいです。<br />"
+
+msgid ""
+"However, it will not be connected to such as a page name, as described above "
+"in the top page, it is possible to put the &lt;title&gt; longer bit more, it "
+"is now can be set separately here."
+msgstr ""
+"ただ、トップページにおいては上記のように他のタイトルと連結されないので、もう"
+"少し長めの&lt;title&gt;をつける事が出来るために、ここで別途設定する事ができる"
+"ようになっています。"
+
+msgid "Site title will be applied if this field is blank."
+msgstr "未記入の場合はサイトのタイトルが反映されます。"
+
+# ---------------
+# Common keywords
+# ---------------
+msgid "Common keywords"
+msgstr "共通キーワード"
+
+msgid ""
+"In the keywords meta tag, the keywords you put in common throughout the "
+"site , Please enter separated."
+msgstr ""
+"metaタグのキーワードで、サイト全体で共通して入れるキーワードを , 区切りで入力"
+"して下さい。"
+
+msgid ""
+"* You do not have to think very seriously because it does not affect the "
+"evaluation of search engine from now."
+msgstr ""
+"* 現在は検索エンジンからの評価に影響しませんのであまり真剣に考えなくてもかま"
+"いません。"
+
+msgid ""
+"* The keywords of each page individually, enter from edit page of each "
+"article. About 10 maximum in conjunction with the common keywords is "
+"desirable."
+msgstr ""
+"* 各ページ個別のキーワードについては、それぞれの記事の編集画面より入力して下"
+"さい。共通キーワードと合わせて最大10個程度が望ましいです。"
+
+msgid "* Not required , at the end of the keyword column last."
+msgstr "* 最後のキーワード欄の末尾には , は必要ありません。"
+
+msgid "Not required , at the end of the keyword column last."
+msgstr "【記入例】 WordPress,テンプレート,テーマ,無料,GPL"
+
+# ---------------
+# Description setting
+# ---------------
+msgctxt "Description setting"
+msgid "Description"
+msgstr "ディスクリプション"
+
+msgid ""
+"What you have to fill in the edit page of each page in the \"excerpt\" field "
+"is reflected in the description of meta tags."
+msgstr ""
+"各ページの編集画面の「抜粋」欄に記入した内容がmetaタグのディスクリプションに"
+"反映されます。"
+
+msgid ""
+"In the search results screen of search sites such as Google, description for "
+"meta tags appears, for example, under the site title."
+msgstr ""
+"metaタグのディスクリプションはGoogleなどの検索サイトの検索結果画面で、サイト"
+"タイトルの下などに表示されます。"
+
+msgid ""
+"If the excerpt field is blank, it is the specification to be applied as a "
+"description is 240 characters from text beginning of a sentence."
+msgstr ""
+"抜粋欄が未記入の場合は、本文文頭より240文字がディスクリプションとして適用され"
+"る仕様となっています。"
+
+msgid ""
+"* If the excerpt field is not visible, there is a tab called \"View\" in the "
+"upper right corner of the edit page, check box to display the \"excerpt\" "
+"field because you come out when you click there, check."
+msgstr ""
+"* 抜粋欄が表示されていない場合は、編集画面の右上に「表示」というタブがありま"
+"すので、そこをクリックすると「抜粋」欄を表示するチェックボックスが出てきます"
+"ので、チェックして下さい。"
+
+# ---------------
+# Google Analytics setting
+# ---------------
+msgid "Google Analytics Setting"
+msgstr "Google Analytics設定"
+
+msgid ""
+"Please fill in the ID of the Analytics When you embed tags GoogleAnalytics."
+msgstr "GoogleAnalyticsのタグを埋め込む場合はAnalyticsのIDを記入して下さい。"
+
+msgid ""
+"Please select the type of analysis to be output tag. (It does not matter if "
+"you skip if you do not know well.)"
+msgstr ""
+"出力する解析タグの種類を選択して下さい。（よくわからない場合は飛ばしてかまい"
+"ません。）"
+
+msgid "To output only tag analysis of normal (default)"
+msgstr "通常の解析タグのみ出力する（デフォルト）"
+
+msgid "I want to output only tag analysis of Universal Analytics"
+msgstr "Universal Analyticsの解析タグのみ出力する"
+
+msgid "I want to output both tags"
+msgstr "両方の解析タグを出力する"
+
+# ######################################
+# Top page setting
+# ######################################
+msgid "Home page setting"
+msgstr "トップページの設定"
+
+msgid "Main visual"
+msgstr "メインビジュアル"
+
+msgid "You can set a slide show or still image."
+msgstr ""
+"トップページのメインビジュアルについて、静止画またはスライドショーを設定出来"
+"ます。"
+
+msgid "Still image setting"
+msgstr "トップページ メインビジュアルの設定はこちら"
+
+msgid "Slide show setting"
+msgstr "トップページ スライドショーの設定はこちら"
+
+msgid "Page to be displayed below the main visual"
+msgstr "トップページのメインビジュアルの下に表示するページ"
+
+msgid "Setting of the page to display just below the main visual of home page"
+msgstr "トップページのメインビジュアルのすぐ下に表示するページを設定します。"
+
+msgid "Select &quot;Recent post&quot; or &quot;page&quot;."
+msgstr ""
+"『フロントページの表示』で『最新の投稿』または『固定ページ』を選択して下さ"
+"い。"
+
+msgid "Do not select the pull-down &quot;post pages&quot;."
+msgstr "『投稿ページ』のプルダウンは選択しないで下さい。"
+
+msgid ""
+"If blank, the body of the page you have set will be displayed 3PR area is "
+"just below the main visual. Therefore, it can be a blank text field is "
+"Without having to fill in particular."
+msgstr ""
+"設定したページの本文が未記入の場合、メインビジュアルのすぐ下には3PRエリアが表"
+"示されますので、特に記入する事がなければ本文欄は未記入でも構いません。"
+
+msgid ""
+"Check this box if you want to display the title of the page to be displayed "
+"in the main visual under the home page."
+msgstr ""
+"トップページのメインビジュアル下に表示するページのタイトルを表示する場合は"
+"チェックを入れて下さい。"
+
+msgid "Display the title"
+msgstr "タイトルを表示する"
+
+msgid "Home 3PR area"
+msgstr "トップページ3PRエリア"
+
+msgid "Setting the Home 3PR area is here"
+msgstr "トップページ3PRエリアの設定はこちら"
+
+msgid "The display of the side bar of a home page."
+msgstr "トップページのサイドバーの表示"
+
+msgid "Check this box if you do not want to see the side bar on the home page."
+msgstr "トップページのサイドバーを表示しない場合はチェックを入れて下さい。"
+
+msgid "I want to hide the sidebar"
+msgstr "サイドバーを非表示にする"
+
+msgid "Display number of %s"
+msgstr "%s の表示件数"
+
+msgid "Please set from the [ Setting the %s and %s ]."
+msgstr "「%s と %s の設定」</a>から設定ください。"
+
+# ---------------
+# RSS
+# ---------------
+msgid "RSS information display setting"
+msgstr "RSS情報表示設定"
+
+msgid ""
+"Enter the address of the RSS if you are using the RSS of related sites and "
+"external blog, then be posted on the home page of this site for updates."
+msgstr ""
+"外部ブログや関連サイトのRSSを利用していて、更新情報をこのサイトのトップページ"
+"に掲載する場合はRSSのアドレスを入力して下さい。"
+
+# ---------------
+# Home bottom free area
+# ---------------
+msgid "Home bottom free area"
+msgstr "トップページ下部フリーエリア"
+
+msgid "It is displayed in the lower part of the list and [%s] and [%s]."
+msgstr "「%s」や「%s」のリストの下の部分に表示されます。"
+
+# ######################################
+# Slide Setting
+# ######################################
+msgid "Slide　show　Setting"
+msgstr "スライドショーの設定"
+
+msgid ""
+"Please enter the URL of the image, such as that displayed when you want to "
+"set the slide show."
+msgstr "スライドショーを設定する場合は表示する画像のURLなどを入力下さい。"
+
+msgid "The recommended size of the image is 950 × 250px."
+msgstr "画像の推奨サイズは950×250pxです。"
+
+msgid "Main visual Home"
+msgstr "トップページのメインビジュアル"
+
+msgid "%s will be displayed if the slide show is not set."
+msgstr "スライドショーが設定されていない場合は %s が表示されます。"
+
+msgid ""
+"It can be only the URL of the image. However, the link is set in the image "
+"If you enter a link URL."
+msgstr ""
+"画像のURLだけでも構いませんがリンク先を入力すると画像クリックでリンクするよう"
+"になります。"
+
+msgid "Please enter a character the contents of the image alternate text."
+msgstr "代替テキストはその画像の内容を文字で入力して下さい。"
+
+msgid ""
+"It becomes easy to hit to search the direction as which it was entered by "
+"the contents. "
+msgstr "記入した方がその内容で検索にヒットしやすくなります。"
+
+msgid ""
+"Moreover, when a visually handicapped person peruses, a text-to-speech-"
+"reading browser reads out the character. "
+msgstr ""
+"また、目の不自由な人が閲覧した際には音声読み上げブラウザがその文字を読み上げ"
+"ます。"
+
+msgid "Link URL"
+msgstr "リンク先URL"
+
+msgid "Image URL"
+msgstr "画像URL"
+
+msgid "Select a image"
+msgstr "画像を選択"
+
+msgid "Alternate text"
+msgstr "代替テキスト"
+
+msgctxt "Slide undisplayed"
+msgid "Undisplayed"
+msgstr "非表示にする"
+
+msgid "Open in a blank window"
+msgstr "別ウィンドウで開く"
+
+msgid ""
+"* If you visit in the environment in which the communications line is slow, "
+"because of the time or bought in the display, it is subject to deduction "
+"from search engine or withdrawal of the user, three or less is recommended."
+msgstr ""
+"* スライドショーは最大５枚まで設定出来ますが、通信回線が遅い環境で閲覧した場"
+"合、表示に時間がかったり、ユーザーの離脱や検索エンジンからの減点対象となる"
+"為、３枚以内推奨です。"
+
+# ######################################
+# SNS
+# ######################################
+msgid "SNS cooperation"
+msgstr "SNS連携"
+
+msgid "There is no problem with setting later if you do not know well."
+msgstr "よくわからない場合は後で設定しても問題ありません。"
+
+msgid ""
+"Banner will be displayed if you enter a URL if you want to link to a "
+"personal account or facebook page."
+msgstr ""
+"facebookページか個人アカウントにリンクする場合はリンク先アドレスを入力すると"
+"バナーが表示されます。"
+
+msgid "facebook application ID"
+msgstr "facebookアプリケーションID"
+
+msgid "I will check and get the application ID"
+msgstr "アプリケーションIDを確認・取得する"
+
+msgid ""
+"* If application ID is not inputted, neither a Like button nor the comment "
+"field displays and operates correctly."
+msgstr ""
+"* アプリケーションIDを入力しないとボタンやコメント欄が表示・正しく動作しませ"
+"ん。"
+
+msgid ""
+"Please search such as [facebook application ID acquisition] If you do not "
+"know much about how to get application ID of facebook."
+msgstr ""
+"facebookのアプリケーションIDの取得方法についてよくわからない場合は「facebook "
+"アプリケーションID 取得」などで検索して下さい。"
+
+msgid "facebook user ID (optional)"
+msgstr "facebookユーザーID （任意）"
+
+msgid "Please enter the facebook user ID of the administrator."
+msgstr "管理者のfacebookユーザーIDを入力して下さい。"
+
+msgid "* It is not the application ID of the facebook page."
+msgstr "* facebookページのアプリケーションIDではありません。"
+
+msgid ""
+"The personal ID of facebook, you can see when you access the http://graph."
+"facebook.com/(own url name(example: hidekazu.ishikawa))."
+msgstr ""
+"facebookの個人IDは、http://graph.facebook.com/★自分のURL名（例：hidekazu."
+"ishikawa）★ にアクセスするとわかります。"
+
+msgid ""
+"Please search such as [Finding facebook user ID] If you still do not know "
+"well."
+msgstr ""
+"それでもよくわからない場合は「facebook ユーザーID 調べ方」などで検索して下さ"
+"い。"
+
+# ---------------
+# twitter account
+# ---------------
+msgid "twitter account"
+msgstr "twitterアカウント"
+
+msgid ""
+"If you want to link to twitter, banner will be displayed if you enter the "
+"account name."
+msgstr ""
+"twitterにリンクする場合はアカウント名を入力するとバナーが表示されます。"
+
+msgid ""
+"* If you want to use, such as widgets twitter, can be left blank, paste the "
+"source code by using the [text] from %s here."
+msgstr ""
+"* twitterのウィジェットなどを利用したい場合は、ここは空欄のままにして、%s よ"
+"り『テキスト』を利用してソースコードを貼り付けて下さい。"
+
+# ---------------
+# OGP
+# ---------------
+msgid "OGP default image"
+msgstr "デフォルトのOGPイメージ"
+
+msgid ""
+"If, for example, they pressed the button of facebook [Like], it is an image "
+"that appears in the timeline of facebook."
+msgstr ""
+"facebookの「いいね」ボタンを押された場合などに、facebookのタイムラインに表示"
+"される画像です。"
+
+msgid ""
+"If the eye-catching image is specified in the page, eye-catching image takes "
+"precedence."
+msgstr "ページにアイキャッチ画像が指定されてる場合はそちらが優先されます。"
+
+msgid ""
+"* Picture sizes are 300x300 pixels or more and picture ratio 16:9 "
+"recommendation."
+msgstr "* 画像サイズは300×300ピクセル以上、画像比率16:9推奨。"
+
+# ---------------
+# Social buttons / facebook comment
+# ---------------
+msgid "Social buttons"
+msgstr "ソーシャルボタン"
+
+msgid "Please check the type of page that displays the social button."
+msgstr "ソーシャルボタンを表示するページの種類にチェックを入れて下さい。"
+
+msgctxt "sns display"
+msgid "Home page"
+msgstr "トップページ"
+
+msgctxt "sns display"
+msgid "Page"
+msgstr "固定ページ"
+
+msgctxt "sns display"
+msgid "single page"
+msgstr "投稿ページ"
+
+msgid ""
+"Also the type of page that checked, if there is a page you do not want to "
+"display, and enter by the delimiter , the ID of the page."
+msgstr ""
+"チェックを入れたページの種類でも表示したくないページがある場合はIDを , 区切り"
+"で入力して下さい。"
+
+msgid "facebook comments box"
+msgstr "facebook コメント欄"
+
+msgid "Please check the type of the page to display the facebook comments."
+msgstr "facebookコメント欄を表示するページにはチェックを入れて下さい。"
+
+# ---------------
+# facebook LikeBox
+# ---------------
+msgid ""
+"If you are installing a facebook LikeBox, please check the installation "
+"place."
+msgstr "facebook LikeBox を設置する場合は設置個所にチェックを入れて下さい。"
+
+msgid "* Please be sure to set facebook application ID."
+msgstr ""
+"* facebook ページのアプリケーションIDも必ず設定してください。余白が出来るなど"
+"正しく表示されません。"
+
+msgid "URL of the facebook page."
+msgstr "facebookページのURL"
+
+msgid "Display of stream"
+msgstr "ストリームの表示"
+
+msgid "Display of face"
+msgstr "顔の表示"
+
+msgid "Height of LikeBox"
+msgstr "LikeBoxの高さ"
+
+# ---------------
+# facebook LikeBox
+# ---------------
+msgid "Do not output the OGP"
+msgstr "OGPを出力しない"
+
+msgid ""
+"If the other plug-ins is outputting the OGP, Do not output the OGP of "
+"BizVektor."
+msgstr ""
+"他のプラグインがOGPを出力している場合はBizVektorのOGPを出力しないようにして下"
+"さい。"
+
+msgid "I want to output the OGP tags BizVektor"
+msgstr "BizVektorのOGPタグを出力する"
+
+msgid "Do not output OGP tags BizVektor"
+msgstr "BizVektorのOGPタグを出力しない"
+
+msgid "Page top"
+msgstr "このページの先頭へ戻る"
+
+# ######################################
+# Customizer
+# ######################################
+msgid "Keycolor"
+msgstr "キーカラー"
+
+msgid "Keycolor(Right)"
+msgstr "キーカラー（明）※リンクにマウスオーバーした時の色です"
+
+msgid "Keycolor(Dark)"
+msgstr "キーカラー（暗い）※メニューやフッターに奥行きを出します"
+
+msgid "Set the color from theme customizer"
+msgstr "テーマカスタマイザーで色を設定する"
+
+# ######################################
+# Default color
+# ######################################
+msgctxt "Default color setting"
+msgid "Default color setting"
+msgstr "Default カラー設定"
+
+# ######################################
+# Calmly color setting
+# ######################################
+msgctxt "Calmly color setting"
+msgid "Calmly color setting"
+msgstr "Calmly カラー設定"
