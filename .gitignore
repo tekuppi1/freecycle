@@ -14,5 +14,7 @@ themes/*.php
 themes/biz-vektor
 themes/twentythirteen
 themes/twentytwelve
+themes/twentyfourteen
+themes/bp-default
 
 /index.php
