@@ -1,4 +1,6 @@
 <?php
+// TODO: 記事を投稿した時点で、初期テーブルにデータをインサートする
+
 // アクションフック登録
 add_action('wp_ajax_giveme', 'giveme');
 add_action('wp_ajax_cancelGiveme', 'cancelGiveme');
@@ -6,17 +8,12 @@ add_action('wp_ajax_confirmGiveme', 'confirmGiveme');
 add_action('wp_ajax_exhibiter_evaluation', 'exhibiter_evaluation');
 add_action('wp_ajax_bidder_evaluation', 'bidder_evaluation');
 add_action('wp_ajax_finish', 'finish');
-add_action('wp_ajax_new_entry', 'new_entry');
 add_action('user_register', 'on_user_added');
 
 /**
  * 記事の状態を調べるユーティリティ関数群
  */
 
-// 「ください待ち」かどうか調べる関数
-function isWaitingGiveme($postID){
-	return isEntry($postID) && !isGiveme($postID);
-}
 
 function isEntry($postID){
 	global $wpdb;
@@ -289,66 +286,6 @@ function finish(){
 	die;
 }
 
-/**
- * 新規出品時に呼ばれる関数
- */
-function new_entry(){
-	global $bp;
-	
-	$post = array(  
-	'comment_status' => 'open', // open comment
-	'ping_status' => 'closed', // pinback, trackback off
-	'post_author' => $bp->loggedin_user->id, // login user ID
-	'post_category' => array($_POST['field_3']),
-	'post_content' => htmlentities($_POST['field_2'], ENT_QUOTES, 'UTF-8'), // item desctiption
-	'post_date' => date('Y-m-d H:i:s'), 
-	'post_date_gmt' => date('Y-m-d H:i:s'),
-	'post_status' => 'publish', // public open
-	'post_title' => strip_tags($_POST['field_1']), // title
-	'post_type' => 'post', // entry type name
-	'tags_input' => $_POST['field_4']
-
-	);  
-
-	$insert_id = wp_insert_post($post);
-
-	if($insert_id){
-		// success
-		// image upload
-		global $post;
-		if($_FILES){
-			$msg = "f!";
-			$files = $_FILES['upload_attachment'];
-			// reverse sort
-			arsort($files['name'],SORT_NUMERIC);
-			arsort($files['type'],SORT_NUMERIC);
-			arsort($files['tmp_name'],SORT_NUMERIC);
-			arsort($files['error'],SORT_NUMERIC);
-			arsort($files['size'],SORT_NUMERIC);
-
-			foreach ($files['name'] as $key => $value){
-				if ($files['name'][$key]){
-					$file = array(
-						'name'     => $files['name'][$key],
-						'type'     => $files['type'][$key],
-						'tmp_name' => $files['tmp_name'][$key],
-						'error'    => $files['error'][$key],
-						'size'     => $files['size'][$key]
-					);  
-					$_FILES = array("upload_attachment" => $file);
-					foreach ($_FILES as $file => $array){
-						$newupload = insert_attachment($file,$insert_id);
-					}
-				}
-			}
-		}
-	}else{
-	// failure
-	}
-	echo $msg;
-	die;
-}
-
 
 /**********************************************
  * 取引状態確認用関数群
@@ -595,20 +532,11 @@ function my_setup_nav() {
 			'show_for_displayed_user' => true,
 			'item_css_id' => 'new-entry'
 			) );
-
-		bp_core_new_nav_item( array( 
-			'name' => __( '出品一覧', 'buddypress' ), 
-			'slug' => 'entry_list', 
-			'position' => 75,
-			'screen_function' => 'entry_list_link',
-			'show_for_displayed_user' => true,
-			'item_css_id' => 'entry-list'
-			) );
 	
 		bp_core_new_nav_item( array( 
 			'name' => __( 'ください', 'buddypress' ), 
 			'slug' => 'giveme', 
-			'position' => 85,
+			'position' => 75,
 			'screen_function' => 'your_giveme_link',
 			'show_for_displayed_user' => true,
 			'default_subnav_slug' => 'your-giveme',
@@ -620,7 +548,7 @@ function my_setup_nav() {
 			'slug' => 'your-giveme', 
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'giveme'),
 			'parent_slug' => 'giveme',
-			'position' => 95,
+			'position' => 85,
 			'screen_function' => 'your_giveme_link',
 			'item_css_id' => 'your-giveme'
 			) );
@@ -630,7 +558,7 @@ function my_setup_nav() {
 			'slug' => 'giveme-from-others', 
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'giveme'),
 			'parent_slug' => 'giveme',
-			'position' => 105,
+			'position' => 95,
 			'screen_function' => 'giveme_from_others_link',
 			'item_css_id' => 'giveme-from-others'
 			) );
@@ -656,39 +584,6 @@ function new_entry_link(){
 	add_action( 'bp_template_title', 'new_entry_title' );
 	add_action( 'bp_template_content', 'new_entry_content' );
 	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
-}
-
-/**********************************************
- * 「出品一覧」表示時に使う関数一式
- **********************************************
- */
-function entry_list_title() {
-	echo '出品一覧';
-}
-
-function entry_list_content() {
-	include_once "members/single/entry-list.php";
-}
-
-function entry_list_link(){
-	add_action( 'bp_template_title', 'entry_list_title' );
-	add_action( 'bp_template_content', 'entry_list_content' );
-	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
-}
-
-
-function get_entry_list($author_id){
-	global $wpdb;
-	global $table_prefix;
-	$entry_list = $wpdb->get_results($wpdb->prepare("
-		SELECT post_id, entry_flg, giveme_flg, confirmed_flg, exhibiter_evaluated_flg, bidder_evaluated_flg, finished_flg
-		FROM " . $table_prefix . "fmt_giveme_state, " . $table_prefix . "posts
-		WHERE " . $table_prefix . "fmt_giveme_state.post_id = " . $table_prefix . "posts.ID
-		AND " . $table_prefix . "posts.post_author = %d
-		ORDER BY post_id DESC",
-		$author_id));
-		
-	return $entry_list;
 }
 
 
@@ -794,6 +689,7 @@ function your_giveme_content() {
 		<?php
 			}
 		?>
+		</div>
 	</div>
 	<?php
 }

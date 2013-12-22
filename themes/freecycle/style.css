@@ -9,6 +9,595 @@ Template: bp-default
 Tags: buddypress
 */
 
-.posttitle :hover{
-	color:#4169e1;
+/*ページ全体の枠組み*/
+
+@charset: utf-8;
+
+@media screen and (min-width: 0px) and (max-width: 320px) {
+a:link { color: orange; }
+a:visited { color: #000090; }
+a:hover { color: blue; }
+a:active { color: #008080; }
+
+body{
+    font: normal 25px meirio;
+	background-color: white;	
+	text-align: left;		
+	color: black;
+	margin: auto;
+	padding: auto;
+	width: 100%;
+	height: 100%;
 }
+
+/*ヘッダー部分*/
+
+header{
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* Opera */ 
+	background-image: -o-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, right top, left top, color-stop(0, #FFFFFF), color-stop(1, #FF9C08));
+
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to left, #FFFFFF 0%, #FF9C08 100%);
+	
+	margin: auto;
+	width: 100%;
+	height: 100px;
+	text-align: left;
+}
+
+	
+	
+h1{
+    font: bold italic 1.8em/1.5 sans-serif;
+    text-shadow: 3px 3px 2px rgba(0,0,0,0.5);
+    letter-spacing: 2px;
+    height: 50px;
+	width: 200px;
+	display: block;
+	margin-top: 30px;
+}
+
+header a{
+	text-decoration: none;
+	display: block;
+	margin: 10px;
+	padding-top: 20px;
+	padding-left: 10px;
+	background-color: transparent;
+} 
+
+header a:hover{
+	color: white;
+}
+
+/* ヘッダーフォーム */
+
+form[name=login-form]{
+	text-align: left;
+	display: block;
+	margin-left: 7px;
+	margin-bottom: 0;
+	padding: 10px;
+	background: orange;
+	border-radius: 10px;
+	width: 90%;
+	clear: both;
+	
+	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+}
+
+form #sidebar-wp-submit{
+	width: 180px;
+	height: 100px;
+	position: center;
+	display: block;
+	margin: 10px;
+}
+	
+	
+
+#sidebar-wp-submit{
+	font-size: 40px;
+	boder-radius: 10px;
+	color: black;
+	background-color: #eee;
+	padding: 10px;
+	margin: 0;
+	text-align: center;
+}
+
+#sidebar-wp-submit:hover{
+	color: red;
+}
+
+/*ナビゲーション*/
+ul,li	{
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+.navi	{
+	width: 100%;
+}
+.navi li	{
+	float: left;
+	text-align: center;
+	font-weight: bold;
+	border: solid 1px #000;
+	border-radius: 5px;
+	/*border-right: solid 1px #000;
+	border-left: solid 1px #FFF;*/
+}
+.navi li a	{
+	display: block;
+	width: 320px;
+	padding: 10px;
+	border-radius: 5px;
+	background: silver;
+	text-decoration: none;
+	border-bottom: solid 1px #000;
+	color: #FFF;
+}
+.navi li a:hover	{
+	background: #FFF;
+	padding: 10px;
+	text-decoration: none;
+	border-top: solid 1px #F90;
+	border-bottom: solid 1px #FFF;
+	color: #F90;
+}
+
+/*#0011{
+	display: block;
+}*/
+
+/*サーチバー*/
+form[role="search"]{
+	display: block;
+	margin-left: 7px;
+	margin-top: 0;
+	padding: 10px;
+	background: orange;
+	border-radius: 10px;
+	width: 90%;
+	
+	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+}
+#searchsubmit{
+	display: block;
+	margin-left:50px;
+	margin-top: 10px;
+	width: 180px;
+	height: 50px;
+	font: bold 1.5em/1.0 meirio;
+	}
+#seachtext{
+	display: block;
+	padding: 0;
+	margin-left: 20px;
+	width: 80%;
+	height: 20px;
+}
+/*コンテンツ部分*/
+
+#content{
+	display: block;
+}
+
+.posttitle{
+    font: italic bold normal 30px meirio;
+    color: orange;
+}
+
+.posttitle :hover{
+	color: blue;
+}	
+
+/*サイドバー部分*/
+/*フッター部分*/
+
+#footer{
+	font: italic 0.7em meirio;
+	color: gray;
+}
+
+
+}
+@media screen and (min-width: 321px) and (max-width: 920px) {
+a:link { color: orange; }
+a:visited { color: #000090; }
+a:hover { color: blue; }
+a:active { color: #008080; }
+
+body{
+    font: normal 20px serif;
+	background-color: white;	
+	text-align: left;		
+	color: black;
+	margin: auto;
+	padding: auto;
+	width: 100%;
+	height: 100%;
+}
+
+/*ヘッダー部分*/
+
+header{
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* Opera */ 
+	background-image: -o-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, right top, left top, color-stop(0, #FFFFFF), color-stop(1, #FF9C08));
+
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to left, #FFFFFF 0%, #FF9C08 100%);
+	
+	margin: auto;
+	/*width: 100%;*/
+	height: 100px;
+	text-align: left;
+}
+
+	
+	
+h1{
+    font: bold italic 3em/1.5 sans-serif;
+    text-shadow: 3px 3px 2px rgba(0,0,0,0.5);
+    letter-spacing: 2px;
+    height: 50px;
+	width: 200px;
+	margin-top: 30px;
+	margin-left: 30px;
+}
+
+header a{
+	text-decoration: none;
+	display: block;
+	background-color: transparent;
+} 
+
+/* ヘッダーフォーム */
+
+form{
+	text-align: left;
+	display: block;
+	margin: auto;
+	padding: 10px;
+	background: green;
+	border-radius: 10px;
+	width: 60%;
+	clear: both;
+	
+}
+
+form #sidebar-wp-submit{
+	width: 300px;
+	height: 100px;
+	position: center;
+}
+	
+	
+
+#sidebar-wp-submit{
+	font-size: 40px;
+	boder-radius: 10px;
+	color: black;
+	background-color: #eee;
+	padding: 10px;
+	margin: 0;
+	height: 60px;
+	width: 10px;
+	text-align: center;
+}
+
+#sidebar-wp-submit :hover{
+	color: red;
+}
+
+/*ナビゲーション*/
+ul,li	{
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+.navi	{
+	width: 100%;
+}
+.navi li	{
+	float: left;
+	text-align: center;
+	font-weight: bold;
+	border: solid 1px #000;
+	border-radius: 5px;
+	/*border-right: solid 1px #000;
+	border-left: solid 1px #FFF;*/
+}
+.navi li a	{
+	display: block;
+	width: 180px;
+	padding: 10px;
+	border-radius: 5px;
+	background: silver;
+	text-decoration: none;
+	border-bottom: solid 1px #000;
+	color: #FFF;
+}
+.navi li a:hover	{
+	background: #FFF;
+	padding: 10px;
+	text-decoration: none;
+	border-top: solid 1px #F90;
+	border-bottom: solid 1px #FFF;
+	color: #F90;
+}
+
+/*#0011{
+	display: block;
+}*/
+
+/*サーチバー*/
+form[role="search"]{
+	display: block;
+	margin-left: 7px;
+	margin-top: 0;
+	padding: 10px;
+	background: orange;
+	border-radius: 10px;
+	width: 90%;
+	
+	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+}
+
+#searchsubmit{
+	padding: 10px;
+	width: 150px;
+	height: 50px;
+	font: bold 1.5em/1.0 meirio;
+	}
+#seachtext{
+	width: auto;
+	height: 20px;
+}
+/*コンテンツ部分*/
+
+#content{
+	display: block;
+}
+
+.posttitle{
+    font: italic bold normal 30px meirio;
+    color: orange;
+}
+
+.posttitle :hover{
+	color: blue;
+}	
+
+/*サイドバー部分*/
+/*フッター部分*/
+
+#footer{
+	font: italic 0.7em meirio;
+	color: gray;
+}
+
+
+}
+@media screen and (min-width: 921px) {
+a:link { color: orange; }
+a:visited { color: #000090; }
+a:hover { color: blue; }
+a:active { color: #008080; }
+
+body{
+    font: normal 20px serif;
+	background-color: white;	
+	text-align: left;		
+	color: black;
+	margin: auto;
+	padding: auto;
+	width: 100%;
+	height: 100%;
+}
+
+/*ヘッダー部分*/
+
+header{
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* Opera */ 
+	background-image: -o-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, right top, left top, color-stop(0, #FFFFFF), color-stop(1, #FF9C08));
+
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to left, #FFFFFF 0%, #FF9C08 100%);
+	
+	margin: auto;
+	/*width: 100%;*/
+	height: 100px;
+	text-align: left;
+}
+
+	
+	
+h1{
+    font: bold italic 3em/1.5 sans-serif;
+    text-shadow: 3px 3px 2px rgba(0,0,0,0.5);
+    letter-spacing: 2px;
+    height: 50px;
+	width: 200px;
+	margin-top: 30px;
+	margin-left: 30px;
+}
+
+header a{
+	text-decoration: none;
+	display: block;
+	background-color: transparent;
+} 
+
+/* ヘッダーフォーム */
+
+#sidebar-login-form{
+	text-align: left;
+	display: block;
+	margin: auto;
+	padding: 10px;
+	background: green;
+	border-radius: 10px;
+	width: 60%;
+	clear: both;
+	
+}
+
+form #sidebar-wp-submit{
+	width: 300px;
+	height: 100px;
+	position: center;
+}
+	
+	
+
+#sidebar-wp-submit{
+	font-size: 40px;
+	boder-radius: 10px;
+	color: black;
+	background-color: #eee;
+	padding: 10px;
+	margin: 0;
+	height: 60px;
+	width: 10px;
+	text-align: center;
+}
+
+#sidebar-wp-submit :hover{
+	color: red;
+}
+
+/*ナビゲーション*/
+ul,li	{
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+.navi	{
+	width: 100%;
+}
+.navi li	{
+	float: left;
+	text-align: center;
+	font-weight: bold;
+	border: solid 1px #000;
+	border-radius: 5px;
+	/*border-right: solid 1px #000;
+	border-left: solid 1px #FFF;*/
+}
+.navi li a	{
+	display: block;
+	width: 180px;
+	padding: 10px;
+	border-radius: 5px;
+	background: silver;
+	text-decoration: none;
+	border-bottom: solid 1px #000;
+	color: #FFF;
+}
+.navi li a:hover	{
+	background: #FFF;
+	padding: 10px;
+	text-decoration: none;
+	border-top: solid 1px #F90;
+	border-bottom: solid 1px #FFF;
+	color: #F90;
+}
+
+/*#0011{
+	display: block;
+}*/
+
+/*サーチバー*/
+form[role="search"]{
+	display: block;
+	margin-left: 235px;
+	margin-top: 0;
+	padding: 10px;
+	background: orange;
+	border-radius: 10px;
+	width: 60%;
+	
+	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+}
+
+#searchsubmit{
+	padding: 10px;
+	width: 150px;
+	height: 50px;
+	font: bold 1.5em/1.0 meirio;
+	}
+#seachtext{
+	width: 450px;
+	height: 20px;
+}
+/*コンテンツ部分*/
+
+#content{
+	display: block;
+}
+
+.posttitle{
+    font: italic bold normal 30px meirio;
+    color: orange;
+}
+
+.posttitle :hover{
+	color: blue;
+}	
+
+/*サイドバー部分*/
+/*フッター部分*/
+
+#footer{
+	font: italic 0.7em meirio;
+	color: gray;
+}
+
+}
+   
