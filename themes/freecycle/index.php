@@ -14,6 +14,7 @@
 				<?php bp_dtheme_content_nav( 'nav-above' ); ?>
 
 				<?php while (have_posts()) : the_post(); ?>
+
 					<?php do_action( 'bp_before_blog_post' ); ?>
 
 					<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>

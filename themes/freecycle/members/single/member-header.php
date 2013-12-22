@@ -38,7 +38,7 @@
 				mimeType:"multipart/form-data",
 				data: fd,
 				success: function(msg){
-					alert(”出品を完了しました！”);
+					alert("商品を出品しました！")
 				}
 			});
 		}else{

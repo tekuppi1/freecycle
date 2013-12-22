@@ -1,4 +1,6 @@
 <?php
+// TODO: 記事を投稿した時点で、初期テーブルにデータをインサートする
+
 // アクションフック登録
 add_action('wp_ajax_giveme', 'giveme');
 add_action('wp_ajax_cancelGiveme', 'cancelGiveme');
@@ -6,17 +8,12 @@ add_action('wp_ajax_confirmGiveme', 'confirmGiveme');
 add_action('wp_ajax_exhibiter_evaluation', 'exhibiter_evaluation');
 add_action('wp_ajax_bidder_evaluation', 'bidder_evaluation');
 add_action('wp_ajax_finish', 'finish');
-add_action('wp_ajax_new_entry', 'new_entry');
 add_action('user_register', 'on_user_added');
 
 /**
  * 記事の状態を調べるユーティリティ関数群
  */
 
-// 「ください待ち」かどうか調べる関数
-function isWaitingGiveme($postID){
-	return isEntry($postID) && !isGiveme($postID);
-}
 
 function isEntry($postID){
 	global $wpdb;
@@ -362,7 +359,6 @@ function new_entry(){
 	die;
 }
 
-
 /**********************************************
  * 取引状態確認用関数群
  **********************************************
@@ -608,20 +604,11 @@ function my_setup_nav() {
 			'show_for_displayed_user' => true,
 			'item_css_id' => 'new-entry'
 			) );
-
-		bp_core_new_nav_item( array( 
-			'name' => __( '出品一覧', 'buddypress' ), 
-			'slug' => 'entry_list', 
-			'position' => 75,
-			'screen_function' => 'entry_list_link',
-			'show_for_displayed_user' => true,
-			'item_css_id' => 'entry-list'
-			) );
 	
 		bp_core_new_nav_item( array( 
 			'name' => __( 'ください', 'buddypress' ), 
 			'slug' => 'giveme', 
-			'position' => 85,
+			'position' => 75,
 			'screen_function' => 'your_giveme_link',
 			'show_for_displayed_user' => true,
 			'default_subnav_slug' => 'your-giveme',
@@ -633,7 +620,7 @@ function my_setup_nav() {
 			'slug' => 'your-giveme', 
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'giveme'),
 			'parent_slug' => 'giveme',
-			'position' => 95,
+			'position' => 85,
 			'screen_function' => 'your_giveme_link',
 			'item_css_id' => 'your-giveme'
 			) );
@@ -643,7 +630,7 @@ function my_setup_nav() {
 			'slug' => 'giveme-from-others', 
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'giveme'),
 			'parent_slug' => 'giveme',
-			'position' => 105,
+			'position' => 95,
 			'screen_function' => 'giveme_from_others_link',
 			'item_css_id' => 'giveme-from-others'
 			) );
@@ -669,39 +656,6 @@ function new_entry_link(){
 	add_action( 'bp_template_title', 'new_entry_title' );
 	add_action( 'bp_template_content', 'new_entry_content' );
 	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
-}
-
-/**********************************************
- * 「出品一覧」表示時に使う関数一式
- **********************************************
- */
-function entry_list_title() {
-	echo '出品一覧';
-}
-
-function entry_list_content() {
-	include_once "members/single/entry-list.php";
-}
-
-function entry_list_link(){
-	add_action( 'bp_template_title', 'entry_list_title' );
-	add_action( 'bp_template_content', 'entry_list_content' );
-	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
-}
-
-
-function get_entry_list($author_id){
-	global $wpdb;
-	global $table_prefix;
-	$entry_list = $wpdb->get_results($wpdb->prepare("
-		SELECT post_id, entry_flg, giveme_flg, confirmed_flg, exhibiter_evaluated_flg, bidder_evaluated_flg, finished_flg
-		FROM " . $table_prefix . "fmt_giveme_state, " . $table_prefix . "posts
-		WHERE " . $table_prefix . "fmt_giveme_state.post_id = " . $table_prefix . "posts.ID
-		AND " . $table_prefix . "posts.post_author = %d
-		ORDER BY post_id DESC",
-		$author_id));
-		
-	return $entry_list;
 }
 
 
@@ -807,6 +761,7 @@ function your_giveme_content() {
 		<?php
 			}
 		?>
+		</div>
 	</div>
 	<?php
 }
