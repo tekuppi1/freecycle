@@ -289,6 +289,20 @@ function finish(){
 	die;
 }
 
+function insert_attachment($file_handler,$post_id,$setthumb='false'){  
+	if ($_FILES[$file_handler]['error'] !== UPLOAD_ERR_OK) __return_false();
+	
+	require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+	require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+	require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+	$attach_id = media_handle_upload($file_handler, $post_id);
+
+	if ($setthumb){
+		update_post_meta($post_id,'_thumbnail_id',$attach_id);
+	}
+	return $attach_id;
+}
+
 /**
  * 新規出品時に呼ばれる関数
  */
@@ -307,7 +321,6 @@ function new_entry(){
 	'post_title' => strip_tags($_POST['field_1']), // title
 	'post_type' => 'post', // entry type name
 	'tags_input' => $_POST['field_4']
-
 	);  
 
 	$insert_id = wp_insert_post($post);
@@ -345,7 +358,7 @@ function new_entry(){
 	}else{
 	// failure
 	}
-	echo $msg;
+	echo "";
 	die;
 }
 

@@ -27,24 +27,20 @@
 		}
 		
 		if(confirm("出品後の記事の編集はできません。出品しますか？")){
-			jQuery("#newentry").submit();
-//			var form = jQuery("#newentry").get()[0];
-//			var formData = new FormData(form);
-//			jQuery.ajax({
-//				type: "POST",
-//				url: "<?php echo admin_url('admin-ajax.php'); ?>",
-//				data: {
-//					"action": "new_entry",
-//					"field_1": jQuery("#field_1").val(),
-//					"field_2": jQuery("#field_2").val(),
-//					"field_3": jQuery("#field_3").val(),
-//					"field_4": jQuery("#field_4").val(),
-//					"field_5": jQuery("#field_5").val()
-//				},
-//				success: function(msg){
-//					alert(msg);
-//				}
-//			});
+			var form = jQuery("#newentry").get()[0];
+			var fd = new FormData(form);
+			fd.append("action", "new_entry");
+			jQuery.ajax({
+				type: "POST",
+				url: "<?php echo admin_url('admin-ajax.php'); ?>",
+				processData: false,
+				contentType: false,
+				mimeType:"multipart/form-data",
+				data: fd,
+				success: function(msg){
+					alert(”出品を完了しました！”);
+				}
+			});
 		}else{
 			return false;
 		}
