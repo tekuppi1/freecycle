@@ -19,6 +19,10 @@ a:visited { color: #000090; }
 a:hover { color: blue; }
 a:active { color: #008080; }
 
+html{
+	background-color: white;
+}
+
 body{
     font: normal 25px meirio;
 	background-color: white;	
@@ -66,7 +70,7 @@ h1{
     height: 50px;
 	width: 200px;
 	display: block;
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 header a{
@@ -87,12 +91,13 @@ header a:hover{
 form[name=login-form]{
 	text-align: left;
 	display: block;
+	margin: auto;
 	margin-left: 7px;
 	margin-bottom: 0;
 	padding: 10px;
 	background: orange;
 	border-radius: 10px;
-	width: 90%;
+	width: 280px;
 	clear: both;
 	
 	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -122,6 +127,30 @@ form #sidebar-wp-submit{
 
 #sidebar-wp-submit:hover{
 	color: red;
+	font-size: 60px;
+	font-style: bold;
+}
+
+#header-under{
+	display: block;
+	margin: auto;
+	padding: 0;
+	background-color: #fff;
+	width: 100%;
+}
+
+#header-under li {
+	float: left;
+	width: 100%;
+}
+
+/*#header-img,#header-img2{
+	margin: 10px;
+}*/
+
+img{
+	max-width:100%;
+	height: auto;
 }
 
 /*ナビゲーション*/
@@ -174,6 +203,7 @@ form[role="search"]{
 	background: orange;
 	border-radius: 10px;
 	width: 90%;
+	clear: both;
 	
 	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -219,11 +249,22 @@ form[role="search"]{
 
 
 }
+
+
+
+
+
+
+
 @media screen and (min-width: 321px) and (max-width: 920px) {
 a:link { color: orange; }
 a:visited { color: #000090; }
 a:hover { color: blue; }
 a:active { color: #008080; }
+
+html{
+	background-color: white;
+}
 
 body{
     font: normal 20px serif;
@@ -281,26 +322,25 @@ header a{
 	background-color: transparent;
 } 
 
-/* ヘッダーフォーム */
+/* ヘッダーフォーム ,ヘッダー画像*/
 
-form{
+#header-under form[name="login-form"]{
 	text-align: left;
 	display: block;
 	margin: auto;
-	padding: 10px;
-	background: green;
+	margin-top: 20px;
+	padding: 20px;
+	background: orange;
 	border-radius: 10px;
-	width: 60%;
+	width: 400px;
+	height: 350px;
 	clear: both;
-	
 }
 
 form #sidebar-wp-submit{
 	width: 300px;
 	height: 100px;
-	position: center;
 }
-	
 	
 
 #sidebar-wp-submit{
@@ -309,14 +349,34 @@ form #sidebar-wp-submit{
 	color: black;
 	background-color: #eee;
 	padding: 10px;
-	margin: 0;
+	margin: auto;
+	display: block;
 	height: 60px;
 	width: 10px;
 	text-align: center;
 }
 
-#sidebar-wp-submit :hover{
+
+#sidebar-wp-submit:hover{
 	color: red;
+	font-size: 60px;
+	font-style: bold;
+}
+
+#header-under{
+	display: block;
+	margin: auto;
+	padding: 10px;
+	background-color: #fff;
+	width: 100%;
+}
+
+#header-under li {
+	float: left;
+}
+
+#header-img,#header-img2{
+	margin: 10px;
 }
 
 /*ナビゲーション*/
@@ -410,11 +470,22 @@ form[role="search"]{
 
 
 }
+
+
+
+
+
+
+
 @media screen and (min-width: 921px) {
 a:link { color: orange; }
 a:visited { color: #000090; }
 a:hover { color: blue; }
 a:active { color: #008080; }
+
+html{
+	background-color: white;
+}
 
 body{
     font: normal 20px serif;
@@ -472,26 +543,25 @@ header a{
 	background-color: transparent;
 } 
 
-/* ヘッダーフォーム */
+/* ヘッダーフォーム ,ヘッダー画像*/
 
-#sidebar-login-form{
+#header-under form[name="login-form"]{
 	text-align: left;
 	display: block;
 	margin: auto;
-	padding: 10px;
-	background: green;
+	margin-top: 20px;
+	padding: 20px;
+	background: orange;
 	border-radius: 10px;
-	width: 60%;
+	width: 400px;
+	height: 350px;
 	clear: both;
-	
 }
 
 form #sidebar-wp-submit{
 	width: 300px;
 	height: 100px;
-	position: center;
 }
-	
 	
 
 #sidebar-wp-submit{
@@ -500,14 +570,34 @@ form #sidebar-wp-submit{
 	color: black;
 	background-color: #eee;
 	padding: 10px;
-	margin: 0;
+	margin: auto;
+	display: block;
 	height: 60px;
 	width: 10px;
 	text-align: center;
 }
 
-#sidebar-wp-submit :hover{
+
+#sidebar-wp-submit:hover{
 	color: red;
+	font-size: 60px;
+	font-style: bold;
+}
+
+#header-under{
+	display: block;
+	margin: auto;
+	padding: 10px;
+	background-color: #fff;
+	width: 100%;
+}
+
+#header-under li {
+	float: left;
+}
+
+#header-img,#header-img2{
+	margin: 10px;
 }
 
 /*ナビゲーション*/
@@ -555,11 +645,12 @@ ul,li	{
 form[role="search"]{
 	display: block;
 	margin-left: 235px;
-	margin-top: 0;
+	margin-top: 10px;
 	padding: 10px;
 	background: orange;
 	border-radius: 10px;
 	width: 60%;
+	clear: both;
 	
 	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -573,7 +664,7 @@ form[role="search"]{
 	font: bold 1.5em/1.0 meirio;
 	}
 #seachtext{
-	width: 450px;
+	width: 420px;
 	height: 20px;
 }
 /*コンテンツ部分*/

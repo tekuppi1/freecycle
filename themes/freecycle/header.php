@@ -35,9 +35,7 @@ wp_enqueue_script('MultiFile');
 		<header>
 			<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><?php bp_site_name(); ?></a></h1>
 		</header><!-- header -->
-		
-		<div id="header-form">
-		       <!-- <div id="0011"><!-- ナビゲーション -->
+<div>
 					<ul class="navi">
 					<li><a href="#" >ホーム</a></li>
 					<li><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
@@ -45,10 +43,20 @@ wp_enqueue_script('MultiFile');
 					<li><a href="#" >Q&A</a></li>
 					<li><a href="#" >お問い合わせ</a></li>
 					</ul>
-					<hr>
-				<!-- </div><!---->
-				<div><!-- ログインフォーム（※ログインしたら消します）-->
-				<form name="login-form" id="sidebar-login-form" class="standard-form" action="http://127.0.0.1/wp/wp-login.php" method="post">
+</div>
+<hr>
+					
+
+<div>
+	<ul id="header-under">
+		<li id="header-img">
+			<img src="./wp-content/themes/freecycle/images/てくすちぇんじ.png" alt="ヘッダー" width="380px" height="400px">
+		</li>
+		<li id="header-img2">
+			<img src="./wp-content/themes/freecycle/images/bookheader.jpg" alt="ヘッダー" width="380px" height="400px">
+		</li>
+		<li>
+			<form name="login-form" id="header-login-form" class="standard-form" action="http://127.0.0.1/wp/wp-login.php" method="post">
 							<label>ユーザーネーム<br />
 							<input type="text" name="log" id="sidebar-user-login" class="input" value="" tabindex="97" /></label>
 							<label>パスワード<br />
@@ -56,10 +64,15 @@ wp_enqueue_script('MultiFile');
 							<p class="forgetmenot"><label><input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" tabindex="99" /> Remember Me</label></p>
 							<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="Log In" tabindex="100" />
 							<input type="hidden" name="redirect_to" value="" />
-				</form>
-				</div><!-- ログインフォーム（※ログインしたら消します）-->
-		</div><!-- ヘッダーフォーム -->
-		<br>
+			</form>
+		</li>
+	</ul>
+</div>
+
+
+
+
+		<hr>
 		<div id="search-2" class="widget widget_search"><!-- 検索バー -->
 				<form role="search" method="get" id="searchform" action="http://127.0.0.1/wp/">
 					<label>検索：</label><input type="text" id="seachtext" value="" name="s" id="s" />
