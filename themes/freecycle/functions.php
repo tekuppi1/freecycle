@@ -557,7 +557,7 @@ function on_user_added($user_id){
 	$wpdb->query($wpdb->prepare("
 		INSERT INTO " . $table_prefix . "fmt_points
 		(user_id, got_points, temp_used_points, used_points)
-		VALUES (%d, 1, 0, 0)",
+		VALUES (%d, 10, 0, 0)",
 		$user_id));
 }
 
