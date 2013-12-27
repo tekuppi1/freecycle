@@ -761,7 +761,6 @@ function your_giveme_content() {
 		<?php
 			}
 		?>
-		</div>
 	</div>
 	<?php
 }
