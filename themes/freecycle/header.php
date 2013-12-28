@@ -37,7 +37,7 @@ wp_enqueue_script('MultiFile');
 		</header><!-- header -->
 <div>
 					<ul class="navi">
-					<li><a href="#" >ホーム</a></li>
+					<li><a href="<?php echo home_url(); ?>" >ホーム</a></li>
 					<li><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					<li><a href="#" >TexChangeとは</a></li>
 					<li><a href="#" >Q&A</a></li>
