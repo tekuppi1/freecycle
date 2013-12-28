@@ -50,10 +50,10 @@ wp_enqueue_script('MultiFile');
 <div>
 	<ul id="header-under">
 		<li id="header-img">
-			<img src="./wp-content/themes/freecycle/images/てくすちぇんじ.png" alt="ヘッダー" width="380px" height="400px">
+			<img src="<?php echo get_stylesheet_directory_uri() ?>/images/てくすちぇんじ.png" alt="ヘッダー" width="380px" height="400px">
 		</li>
 		<li id="header-img2">
-			<img src="./wp-content/themes/freecycle/images/bookheader.jpg" alt="ヘッダー" width="380px" height="400px">
+			<img src="<?php echo get_stylesheet_directory_uri() ?>/images/bookheader.jpg" alt="ヘッダー" width="380px" height="400px">
 		</li>
 		<li>
 			<form name="login-form" id="header-login-form" class="standard-form" action="http://127.0.0.1/wp/wp-login.php" method="post">
