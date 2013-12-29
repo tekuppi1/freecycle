@@ -8,6 +8,7 @@ add_action('wp_ajax_confirmGiveme', 'confirmGiveme');
 add_action('wp_ajax_exhibiter_evaluation', 'exhibiter_evaluation');
 add_action('wp_ajax_bidder_evaluation', 'bidder_evaluation');
 add_action('wp_ajax_finish', 'finish');
+add_action('wp_ajax_new_entry', 'new_entry');
 add_action('user_register', 'on_user_added');
 
 /**
@@ -305,7 +306,7 @@ function insert_attachment($file_handler,$post_id,$setthumb='false'){
  */
 function new_entry(){
 	global $bp;
-	
+
 	$post = array(  
 	'comment_status' => 'open', // open comment
 	'ping_status' => 'closed', // pinback, trackback off
@@ -355,7 +356,7 @@ function new_entry(){
 	}else{
 	// failure
 	}
-	echo "";
+	echo get_permalink($insert_id);
 	die;
 }
 

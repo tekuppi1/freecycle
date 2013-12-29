@@ -6,15 +6,7 @@ wp_register_script(
 	'20131028'
 );
 
-wp_register_script(
-	'MultiFile',
-	get_stylesheet_directory_uri() . '/js/jquery.MultiFile.js',
-	false,
-	'20131120'
-);
-
 wp_enqueue_script('freecycleScript');
-wp_enqueue_script('MultiFile');
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

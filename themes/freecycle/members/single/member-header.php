@@ -26,6 +26,13 @@
 			return false;
 		}
 		
+		for (var i = jQuery(".multi").length - 1; i >= 0; i--) {
+			var fileName = jQuery(".multi").get(i).value;
+			if(fileName && !fileName.match(/\.(jpeg|jpg|png)$/i)){
+				alert("不正なファイルです。\n.jpeg,.jpg,.png ファイルのみアップロードできます。");
+			}
+		}
+
 		if(confirm("出品後の記事の編集はできません。出品しますか？")){
 			var form = jQuery("#newentry").get()[0];
 			var fd = new FormData(form);
@@ -37,8 +44,14 @@
 				contentType: false,
 				mimeType:"multipart/form-data",
 				data: fd,
-				success: function(msg){
-					alert("商品を出品しました！")
+				success: function(permalink){
+					if(confirm("商品を出品しました。\n商品ページを確認しますか？")){
+						// open entry item page
+						location.href = permalink;
+					}else{
+						// reload new entry page
+						location.href = "<?php echo bp_loggedin_user_domain(); ?>" + "new_entry/";
+					};
 				}
 			});
 		}else{

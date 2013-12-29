@@ -22,7 +22,10 @@
 <input type="text" name="field_4" id="field_4" value="" size="30"></br>
 <!-- picture -->
 <label for="field_5">写真(最大3枚)</label></br>
-<input type="file" class="multi" name="upload_attachment[]" maxlength="3" accept="jpeg|jpg|png"></br>
+<input type="file" class="multi" name="upload_attachment[]" ></br>
+<input type="file" class="multi" name="upload_attachment[]" ></br>
+<input type="file" class="multi" name="upload_attachment[]" ></br>
+
 <input type="button" value="出品" onClick="callOnNewEntry()">
 <p>注意:出品後の記事の編集はできません。内容を十分確認して下さい。</p>
 </form>
