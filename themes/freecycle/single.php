@@ -119,6 +119,29 @@
 			});
 		}
 		
+		function onDeletePost(){
+			if(confirm("取り消した出品は復活できません。よろしいですか？")){
+				// send values
+				jQuery.ajax({
+					type: "POST",
+					url: '<?php echo admin_url('admin-ajax.php'); ?>',
+					data: {
+						"action": "delete_post",
+						"postID": "<?php echo $post->ID ?>"
+					},
+					success: function(msg){
+						alert("出品を取り消しました。");
+						location.href = "<?php echo home_url(); ?>";
+					},
+					false: function(msg){
+						alert("取り消しに失敗しました。");
+					}
+				});
+			}else{
+				return false;
+			}
+		}
+
 		function switchGiveme(){
 			if(jQuery("#giveme").size() > 0){
 				jQuery('<input type="button" id="cancelGiveme" value="ください取消" onClick="onCencelGiveme();">').replaceAll(jQuery("#giveme"));
@@ -231,6 +254,7 @@
 							<?php printf( __( '%1$s <span>in %2$s</span>', 'buddypress' ), get_the_date(), get_the_category_list( ', ' ) ); ?>
 							<!-- edit entry is not available -->
 							<!-- <span class="post-utility alignright"><?php edit_post_link( __( 'Edit this entry', 'buddypress' ) ); ?></span> -->
+							<?php if($user_ID == $authordata->ID && !isGiveme($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onDeletePost();">出品取り消し</a></span><?php } ?>
 						</p>
 
 						<div class="entry">

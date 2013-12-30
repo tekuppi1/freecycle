@@ -9,6 +9,7 @@ add_action('wp_ajax_exhibiter_evaluation', 'exhibiter_evaluation');
 add_action('wp_ajax_bidder_evaluation', 'bidder_evaluation');
 add_action('wp_ajax_finish', 'finish');
 add_action('wp_ajax_new_entry', 'new_entry');
+add_action('wp_ajax_delete_post', 'delete_post');
 add_action('user_register', 'on_user_added');
 
 /**
@@ -356,7 +357,12 @@ function new_entry(){
 	}else{
 	// failure
 	}
-	echo get_permalink($insert_id);
+	echo "";
+	die;
+}
+
+function delete_post(){
+	wp_delete_post($_POST['postID']);
 	die;
 }
 

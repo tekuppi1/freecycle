@@ -45,13 +45,9 @@
 				mimeType:"multipart/form-data",
 				data: fd,
 				success: function(permalink){
-					if(confirm("商品を出品しました。\n商品ページを確認しますか？")){
-						// open entry item page
-						location.href = permalink;
-					}else{
-						// reload new entry page
-						location.href = "<?php echo bp_loggedin_user_domain(); ?>" + "new_entry/";
-					};
+					alert("商品を出品しました。");
+					// reload new entry page
+					location.href = "<?php echo bp_loggedin_user_domain(); ?>" + "new_entry/";
 				}
 			});
 		}else{
