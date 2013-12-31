@@ -57,33 +57,36 @@ header{
 	
 	margin: auto;
 	width: 100%;
-	height: 100px;
-	text-align: left;
+	height: 50px;
+	/*text-align: left;*/
 }
 
 	
 	
 h1{
-    font: bold italic 1.8em/1.5 sans-serif;
+    font: bold italic 1.3em/1.5 meirio;
     text-shadow: 3px 3px 2px rgba(0,0,0,0.5);
     letter-spacing: 2px;
-    height: 50px;
+    /*height: 50px;
 	width: 200px;
 	display: block;
-	margin-top: 10px;
+	margin-top: 10px;*/
 }
 
 header a{
 	text-decoration: none;
-	display: block;
-	margin: 10px;
+	/*display: block;
 	padding-top: 20px;
-	padding-left: 10px;
+	padding-left: 10px;*/
 	background-color: transparent;
 } 
 
 header a:hover{
 	color: white;
+}
+
+header a:active{
+	color: orange;
 }
 
 /* ヘッダーフォーム */
@@ -92,7 +95,6 @@ form[name=login-form]{
 	text-align: left;
 	display: block;
 	margin: auto;
-	margin-left: 7px;
 	margin-bottom: 0;
 	padding: 10px;
 	background: orange;
@@ -107,8 +109,8 @@ form[name=login-form]{
 
 form #sidebar-wp-submit{
 	width: 180px;
-	height: 100px;
-	position: center;
+	height: 50px;
+	/*position: center;*/
 	display: block;
 	margin: 10px;
 }
@@ -116,18 +118,18 @@ form #sidebar-wp-submit{
 	
 
 #sidebar-wp-submit{
-	font-size: 40px;
+	font-size: 25px;
 	boder-radius: 10px;
 	color: black;
 	background-color: #eee;
-	padding: 10px;
+	padding: 5px;
 	margin: 0;
 	text-align: center;
 }
 
 #sidebar-wp-submit:hover{
 	color: red;
-	font-size: 60px;
+	font-size: 40px;
 	font-style: bold;
 }
 
@@ -170,11 +172,12 @@ ul,li	{
 	border-radius: 5px;
 	/*border-right: solid 1px #000;
 	border-left: solid 1px #FFF;*/
+	margin: auto;
 }
 .navi li a	{
 	font-size: 0.8em;
 	display: block;
-	width: 320px;
+	width: 310px;
 	padding: 3px;
 	border-radius: 5px;
 	background: silver;
@@ -198,8 +201,7 @@ ul,li	{
 /*サーチバー*/
 form[role="search"]{
 	display: block;
-	margin-left: 7px;
-	margin-top: 0;
+	margin: auto;
 	padding: 10px;
 	background: orange;
 	border-radius: 10px;
@@ -210,6 +212,7 @@ form[role="search"]{
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     box-shadow: 1px 2px 4px rgba(0,0,0,.5);
 }
+
 #searchsubmit{
 	display: block;
 	margin-left:50px;
@@ -217,7 +220,8 @@ form[role="search"]{
 	width: 180px;
 	height: 50px;
 	font: bold 1.5em/1.0 meirio;
-	}
+}
+	
 #seachtext{
 	display: block;
 	padding: 0;
