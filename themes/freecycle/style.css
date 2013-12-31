@@ -52,7 +52,7 @@ h3{
 }
 
 hr{
-	background-color: red;
+	background-color: orange;
 }
 
 
@@ -274,6 +274,7 @@ form[role="search"]{
 	font-size: 1.4em;
 	display: block;
 	padding: 0 5px 0 5px;
+	margin: auto;
 }
 
 /*サイドバー部分*/

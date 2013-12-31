@@ -44,9 +44,10 @@
 					</div>
 
 					<?php do_action( 'bp_after_blog_post' ); ?>
-
+							<hr>
+							
 				<?php endwhile; ?>
-
+							
 				<?php bp_dtheme_content_nav( 'nav-below' ); ?>
 
 			<?php else : ?>
