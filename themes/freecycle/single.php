@@ -86,7 +86,7 @@
 				},
 				success: function(msg){
 					afterEvaluation();
-					alert("取引評価を行いました！" + msg);
+					alert("取引評価を行いました！");
 				}
 			});
 		}
@@ -114,7 +114,7 @@
 				},
 				success: function(msg){
 					afterEvaluation();
-					alert("取引評価を行いました！" + msg);
+					alert("取引評価を行いました！");
 				}
 			});
 		}

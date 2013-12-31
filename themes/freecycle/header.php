@@ -50,8 +50,18 @@ wp_enqueue_script('freecycleScript');
 <div>
 
 	<ul id="header-under">
+<<<<<<< HEAD
 	
 		
+=======
+		<li id="header-img">
+			<img src="<?php echo get_stylesheet_directory_uri() ?>/images/てくすちぇんじ.png" alt="ヘッダー" width="380px" height="400px">
+		</li>
+		<li id="header-img2">
+			<img src="<?php echo get_stylesheet_directory_uri() ?>/images/bookheader.jpg" alt="ヘッダー" width="380px" height="400px">
+		</li>
+		<?php if(!is_user_logged_in()){ ?>
+>>>>>>> 6b5ae0388374c6f30ce37a36b608fab9fa1f61c6
 		<li>
 			<form name="login-form" id="header-login-form" class="standard-form" action="http://127.0.0.1/wp/wp-login.php" method="post">
 							<label>ユーザーネーム<br />
@@ -63,6 +73,7 @@ wp_enqueue_script('freecycleScript');
 							<input type="hidden" name="redirect_to" value="" />
 			</form>
 		</li>
+		<?php } ?>
 	</ul>
 </div>
 
