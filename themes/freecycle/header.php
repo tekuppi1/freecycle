@@ -27,7 +27,13 @@ wp_enqueue_script('freecycleScript');
 		<header>
 			<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><?php bp_site_name(); ?></a></h1>
 		</header><!-- header -->
+		
+		
 <div>
+					<li id="header-img">
+							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_iine.png" alt="ヘッダー" width="380px" height="100px">
+					</li>
+
 					<ul class="navi">
 					<li><a href="<?php echo home_url(); ?>" >ホーム</a></li>
 					<?php if(is_user_logged_in()){ ?>
@@ -37,19 +43,14 @@ wp_enqueue_script('freecycleScript');
 					<li><a href="#" >Q&A</a></li>
 					<li><a href="#" >お問い合わせ</a></li>
 					</ul>
+					
 </div>
-<hr>
 					
 
 <div>
+
 	<ul id="header-under">
 		<?php if(!is_user_logged_in()){ ?>
-		<li id="header-img">
-			<img src="<?php echo get_stylesheet_directory_uri() ?>/images/てくすちぇんじ.png" alt="ヘッダー" width="380px" height="400px">
-		</li>
-		<li id="header-img2">
-			<img src="<?php echo get_stylesheet_directory_uri() ?>/images/bookheader.jpg" alt="ヘッダー" width="380px" height="400px">
-		</li>
 		<li>
 			<form name="login-form" id="header-login-form" class="standard-form" action="http://127.0.0.1/wp/wp-login.php" method="post">
 							<label>ユーザーネーム<br />
@@ -66,13 +67,10 @@ wp_enqueue_script('freecycleScript');
 </div>
 
 
-
-
-		<hr>
 		<?php if(bp_is_front_page()){ ?>
 		<div id="search-2" class="widget widget_search"><!-- 検索バー -->
 				<form role="search" method="get" id="searchform" action="http://127.0.0.1/wp/">
-					<label>検索：</label><input type="text" id="seachtext" value="" name="s" id="s" />
+					<!-- <label>検索：</label> --><input type="text" id="seachtext" value="" name="s" id="s" />
 					<input type="submit" id="searchsubmit" value="Search" />
 				</form>
 		</div><!-- 検索バー -->
