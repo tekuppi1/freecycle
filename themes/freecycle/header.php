@@ -30,7 +30,9 @@ wp_enqueue_script('freecycleScript');
 <div>
 					<ul class="navi">
 					<li><a href="<?php echo home_url(); ?>" >ホーム</a></li>
+					<?php if(is_user_logged_in()){ ?>
 					<li><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
+					<?php } ?>
 					<li><a href="#" >TexChangeとは</a></li>
 					<li><a href="#" >Q&A</a></li>
 					<li><a href="#" >お問い合わせ</a></li>
