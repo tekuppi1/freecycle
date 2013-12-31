@@ -22,7 +22,7 @@ function onConfirmGiveme(postID, url){
 						},
 						success: function(msg){
 							jQuery("#post_"+postID).hide(1000,function(){
-							alert("取引相手を確定させました。確実に商品の受渡を行ってください。" + msg);
+							alert("取引相手を確定させました。確実に商品の受渡を行ってください。");
 						});
 					}
 				});
