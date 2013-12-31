@@ -202,8 +202,7 @@ function confirmGiveme(){
 		'sender_id' => bp_loggedin_user_id(),
 		'recipients' => $userID,
 		'subject' => '【自動送信】くださいリクエストが承認されました！',
-		'content' => 'あなたが以下の商品の取引相手に選ばれました！</br>' .
-						'このメッセージに返信して、商品の受け取りを進めてください。</br>' .
+		'content' => 'あなたが以下の商品の取引相手に選ばれました！このメッセージに返信して、商品の受け取りを進めてください。 ' .
 						'<a href="' . get_permalink($postID) . '">' . get_permalink($postID) . '</a>'
 	));
 
@@ -605,6 +604,16 @@ function my_setup_nav() {
 // ログインユーザのプロフィールにのみ表示させる。
 	if($user_ID == bp_displayed_user_id()){
 		bp_core_new_nav_item( array( 
+			'name' => __( '出品一覧', 'buddypress' ), 
+			'slug' => 'entry_list', 
+			'position' => 65,
+			'screen_function' => 'entry_list_link',
+			'show_for_displayed_user' => true,
+			'item_css_id' => 'entry-list'
+			) );
+	
+
+		bp_core_new_nav_item( array( 
 			'name' => __( '新規出品', 'buddypress' ), 
 			'slug' => 'new_entry', 
 			'position' => 65,
@@ -647,6 +656,24 @@ function my_setup_nav() {
 }
  
 add_action( 'bp_setup_nav', 'my_setup_nav', 1000 );
+
+/**********************************************
+ * 「出品一覧」表示時に使う関数一式
+ **********************************************
+ */
+function entry_list_title() {
+	echo '出品一覧';
+}
+
+function entry_list_content() {
+	include_once "members/single/entry-list.php";
+}
+
+function entry_list_link(){
+	add_action( 'bp_template_title', 'entry_list_title' );
+	add_action( 'bp_template_content', 'entry_list_content' );
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
 
 /**********************************************
  * 「新規出品」表示時に使う関数一式
@@ -712,7 +739,7 @@ function giveme_from_others_content() {
 			<?php if($last_post_id != ""){ ?>
 			<input type="button" value="取引相手確定" onClick="callOnConfirmGiveme(<?php echo $last_post_id; ?>);">
 			<?php } ?>
-			</div><!-- #post_(id) -->
+			</div>
 	</div>
 	<?php
 }

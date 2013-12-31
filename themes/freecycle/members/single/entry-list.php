@@ -5,39 +5,39 @@
 	</div>
 <?php
 	global $user_ID;
-	$entry_list = get_entry_list($user_ID);
+	$entry_list = get_posts(array('author' => $user_ID));
 	foreach($entry_list as $entry){
 ?>
-	<div id="post_<?php echo $entry->post_id; ?>" class="entry">
-		<span class="posttitle"><a href="<?php echo get_permalink($entry->post_id) ?>"><?php echo get_post($entry->post_id)->post_title; ?></a></span>
+	<div id="post_<?php echo $entry->ID; ?>" class="entry">
+		<span class="posttitle"><a href="<?php echo get_permalink($entry->ID) ?>"><?php echo get_post($entry->ID)->post_title; ?></a></span>
 		<span class="poststatus">
 			<?php
-				if(isFinish($entry->post_id)){
-					if(isBidderEvaluated($entry->post_id)){
+				if(isFinish($entry->ID)){
+					if(isBidderEvaluated($entry->ID)){
 					echo "取引完了";
 					}else{
 					echo "落札者未評価";
 					}
-				}elseif(isConfirm($entry->post_id)){
+				}elseif(isConfirm($entry->ID)){
 					echo "取引未完了";
-				}elseif(isGiveme($entry->post_id)){
+				}elseif(isGiveme($entry->ID)){
 					echo "落札者未確定";
 				}else{
 					echo "ください待ち";
 				}
 			?>
 		</span>
-		<span class="posttodo"><a href="<?php echo get_permalink($entry->post_id) ?>">
+		<span class="posttodo"><a href="<?php echo get_permalink($entry->ID) ?>">
 			<?php
-				if(isFinish($entry->post_id)){
-					if(isBidderEvaluated($entry->post_id)){
+				if(isFinish($entry->ID)){
+					if(isBidderEvaluated($entry->ID)){
 					echo "";
 					}else{
 					echo "落札者を評価してください。";
 					}
-				}elseif(isConfirm($entry->post_id)){
+				}elseif(isConfirm($entry->ID)){
 					echo "商品を受渡し、取引を確定してください。";
-				}elseif(isGiveme($entry->post_id)){
+				}elseif(isGiveme($entry->ID)){
 					echo "落札者を確定してください。";
 				}else{
 					echo "";
