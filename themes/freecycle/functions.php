@@ -202,7 +202,8 @@ function confirmGiveme(){
 		'sender_id' => bp_loggedin_user_id(),
 		'recipients' => $userID,
 		'subject' => '【自動送信】くださいリクエストが承認されました！',
-		'content' => 'あなたの以下の商品に対するくださいリクエストが承認されました。</br>' .
+		'content' => 'あなたが以下の商品の取引相手に選ばれました！</br>' .
+						'このメッセージに返信して、商品の受け取りを進めてください。</br>' .
 						'<a href="' . get_permalink($postID) . '">' . get_permalink($postID) . '</a>'
 	));
 
