@@ -55,7 +55,7 @@
 				<h2 class="center"><?php _e( 'Not Found', 'buddypress' ); ?></h2>
 				<p class="center"><?php _e( 'Sorry, but you are looking for something that isn\'t here.', 'buddypress' ); ?></p>
 
-				<?php get_search_form(); ?>
+				<!-- <?php get_search_form(); ?> -->
 
 			<?php endif; ?>
 		</div>

@@ -48,11 +48,21 @@ h2{
 }
 
 h3{
-	font-size: 1em;	
+	font-size: 0.9em;	
 }
 
+h4{
+	font-size: 0.7em;	
+}
+
+h5{
+	font-size: 0.5em;	
+}
+
+
 hr{
-	background-color: orange;
+	background-color: 4b4c4a;
+	width: 100%;
 }
 
 
@@ -255,6 +265,7 @@ form[role="search"]{
 .posttitle{
     font: italic bold normal 30px MS P ゴシック;
     color: orange;
+    text-decoration: underline;
 }
 
 .posttitle :hover{
@@ -270,11 +281,88 @@ form[role="search"]{
 
 /*ユーザーページ*/
 
+#item-nav{
+	font-size: 1.1em;
+	text-align: center;
+	display: block;
+	border-top: ridge;
+	border-bottom: ridge;
+}
+
 .activity-meta a{
 	font-size: 1.4em;
+	text-align: center;
 	display: block;
+	width: 150px;
+	height: 20px;
 	padding: 0 5px 0 5px;
 	margin: auto;
+}
+
+form #newentry{
+	font-size: 1.3em;
+}
+
+#newentry p{
+	color: red;
+}
+
+#field_3{
+	display: block;
+	width: 100px;
+}
+
+#newentry input[type="button"]{
+	width: 150px;
+	height: 50px;
+	font-size: 1.4em;
+	color: black;
+	display: block;
+}
+
+#newentry input[type="button"]:hover{
+	background: orange;
+	font-size: 1.5em;
+}
+
+#giveme-from-others-personal-li{
+	font-size: 1.5em;
+	text-decoration: underline;
+	
+}
+
+input[class="multi"]:hover{
+	color: orange;
+}
+
+input[type="button",value="出品"]:hover{
+	color: orange;
+}
+
+/*---プロフィールページ--*/
+input#upload{
+	width: 200px;
+	height: 50px;
+	font-size: 1.25em;
+	color: black;
+	display: block;	
+}
+
+input#upload:hover{
+	color: orange;
+}
+
+/*---設定--*/
+input#submit{
+	width: 200px;
+	height: 50px;
+	font-size: 1.25em;
+	color: black;
+	display: block;	
+}
+
+input#submit:hover{
+	color: orange;
 }
 
 /*サイドバー部分*/

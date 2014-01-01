@@ -1,11 +1,14 @@
 <!-- <form action="" method="post" enctype="multipart/form-data" id="newentry"> -->
 <form action="new_entry" method="post" enctype="multipart/form-data" id="newentry">
+
 <!-- item name -->
 <label for="field_1">商品名(必須)</label></br>
 <input type="text" name="field_1" id="field_1" value=""></br>
+
 <!-- item description -->
 <label for="field_2">商品説明(必須)</label></br>
 <textarea rows="5" cols="40" name="field_2" id="field_2"></textarea></br>
+
 <!-- category -->
 <label for="field_3">カテゴリ</label></br>
 <?php
@@ -29,3 +32,4 @@
 <input type="button" value="出品" onClick="callOnNewEntry()">
 <p>注意:出品後の記事の編集はできません。内容を十分確認して下さい。</p>
 </form>
+<hr> <!-- 仕切り線 -->
