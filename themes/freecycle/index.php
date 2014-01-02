@@ -63,6 +63,9 @@
 		<?php do_action( 'bp_after_blog_home' ); ?>
 
 		</div><!-- .padder -->
+		
+		<div id="pagetop_link"><a href="#logo">Go to pagetop</a></div>
+		
 	</div><!-- #content -->
 
 	<?php get_sidebar(); ?>
