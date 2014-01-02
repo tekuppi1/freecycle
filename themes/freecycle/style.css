@@ -9,28 +9,25 @@ Template: bp-default
 Tags: buddypress
 */
 
-/*ƒy[ƒW‘S‘Ì‚Ì˜g‘g‚İ*/
+/*ãƒšãƒ¼ã‚¸å…¨ä½“ã®æ çµ„ã¿*/
 
 @charset: utf-8;
 /*---------------------------------------------------------------------------------------------------------------------------------------*/
 @media screen and (max-width: 320px) {
 
-a:link { color: orange; }
+a:link { color: #000080; }
 a:visited { color: #000090; }
-a:hover { color: blue; }
+a:hover { color: #00bfff; }
 a:active { color: #008080; }
 
-html{
-	background-color: white;
-}
-
 body{
+	background: white;
+	color: #696969;
 	margin: 0;
 	padding: 0;
 	line-height:1.4;
-	color:#333;
-	font-family:Arial, ‚l‚r ‚oƒSƒVƒbƒN;
-	font-size: 16px;
+	font-family:Arial, ï¼­ï¼³ ï¼°ã‚´ã‚·ãƒƒã‚¯;
+	font-size: 15px;
 	width: 100%;
 	height: 100%;
 }
@@ -61,12 +58,12 @@ h5{
 
 
 hr{
-	border:thin dotted black;
+	border:thin dotted #ffa500;
 	width: 100%;
 }
 
 
-/*ƒwƒbƒ_[•”•ª*/
+/*ãƒ˜ãƒƒãƒ€ãƒ¼éƒ¨åˆ†*/
 
 header{
 	/* IE10 Consumer Preview */ 
@@ -88,15 +85,16 @@ header{
 	background-image: linear-gradient(to left, #FFFFFF 0%, #FF9C08 100%);
 	
 	width: 100%;
-	height: 70px;
+	height: 80px;
 }
 
 	
 	
 header #logo{
-    font: bold italic 2em/1.5 MS P ƒSƒVƒbƒN;
+    font: bold italic 2em/1.5 MS P ã‚´ã‚·ãƒƒã‚¯;
     text-shadow: 3px 3px 2px rgba(0,0,0,0.5);
     letter-spacing: 2px;
+    padding: 3px 0 7px 25px;
 }
 
 header a{
@@ -116,7 +114,7 @@ header a:active{
 	color: orange;
 }
 
-/* ƒwƒbƒ_[ƒtƒH[ƒ€ */
+/* ãƒ˜ãƒƒãƒ€ãƒ¼ãƒ•ã‚©ãƒ¼ãƒ  */
 
 form[name=login-form]{
 	text-align: left;
@@ -129,7 +127,8 @@ form[name=login-form]{
 	border-radius: 10px;
 	width: 280px;
 	clear: both;
-	border: solid 2px;
+	border: solid 1px;
+	color: black;
 	
 	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -139,9 +138,8 @@ form[name=login-form]{
 form #sidebar-wp-submit{
 	width: 180px;
 	height: 50px;
-	/*position: center;*/
 	display: block;
-	margin: 10px;
+	margin: auto;
 }
 	
 	
@@ -179,22 +177,42 @@ form #sidebar-wp-submit{
 	margin: 10px;
 }*/
 
-img{
-	max-width:100%;
-	height: auto;
+/*ãƒ˜ãƒƒãƒ€ãƒ¼ã‚¤ãƒ¡ãƒ¼ã‚¸*/
+.header_img_navi{
+	float:left;
 }
 
-/*ƒiƒrƒQ[ƒVƒ‡ƒ“*/
+.header_img_navi img{
+	max-width:70%;
+	height: 140px;
+	margin: 5px 0 5px 40px;
+	padding-left: 8px;
+}
 
-ul,li	{
+/*ãƒŠãƒ“ã‚²ãƒ¼ã‚·ãƒ§ãƒ³*/
+.header_img_navi{
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+	
+
+nav{
+	margin: 3px 0 3px 0;
+	display: block;
+	bottom: 100%;
+	left: 100px;
+}
+
+nav ul,li	{
 	margin:0;
 	padding:0;
 	list-style: none;
 }
-.navi	{
-	width: 100%;
+nav .navi	{
+	width: 95%;
+	display: block;
 }
-.navi li	{
+nav li{
 	float: left;
 	text-align: center;
 	font-weight: bold;
@@ -202,40 +220,43 @@ ul,li	{
 	border-radius: 5px;
 	/*border-right: solid 1px #000;
 	border-left: solid 1px #FFF;*/
-	margin: auto;
+	margin-left: 1px;
 }
-.navi li a	{
-	font-size: 0.8em;
+
+nav li a{
+	color: #fff !important;
+	font-size: 0.9em;
 	display: block;
 	width: 310px;
 	padding: 3px;
 	border-radius: 5px;
-	background: silver;
+	background: #ffd700;
 	text-decoration: none;
-	border-bottom: solid 1px #000;
-	color: #FFF;
+	/*border-bottom: solid 1px #000;*/
 }
-.navi li a:hover	{
-	background: #FFF;
+
+nav li a:hover{
+	background: #ffa500;
 	padding: 3px;
 	text-decoration: none;
-	border-top: solid 1px #F90;
-	border-bottom: solid 1px #FFF;
-	color: #F90;
+	border-left: solid 3px #fff;
+	color: #fff;
 }
 
 
-/*ƒT[ƒ`ƒo[*/
-form[role="search"]{
+/*ã‚µãƒ¼ãƒãƒãƒ¼*/
+
+
+#searchform{
 	display: block;
 	margin: auto;
-	padding: 10px;
+	padding: 6px;
 	background: orange;
 	border-radius: 10px;
-	width: 280px;
+	width: 95%;
 	clear: both;
-	margin-bottom: 1px;
-	margin-top: 1px;
+	margin-bottom: 3px;
+	margin-top: 3px;
 	
 	
 	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -244,32 +265,38 @@ form[role="search"]{
 }
 
 #searchsubmit{
+	margin: auto;
 	display: block;
-	margin-left:50px;
-	margin-top: 10px;
 	width: 180px;
-	height: 50px;
-	font: bold 1.5em/1.0 MS P ƒSƒVƒbƒN;
+	height: 25px;
+	font: bold 1.1em/1.0 MS P ã‚´ã‚·ãƒƒã‚¯;
+	color: black;
+}
+
+#searchsubmit:hover{
+	color: red;
 }
 	
 #seachtext{
+	margin: auto;
 	display: block;
 	padding: 0;
-	margin-left: 20px;
+	margin-bottom: 3px;
 	width: 80%;
 	height: 20px;
 }
-/*ƒRƒ“ƒeƒ“ƒc•”•ª*/
+
+/*ã‚³ãƒ³ãƒ†ãƒ³ãƒ„éƒ¨åˆ†*/
 
 
-.posttitle{
-    font: italic bold normal 30px MS P ƒSƒVƒbƒN;
-    color: orange;
+.posttitle {
+    font: italic bold normal 30px MS P ã‚´ã‚·ãƒƒã‚¯;
+    color: black;
     text-decoration: underline;
 }
 
 .posttitle :hover{
-	color: blue;
+	color: orange;
 }	
 
 /*.entry p{
@@ -279,7 +306,7 @@ form[role="search"]{
 
 }*/
 
-/*ƒ†[ƒU[ƒy[ƒW*/
+/*ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒšãƒ¼ã‚¸*/
 
 #item-nav{
 	font-size: 1.1em;
@@ -328,18 +355,18 @@ form #newentry{
 #giveme-from-others-personal-li{
 	font-size: 1.5em;
 	text-decoration: underline;
-	
 }
+
 
 input[class="multi"]:hover{
 	color: orange;
 }
 
-input[type="button",value="o•i"]:hover{
+input[type="button",value="å‡ºå“"]:hover{
 	color: orange;
 }
 
-/*---ƒvƒƒtƒB[ƒ‹ƒy[ƒW--*/
+/*---ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ãƒšãƒ¼ã‚¸--*/
 input#upload{
 	width: 200px;
 	height: 50px;
@@ -352,7 +379,7 @@ input#upload:hover{
 	color: orange;
 }
 
-/*---İ’è--*/
+/*---è¨­å®š--*/
 input#submit{
 	width: 200px;
 	height: 50px;
@@ -365,13 +392,18 @@ input#submit:hover{
 	color: orange;
 }
 
-/*ƒTƒCƒhƒo[•”•ª*/
+/*ã‚µã‚¤ãƒ‰ãƒãƒ¼éƒ¨åˆ†*/
 
-/*ƒy[ƒWƒgƒbƒv‚É–ß‚éƒ{ƒ^ƒ“*/
+#sidebar-login-form{
+	display: block;
+	padding-left: 6px;
+}
+
+/*ãƒšãƒ¼ã‚¸ãƒˆãƒƒãƒ—ã«æˆ»ã‚‹ãƒœã‚¿ãƒ³*/
 #pagetop_link{
 	text-align: right;
 }
-/*ƒtƒbƒ^[•”•ª*/
+/*ãƒ•ãƒƒã‚¿ãƒ¼éƒ¨åˆ†*/
 
 #footer{
 	font: italic 0.7em meirio;
@@ -408,7 +440,7 @@ body{
 	height: 100%;
 }
 
-/*ƒwƒbƒ_[•”•ª*/
+/*ãƒ˜ãƒƒãƒ€ãƒ¼éƒ¨åˆ†*/
 
 header{
 	/* IE10 Consumer Preview */ 
@@ -453,7 +485,7 @@ header a{
 	background-color: transparent;
 } 
 
-/* ƒwƒbƒ_[ƒtƒH[ƒ€ ,ƒwƒbƒ_[‰æ‘œ*/
+/* ãƒ˜ãƒƒãƒ€ãƒ¼ãƒ•ã‚©ãƒ¼ãƒ  ,ãƒ˜ãƒƒãƒ€ãƒ¼ç”»åƒ*/
 
 #header-under form[name="login-form"]{
 	text-align: left;
@@ -510,18 +542,18 @@ header a{
 	margin: 10px;
 }
 
-/*ƒiƒrƒQ[ƒVƒ‡ƒ“*/
+/*ãƒŠãƒ“ã‚²ãƒ¼ã‚·ãƒ§ãƒ³*/
 ul,li	{
 	margin:0;
 	padding:0;
-	list-style: none;
+	/*list-style: none;*/
 }
 
-.navi	{
+nav .navi	{
 	width: 100%;
 }
 
-.navi li	{
+nav .navi li	{
 	float: left;
 	text-align: center;
 	font-weight: bold;
@@ -531,29 +563,28 @@ ul,li	{
 	border-left: solid 1px #FFF;*/
 }
 
-.navi li a	{
+nav .navi li a{
 	display: block;
 	width: 180px;
 	padding: 10px;
 	border-radius: 5px;
-	background: silver;
 	text-decoration: none;
 	border-bottom: solid 1px #000;
 	color: #FFF;
 }
 
-.navi li a:hover	{
-	background: #FFF;
+nav .navi li a:hover	{
+	background: #f8f8ff;
 	padding: 10px;
 	text-decoration: none;
-	border-top: solid 1px #F90;
-	border-bottom: solid 1px #FFF;
-	color: #F90;
+	border-left: solid 1px #F90;
+	border-right: solid 1px #F90;
+	/*color: #F90;*/
 }
 
 
 
-/*ƒT[ƒ`ƒo[*/
+/*ã‚µãƒ¼ãƒãƒãƒ¼*/
 form[role="search"]{
 	display: block;
 	margin-left: 7px;
@@ -578,7 +609,7 @@ form[role="search"]{
 	width: auto;
 	height: 20px;
 }
-/*ƒRƒ“ƒeƒ“ƒc•”•ª*/
+/*ã‚³ãƒ³ãƒ†ãƒ³ãƒ„éƒ¨åˆ†*/
 
 #content{
 	display: block;
@@ -593,8 +624,8 @@ form[role="search"]{
 	color: blue;
 }	
 
-/*ƒTƒCƒhƒo[•”•ª*/
-/*ƒtƒbƒ^[•”•ª*/
+/*ã‚µã‚¤ãƒ‰ãƒãƒ¼éƒ¨åˆ†*/
+/*ãƒ•ãƒƒã‚¿ãƒ¼éƒ¨åˆ†*/
 
 #footer{
 	font: italic 0.7em meirio;
@@ -627,7 +658,7 @@ body{
 	height: 100%;
 }
 
-/*ƒwƒbƒ_[•”•ª*/
+/*ãƒ˜ãƒƒãƒ€ãƒ¼éƒ¨åˆ†*/
 
 header{
 	/* IE10 Consumer Preview */ 
@@ -672,7 +703,7 @@ header a{
 	background-color: transparent;
 } 
 
-/* ƒwƒbƒ_[ƒtƒH[ƒ€ ,ƒwƒbƒ_[‰æ‘œ*/
+/* ãƒ˜ãƒƒãƒ€ãƒ¼ãƒ•ã‚©ãƒ¼ãƒ  ,ãƒ˜ãƒƒãƒ€ãƒ¼ç”»åƒ*/
 
 #header-under form[name="login-form"]{
 	text-align: left;
@@ -729,7 +760,7 @@ form #sidebar-wp-submit{
 	margin: 10px;
 }
 
-/*ƒiƒrƒQ[ƒVƒ‡ƒ“*/
+/*ãƒŠãƒ“ã‚²ãƒ¼ã‚·ãƒ§ãƒ³*/
 ul,li	{
 	margin:0;
 	padding:0;
@@ -770,7 +801,7 @@ ul,li	{
 	display: block;
 }*/
 
-/*ƒT[ƒ`ƒo[*/
+/*ã‚µãƒ¼ãƒãƒãƒ¼*/
 form[role="search"]{
 	display: block;
 	margin-left: 235px;
@@ -796,7 +827,7 @@ form[role="search"]{
 	width: 420px;
 	height: 20px;
 }
-/*ƒRƒ“ƒeƒ“ƒc•”•ª*/
+/*ã‚³ãƒ³ãƒ†ãƒ³ãƒ„éƒ¨åˆ†*/
 
 #content{
 	display: block;
@@ -811,8 +842,8 @@ form[role="search"]{
 	color: blue;
 }	
 
-/*ƒTƒCƒhƒo[•”•ª*/
-/*ƒtƒbƒ^[•”•ª*/
+/*ã‚µã‚¤ãƒ‰ãƒãƒ¼éƒ¨åˆ†*/
+/*ãƒ•ãƒƒã‚¿ãƒ¼éƒ¨åˆ†*/
 
 #footer{
 	font: italic 0.7em meirio;

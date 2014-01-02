@@ -25,30 +25,34 @@ wp_enqueue_script('freecycleScript');
 		<?php do_action( 'bp_before_header' ); ?>
 
 		<header>
-			<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><?php bp_site_name(); ?></a></h1>
+			<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_logo.png" alt="ロゴ" width="170px" height="70px"></a></h1>
 		</header><!-- header -->
 		
 		
-<div>
+<div class="header_img_navi">
+
+				<div class="header_img_navi_contents">
 					<li id="header-img">
 							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_iine.png" alt="ヘッダー" width="380px" height="300px">
 					</li>
-
+				</div>
+				
+				<nav>
 					<ul class="navi">
-					<li><a href="<?php echo home_url(); ?>" >ホーム</a></li>
+					<li class="grobal_nav"><a href="<?php echo home_url(); ?>" >ホーム</a></li>
 					<?php if(is_user_logged_in()){ ?>
-					<li><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
+					<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					<?php } ?>
-					<li><a href="#" >TexChangeとは</a></li>
-					<li><a href="#" >Q&A</a></li>
-					<li><a href="#" >お問い合わせ</a></li>
+					<li class="grobal_nav"><a href="#" >TexChangeとは</a></li>
+					<li class="grobal_nav"><a href="#" >Q&A</a></li>
+					<li class="grobal_nav"><a href="#" >お問い合わせ</a></li>
 					</ul>
-					
+				</nav>
 </div>
 					
 
-<div>
-
+<div class="header_form_">
+	<div>
 	<ul id="header-under">
 		<?php if(!is_user_logged_in()){ ?>
 		<li>
@@ -64,17 +68,18 @@ wp_enqueue_script('freecycleScript');
 		</li>
 		<?php } ?>
 	</ul>
-</div>
+	</div>
 
 
 		<?php if(bp_is_front_page()){ ?>
 		
-<div id="search-2" class="widget widget_search"><!-- 検索バー -->
+	<div id="search-2" class="widget widget_search"><!-- 検索バー -->
 				<form role="search" method="get" id="searchform" action="http://127.0.0.1/wp/">
 					<!-- <label>検索：</label> --><input type="text" id="seachtext" value="" name="s" id="s" />
 					<input type="submit" id="searchsubmit" value="Search" />
-				</form>
-</div><!-- 検索バー -->
+				</form>	
+	</div><!-- 検索バー -->
+</div>	
 		
 		<?php } ?>
 		<div id="container">
