@@ -21,7 +21,7 @@
 ?>
 </br>
 <!-- tags -->
-<label for="field_4">タグ(コンマ区切り)</label></br>
+<label for="field_4">タグ(スペース区切り)</label></br>
 <input type="text" name="field_4" id="field_4" value="" size="30"></br>
 <!-- picture -->
 <label for="field_5">写真(最大3枚)</label></br>

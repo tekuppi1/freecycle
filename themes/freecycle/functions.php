@@ -319,7 +319,7 @@ function new_entry(){
 	'post_status' => 'publish', // public open
 	'post_title' => strip_tags($_POST['field_1']), // title
 	'post_type' => 'post', // entry type name
-	'tags_input' => $_POST['field_4']
+	'tags_input' => str_replace(array(" ", "　"), array("," ,",") , $_POST['field_4']) // スペース(半角および全角)をカンマに置換
 	);  
 
 	$insert_id = wp_insert_post($post);
