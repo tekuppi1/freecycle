@@ -25,6 +25,8 @@
 		<?php if ( bp_is_active( 'messages' ) ) : ?>
 			<?php bp_message_get_notices(); /* Site wide notices to all users */ ?>
 		<?php endif; ?>
+	<!-- ***** costomize ***** --> 
+	<!-- delete sidebar login form  -->
 	<?php endif; ?>
 
 	<?php /* Show forum tags on the forums directory */
