@@ -326,10 +326,12 @@ function new_entry(){
 
 	if($insert_id){
 		// success
+		// add custom field
+		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
+
 		// image upload
 		global $post;
 		if($_FILES){
-			$msg = "f!";
 			$files = $_FILES['upload_attachment'];
 			// reverse sort
 			arsort($files['name'],SORT_NUMERIC);
@@ -587,6 +589,20 @@ function get_post_author($post_id){
 	return $author_id;
 }
 
+/**
+ * 商品状態を表示用文字列に変換する関数。
+ */
+function get_display_item_status($item_status){
+	$display_map = array(
+			"excellent" => "新品、未使用",
+			"verygood"  => "未使用に近い",
+			"good"		=> "目立った傷や汚れなし",
+			"bad"		=> "やや傷や汚れあり",
+			"verybad"	=> "傷や汚れあり",
+			"poor"		=> "全体的に状態が悪い"
+		);
+	return $display_map[$item_status];
+}
 
 /**********************************************
  * ユーザページカスタマイズ用関数群
@@ -824,18 +840,6 @@ function get_your_giveme_list(){
 		
 	return $givemes;
 }
-
-/**
- * デフォルト投稿画面の表示を編集
- */
-function post_output_css() {
-	$pt = get_post_type();
-	if ($pt == 'post') {
-		$hide_postdiv_css = '<style type="text/css">#postdiv, #postdivrich { display: none; }</style>';
-		echo $hide_postdiv_css;
-	}
-}
-add_action('admin_head', 'post_output_css');
 
 // 管理者以外の場合ツールバーを非表示
 function my_function_admin_bar($content){
