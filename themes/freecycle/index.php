@@ -44,9 +44,10 @@
 					</div>
 
 					<?php do_action( 'bp_after_blog_post' ); ?>
-
+							<hr>
+							
 				<?php endwhile; ?>
-
+							
 				<?php bp_dtheme_content_nav( 'nav-below' ); ?>
 
 			<?php else : ?>
@@ -54,7 +55,7 @@
 				<h2 class="center"><?php _e( 'Not Found', 'buddypress' ); ?></h2>
 				<p class="center"><?php _e( 'Sorry, but you are looking for something that isn\'t here.', 'buddypress' ); ?></p>
 
-				<?php get_search_form(); ?>
+				<!-- <?php get_search_form(); ?> -->
 
 			<?php endif; ?>
 		</div>
@@ -62,6 +63,9 @@
 		<?php do_action( 'bp_after_blog_home' ); ?>
 
 		</div><!-- .padder -->
+		
+		<div id="pagetop_link"><a href="#logo">Go to pagetop</a></div>
+		
 	</div><!-- #content -->
 
 	<?php get_sidebar(); ?>

@@ -87,9 +87,11 @@
 	
 	<!-- display when loggin user page -->
 	<?php if($user_ID == bp_displayed_user_id()){ ?>
+	
 	<div id="points-info">
-	<h3>使用可能ポイント:<?php echo get_usable_point($user_ID); ?>p (仮払ポイント:<?php echo get_temp_used_point($user_ID); ?>p)</h3>
+		<h3>使用可能ポイント:<?php echo get_usable_point($user_ID); ?>p <br>(仮払ポイント:<?php echo get_temp_used_point($user_ID); ?>p)</h3>	
 	</div>
+	
 	<?php } ?>
 	<h5>出品者としての評価平均:<?php echo get_average_exhibiter_score(bp_displayed_user_id()); ?> (件数:<?php echo get_count_exhibiter_evaluation(bp_displayed_user_id()); ?>件)</h5>
 	<h5>落札者としての評価平均:<?php echo get_average_bidder_score(bp_displayed_user_id()); ?> (件数:<?php echo get_count_bidder_evaluation(bp_displayed_user_id()); ?>件)</h5>
@@ -121,7 +123,7 @@
 		 do_action( 'bp_profile_header_meta' );
 
 		 ?>
-
+		 
 	</div><!-- #item-meta -->
 
 </div><!-- #item-header-content -->
