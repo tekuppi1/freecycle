@@ -57,11 +57,11 @@
 	
 </script>
 <div id="item-header-avatar">
+
 	<a href="<?php bp_displayed_user_link(); ?>">
-
 		<?php bp_displayed_user_avatar( 'type=full' ); ?>
-
 	</a>
+	
 </div><!-- #item-header-avatar -->
 
 <div id="item-header-content">
