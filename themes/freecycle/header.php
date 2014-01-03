@@ -56,7 +56,7 @@ wp_enqueue_script('freecycleScript');
 	<ul id="header-under">
 		<?php if(!is_user_logged_in()){ ?>
 		<li>
-			<form name="login-form" id="header-login-form" class="standard-form" action="http://127.0.0.1/wp/wp-login.php" method="post">
+			<form name="login-form" id="header-login-form" class="standard-form" action="<?php echo home_url(); ?>/wp-login.php" method="post">
 							<label>ユーザーネーム<br/>
 							<input type="text" name="log" id="sidebar-user-login" class="input" value="" tabindex="97" /></label>
 							<label>パスワード<br />
@@ -74,7 +74,7 @@ wp_enqueue_script('freecycleScript');
 		<?php if(bp_is_front_page()){ ?>
 		
 	<div id="search-2" class="widget widget_search"><!-- 検索バー -->
-				<form role="search" method="get" id="searchform" action="http://127.0.0.1/wp/">
+				<form role="search" method="get" id="searchform" action="<?php echo home_url(); ?>">
 					<!-- <label>検索：</label> --><input type="text" id="seachtext" value="" name="s" id="s" />
 					<input type="submit" id="searchsubmit" value="Search" />
 				</form>	
