@@ -74,7 +74,7 @@ wp_enqueue_script('freecycleScript');
 		<?php if(bp_is_front_page()){ ?>
 		
 	<div id="search-23" class="widget widget_search"><!-- 検索バー -->
-				<form role="search" method="get" id="searchform" action="<?php echo home_url(); ?>">
+				<form role="search" method="get" id="searchform_main" action="<?php echo home_url(); ?>">
 					<!-- <label>検索：</label> --><input type="text" id="seachtext" value="" name="s" id="s" />
 					<input type="submit" id="searchsubmit" value="Search" />
 				</form>	

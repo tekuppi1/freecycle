@@ -249,7 +249,7 @@ nav li a:hover{
 /*サーチバー*/
 
 
-#searchform{
+#searchform_main{
 	display: block;
 	margin: auto;
 	padding: 6px;
@@ -286,6 +286,10 @@ nav li a:hover{
 	margin-bottom: 3px;
 	width: 80%;
 	height: 20px;
+}
+
+#searchform{
+	display: none;
 }
 
 /*コンテンツ部分*/
