@@ -54,7 +54,7 @@ wp_enqueue_script('freecycleScript');
 <div class="header_form_">
 	<div>
 	<ul id="header-under">
-		<?php if(!is_user_logged_in()){ ?>
+		<?php if(!is_user_logged_in() && get_permalink() != get_home_url()."/register"){ ?>
 		<li>
 			<form name="login-form" id="header-login-form" class="standard-form" action="<?php echo home_url(); ?>/wp-login.php" method="post">
 							<label>ユーザーネーム<br/>
@@ -62,6 +62,7 @@ wp_enqueue_script('freecycleScript');
 							<label>パスワード<br />
 							<input type="password" name="pwd" id="sidebar-user-pass" class="input" value="" tabindex="98" /></label>
 							<p class="forgetmenot"><label><input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" tabindex="99" /> Remember Me</label></p>
+							<p class="register"><a href="<?php echo home_url(); ?>/register">アカウント作成はこちら</a></p>
 							<p class="lostpassword"><a href="<?php echo home_url(); ?>/wp-login.php?action=lostpassword">パスワードを忘れた方はこちら</a></p>
 							<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="Log In" tabindex="100" />
 							<input type="hidden" name="redirect_to" value="" />
