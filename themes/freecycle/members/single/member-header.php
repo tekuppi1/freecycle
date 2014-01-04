@@ -56,7 +56,7 @@
 				success: function(permalink){
 					alert("商品を出品しました。");
 					// reload new entry page
-					location.href = "<?php echo bp_loggedin_user_domain(); ?>" + "new_entry/";
+					location.href = "<?php echo bp_loggedin_user_domain(); ?>" + "new_entry/#newentry";
 				}
 			});
 		}else{
