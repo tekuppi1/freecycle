@@ -12,13 +12,6 @@ Tags: buddypress
 /*ページ全体の枠組み*/
 
 @charset: utf-8;
-/*---------------------------------------------------------------------------------------------------------------------------------------*/
-@media screen and (max-width: 320px) {
-
-a:link { color: #000080; }
-a:visited { color: #000090; }
-a:hover { color: #00bfff; }
-a:active { color: #008080; }
 
 body{
 	background: white;
@@ -61,6 +54,15 @@ hr{
 	border:thin dotted #ffa500;
 	width: 100%;
 }
+
+/*---------------------------------------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 320px) {
+
+a:link { color: #000080; }
+a:visited { color: #000090; }
+a:hover { color: #00bfff; }
+a:active { color: #008080; }
+
 
 
 /*ヘッダー部分*/
@@ -299,21 +301,17 @@ nav li a:hover{
 	color: orange;
 }	
 
-/*.post-content3{
+
+
+/*.353836,.item-status{
 	float: left;
 }
 
-.author-box{
-	float: right;
+p.date{
+	clear both;
 }*/
 
-.post-content .date{
-	clear: both;
-}
-/*.entry p{
-	display: block;
-	float: right;
-}*/
+
 
 #score{
 	display: block;

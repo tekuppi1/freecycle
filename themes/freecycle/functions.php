@@ -202,8 +202,7 @@ function confirmGiveme(){
 		'sender_id' => bp_loggedin_user_id(),
 		'recipients' => $userID,
 		'subject' => '【自動送信】くださいリクエストが承認されました！',
-		'content' => 'あなたが以下の商品の取引相手に選ばれました！</br>' .
-						'このメッセージに返信して、商品の受け取りを進めてください。</br>' .
+		'content' => 'あなたが以下の商品の取引相手に選ばれました！このメッセージに返信して、商品の受け取りを進めてください。 ' .
 						'<a href="' . get_permalink($postID) . '">' . get_permalink($postID) . '</a>'
 	));
 
@@ -320,17 +319,19 @@ function new_entry(){
 	'post_status' => 'publish', // public open
 	'post_title' => strip_tags($_POST['field_1']), // title
 	'post_type' => 'post', // entry type name
-	'tags_input' => $_POST['field_4']
+	'tags_input' => str_replace(array(" ", "　"), array("," ,",") , $_POST['field_4']) // スペース(半角および全角)をカンマに置換
 	);  
 
 	$insert_id = wp_insert_post($post);
 
 	if($insert_id){
 		// success
+		// add custom field
+		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
+
 		// image upload
 		global $post;
 		if($_FILES){
-			$msg = "f!";
 			$files = $_FILES['upload_attachment'];
 			// reverse sort
 			arsort($files['name'],SORT_NUMERIC);
@@ -588,6 +589,20 @@ function get_post_author($post_id){
 	return $author_id;
 }
 
+/**
+ * 商品状態を表示用文字列に変換する関数。
+ */
+function get_display_item_status($item_status){
+	$display_map = array(
+			"excellent" => "新品、未使用",
+			"verygood"  => "未使用に近い",
+			"good"		=> "目立った傷や汚れなし",
+			"bad"		=> "やや傷や汚れあり",
+			"verybad"	=> "傷や汚れあり",
+			"poor"		=> "全体的に状態が悪い"
+		);
+	return $display_map[$item_status];
+}
 
 /**********************************************
  * ユーザページカスタマイズ用関数群
@@ -604,6 +619,16 @@ function my_setup_nav() {
 
 // ログインユーザのプロフィールにのみ表示させる。
 	if($user_ID == bp_displayed_user_id()){
+		bp_core_new_nav_item( array( 
+			'name' => __( '出品一覧', 'buddypress' ), 
+			'slug' => 'entry_list', 
+			'position' => 65,
+			'screen_function' => 'entry_list_link',
+			'show_for_displayed_user' => true,
+			'item_css_id' => 'entry-list'
+			) );
+	
+
 		bp_core_new_nav_item( array( 
 			'name' => __( '新規出品', 'buddypress' ), 
 			'slug' => 'new_entry', 
@@ -647,6 +672,24 @@ function my_setup_nav() {
 }
  
 add_action( 'bp_setup_nav', 'my_setup_nav', 1000 );
+
+/**********************************************
+ * 「出品一覧」表示時に使う関数一式
+ **********************************************
+ */
+function entry_list_title() {
+	echo '出品一覧';
+}
+
+function entry_list_content() {
+	include_once "members/single/entry-list.php";
+}
+
+function entry_list_link(){
+	add_action( 'bp_template_title', 'entry_list_title' );
+	add_action( 'bp_template_content', 'entry_list_content' );
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
 
 /**********************************************
  * 「新規出品」表示時に使う関数一式
@@ -712,7 +755,7 @@ function giveme_from_others_content() {
 			<?php if($last_post_id != ""){ ?>
 			<input type="button" value="取引相手確定" onClick="callOnConfirmGiveme(<?php echo $last_post_id; ?>);">
 			<?php } ?>
-			</div><!-- #post_(id) -->
+			</div>
 	</div>
 	<?php
 }
@@ -797,18 +840,6 @@ function get_your_giveme_list(){
 		
 	return $givemes;
 }
-
-/**
- * デフォルト投稿画面の表示を編集
- */
-function post_output_css() {
-	$pt = get_post_type();
-	if ($pt == 'post') {
-		$hide_postdiv_css = '<style type="text/css">#postdiv, #postdivrich { display: none; }</style>';
-		echo $hide_postdiv_css;
-	}
-}
-add_action('admin_head', 'post_output_css');
 
 // 管理者以外の場合ツールバーを非表示
 function my_function_admin_bar($content){

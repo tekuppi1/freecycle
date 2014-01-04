@@ -26,11 +26,20 @@
 			return false;
 		}
 		
+		var isAttachedFlg = false;
 		for (var i = jQuery(".multi").length - 1; i >= 0; i--) {
 			var fileName = jQuery(".multi").get(i).value;
+			if(fileName){
+				isAttachedFlg = true;
+			}
 			if(fileName && !fileName.match(/\.(jpeg|jpg|png)$/i)){
 				alert("不正なファイルです。\n.jpeg,.jpg,.png ファイルのみアップロードできます。");
 			}
+		}
+
+		if(!isAttachedFlg){
+			alert("写真を添付してください。");
+			return false;
 		}
 
 		if(confirm("出品後の記事の編集はできません。出品しますか？")){
