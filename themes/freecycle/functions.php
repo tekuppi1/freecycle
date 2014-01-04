@@ -124,7 +124,14 @@ function giveme(){
 	// 仮払ポイントを1p増
 	add_temp_used_points($userID, 1);
 	
-	// TODO: 「ください」リクエストが来たことを記事投稿者に通知する
+	// 「ください」リクエストが来たことを記事投稿者に通知する
+	messages_new_message(array(
+	'sender_id' => $userID,
+	'recipients' => get_post_author($postID),
+	'subject' => '【自動送信】あなたの商品に「ください」がされました',
+	'content' => bp_core_get_userlink($userID) . 'さんが以下の商品に「ください」をしています！<br>' .
+					'<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>'
+	));
 	
 	echo $current_giveme;
 	die;
