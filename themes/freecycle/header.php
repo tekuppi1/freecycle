@@ -62,6 +62,7 @@ wp_enqueue_script('freecycleScript');
 							<label>パスワード<br />
 							<input type="password" name="pwd" id="sidebar-user-pass" class="input" value="" tabindex="98" /></label>
 							<p class="forgetmenot"><label><input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" tabindex="99" /> Remember Me</label></p>
+							<p class="lostpassword"><a href="<?php echo home_url(); ?>/wp-login.php?action=lostpassword">パスワードを忘れた方はこちら</a></p>
 							<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="Log In" tabindex="100" />
 							<input type="hidden" name="redirect_to" value="" />
 			</form>
