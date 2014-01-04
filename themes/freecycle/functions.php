@@ -186,6 +186,12 @@ function confirmGiveme(){
 		WHERE post_id = %d",
 		$postID));
 
+	$wpdb->query($wpdb->prepare("
+		UPDATE " . $table_prefix . "fmt_user_giveme
+		SET confirmed_flg = 1
+		WHERE post_id = %d",
+		$postID));
+
 	// 取引履歴を登録
 	$wpdb->query($wpdb->prepare("
 		INSERT INTO " . $table_prefix . "fmt_trade_history
@@ -401,6 +407,18 @@ function get_confirmed_user_id($post_id){
  */
 
 /**
+ * 出品者、落札者全体の平均評価点数を取得します。
+ */
+function get_average_score($user_id){
+	if(get_count_evaluation($user_id) == 0){
+		return "0.00";
+	}
+	return (get_average_exhibiter_score($user_id) * get_count_exhibiter_evaluation($user_id)
+				+ get_average_bidder_score($user_id) * get_count_bidder_evaluation($user_id))
+				/ (get_count_exhibiter_evaluation($user_id) + get_count_bidder_evaluation($user_id));
+}
+
+/**
  * 出品者としての平均の評価点数を取得します。
  * スコアが0のレコードは評価未実施のため対象外です。
  */
@@ -416,7 +434,7 @@ function get_average_exhibiter_score($user_id){
 		GROUP BY exhibiter_id",
 		$user_id));
 	if(is_null($average_score)){
-		$average_score = "0.00";
+		$average_score = 0;
 	}
 	return $average_score;
 }
@@ -438,10 +456,18 @@ function get_average_bidder_score($user_id){
 		GROUP BY bidder_id",
 		$user_id));
 	if(is_null($average_score)){
-		$average_score = "0.00";
+		$average_score = 0;
 	}
 	return $average_score;
 }
+
+/**
+ * 出品者、落札者全体の評価件数を取得します。
+ */
+function get_count_evaluation($user_id){
+	return get_count_exhibiter_evaluation($user_id) + get_count_bidder_evaluation($user_id);
+}
+
 
 /**
  * 出品者としての評価件数を取得します。

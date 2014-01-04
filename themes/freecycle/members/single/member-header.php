@@ -93,8 +93,7 @@
 	</div>
 	
 	<?php } ?>
-	<h5>出品者としての評価平均:<?php echo get_average_exhibiter_score(bp_displayed_user_id()); ?> (件数:<?php echo get_count_exhibiter_evaluation(bp_displayed_user_id()); ?>件)</h5>
-	<h5>落札者としての評価平均:<?php echo get_average_bidder_score(bp_displayed_user_id()); ?> (件数:<?php echo get_count_bidder_evaluation(bp_displayed_user_id()); ?>件)</h5>
+	<h5>評価平均:<?php echo number_format(get_average_score(bp_displayed_user_id()),2); ?>(件数:<?php echo get_count_evaluation(bp_displayed_user_id()); ?>件)</h5>
 	<?php do_action( 'bp_before_member_header_meta' ); ?>
 
 	<div id="item-meta">
