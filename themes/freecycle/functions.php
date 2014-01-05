@@ -124,7 +124,14 @@ function giveme(){
 	// 仮払ポイントを1p増
 	add_temp_used_points($userID, 1);
 	
-	// TODO: 「ください」リクエストが来たことを記事投稿者に通知する
+	// 「ください」リクエストが来たことを記事投稿者に通知する
+	messages_new_message(array(
+	'sender_id' => $userID,
+	'recipients' => get_post_author($postID),
+	'subject' => '【自動送信】あなたの商品に「ください」がされました',
+	'content' => bp_core_get_userlink($userID) . 'さんが以下の商品に「ください」をしています！<br>' .
+					'<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>'
+	));
 	
 	echo $current_giveme;
 	die;
@@ -175,6 +182,12 @@ function confirmGiveme(){
 	// 記事の状態を確定済にする
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_giveme_state
+		SET confirmed_flg = 1
+		WHERE post_id = %d",
+		$postID));
+
+	$wpdb->query($wpdb->prepare("
+		UPDATE " . $table_prefix . "fmt_user_giveme
 		SET confirmed_flg = 1
 		WHERE post_id = %d",
 		$postID));
@@ -394,6 +407,18 @@ function get_confirmed_user_id($post_id){
  */
 
 /**
+ * 出品者、落札者全体の平均評価点数を取得します。
+ */
+function get_average_score($user_id){
+	if(get_count_evaluation($user_id) == 0){
+		return "0.00";
+	}
+	return (get_average_exhibiter_score($user_id) * get_count_exhibiter_evaluation($user_id)
+				+ get_average_bidder_score($user_id) * get_count_bidder_evaluation($user_id))
+				/ (get_count_exhibiter_evaluation($user_id) + get_count_bidder_evaluation($user_id));
+}
+
+/**
  * 出品者としての平均の評価点数を取得します。
  * スコアが0のレコードは評価未実施のため対象外です。
  */
@@ -409,7 +434,7 @@ function get_average_exhibiter_score($user_id){
 		GROUP BY exhibiter_id",
 		$user_id));
 	if(is_null($average_score)){
-		$average_score = "0.00";
+		$average_score = 0;
 	}
 	return $average_score;
 }
@@ -431,10 +456,18 @@ function get_average_bidder_score($user_id){
 		GROUP BY bidder_id",
 		$user_id));
 	if(is_null($average_score)){
-		$average_score = "0.00";
+		$average_score = 0;
 	}
 	return $average_score;
 }
+
+/**
+ * 出品者、落札者全体の評価件数を取得します。
+ */
+function get_count_evaluation($user_id){
+	return get_count_exhibiter_evaluation($user_id) + get_count_bidder_evaluation($user_id);
+}
+
 
 /**
  * 出品者としての評価件数を取得します。
