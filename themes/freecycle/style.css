@@ -226,7 +226,7 @@ nav li{
 }
 
 nav li a{
-	color: #fff !important;
+	color: black !important;
 	font-size: 0.9em;
 	display: block;
 	width: 310px;
@@ -241,7 +241,6 @@ nav li a:hover{
 	background: #ffa500;
 	padding: 3px;
 	text-decoration: none;
-	border-left: solid 3px #fff;
 	color: #fff;
 }
 
@@ -629,22 +628,21 @@ nav li{
 }
 
 nav li a{
-	color: #fff !important;
+	color: #708090 !important;
 	font-size: 0.9em;
 	display: block;
 	width: 310px;
 	padding: 3px;
 	border-radius: 5px;
-	background: #ffd700;
+	background: #fffacd;
 	text-decoration: none;
 	/*border-bottom: solid 1px #000;*/
 }
 
 nav li a:hover{
-	background: #ffa500;
+	background: orange;
 	padding: 3px;
 	text-decoration: none;
-	border-left: solid 3px #fff;
 	color: #fff;
 }
 
