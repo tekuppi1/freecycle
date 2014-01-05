@@ -464,7 +464,8 @@ a:hover { color: #00bfff; }
 a:active { color: #008080; }
 
 body{
-	width: 320px:
+	width: 700px:
+	margin: auto;
 }
 
 /*ヘッダー部分*/
@@ -628,13 +629,13 @@ nav li{
 }
 
 nav li a{
-	color: #708090 !important;
+	color: black !important;
 	font-size: 0.9em;
 	display: block;
-	width: 310px;
+	width: 700px;
 	padding: 3px;
 	border-radius: 5px;
-	background: #fffacd;
+	background: gold;
 	text-decoration: none;
 	/*border-bottom: solid 1px #000;*/
 }
@@ -860,7 +861,8 @@ a:active { color: #008080; }
 
 
 body{
-	width: 320px;
+	width: 750px;
+	margin: auto;
 }
 
 
@@ -1028,7 +1030,7 @@ nav li a{
 	color: #fff !important;
 	font-size: 0.9em;
 	display: block;
-	width: 310px;
+	width: 750px;
 	padding: 3px;
 	border-radius: 5px;
 	background: #ffd700;
