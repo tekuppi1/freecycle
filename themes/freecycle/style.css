@@ -464,7 +464,9 @@ a:visited { color: #000090; }
 a:hover { color: #00bfff; }
 a:active { color: #008080; }
 
-
+body{
+	width: 320px:
+}
 
 /*ヘッダー部分*/
 
@@ -858,6 +860,10 @@ a:visited { color: #000090; }
 a:hover { color: #00bfff; }
 a:active { color: #008080; }
 
+
+body{
+	width: 320px;
+}
 
 
 /*ヘッダー部分*/
