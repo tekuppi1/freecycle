@@ -311,7 +311,8 @@
 				<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>
 
 			<?php endif; ?>
-
+				
+				
 		</div>
 
 		<?php do_action( 'bp_after_blog_single_post' ); ?>

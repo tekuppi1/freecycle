@@ -77,8 +77,22 @@ wp_enqueue_script('freecycleScript');
 		
 	<div id="search-23" class="widget widget_search"><!-- 検索バー -->
 				<form role="search" method="get" id="searchform_main" action="<?php echo home_url(); ?>">
-					<!-- <label>検索：</label> --><input type="text" id="seachtext" value="" name="s" id="s" />
-					<input type="submit" id="searchsubmit" value="Search" />
+					<!-- <label>検索：</label> -->
+						<div id="searchform_text">
+					  			<input type="text" id="searchtext" value="" name="s" id="s" />
+					  	</div>
+						<div id="searchform_text_pulldown">
+							<div id="searchform_pulldown">
+								<select name="categories_seachform">
+									<option value="#">カテゴリ</option>
+									<option value="#">タグ</option>
+									<option value="#">キーワード</option>
+								</select>
+							</div>
+							<div id="searchform_submit">
+									<input type="submit" id="searchsubmit" value="Search" />
+							</div>
+						</div>
 				</form>	
 	</div><!-- 検索バー -->
 </div>	
