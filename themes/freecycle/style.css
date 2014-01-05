@@ -13,7 +13,7 @@ Tags: buddypress
 
 @charset: utf-8;
 
-body{
+html{
 	background: white;
 	color: #696969;
 	margin: 0;
@@ -34,25 +34,30 @@ h1{
 }
 
 h2{
-	font-size: 1.2em;	
+	font-size: 1.4em;	
 }
 
 h3{
-	font-size: 0.9em;	
+	font-size: 1.2em;	
 }
 
 h4{
-	font-size: 0.7em;	
+	font-size: 1em;	
 }
 
 h5{
-	font-size: 0.5em;	
+	font-size: 0.8em;	
 }
 
 
 hr{
 	border:thin dotted #ffa500;
 	width: 100%;
+}
+p{
+}
+
+a{
 }
 
 /*-----------FAQ------------*/
@@ -154,6 +159,19 @@ header a:active{
 	color: orange;
 }
 
+/*ヘッダーイメージ*/
+.header_img_navi{
+	float:left;
+}
+
+.header_img_navi img{
+	width:100%;
+	height: auto;
+	margin: 0;
+	/*padding-left: 2px;*/
+}
+
+
 /* ヘッダーフォーム */
 
 form[name=login-form]{
@@ -216,18 +234,6 @@ form #sidebar-wp-submit{
 /*#header-img,#header-img2{
 	margin: 10px;
 }*/
-
-/*ヘッダーイメージ*/
-.header_img_navi{
-	float:left;
-}
-
-.header_img_navi img{
-	max-width:80%;
-	height: 160px;
-	margin: 0 0 2px 30px;
-	padding-left: 2px;
-}
 
 /*ナビゲーション*/
 .header_img_navi{
@@ -344,7 +350,10 @@ nav li a:hover{
 }	
 
 div.entry a{
+	display: block;
 	align: left;
+	height: 200px;
+	width: 200px;
 }
 
 
@@ -1150,9 +1159,10 @@ nav li a:hover{
 	color: orange;
 }	
 
-div#entry_img{
-	align: left;
-}
+div.entry a{
+	/*display: block;*/
+	float: left;
+	}
 
 /*.353836,.item-status{
 	float: left;
