@@ -57,7 +57,7 @@ wp_enqueue_script('freecycleScript');
 		<?php if(!is_user_logged_in() && get_permalink() != get_home_url()."/register"){ ?>
 		<li>
 			<form name="login-form" id="header-login-form" class="standard-form" action="<?php echo home_url(); ?>/wp-login.php" method="post">
-							<label>ユーザーネーム<br/>
+							<label>ユーザ名<br/>
 							<input type="text" name="log" id="sidebar-user-login" class="input" value="" tabindex="97" /></label>
 							<label>パスワード<br />
 							<input type="password" name="pwd" id="sidebar-user-pass" class="input" value="" tabindex="98" /></label>

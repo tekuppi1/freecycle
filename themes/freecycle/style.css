@@ -127,7 +127,7 @@ form[name=login-form]{
 	padding: 7px;
 	background: orange;
 	border-radius: 10px;
-	width: 90%;
+	width: 95%;
 	clear: both;
 	border: solid 1px;
 	color: black;
@@ -251,7 +251,7 @@ nav li a:hover{
 #searchform_main{
 	display: block;
 	margin: auto;
-	padding: 6px;
+	padding: 5px;
 	background: orange;
 	border-radius: 10px;
 	width: 95%;
@@ -260,15 +260,16 @@ nav li a:hover{
 	margin-top: 3px;
 	
 	
-	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
-    box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
 }
 
 #searchsubmit{
-	margin: auto;
+	margin-left: auto;
+	margin-right: 12px;
 	display: block;
-	width: 180px;
+	width: 170px;
 	height: 25px;
 	font: bold 1.1em/1.0 MS P ゴシック;
 	color: black;
@@ -283,7 +284,7 @@ nav li a:hover{
 	display: block;
 	padding: 0;
 	margin-bottom: 3px;
-	width: 80%;
+	width: 90%;
 	height: 20px;
 }
 
@@ -304,6 +305,9 @@ nav li a:hover{
 	color: orange;
 }	
 
+div.entry a{
+	align: left;
+}
 
 
 /*.353836,.item-status{
@@ -707,7 +711,9 @@ nav li a:hover{
 	color: orange;
 }	
 
-
+div#entry_img{
+	align: left;
+}
 
 /*.353836,.item-status{
 	float: left;
@@ -1106,7 +1112,9 @@ nav li a:hover{
 	color: orange;
 }	
 
-
+div#entry_img{
+	align: left;
+}
 
 /*.353836,.item-status{
 	float: left;

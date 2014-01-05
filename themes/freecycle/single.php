@@ -292,6 +292,8 @@
 							?>
 							<?php the_content( __( 'Read the rest of this entry &rarr;', 'buddypress' ) ); ?>
 							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
+							
+							
 						</div>
 						
 							<p class="postmetadata"><?php the_tags( '<span class="tags">' . __( 'Tags: ', 'buddypress' ), ', ', '</span>' ); ?>&nbsp;</p>
