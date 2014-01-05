@@ -19,7 +19,7 @@ body{
 	margin: 0;
 	padding: 0;
 	line-height:1.4;
-	font-family:Arial, ＭSＰゴシック;
+	font-family:"Arial", "ＭS Ｐゴシック";
 	font-size: 15px;
 	width: 100%;
 	height: 100%;
@@ -54,6 +54,44 @@ hr{
 	border:thin dotted #ffa500;
 	width: 100%;
 }
+
+/*-----------FAQ------------*/
+h2.pagetitle{
+	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
+	border-top: double 3px black;
+	border-bottom: double 3px black;
+	text-align: center;
+	width:auto;
+	color: black;
+	
+}
+h3.faq_heading{
+	font: normal 1.2em/1.4 "MS P ゴシック","Arial";
+	border-left: double 3px gold;
+	border-bottom: medium 1px gold;
+	color: red;
+}
+h4.faq_heading{
+	font: normal 1.0em/1.4 "MS P ゴシック","Arial";
+}
+h5.faq_heading{
+	font: normal 0.9em/1.4 "MS P ゴシック","Arial";
+}
+
+/*-----------テクスチェンジとは--------------*/
+h3.whats_tex{
+	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
+	border-top: double 3px black;
+	border-bottom: double 3px black;
+	text-align: center;
+	width:auto;
+	color: black;
+}
+h4.whats_tex{
+	font: bold 1.2em/1.4 "MS P ゴシック","Arial";
+	color: red;
+}
+
 
 /*---------------------------------------------------------------------------------------------------------------------------------------*/
 @media screen and (max-width: 320px) {
