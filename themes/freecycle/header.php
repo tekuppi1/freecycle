@@ -33,7 +33,10 @@ wp_enqueue_script('freecycleScript');
 
 				<div class="header_img_navi_contents">
 					<li id="header-img">
+					<?php if(is_user_logged_in()) { ?>
+					<?php }else{?>
 							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_iine.png" alt="ヘッダー" width="380px" height="300px">
+					<?php } ?>
 					</li>
 				</div>
 				
