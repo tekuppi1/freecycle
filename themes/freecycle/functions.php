@@ -185,12 +185,14 @@ function confirmGiveme(){
 		SET confirmed_flg = 1
 		WHERE post_id = %d",
 		$postID));
-
+	
+	// ユーザ確定情報の登録
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_user_giveme
 		SET confirmed_flg = 1
-		WHERE post_id = %d",
-		$postID));
+		WHERE post_id = %d
+		AND user_id = %d",
+		$postID, $userID));
 
 	// 取引履歴を登録
 	$wpdb->query($wpdb->prepare("
