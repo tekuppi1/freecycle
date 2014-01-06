@@ -103,11 +103,11 @@ h5.faq_heading{
 /*-----------テクスチェンジとは--------------*/
 h3.whats_tex{
 	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
-	border-top: solid 3px black;
-	border-bottom: solid 3px black;
-	text-align: center;
+	border-left: double 2px black;
+	border-bottom: solid 2px black;
+	text-align: left;
 	width:auto;
-	background: gold;
+	background-color: gold;
 	color: black;
 }
 
@@ -628,13 +628,14 @@ h5.faq_heading{
 /*-----------テクスチェンジとは--------------*/
 h3.whats_tex{
 	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
-	border-top: solid 3px black;
-	border-bottom: solid 3px black;
-	text-align: center;
+	border-left: double 2px black;
+	border-bottom: solid 2px black;
+	text-align: left;
 	width:auto;
-	background: gold;
+	background-color: gold;
 	color: black;
 }
+
 h4.whats_tex{
 	font: bold 1.2em/1.4 "MS P ゴシック","Arial";
 	color: red;
