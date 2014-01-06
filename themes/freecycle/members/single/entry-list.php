@@ -27,18 +27,18 @@
 				}
 			?>
 		</span>
-		<span class="posttodo"><a href="<?php echo get_permalink($entry->ID) ?>">
+		<span class="posttodo">
 			<?php
 				if(isFinish($entry->ID)){
 					if(isBidderEvaluated($entry->ID)){
 					echo "";
 					}else{
-					echo "落札者を評価してください。";
+					echo "<a href='" . get_permalink($entry->ID) . "'>落札者を評価してください。";
 					}
 				}elseif(isConfirm($entry->ID)){
-					echo "商品を受渡し、取引を確定してください。";
+					echo "<a href='" . get_permalink($entry->ID) . "'>商品を受渡し、取引を確定してください。";
 				}elseif(isGiveme($entry->ID)){
-					echo "落札者を確定してください。";
+					echo "<a href='" . get_giveme_from_others_url() . "'>落札者を確定してください。";
 				}else{
 					echo "";
 				}
