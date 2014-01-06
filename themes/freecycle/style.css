@@ -103,10 +103,11 @@ h5.faq_heading{
 /*-----------テクスチェンジとは--------------*/
 h3.whats_tex{
 	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
-	border-top: double 3px black;
-	border-bottom: double 3px black;
+	border-top: solid 3px black;
+	border-bottom: solid 3px black;
 	text-align: center;
 	width:auto;
+	background: gold;
 	color: black;
 }
 
@@ -386,7 +387,7 @@ nav li a:hover{
 	color: orange;
 }	
 
-div.entry a{
+/*div.entry a{
 	display: block;
 	align: left;
 	height: 200px;
@@ -394,7 +395,7 @@ div.entry a{
 }
 
 
-/*.353836,.item-status{
+.353836,.item-status{
 	float: left;
 }
 
@@ -627,10 +628,11 @@ h5.faq_heading{
 /*-----------テクスチェンジとは--------------*/
 h3.whats_tex{
 	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
-	border-top: double 3px black;
-	border-bottom: double 3px black;
+	border-top: solid 3px black;
+	border-bottom: solid 3px black;
 	text-align: center;
 	width:auto;
+	background: gold;
 	color: black;
 }
 h4.whats_tex{
@@ -825,7 +827,7 @@ nav li a:hover{
 	background: orange;
 	padding: 3px;
 	text-decoration: none;
-	color: #fff;
+	color:black;
 }
 
 
@@ -834,11 +836,13 @@ nav li a:hover{
 
 #searchform_main{
 	display: block;
-	margin: auto;
-	padding: 6px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 5px;
 	background: orange;
 	border-radius: 10px;
-	width: 95%;
+	width: 99%;
+	height: 27px;
 	clear: both;
 	margin-bottom: 3px;
 	margin-top: 3px;
@@ -851,8 +855,9 @@ nav li a:hover{
 
 #searchsubmit{
 	margin: auto;
+	padding: 5px;
 	display: block;
-	width: 180px;
+	width: 120px;
 	height: 25px;
 	font: bold 1.1em/1.0 MS P ゴシック;
 	color: black;
@@ -861,24 +866,39 @@ nav li a:hover{
 #searchsubmit:hover{
 	color: orange;
 }
-	
-#seachtext{
+
+/*div#searchform_submit{
+	width: 70px;
+}*/
+
+#searchform_pulldown{
+	padding: 3px;
+}
+
+#searchtext{
 	margin: auto;
 	display: block;
 	padding: 0;
-	margin-bottom: 3px;
-	width: 80%;
+	width: 65%;
 	height: 20px;
-}
-
-select[name="categories_seachform"]{
-	align: left;
+	float: left;
 }
 
 #searchform{
 	display: none;
 }
 
+#searchform_text_pulldown{
+	margin-left: 80px;
+}
+
+#searchform_pulldown{
+	float: left;
+}
+
+#searchform_submit{
+	float: left;
+}
 
 /*コンテンツ部分*/
 
