@@ -562,7 +562,7 @@ html{
 	padding: 0;
 	line-height:1.4;
 	font-family:"Arial", "ＭS Ｐゴシック";
-	font-size: 15px;
+	font-size: 17px;
 	width: 700px;
 	height: 100%;
 }
@@ -615,7 +615,7 @@ h2.pagetitle{
 h3.faq_heading{
 	font: normal 1.2em/1.4 "MS P ゴシック","Arial";
 	border-left: double 3px gold;
-	border-bottom: medium 1px gold;
+	border-bottom: solid 1px gold;
 	color: red;
 }
 h4.faq_heading{
@@ -684,7 +684,7 @@ header #logo{
     font: bold italic 2em/1.5 MS P ゴシック;
     text-shadow: 3px 3px 2px rgba(0,0,0,0.5);
     letter-spacing: 2px;
-    padding: 3px 0 7px 25px;
+   padding: 0 0 0 20px;
 }
 
 header a{
@@ -715,7 +715,7 @@ form[name=login-form]{
 	padding: 7px;
 	background: orange;
 	border-radius: 10px;
-	width: 90%;
+	width: 98%;
 	clear: both;
 	border: solid 1px;
 	color: black;
@@ -769,7 +769,7 @@ form #sidebar-wp-submit{
 
 /*ヘッダーイメージ*/
 .header_img_navi{
-	float:left;
+	/*float:left;*/
 }
 
 .header_img_navi img{
