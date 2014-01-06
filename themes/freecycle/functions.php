@@ -749,6 +749,10 @@ function new_entry_link(){
  * 「くださいリクエスト」一覧表示時に使う関数一式
  **********************************************
  */
+function get_giveme_from_others_url() {
+	return bp_loggedin_user_domain() . "giveme/giveme-from-others/";
+}
+
 function giveme_from_others_title() {
 	echo 'くださいリクエスト一覧';
 }

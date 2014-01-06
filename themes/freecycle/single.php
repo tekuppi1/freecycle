@@ -228,7 +228,7 @@
 						<input type="button" id="finish" value="取引完了" onClick="onFinish();">
 							<?php }elseif(isGiveme($post->ID)){ ?>
 							<!-- when status is giveme -->
-						<input type="button" id="finish" value="取引完了(まだ押せない)">
+						<a href="<?php echo get_giveme_from_others_url(); ?>">取引相手を確定させてください。</a>
 							<?php }else{ ?>
 									この商品は「ください」待ちです。
 						<?php     } ?>
