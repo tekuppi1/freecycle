@@ -174,21 +174,22 @@
 
 							<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-
+						<div class="author-box">
+						<?php echo get_avatar( get_the_author_meta( 'user_email' ), '50' ); ?>
+						<p><?php printf( _x( 'by %s', 'Post written by...', 'buddypress' ), str_replace( '<a href=', '<a rel="author" href=', bp_core_get_userlink( $post->post_author ) ) ); ?></p>
+						</div>			
 					
 
 					<div class="post-content">
-						<h2 class="posttitle"><?php the_title(); ?></h2>							
+						<h2 class="posttitle"><?php the_title(); ?></h2>	
+								
+							
 						<div class="item_status">状態:
 						<?php
 							$item_status = get_post_custom_values("item_status");
 							echo get_display_item_status($item_status["0"]);
 						?>
 						</div>
-						<div class="author-box">
-						<?php echo get_avatar( get_the_author_meta( 'user_email' ), '50' ); ?>
-						<p><?php printf( _x( 'by %s', 'Post written by...', 'buddypress' ), str_replace( '<a href=', '<a rel="author" href=', bp_core_get_userlink( $post->post_author ) ) ); ?></p>
-					</div>
 
 						<?php
 						/*

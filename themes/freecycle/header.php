@@ -41,7 +41,7 @@ wp_enqueue_script('freecycleScript');
 				</div>
 				
 				<nav>
-					<ul class="navi">
+					<ul class="navi" class="clearfix">
 					<li class="grobal_nav"><a href="<?php echo home_url(); ?>" >ホーム</a></li>
 					<?php if(is_user_logged_in()){ ?>
 					<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>

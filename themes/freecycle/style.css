@@ -52,11 +52,19 @@ h2{
 }
 
 h3{
-	font-size: 1.2em;	
+	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
+	border-left: double 2px black;
+	text-align: left;
+	width:auto;
+	padding-left: 3px;
+	background-color: gold;
+	color: black;
 }
 
 h4{
-	font-size: 1em;	
+	font: normal 1.3em/1.4 "MS P ゴシック","Arial";
+	border-left: solid 2px gold;
+	color: black;
 }
 
 h5{
@@ -83,13 +91,12 @@ h2.pagetitle{
 	text-align: center;
 	width:auto;
 	color: black;
-	
 }
+
 h3.faq_heading{
 	font: normal 1.3em/1.4 "MS P ゴシック","Arial";
 	border-left: double 3px gold;
-	border-bottom: solid 2px gold;
-	color: gold;
+	color: black;
 }
 
 h4.faq_heading{
@@ -104,9 +111,9 @@ h5.faq_heading{
 h3.whats_tex{
 	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
 	border-left: double 2px black;
-	border-bottom: solid 2px black;
 	text-align: left;
 	width:auto;
+	padding-left: 3px;
 	background-color: gold;
 	color: black;
 }
@@ -539,11 +546,544 @@ div#search-2{
 }
 
 }
+/*--------------------------------------------------------------------------------------------------------------------------------------*/
+@media screen and (min-width: 321px) and (max-width: 480px){
+
+a:link { color: #000080; }
+a:visited { color: #000090; }
+a:hover { color: #00bfff; }
+a:active { color: #008080; }
+
+input[type="button"]:disable{
+	display: none;
+}
+
+@charset: utf-8;
+
+html{
+	background: white;
+	color: #696969;
+	margin: 0;
+	padding: 0;
+	line-height:1.4;
+	font-family:"Arial", "ＭS Ｐゴシック";
+	font-size: 15px;
+	width: 400px;
+	height: 100%;
+}
+
+input{
+	font-size: 1.2em;
+}
+
+h1{
+	font-size: 1.5em;	
+}
+
+h2{
+	font-size: 1.4em;	
+}
+
+h3{
+	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
+	border-left: double 2px black;
+	text-align: left;
+	width:auto;
+	padding-left: 3px;
+	background-color: gold;
+	color: black;
+}
+
+h4{
+	font: normal 1.3em/1.4 "MS P ゴシック","Arial";
+	border-left: solid 2px gold;
+	color: black;
+}
+
+h5{
+	font-size: 0.8em;	
+}
+
+
+hr{
+	border:thin dotted #ffa500;
+	width: 100%;
+}
+p{
+	line-height: 1.4;
+}
+
+
+/*-----------FAQ------------*/
+h2.pagetitle{
+	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
+	border-top: double 3px black;
+	border-bottom: double 3px black;
+	text-align: center;
+	width:auto;
+	color: black;
+	
+}
+h3.faq_heading{
+	font: normal 1.3em/1.4 "MS P ゴシック","Arial";
+	border-left: double 3px orange;
+	color: black;
+}
+
+h4.faq_heading{
+	font: bold 1.2em/1.4 "MS P ゴシック","Arial";
+	color: red;
+}
+h5.faq_heading{
+	font: normal 0.9em/1.4 "MS P ゴシック","Arial";
+}
+
+/*-----------テクスチェンジとは--------------*/
+h3.whats_tex{
+	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
+	border-left: double 2px black;
+	text-align: left;
+	width:auto;
+	background-color: gold;
+	color: black;
+}
+
+h4.whats_tex{
+	font: bold 1.3em/1.4 "MS P ゴシック","Arial";
+	color: red;
+}
+
+input[type="button"]{
+	width: 130px;
+	height: 30px;
+	padding: 5px;
+	font: normal 1.2em/1.5 "arial","MS P ゴシック"
+	color: black;
+}
+
+input[type="button"]:hover{
+	background: orange;
+}
+
+
+/*ヘッダー部分*/
+
+header{
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* Opera */ 
+	background-image: -o-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, right top, left top, color-stop(0, #FFFFFF), color-stop(1, #FF9C08));
+
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
+
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to left, #FFFFFF 0%, #FF9C08 100%);
+	
+	width: 100%;
+	height: 80px;
+}
+
+	
+	
+header #logo{
+    font: bold italic 2em/1.5 MS P ゴシック;
+    text-shadow: 3px 3px 2px rgba(0,0,0,0.5);
+    letter-spacing: 2px;
+    padding: 3px 0 7px 25px;
+}
+
+header a{
+	text-decoration: none;
+	display: block;
+	padding-left: 10px;
+	margin: 5px;
+	background-color: transparent; 
+} 
+
+header a:hover{
+	color: white;
+}
+
+header a:active{
+	color: orange;
+}
+
+/*ヘッダーイメージ*/
+.header_img_navi{
+	float:left;
+}
+
+.header_img_navi img{
+	width:100%;
+	height: auto;
+	margin: 0;
+	/*padding-left: 2px;*/
+}
+
+
+/* ヘッダーフォーム */
+
+form[name=login-form]{
+	text-align: left;
+	display: block;
+	margin: auto;
+	margin-bottom: 1px;
+	margin-top: 1px;
+	padding: 7px;
+	background: orange;
+	border-radius: 10px;
+	width: 95%;
+	clear: both;
+	border: solid 1px;
+	color: black;
+	
+	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
+}
+
+form #sidebar-wp-submit{
+	width: 180px;
+	height: 45px;
+	display: block;
+	margin: auto;
+}
+	
+	
+
+#sidebar-wp-submit{
+	font-size: 25px;
+	boder-radius: 10px;
+	color: black;
+	background-color: #eee;
+	padding: 5px;
+	margin: 0;
+	text-align: center;
+}
+
+#sidebar-wp-submit:hover{
+	color: orange;
+	font-size: 40px;
+	font-style: bold;
+}
+
+#header-under{
+	display: block;
+	margin: auto;
+	padding: 0;
+	background-color: #fff;
+	width: 100%;
+}
+
+#header-under li {
+	float: left;
+	width: 100%;
+}
+
+/*#header-img,#header-img2{
+	margin: 10px;
+}*/
+
+/*ナビゲーション*/
+.header_img_navi{
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+	
+
+nav{
+	margin: 3px 0 3px 0;
+	display: block;
+}
+
+nav ul,li	{
+	margin:0;
+	padding:0;
+	list-style: none;
+}
+nav .navi	{
+	width: 95%;
+	display: block;
+}
+nav li{
+	float: left;
+	text-align: center;
+	font-weight: bold;
+	border: solid 1px #000;
+	border-radius: 5px;
+	/*border-right: solid 1px #000;
+	border-left: solid 1px #FFF;*/
+	margin-left: 1px;
+}
+
+nav li a{
+	color: black !important;
+	font-size: 0.9em;
+	display: block;
+	width: 389px;
+	padding: 3px;
+	border-radius: 5px;
+	background: #ffd700;
+	text-decoration: none;
+	/*border-bottom: solid 1px #000;*/
+}
+
+nav li a:hover{
+	background: #ffa500;
+	padding: 3px;
+	text-decoration: none;
+	color: #fff;
+}
+
+.clearfix:after {  
+  content: " ";   
+  display: block;   
+  height: 0;   
+  clear: both;   
+  visibility: hidden;  
+}  
+/*サーチバー*/
+
+
+#searchform_main{
+	display: block;
+	margin: auto;
+	padding: 5px;
+	background: orange;
+	border-radius: 10px;
+	width: 95%;
+	height: 55px;
+	clear: both;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	
+	
+	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
+}
+
+#searchsubmit{
+	margin-left: auto;
+	padding: 3px;
+	display: block;
+	width: 200px;
+	height: 25px;
+	font: bold 1.1em/1.0 MS P ゴシック;
+	color: black;
+}
+
+#searchsubmit:hover{
+	color: orange;
+}
+
+/*div#searchform_submit{
+	width: 70px;
+}*/
+
+#searchform_pulldown{
+	padding: 3px;
+}
+
+#searchtext{
+	margin: auto;
+	display: block;
+	padding: 0;
+	margin-bottom: 3px;
+	width: 95%;
+	height: 20px;
+}
+
+#searchform{
+	display: none;
+}
+
+#searchform_pulldown{
+	float: left;
+}
+
+#searchform_submit{
+	float: left;
+}
+
+/*コンテンツ部分*/
+
+
+.posttitle {
+    font: italic bold normal 30px MS P ゴシック;
+    color: black;
+    text-decoration: underline;
+}
+
+.posttitle :hover{
+	color: orange;
+}	
+
+/*div.entry a{
+	display: block;
+	align: left;
+	height: 200px;
+	width: 200px;
+}
+
+
+.353836,.item-status{
+	float: left;
+}
+
+p.date{
+	clear both;
+}*/
+
+
+
+#score{
+	display: block;
+	width: 180px;
+	height: 25px;
+}
+
+#evaluation{
+	display: block;
+	width: 180px;
+	height: 25px;
+}
+
+/*ユーザーページ*/
+
+#item-nav{
+	font-size: 1.1em;
+	font-weight: bold;
+	text-align: left;
+	display: block;
+	border-top: ridge;
+	border-bottom: ridge;
+	color: black;
+	text-decoration: underline;
+}
+
+.activity-meta a{
+	font-size: 1.4em;
+	text-align: center;
+	display: block;
+	width: 150px;
+	height: 20px;
+	padding: 0 5px 0 5px;
+	margin: auto;
+}
+
+form #newentry{
+	font-size: 1.3em;
+}
+
+#newentry p{
+	color: red;
+}
+
+#field_3{
+	display: block;
+	width: 100px;
+}
+
+#newentry input[type="button"]{
+	width: 150px;
+	height: 50px;
+	font-size: 1.4em;
+	color: black;
+	display: block;
+}
+
+#newentry input[type="button"]:hover{
+	background: orange;
+	font-size: 1.5em;
+}
+
+#giveme-from-others-personal-li{
+	font-size: 1.5em;
+	text-decoration: underline;
+}
+
+
+input[class="multi"]:hover{
+	color: orange;
+}
+
+input[type="button",value="出品"]:hover{
+	color: orange;
+}
+
+/*---プロフィールページ--*/
+input#upload{
+	width: 200px;
+	height: 50px;
+	font-size: 1.25em;
+	color: black;
+	display: block;	
+}
+
+input#upload:hover{
+	color: orange;
+}
+
+/*#subnav h3{
+	display: block;
+	font-size: 1.3em !important;
+}*/
+
+/*---設定--*/
+input#submit{
+	width: 200px;
+	height: 50px;
+	font-size: 1.25em;
+	color: black;
+	display: block;	
+}
+
+input#submit:hover{
+	color: orange;
+}
+
+/*サイドバー部分*/
+
+#sidebar-login-form{
+	display: block;
+	padding-left: 6px;
+}
+
+div#sidebar h3.widgettitle {
+	background: #ffd700;
+	color: black;
+}
+
+div#search-2{
+	display: none;
+}
+
+/*ページトップに戻るボタン*/
+#pagetop_link{
+	text-align: right;
+}
+/*フッター部分*/
+
+#footer{
+	font: italic 0.7em meirio;
+	color: gray;
+}
+
+}
 
 
 
 /*---------------------------------------------------------------------------------------------------------------------------------------*/
-@media screen and (min-width: 321px) {
+@media screen and (min-width: 481px) {
 a:link { color: #000080; }
 a:visited { color: #000090; }
 a:hover { color: #00bfff; }
@@ -580,12 +1120,21 @@ h2{
 }
 
 h3{
-	font-size: 1.2em;	
+	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
+	border-left: double 2px black;
+	text-align: left;
+	width:auto;
+	padding-left: 3px;
+	background-color: gold;
+	color: black;
 }
 
 h4{
-	font-size: 1em;	
+	font: normal 1.3em/1.4 "MS P ゴシック","Arial";
+	border-left: solid 2px gold;
+	color: black;
 }
+
 
 h5{
 	font-size: 0.8em;	
@@ -606,20 +1155,20 @@ a{
 h2.pagetitle{
 	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
 	border-top: double 3px black;
-	border-bottom: double 3px black;
 	text-align: center;
 	width:auto;
 	color: black;
 	
 }
 h3.faq_heading{
-	font: normal 1.2em/1.4 "MS P ゴシック","Arial";
-	border-left: double 3px gold;
-	border-bottom: solid 1px gold;
-	color: red;
+	font: normal 1.3em/1.4 "MS P ゴシック","Arial";
+	border-left: double 3px orange;
+	color: black;
 }
+
 h4.faq_heading{
-	font: normal 1.0em/1.4 "MS P ゴシック","Arial";
+	font: bold 1.2em/1.4 "MS P ゴシック","Arial";
+	color: red;
 }
 h5.faq_heading{
 	font: normal 0.9em/1.4 "MS P ゴシック","Arial";
@@ -637,7 +1186,7 @@ h3.whats_tex{
 }
 
 h4.whats_tex{
-	font: bold 1.2em/1.4 "MS P ゴシック","Arial";
+	font: bold 1.3em/1.4 "MS P ゴシック","Arial";
 	color: red;
 }
 
@@ -999,6 +1548,7 @@ input[class="multi"]:hover{
 input[type="button",value="出品"]:hover{
 	color: orange;
 }
+
 
 /*---プロフィールページ--*/
 input#upload{
