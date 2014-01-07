@@ -25,7 +25,7 @@ wp_enqueue_script('freecycleScript');
 		<?php do_action( 'bp_before_header' ); ?>
 
 		<header>
-			<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_logo.png" alt="ロゴ" width="170px" height="70px"></a></h1>
+			<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header.png" alt="ヘッダー" width="700px" height="200px"></a></h1>
 		</header><!-- header -->
 		
 		
@@ -38,6 +38,7 @@ wp_enqueue_script('freecycleScript');
 							<a class="unread_alert" href="<?php echo bp_loggedin_user_domain() . "messages"; ?>">未読メッセージが<?php echo messages_get_unread_count();?>件あります！</a>
 					<?php 		} 
 						}else{ ?> 
+						
 					<li id="header-img">
 							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_iine.png" alt="ヘッダー" width="380px" height="300px">
 					</li>

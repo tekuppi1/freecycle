@@ -141,32 +141,14 @@ input[type="button"]:hover{
 
 /*ヘッダー部分*/
 
-header{
-	/* IE10 Consumer Preview */ 
-	background-image: -ms-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
-
-	/* Mozilla Firefox */ 
-	background-image: -moz-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
-
-	/* Opera */ 
-	background-image: -o-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
-
-	/* Webkit (Safari/Chrome 10) */ 
-	background-image: -webkit-gradient(linear, right top, left top, color-stop(0, #FFFFFF), color-stop(1, #FF9C08));
-
-	/* Webkit (Chrome 11+) */ 
-	background-image: -webkit-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
-
-	/* W3C Markup, IE10 Release Preview */ 
-	background-image: linear-gradient(to left, #FFFFFF 0%, #FF9C08 100%);
-	
+header{	
 	width: 100%;
-	height: 80px;
+	height: 110px;
 }
 
 	
 	
-header #logo{
+/*header #logo{
     font: bold italic 2em/1.5 MS P ゴシック;
     text-shadow: 3px 3px 2px rgba(0,0,0,0.5);
     letter-spacing: 2px;
@@ -187,6 +169,12 @@ header a:hover{
 
 header a:active{
 	color: orange;
+}*/
+
+header #logo img{
+	width: 100%;
+	height: 120px;
+	
 }
 
 /*ヘッダーイメージ*/
@@ -684,31 +672,13 @@ input[type="button"]:hover{
 /*ヘッダー部分*/
 
 header{
-	/* IE10 Consumer Preview */ 
-	background-image: -ms-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
-
-	/* Mozilla Firefox */ 
-	background-image: -moz-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
-
-	/* Opera */ 
-	background-image: -o-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
-
-	/* Webkit (Safari/Chrome 10) */ 
-	background-image: -webkit-gradient(linear, right top, left top, color-stop(0, #FFFFFF), color-stop(1, #FF9C08));
-
-	/* Webkit (Chrome 11+) */ 
-	background-image: -webkit-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
-
-	/* W3C Markup, IE10 Release Preview */ 
-	background-image: linear-gradient(to left, #FFFFFF 0%, #FF9C08 100%);
-	
 	width: 100%;
-	height: 80px;
+	height: 140px;
 }
 
 	
 	
-header #logo{
+/*header #logo{
     font: bold italic 2em/1.5 MS P ゴシック;
     text-shadow: 3px 3px 2px rgba(0,0,0,0.5);
     letter-spacing: 2px;
@@ -729,7 +699,14 @@ header a:hover{
 
 header a:active{
 	color: orange;
+}*/
+
+header #logo img{
+	width: 100%;
+	height: 150px;
+	
 }
+
 
 /*ヘッダーイメージ*/
 .header_img_navi{
@@ -1233,31 +1210,13 @@ input[type="button"]:hover{
 /*ヘッダー部分*/
 
 header{
-	/* IE10 Consumer Preview */ 
-	background-image: -ms-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
-
-	/* Mozilla Firefox */ 
-	background-image: -moz-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
-
-	/* Opera */ 
-	background-image: -o-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
-
-	/* Webkit (Safari/Chrome 10) */ 
-	background-image: -webkit-gradient(linear, right top, left top, color-stop(0, #FFFFFF), color-stop(1, #FF9C08));
-
-	/* Webkit (Chrome 11+) */ 
-	background-image: -webkit-linear-gradient(right, #FFFFFF 0%, #FF9C08 100%);
-
-	/* W3C Markup, IE10 Release Preview */ 
-	background-image: linear-gradient(to left, #FFFFFF 0%, #FF9C08 100%);
-	
 	width: 100%;
-	height: 80px;
+	height: 250px;
 }
 
 	
 	
-header #logo{
+/*header #logo{
     font: bold italic 2em/1.5 MS P ゴシック;
     text-shadow: 3px 3px 2px rgba(0,0,0,0.5);
     letter-spacing: 2px;
@@ -1278,7 +1237,13 @@ header a:hover{
 
 header a:active{
 	color: orange;
+}*/
+
+header #logo img{
+	width: 100%;
+	height: 250px;
 }
+
 
 /* ヘッダーフォーム */
 
