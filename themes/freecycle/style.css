@@ -129,6 +129,9 @@ input[type="button"]{
 	padding: 5px;
 	font: normal 1.2em/1.5 "arial","MS P ゴシック"
 	color: black;
+	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    box-shadow: 1px 2px 4px rgba(0,0,0,.5);
 }
 
 input[type="button"]:hover{
@@ -173,7 +176,6 @@ header #logo{
 header a{
 	text-decoration: none;
 	display: block;
-	padding-top: 10px;
 	padding-left: 10px;
 	margin: 5px;
 	background-color: transparent; 
@@ -473,10 +475,6 @@ form #newentry{
 	font-size: 1.5em;
 }
 
-#giveme-from-others-personal-li{
-	font-size: 1.5em;
-	text-decoration: underline;
-}
 
 
 input[class="multi"]:hover{
@@ -485,6 +483,12 @@ input[class="multi"]:hover{
 
 input[type="button",value="出品"]:hover{
 	color: orange;
+}
+
+#points-info h3{
+	color: red;
+	border: none;
+	background: #f8f8ff;
 }
 
 /*---プロフィールページ--*/
@@ -534,6 +538,10 @@ div#search-2{
 	display: none;
 }
 
+div#sidebar-me h4{
+	border: none;
+}
+
 /*ページトップに戻るボタン*/
 #pagetop_link{
 	text-align: right;
@@ -543,6 +551,10 @@ div#search-2{
 #footer{
 	font: italic 0.7em meirio;
 	color: gray;
+}
+
+#footer-widget-area{
+	font-size: 12px;
 }
 
 }
@@ -561,7 +573,7 @@ input[type="button"]:disable{
 @charset: utf-8;
 
 html{
-	background: white;
+	background: #fff;
 	color: #696969;
 	margin: 0;
 	padding: 0;
@@ -659,6 +671,9 @@ input[type="button"]{
 	padding: 5px;
 	font: normal 1.2em/1.5 "arial","MS P ゴシック"
 	color: black;
+	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    box-shadow: 1px 2px 4px rgba(0,0,0,.5);
 }
 
 input[type="button"]:hover{
@@ -826,7 +841,7 @@ nav li{
 
 nav li a{
 	color: black !important;
-	font-size: 0.9em;
+	font-size: 15px;
 	display: block;
 	width: 389px;
 	padding: 3px;
@@ -1006,10 +1021,6 @@ form #newentry{
 	font-size: 1.5em;
 }
 
-#giveme-from-others-personal-li{
-	font-size: 1.5em;
-	text-decoration: underline;
-}
 
 
 input[class="multi"]:hover{
@@ -1018,6 +1029,13 @@ input[class="multi"]:hover{
 
 input[type="button",value="出品"]:hover{
 	color: orange;
+}
+
+
+#points-info h3{
+	color: red;
+	border: none;
+	background: #f8f8ff;
 }
 
 /*---プロフィールページ--*/
@@ -1067,6 +1085,10 @@ div#search-2{
 	display: none;
 }
 
+div#sidebar-me h4{
+	border: none;
+}
+
 /*ページトップに戻るボタン*/
 #pagetop_link{
 	text-align: right;
@@ -1076,6 +1098,9 @@ div#search-2{
 #footer{
 	font: italic 0.7em meirio;
 	color: gray;
+}
+#footer-widget-area{
+	font-size: 12px;
 }
 
 }
@@ -1196,6 +1221,9 @@ input[type="button"]{
 	padding: 5px;
 	font: normal 1.2em/1.5 "arial","MS P ゴシック"
 	color: black;
+	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    box-shadow: 1px 2px 4px rgba(0,0,0,.5);
 }
 
 input[type="button"]:hover{
@@ -1239,7 +1267,6 @@ header #logo{
 header a{
 	text-decoration: none;
 	display: block;
-	padding-top: 10px;
 	padding-left: 10px;
 	margin: 5px;
 	background-color: transparent; 
@@ -1363,7 +1390,7 @@ nav li{
 
 nav li a{
 	color: black !important;
-	font-size: 0.9em;
+	font-size: 17px;
 	display: block;
 	width: 660px;
 	padding: 3px;
@@ -1535,10 +1562,10 @@ form #newentry{
 	font-size: 1.5em;
 }
 
-#giveme-from-others-personal-li{
+/*#giveme-from-others-personal-li{
 	font-size: 1.5em;
 	text-decoration: underline;
-}
+}*/
 
 
 input[class="multi"]:hover{
@@ -1549,6 +1576,11 @@ input[type="button",value="出品"]:hover{
 	color: orange;
 }
 
+#points-info h3{
+	color: red;
+	border: none;
+	background: #f8f8ff;
+}
 
 /*---プロフィールページ--*/
 input#upload{
@@ -1597,11 +1629,19 @@ div#search-2{
 	display: none;
 }
 
+div#sidebar-me h4{
+	border: none;
+}
+
 /*ページトップに戻るボタン*/
 #pagetop_link{
 	text-align: right;
 }
 /*フッター部分*/
+
+#footer-widget-area{
+	font-size: 12px;
+}
 
 #footer{
 	font: italic 0.7em meirio;
