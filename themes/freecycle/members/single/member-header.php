@@ -16,6 +16,7 @@
 	}
 	
 	function callOnNewEntry(){
+		jQuery("input[type=button]").attr("disabled",true);
 		if(jQuery("#field_1").val().length == 0){
 			alert("商品名が未入力です。");
 			return false;
@@ -60,9 +61,8 @@
 					jQuery("input[type='text'], input[type='file'], textarea, select").val("").removeAttr("selected");
 				}
 			});
-		}else{
-			return false;
 		}
+		jQuery("input[type=button]").attr("disabled",false);
 	}
 	
 </script>
