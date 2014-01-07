@@ -799,7 +799,7 @@ function giveme_from_others_content() {
 					<?php
 					$last_post_id = $giveme->post_id;
 				} ?>
-				<input type="radio" name="sendto_user_<?php echo $giveme->post_id ?>" value="<?php echo $giveme->user_id ?>" id="post<?php echo $giveme->post_id; ?>_user<?php echo $giveme->user_id ?>"/><label for="<?php echo $giveme->display_name; ?>"><?php echo $giveme->display_name; ?></label>
+				<input type="radio" name="sendto_user_<?php echo $giveme->post_id ?>" value="<?php echo $giveme->user_id ?>" id="post<?php echo $giveme->post_id; ?>_user<?php echo $giveme->user_id ?>"/><label for="<?php echo $giveme->display_name; ?>"><a href="<?php echo home_url() . "/members/" . $giveme->user_nicename ?>"><?php echo $giveme->display_name; ?></a></label>
 			<?php
 			}
 			?>
@@ -825,7 +825,7 @@ function get_giveme_from_others_list(){
 	global $table_prefix;
 	global $user_ID;
 	$givemes = $wpdb->get_results($wpdb->prepare("
-		SELECT " . $table_prefix . "fmt_user_giveme.post_id, display_name, " . $table_prefix . "fmt_user_giveme.user_id
+		SELECT " . $table_prefix . "fmt_user_giveme.post_id, display_name, user_nicename, " . $table_prefix . "fmt_user_giveme.user_id
 		FROM " . $table_prefix . "fmt_user_giveme, " . $table_prefix . "posts, " . $table_prefix . "users, " . $table_prefix . "fmt_giveme_state
 		WHERE " . $table_prefix . "fmt_user_giveme.post_id = " . $table_prefix . "posts.ID
 		AND " . $table_prefix . "fmt_user_giveme.post_id = " . $table_prefix . "fmt_giveme_state.post_id
