@@ -33,15 +33,15 @@ wp_enqueue_script('freecycleScript');
 
 				<div class="header_img_navi_contents">
 					<?php if(is_user_logged_in()) { 
-								if(messages_get_unread_count() > 0){
+								 if(messages_get_unread_count() > 0){ 
 					?>
 							<a class="unread_alert" href="<?php echo bp_loggedin_user_domain() . "messages"; ?>">未読メッセージが<?php echo messages_get_unread_count();?>件あります！</a>
 					<?php 		} 
-						}else{ ?>
+						}else{ ?> 
 					<li id="header-img">
 							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_iine.png" alt="ヘッダー" width="380px" height="300px">
 					</li>
-					<?php } ?>
+					<?php } ?> 
 				</div>
 				
 				<nav>
