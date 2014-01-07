@@ -300,6 +300,15 @@ function finish(){
 	// 獲得ポイントを1p加算
 	add_got_points($userID, 1);
 	
+	// 取引完了メールを送信
+	messages_new_message(array(
+		'sender_id' => $userID,
+		'recipients' => get_confirmed_user_id($postID),
+		'subject' => '【自動送信】出品者の評価をしてください！',
+		'content' => '出品者が取引を完了状態にしました。以下のリンクから出品者の評価を実施してください。' .
+						'<a href="' . get_permalink($postID) . '">' . get_permalink($postID) . '</a>'
+	));
+
 	die;
 }
 

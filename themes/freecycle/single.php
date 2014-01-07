@@ -4,7 +4,7 @@
 		 This function is called when finish button is clicked.
 		 */
 		function onFinish(){
-			if(confirm("取引を完了状態にします。よろしいですか？")){
+			if(confirm("商品の受け渡しが完了していますか？")){
 				jQuery.ajax({
 					type: "POST",
 					url: '<?php echo admin_url('admin-ajax.php'); ?>',
@@ -234,11 +234,13 @@
 						<?php     } ?>
 						
 						<!-- when login user is not author -->
+						<?php }elseif(!is_user_logged_in()){?>
+						<!-- information is hidden for un-login users -->
 						<?php }elseif(isConfirm($post->ID)){
 								if(get_confirmed_user_id($post->ID) == $user_ID){
 									if(isExhibiterEvaluated($post->ID)){ ?>
 										この商品は評価済です。
-								<?php }else{ ?>
+								<?php }elseif(isFinish($post->ID)){ ?>
 								<div id="evaluation">
 									出品者の評価:</br>
 									<select name="score" id="score">
@@ -254,6 +256,8 @@
 									<textarea name="trade_comment" id="trade_comment" rows="5" cols="40"></textarea></br>
 									<input type="button" id="evaluation" value="評価する" onClick="onExhibiterEvaluation();">
 								</div>
+								<?php }else{ ?>
+									取引完了待ちです。
 								<?php } ?>
 							<?php }else{ ?>
 									この商品は取引相手が決まったため、「ください」はできません
