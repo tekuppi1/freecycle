@@ -300,6 +300,15 @@ function finish(){
 	// 獲得ポイントを1p加算
 	add_got_points($userID, 1);
 	
+	// 取引完了メールを送信
+	messages_new_message(array(
+		'sender_id' => $userID,
+		'recipients' => get_confirmed_user_id($postID),
+		'subject' => '【自動送信】出品者の評価をしてください！',
+		'content' => '出品者が取引を完了状態にしました。以下のリンクから出品者の評価を実施してください。' .
+						'<a href="' . get_permalink($postID) . '">' . get_permalink($postID) . '</a>'
+	));
+
 	die;
 }
 
@@ -646,13 +655,16 @@ function get_display_item_status($item_status){
 
 
 /**
- * ユーザページにタブを追加
+ * マイページのメニューを編集
  */
 function my_setup_nav() {
 	global $bp;
 	global $user_ID;
 
-// ログインユーザのプロフィールにのみ表示させる。
+	// メッセージ「作成」メニューを削除
+	bp_core_remove_subnav_item(BP_MESSAGES_SLUG, 'compose');
+
+	// ログインユーザのプロフィールにのみ表示させるメニュー。
 	if($user_ID == bp_displayed_user_id()){
 		bp_core_new_nav_item( array( 
 			'name' => __( '出品一覧', 'buddypress' ), 

@@ -16,6 +16,7 @@
 	}
 	
 	function callOnNewEntry(){
+		jQuery("input[type=button]").attr("disabled",true);
 		if(jQuery("#field_1").val().length == 0){
 			alert("商品名が未入力です。");
 			return false;
@@ -57,11 +58,12 @@
 					alert("商品を出品しました。");
 					// reload new entry page
 					location.href = "<?php echo bp_loggedin_user_domain(); ?>" + "new_entry/#newentry";
+					jQuery("input[type='text'], input[type='file'], textarea").val("");
+					jQuery("option").attr("selected", false);
 				}
 			});
-		}else{
-			return false;
 		}
+		jQuery("input[type=button]").attr("disabled",false);
 	}
 	
 </script>
