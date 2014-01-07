@@ -58,7 +58,8 @@
 					alert("商品を出品しました。");
 					// reload new entry page
 					location.href = "<?php echo bp_loggedin_user_domain(); ?>" + "new_entry/#newentry";
-					jQuery("input[type='text'], input[type='file'], textarea, select").val("").removeAttr("selected");
+					jQuery("input[type='text'], input[type='file'], textarea").val("");
+					jQuery("option").attr("selected", false);
 				}
 			});
 		}
