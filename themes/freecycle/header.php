@@ -50,9 +50,9 @@ wp_enqueue_script('freecycleScript');
 					<?php if(is_user_logged_in()){ ?>
 					<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					<?php } ?>
-					<li class="grobal_nav"><a href="#" >TexChangeとは</a></li>
-					<li class="grobal_nav"><a href="#" >FAQ</a></li>
-					<li class="grobal_nav"><a href="#" >お問い合わせ</a></li>
+					<li class="grobal_nav"><a href="<?php echo home_url() . "/about"; ?>" >TexChangeとは</a></li>
+					<li class="grobal_nav"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>
+					<li class="grobal_nav"><a href="<?php echo home_url() . "/contact"; ?>" >お問い合わせ</a></li>
 					</ul>
 				</nav>
 </div>
