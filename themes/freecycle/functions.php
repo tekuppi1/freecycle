@@ -655,13 +655,16 @@ function get_display_item_status($item_status){
 
 
 /**
- * ユーザページにタブを追加
+ * マイページのメニューを編集
  */
 function my_setup_nav() {
 	global $bp;
 	global $user_ID;
 
-// ログインユーザのプロフィールにのみ表示させる。
+	// メッセージ「作成」メニューを削除
+	bp_core_remove_subnav_item(BP_MESSAGES_SLUG, 'compose');
+
+	// ログインユーザのプロフィールにのみ表示させるメニュー。
 	if($user_ID == bp_displayed_user_id()){
 		bp_core_new_nav_item( array( 
 			'name' => __( '出品一覧', 'buddypress' ), 
