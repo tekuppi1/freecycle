@@ -92,15 +92,14 @@ wp_enqueue_script('freecycleScript');
 						<div id="searchform_text_pulldown">
 							<div id="searchform_pulldown">
 								<select name="categories_seachform">
-									<option value="#">カテゴリ</option>
-									<option value="#">タグ</option>
-									<option value="#">キーワード</option>
+									<option value="#">すべて</option>
+									<option value="#">ください可能</option>
 								</select>
 							</div>
 							<div id="searchform_submit">
 									<input type="submit" id="searchsubmit" value="Search" />
 							</div>
-						</div>
+						</div> 
 				</form>	
 	</div><!-- 検索バー -->
 </div>	
