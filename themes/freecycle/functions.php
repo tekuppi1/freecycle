@@ -12,6 +12,29 @@ add_action('wp_ajax_new_entry', 'new_entry');
 add_action('wp_ajax_delete_post', 'delete_post');
 add_action('user_register', 'on_user_added');
 
+
+// 記事検索時の条件追加
+function add_costom_join($join){
+	global $table_prefix;
+	$join .= "LEFT JOIN " . $table_prefix . "fmt_giveme_state "
+			. "ON " . $table_prefix . "posts.ID = " . $table_prefix . "fmt_giveme_state.post_id ";
+	return $join;
+}
+
+function add_custom_where($where){
+	global $wpdb;
+	global $table_prefix;
+	// 一覧ページには取引完了済みの記事を表示しない。
+	if(is_front_page()){
+		$where .= "AND (" . $table_prefix . "fmt_giveme_state.finished_flg <> 1 "
+				. " OR " . $table_prefix . "fmt_giveme_state.finished_flg is NULL)";
+	}
+	return $where;
+}
+
+add_filter("posts_join", "add_costom_join");
+add_filter("posts_where", "add_custom_where");
+
 /**
  * 記事の状態を調べるユーティリティ関数群
  */
@@ -891,6 +914,22 @@ function get_your_giveme_list(){
 		
 	return $givemes;
 }
+
+// コメント欄をカスタマイズ
+function my_comment_field_init($defaults){
+	// タグに関する注意書きを非表示
+	$defaults["comment_notes_after"] = "";
+	return $defaults;
+}
+add_filter("comment_form_defaults", "my_comment_field_init");
+
+function html_to_text($comment_content) {
+  if ( get_comment_type() == 'comment' ) {
+    $comment_content = htmlspecialchars($comment_content, ENT_QUOTES);
+  }
+  return $comment_content;
+}
+add_filter('comment_text', 'html_to_text', 9);
 
 // 管理者以外の場合ツールバーを非表示
 function my_function_admin_bar($content){
