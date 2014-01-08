@@ -83,6 +83,8 @@ wp_enqueue_script('freecycleScript');
 
 		<?php if(bp_is_front_page()){ ?>
 		
+		<!-- <hr class="line-search"> -->
+		
 	<div id="search-23" class="widget widget_search"><!-- 検索バー -->
 				<form role="search" method="get" id="searchform_main" action="<?php echo home_url(); ?>">
 					<!-- <label>検索：</label> -->
@@ -103,6 +105,6 @@ wp_enqueue_script('freecycleScript');
 				</form>	
 	</div><!-- 検索バー -->
 </div>	
-		
+		<!--<hr class="line-search"> -->
 		<?php } ?>
 		<div id="container">

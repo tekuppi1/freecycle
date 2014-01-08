@@ -23,7 +23,9 @@ Tags: buddypress
 	font-size:1px;
 }
 
-
+*{
+	background: white;
+}
 
 /*---------------------------------------------------------------------------------------------------------------------------------------*/
 @media screen and (max-width: 320px) {
@@ -75,7 +77,7 @@ h3{
 
 h4{
 	font: normal 1.3em/1.4 "MS P ゴシック","Arial";
-	border-left: solid 2px gold;
+	border-left: solid 2px #FBA848;
 	color: black;
 }
 
@@ -85,7 +87,7 @@ h5{
 
 
 hr{
-	border:thin dotted #ffa500;
+	border:thin dotted #FBA848;
 	width: 100%;
 }
 p{
@@ -161,6 +163,7 @@ input[type="button"]:hover{
 header{	
 	width: 100%;
 	height: 110px;
+	background: white;
 }
 
 	
@@ -326,33 +329,41 @@ nav li a:hover{
 
 　/*サーチバー*/
 
-
-#searchform_main{
-	background: orange;
-	display: block;
-	margin: auto;
-	padding: 5px;
-	border-radius: 6px;
-	border: solid 1px black;
-	width: 95%;
-	height: 55px;
-	clear: both;
-	margin-bottom: 3px;
-	margin-top: 6px;
-	
-	
-	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
-    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
-    box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+hr.line-search{
+	margin: 1em 0 1em;
+    padding: 0;
+    height: 1px;
+    border: black 1px solid;
+    color: #fcc;
+    background: #fcc;
 }
 
-form#searchsubmit{
-	margin-left: auto;
+#searchform_main{
+	display: block;
+	margin: auto;
+	padding: 3px 5px 3px 5px;
+	background: orange;
+	border-radius: 10px;
+	width: 95%;
+	height: 55px;
+	clear: both;	
+	
+	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+    box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
+}
+
+#searchform_text_pulldown{
+	margin: 0 auto;
+}
+
+#searchsubmit{
+	margin:auto;
 	padding: 3px;
 	display: block;
-	width: 200px;
+	width: 190px;
 	height: 25px;
-	font: bold 1.1em/1.0 MS P ゴシック;
+	font: bold 1.1em/1.0 "MS P ゴシック";
 	color: black;
 }
 
@@ -360,6 +371,12 @@ form#searchsubmit{
 	color: orange;
 }
 
+#blog-search h2.pagetitle{
+	display: none;
+}
+/*div#searchform_submit{
+	width: 70px;
+}*/
 
 #searchform_pulldown{
 	padding: 3px;
@@ -538,8 +555,8 @@ input#submit:hover{
 	padding-left: 6px;
 }
 
-div#sidebar h3.widgettitle {
-	background: #ffd700;
+div#sidebar-me h3.widgettitle {
+	background: #40AAEF;
 	color: black;
 }
 
@@ -550,6 +567,7 @@ div#search-2{
 div#sidebar-me h4{
 	border: none;
 }
+
 
 /*ページトップに戻るボタン*/
 #pagetop_link{
@@ -698,6 +716,7 @@ input[type="button"]:hover{
 header{
 	width: 100%;
 	height: 140px;
+	background: white;
 }
 
 	
@@ -872,7 +891,7 @@ nav li a:hover{
 #searchform_main{
 	display: block;
 	margin: auto;
-	padding: 5px;
+	padding: 3px 5px 3px 5px;
 	background: orange;
 	border-radius: 10px;
 	width: 95%;
@@ -888,10 +907,9 @@ nav li a:hover{
 }
 
 #searchsubmit{
-	margin-left: auto;
 	padding: 3px;
 	display: block;
-	width: 200px;
+	width: 267px;
 	height: 25px;
 	font: bold 1.1em/1.0 MS P ゴシック;
 	color: black;
@@ -928,6 +946,10 @@ nav li a:hover{
 
 #searchform_submit{
 	float: left;
+}
+
+#blog-search h2.pagetitle{
+	display: none;
 }
 
 /*コンテンツ部分*/
@@ -1199,7 +1221,7 @@ h2.pagetitle{
 }
 h3.faq_heading{
 	font: normal 1.3em/1.4 "MS P ゴシック","Arial";
-	border-left: double 3px orange;
+	border-left: double 3px #ff7e00;
 	color: black;
 }
 
@@ -1247,6 +1269,7 @@ input[type="button"]:hover{
 header{
 	width: 100%;
 	height: 230px;
+	background: white;
 }
 
 	
@@ -1415,7 +1438,7 @@ nav li a:hover{
 	display: block;
 	margin-top: 5px;
 	margin-bottom: 5px;
-	padding: 5px;
+	padding: 3px 5px 3px 5px;
 	background: orange;
 	border-radius: 10px;
 	width: 99%;
@@ -1434,7 +1457,7 @@ nav li a:hover{
 	margin: auto;
 	padding: 5px;
 	display: block;
-	width: 120px;
+	width: 100px;
 	height: 25px;
 	font: bold 1.1em/1.0 MS P ゴシック;
 	color: black;
@@ -1475,6 +1498,10 @@ nav li a:hover{
 
 #searchform_submit{
 	float: left;
+}
+
+#blog-search h2.pagetitle{
+	display: none;
 }
 
 /*コンテンツ部分*/
