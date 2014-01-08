@@ -23,8 +23,13 @@ Tags: buddypress
 	font-size:1px;
 }
 
+
 *{
 	background: white;
+}
+
+#page{
+	font-size:100%;
 }
 
 /*---------------------------------------------------------------------------------------------------------------------------------------*/
@@ -342,7 +347,7 @@ hr.line-search{
 	display: block;
 	margin: auto;
 	padding: 3px 5px 3px 5px;
-	background: orange;
+	background: #FBA848;
 	border-radius: 10px;
 	width: 95%;
 	height: 55px;
@@ -446,11 +451,11 @@ p.date{
 	height: 25px;
 }
 
-#evaluation{
+/*#evaluation{
 	display: block;
 	width: 180px;
 	height: 25px;
-}
+}*/
 
 /*ユーザーページ*/
 
@@ -535,6 +540,14 @@ input#upload:hover{
 	font-size: 1.3em !important;
 }*/
 
+/*---------------------------------評価--------------------------------------*/
+div#evaluation{
+	height: 200px;
+}
+
+div#evaluation textarea#trade_comment{
+	width:70%;
+}
 /*---設定--*/
 input#submit{
 	width: 200px;
@@ -555,9 +568,9 @@ input#submit:hover{
 	padding-left: 6px;
 }
 
-div#sidebar-me h3.widgettitle {
+div#sidebar h3.widgettitle {
 	background: #40AAEF;
-	color: black;
+	color: white;
 }
 
 div#search-2{
@@ -965,21 +978,9 @@ nav li a:hover{
 	color: orange;
 }	
 
-/*div.entry a{
-	display: block;
-	align: left;
-	height: 200px;
-	width: 200px;
+p.author_name{
+	display: none;
 }
-
-
-.353836,.item-status{
-	float: left;
-}
-
-p.date{
-	clear both;
-}*/
 
 
 
@@ -989,11 +990,11 @@ p.date{
 	height: 25px;
 }
 
-#evaluation{
+/*#evaluation{
 	display: block;
 	width: 180px;
 	height: 25px;
-}
+}*/
 
 /*ユーザーページ*/
 
@@ -1087,6 +1088,14 @@ input#upload:hover{
 	font-size: 1.3em !important;
 }*/
 
+/*---------------------------------評価--------------------------------------*/
+div#evaluation{
+	height: 200px;
+}
+
+div#evaluation textarea#trade_comment{
+	width:70%;
+}
 /*---設定--*/
 input#submit{
 	width: 200px;
@@ -1108,8 +1117,8 @@ input#submit:hover{
 }
 
 div#sidebar h3.widgettitle {
-	background: #ffd700;
-	color: black;
+	background: #40AAEF;
+	color: white;
 }
 
 div#search-2{
@@ -1521,14 +1530,9 @@ div#entry_img{
 	align: left;
 }
 
-/*.353836,.item-status{
-	float: left;
+p.author_name{
+	display: none;
 }
-
-p.date{
-	clear both;
-}*/
-
 
 
 #score{
@@ -1635,6 +1639,10 @@ input#upload:hover{
 	font-size: 1.3em !important;
 }*/
 
+/*---------------------------------評価--------------------------------------*/
+div#evaluation{
+	height: 200px;
+}
 /*---設定--*/
 input#submit{
 	width: 200px;
@@ -1648,6 +1656,7 @@ input#submit:hover{
 	color: orange;
 }
 
+
 /*サイドバー部分*/
 
 #sidebar-login-form{
@@ -1656,8 +1665,8 @@ input#submit:hover{
 }
 
 div#sidebar h3.widgettitle {
-	background: #ffd700;
-	color: black;
+	background: #40AAEF;
+	color: white;
 }
 
 div#search-2{
