@@ -931,6 +931,20 @@ function html_to_text($comment_content) {
 }
 add_filter('comment_text', 'html_to_text', 9);
 
+// アカウント作成画面のカスタマイズ
+function my_signup_validate(){
+	global $bp;
+	if(!$_POST["agreewithpolicy"]){
+		$bp->signup->errors["agreewithpolicy"] = __( '規約に同意してください。', 'buddypress' );
+		add_action("agreewithpolicy_action", "show_error_on_agreewithpolicy");
+	}
+}
+function show_error_on_agreewithpolicy(){
+	echo "<div class='error'>規約に同意してください。</div>";
+}
+
+add_action("bp_signup_validate", "my_signup_validate");
+
 // 管理者以外の場合ツールバーを非表示
 function my_function_admin_bar($content){
 	return (current_user_can("administrator"))?$content:false;
