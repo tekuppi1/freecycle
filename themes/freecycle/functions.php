@@ -689,8 +689,14 @@ function my_setup_nav() {
 
 	// ログインユーザのプロフィールにのみ表示させるメニュー。
 	if($user_ID == bp_displayed_user_id()){
+		$entry_list_name;
+		if(has_todo_in_entry_list()){
+			$entry_list_name = '出品一覧<span>！</span>';
+		}else{
+			$entry_list_name = '出品一覧';
+		}
 		bp_core_new_nav_item( array( 
-			'name' => __( '出品一覧', 'buddypress' ), 
+			'name' => $entry_list_name, 
 			'slug' => 'entry_list', 
 			'position' => 65,
 			'screen_function' => 'entry_list_link',
@@ -708,8 +714,15 @@ function my_setup_nav() {
 			'item_css_id' => 'new-entry'
 			) );
 	
+		$giveme_name;
+		if(get_count_giveme_from_others() > 0){
+			$giveme_name = 'ください<span>！</span>';
+		}else{
+			$giveme_name = 'ください';
+		}
+
 		bp_core_new_nav_item( array( 
-			'name' => __( 'ください', 'buddypress' ), 
+			'name' => $giveme_name, 
 			'slug' => 'giveme', 
 			'position' => 75,
 			'screen_function' => 'your_giveme_link',
@@ -728,8 +741,14 @@ function my_setup_nav() {
 			'item_css_id' => 'your-giveme'
 			) );
 
+		$giveme_from_others_name;
+		if(get_count_giveme_from_others() > 0){
+			$giveme_from_others_name = sprintf('みんなからのください<span>%s</span>', get_count_giveme_from_others());
+		}else{
+			$giveme_from_others_name = 'みんなからのください';
+		}
 		bp_core_new_subnav_item( array( 
-			'name' => 'みんなからのください', 
+			'name' => $giveme_from_others_name,
 			'slug' => 'giveme-from-others', 
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'giveme'),
 			'parent_slug' => 'giveme',
@@ -759,6 +778,27 @@ function entry_list_link(){
 	add_action( 'bp_template_title', 'entry_list_title' );
 	add_action( 'bp_template_content', 'entry_list_content' );
 	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
+
+function has_todo_in_entry_list(){
+	global $user_ID;
+	$entry_list = get_posts(array('author' => $user_ID));
+	foreach($entry_list as $entry){
+		if(isFinish($entry->ID)){
+			if(isBidderEvaluated($entry->ID)){
+				continue;
+			}else{
+				return true;
+			}
+		}elseif(isConfirm($entry->ID)){
+			return true;
+		}elseif(isGiveme($entry->ID)){
+			return true;
+		}else{
+			continue;
+		}
+	}
+	return false;
 }
 
 /**********************************************
@@ -804,7 +844,11 @@ function giveme_from_others_title() {
 function giveme_from_others_content() {
 	?>
 	<div id="giveme-from-others" class="giveme-from-others">
-		以下の記事にくださいリクエストが来ています。取引相手を選んで確定させてください。
+		<?php if(get_count_giveme_from_others() > 0 ){ ?>
+		以下の商品にくださいリクエストが来ています。取引相手を選んで確定させてください。
+		<?php }else{ ?>
+		くださいリクエストがきている商品はありません。
+		<?php }?>
 		<?php 
 			$givemes = get_giveme_from_others_list();
 			$last_post_id = "";
@@ -849,16 +893,32 @@ function get_giveme_from_others_list(){
 	global $user_ID;
 	$givemes = $wpdb->get_results($wpdb->prepare("
 		SELECT " . $table_prefix . "fmt_user_giveme.post_id, display_name, user_nicename, " . $table_prefix . "fmt_user_giveme.user_id
-		FROM " . $table_prefix . "fmt_user_giveme, " . $table_prefix . "posts, " . $table_prefix . "users, " . $table_prefix . "fmt_giveme_state
+		FROM " . $table_prefix . "fmt_user_giveme, " . $table_prefix . "posts, " . $wpdb->users . ", " . $table_prefix . "fmt_giveme_state
 		WHERE " . $table_prefix . "fmt_user_giveme.post_id = " . $table_prefix . "posts.ID
 		AND " . $table_prefix . "fmt_user_giveme.post_id = " . $table_prefix . "fmt_giveme_state.post_id
-		AND " . $table_prefix . "fmt_user_giveme.user_id = " . $table_prefix . "users.ID
+		AND " . $table_prefix . "fmt_user_giveme.user_id = " . $wpdb->users .".ID
 		AND " . $table_prefix . "fmt_giveme_state.confirmed_flg = 0
 		AND " . $table_prefix . "posts.post_author = %d
 		ORDER BY post_id",
 		$user_ID));
 		
 	return $givemes;
+}
+
+function get_count_giveme_from_others(){
+	global $wpdb;
+	global $table_prefix;
+	global $user_ID;
+	$count = $wpdb->get_var($wpdb->prepare("
+		SELECT count(DISTINCT(" . $table_prefix . "posts.ID))  
+		FROM " . $table_prefix . "fmt_user_giveme, " . $table_prefix . "posts, " . $table_prefix . "fmt_giveme_state
+		WHERE " . $table_prefix . "fmt_user_giveme.post_id = " . $table_prefix . "posts.ID
+		AND " . $table_prefix . "fmt_user_giveme.post_id = " . $table_prefix . "fmt_giveme_state.post_id
+		AND " . $table_prefix . "fmt_giveme_state.confirmed_flg = 0
+		AND " . $table_prefix . "posts.post_author = %d",
+		$user_ID));
+		
+	return $count;
 }
 
 
