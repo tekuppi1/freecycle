@@ -190,7 +190,9 @@
 							echo get_display_item_status($item_status["0"]);
 						?>
 						</div>
-
+						<div>
+							学部,学科: <?php echo get_post_custom_values("department")["0"] ?>,<?php echo get_post_custom_values("course")["0"] ?>
+						</div>
 						<?php
 						/*
 						  display finish button or giveme button

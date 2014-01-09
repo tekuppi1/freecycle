@@ -40,11 +40,12 @@
 							</span>
 							<div class="item_status">状態:
 							<?php
-								$item_status = get_post_custom_values("item_status");
-								echo get_display_item_status($item_status["0"]);
+								echo get_display_item_status(get_post_custom_values("item_status")["0"]);
 							?>				
 							</div>							
-											
+							<div>
+								学部,学科: <?php echo get_post_custom_values("department")["0"] ?>,<?php echo get_post_custom_values("course")["0"] ?>
+							</div>
 							<p class="date"><?php printf( __( '%1$s <span>in %2$s</span>', 'buddypress' ), get_the_date(), get_the_category_list( ', ' ) ); ?> </p>
 														
 

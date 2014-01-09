@@ -375,6 +375,8 @@ function new_entry(){
 		// success
 		// add custom field
 		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
+		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$bp->loggedin_user->id), true);
+		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$bp->loggedin_user->id), true);
 
 		// image upload
 		global $post;
