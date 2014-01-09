@@ -1,3 +1,10 @@
+<?php
+	if(has_todo_in_entry_list()){
+?>
+	<div class="alert-todo-text">
+		出品した商品に「やること」が残っています！
+	</div>
+<?php } ?>
 	<div id="entrylist-labels" class="entrylist-labels">
 		<span id="posttitle-label" class="posttitle-label">商品名</span>
 		<span id="poststatus-label" class="poststatus-label">状態</span>
