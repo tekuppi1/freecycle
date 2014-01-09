@@ -281,6 +281,9 @@
 						</p>
 
 						<div class="entry">
+						
+							<p class="author_name"><?php printf( _x( 'by %s', 'Post written by...', 'buddypress' ), bp_core_get_userlink( $post->post_author ) ); ?></p>
+						
 							<?php
 							$args = array(
 								'post_type' => 'attachment',

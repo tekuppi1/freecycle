@@ -112,6 +112,7 @@ h2.pagetitle{
 	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
 	border-top: double 3px black;
 	border-bottom: double 3px black;
+	margin: 4px 0;
 	text-align: center;
 	width:auto;
 	color: black;
@@ -674,6 +675,7 @@ h2.pagetitle{
 	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
 	border-top: double 3px black;
 	border-bottom: double 3px black;
+	margin: 4px 0;
 	text-align: center;
 	width:auto;
 	color: black;
@@ -1168,7 +1170,7 @@ html{
 	line-height:1.4;
 	font-family:"Arial", "ＭS Ｐゴシック";
 	font-size: 17px;
-	width: 700px;
+	width: 800px;
 	height: 100%;
 }
 
@@ -1224,6 +1226,7 @@ h2.pagetitle{
 	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
 	border-top: double 3px black;
 	text-align: center;
+	margin: 4px 0;
 	width:auto;
 	color: black;
 	
@@ -1424,7 +1427,7 @@ nav li a{
 	color: black !important;
 	font-size: 17px;
 	display: block;
-	width: 660px;
+	width: 750px;
 	padding: 3px;
 	border-radius: 5px;
 	background: gold;
@@ -1493,9 +1496,9 @@ nav li a:hover{
 	float: left;
 }
 
-#searchform{
+/*#searchform{
 	display: none;
-}
+}*/
 
 #searchform_text_pulldown{
 	margin-left: 80px;
@@ -1514,6 +1517,11 @@ nav li a:hover{
 }
 
 /*コンテンツ部分*/
+
+div.page#blog-latest{
+	width: 500px;
+}
+
 
 
 .posttitle {

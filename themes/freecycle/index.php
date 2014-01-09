@@ -49,6 +49,7 @@
 														
 
 							<div class="entry">
+								
 								<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(array(150, 150)) ?></a>
 								<?php the_content( __( 'Read the rest of this entry &rarr;', 'buddypress' ) ); ?>
 								<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
