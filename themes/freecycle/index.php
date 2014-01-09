@@ -39,8 +39,7 @@
 							<?php } ?>
 							</span>
 							<div class="item_status">状態:
-							<?php
-								echo get_display_item_status(get_post_custom_values("item_status")["0"]);
+							<?php echo get_display_item_status(get_post_custom_values("item_status")["0"]);
 							?>				
 							</div>							
 							<div>

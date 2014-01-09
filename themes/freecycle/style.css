@@ -549,6 +549,22 @@ div#evaluation{
 div#evaluation textarea#trade_comment{
 	width:70%;
 }
+
+/*---------------------------------
+              message
+--------------------------------------*/
+td.thread-avatar img{
+	width:30px;
+}
+
+a.button-confirm{
+	display: block;
+	font: 3%;
+	color: red;
+	border-radius: 3px;
+	text-align: center;
+}
+
 /*---設定--*/
 input#submit{
 	width: 200px;
