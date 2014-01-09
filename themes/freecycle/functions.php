@@ -872,8 +872,8 @@ function giveme_from_others_content() {
 			?>
 			<?php if($last_post_id != ""){ ?>
 			<input type="button" value="取引相手確定" onClick="callOnConfirmGiveme(<?php echo $last_post_id; ?>);">
-			<?php } ?>
 			</div>
+			<?php } ?>
 	</div>
 	<?php
 }
