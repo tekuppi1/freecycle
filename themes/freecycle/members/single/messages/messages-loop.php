@@ -38,13 +38,10 @@
 						<span class="activity"><?php bp_message_thread_last_post_date(); ?></span>
 					</td>
 				<?php endif; ?>
-
 				<td width="55%" class="thread-info">
 					<p><a href="<?php bp_message_thread_view_link(); ?>" title="<?php _e( "View Message", "buddypress" ); ?>"><?php bp_message_thread_subject(); ?></a></p>
 				</td>
-
 				<?php do_action( 'bp_messages_inbox_list_item' ); ?>
-
 				<td width="13%" class="thread-options">
 					<input type="checkbox" name="message_ids[]" value="<?php bp_message_thread_id(); ?>" />
 					<a class="button-confirm" href="<?php bp_message_thread_delete_link(); ?>" title="<?php _e( "Delete Message", "buddypress" ); ?>"><?php _e( 'Delete', 'buddypress' ); ?></a> &nbsp;
