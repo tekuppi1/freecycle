@@ -54,7 +54,7 @@ input[type="button" ][disabled="true"]:hover{
 }
 
 
-body{
+html{
 	background: white;
 	color: #696969;
 	margin: 0;
@@ -480,6 +480,19 @@ p.date{
 	color: black;
 	text-decoration: underline;
 }
+
+div#item-header-avatar{
+	width: 110px !important;
+}
+
+#item-header-avatar img{
+	width: 120px;
+	height: 120px;
+}
+
+/*#item-header-content{
+	width: 110px;
+}*/
 
 .activity-meta a{
 	font-size: 1.4em;
@@ -1226,7 +1239,7 @@ input[type="button" ][disabled="true"]:hover{
 
 @charset: utf-8;
 
-body{
+html{
 	background: white;
 	color: #696969;
 	margin: auto;
