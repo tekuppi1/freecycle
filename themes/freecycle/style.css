@@ -112,7 +112,12 @@ a{
 
 ol li.whats_tex, ul li.whats_tex{
 	font-weight: bold;
-	background: #00bfff;
+	color: orenge;
+	font-size: 1.2em;
+}
+
+textarea{
+	font-size: 1em;
 }
 
 /*-----------FAQ------------*/
@@ -645,10 +650,10 @@ input[type="button" ][disabled="true"]:hover{
 
 @charset: utf-8;
 
-body{
+html{
 	background: #fff;
 	color: #696969;
-	margin: 0;
+	margin: 0 auto;
 	padding: 0;
 	line-height:1.4;
 	font-family:"arial","ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3", sans-serif;
@@ -700,8 +705,14 @@ p{
 
 ol li.whats_tex, ul li.whats_tex{
 	font-weight: bold;
-	background: #00bfff;
+	color: orenge;
+	font-size: 1.2em;
 }
+
+textarea{
+	font-size: 1em;
+}
+
 /*-----------FAQ------------*/
 h2.pagetitle{
 	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
@@ -1257,7 +1268,12 @@ p{
 
 ol li.whats_tex, ul li.whats_tex{
 	font-weight: bold;
-	background: #00bfff;
+	color: orenge;
+	font-size: 1.2em;
+}
+
+textarea{
+	font-size: 1em;
 }
 
 
