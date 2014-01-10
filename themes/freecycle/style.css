@@ -105,6 +105,7 @@ hr{
 }
 p{
 	line-height: 1.4;
+	font-size: 1em;
 }
 
 
@@ -726,6 +727,7 @@ hr{
 }
 p{
 	line-height: 1.4;
+	font-size: 1em;
 }
 
 ul li.whats_tex{
@@ -1311,6 +1313,10 @@ h5{
 	font-size: 0.8em;	
 }
 
+p{
+	line-height: 1.4;
+	font-size: 1em;
+}
 
 hr{
 	border:thin dotted #ffa500;
@@ -1512,7 +1518,10 @@ form #sidebar-wp-submit{
 	margin-bottom: 2px;
 }
 	
-
+div.grobal_nav_div{
+	width: 100%;
+	background: orange;
+}
 nav{
 	width: 100%;
 	margin: 0 0 2px 23px;

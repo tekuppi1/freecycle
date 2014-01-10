@@ -40,6 +40,7 @@ wp_enqueue_script('freecycleScript');
 						} ?> 
 				</div>
 				
+				<div class="grobal_nav_div">
 				<nav>
 					<ul class="navi" class="clearfix">
 					<li class="grobal_nav"><a href="<?php echo home_url(); ?>" >ホーム</a></li>
@@ -51,6 +52,7 @@ wp_enqueue_script('freecycleScript');
 					<li class="grobal_nav"><a href="<?php echo home_url() . "/contact"; ?>" >お問い合わせ</a></li>
 					</ul>
 				</nav>
+				</div>
 </div>
 					
 
