@@ -54,7 +54,7 @@ input[type="button" ][disabled="true"]:hover{
 }
 
 
-body{
+html{
 	background: white;
 	color: #696969;
 	margin: 0;
@@ -441,15 +441,12 @@ div.post-content div.entry img{
 	float: left;
 }
 
-/*div.entry a{
-	display: block;
-	align: left;
-	height: 200px;
-	width: 200px;
+div.entry span.posttitle{
+	font-size: 1.4em !important;
 }
 
 
-.353836,.item-status{
+/*.353836,.item-status{
 	float: left;
 }
 
@@ -483,6 +480,19 @@ p.date{
 	color: black;
 	text-decoration: underline;
 }
+
+div#item-header-avatar{
+	width: 110px !important;
+}
+
+#item-header-avatar img{
+	width: 120px;
+	height: 120px;
+}
+
+/*#item-header-content{
+	width: 110px;
+}*/
 
 .activity-meta a{
 	font-size: 1.4em;
@@ -1027,6 +1037,9 @@ p.author_name{
 	display: none;
 }
 
+div.entry span.posttitle{
+	font-size: 1.4em !important;
+}
 
 
 #score{
@@ -1226,7 +1239,7 @@ input[type="button" ][disabled="true"]:hover{
 
 @charset: utf-8;
 
-body{
+html{
 	background: white;
 	color: #696969;
 	margin: auto;
@@ -1602,6 +1615,10 @@ div.page#blog-latest{
 .posttitle :hover{
 	color: orange;
 }	
+
+div.entry span.posttitle{
+	font-size: 1.4em !important;
+}
 
 div#entry_img{
 	align: left;
