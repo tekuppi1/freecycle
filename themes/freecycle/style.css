@@ -1141,6 +1141,19 @@ div#evaluation{
 div#evaluation textarea#trade_comment{
 	width:70%;
 }
+/*---------------------------------
+						メッセージ
+------------------------------------------------*/
+
+a.button-confirm{
+	display: block;
+	font: 3%;
+	color: red;
+	border-radius: 3px;
+	text-align: center;
+}
+
+
 /*---設定--*/
 input#submit{
 	width: 200px;
@@ -1719,6 +1732,19 @@ input#submit{
 input#submit:hover{
 	color: orange;
 }
+
+/*---------------------------------
+						メッセージ
+------------------------------------------------*/
+
+a.button-confirm{
+	display: block;
+	font: 2%;
+	color: red;
+	border-radius: 3px;
+	text-align: center;
+}
+
 
 
 /*サイドバー部分*/
