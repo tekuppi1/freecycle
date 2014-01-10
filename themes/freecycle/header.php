@@ -25,7 +25,7 @@ wp_enqueue_script('freecycleScript');
 		<?php do_action( 'bp_before_header' ); ?>
 
 		<header>
-			<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header.png" alt="ヘッダー" width="700px" height="200px"></a></h1>
+			<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_beta ver..png" alt="ヘッダー" width="700px" height="200px"></a></h1>
 		</header><!-- header -->
 		
 		
@@ -40,6 +40,7 @@ wp_enqueue_script('freecycleScript');
 						} ?> 
 				</div>
 				
+				<div class="grobal_nav_div">
 				<nav>
 					<ul class="navi" class="clearfix">
 					<li class="grobal_nav"><a href="<?php echo home_url(); ?>" >ホーム</a></li>
@@ -51,6 +52,7 @@ wp_enqueue_script('freecycleScript');
 					<li class="grobal_nav"><a href="<?php echo home_url() . "/contact"; ?>" >お問い合わせ</a></li>
 					</ul>
 				</nav>
+				</div>
 </div>
 					
 

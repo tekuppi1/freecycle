@@ -31,13 +31,13 @@
 							<h2 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
 							<p class="author_name"><?php printf( _x( 'by %s', 'Post written by...', 'buddypress' ), bp_core_get_userlink( $post->post_author ) ); ?></p>
 							<?php if(isConfirm($post->ID)){ ?>
-							<div class="trade_status confirmed">
+							<div class="trade_status_confirmed">
 							この商品には「ください」できません。　
 							<?php }else{ ?>
-							<div class="trade_status notconfirmed">
+							<div class="trade_status_notconfirmed">
 							「ください」受付中！
 							<?php } ?>
-							</span>
+							</div>
 							<div class="item_status">状態:
 							<?php echo get_display_item_status(get_post_custom_values("item_status")["0"]);
 							?>				
