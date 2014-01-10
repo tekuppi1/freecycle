@@ -37,12 +37,7 @@ wp_enqueue_script('freecycleScript');
 					?>
 							<a class="unread_alert" href="<?php echo bp_loggedin_user_domain() . "messages"; ?>">未読メッセージが<?php echo messages_get_unread_count();?>件あります！</a>
 					<?php 		} 
-						}else{ ?> 
-						
-					<li id="header-img">
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_iine.png" alt="ヘッダー" width="380px" height="300px">
-					</li>
-					<?php } ?> 
+						} ?> 
 				</div>
 				
 				<nav>

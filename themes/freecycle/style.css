@@ -39,12 +39,20 @@ a:link { color: #000080; }
 a:visited { color: #000090; }
 a:hover { color: #00bfff; }
 a:active { color: #008080; }
+@charset: utf-8;
 
-input[type="button"]:disable{
-	display: none;
+input[type="button"]:disabled{
+	background: #f9f9f9;
+	border: inset;
+	color: #fff !important;
 }
 
-@charset: utf-8;
+input[type="button" ][disabled="true"]:hover{
+	background: #f9f9f9 !important;
+	border: inset;
+	color: #fff !important;
+}
+
 
 body{
 	background: white;
@@ -623,8 +631,16 @@ a:visited { color: #000090; }
 a:hover { color: #00bfff; }
 a:active { color: #008080; }
 
-input[type="button"]:disable{
-	display: none;
+input[type="button"]:disabled{
+	background: #f9f9f9;
+	border: inset;
+	color: #fff !important;
+}
+
+input[type="button" ][disabled="true"]:hover{
+	background: #f9f9f9 !important;
+	border: inset;
+	color: #fff !important;
 }
 
 @charset: utf-8;
@@ -1172,8 +1188,16 @@ a:visited { color: #000090; }
 a:hover { color: #00bfff; }
 a:active { color: #008080; }
 
-input[type="button"]:disable{
-	display: none;
+input[type="button"]:disabled{
+	background: #f9f9f9;
+	border: inset;
+	color: #fff !important;
+}
+
+input[type="button" ][disabled="true"]:hover{
+	background: #f9f9f9 !important;
+	border: inset;
+	color: #fff !important;
 }
 
 @charset: utf-8;
@@ -1443,7 +1467,7 @@ nav li a{
 	color: black !important;
 	font-size: 17px;
 	display: block;
-	width: 750px;
+	width: 795px;
 	padding: 3px;
 	border-radius: 5px;
 	background: gold;
