@@ -1310,13 +1310,14 @@ ul li.whats_tex{
 	font-weight: bold;
 	color: orenge;
 	font-size: 1.2em;
-	list-style-type: square;
+	list-style-type: square !important;
 }
 
 ol li.whats_tex{
 	font-weight: bold;
 	color: orenge;
 	font-size: 1.2em;
+	list-style-type: decimal !important;
 }
 
 textarea{
@@ -1329,7 +1330,7 @@ h2.pagetitle{
 	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
 	border-top: double 3px black;
 	text-align: center;
-	margin: 4px 0;
+	margin: 0 0 5px 0;
 	width:auto;
 	color: black;
 	
