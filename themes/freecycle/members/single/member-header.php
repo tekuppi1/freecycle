@@ -19,11 +19,13 @@
 		jQuery("input[type=button]").attr("disabled",true);
 		if(jQuery("#field_1").val().length == 0){
 			alert("商品名が未入力です。");
+			jQuery("input[type=button]").attr("disabled",false);
 			return false;
 		}
 
 		if(jQuery("#field_2").val().length == 0){
 			alert("商品説明が未入力です。");
+			jQuery("input[type=button]").attr("disabled",false);
 			return false;
 		}
 		
@@ -35,11 +37,14 @@
 			}
 			if(fileName && !fileName.match(/\.(jpeg|jpg|png)$/i)){
 				alert("不正なファイルです。\n.jpeg,.jpg,.png ファイルのみアップロードできます。");
+				jQuery("input[type=button]").attr("disabled",false);
+				return false;
 			}
 		}
 
 		if(!isAttachedFlg){
 			alert("写真を添付してください。");
+			jQuery("input[type=button]").attr("disabled",false);
 			return false;
 		}
 
