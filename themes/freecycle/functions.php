@@ -220,7 +220,12 @@ function confirmGiveme(){
 	$postID = $_POST['postID'];
 	$userID = $_POST['userID'];
 	$uncheckedUserIDs = explode(",", $_POST['uncheckedUserIDs']);
-	
+	$tradeway = $_POST['tradeway'];
+	$tradedate = $_POST['tradedate'];
+	$tradetime = $_POST['tradetime'];
+	$place = $_POST['place'];
+	$message = $_POST['message'];
+
 	// 記事の状態を確定済にする
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_giveme_state
@@ -255,12 +260,23 @@ function confirmGiveme(){
 
 	// 取引相手に確定されたことを通知
 	// TODO sender_id は システム管理者のIDにしておくべきか。
+	$content = 'あなたが以下の商品の取引相手に選ばれました！' . PHP_EOL . ' 【商品名】<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>' . PHP_EOL;
+	$content .= '【受渡方法】:' . get_display_tradeway($tradeway) . PHP_EOL;
+	if($tradeway == "handtohand"){
+		$content .= '以下の受渡希望条件を確認してください。問題なければ「OKです」と返信してください！' . PHP_EOL;
+		$content .= 'もし不都合があれば、代わりの日時、場所を記入して返信してください。'. PHP_EOL;
+		$content .= '【受渡希望日時】:' . $tradedate . ' ' . $tradetime . PHP_EOL;
+		$content .= '【受渡希望場所】:' . $place . PHP_EOL;
+	}
+	if($message){
+		$content .= '【メッセージ】:' . $message . PHP_EOL;
+	}
+
 	messages_new_message(array(
 		'sender_id' => bp_loggedin_user_id(),
 		'recipients' => $userID,
 		'subject' => '【自動送信】くださいリクエストが承認されました！',
-		'content' => 'あなたが以下の商品の取引相手に選ばれました！このメッセージに返信して、商品の受け取りを進めてください。 ' .
-						'<a href="' . get_permalink($postID) . '">' . get_permalink($postID) . '</a>'
+		'content' => $content
 	));
 
 	echo "confirm";
@@ -645,7 +661,7 @@ function add_used_points($user_id, $point){
 
 /**
  * 新規ユーザ追加時に呼ばれる関数。
- *
+ * 初期付与ポイントはgot_pointsの値で設定してください。
  */
 function on_user_added($user_id){
 	global $wpdb;
@@ -654,7 +670,7 @@ function on_user_added($user_id){
 	$wpdb->query($wpdb->prepare("
 		INSERT INTO " . $table_prefix . "fmt_points
 		(user_id, got_points, temp_used_points, used_points)
-		VALUES (%d, 10, 0, 0)",
+		VALUES (%d, 3, 0, 0)",
 		$user_id));
 }
 
@@ -691,6 +707,18 @@ function get_display_item_status($item_status){
 		);
 	return $display_map[$item_status];
 }
+
+/**
+ * 取引方法を表示用文字列に変換する関数。
+ */
+function get_display_tradeway($tradeway){
+	$display_map = array(
+			"handtohand" => "直接手渡し",
+			"delivary"  => "配送"
+		);
+	return $display_map[$tradeway];
+}
+
 
 /**********************************************
  * ユーザページカスタマイズ用関数群
@@ -866,7 +894,7 @@ function giveme_from_others_content() {
 	?>
 	<div id="giveme-from-others" class="giveme-from-others">
 		<?php if(get_count_giveme_from_others() > 0 ){ ?>
-		以下の商品にくださいリクエストが来ています。取引相手を選んで確定させてください。
+		以下の商品にくださいリクエストが来ています。取引相手、取引方法を選んで確定させてください。
 		<?php }else{ ?>
 		くださいリクエストがきている商品はありません。
 		<?php }?>
@@ -877,23 +905,89 @@ function giveme_from_others_content() {
 				if($last_post_id != $giveme->post_id){
 					if($last_post_id != ""){
 		?>
-					<input type="button" value="取引相手確定" onClick="callOnConfirmGiveme(<?php echo $last_post_id; ?>)">
+					</p>
+					<label for="tradeway_<?php echo $last_post_id; ?>">取引方法:</label>
+					<select id="tradeway_<?php echo $last_post_id; ?>" name="tradeway_<?php echo $last_post_id; ?>">
+						<option value="handtohand">直接手渡し</option>
+						<!-- <option value="delivary">配送</option> -->
+					</select></br>
+					受渡希望日時:</br>
+					<select id="year_<?php echo $last_post_id; ?>" name="year_<?php echo $last_post_id; ?>">
+						<option value="<?php echo date('Y',strtotime('now'))?>"><?php echo date('Y',strtotime('now'))?></option>
+						<option value="<?php echo date('Y',strtotime('+1 year'))?>"><?php echo date('Y',strtotime('+1 year'))?></option>
+					</select>年
+					<select id="month_<?php echo $last_post_id; ?>" name="month_<?php echo $last_post_id; ?>">
+						<?php for ($i=1; $i<13; $i++) { 
+							echo '<option value="' . $i . '">' . $i . '</option>';
+						}?>
+					</select>月
+					<select id="date_<?php echo $last_post_id; ?>" name="date_<?php echo $last_post_id; ?>">
+						<?php for ($i=1; $i<32; $i++) { 
+							echo '<option value="' . $i . '">' . $i . '</option>';
+						}?>
+					</select>日
+					<select id="tradetime_<?php echo $last_post_id; ?>" name="tradetime_<?php echo $last_post_id; ?>">
+						<?php for ($i=10; $i<21; $i++) { 
+							echo '<option value="' . $i . ':00">' . $i . ':00</option>';
+							echo '<option value="' . $i . ':30">' . $i . ':30</option>';
+						}?>
+					</select>頃</br>
+					受渡希望場所:</br>
+					<input type="text" id="place_<?php echo $last_post_id; ?>" name="place_<?php echo $last_post_id; ?>" size=30 maxlength=30></br>
+					※原則、大学構内の場所を指定してください</br>
+					<label for="message_<?php echo $last_post_id; ?>">メッセージ:</label></br>
+					<textarea id="message_<?php echo $last_post_id; ?>" name="message_<?php echo $last_post_id; ?>" rows=3 cols=30></textarea></br>
+					<input type="button" value="確定" onClick="callOnConfirmGiveme(<?php echo $last_post_id; ?>)">
 					</div><!-- #post_(id) -->
+					<hr>
 					<?php
 					}
 					?>
 					<div id="post_<?php echo $giveme->post_id; ?>">
-					<h2 class="posttitle"><?php echo get_post($giveme->post_id)->post_title; ?></h2>
+					<div class="posttitle"><?php echo get_post($giveme->post_id)->post_title; ?></div>
 					<?php
 					$last_post_id = $giveme->post_id;
 				} ?>
-				<input type="radio" name="sendto_user_<?php echo $giveme->post_id ?>" value="<?php echo $giveme->user_id ?>" id="post<?php echo $giveme->post_id; ?>_user<?php echo $giveme->user_id ?>"/><label for="<?php echo $giveme->display_name; ?>"><a href="<?php echo home_url() . "/members/" . $giveme->user_nicename ?>"><?php echo $giveme->display_name; ?></a></label>
+				<p><input type="radio" name="sendto_user_<?php echo $giveme->post_id ?>" value="<?php echo $giveme->user_id ?>" id="post<?php echo $giveme->post_id; ?>_user<?php echo $giveme->user_id ?>"/><label for="<?php echo $giveme->display_name; ?>"><a href="<?php echo home_url() . "/members/" . $giveme->user_nicename ?>"><?php echo $giveme->display_name; ?></a></label>
 			<?php
 			}
 			?>
 			<?php if($last_post_id != ""){ ?>
-			<input type="button" value="取引相手確定" onClick="callOnConfirmGiveme(<?php echo $last_post_id; ?>);">
+			</p>
+			<label for="tradeway_<?php echo $last_post_id; ?>">取引方法:</label>
+			<select id="tradeway_<?php echo $last_post_id; ?>" name="tradeway_<?php echo $last_post_id; ?>">
+				<option value="handtohand">直接手渡し</option>
+				<!-- <option value="delivary">配送</option> -->
+			</select></br>
+			受渡希望日時:</br>
+			<select id="year_<?php echo $last_post_id; ?>" name="year_<?php echo $last_post_id; ?>">
+				<option value="<?php echo date('Y',strtotime('now'))?>"><?php echo date('Y',strtotime('now'))?></option>
+				<option value="<?php echo date('Y',strtotime('+1 year'))?>"><?php echo date('Y',strtotime('+1 year'))?></option>
+			</select>年
+			<select id="month_<?php echo $last_post_id; ?>" name="month_<?php echo $last_post_id; ?>">
+				<?php for ($i=1; $i<13; $i++) { 
+					echo '<option value="' . $i . '">' . $i . '</option>';
+				}?>
+			</select>月
+			<select id="date_<?php echo $last_post_id; ?>" name="date_<?php echo $last_post_id; ?>">
+				<?php for ($i=1; $i<32; $i++) { 
+					echo '<option value="' . $i . '">' . $i . '</option>';
+				}?>
+			</select>日
+			<select id="tradetime_<?php echo $last_post_id; ?>" name="tradetime_<?php echo $last_post_id; ?>">
+				<?php for ($i=10; $i<21; $i++) { 
+					echo '<option value="' . $i . ':00">' . $i . ':00</option>';
+					echo '<option value="' . $i . ':30">' . $i . ':30</option>';
+				}?>
+			</select>頃</br>
+			受渡希望場所:</br>
+			<input type="text" id="place_<?php echo $last_post_id; ?>" name="place_<?php echo $last_post_id; ?>" size=30 maxlength=30></br>
+			※原則、大学構内の場所を指定してください</br>
+			<label for="message_<?php echo $last_post_id; ?>">メッセージ:</label></br>
+			<textarea id="message_<?php echo $last_post_id; ?>" name="message_<?php echo $last_post_id; ?>" rows=3 cols=30></textarea></br>
+			<input type="button" value="確定" onClick="callOnConfirmGiveme(<?php echo $last_post_id; ?>);">
 			</div>
+			<hr>
 			<?php } ?>
 	</div>
 	<?php
