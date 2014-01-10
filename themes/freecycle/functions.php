@@ -2,6 +2,7 @@
 // TODO: 記事を投稿した時点で、初期テーブルにデータをインサートする
 
 // アクションフック登録
+add_action('init', 'custom_init');
 add_action('wp_ajax_giveme', 'giveme');
 add_action('wp_ajax_cancelGiveme', 'cancelGiveme');
 add_action('wp_ajax_confirmGiveme', 'confirmGiveme');
@@ -12,6 +13,24 @@ add_action('wp_ajax_new_entry', 'new_entry');
 add_action('wp_ajax_delete_post', 'delete_post');
 add_action('user_register', 'on_user_added');
 
+function custom_init(){
+	add_action('comment_post', 'on_comment_post');	
+}
+
+// コメント投稿時にメッセージを飛ばす
+function on_comment_post() {
+	global $post;
+	// 自分自身の記事にコメントした場合はメッセージを飛ばさない
+	if(bp_loggedin_user_id() != $post->post_author){
+		messages_new_message(array(
+		'sender_id' => bp_loggedin_user_id(),
+		'recipients' => $post->post_author,
+		'subject' => '【自動送信】あなたの商品にコメントがつきました',
+		'content' => '以下の商品にコメントが来ています！'
+						. '<a href="' . get_permalink($post->ID) . '">' . $post->post_title . '</a>'
+		));
+	}
+}
 
 // 記事検索時の条件追加
 function add_costom_join($join){
