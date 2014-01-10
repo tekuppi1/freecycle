@@ -1,3 +1,12 @@
+function onChangeTradeWay(postID){
+	var tradeway = jQuery("#tradeway_"+postID).val();
+	if(tradeway == "handtohand"){
+		jQuery("#handtohand-option_"+postID).show();
+	}else if(tradeway == "delivery"){
+		jQuery("#handtohand-option_"+postID).hide();
+	}
+}
+
 function onConfirmGiveme(postID, url){
 	jQuery("input[type=button]").attr("disabled",true);
 	// ラジオボタンのチェック確認
@@ -21,7 +30,7 @@ function onConfirmGiveme(postID, url){
 		return false;
 	}
 
-	if(!jQuery("#place_" + postID).val()){
+	if(!jQuery("#place_" + postID).val() && jQuery("#tradeway_" + postID).val() === "handtohand"){
 		alert("受渡希望場所を記入してください。");
 		jQuery("input[type=button]").attr("disabled",false);
 		return false;

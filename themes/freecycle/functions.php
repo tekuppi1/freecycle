@@ -260,13 +260,16 @@ function confirmGiveme(){
 
 	// 取引相手に確定されたことを通知
 	// TODO sender_id は システム管理者のIDにしておくべきか。
-	$content = 'あなたが以下の商品の取引相手に選ばれました！' . PHP_EOL . ' 【商品名】<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>' . PHP_EOL;
+	$content = 'あなたが以下の商品の取引相手に選ばれました！' . PHP_EOL . ' 【商品名】:<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>' . PHP_EOL;
 	$content .= '【受渡方法】:' . get_display_tradeway($tradeway) . PHP_EOL;
 	if($tradeway == "handtohand"){
 		$content .= '以下の受渡希望条件を確認してください。問題なければ「OKです」と返信してください！' . PHP_EOL;
 		$content .= 'もし不都合があれば、代わりの日時、場所を記入して返信してください。'. PHP_EOL;
 		$content .= '【受渡希望日時】:' . $tradedate . ' ' . $tradetime . PHP_EOL;
 		$content .= '【受渡希望場所】:' . $place . PHP_EOL;
+	}elseif($tradeway == "delivery"){
+		$content .= '配送による受渡に同意する場合、受取先の住所と名前を記入して返信してください！' . PHP_EOL;
+		$content .= '同意しない場合、直接手渡しの希望日時、場所を記入して返信してください。	' . PHP_EOL;
 	}
 	if($message){
 		$content .= '【メッセージ】:' . $message . PHP_EOL;
@@ -714,7 +717,7 @@ function get_display_item_status($item_status){
 function get_display_tradeway($tradeway){
 	$display_map = array(
 			"handtohand" => "直接手渡し",
-			"delivary"  => "配送"
+			"delivery"  => "配送"
 		);
 	return $display_map[$tradeway];
 }
@@ -906,11 +909,12 @@ function giveme_from_others_content() {
 					if($last_post_id != ""){
 		?>
 					</p>
-					<label for="tradeway_<?php echo $last_post_id; ?>">取引方法:</label>
-					<select id="tradeway_<?php echo $last_post_id; ?>" name="tradeway_<?php echo $last_post_id; ?>">
+					<label for="tradeway_<?php echo $last_post_id; ?>" >取引方法:</label>
+					<select id="tradeway_<?php echo $last_post_id; ?>" name="tradeway_<?php echo $last_post_id; ?>" onChange="onChangeTradeWay(<?php echo $last_post_id; ?>)">
 						<option value="handtohand">直接手渡し</option>
-						<!-- <option value="delivary">配送</option> -->
+						<option value="delivery">配送</option>
 					</select></br>
+					<div id="handtohand-option_<?php echo $last_post_id; ?>">
 					受渡希望日時:</br>
 					<select id="year_<?php echo $last_post_id; ?>" name="year_<?php echo $last_post_id; ?>">
 						<option value="<?php echo date('Y',strtotime('now'))?>"><?php echo date('Y',strtotime('now'))?></option>
@@ -935,6 +939,7 @@ function giveme_from_others_content() {
 					受渡希望場所:</br>
 					<input type="text" id="place_<?php echo $last_post_id; ?>" name="place_<?php echo $last_post_id; ?>" size=30 maxlength=30></br>
 					※原則、大学構内の場所を指定してください</br>
+					</div>
 					<label for="message_<?php echo $last_post_id; ?>">メッセージ:</label></br>
 					<textarea id="message_<?php echo $last_post_id; ?>" name="message_<?php echo $last_post_id; ?>" rows=3 cols=30></textarea></br>
 					<input type="button" value="確定" onClick="callOnConfirmGiveme(<?php echo $last_post_id; ?>)">
@@ -955,10 +960,11 @@ function giveme_from_others_content() {
 			<?php if($last_post_id != ""){ ?>
 			</p>
 			<label for="tradeway_<?php echo $last_post_id; ?>">取引方法:</label>
-			<select id="tradeway_<?php echo $last_post_id; ?>" name="tradeway_<?php echo $last_post_id; ?>">
+			<select id="tradeway_<?php echo $last_post_id; ?>" name="tradeway_<?php echo $last_post_id; ?>" onChange="onChangeTradeWay(<?php echo $last_post_id; ?>)">
 				<option value="handtohand">直接手渡し</option>
-				<!-- <option value="delivary">配送</option> -->
+				<option value="delivery">配送</option>
 			</select></br>
+			<div id="handtohand-option_<?php echo $last_post_id; ?>">
 			受渡希望日時:</br>
 			<select id="year_<?php echo $last_post_id; ?>" name="year_<?php echo $last_post_id; ?>">
 				<option value="<?php echo date('Y',strtotime('now'))?>"><?php echo date('Y',strtotime('now'))?></option>
@@ -983,6 +989,7 @@ function giveme_from_others_content() {
 			受渡希望場所:</br>
 			<input type="text" id="place_<?php echo $last_post_id; ?>" name="place_<?php echo $last_post_id; ?>" size=30 maxlength=30></br>
 			※原則、大学構内の場所を指定してください</br>
+			</div>
 			<label for="message_<?php echo $last_post_id; ?>">メッセージ:</label></br>
 			<textarea id="message_<?php echo $last_post_id; ?>" name="message_<?php echo $last_post_id; ?>" rows=3 cols=30></textarea></br>
 			<input type="button" value="確定" onClick="callOnConfirmGiveme(<?php echo $last_post_id; ?>);">
