@@ -107,14 +107,22 @@ p{
 	line-height: 1.4;
 }
 
-a{
+
+
+ul li.whats_tex{
+	font-weight: bold;
+	color: orenge;
+	font-size: 1.2em;
+	list-style-type: square;
 }
 
-ol li.whats_tex, ul li.whats_tex{
+ol li.whats_tex{
 	font-weight: bold;
 	color: orenge;
 	font-size: 1.2em;
 }
+
+
 
 textarea{
 	font-size: 1em;
@@ -713,7 +721,14 @@ p{
 	line-height: 1.4;
 }
 
-ol li.whats_tex, ul li.whats_tex{
+ul li.whats_tex{
+	font-weight: bold;
+	color: orenge;
+	font-size: 1.2em;
+	list-style-type: square;
+}
+
+ol li.whats_tex{
 	font-weight: bold;
 	color: orenge;
 	font-size: 1.2em;
@@ -1247,7 +1262,7 @@ html{
 	line-height:1.4;
 	font-family:"arial","ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3", sans-serif;
 	font-size: 17px;
-	width: 800px;
+	width: 700px;
 	height: 100%;
 }
 
@@ -1289,10 +1304,16 @@ hr{
 	border:thin dotted #ffa500;
 	width: 100%;
 }
-p{
+
+
+ul li.whats_tex{
+	font-weight: bold;
+	color: orenge;
+	font-size: 1.2em;
+	list-style-type: square;
 }
 
-ol li.whats_tex, ul li.whats_tex{
+ol li.whats_tex{
 	font-weight: bold;
 	color: orenge;
 	font-size: 1.2em;
@@ -1503,13 +1524,14 @@ nav li{
 	/*border-right: solid 1px #000;
 	border-left: solid 1px #FFF;*/
 	margin-left: 1px;
+	width:650px;
 }
 
 nav li a{
 	color: black !important;
 	font-size: 17px;
 	display: block;
-	width: 795px;
+	width: 650px !important;
 	padding: 3px;
 	border-radius: 5px;
 	background: gold;
