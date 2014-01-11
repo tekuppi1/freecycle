@@ -62,13 +62,13 @@
 				success: function(permalink){
 					alert("商品を出品しました。");
 					// reload new entry page
+					jQuery("input[type=button]").attr("disabled",false);
 					location.href = "<?php echo bp_loggedin_user_domain(); ?>" + "new_entry/#newentry";
 					jQuery("input[type='text'], input[type='file'], textarea").val("");
 					jQuery("option").attr("selected", false);
 				}
 			});
 		}
-		jQuery("input[type=button]").attr("disabled",false);
 	}
 	
 </script>
