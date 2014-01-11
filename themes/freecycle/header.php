@@ -25,7 +25,7 @@ wp_enqueue_script('freecycleScript');
 		<?php do_action( 'bp_before_header' ); ?>
 
 		<header>
-			<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_beta ver..png" alt="ヘッダー" width="700px" height="200px"></a></h1>
+			<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_b.png" alt="ヘッダー" width="700px" height="200px"></a></h1>
 		</header><!-- header -->
 		
 		
