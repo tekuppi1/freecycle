@@ -130,6 +130,20 @@ textarea{
 	font-size: 1em;
 }
 
+img{
+	width: 100;
+	height: 100;
+	float: left;
+}
+
+img:after{
+	content: "";
+    clear: both;
+    height: 0;
+    display: block;
+    visibility: hidden;
+ }
+
 /*-----------FAQ------------*/
 h2.pagetitle{
 	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
@@ -751,6 +765,21 @@ textarea{
 	font-size: 1em;
 }
 
+img{
+	width: 120;
+	height: 120;
+	float: left;
+}
+
+img:after{
+	content: "";
+    clear: both;
+    height: 0;
+    display: block;
+    visibility: hidden;
+ }
+
+
 /*-----------FAQ------------*/
 h2.pagetitle{
 	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
@@ -1347,6 +1376,19 @@ textarea{
 	font-size: 1em;
 }
 
+img{
+	width: 200;
+	height: 200;
+	float: left;
+}
+
+img:after{
+	content: "";
+    clear: both;
+    height: 0;
+    display: block;
+    visibility: hidden;
+ }
 
 /*-----------FAQ------------*/
 h2.pagetitle{
