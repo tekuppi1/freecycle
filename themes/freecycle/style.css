@@ -133,16 +133,15 @@ textarea{
 img{
 	width: 100;
 	height: 100;
-	float: left;
 }
 
-img:after{
+/*img:after{
 	content: "";
     clear: both;
     height: 0;
     display: block;
     visibility: hidden;
- }
+ }*/
 
 /*-----------FAQ------------*/
 h2.pagetitle{
@@ -207,7 +206,7 @@ header{
 	width: 100%;
 	height: 110px;
 	background: white;
-	padding: 1px 0;
+	padding: 6px 0 1px 0;
 }
 
 header #logo img{
@@ -620,6 +619,10 @@ a.button-confirm{
 	text-align: center;
 }
 
+td.thread-info a{
+	font-size: 1em !important;
+}
+
 /*---設定--*/
 input#submit{
 	width: 200px;
@@ -768,16 +771,15 @@ textarea{
 img{
 	width: 120;
 	height: 120;
-	float: left;
 }
 
-img:after{
+/*img:after{
 	content: "";
     clear: both;
     height: 0;
     display: block;
     visibility: hidden;
- }
+ }*/
 
 
 /*-----------FAQ------------*/
@@ -1229,6 +1231,10 @@ a.button-confirm{
 	text-align: center;
 }
 
+td.thread-info a{
+	font-size: 1em !important;
+}
+
 
 /*---設定--*/
 input#submit{
@@ -1379,16 +1385,15 @@ textarea{
 img{
 	width: 200;
 	height: 200;
-	float: left;
 }
 
-img:after{
+/*img:after{
 	content: "";
     clear: both;
     height: 0;
     display: block;
     visibility: hidden;
- }
+ }*/
 
 /*-----------FAQ------------*/
 h2.pagetitle{
@@ -1858,6 +1863,9 @@ a.button-confirm{
 	text-align: center;
 }
 
+td.thread-info a{
+	font-size: 1em !important;
+}
 
 
 /*サイドバー部分*/
