@@ -48,8 +48,7 @@
 							<p class="date"><?php printf( __( '%1$s <span>in %2$s</span>', 'buddypress' ), get_the_date(), get_the_category_list( ', ' ) ); ?> </p>
 														
 
-							<div class="entry">
-								
+							<div class="entry">								
 								<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(array(150, 150)) ?></a>
 								<?php the_content( __( 'Read the rest of this entry &rarr;', 'buddypress' ) ); ?>
 								<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
@@ -58,11 +57,9 @@
 						</div>
 
 					</div>
-					
-					
-
+		
 					<?php do_action( 'bp_after_blog_post' ); ?>
-							<hr>
+					<hr>
 							
 				<?php endwhile; ?>
 							
