@@ -465,7 +465,7 @@ hr.line-search{
 	margin:auto;
 	padding: 3px;
 	display: block;
-	width: 190px;
+	width: 120px;
 	height: 25px;
 	font: bold 1.1em/1.0 "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
@@ -475,6 +475,7 @@ hr.line-search{
 		"ＭＳ Ｐゴシック", "MS P Gothic",
 		sans-serif;
 	color: black;
+	float: left;
 }
 
 #searchsubmit:hover{
@@ -484,9 +485,7 @@ hr.line-search{
 #blog-search h2.pagetitle{
 	display: none;
 }
-/*div#searchform_submit{
-	width: 70px;
-}*/
+
 
 #searchform_pulldown{
 	padding: 3px;
@@ -1128,7 +1127,7 @@ nav li a{
 	color: black !important;
 	font-size: 15px;
 	display: block;
-	width: 389px;
+	width: 385px;
 	padding: 3px;
 	border-radius: 5px;
 	background: #ffd700;
@@ -1156,14 +1155,12 @@ nav li a:hover{
 #searchform_main{
 	display: block;
 	margin: auto;
-	padding: 3px 5px 3px 5px;
+	padding: 5px;
 	background: orange;
 	border-radius: 10px;
 	width: 95%;
 	height: 55px;
 	clear: both;
-	margin-bottom: 3px;
-	margin-top: 3px;
 	
 	
 	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -1174,7 +1171,7 @@ nav li a:hover{
 #searchsubmit{
 	padding: 3px;
 	display: block;
-	width: 267px;
+	width: 258px;
 	height: 25px;
 	font: bold 1.1em/1.0 "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",

@@ -96,8 +96,8 @@ wp_enqueue_script('freecycleScript');
 								</select>
 							</div>
 							<div id="searchform_submit">
-									<input type="submit" id="searchsubmit" value="Search" />
-							</div>
+								<input type="submit" id="searchsubmit" value="Search" />
+							</div> 
 						</div> 
 				</form>	
 	</div><!-- 検索バー -->
