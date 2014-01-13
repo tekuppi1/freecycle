@@ -465,7 +465,7 @@ hr.line-search{
 	margin:auto;
 	padding: 3px;
 	display: block;
-	width: 120px;
+	width: 150px;
 	height: 25px;
 	font: bold 1.1em/1.0 "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
@@ -523,12 +523,12 @@ hr.line-search{
 		Osaka,
 		"ＭＳ Ｐゴシック", "MS P Gothic",
 		sans-serif;
-    color: black;
+    color: orange !impotant;
     text-decoration: underline;
 }
 
 .posttitle :hover{
-	color: orange;
+	color: #FBA848;
 }	
 
 div.post-content div.entry img{
@@ -1231,12 +1231,12 @@ nav li a:hover{
 		Osaka,
 		"ＭＳ Ｐゴシック", "MS P Gothic",
 		sans-serif;
-    color: black;
+    color: orange !important;
     text-decoration: underline;
 }
 
 .posttitle :hover{
-	color: orange;
+	color: #FBA848;
 }	
 
 p.author_name{
