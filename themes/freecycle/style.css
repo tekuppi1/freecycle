@@ -532,8 +532,8 @@ hr.line-search{
 }	
 
 div.post-content div.entry img{
-	width: 60px;
-	height: 60px;
+	width: 140px;
+	height: 140px;
 	float: left;
 }
 
@@ -1244,8 +1244,8 @@ p.author_name{
 }
 
 div.post-content div.entry img{
-	width: 70px;
-	height: 70px;
+	width: 150px;
+	height: 150px;
 	float: left;
 }
 
@@ -1946,8 +1946,10 @@ div.entry span.posttitle{
 	font-size: 1.4em !important;
 }
 
-div#entry_img{
-	align: left;
+div.post-content div.entry img{
+	width: 70px;
+	height: 70px;
+	float: left;
 }
 
 p.author_name{
