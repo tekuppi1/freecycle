@@ -516,7 +516,7 @@ hr.line-search{
 
 
 .posttitle {
-    font: italic bold normal 30px "メイリオ", Meiryo,
+    font: italic bold normal 23px "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
 		"HIragino Kaku Gothic Pro W3",
 		"HIragino Kaku Gothic Pro",
@@ -532,8 +532,8 @@ hr.line-search{
 }	
 
 div.post-content div.entry img{
-	width: 100px;
-	height: 100px;
+	width: 60px;
+	height: 60px;
 	float: left;
 }
 
@@ -1224,7 +1224,7 @@ nav li a:hover{
 
 
 .posttitle {
-    font: italic bold normal 30px "メイリオ", Meiryo,
+    font: italic bold normal 23px "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
 		"HIragino Kaku Gothic Pro W3",
 		"HIragino Kaku Gothic Pro",
@@ -1241,6 +1241,12 @@ nav li a:hover{
 
 p.author_name{
 	display: none;
+}
+
+div.post-content div.entry img{
+	width: 70px;
+	height: 70px;
+	float: left;
 }
 
 div.trade_status_notconfirmed,div.trade_status_confirmed{
