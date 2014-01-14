@@ -1798,7 +1798,7 @@ form #sidebar-wp-submit{
 	padding-top: 2px;
 	padding-bottom: 2px;
 	background: gold;
-	height: 24px;
+	height: 30px;
 }
 	
 div.grobal_nav_div{
@@ -1837,8 +1837,9 @@ nav li a{
 	color: black !important;
 	font-size: 17px;
 	display: block;
-	width: 138px !important;
-	padding: 3px;
+	/*width: 120px !important;*/
+	height: 20px;
+	padding: 6px;
 	/*border-radius: 5px;*/
 	background: gold;
 	text-decoration: none;
@@ -1847,7 +1848,6 @@ nav li a{
 
 nav li a:hover{
 	background: orange;
-	padding: 3px;
 	text-decoration: none;
 	color:black;
 }
@@ -1959,8 +1959,8 @@ div.entry span.posttitle{
 }
 
 div.post-content div.entry img{
-	width: 70px;
-	height: 70px;
+	width: 120px;
+	height: 120px;
 	float: left;
 }
 
