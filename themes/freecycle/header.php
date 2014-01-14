@@ -48,8 +48,9 @@ wp_enqueue_script('freecycleScript');
 					<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					<?php } ?>
 					<li class="grobal_nav"><a href="<?php echo home_url() . "/about"; ?>" >TexChangeとは</a></li>
+					<li class="grobal_nav"><a href="http://texchg.com/guide" >使い方ガイド</a></li>
+					<li class="grobal_nav"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
 					<li class="grobal_nav"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>
-					<li class="grobal_nav"><a href="<?php echo home_url() . "/contact"; ?>" >お問い合わせ</a></li>
 					</ul>
 				</nav>
 				</div>
