@@ -120,8 +120,11 @@ h5{
 
 
 hr{
-	border:thin dotted #FBA848;
+	border:thin ridge #FBA848;
 	width: 100%;
+	padding: 0;
+	margin: 0;
+	margin-top: -25px;
 }
 p{
 	line-height: 1.4;
@@ -515,23 +518,30 @@ hr.line-search{
 /*コンテンツ部分*/
 
 
-.posttitle {
-    font: italic bold normal 23px "メイリオ", Meiryo,
+div.post-content h2.posttitle {
+    font: italic bold normal 20px "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
 		"HIragino Kaku Gothic Pro W3",
 		"HIragino Kaku Gothic Pro",
 		Osaka,
 		"ＭＳ Ｐゴシック", "MS P Gothic",
 		sans-serif;
-    color: orange !impotant;
+    color: #FBA848 !important;
     text-decoration: underline;
+}
+.posttitle :link{
+	color: orange;
 }
 
 .posttitle :hover{
-	color: #FBA848;
+	color: #00bfff;
 }	
 
-div.post-content div.entry img{
+div.post-content{
+	padding: 0;
+}
+
+div.post-content div.entry img{	
 	width: 140px;
 	height: 140px;
 	float: left;
@@ -546,9 +556,11 @@ p.author_name{
 }
 
 div.trade_status_notconfirmed,div.trade_status_confirmed{
-	color:red;
+	color: red;
 	font-weight: bold;
 }
+
+
 /*.353836,.item-status{
 	float: left;
 }
