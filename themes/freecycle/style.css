@@ -54,6 +54,11 @@ input[type="button" ][disabled="true"]:hover{
 }
 
 
+* {
+    padding: 0;
+    margin: 0;
+}
+
 html{
 	background: white;
 	color: #696969;
@@ -267,15 +272,18 @@ input[type="button"]:hover{
 
 header{	
 	width: 100%;
-	height: 110px;
+	height: auto;
 	background: white;
-	padding:25px 0 1px 0;
+	padding: 25px 0 0 0;
+	margin: 0;
 }
 
 header #logo img{
 	width: 100%;
-	height: 100px;
+	height: 70px;
+	padding: 0 2px;
 	margin: auto;
+	margin-bottom: -20px;
 }
 
 	
@@ -305,16 +313,24 @@ header a:active{
 
 
 /*ヘッダーイメージ*/
-.header_img_navi{
-	float:left;
-}
 
-.header_img_navi img{
+/*.header_img_navi img{
 	width:100%;
 	height: auto;
 	margin: 0;
-	/*padding-left: 2px;*/
-}
+	padding-left: 2px;
+}*/
+
+/*---------------------------------------------------
+				キャッチコピー
+------------------------------------------------------*/
+
+div.header_copy a img{
+	margin:0 0 -16px 0;
+	padding: 0;
+	width: 100%;
+	height: 120px;
+}			
 
 
 /* ヘッダーフォーム */
@@ -381,17 +397,16 @@ form #sidebar-wp-submit{
 }*/
 
 　　　　　　　　　　/*ナビゲーション*/
-.header_img_navi{
-	margin-top: 2px;
-	margin-bottom: 2px;
+div.header_img_navi{
+	width: 100%;
+	padding: 3px 0;
 }
 	
 
 nav{
-	margin: 3px 0 3px 0;
+	margin: 0;
 	display: block;
-	bottom: 100%;
-	left: 100px;
+	width:100%;
 }
 
 nav ul,li	{
@@ -399,28 +414,27 @@ nav ul,li	{
 	padding:0;
 	list-style: none;
 }
-nav .navi	{
-	width: 95%;
-	display: block;
-}
+
 nav li{
 	float: left;
 	text-align: center;
 	font-weight: bold;
 	border: solid 1px #000;
-	border-radius: 5px;
+	border-radius: 2px;
 	/*border-right: solid 1px #000;
 	border-left: solid 1px #FFF;*/
-	margin-left: 1px;
+	width: 100%;
 }
+
+
 
 nav li a{
 	color: black !important;
-	font-size: 0.9em;
+	font-size: 12px;
 	display: block;
-	width: 310px;
+	width: auto;
 	padding: 3px;
-	border-radius: 5px;
+	border-radius: 2px;
 	background: #ffd700;
 	text-decoration: none;
 	/*border-bottom: solid 1px #000;*/
@@ -428,10 +442,59 @@ nav li a{
 
 nav li a:hover{
 	background: #ffa500;
-	padding: 3px;
-	text-decoration: none;
 	color: #fff;
 }
+
+div#grobal_nav_div{
+	margin: 0;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	width: 100%;
+}
+
+
+
+
+/*nav{
+	width: 100%;
+	margin: 10px auto;
+}
+
+nav ul {
+    list-style: none;
+    overflow: hidden;
+}
+
+nav li{
+	float: left;
+	width: 100%
+}
+
+	
+nav li a {
+    display: block;
+    width: 10%;
+    padding: 10px;
+     
+    background: #0E7AC4;
+    border-right: 1px solid #fff;
+     
+    color: #fff !important;    
+    font: 400 11px/1.4 'Cutive', Helvetica, Verdana, Arial, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+
+nav li a:hover {
+    background: #40AAEF;
+}
+
+nav li:last-child a {
+    border: none;
+}*/
+
 
 
 　/*サーチバー*/
@@ -756,7 +819,11 @@ div#sidebar-me h4{
 }
 
 #footer-widget-area{
-	font-size: 12px;
+	font-size: 13px;
+}
+
+ul#menu-footer_menu li{
+	line-height: 120%;
 }
 
 }
@@ -1448,6 +1515,10 @@ div#sidebar-me h4{
 }
 #footer-widget-area{
 	font-size: 12px;
+}
+
+ul#menu-footer_menu li{
+	line-height: 120%;
 }
 
 }
@@ -2149,5 +2220,8 @@ div#sidebar-me h4{
 	color: gray;
 }
 
+ul#menu-footer_menu li{
+	line-height: 120%;
+}
 }
 
