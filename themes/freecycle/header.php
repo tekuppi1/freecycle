@@ -25,7 +25,7 @@ wp_enqueue_script('freecycleScript');
 		<?php do_action( 'bp_before_header' ); ?>
 
 		<header>
-			<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_2014.png" alt="ヘッダー" width="700px" height="200px"></a></h1>
+			<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_b.png" alt="ヘッダー" width="700px" height="200px"></a></h1>
 		</header><!-- header -->
 		
 		
@@ -40,26 +40,20 @@ wp_enqueue_script('freecycleScript');
 						} ?> 
 				</div>
 				
-				<div class="header_copy">
-					<a href="<?php echo home_url() . "/about"; ?>" ><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_catchcopy.png" alt="てくすちぇんじとは？" width="700px" height="200px"></a>
-				</div>
-	
 				<div class="grobal_nav_div">
 				<nav>
-					<ul class="navi" >
-					　		<li class="grobal_nav"><a href="<?php echo home_url(); ?>" >ホーム</a></li>
-					　		<?php if(is_user_logged_in()){ ?>
-					　		<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
-					　		<?php } ?>
-					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/about"; ?>" >TexChangeとは</a></li>
-					　		<li class="grobal_nav"><a href="http://texchg.com/guide" >使い方ガイド</a></li>
-					　		<li class="grobal_nav"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
-					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>
+					<ul class="navi" class="clearfix">
+					<li class="grobal_nav"><a href="<?php echo home_url(); ?>" >ホーム</a></li>
+					<?php if(is_user_logged_in()){ ?>
+					<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
+					<?php } ?>
+					<li class="grobal_nav"><a href="<?php echo home_url() . "/about"; ?>" >TexChangeとは</a></li>
+					<li class="grobal_nav"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>
+					<li class="grobal_nav"><a href="<?php echo home_url() . "/contact"; ?>" >お問い合わせ</a></li>
 					</ul>
 				</nav>
 				</div>
-</div>	
-
+</div>
 					
 
 <div class="header_form_">
@@ -102,8 +96,8 @@ wp_enqueue_script('freecycleScript');
 								</select>
 							</div>
 							<div id="searchform_submit">
-								<input type="submit" id="searchsubmit" value="Search" />
-							</div> 
+									<input type="submit" id="searchsubmit" value="Search" />
+							</div>
 						</div> 
 				</form>	
 	</div><!-- 検索バー -->

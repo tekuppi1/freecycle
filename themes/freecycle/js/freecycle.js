@@ -19,22 +19,15 @@ function onConfirmGiveme(postID, url){
 	}
 
 	// TODO 日付の厳密なチェックを再実装する。
-	var tradedates = new Array();
+	var tradeYear = jQuery("select[name='year_"+postID+"']").val();
+	var tradeMonth = jQuery("select[name='month_"+postID+"']").val();
+	var tradeDate = jQuery("select[name='date_"+postID+"']").val();
 
-	for (var i=1; i<=3; i++) {
-		var year  = document.getElementById("year_" + postID + "_" + i).value;
-		var month = document.getElementById("month_" + postID + "_" + i).value;
-		var date  = document.getElementById("date_" + postID + "_" + i).value;
-		var time  = document.getElementById("tradetime_" + postID + "_" + i).value;
-		if(year && month && date && time){
-			tradedates[i] = year + "/" + month + "/" + date + " " + time;
-		}
-
-		if(!tradedates[i-1] && tradedates[i] && i != 1){
-			alert("第" + (i-1) + "希望が入力されていません。");
-			jQuery("input[type=button]").attr("disabled",false);
-			return false;
-		}
+	var date = new Date(tradeYear, tradeMonth-1, tradeDate);
+	if(isNaN(date)){
+		alert("日付が無効です。");
+		jQuery("input[type=button]").attr("disabled",false);
+		return false;
 	}
 
 	if(!jQuery("#place_" + postID).val() && jQuery("#tradeway_" + postID).val() === "handtohand"){
@@ -43,16 +36,9 @@ function onConfirmGiveme(postID, url){
 		return false;
 	}
 
-	var confirmText = "取引相手を確定させます。変更やキャンセルはできません。よろしいですか？\n";
-	confirmText += "商品:"+ jQuery("#post_"+ postID + " .posttitle").text() + "\n";
-	confirmText += "取引相手:"+ jQuery("input[name='sendto_user_"+postID+"']:checked").text() + "\n";
-	confirmText += "受渡希望日時:\n"
-	for(var i=1; i<tradedates.length; i++){
-		confirmText += "第" + i + "希望:" + tradedates[i] + "\n";
-	}
-	confirmText += "受渡希望場所:" + jQuery("#place_" + postID).val();
-
-	if(confirm(confirmText)){
+	if(confirm("取引相手を確定させます。変更やキャンセルはできません。よろしいですか？\n" + 
+				"商品:"+ jQuery("#post_"+ postID + " .posttitle").text()
+				)){
 					// 取引相手でないユーザID一覧を取得
 					var uncheckedUserIDs = new Array();
 					jQuery("[name=sendto_user_"+ postID + "]" + ":not(:checked)").each(function(){
@@ -67,7 +53,8 @@ function onConfirmGiveme(postID, url){
 						"userID": userID,
 						"uncheckedUserIDs": uncheckedUserIDs.join(),
 						"tradeway": jQuery("#tradeway_" + postID).val(),
-						"tradedates": tradedates.join(),
+						"tradedate": tradeYear + "/" + tradeMonth + "/" + tradeDate,
+						"tradetime": jQuery("#tradetime_" + postID).val(),
 						"place": jQuery("#place_" + postID).val(),
 						"message": jQuery("#message_" + postID).val(),
 					},
