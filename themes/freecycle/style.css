@@ -581,7 +581,7 @@ hr.line-search{
 /*コンテンツ部分*/
 
 
-div.post-content h2.posttitle {
+div.post-content h2.posttitle{
     font: italic bold normal 20px "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
 		"HIragino Kaku Gothic Pro W3",
@@ -591,9 +591,6 @@ div.post-content h2.posttitle {
 		sans-serif;
     color: #FBA848 !important;
     text-decoration: underline;
-}
-.posttitle :link{
-	color: orange;
 }
 
 .posttitle :hover{
@@ -822,7 +819,7 @@ div#sidebar-me h4{
 	font-size: 13px;
 }
 
-ul#menu-footer_menu li{
+ul#menu-footer_menu li a{
 	line-height: 120%;
 }
 
@@ -1517,7 +1514,7 @@ div#sidebar-me h4{
 	font-size: 12px;
 }
 
-ul#menu-footer_menu li{
+ul#menu-footer_menu li a{
 	line-height: 120%;
 }
 
@@ -2220,7 +2217,7 @@ div#sidebar-me h4{
 	color: gray;
 }
 
-ul#menu-footer_menu li{
+ul#menu-footer_menu li a{
 	line-height: 120%;
 }
 }
