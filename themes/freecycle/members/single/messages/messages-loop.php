@@ -39,7 +39,7 @@
 					</td>
 				<?php endif; ?>
 				<td width="55%" class="thread-info"> <!-- 暫定的なクラス -->
-					<a href="<?php bp_message_thread_view_link(); ?>" title="<?php _e( "View Message", "buddypress" ); ?>"><?php bp_message_thread_subject(); ?></a>
+					<p><a href="<?php bp_message_thread_view_link(); ?>" title="<?php _e( "View Message", "buddypress" ); ?>"><?php bp_message_thread_subject(); ?></a></p>
 				</td>
 				<?php do_action( 'bp_messages_inbox_list_item' ); ?>
 				<td width="13%" class="thread-options">
