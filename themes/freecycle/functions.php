@@ -1184,21 +1184,3 @@ function bp_dtheme_header_style() {
 <?php
 }
 ?>
-
-<?php
-/**
- * override default function
- * header image is always get_header_image()
- */
-function bp_dtheme_content_nav( $nav_id ) {
-	global $wp_query;
-
-	if ( !empty( $wp_query->max_num_pages ) && $wp_query->max_num_pages > 1 ) : ?>
-
-		<div id="<?php echo $nav_id; ?>" class="navigation">
-			<div class="alignleft"><?php next_posts_link('&larr; 前の商品'); ?></div>
-			<div class="alignright"><?php previous_posts_link('次の商品 &rarr;'); ?></div>
-		</div><!-- #<?php echo $nav_id; ?> -->
-	<?php endif;
-}
-?>
