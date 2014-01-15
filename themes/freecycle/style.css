@@ -54,13 +54,24 @@ input[type="button" ][disabled="true"]:hover{
 }
 
 
+* {
+    padding: 0;
+    margin: 0;
+}
+
 html{
 	background: white;
 	color: #696969;
 	margin: 0;
 	padding: 0;
 	line-height:1.4;
-	font-family:"Arial","ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3", sans-serif;
+	font-family:"メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	font-size: 15px;
 	width: 100%;
 	height: 100%;
@@ -81,7 +92,13 @@ h2{
 }
 
 h3{
-	font: normal bold 1.4em/1.4 "MS P ゴシック","Arial";
+	font: normal bold 1.4em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-left: double 2px black;
 	text-align: left;
 	width:auto;
@@ -91,7 +108,13 @@ h3{
 }
 
 h4{
-	font: normal bold 1.3em/1.4 "MS P ゴシック","Arial";
+	font: normal bold 1.3em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-left: solid 2px #FBA848;
 	color: black;
 }
@@ -102,8 +125,11 @@ h5{
 
 
 hr{
-	border:thin dotted #FBA848;
+	border:thin ridge #FBA848;
 	width: 100%;
+	padding: 0;
+	margin: 0;
+	margin-top: -25px;
 }
 p{
 	line-height: 1.4;
@@ -145,7 +171,13 @@ img{
 
 /*-----------FAQ------------*/
 h2.pagetitle{
-	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
+	font: normal 1.4em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-top: double 3px black;
 	border-bottom: double 3px black;
 	padding: 4px 0;
@@ -155,22 +187,46 @@ h2.pagetitle{
 }
 
 h3.faq_heading{
-	font: normal 1.3em/1.4 "MS P ゴシック","Arial";
+	font: normal 1.3em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-left: double 3px gold;
 	color: black;
 }
 
 h4.faq_heading{
-	font: bold 1.2em/1.4 "MS P ゴシック","Arial";
+	font: bold 1.2em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	color: red;
 }
 h5.faq_heading{
-	font: normal 0.9em/1.4 "MS P ゴシック","Arial";
+	font: normal 0.9em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 }
 
 /*-----------テクスチェンジとは--------------*/
 h3.whats_tex{
-	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
+	font: normal 1.4em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-left: double 2px black;
 	text-align: left;
 	width:auto;
@@ -180,7 +236,13 @@ h3.whats_tex{
 }
 
 h4.whats_tex{
-	font: bold 1.3em/1.4 "MS P ゴシック","Arial";
+	font: bold 1.3em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	color: red;
 }
 
@@ -188,7 +250,13 @@ input[type="button"]{
 	width: 130px;
 	height: 30px;
 	padding: 5px;
-	font: normal 1.2em/1.5 "arial","MS P ゴシック"
+	font: normal 1.2em/1.5 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	color: black;
 	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -204,15 +272,18 @@ input[type="button"]:hover{
 
 header{	
 	width: 100%;
-	height: 110px;
+	height: auto;
 	background: white;
-	padding: 6px 0 1px 0;
+	padding: 25px 0 0 0;
+	margin: 0;
 }
 
 header #logo img{
 	width: 100%;
-	height: 100px;
+	height: 70px;
+	padding: 0 2px;
 	margin: auto;
+	margin-bottom: -20px;
 }
 
 	
@@ -242,16 +313,24 @@ header a:active{
 
 
 /*ヘッダーイメージ*/
-.header_img_navi{
-	float:left;
-}
 
-.header_img_navi img{
+/*.header_img_navi img{
 	width:100%;
 	height: auto;
 	margin: 0;
-	/*padding-left: 2px;*/
-}
+	padding-left: 2px;
+}*/
+
+/*---------------------------------------------------
+				キャッチコピー
+------------------------------------------------------*/
+
+div.header_copy a img{
+	margin:0 0 -16px 0;
+	padding: 0;
+	width: 100%;
+	height: 120px;
+}			
 
 
 /* ヘッダーフォーム */
@@ -318,17 +397,16 @@ form #sidebar-wp-submit{
 }*/
 
 　　　　　　　　　　/*ナビゲーション*/
-.header_img_navi{
-	margin-top: 2px;
-	margin-bottom: 2px;
+div.header_img_navi{
+	width: 100%;
+	padding: 3px 0;
 }
 	
 
 nav{
-	margin: 3px 0 3px 0;
+	margin: 0;
 	display: block;
-	bottom: 100%;
-	left: 100px;
+	width:100%;
 }
 
 nav ul,li	{
@@ -336,28 +414,27 @@ nav ul,li	{
 	padding:0;
 	list-style: none;
 }
-nav .navi	{
-	width: 95%;
-	display: block;
-}
+
 nav li{
 	float: left;
 	text-align: center;
 	font-weight: bold;
 	border: solid 1px #000;
-	border-radius: 5px;
+	border-radius: 2px;
 	/*border-right: solid 1px #000;
 	border-left: solid 1px #FFF;*/
-	margin-left: 1px;
+	width: 100%;
 }
+
+
 
 nav li a{
 	color: black !important;
-	font-size: 0.9em;
+	font-size: 12px;
 	display: block;
-	width: 310px;
+	width: auto;
 	padding: 3px;
-	border-radius: 5px;
+	border-radius: 2px;
 	background: #ffd700;
 	text-decoration: none;
 	/*border-bottom: solid 1px #000;*/
@@ -365,10 +442,59 @@ nav li a{
 
 nav li a:hover{
 	background: #ffa500;
-	padding: 3px;
-	text-decoration: none;
 	color: #fff;
 }
+
+div#grobal_nav_div{
+	margin: 0;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	width: 100%;
+}
+
+
+
+
+/*nav{
+	width: 100%;
+	margin: 10px auto;
+}
+
+nav ul {
+    list-style: none;
+    overflow: hidden;
+}
+
+nav li{
+	float: left;
+	width: 100%
+}
+
+	
+nav li a {
+    display: block;
+    width: 10%;
+    padding: 10px;
+     
+    background: #0E7AC4;
+    border-right: 1px solid #fff;
+     
+    color: #fff !important;    
+    font: 400 11px/1.4 'Cutive', Helvetica, Verdana, Arial, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+
+nav li a:hover {
+    background: #40AAEF;
+}
+
+nav li:last-child a {
+    border: none;
+}*/
+
 
 
 　/*サーチバー*/
@@ -405,10 +531,17 @@ hr.line-search{
 	margin:auto;
 	padding: 3px;
 	display: block;
-	width: 190px;
+	width: 150px;
 	height: 25px;
-	font: bold 1.1em/1.0 "MS P ゴシック";
+	font: bold 1.1em/1.0 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	color: black;
+	float: left;
 }
 
 #searchsubmit:hover{
@@ -418,9 +551,7 @@ hr.line-search{
 #blog-search h2.pagetitle{
 	display: none;
 }
-/*div#searchform_submit{
-	width: 70px;
-}*/
+
 
 #searchform_pulldown{
 	padding: 3px;
@@ -450,19 +581,29 @@ hr.line-search{
 /*コンテンツ部分*/
 
 
-.posttitle {
-    font: italic bold normal 30px MS P ゴシック;
-    color: black;
+div.post-content h2.posttitle{
+    font: italic bold normal 20px "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
+    color: #FBA848 !important;
     text-decoration: underline;
 }
 
 .posttitle :hover{
-	color: orange;
+	color: #00bfff;
 }	
 
-div.post-content div.entry img{
-	width: 100px;
-	height: 100px;
+div.post-content{
+	padding: 0;
+}
+
+div.post-content div.entry img{	
+	width: 140px;
+	height: 140px;
 	float: left;
 }
 
@@ -475,9 +616,11 @@ p.author_name{
 }
 
 div.trade_status_notconfirmed,div.trade_status_confirmed{
-	color:red;
+	color: red;
 	font-weight: bold;
 }
+
+
 /*.353836,.item-status{
 	float: left;
 }
@@ -623,7 +766,7 @@ a.button-confirm{
 	text-align: center;
 }
 
-td.thread-info p{
+td.thread-info p a{
 	font-size: 1em !important;
 }
 
@@ -673,7 +816,11 @@ div#sidebar-me h4{
 }
 
 #footer-widget-area{
-	font-size: 12px;
+	font-size: 13px;
+}
+
+ul#menu-footer_menu li a{
+	line-height: 120%;
 }
 
 }
@@ -705,7 +852,13 @@ html{
 	margin: 0 auto;
 	padding: 0;
 	line-height:1.4;
-	font-family:"arial","ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3", sans-serif;
+	font-family:"メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	font-size: 15px;
 	width: 400px;
 	height: 100%;
@@ -726,7 +879,13 @@ h2{
 }
 
 h3{
-	font: normal bold 1.4em/1.4 "MS P ゴシック","Arial";
+	font: normal bold 1.4em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-left: double 2px black;
 	text-align: left;
 	width:auto;
@@ -736,7 +895,13 @@ h3{
 }
 
 h4{
-	font: normal bold1.3em/1.4 "MS P ゴシック","Arial";
+	font: normal bold1.3em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-left: solid 2px gold;
 	color: black;
 }
@@ -788,7 +953,13 @@ img{
 
 /*-----------FAQ------------*/
 h2.pagetitle{
-	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
+	font: normal 1.4em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-top: double 3px black;
 	border-bottom: double 3px black;
 	padding: 4px 0;
@@ -798,22 +969,46 @@ h2.pagetitle{
 }
 
 h3.faq_heading{
-	font: normal bold 1.3em/1.4 "MS P ゴシック","Arial";
+	font: normal bold 1.3em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-left: double 3px orange;
 	color: black;
 }
 
 h4.faq_heading{
-	font: bold 1.2em/1.4 "MS P ゴシック","Arial";
+	font: bold 1.2em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	color: red;
 }
 h5.faq_heading{
-	font: normal 0.9em/1.4 "MS P ゴシック","Arial";
+	font: normal 0.9em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 }
 
 /*-----------テクスチェンジとは--------------*/
 h3.whats_tex{
-	font: normal bold 1.4em/1.4 "MS P ゴシック","Arial";
+	font: normal bold 1.4em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-left: double 2px black;
 	text-align: left;
 	width:auto;
@@ -822,7 +1017,13 @@ h3.whats_tex{
 }
 
 h4.whats_tex{
-	font: bold 1.3em/1.4 "MS P ゴシック","Arial";
+	font: bold 1.3em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	color: red;
 }
 
@@ -830,7 +1031,13 @@ input[type="button"]{
 	width: 130px;
 	height: 30px;
 	padding: 5px;
-	font: normal 1.2em/1.5 "arial","MS P ゴシック"
+	font: normal 1.2em/1.5 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	color: black;
 	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -996,7 +1203,7 @@ nav li a{
 	color: black !important;
 	font-size: 15px;
 	display: block;
-	width: 389px;
+	width: 385px;
 	padding: 3px;
 	border-radius: 5px;
 	background: #ffd700;
@@ -1024,14 +1231,12 @@ nav li a:hover{
 #searchform_main{
 	display: block;
 	margin: auto;
-	padding: 3px 5px 3px 5px;
+	padding: 5px;
 	background: orange;
 	border-radius: 10px;
 	width: 95%;
 	height: 55px;
 	clear: both;
-	margin-bottom: 3px;
-	margin-top: 3px;
 	
 	
 	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -1042,9 +1247,15 @@ nav li a:hover{
 #searchsubmit{
 	padding: 3px;
 	display: block;
-	width: 267px;
+	width: 258px;
 	height: 25px;
-	font: bold 1.1em/1.0 MS P ゴシック;
+	font: bold 1.1em/1.0 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	color: black;
 }
 
@@ -1089,17 +1300,29 @@ nav li a:hover{
 
 
 .posttitle {
-    font: italic bold normal 30px MS P ゴシック;
-    color: black;
+    font: italic bold normal 23px "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
+    color: orange !important;
     text-decoration: underline;
 }
 
 .posttitle :hover{
-	color: orange;
+	color: #FBA848;
 }	
 
 p.author_name{
 	display: none;
+}
+
+div.post-content div.entry img{
+	width: 150px;
+	height: 150px;
+	float: left;
 }
 
 div.trade_status_notconfirmed,div.trade_status_confirmed{
@@ -1291,6 +1514,10 @@ div#sidebar-me h4{
 	font-size: 12px;
 }
 
+ul#menu-footer_menu li a{
+	line-height: 120%;
+}
+
 }
 
 
@@ -1322,7 +1549,13 @@ html{
 	margin: auto;
 	padding: 0;
 	line-height:1.4;
-	font-family:"arial","ＭＳ Ｐゴシック", Osaka, "ヒラギノ角ゴ Pro W3", sans-serif;
+	font-family:"メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	font-size: 17px;
 	width: 810px;
 	height: 100%;
@@ -1341,7 +1574,13 @@ h2{
 }
 
 h3{
-	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
+	font: normal 1.4em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-left: double 2px black;
 	text-align: left;
 	width:auto;
@@ -1351,7 +1590,13 @@ h3{
 }
 
 h4{
-	font: normal 1.3em/1.4 "MS P ゴシック","Arial";
+	font: normal 1.3em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-left: solid 2px gold;
 	color: black;
 }
@@ -1405,7 +1650,13 @@ img{
 
 /*-----------FAQ------------*/
 h2.pagetitle{
-	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
+	font: normal 1.4em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-top: double 3px black;
 	border-bottom: double 3px black;
 	text-align: center;
@@ -1415,22 +1666,46 @@ h2.pagetitle{
 	
 }
 h3.faq_heading{
-	font: normal 1.3em/1.4 "MS P ゴシック","Arial";
+	font: normal 1.3em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-left: double 3px #ff7e00;
 	color: black;
 }
 
 h4.faq_heading{
-	font: bold 1.2em/1.4 "MS P ゴシック","Arial";
+	font: bold 1.2em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	color: red;
 }
 h5.faq_heading{
-	font: normal 0.9em/1.4 "MS P ゴシック","Arial";
+	font: normal 0.9em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 }
 
 /*-----------テクスチェンジとは--------------*/
 h3.whats_tex{
-	font: normal 1.4em/1.4 "MS P ゴシック","Arial";
+	font: normal 1.4em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	border-left: double 2px black;
 	border-bottom: solid 2px black;
 	text-align: left;
@@ -1440,7 +1715,13 @@ h3.whats_tex{
 }
 
 h4.whats_tex{
-	font: bold 1.3em/1.4 "MS P ゴシック","Arial";
+	font: bold 1.3em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	color: red;
 }
 
@@ -1448,7 +1729,13 @@ input[type="button"]{
 	width: 130px;
 	height: 30px;
 	padding: 5px;
-	font: normal 1.2em/1.5 "arial","MS P ゴシック"
+	font: normal 1.2em/1.5 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	color: black;
 	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -1579,7 +1866,7 @@ form #sidebar-wp-submit{
 	padding-top: 2px;
 	padding-bottom: 2px;
 	background: gold;
-	height: 24px;
+	height: 30px;
 }
 	
 div.grobal_nav_div{
@@ -1618,8 +1905,9 @@ nav li a{
 	color: black !important;
 	font-size: 17px;
 	display: block;
-	width: 138px !important;
-	padding: 3px;
+	/*width: 120px !important;*/
+	height: 20px;
+	padding: 6px;
 	/*border-radius: 5px;*/
 	background: gold;
 	text-decoration: none;
@@ -1628,7 +1916,6 @@ nav li a{
 
 nav li a:hover{
 	background: orange;
-	padding: 3px;
 	text-decoration: none;
 	color:black;
 }
@@ -1660,7 +1947,13 @@ nav li a:hover{
 	display: block;
 	width: 130px;
 	height: 25px;
-	font: bold 1.1em/1.0 MS P ゴシック;
+	font: bold 1.1em/1.0 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
 	color: black;
 }
 
@@ -1714,7 +2007,13 @@ div.page#blog-latest{
 
 
 .posttitle {
-    font: italic bold normal 30px MS P ゴシック;
+    font: italic bold normal 30px "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
     color: black;
     text-decoration: underline;
 }
@@ -1727,8 +2026,10 @@ div.entry span.posttitle{
 	font-size: 1.4em !important;
 }
 
-div#entry_img{
-	align: left;
+div.post-content div.entry img{
+	width: 120px;
+	height: 120px;
+	float: left;
 }
 
 p.author_name{
@@ -1916,5 +2217,8 @@ div#sidebar-me h4{
 	color: gray;
 }
 
+ul#menu-footer_menu li a{
+	line-height: 120%;
+}
 }
 

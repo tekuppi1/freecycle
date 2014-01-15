@@ -221,8 +221,7 @@ function confirmGiveme(){
 	$userID = $_POST['userID'];
 	$uncheckedUserIDs = explode(",", $_POST['uncheckedUserIDs']);
 	$tradeway = $_POST['tradeway'];
-	$tradedate = $_POST['tradedate'];
-	$tradetime = $_POST['tradetime'];
+	$tradedates = explode(",", $_POST['tradedates']);
 	$place = $_POST['place'];
 	$message = $_POST['message'];
 
@@ -259,13 +258,16 @@ function confirmGiveme(){
 	}
 
 	// 取引相手に確定されたことを通知
-	// TODO sender_id は システム管理者のIDにしておくべきか。
 	$content = 'あなたが以下の商品の取引相手に選ばれました！' . PHP_EOL . ' 【商品名】:<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>' . PHP_EOL;
 	$content .= '【受渡方法】:' . get_display_tradeway($tradeway) . PHP_EOL;
+	$content .= PHP_EOL;
 	if($tradeway == "handtohand"){
 		$content .= '以下の受渡希望条件を確認してください。問題なければ「OKです」と返信してください！' . PHP_EOL;
 		$content .= 'もし不都合があれば、代わりの日時、場所を記入して返信してください。'. PHP_EOL;
-		$content .= '【受渡希望日時】:' . $tradedate . ' ' . $tradetime . PHP_EOL;
+		$content .= '【受渡希望日時】:' . PHP_EOL;
+		for($i=1; $i<count($tradedates); $i++){
+			$content .= ' 第' . $i .'希望:' . $tradedates[$i] . PHP_EOL;
+		}
 		$content .= '【受渡希望場所】:' . $place . PHP_EOL;
 	}elseif($tradeway == "delivery"){
 		$content .= '配送による受渡に同意する場合、受取先の住所と名前を記入して返信してください！' . PHP_EOL;
@@ -916,29 +918,34 @@ function giveme_from_others_content() {
 					</select></br>
 					<div id="handtohand-option_<?php echo $last_post_id; ?>">
 					受渡希望日時:</br>
-					<select id="year_<?php echo $last_post_id; ?>" name="year_<?php echo $last_post_id; ?>">
-						<option value="<?php echo date('Y',strtotime('now'))?>"><?php echo date('Y',strtotime('now'))?></option>
-						<option value="<?php echo date('Y',strtotime('+1 year'))?>"><?php echo date('Y',strtotime('+1 year'))?></option>
-					</select>年
-					<select id="month_<?php echo $last_post_id; ?>" name="month_<?php echo $last_post_id; ?>">
-						<?php for ($i=1; $i<13; $i++) { 
-							echo '<option value="' . $i . '">' . $i . '</option>';
-						}?>
-					</select>月
-					<select id="date_<?php echo $last_post_id; ?>" name="date_<?php echo $last_post_id; ?>">
-						<?php for ($i=1; $i<32; $i++) { 
-							echo '<option value="' . $i . '">' . $i . '</option>';
-						}?>
-					</select>日
-					<select id="tradetime_<?php echo $last_post_id; ?>" name="tradetime_<?php echo $last_post_id; ?>">
-						<?php for ($i=10; $i<21; $i++) { 
-							echo '<option value="' . $i . ':00">' . $i . ':00</option>';
-							echo '<option value="' . $i . ':30">' . $i . ':30</option>';
-						}?>
-					</select>頃</br>
-					受渡希望場所:</br>
-					<input type="text" id="place_<?php echo $last_post_id; ?>" name="place_<?php echo $last_post_id; ?>" size=30 maxlength=30></br>
-					※原則、大学構内の場所を指定してください</br>
+					<?php for ($k=1; $k < 4; $k++) { ?>
+						第<?php echo $k?>希望<?php echo $k==1?"(必須)":""; ?></br>
+						<select id="year_<?php echo $last_post_id; ?>_<?php echo $k; ?>" name="year_<?php echo $last_post_id; ?>_<?php echo $k; ?>">
+							<?php echo $k==1?"":"<option value=''>----</option>" ?>
+							<option value="<?php echo date('Y',strtotime('now'))?>"><?php echo date('Y',strtotime('now'))?></option>
+							<option value="<?php echo date('Y',strtotime('+1 year'))?>"><?php echo date('Y',strtotime('+1 year'))?></option>
+						</select>年
+						<select id="month_<?php echo $last_post_id; ?>_<?php echo $k; ?>" name="month_<?php echo $last_post_id; ?>_<?php echo $k; ?>">
+							<?php echo $k==1?"":"<option value=''>--</option>" ?>
+							<?php for ($i=1; $i<13; $i++) { 
+								echo '<option value="' . $i . '">' . $i . '</option>';
+							}?>
+						</select>月
+						<select id="date_<?php echo $last_post_id; ?>_<?php echo $k; ?>" name="date_<?php echo $last_post_id; ?>_<?php echo $k; ?>">
+							<?php echo $k==1?"":"<option value=''>--</option>" ?>
+							<?php for ($i=1; $i<32; $i++) { 
+								echo '<option value="' . $i . '">' . $i . '</option>';
+							}?>
+						</select>日
+						<select id="tradetime_<?php echo $last_post_id; ?>_<?php echo $k; ?>" name="tradetime_<?php echo $last_post_id; ?>_<?php echo $k; ?>">
+								<?php echo $k==1?"":"<option value=''>--</option>" ?>
+								<option value="AM">AM</option>;
+								<option value="PM">PM</option>';
+						</select></br>
+					<?php } ?>
+						受渡希望場所(必須):</br>
+						<input type="text" id="place_<?php echo $last_post_id; ?>" name="place_<?php echo $last_post_id; ?>" size=30 maxlength=30></br>
+						※原則、大学構内の場所を指定してください</br>
 					</div>
 					<label for="message_<?php echo $last_post_id; ?>">メッセージ:</label></br>
 					<textarea id="message_<?php echo $last_post_id; ?>" name="message_<?php echo $last_post_id; ?>" rows=3 cols=30></textarea></br>
@@ -953,7 +960,7 @@ function giveme_from_others_content() {
 					<?php
 					$last_post_id = $giveme->post_id;
 				} ?>
-				<p><input type="radio" name="sendto_user_<?php echo $giveme->post_id ?>" value="<?php echo $giveme->user_id ?>" id="post<?php echo $giveme->post_id; ?>_user<?php echo $giveme->user_id ?>"/><label for="<?php echo $giveme->display_name; ?>"><a href="<?php echo home_url() . "/members/" . $giveme->user_nicename ?>"><?php echo $giveme->display_name; ?></a></label>
+				<p><input type="radio" name="sendto_user_<?php echo $giveme->post_id ?>" value="<?php echo $giveme->user_id ?>" id="post<?php echo $giveme->post_id; ?>_user<?php echo $giveme->user_id ?>"/><label for="<?php echo $giveme->display_name; ?>"><a href="<?php echo home_url() . "/members/" . $giveme->user_nicename ?>" id="<?php echo $giveme->user_id ?>_<?php echo $giveme->post_id; ?>"><?php echo $giveme->display_name; ?></a></label>
 			<?php
 			}
 			?>
@@ -966,27 +973,32 @@ function giveme_from_others_content() {
 			</select></br>
 			<div id="handtohand-option_<?php echo $last_post_id; ?>">
 			受渡希望日時:</br>
-			<select id="year_<?php echo $last_post_id; ?>" name="year_<?php echo $last_post_id; ?>">
-				<option value="<?php echo date('Y',strtotime('now'))?>"><?php echo date('Y',strtotime('now'))?></option>
-				<option value="<?php echo date('Y',strtotime('+1 year'))?>"><?php echo date('Y',strtotime('+1 year'))?></option>
-			</select>年
-			<select id="month_<?php echo $last_post_id; ?>" name="month_<?php echo $last_post_id; ?>">
-				<?php for ($i=1; $i<13; $i++) { 
-					echo '<option value="' . $i . '">' . $i . '</option>';
-				}?>
-			</select>月
-			<select id="date_<?php echo $last_post_id; ?>" name="date_<?php echo $last_post_id; ?>">
-				<?php for ($i=1; $i<32; $i++) { 
-					echo '<option value="' . $i . '">' . $i . '</option>';
-				}?>
-			</select>日
-			<select id="tradetime_<?php echo $last_post_id; ?>" name="tradetime_<?php echo $last_post_id; ?>">
-				<?php for ($i=10; $i<21; $i++) { 
-					echo '<option value="' . $i . ':00">' . $i . ':00</option>';
-					echo '<option value="' . $i . ':30">' . $i . ':30</option>';
-				}?>
-			</select>頃</br>
-			受渡希望場所:</br>
+				<?php for ($k=1; $k < 4; $k++) { ?>
+					第<?php echo $k?>希望<?php echo $k==1?"(必須)":""; ?></br>
+					<select id="year_<?php echo $last_post_id; ?>_<?php echo $k; ?>" name="year_<?php echo $last_post_id; ?>_<?php echo $k; ?>">
+						<?php echo $k==1?"":"<option value=''>----</option>" ?>
+						<option value="<?php echo date('Y',strtotime('now'))?>"><?php echo date('Y',strtotime('now'))?></option>
+						<option value="<?php echo date('Y',strtotime('+1 year'))?>"><?php echo date('Y',strtotime('+1 year'))?></option>
+					</select>年
+					<select id="month_<?php echo $last_post_id; ?>_<?php echo $k; ?>" name="month_<?php echo $last_post_id; ?>_<?php echo $k; ?>">
+						<?php echo $k==1?"":"<option value=''>--</option>" ?>
+						<?php for ($i=1; $i<13; $i++) { 
+							echo '<option value="' . $i . '">' . $i . '</option>';
+						}?>
+					</select>月
+					<select id="date_<?php echo $last_post_id; ?>_<?php echo $k; ?>" name="date_<?php echo $last_post_id; ?>_<?php echo $k; ?>">
+						<?php echo $k==1?"":"<option value=''>--</option>" ?>
+						<?php for ($i=1; $i<32; $i++) { 
+							echo '<option value="' . $i . '">' . $i . '</option>';
+						}?>
+					</select>日
+					<select id="tradetime_<?php echo $last_post_id; ?>_<?php echo $k; ?>" name="tradetime_<?php echo $last_post_id; ?>_<?php echo $k; ?>">
+							<?php echo $k==1?"":"<option value=''>--</option>" ?>
+							<option value="AM">AM</option>;
+							<option value="PM">PM</option>';
+					</select></br>
+				<?php } ?>
+			受渡希望場所(必須):</br>
 			<input type="text" id="place_<?php echo $last_post_id; ?>" name="place_<?php echo $last_post_id; ?>" size=30 maxlength=30></br>
 			※原則、大学構内の場所を指定してください</br>
 			</div>
@@ -1097,6 +1109,14 @@ function get_your_giveme_list(){
 	return $givemes;
 }
 
+// デバッグログ吐き出しメソッド
+function debug_log($str){
+	$fp = fopen('debug.txt', 'a');
+	fwrite($fp, $str);
+	fwrite($fp, PHP_EOL);
+	fclose($fp);
+}
+
 // コメント欄をカスタマイズ
 function my_comment_field_init($defaults){
 	// タグに関する注意書きを非表示
@@ -1162,5 +1182,23 @@ function bp_dtheme_header_style() {
 		<?php } ?>
 	</style>
 <?php
+}
+?>
+
+<?php
+/**
+ * override default function
+ * header image is always get_header_image()
+ */
+function bp_dtheme_content_nav( $nav_id ) {
+	global $wp_query;
+
+	if ( !empty( $wp_query->max_num_pages ) && $wp_query->max_num_pages > 1 ) : ?>
+
+		<div id="<?php echo $nav_id; ?>" class="navigation">
+			<div class="alignleft"><?php next_posts_link('&larr; 前の商品'); ?></div>
+			<div class="alignright"><?php previous_posts_link('次の商品 &rarr;'); ?></div>
+		</div><!-- #<?php echo $nav_id; ?> -->
+	<?php endif;
 }
 ?>
