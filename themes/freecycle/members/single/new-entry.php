@@ -40,4 +40,5 @@
 <input type="button" value="出品" onClick="callOnNewEntry()" >
 <p>注意:出品後の記事の編集はできません。内容を十分確認して下さい。</p>
 </form>
+<br/>
 <hr> <!-- 仕切り線 -->
