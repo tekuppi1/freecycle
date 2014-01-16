@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2014-01-16 18:01+0900\n"
+"PO-Revision-Date: 2014-01-16 18:27+0900\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4509,11 +4509,11 @@ msgstr "「%1$s」のアーカイブを表示中です。"
 
 #: bp-themes/bp-default/functions.php:741
 msgid "&larr; Previous Entries"
-msgstr "&larr; 前の商品"
+msgstr "&larr; 古い出品"
 
 #: bp-themes/bp-default/functions.php:742
 msgid "Next Entries &rarr;"
-msgstr "次の商品 &rarr;"
+msgstr "新しい出品 &rarr;"
 
 #: bp-themes/bp-default/archive.php:28 bp-themes/bp-default/attachment.php:22
 #: bp-themes/bp-default/index.php:32 bp-themes/bp-default/search.php:30
