@@ -280,10 +280,10 @@ header{
 
 header #logo img{
 	width: 100%;
-	height: 70px;
+	height: 150px;
 	padding: 0 2px;
 	margin: auto;
-	margin-bottom: -20px;
+	margin-bottom: -40px;
 }
 
 	
@@ -325,12 +325,12 @@ header a:active{
 				キャッチコピー
 ------------------------------------------------------*/
 
-div.header_copy a img{
+/*div.header_copy a img{
 	margin:0 0 -16px 0;
 	padding: 0;
 	width: 100%;
 	height: 100px;
-}			
+}	*/		
 
 
 /* ヘッダーフォーム */
@@ -1053,15 +1053,17 @@ input[type="button"]:hover{
 
 header{	
 	width: 100%;
-	height: 100px;
+	height: auto;
 	background: white;
 	padding: 1px 0;
 }
 
 header #logo img{
 	width: 100%;
-	height: 100px;
+	height: 220px;
 	margin: auto;
+	margin-top: 10px;
+	margin-bottom: -40px;
 }
 
 	
@@ -1093,12 +1095,12 @@ header a:active{
 				キャッチコピー
 ------------------------------------------------------*/
 
-div.header_copy a img{
+/*div.header_copy a img{
 	margin:0 0 -17px 0;
 	padding: 0;
 	width: 100%;
 	height: 130px;
-}			
+}*/			
 
 
 
@@ -1758,15 +1760,16 @@ input[type="button"]:hover{
 
 header{	
 	width: 100%;
-	height: 150px;
+	height: auto;
 	background: white;
 	padding: 10px 0;
 }
 
 header #logo img{
 	width: 100%;
-	height: 150px;
+	height: 300px;
 	margin: auto;
+	margin-bottom: -30px;
 }
 
 	
@@ -1798,12 +1801,12 @@ header a:active{
 				キャッチコピー
 ------------------------------------------------------*/
 
-div.header_copy a img{
+/*div.header_copy a img{
 	margin:0 0 3px 0;
 	padding: 0;
 	width: 100%;
 	height: 250px;
-}			
+}*/
 
 
 /* ヘッダーフォーム */
