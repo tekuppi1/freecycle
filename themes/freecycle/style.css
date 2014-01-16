@@ -329,7 +329,7 @@ div.header_copy a img{
 	margin:0 0 -16px 0;
 	padding: 0;
 	width: 100%;
-	height: 120px;
+	height: 100px;
 }			
 
 
@@ -1053,14 +1053,14 @@ input[type="button"]:hover{
 
 header{	
 	width: 100%;
-	height: 120px;
+	height: 100px;
 	background: white;
 	padding: 1px 0;
 }
 
 header #logo img{
 	width: 100%;
-	height: 120px;
+	height: 100px;
 	margin: auto;
 }
 
@@ -1089,6 +1089,17 @@ header a:active{
 	color: orange;
 }*/
 
+/*---------------------------------------------------
+				キャッチコピー
+------------------------------------------------------*/
+
+div.header_copy a img{
+	margin:0 0 -17px 0;
+	padding: 0;
+	width: 100%;
+	height: 130px;
+}			
+
 
 
 /*ヘッダーイメージ*/
@@ -1106,7 +1117,7 @@ header a:active{
 
 /* ヘッダーフォーム */
 
-form[name=login-form]{
+form#header-login-form{
 	text-align: left;
 	display: block;
 	margin: auto;
@@ -1115,14 +1126,10 @@ form[name=login-form]{
 	padding: 7px;
 	background: orange;
 	border-radius: 10px;
-	width: 95%;
+	width: 60%;
 	clear: both;
 	border: solid 1px;
 	color: black;
-	
-	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
-    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
-    box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
 }
 
 form #sidebar-wp-submit{
@@ -1185,7 +1192,7 @@ nav ul,li	{
 	list-style: none;
 }
 nav .navi	{
-	width: 95%;
+	width: 99%;
 	display: block;
 }
 nav li{
@@ -1197,13 +1204,14 @@ nav li{
 	/*border-right: solid 1px #000;
 	border-left: solid 1px #FFF;*/
 	margin-left: 1px;
+	width: 100%;
 }
 
 nav li a{
 	color: black !important;
 	font-size: 15px;
 	display: block;
-	width: 385px;
+	width: auto;
 	padding: 3px;
 	border-radius: 5px;
 	background: #ffd700;
@@ -1750,14 +1758,14 @@ input[type="button"]:hover{
 
 header{	
 	width: 100%;
-	height: 200px;
+	height: 150px;
 	background: white;
 	padding: 10px 0;
 }
 
 header #logo img{
 	width: 100%;
-	height: 200px;
+	height: 150px;
 	margin: auto;
 }
 
@@ -1786,19 +1794,30 @@ header a:active{
 	color: orange;
 }*/
 
+/*---------------------------------------------------
+				キャッチコピー
+------------------------------------------------------*/
+
+div.header_copy a img{
+	margin:0 0 3px 0;
+	padding: 0;
+	width: 100%;
+	height: 250px;
+}			
+
 
 /* ヘッダーフォーム */
 
 form[name=login-form]{
 	text-align: left;
 	display: block;
-	margin: auto;
+	margin: 0 auto;
 	margin-bottom: 1px;
 	margin-top: 1px;
-	padding: 7px;
+	padding: 10px;
 	background: orange;
-	border-radius: 10px;
-	width: 98%;
+	border-radius: 8px;
+	width: 60%;
 	clear: both;
 	border: solid 1px;
 	color: black;
@@ -1808,8 +1827,12 @@ form[name=login-form]{
     box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
 }
 
+input#sidebar-user-login{
+	width: 15em;
+}
+
 form #sidebar-wp-submit{
-	width: 180px;
+	width: 250px;
 	height: 45px;
 	display: block;
 	margin: auto;
@@ -1829,7 +1852,7 @@ form #sidebar-wp-submit{
 
 #sidebar-wp-submit:hover{
 	color: orange;
-	font-size: 40px;
+	font-size:38px;
 	font-style: bold;
 }
 
@@ -1851,9 +1874,7 @@ form #sidebar-wp-submit{
 }*/
 
 /*ヘッダーイメージ*/
-.header_img_navi{
-	/*float:left;*/
-}
+
 
 .header_img_navi img{
 	max-width:100%;
@@ -1862,15 +1883,17 @@ form #sidebar-wp-submit{
 }
 
 /*ナビゲーション*/
-.header_img_navi{
+/*.header_img_navi{
 	padding-top: 2px;
 	padding-bottom: 2px;
 	background: gold;
 	height: 30px;
-}
+}*/
 	
 div.grobal_nav_div{
 	width: 100%;
+	height: 30px;
+	background: gold;
 }
 
 nav{
@@ -1884,11 +1907,13 @@ nav ul,li	{
 	padding:0;
 	list-style: none;
 }
+
 nav .navi	{
 	width: 100%;
 	display: block;
 	background-color: gold;
 }
+
 nav li{
 	float: left;
 	text-align: center;
@@ -1906,7 +1931,7 @@ nav li a{
 	font-size: 17px;
 	display: block;
 	/*width: 120px !important;*/
-	height: 20px;
+	height: 18px;
 	padding: 6px;
 	/*border-radius: 5px;*/
 	background: gold;
@@ -1926,12 +1951,11 @@ nav li a:hover{
 
 #searchform_main{
 	display: block;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	padding: 3px 5px 3px 5px;
+	margin: 5px auto;
+	padding: 5px 8px 5px 8px;
 	background: orange;
 	border-radius: 10px;
-	width: 99%;
+	width:90%;
 	height: 27px;
 	clear: both;
 	
