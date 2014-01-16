@@ -920,11 +920,6 @@ function giveme_from_others_content() {
 					受渡希望日時:</br>
 					<?php for ($k=1; $k < 4; $k++) { ?>
 						第<?php echo $k?>希望<?php echo $k==1?"(必須)":""; ?></br>
-						<select id="year_<?php echo $last_post_id; ?>_<?php echo $k; ?>" name="year_<?php echo $last_post_id; ?>_<?php echo $k; ?>">
-							<?php echo $k==1?"":"<option value=''>----</option>" ?>
-							<option value="<?php echo date('Y',strtotime('now'))?>"><?php echo date('Y',strtotime('now'))?></option>
-							<option value="<?php echo date('Y',strtotime('+1 year'))?>"><?php echo date('Y',strtotime('+1 year'))?></option>
-						</select>年
 						<select id="month_<?php echo $last_post_id; ?>_<?php echo $k; ?>" name="month_<?php echo $last_post_id; ?>_<?php echo $k; ?>">
 							<?php echo $k==1?"":"<option value=''>--</option>" ?>
 							<?php for ($i=1; $i<13; $i++) { 
@@ -975,11 +970,6 @@ function giveme_from_others_content() {
 			受渡希望日時:</br>
 				<?php for ($k=1; $k < 4; $k++) { ?>
 					第<?php echo $k?>希望<?php echo $k==1?"(必須)":""; ?></br>
-					<select id="year_<?php echo $last_post_id; ?>_<?php echo $k; ?>" name="year_<?php echo $last_post_id; ?>_<?php echo $k; ?>">
-						<?php echo $k==1?"":"<option value=''>----</option>" ?>
-						<option value="<?php echo date('Y',strtotime('now'))?>"><?php echo date('Y',strtotime('now'))?></option>
-						<option value="<?php echo date('Y',strtotime('+1 year'))?>"><?php echo date('Y',strtotime('+1 year'))?></option>
-					</select>年
 					<select id="month_<?php echo $last_post_id; ?>_<?php echo $k; ?>" name="month_<?php echo $last_post_id; ?>_<?php echo $k; ?>">
 						<?php echo $k==1?"":"<option value=''>--</option>" ?>
 						<?php for ($i=1; $i<13; $i++) { 

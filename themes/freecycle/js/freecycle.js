@@ -22,12 +22,11 @@ function onConfirmGiveme(postID, url){
 	var tradedates = new Array();
 
 	for (var i=1; i<=3; i++) {
-		var year  = document.getElementById("year_" + postID + "_" + i).value;
 		var month = document.getElementById("month_" + postID + "_" + i).value;
 		var date  = document.getElementById("date_" + postID + "_" + i).value;
 		var time  = document.getElementById("tradetime_" + postID + "_" + i).value;
-		if(year && month && date && time){
-			tradedates[i] = year + "/" + month + "/" + date + " " + time;
+		if(month && date && time){
+			tradedates[i] = month + "/" + date + " " + time;
 		}
 
 		if(!tradedates[i-1] && tradedates[i] && i != 1){
