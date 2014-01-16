@@ -7,7 +7,6 @@ uploads/
 plugins/*.php
 plugins/akismet
 plugins/buddypress
-plugins/buddypress-translations
 plugins/theme-my-login
 
 #themes
