@@ -23,12 +23,9 @@
 <!-- status -->
 <label for="item_status">状態</label></br>
 <select name="item_status">
-<option value="excellent" selected><?php echo get_display_item_status("excellent"); ?></option>
 <option value="verygood"><?php echo get_display_item_status("verygood"); ?></option>
 <option value="good"><?php echo get_display_item_status("good"); ?></option>
 <option value="bad"><?php echo get_display_item_status("bad"); ?></option>
-<option value="verybad"><?php echo get_display_item_status("verybad"); ?></option>
-<option value="poor"><?php echo get_display_item_status("poor"); ?></option>
 </select>
 </br>
 <!-- tags -->

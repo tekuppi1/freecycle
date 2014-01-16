@@ -703,12 +703,9 @@ function get_post_author($post_id){
  */
 function get_display_item_status($item_status){
 	$display_map = array(
-			"excellent" => "新品、未使用",
-			"verygood"  => "未使用に近い",
-			"good"		=> "目立った傷や汚れなし",
-			"bad"		=> "やや傷や汚れあり",
-			"verybad"	=> "傷や汚れあり",
-			"poor"		=> "全体的に状態が悪い"
+			"verygood"  => "良",
+			"good"		=> "可",
+			"bad"		=> "悪",
 		);
 	return $display_map[$item_status];
 }
