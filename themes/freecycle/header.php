@@ -83,7 +83,7 @@ wp_enqueue_script('freecycleScript');
 					
 
 <div class="header_form_">
-	<!-- <div>
+	<div>
 	<ul id="header-under">
 		<?php if(!is_user_logged_in() && get_permalink() != get_home_url()."/register"){ ?>
 		<li>
@@ -102,10 +102,11 @@ wp_enqueue_script('freecycleScript');
 		
 		<?php } ?>
 	</ul>
-	</div> -->
+	</div> 
+	<!--
 	<div class="login_form_button">
 		<button><a href="###" >新規登録、ログインはこちら！！！！</a></button>
-	</div>
+	</div> -->
 
 		<?php if(bp_is_front_page()){ ?>
 		
