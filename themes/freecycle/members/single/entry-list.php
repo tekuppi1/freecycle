@@ -12,7 +12,7 @@
 	</div>
 <?php
 	global $user_ID;
-	$entry_list = get_posts(array('author' => $user_ID));
+	$entry_list = get_posts(array('author' => $user_ID, 'numberposts' => -1));
 	foreach($entry_list as $entry){
 ?>
 	<div id="post_<?php echo $entry->ID; ?>" class="entry">
