@@ -274,16 +274,24 @@ header{
 	width: 100%;
 	height: auto;
 	background: white;
-	padding: 25px 0 0 0;
+	padding: 25px 0 5px 0;
 	margin: 0;
 }
 
 header #logo img{
-	width: 100%;
-	height: 150px;
+	width: 55%;
+	height: 50px;
 	padding: 0 2px;
 	margin: auto;
 	margin-bottom: -40px;
+	float: left;
+}
+
+header a img#menu_icon{
+	width: 50px;
+	height: 50px;
+	float: right;
+	margin: 0 5px 0 0;
 }
 
 	
@@ -314,23 +322,23 @@ header a:active{
 
 /*ヘッダーイメージ*/
 
-/*.header_img_navi img{
+.header_img_navi img{
 	width:100%;
 	height: auto;
 	margin: 0;
 	padding-left: 2px;
-}*/
+}
 
 /*---------------------------------------------------
 				キャッチコピー
 ------------------------------------------------------*/
 
-/*div.header_copy a img{
-	margin:0 0 -16px 0;
+div#header_copy a img{
+	margin:3px 0 -16px 0;
 	padding: 0;
 	width: 100%;
-	height: 100px;
-}	*/		
+	height: 120px;
+}
 
 
 /* ヘッダーフォーム */
@@ -1059,12 +1067,21 @@ header{
 }
 
 header #logo img{
-	width: 100%;
-	height: 220px;
+	width: 55%;
+	height: 60px;
 	margin: auto;
 	margin-top: 10px;
-	margin-bottom: -40px;
+	float: left;
 }
+
+header a img#menu_icon{
+	width: 60px;
+	height: 60px;
+	float: right;
+	margin: 10px 10px 0 0;
+}
+
+
 
 	
 	
@@ -1095,12 +1112,11 @@ header a:active{
 				キャッチコピー
 ------------------------------------------------------*/
 
-/*div.header_copy a img{
-	margin:0 0 -17px 0;
-	padding: 0;
+div#header_copy a img{
 	width: 100%;
-	height: 130px;
-}*/			
+	height: 150px;
+	margin-bottom: -20px;
+}	
 
 
 
@@ -1766,11 +1782,17 @@ header{
 }
 
 header #logo img{
-	width: 100%;
-	height: 300px;
+	width: 40%;
+	height:80px;
 	margin: auto;
 	margin-bottom: -30px;
+	margin-top: 15px;
 }
+
+header a img#menu_icon{
+	display: none;
+}
+
 
 	
 	
@@ -1801,12 +1823,12 @@ header a:active{
 				キャッチコピー
 ------------------------------------------------------*/
 
-/*div.header_copy a img{
+div#header_copy a img{
 	margin:0 0 3px 0;
 	padding: 0;
 	width: 100%;
-	height: 250px;
-}*/
+	height: 270px;
+}
 
 
 /* ヘッダーフォーム */

@@ -25,7 +25,11 @@ wp_enqueue_script('freecycleScript');
 		<?php do_action( 'bp_before_header' ); ?>
 
 		<header>
-			<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_20140117.png" alt="ヘッダー" width="700px" height="200px"></a></h1>
+			<div id="header_menu">
+				<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_b.png" alt="ヘッダー" width="100px" height="50px"></a></h1>
+				
+				<a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img  id="menu_icon" src="<?php echo get_stylesheet_directory_uri() ?>/images/icon_menu.png" alt="ヘッダー" width="50px" height="50px"></a>
+			</div>
 		</header><!-- header -->
 		
 		
@@ -38,6 +42,10 @@ wp_enqueue_script('freecycleScript');
 							<a class="unread_alert" href="<?php echo bp_loggedin_user_domain() . "messages"; ?>">未読メッセージが<?php echo messages_get_unread_count();?>件あります！</a>
 					<?php 		} 
 						} ?> 
+				</div>
+				
+				<div id="header_copy">
+					<a href="<?php echo home_url() . "/about"; ?>" ><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_20140117.png" alt="てくすちぇんじとは？" width="700px" height="200px"></a>
 				</div>
 	
 				<div class="grobal_nav_div">
