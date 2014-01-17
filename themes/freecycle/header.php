@@ -26,12 +26,27 @@ wp_enqueue_script('freecycleScript');
 
 		<header>
 			<div id="header_menu">
-				<h1 id="logo"><a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_b.png" alt="ヘッダー" width="100px" height="50px"></a></h1>
+				<a id="logo" href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_b.png" alt="ヘッダー" width="100px" height="50px"></a>
 				
-				<a href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img  id="menu_icon" src="<?php echo get_stylesheet_directory_uri() ?>/images/icon_menu.png" alt="ヘッダー" width="50px" height="50px"></a>
+				<a href="javascript:onClickMenuIcon();"  id="menu_icon_sp" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img  id="menu_icon" src="<?php echo get_stylesheet_directory_uri() ?>/images/icon_menu.png" alt="ヘッダー" width="50px" height="50px"></a>
 			</div>
 		</header><!-- header -->
 		
+		<div class="grobal_nav_div_sp">
+				<nav>
+					<ul class="navi" >
+					　		<li class="grobal_nav"><a href="<?php echo home_url(); ?>" >ホーム</a></li>
+					　		<?php if(is_user_logged_in()){ ?>
+					　		<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
+					　		<?php } ?>
+					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/about"; ?>" >TexChangeとは</a></li>
+					　		<li class="grobal_nav"><a href="http://texchg.com/guide" >使い方ガイド</a></li>
+					　		<li class="grobal_nav"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
+					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>
+					</ul>
+				</nav>
+		</div>
+
 		
 <div class="header_img_navi">
 
@@ -44,10 +59,11 @@ wp_enqueue_script('freecycleScript');
 						} ?> 
 				</div>
 				
+				<?php if(!is_user_logged_in()){ ?>
 				<div id="header_copy">
-					<a href="<?php echo home_url() . "/about"; ?>" ><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_20140117.png" alt="てくすちぇんじとは？" width="700px" height="200px"></a>
+					<img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_20140117.png" alt="てくすちぇんじとは？" width="700px" height="200px">
 				</div>
-	
+				<?php } ?>
 				<div class="grobal_nav_div">
 				<nav>
 					<ul class="navi" >
@@ -67,7 +83,7 @@ wp_enqueue_script('freecycleScript');
 					
 
 <div class="header_form_">
-	<div>
+	<!-- <div>
 	<ul id="header-under">
 		<?php if(!is_user_logged_in() && get_permalink() != get_home_url()."/register"){ ?>
 		<li>
@@ -82,11 +98,14 @@ wp_enqueue_script('freecycleScript');
 							<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="Log In" tabindex="100" />
 							<input type="hidden" name="redirect_to" value="" />
 			</form>
-		</li>
+		</li> 
+		
 		<?php } ?>
 	</ul>
+	</div> -->
+	<div class="login_form_button">
+		<button><a href="###" >新規登録、ログインはこちら！！！！</a></button>
 	</div>
-
 
 		<?php if(bp_is_front_page()){ ?>
 		

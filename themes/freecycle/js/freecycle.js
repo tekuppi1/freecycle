@@ -1,3 +1,7 @@
+function onClickMenuIcon(){
+	jQuery(".grobal_nav_div_sp").slideToggle();
+}
+
 function onChangeTradeWay(postID){
 	var tradeway = jQuery("#tradeway_"+postID).val();
 	if(tradeway == "handtohand"){

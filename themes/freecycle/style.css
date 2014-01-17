@@ -272,18 +272,30 @@ input[type="button"]:hover{
 
 header{	
 	width: 100%;
-	height: auto;
+	height: 60px;
 	background: white;
-	padding: 25px 0 5px 0;
 	margin: 0;
+	clear: both;
 }
 
-header #logo img{
+div#header_menu{
+	background: #fff;
+	position: absolute;
+	padding-top: 10px;
+	left: 0;
+	top: 0;
+	right: 0;
+	z-index: 2;
+	overflow: hidden;
+	height: 60px;
+}
+
+header a#logo img{
 	width: 55%;
 	height: 50px;
-	padding: 0 2px;
-	margin: auto;
-	margin-bottom: -40px;
+	/*padding: 0 2px;
+	margin: auto;*/
+	/*margin-bottom: -40px;*/
 	float: left;
 }
 
@@ -291,7 +303,7 @@ header a img#menu_icon{
 	width: 50px;
 	height: 50px;
 	float: right;
-	margin: 0 5px 0 0;
+	/*margin: 0 5px 0 0;*/
 }
 
 	
@@ -326,17 +338,24 @@ header a:active{
 	width:100%;
 	height: auto;
 	margin: 0;
-	padding-left: 2px;
+}
+
+div.header_img_navi{
+	/*clear: both;*/
 }
 
 /*---------------------------------------------------
 				キャッチコピー
 ------------------------------------------------------*/
 
-div#header_copy a img{
-	margin:3px 0 -16px 0;
+div#header_copy img{
+	margin:0;
 	padding: 0;
 	width: 100%;
+	height: 120px;
+}
+
+div#header_copy{
 	height: 120px;
 }
 
@@ -404,12 +423,36 @@ form #sidebar-wp-submit{
 	margin: 10px;
 }*/
 
+div.login_form_button button{
+	margin: auto;
+	width: 100%;
+	-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);  
+    -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);  
+    border: 1px solid rgba(0,0,0,0.4);  
+    background: rgba(0,0,0,0.6);  
+    color: #fff !important;  
+    text-shadow: 0 -1px 1px #aaa, -1px 0 1px #aaa, 1px 0 1px #000;  
+}
+
+div.login_form_button button:hover{
+	background: #40AAEF;
+}
+
+
 　　　　　　　　　　/*ナビゲーション*/
 div.header_img_navi{
 	width: 100%;
-	padding: 3px 0;
+	/*padding: 10px 0;*/
+}
+
+div.header_img_navi_contents{
+	height: 10px;
+	padding: 8px 0;
 }
 	
+div.grobal_nav_div{
+	display: none;
+}
 
 nav{
 	margin: 0;
@@ -460,6 +503,13 @@ div#grobal_nav_div{
 	width: 100%;
 }
 
+.grobal_nav_div_sp{
+	display: none;
+	}
+
+.grobal_nav_div_sp.active {
+	
+}
 
 
 
@@ -514,6 +564,10 @@ hr.line-search{
     border: black 1px solid;
     color: #fcc;
     background: #fcc;
+}
+
+#search-23{
+	padding-top:10px;
 }
 
 #searchform_main{
@@ -1066,6 +1120,11 @@ header{
 	padding: 1px 0;
 }
 
+div#header_menu{
+	background: #fff;
+}
+
+
 header #logo img{
 	width: 55%;
 	height: 60px;
@@ -1192,12 +1251,34 @@ form #sidebar-wp-submit{
 	margin: 10px;
 }*/
 
+div.login_form_button button{
+	margin: auto;
+	width: 100%;
+	-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);  
+    -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);  
+    border: 1px solid rgba(0,0,0,0.4);  
+    background: rgba(0,0,0,0.6);  
+    color: #fff;  
+    text-shadow: 0 -1px 1px #aaa, -1px 0 1px #aaa, 1px 0 1px #000;  
+}
+
+div.login_form_button button:hover{
+	background: #40AAEF;
+}
+
+
 /*ナビゲーション*/
+.grobal_nav_div_sp{
+	display: none;
+}
 .header_img_navi{
 	margin-top: 2px;
 	margin-bottom: 2px;
 }
 	
+div.grobal_nav_div{
+	display: none;
+}
 
 nav{
 	margin: 3px 0 3px 0;
@@ -1570,7 +1651,7 @@ input[type="button" ][disabled="true"]:hover{
 @charset: utf-8;
 
 html{
-	background: white;
+	background: #fff;
 	color: #696969;
 	margin: auto;
 	padding: 0;
@@ -1781,6 +1862,11 @@ header{
 	padding: 10px 0;
 }
 
+div#header_menu{
+	background: #fff;
+}
+
+
 header #logo img{
 	width: 40%;
 	height:80px;
@@ -1898,9 +1984,26 @@ form #sidebar-wp-submit{
 	margin: 10px;
 }*/
 
+div.login_form_button button{
+	margin: auto;
+	width: 100%;
+	-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);  
+    -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);  
+    border: 1px solid rgba(0,0,0,0.4);  
+    background: rgba(0,0,0,0.6);  
+    color: #fff;  
+    text-shadow: 0 -1px 1px #aaa, -1px 0 1px #aaa, 1px 0 1px #000;  
+}
+
+div.login_form_button button:hover{
+	background: #40AAEF;
+}
+
 /*ヘッダーイメージ*/
 
-
+.header_img_navi{
+	padding-top:22px;
+}
 .header_img_navi img{
 	max-width:100%;
 	height: auto;
@@ -1914,11 +2017,15 @@ form #sidebar-wp-submit{
 	background: gold;
 	height: 30px;
 }*/
+div.grobal_nav_div_sp{
+	display: none;
+}
 	
 div.grobal_nav_div{
-	width: 100%;
+	width: 90%;
 	height: 30px;
 	background: gold;
+	margin: 0;
 }
 
 nav{
