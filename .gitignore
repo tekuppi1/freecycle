@@ -8,6 +8,8 @@ plugins/*.php
 plugins/akismet
 plugins/buddypress
 plugins/theme-my-login
+plugins/buddypress-translations
+plugins/contact-form-7
 
 #themes
 themes/*.php
