@@ -198,7 +198,7 @@
 					<?php do_action( 'bp_after_signup_profile_fields' ); ?>
 
 				<?php endif; ?>
-					<div>
+					<div id="must_checkbox">
 					<!-- 利用規約に同意 -->
 					<input type="checkbox" name="agreewithpolicy" id="agreewithpolicy"/><a href="<?php echo home_url() . "/guideline"?>">ガイドライン</a>、<a href="<?php echo home_url() . "/disclaimer"?>">免責事項</a>、<a href="<?php echo home_url() . "/privacy-policy"?>">個人情報保護方針</a>に同意します。
 					<?php do_action('agreewithpolicy_action'); ?>
