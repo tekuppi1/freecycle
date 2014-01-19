@@ -26,7 +26,7 @@ wp_enqueue_script('freecycleScript');
 
 		<header>
 			<div id="header_menu">
-				<a id="logo" href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_b.png" alt="ヘッダー" width="100px" height="50px"></a>
+				<a id="logo" href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_b_logosize.png" alt="ヘッダー" width="100px" height="50px"></a>
 				
 				<a href="javascript:onClickMenuIcon();"  id="menu_icon_sp" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img  id="menu_icon" src="<?php echo get_stylesheet_directory_uri() ?>/images/icon_menu.png" alt="ヘッダー" width="50px" height="50px"></a>
 			</div>
@@ -42,7 +42,8 @@ wp_enqueue_script('freecycleScript');
 					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/about"; ?>" >TexChangeとは</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/guide" >使い方ガイド</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
-					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>
+					　		<li class="grobal_nav"><a href="http://texchg.com/review" >利用者の声</a></li>
+					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>			
 					</ul>
 				</nav>
 		</div>
@@ -65,7 +66,6 @@ wp_enqueue_script('freecycleScript');
 				</div>
 				<?php } ?>
 				<div class="grobal_nav_div">
-				<nav>
 					<ul class="navi" >
 					　		<li class="grobal_nav"><a href="<?php echo home_url(); ?>" >ホーム</a></li>
 					　		<?php if(is_user_logged_in()){ ?>
@@ -73,12 +73,12 @@ wp_enqueue_script('freecycleScript');
 					　		<?php } ?>
 					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/about"; ?>" >TexChangeとは</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/guide" >使い方ガイド</a></li>
+					　		<li class="grobal_nav"><a href="http://texchg.com/review" >利用者の声</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
 					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>
 					</ul>
-				</nav>
-				</div>
-</div>	
+				</div><!-- .grobal_nav_img -->
+</div><!-- .header_img_navi -->
 
 					
 

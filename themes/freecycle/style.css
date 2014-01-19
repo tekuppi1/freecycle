@@ -11,30 +11,8 @@ Tags: buddypress
 
 /*ページ全体の枠組み*/
 
-#message-threads{
-	width: 100%;
-}
 
-.thread-info{
-	width: 25%;
-}
-
-.thread-info p{
-	font-size:1px;
-}
-
-
-*{
-	background: #fff;
-}
-
-#page{
-	font-size:100%;
-}
-
-/*---------------------------------------------------------------------------------------------------------------------------------------*/
 @media screen and (max-width: 320px) {
-
 a:link { color: #000080; }
 a:visited { color: #000090; }
 a:hover { color: #00bfff; }
@@ -60,9 +38,13 @@ input[type="button" ][disabled="true"]:hover{
 	background: #fff;
 }
 
-body{
+html{
 	background: #fff;
-	color: #696969;
+	width: 100%;
+	height: 100%;
+}
+
+body{
 	line-height:1.4;
 	font-family:"メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
@@ -72,8 +54,7 @@ body{
 		"ＭＳ Ｐゴシック", "MS P Gothic",
 		sans-serif;
 	font-size: 15px;
-	width: 100%;
-	height: 100%;
+	width: 95%;
 }
 
 input{
@@ -155,12 +136,12 @@ textarea{
 	font-size: 1em;
 }
 
-img{
+/*img{
 	width: 100;
 	height: 100;
 }
 
-/*img:after{
+img:after{
 	content: "";
     clear: both;
     height: 0;
@@ -288,11 +269,12 @@ div#header_menu{
 	z-index: 2;
 	overflow: hidden;
 	height: 60px;
+	width: 100%;
 }
 
 header a#logo img{
-	width: 55%;
-	height: 50px;
+	width: 80%;
+	height: 60px;
 	/*padding: 0 2px;
 	margin: auto;*/
 	/*margin-bottom: -40px;*/
@@ -300,8 +282,8 @@ header a#logo img{
 }
 
 header a img#menu_icon{
-	width: 50px;
-	height: 50px;
+	width: 60px;
+	height: 60px;
 	float: right;
 	/*margin: 0 5px 0 0;*/
 }
@@ -365,6 +347,10 @@ div#header_copy{
 
 
 /* ヘッダーフォーム */
+
+div.header_form_{
+	background-color: #fff;
+}
 
 form[name=login-form]{
 	text-align: left;
@@ -450,8 +436,7 @@ div.header_img_navi{
 }
 
 div.header_img_navi_contents{
-	height: 10px;
-	padding: 10px 0;
+	margin-top: 20px;
 }
 	
 div.grobal_nav_div{
@@ -891,7 +876,9 @@ ul#menu-footer_menu li a{
 
 }
 /*--------------------------------------------------------------------------------------------------------------------------------------*/
-@media screen and (min-width: 321px) and (max-width: 480px){
+@media screen and (min-width: 321px) and (max-width: 480px) {
+
+@charset: utf-8;
 
 a:link { color: #000080; }
 a:visited { color: #000090; }
@@ -910,17 +897,14 @@ input[type="button" ][disabled="true"]:hover{
 	color: #fff !important;
 }
 
-@charset: utf-8;
 
 * {
     padding: 0;
     margin: 0;
-	background: #fff;
 }
 
 html{
 	background: #fff;
-	color: #696969;
 	margin: 0 auto;
 	padding: 0;
 	line-height:1.4;
@@ -1132,11 +1116,15 @@ header{
 
 div#header_menu{
 	background: #fff;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	top:10px;
 }
 
 
-header #logo img{
-	width: 55%;
+header a#logo img{
+	width: 80%;
 	height: 60px;
 	margin: auto;
 	margin-top: 10px;
@@ -1177,6 +1165,13 @@ header a:active{
 	color: orange;
 }*/
 
+/*
+未読メッセージアラート
+*/
+a.unread_alert{
+	font-size: 1.1em
+}
+
 /*---------------------------------------------------
 				キャッチコピー
 ------------------------------------------------------*/
@@ -1184,12 +1179,8 @@ header a:active{
 div#header_copy a img{
 	width: 100%;
 	height: 150px;
-	margin-bottom: -20px;
+	/*margin-bottom: -15px;*/
 }	
-
-div#header_copy{
-	height: 150px;
-}
 
 
 
@@ -1209,6 +1200,10 @@ div#header_copy{
 
 
 /* ヘッダーフォーム */
+
+div.header_form_{
+	background-color: #fff;
+}
 
 form#header-login-form{
 	text-align: left;
@@ -1298,8 +1293,7 @@ div.grobal_nav_div{
 }
 
 div.header_img_navi_contents{
-	height: 10px;
-	padding: 10px 0;
+	margin-top: 20px;
 }
 
 
@@ -1889,18 +1883,23 @@ input[type="button"]:hover{
 
 header{	
 	width: 100%;
-	height: auto;
 	background: white;
 	padding: 10px 0;
+	height: 90px;
 }
 
 div#header_menu{
 	background: #fff;
+	overflow: hidden;
+	width: 100%;
+	height: 90px;
+	position: relative;
+	top: 5px;
 }
 
 
-header #logo img{
-	width: 40%;
+header a#logo img{
+	width: 80%;
 	height:80px;
 	margin: auto;
 	margin-bottom: -30px;
@@ -1937,6 +1936,13 @@ header a:active{
 	color: orange;
 }*/
 
+/*
+未読メッセージアラート
+*/
+a.unread_alert{
+	font-size: 1.1em
+}
+
 /*---------------------------------------------------
 				キャッチコピー
 ------------------------------------------------------*/
@@ -1946,15 +1952,27 @@ div#header_copy  img{
 	padding: 0;
 	width: 100%;
 	height: 270px;
-	padding-bottom: 15px;
+	/*padding-bottom: 15px;*/
 }
 
 div#header_copy{
 	height: 270px;
 }
 
+/*
+アカウント登録ページ
+*/
+
+div#must_checkbox{
+	position: relative;
+	top: 350px;
+	height: 70px;	
+}
 
 /* ヘッダーフォーム */
+div.header_form_{
+	background-color: #fff;
+}
 
 form[name=login-form]{
 	text-align: left;
@@ -2042,10 +2060,6 @@ div.login_form_button button:hover{
 	width: 100%;
 	padding-top:22px;
 }
-.header_img_navi img{
-	height: auto;
-	margin: auto;
-}
 
 /*ナビゲーション*/
 /*.header_img_navi{
@@ -2054,64 +2068,72 @@ div.login_form_button button:hover{
 	background: gold;
 	height: 30px;
 }*/
+
 div.grobal_nav_div_sp{
 	display: none;
 }
 	
 div.grobal_nav_div{
 	width: 100%;
-	height: 30px;
-	background: gold;
 	margin: auto;
 }
 
-nav{
+div.grobal_nav_div{
 	width: 100%;
+	height: 30px;
 	margin: 0;
-	display:block;
+	overflow: hidden;
+	background-color: gold;
+	border-radius: 4px;
 }
 
-nav ul,li	{
+div.grobal_nav_div ul,div.grobal_nav_div li	{
 	margin: 0;
 	padding:0;
 	list-style: none;
 }
 
-nav .navi	{
+ul.navi	{
 	width: 100%;
-	display: block;
-	background-color: gold;
+	height: 30px;
 }
 
-nav li{
+div.grobal_nav_div  li{
 	float: left;
 	text-align: center;
 	font-weight: bold;
 	/*border: solid 1px #000;*/
-	border-right: solid 1px #000;
-	/*border-left: solid 1px #FFF;
-	margin-left: 1px;*/
+	/*border-left: solid 1px #FFF;*/
 	width:auto;
+	display: block;
+	border-right: solid 1px #000;
 	
 }
 
-nav li a{
-	color: black !important;
-	font-size: 17px;
-	display: block;
-	/*width: 120px !important;*/
-	height: 18px;
-	padding: 6px;
-	/*border-radius: 5px;*/
-	background: gold;
-	text-decoration: none;
-	/*border-bottom: solid 1px #000;*/
+div.grobal_nav_div  li:first-child{
+	margin-left: 10px;
 }
 
-nav li a:hover{
-	background: orange;
+div.grobal_nav_div  li:last-child{
+	border: none;		
+}
+
+
+
+div.grobal_nav_div  li a{
+	color: black !important;
+	font-size: 15px;
+	display: block;
+	/*background: gold;*/
 	text-decoration: none;
-	color:black;
+	text-align: center;
+	width:auto;
+	height: 25px;
+	padding: 5px 5px 0;
+}
+
+div.grobal_nav_div  li a:hover{
+	background: orange;
 }
 
 
