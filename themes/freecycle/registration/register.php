@@ -192,10 +192,8 @@
 						<?php endwhile; endif; endif; ?>
 
 						<?php do_action( 'bp_signup_profile_fields' ); ?>
-
-					</div><!-- #profile-details-section -->
-
-					<?php do_action( 'bp_after_signup_profile_fields' ); ?>
+						
+						<?php do_action( 'bp_after_signup_profile_fields' ); ?>
 
 				<?php endif; ?>
 					<div id="must_checkbox">
@@ -207,6 +205,10 @@
 
 					<?php do_action( 'bp_before_blog_details_fields' ); ?>
 
+
+					</div><!-- #profile-details-section -->
+
+					
 					<?php /***** Blog Creation Details ******/ ?>
 
 					<div class="register-section" id="blog-details-section">
