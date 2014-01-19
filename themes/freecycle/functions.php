@@ -1142,11 +1142,14 @@ function my_function_admin_bar($content){
 add_filter('show_admin_bar', 'my_function_admin_bar');
 
 // 管理者以外の場合ダッシュボードにログインさせない
-add_action( 'admin_init', 'disable_admin_pages' );
+add_action('admin_init', 'disable_admin_pages' );
 function disable_admin_pages() {
-	if(!current_user_can('administrator')){
+	debug_log($_SERVER['REQUEST_URI']);
+	if(!current_user_can('administrator')
+		&& strpos($_SERVER['REQUEST_URI'] ,'admin-ajax') === false){
 		$redirect_url = get_option('home');
 		header("Location: ".$redirect_url);
+		exit;
 	}
 }
 
