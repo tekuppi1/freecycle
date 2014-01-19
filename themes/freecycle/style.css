@@ -561,7 +561,7 @@ hr.line-search{
 
 #searchform_main{
 	display: block;
-	margin: auto;
+	margin: 0 auto;
 	padding: 3px 5px 3px 5px;
 	background: #FBA848;
 	border-radius: 10px;
@@ -1358,7 +1358,7 @@ div.header_img_navi_contents{
 
 #searchform_main{
 	display: block;
-	margin: auto;
+	margin: 0 auto;
 	padding: 5px;
 	background: orange;
 	border-radius: 10px;
@@ -2146,7 +2146,7 @@ div.grobal_nav_div  li a:hover{
 
 #searchform_main{
 	display: block;
-	margin: 5px auto;
+	margin: 0 auto;
 	padding: 5px 8px 5px 8px;
 	background: orange;
 	border-radius: 10px;
