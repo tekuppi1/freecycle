@@ -1176,7 +1176,7 @@ a.unread_alert{
 				キャッチコピー
 ------------------------------------------------------*/
 
-div#header_copy a img{
+div#header_copy  img{
 	width: 100%;
 	height: 150px;
 	/*margin-bottom: -15px;*/
@@ -1195,7 +1195,6 @@ div#header_copy a img{
 	width:100%;
 	height: auto;
 	margin: 0;
-	/*padding-left: 2px;*/
 }
 
 
@@ -1283,17 +1282,14 @@ div.login_form_button button:hover{
 .grobal_nav_div_sp{
 	display: none;
 }
-.header_img_navi{
-	margin-top: 2px;
-	margin-bottom: 2px;
-}
+
 	
 div.grobal_nav_div{
 	display: none;
 }
 
 div.header_img_navi_contents{
-	margin-top: 20px;
+	/*margin-top: 20px;*/
 }
 
 
@@ -1349,6 +1345,11 @@ nav li a:hover{
   clear: both;   
   visibility: hidden;  
 }  
+
+div.header_img_navi_contents{
+	margin-top: 20px;
+}
+
 /*サーチバー*/
 
 #search-23{
@@ -2058,7 +2059,7 @@ div.login_form_button button:hover{
 
 .header_img_navi{
 	width: 100%;
-	padding-top:22px;
+	/*padding-top:22px;*/
 }
 
 /*ナビゲーション*/

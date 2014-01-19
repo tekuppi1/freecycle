@@ -65,6 +65,7 @@ wp_enqueue_script('freecycleScript');
 					<img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_20140117.png" alt="てくすちぇんじとは？" width="700px" height="200px">
 				</div>
 				<?php } ?>
+				
 				<div class="grobal_nav_div">
 					<ul class="navi" >
 					　		<li class="grobal_nav"><a href="<?php echo home_url(); ?>" >ホーム</a></li>
