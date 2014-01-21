@@ -273,7 +273,7 @@ div#header_menu{
 }
 
 header a#logo img{
-	width: 80%;
+	width: 70%;
 	height: 60px;
 	/*padding: 0 2px;
 	margin: auto;*/
@@ -282,11 +282,20 @@ header a#logo img{
 }
 
 header a img#menu_icon{
+	width: 30px;
+	height: 35px;
+	float: right;
+	margin: 0 8px 0 0;
+	position: relative;
+	top: 15px;
+}
+
+/*header a img#user_icon{
 	width: 60px;
 	height: 60px;
 	float: right;
-	/*margin: 0 5px 0 0;*/
-}
+	margin: 0 5px 0 0;
+}*/
 
 	
 	
@@ -561,7 +570,7 @@ hr.line-search{
 
 #searchform_main{
 	display: block;
-	margin: auto;
+	margin: 0 auto;
 	padding: 3px 5px 3px 5px;
 	background: #FBA848;
 	border-radius: 10px;
@@ -1156,7 +1165,7 @@ div#header_menu{
 
 
 header a#logo img{
-	width: 80%;
+	width: 70%;
 	height: 60px;
 	margin: auto;
 	margin-top: 10px;
@@ -1164,10 +1173,10 @@ header a#logo img{
 }
 
 header a img#menu_icon{
-	width: 60px;
-	height: 60px;
+	width: 40px;
+	height: 45px;
 	float: right;
-	margin: 10px 10px 0 0;
+	margin: 20px 20px 0 0;
 }
 
 
@@ -1390,7 +1399,7 @@ div.header_img_navi_contents{
 
 #searchform_main{
 	display: block;
-	margin: auto;
+	margin: 0 auto;
 	padding: 5px;
 	background: orange;
 	border-radius: 10px;
@@ -1964,7 +1973,7 @@ div#header_menu{
 
 
 header a#logo img{
-	width: 80%;
+	width: 60%;
 	height:80px;
 	margin: auto;
 	margin-bottom: -30px;
@@ -2029,8 +2038,8 @@ div#header_copy{
 */
 
 div#must_checkbox{
-	position: relative;
-	top: 350px;
+	/*position: relative;
+	top: 350px;*/
 	height: 80px;	
 }
 
@@ -2210,7 +2219,7 @@ div.grobal_nav_div  li a:hover{
 
 #searchform_main{
 	display: block;
-	margin: 5px auto;
+	margin: 0 auto;
 	padding: 5px 8px 5px 8px;
 	background: orange;
 	border-radius: 10px;
