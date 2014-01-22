@@ -29,8 +29,9 @@ wp_enqueue_script('freecycleScript');
 				<a id="logo" href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_b_logosize_2.png" alt="ヘッダー" width="100px" height="50px"></a>
 								
 				<a href="javascript:onClickMenuIcon();"  id="menu_icon_sp" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img  id="menu_icon" src="<?php echo get_stylesheet_directory_uri() ?>/images/menu_icon.png" alt="ヘッダー" width="50px" height="50px"></a>
-				
-				<a href="###"  id="user_icon_sp" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img  id="user_icon" src="<?php echo get_stylesheet_directory_uri() ?>/images/user_icon.png" alt="ヘッダー" width="50px" height="50px"></a>
+				<?php if(!is_user_logged_in()){ ?>
+				<a href="<?php echo home_url(); ?>/login"  id="user_icon_sp" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img  id="user_icon" src="<?php echo get_stylesheet_directory_uri() ?>/images/user_icon.png" alt="ヘッダー" width="50px" height="50px"></a>
+				<?php } ?>
 			</div>
 		</header><!-- header -->
 		
@@ -86,35 +87,7 @@ wp_enqueue_script('freecycleScript');
 					
 
 <div class="header_form_">
-	<div>
-	<ul id="header-under">
-		<?php if(!is_user_logged_in() && get_permalink() != get_home_url()."/register"){ ?>
-		<li>
-			<form name="login-form" id="header-login-form" class="standard-form" action="<?php echo home_url(); ?>/wp-login.php" method="post">
-							<label>ユーザ名<br/>
-							<input type="text" name="log" id="sidebar-user-login" class="input" value="" tabindex="97" /></label>
-							<label>パスワード<br />
-							<input type="password" name="pwd" id="sidebar-user-pass" class="input" value="" tabindex="98" /></label>
-							<p class="forgetmenot"><label><input name="rememberme" type="checkbox" id="sidebar-rememberme" value="forever" tabindex="99" /> Remember Me</label></p>
-							<p class="register"><a href="<?php echo home_url(); ?>/register">アカウント作成はこちら</a></p>
-							<p class="lostpassword"><a href="<?php echo home_url(); ?>/wp-login.php?action=lostpassword">パスワードを忘れた方はこちら</a></p>
-							<input type="submit" name="wp-submit" id="sidebar-wp-submit" value="Log In" tabindex="100" />
-							<input type="hidden" name="redirect_to" value="" />
-			</form>
-		</li> 
-		
-		<?php } ?>
-	</ul>
-	</div> 
-	<!--
-	<div class="login_form_button">
-		<button><a href="###" >新規登録、ログインはこちら！！！！</a></button>
-	</div> -->
-
 		<?php if(bp_is_front_page()){ ?>
-		
-		<!-- <hr class="line-search"> -->
-		
 	<div id="search-23" class="widget widget_search"><!-- 検索バー -->
 				<form role="search" method="get" id="searchform_main" action="<?php echo home_url(); ?>">
 					<!-- <label>検索：</label> -->
