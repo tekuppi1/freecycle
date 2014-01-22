@@ -290,12 +290,14 @@ header a img#menu_icon{
 	top: 15px;
 }
 
-/*header a img#user_icon{
-	width: 60px;
-	height: 60px;
+header a img#user_icon{
+	width: 30px;
+	height: 35px;
 	float: right;
-	margin: 0 5px 0 0;
-}*/
+	/*margin: 0 5px 0 0;*/
+	position: relative;
+	top: 15px;
+}
 
 	
 	
@@ -1147,6 +1149,14 @@ header a img#menu_icon{
 	margin: 20px 20px 0 0;
 }
 
+header a img#user_icon{
+	width: 40px;
+	height: 45px;
+	float: right;
+	margin: 20px 10px 0 0;
+}
+
+
 
 
 	
@@ -1918,6 +1928,13 @@ header a#logo img{
 
 header a img#menu_icon{
 	display: none;
+}
+
+header a img#user_icon{
+	width: 50px;
+	height: 55px;
+	float: right;
+	margin: 30px 30px 0 0;
 }
 
 
