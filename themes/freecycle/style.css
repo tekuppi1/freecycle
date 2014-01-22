@@ -556,14 +556,14 @@ nav li:last-child a {
 
 　/*サーチバー*/
 
-hr.line-search{
+/*hr.line-search{
 	margin: 1em 0 1em;
     padding: 0;
     height: 1px;
     border: black 1px solid;
     color: #fcc;
     background: #fcc;
-}
+}*/
 
 #search-23{
 	padding-top:2px;
@@ -572,7 +572,7 @@ hr.line-search{
 #searchform_main{
 	display: block;
 	margin: 0 auto;
-	padding: 8px 9px 8px 9px;
+	padding: 8px 9px 6px 9px;
 	background: #FBA848;
 	border-radius: 10px;
 	width: 95%;
@@ -2004,14 +2004,14 @@ form[name=login-form]{
 	text-align: left;
 	display: block;
 	margin: 0 auto;
-	margin-bottom: 1px;
+	/*margin-bottom: 1px;
 	margin-top: 1px;
 	padding: 10px;
 	background: orange;
-	border-radius: 8px;
-	width: 60%;
+	border-radius: 8px;*/
+	width: 90%;
 	clear: both;
-	border: solid 1px;
+	/*border: solid 1px;*/
 	color: black;
 	
 	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -2031,7 +2031,6 @@ form #sidebar-wp-submit{
 }
 	
 	
-
 #sidebar-wp-submit{
 	font-size: 25px;
 	boder-radius: 10px;
@@ -2044,7 +2043,6 @@ form #sidebar-wp-submit{
 
 #sidebar-wp-submit:hover{
 	color: orange;
-	font-size:38px;
 	font-style: bold;
 }
 
