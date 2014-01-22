@@ -256,7 +256,7 @@ header{
 	background: white;
 	margin: 0;
 	clear: both;
-	margin-top: 40px;
+	/*margin-top: 20px;*/
 }
 
 div#header_menu{
@@ -294,7 +294,7 @@ header a img#user_icon{
 	width: 30px;
 	height: 35px;
 	float: right;
-	/*margin: 0 5px 0 0;*/
+	margin: 0 10px 0 0;
 	position: relative;
 	top: 15px;
 }
@@ -367,14 +367,13 @@ form[name=login-form]{
 	text-align: left;
 	display: block;
 	margin: auto;
-	margin-bottom: 1px;
-	margin-top: 1px;
+	/*margin-bottom: 1px;
+	margin-top: 1px;*/
 	padding: 7px;
-	background: orange;
-	border-radius: 6px;
+	/*order-radius: 6px;*/
 	width: 95%;
 	clear: both;
-	border: solid 1px;
+	/*border: solid 1px;*/
 	color: black;
 	
 	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -573,7 +572,7 @@ hr.line-search{
 #searchform_main{
 	display: block;
 	margin: 0 auto;
-	padding: 3px 5px 3px 5px;
+	padding: 8px 9px 8px 9px;
 	background: #FBA848;
 	border-radius: 10px;
 	width: 95%;
@@ -593,7 +592,7 @@ hr.line-search{
 	margin:auto;
 	padding: 3px;
 	display: block;
-	width: 150px;
+	width: 195px;
 	height: 25px;
 	font: bold 1.1em/1.0 "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
@@ -1122,7 +1121,7 @@ header{
 	width: 100%;
 	height: auto;
 	background: white;
-	margin-top: 40px;
+	margin-top: 20px;
 }
 
 div#header_menu{
