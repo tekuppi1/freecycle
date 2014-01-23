@@ -40,6 +40,10 @@ function on_comment_post() {
 	}
 }
 
+// change timing of sending notification mail
+remove_action('messages_message_sent', 'messages_notification_new_message');
+add_action('messages_message_after_save', 'messages_notification_new_message', 10);
+
 // 記事検索時の条件追加
 function add_costom_join($join){
 	global $table_prefix;
