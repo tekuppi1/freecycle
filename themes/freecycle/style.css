@@ -682,22 +682,44 @@ div.trade_status_notconfirmed,div.trade_status_confirmed{
 }
 
 /*
-	for smart phone
+	for amazon like layout begin
 */
 
 .entry {
+	width: 100%;
+	height: 120px;
 	position: relative;
 }
 
 .entry img.wp-post-image {
  	border: 1px solid;
-	width: 45% !important;
-	height: auto;
+	width: 100% !important;
+	height: 100% !important;
 }
 
-.posts-row{
-	height: 150px;
-	padding: 5px 0px 0px 0px;
+.posts-row {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+.posts-row .post {
+	width: 45%;
+	height: 120px;
+	margin: 0px 0px 10px 0px;
+	padding: 5px 5px 5px 5px;
+	float: left;
+}
+
+div .post-content {
+	margin: 3px 0px 3px 0px;
+}
+
+.index-item-title {
+	width: 100%;
+	height: 20px;
+	position: absolute;
+	left: 0%;
+	bottom: -3%;
 }
 
 .index-item-title a{
@@ -707,12 +729,13 @@ div.trade_status_notconfirmed,div.trade_status_confirmed{
 	background-color: #000;
 	opacity: 0.8;
 	white-space: nowrap;
-	width: 95%;
-	height: 20px;
+	width: 100%;
 	position: absolute;
-	left: 0%;
-	bottom: 5%;
 }
+
+/*
+	for amazon like layout end
+*/
 
 /*.353836,.item-status{
 	float: left;
@@ -1509,22 +1532,42 @@ div.trade_status_notconfirmed,div.trade_status_confirmed{
 }
 
 /*
-	for smart phone
+	for amazon like layout begin
 */
 
 .entry {
+	width: 100%;
+	height: 174px;
 	position: relative;
 }
 
 .entry img.wp-post-image {
  	border: 1px solid;
-	width: 45% !important;
-	height: auto;
+	width: 100% !important;
+	height: 100% !important;
 }
 
-.posts-row{
-	height: 150px;
-	margin: 10px 0px 3px 0px;
+.posts-row {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+.posts-row .post {
+	width: 47%;
+	padding: 5px 5px 5px 5px;
+	float: left;
+}
+
+div .post-content {
+	margin: 0px 0px 0px 0px;
+}
+
+.index-item-title {
+	width: 100%;
+	height: 20px;
+	position: absolute;
+	left: 0%;
+	bottom: 0%;
 }
 
 .index-item-title a{
@@ -1535,14 +1578,12 @@ div.trade_status_notconfirmed,div.trade_status_confirmed{
 	opacity: 0.8;
 	white-space: nowrap;
 	width: 100%;
-	height: 20px;
 	position: absolute;
-	left: 0%;
-	bottom: 5%;
 }
-div.entry span.posttitle{
-	font-size: 1.4em !important;
-}
+
+/*
+	for amazon like layout end
+*/
 
 
 #score{
@@ -2348,23 +2389,42 @@ div.trade_status_notconfirmed,div.trade_status_confirmed{
 }
 
 /*
-	for smart phone
+	for amazon like layout begin
 */
 
 .entry {
+	width: 100%;
+	height: 200px;
 	position: relative;
 }
 
 .entry img.wp-post-image {
  	border: 1px solid;
-	width: 45% !important;
-	height: auto;
+	width: 100% !important;
+	height: 100% !important;
 }
 
-.posts-row{
-	height: 150px;
+.posts-row {
 	margin: 0px 0px 0px 0px;
-	padding: 0px 0px 20px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+.posts-row .post {
+	width: 47%;
+	padding: 5px 5px 5px 5px;
+	float: left;
+}
+
+div .post-content {
+	margin: 0px 0px 0px 0px;
+}
+
+.index-item-title {
+	width: 100%;
+	height: 20px;
+	position: absolute;
+	left: 0%;
+	bottom: 0%;
 }
 
 .index-item-title a{
@@ -2375,11 +2435,12 @@ div.trade_status_notconfirmed,div.trade_status_confirmed{
 	opacity: 0.8;
 	white-space: nowrap;
 	width: 100%;
-	height: 20px;
 	position: absolute;
-	left: 0%;
-	bottom: 5%;
 }
+
+/*
+	for amazon like layout end
+*/
 
 #score{
 	display: block;

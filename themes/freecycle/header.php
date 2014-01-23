@@ -20,7 +20,7 @@ wp_enqueue_script('freecycleScript');
 		<?php bp_head(); ?>
 		<?php wp_head(); ?>
 	</head>
-	
+
 	<body <?php body_class(); ?> id="bp-default">
 		<?php do_action( 'bp_before_header' ); ?>
 
@@ -34,7 +34,6 @@ wp_enqueue_script('freecycleScript');
 				<?php } ?>
 			</div>
 		</header><!-- header -->
-		
 		<div class="grobal_nav_div_sp">
 				<nav>
 					<ul class="navi" >
