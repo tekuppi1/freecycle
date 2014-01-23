@@ -744,7 +744,9 @@ function my_setup_nav() {
 	global $user_ID;
 
 	// メッセージ「作成」メニューを削除
-	bp_core_remove_subnav_item(BP_MESSAGES_SLUG, 'compose');
+	if(!current_user_can('administrator')){
+		bp_core_remove_subnav_item(BP_MESSAGES_SLUG, 'compose');
+	}
 
 	// ログインユーザのプロフィールにのみ表示させるメニュー。
 	if($user_ID == bp_displayed_user_id()){
