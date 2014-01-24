@@ -759,7 +759,7 @@ div.trade_status_notconfirmed,div.trade_status_confirmed{
 	position: relative;
 }
 
-.entry img.wp-post-image {
+.entry a.post-img-contents>img {
  	border: 1px solid;
 	width: 100% !important;
 	height: 100% !important;
@@ -931,6 +931,7 @@ input#upload:hover{
 	width: 100%;
 	height: 50px;
 }
+
 /*---------------------------------評価--------------------------------------*/
 div#evaluation{
 	height: 200px;
@@ -1831,6 +1832,11 @@ input#upload:hover{
 	display: block;
 	font-size: 1.3em !important;
 }*/
+
+#latestEntries ul li.thumbnailBox img{
+	width: 100%;
+	height: 50px;
+}
 
 /*---------------------------------評価--------------------------------------*/
 div#evaluation{
@@ -2751,6 +2757,11 @@ input#upload:hover{
 	display: block;
 	font-size: 1.3em !important;
 }*/
+
+#latestEntries ul li.thumbnailBox img{
+	width: 100%;
+	height: 50px;
+}
 
 /*---------------------------------評価--------------------------------------*/
 div#evaluation{
