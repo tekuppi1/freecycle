@@ -41,8 +41,7 @@ wp_enqueue_script('freecycleScript');
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					　		<?php } ?>
-					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/about"; ?>" >TexChangeとは</a></li>
-					　		<li class="grobal_nav"><a href="http://texchg.com/guide" >使い方ガイド</a></li>
+					　		<li class="grobal_nav"><a href="http://texchg.com/how-to-use" >How to use</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/review" >利用者の声</a></li>
 					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>			
@@ -74,8 +73,7 @@ wp_enqueue_script('freecycleScript');
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					　		<?php } ?>
-					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/about"; ?>" >TexChangeとは</a></li>
-					　		<li class="grobal_nav"><a href="http://texchg.com/guide" >使い方ガイド</a></li>
+					　		<li class="grobal_nav"><a href="http://texchg.com/how-to-use" >How to use</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/review" >利用者の声</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
 					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>
@@ -83,7 +81,11 @@ wp_enqueue_script('freecycleScript');
 				</div><!-- .grobal_nav_img -->
 </div><!-- .header_img_navi -->
 
-					
+<?php if(!is_user_logged_in()){ ?>
+<div class="whats-tex-button">
+	<a href="<?php echo home_url() . "/about"; ?>"  class="whats-tex-button">初めての方は<br>こちら！！！</a>
+</div>			
+<?php } ?>	
 
 <div class="header_form_">
 		<?php if(bp_is_front_page() || is_archive() || is_search() || is_single()){ ?>

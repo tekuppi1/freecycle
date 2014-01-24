@@ -60,7 +60,6 @@
 
 		</div><!-- .padder -->
 		
-		<div id="pagetop_link"><a href="#logo">Go to pagetop</a></div>
 		
 	</div><!-- #content -->
 

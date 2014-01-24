@@ -671,6 +671,42 @@ select#cat{
 	margin: 0 auto;
 }
 
+/*
+				初めてボタン
+*/
+a.whats-tex-button{
+	width:100%;
+  	color:#ffffff;
+  	background:orange;
+  	font-size: 1.7em;
+  	font-weight:bold;
+  	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
+  	text-align:center;
+  	display:block;
+  	margin: 0 auto;
+  	text-decoration:none;
+  	border:1px solid #225588;
+  	padding:12px 0 8px 0;
+  	border-radius:5px;
+  	box-shadow:1px 2px 2px rgba(0,0,0,0.3), 0px 1px 0px rgba(255,255,255,0.5) inset, 0px -1px 0px rgba(255,255,255,0.2) inset;
+  	background-image: -moz-linear-gradient(top, #ffa61a, #ffcb4f);
+	background-image: -ms-linear-gradient(top, #ffa61a, #ffcb4f);
+	background-image: -o-linear-gradient(top, #ffa61a, #ffcb4f);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#ffa61a), 									to(#ffcb4f));
+	background-image: -webkit-linear-gradient(top, #ffa61a, #ffcb4f);
+	background-image: linear-gradient(top, #ffa61a, #ffcb4f);
+  }
+  
+ a.whats-tex-button:hover{
+ 	background-image: -moz-linear-gradient(top, #03cdff, #cffeff);
+	background-image: -ms-linear-gradient(top, #03cdff, #cffeff);
+	background-image: -o-linear-gradient(top, #03cdff, #cffeff);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#03cdff), 									to(#cffeff));
+	background-image: -webkit-linear-gradient(top, #03cdff, #cffeff);
+	background-image: linear-gradient(top, #03cdff, #cffeff);
+	opacity: 0.7;
+ }
+  
 /*コンテンツ部分*/
 
 
@@ -891,6 +927,10 @@ input#upload:hover{
 	font-size: 1.3em !important;
 }*/
 
+#latestEntries ul li.thumbnailBox img{
+	width: 100%;
+	height: 50px;
+}
 /*---------------------------------評価--------------------------------------*/
 div#evaluation{
 	height: 200px;
@@ -1090,12 +1130,12 @@ textarea{
 	font-size: 1em;
 }
 
-img{
+/*img{
 	width: 120;
 	height: 120;
 }
 
-/*img:after{
+img:after{
 	content: "";
     clear: both;
     height: 0;
@@ -1293,7 +1333,6 @@ div#header_copy  img{
 /*ヘッダーイメージ*/
 .header_img_navi{
 	width: 100%;
-	float:left;
 }
 
 .header_img_navi img{
@@ -1561,6 +1600,41 @@ select#cat{
 	left: 50px;*/	
 }
 
+div.whats-tex-button{
+}
+a.whats-tex-button{
+	width:100%;
+  	color:#ffffff;
+  	background:orange;
+  	font-size: 1.7em;
+  	font-weight:bold;
+  	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
+  	text-align:center;
+  	display:block;
+  	margin: 0 auto;
+  	text-decoration:none;
+  	border:1px solid #225588;
+  	padding:12px 0 8px 0;
+  	border-radius:5px;
+  	box-shadow:1px 2px 2px rgba(0,0,0,0.3), 0px 1px 0px rgba(255,255,255,0.5) inset, 0px -1px 0px rgba(255,255,255,0.2) inset;
+  	background-image: -moz-linear-gradient(top, #ffa61a, #ffcb4f);
+	background-image: -ms-linear-gradient(top, #ffa61a, #ffcb4f);
+	background-image: -o-linear-gradient(top, #ffa61a, #ffcb4f);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#ffa61a), 									to(#ffcb4f));
+	background-image: -webkit-linear-gradient(top, #ffa61a, #ffcb4f);
+	background-image: linear-gradient(top, #ffa61a, #ffcb4f);
+  }
+  
+ a.whats-tex-button:hover{
+ 	background-image: -moz-linear-gradient(top, #03cdff, #cffeff);
+	background-image: -ms-linear-gradient(top, #03cdff, #cffeff);
+	background-image: -o-linear-gradient(top, #03cdff, #cffeff);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#03cdff), 									to(#cffeff));
+	background-image: -webkit-linear-gradient(top, #03cdff, #cffeff);
+	background-image: linear-gradient(top, #03cdff, #cffeff);
+	opacity: 0.7;
+ }
+
 /*コンテンツ部分*/
 
 
@@ -1608,7 +1682,7 @@ div.trade_status_notconfirmed,div.trade_status_confirmed{
 .entry img.wp-post-image {
  	border: 1px solid;
 	width: 100% !important;
-	height: 100% !important;
+	height: 100% !important; 
 }
 
 .posts-row {
@@ -1956,12 +2030,12 @@ textarea{
 	font-size: 1em;
 }
 
-img{
+/*img{
 	width: 200;
 	height: 200;
 }
 
-/*img:after{
+img:after{
 	content: "";
     clear: both;
     height: 0;
@@ -2439,6 +2513,39 @@ select#cat{
 	margin: 0 auto;
 	
 }
+
+a.whats-tex-button{
+	width:100%;
+  	color:#ffffff;
+  	background:orange;
+  	font-size: 1.7em;
+  	font-weight:bold;
+  	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
+  	text-align:center;
+  	display:block;
+  	margin: 0 auto;
+  	text-decoration:none;
+  	border:1px solid #225588;
+  	padding:12px 0 8px 0;
+  	border-radius:5px;
+  	box-shadow:1px 2px 2px rgba(0,0,0,0.3), 0px 1px 0px rgba(255,255,255,0.5) inset, 0px -1px 0px rgba(255,255,255,0.2) inset;
+  	background-image: -moz-linear-gradient(top, #ffa61a, #ffcb4f);
+	background-image: -ms-linear-gradient(top, #ffa61a, #ffcb4f);
+	background-image: -o-linear-gradient(top, #ffa61a, #ffcb4f);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#ffa61a), 									to(#ffcb4f));
+	background-image: -webkit-linear-gradient(top, #ffa61a, #ffcb4f);
+	background-image: linear-gradient(top, #ffa61a, #ffcb4f);
+  }
+  
+ a.whats-tex-button:hover{
+ 	background-image: -moz-linear-gradient(top, #03cdff, #cffeff);
+	background-image: -ms-linear-gradient(top, #03cdff, #cffeff);
+	background-image: -o-linear-gradient(top, #03cdff, #cffeff);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#03cdff), 									to(#cffeff));
+	background-image: -webkit-linear-gradient(top, #03cdff, #cffeff);
+	background-image: linear-gradient(top, #03cdff, #cffeff);
+	opacity: 0.7;
+ }
 
 /*コンテンツ部分*/
 
