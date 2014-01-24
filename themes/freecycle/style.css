@@ -554,7 +554,9 @@ nav li:last-child a {
 
 
 
-　/*サーチバー*/
+/*
+                 サーチバー
+*/
 
 /*hr.line-search{
 	margin: 1em 0 1em;
@@ -592,7 +594,7 @@ nav li:last-child a {
 	margin:auto;
 	padding: 3px;
 	display: block;
-	width: 195px;
+	width: 170px;
 	height: 25px;
 	font: bold 1.1em/1.0 "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
@@ -637,6 +639,36 @@ nav li:last-child a {
 
 #searchform_submit{
 	float: left;
+}
+
+/*
+				ヘッダーカテゴリ
+*/
+
+div#categories-header{
+	width: 100%;
+}
+
+h3.categories_h3{
+	font: normal bold 0.8em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
+	text-align: center;
+	padding-left: 3px;
+	background-color: #fff;
+	border: none;
+	color: gray;
+	margin: 3px 0 3px;
+}
+
+select#cat{
+	display: block;
+	width: 80%;
+	margin: 0 auto;
 }
 
 /*コンテンツ部分*/
@@ -1497,6 +1529,38 @@ div.header_img_navi_contents{
 	display: none;
 }
 
+/*
+				ヘッダーカテゴリ
+*/
+
+div#categories-header{
+	width: 100%;
+}
+
+h3.categories_h3{
+	font: normal bold 0.8em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
+	text-align: center;
+	padding-left: 3px;
+	background-color: #fff;
+	border: none;
+	color: gray;
+	margin: 3px 0 3px;
+}
+
+select#cat{
+	display: block;
+	width: 80%;
+	margin: 0 auto;
+	/*position: relative;
+	left: 50px;*/	
+}
+
 /*コンテンツ部分*/
 
 
@@ -2343,6 +2407,37 @@ div.grobal_nav_div  li a:hover{
 
 #blog-search h2.pagetitle{
 	display: none;
+}
+
+/*
+				ヘッダーカテゴリ
+*/
+
+div#categories-header{
+	width: 100%;
+}
+
+h3.categories_h3{
+	font: normal bold 0.8em/1.4 "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
+	text-align: center;
+	padding-left: 3px;
+	background-color: #fff;
+	border: none;
+	color: gray;
+	margin: 3px 0 3px;
+}
+
+select#cat{
+	display: block;
+	width: 80%;
+	margin: 0 auto;
+	
 }
 
 /*コンテンツ部分*/

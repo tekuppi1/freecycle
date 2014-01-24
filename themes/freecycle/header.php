@@ -106,6 +106,39 @@ wp_enqueue_script('freecycleScript');
 						</div> 
 				</form>	
 	</div><!-- 検索バー -->
+	
+	<div id="categories-header" class="widget widget_categories">
+			<h3 class="categories_h3">カテゴリー検索はこちら</h3>
+			<select name='cat' id='cat' class='postform' >
+				<option value='-1'>カテゴリーを選択</option>
+				<option class="level-0" value="24">実用書&nbsp;&nbsp;(49)</option>
+				<option class="level-0" value="23">小説&nbsp;&nbsp;(30)</option>
+				<option class="level-0" value="21">就活&nbsp;&nbsp;(13)</option>
+				<option class="level-0" value="25">教科書・参考書&nbsp;&nbsp;(119)</option>
+				<option class="level-1" value="26">&nbsp;&nbsp;&nbsp;全学教養&nbsp;&nbsp;(5)</option>
+				<option class="level-1" value="18">&nbsp;&nbsp;&nbsp;工学部&nbsp;&nbsp;(10)</option>
+				<option class="level-1" value="15">&nbsp;&nbsp;&nbsp;情報文化学部（社会システム情報）&nbsp;&nbsp;(1)</option>
+				<option class="level-1" value="13">&nbsp;&nbsp;&nbsp;教育学部&nbsp;&nbsp;(1)</option>
+				<option class="level-1" value="14">&nbsp;&nbsp;&nbsp;文学部&nbsp;&nbsp;(3)</option>
+				<option class="level-1" value="28">&nbsp;&nbsp;&nbsp;法学部&nbsp;&nbsp;(41)</option>
+				<option class="level-1" value="12">&nbsp;&nbsp;&nbsp;経済学部&nbsp;&nbsp;(42)</option>
+				<option class="level-1" value="27">&nbsp;&nbsp;&nbsp;語学&nbsp;&nbsp;(12)</option>
+				<option class="level-0" value="22">漫画&nbsp;&nbsp;(9)</option>
+			</select>
+
+<script type='text/javascript'>
+/* <![CDATA[ */
+	var dropdown = document.getElementById("cat");
+	function onCatChange() {
+		if ( dropdown.options[dropdown.selectedIndex].value > 0 ) {
+			location.href = "http://texchg.com/?cat="+dropdown.options[dropdown.selectedIndex].value;
+		}
+	}
+	dropdown.onchange = onCatChange;
+/* ]]> */
+</script>
+
+	</div><!-- categories-header -->
 </div>	
 		<!--<hr class="line-search"> -->
 		<?php } ?>
