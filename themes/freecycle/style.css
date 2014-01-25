@@ -35,11 +35,9 @@ input[type="button" ][disabled="true"]:hover{
 * {
     padding: 0;
     margin: 0;
-	background: #fff;
 }
 
 html{
-	background: #fff;
 	width: 100%;
 	height: 100%;
 }
@@ -359,8 +357,10 @@ div#header_copy{
 
 /* ヘッダーフォーム */
 
-div.header_form_{
-	background-color: #fff;
+div.header_form{
+	background-color: #FBA848;
+	padding: 0 0 5px;
+	border-radius: 4px;
 }
 
 form[name=login-form]{
@@ -575,7 +575,6 @@ nav li:last-child a {
 	display: block;
 	margin: 0 auto;
 	padding: 8px 9px 6px 9px;
-	background: #FBA848;
 	border-radius: 10px;
 	width: 95%;
 	height: 55px;
@@ -626,7 +625,7 @@ nav li:last-child a {
 	padding: 0;
 	margin-bottom: 3px;
 	width: 95%;
-	height: 20px;
+	height: 22px;
 }
 
 #searchform{
@@ -659,9 +658,9 @@ h3.categories_h3{
 		sans-serif;
 	text-align: center;
 	padding-left: 3px;
-	background-color: #fff;
+	background-color: #FBA848;
 	border: none;
-	color: gray;
+	color: #fff;
 	margin: 3px 0 3px;
 }
 
@@ -675,27 +674,21 @@ select#cat{
 				初めてボタン
 */
 a.whats-tex-button{
-	width:100%;
+	width:90%;
   	color:#ffffff;
-  	background:orange;
+  	background-color: #1AB7EA;
   	font-size: 1.7em;
   	font-weight:bold;
   	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
   	text-align:center;
   	display:block;
-  	margin: 0 auto;
+  	margin: 3px auto;
   	text-decoration:none;
   	border:1px solid #225588;
   	padding:12px 0 8px 0;
   	border-radius:5px;
   	box-shadow:1px 2px 2px rgba(0,0,0,0.3), 0px 1px 0px rgba(255,255,255,0.5) inset, 0px -1px 0px rgba(255,255,255,0.2) inset;
-  	background-image: -moz-linear-gradient(top, #ffa61a, #ffcb4f);
-	background-image: -ms-linear-gradient(top, #ffa61a, #ffcb4f);
-	background-image: -o-linear-gradient(top, #ffa61a, #ffcb4f);
-	background-image: -webkit-gradient(linear, center top, center bottom, from(#ffa61a), 									to(#ffcb4f));
-	background-image: -webkit-linear-gradient(top, #ffa61a, #ffcb4f);
-	background-image: linear-gradient(top, #ffa61a, #ffcb4f);
-  }
+ }
   
  a.whats-tex-button:hover{
  	background-image: -moz-linear-gradient(top, #03cdff, #cffeff);
@@ -994,9 +987,23 @@ div#sidebar-me h4{
 
 
 /*ページトップに戻るボタン*/
-#pagetop_link{
-	text-align: right;
+div#pagetop_link{
+	width: 100%;
 }
+#pagetop_link a{
+	text-align: center;
+	display: block;
+	width: 100%;
+	font-size: 1.2em;
+	border-radius: 4px;
+	background-image: -moz-linear-gradient(top, #09a1ab, #9aaeba);
+	background-image: -ms-linear-gradient(top, #09a1ab, #9aaeba);
+	background-image: -o-linear-gradient(top, #09a1ab, #9aaeba);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#09a1ab), to(#9aaeba));
+	background-image: -webkit-linear-gradient(top, #09a1ab, #9aaeba);
+	background-image: linear-gradient(top, #09a1ab, #9aaeba);
+}
+
 /*フッター部分*/
 
 #footer{
@@ -1345,8 +1352,10 @@ div#header_copy  img{
 
 /* ヘッダーフォーム */
 
-div.header_form_{
-	background-color: #fff;
+div.header_form{
+	background-color: #FBA848;
+	padding: 0 0 5px;
+	border-radius: 4px;
 }
 
 form#header-login-form{
@@ -1356,7 +1365,6 @@ form#header-login-form{
 	margin-bottom: 1px;
 	margin-top: 1px;
 	padding: 7px;
-	background: orange;
 	border-radius: 10px;
 	width: 60%;
 	clear: both;
@@ -1587,9 +1595,9 @@ h3.categories_h3{
 		sans-serif;
 	text-align: center;
 	padding-left: 3px;
-	background-color: #fff;
+	background-color: #FBA848;
 	border: none;
-	color: gray;
+	color: #fff;
 	margin: 3px 0 3px;
 }
 
@@ -1604,27 +1612,21 @@ select#cat{
 div.whats-tex-button{
 }
 a.whats-tex-button{
-	width:100%;
+	width:90%;
   	color:#ffffff;
-  	background:orange;
+  	background-color: #1AB7EA;
   	font-size: 1.7em;
   	font-weight:bold;
   	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
   	text-align:center;
   	display:block;
-  	margin: 0 auto;
+  	margin: 3px auto;
   	text-decoration:none;
   	border:1px solid #225588;
   	padding:12px 0 8px 0;
   	border-radius:5px;
   	box-shadow:1px 2px 2px rgba(0,0,0,0.3), 0px 1px 0px rgba(255,255,255,0.5) inset, 0px -1px 0px rgba(255,255,255,0.2) inset;
-  	background-image: -moz-linear-gradient(top, #ffa61a, #ffcb4f);
-	background-image: -ms-linear-gradient(top, #ffa61a, #ffcb4f);
-	background-image: -o-linear-gradient(top, #ffa61a, #ffcb4f);
-	background-image: -webkit-gradient(linear, center top, center bottom, from(#ffa61a), 									to(#ffcb4f));
-	background-image: -webkit-linear-gradient(top, #ffa61a, #ffcb4f);
-	background-image: linear-gradient(top, #ffa61a, #ffcb4f);
-  }
+ }
   
  a.whats-tex-button:hover{
  	background-image: -moz-linear-gradient(top, #03cdff, #cffeff);
@@ -1896,9 +1898,21 @@ div#sidebar-me h4{
 }
 
 /*ページトップに戻るボタン*/
-#pagetop_link{
-	text-align: right;
+
+#pagetop_link a{
+	text-align: center;
+	display: block;
+	width: 100%;
+	font-size: 1.2em;
+	border-radius: 4px;
+	background-image: -moz-linear-gradient(top, #09a1ab, #9aaeba);
+	background-image: -ms-linear-gradient(top, #09a1ab, #9aaeba);
+	background-image: -o-linear-gradient(top, #09a1ab, #9aaeba);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#09a1ab), to(#9aaeba));
+	background-image: -webkit-linear-gradient(top, #09a1ab, #9aaeba);
+	background-image: linear-gradient(top, #09a1ab, #9aaeba);
 }
+
 /*フッター部分*/
 
 #footer{
@@ -2245,8 +2259,12 @@ div#must_checkbox{
 }
 
 /* ヘッダーフォーム */
-div.header_form_{
-	background-color: #fff;
+div.header_form{
+	background-color: #FBA848;
+	padding: 0 0 5px;
+	border-radius: 4px;
+	width: 95%;
+	margin: 0 auto;
 }
 
 form[name=login-form]{
@@ -2384,7 +2402,7 @@ div.grobal_nav_div  li{
 }
 
 div.grobal_nav_div  li:first-child{
-	margin-left: 10px;
+	margin-left: 125px;
 }
 
 div.grobal_nav_div  li:last-child{
@@ -2395,7 +2413,7 @@ div.grobal_nav_div  li:last-child{
 
 div.grobal_nav_div  li a{
 	color: black !important;
-	font-size: 12px;
+	font-size: 15px;
 	display: block;
 	/*background: gold;*/
 	text-decoration: none;
@@ -2420,7 +2438,6 @@ div.grobal_nav_div  li a:hover{
 	display: block;
 	margin: 0 auto;
 	padding: 5px 8px 5px 8px;
-	background: orange;
 	border-radius: 10px;
 	width:90%;
 	height: 27px;
@@ -2507,9 +2524,9 @@ h3.categories_h3{
 		sans-serif;
 	text-align: center;
 	padding-left: 3px;
-	background-color: #fff;
+	background-color: #FBA848;
 	border: none;
-	color: gray;
+	color: #fff;
 	margin: 3px 0 3px;
 }
 
@@ -2521,27 +2538,21 @@ select#cat{
 }
 
 a.whats-tex-button{
-	width:100%;
+	width:60%;
   	color:#ffffff;
-  	background:orange;
+  	background-color: #1AB7EA;
   	font-size: 1.7em;
   	font-weight:bold;
   	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
   	text-align:center;
   	display:block;
-  	margin: 0 auto;
+  	margin: 3px auto;
   	text-decoration:none;
   	border:1px solid #225588;
   	padding:12px 0 8px 0;
   	border-radius:5px;
   	box-shadow:1px 2px 2px rgba(0,0,0,0.3), 0px 1px 0px rgba(255,255,255,0.5) inset, 0px -1px 0px rgba(255,255,255,0.2) inset;
-  	background-image: -moz-linear-gradient(top, #ffa61a, #ffcb4f);
-	background-image: -ms-linear-gradient(top, #ffa61a, #ffcb4f);
-	background-image: -o-linear-gradient(top, #ffa61a, #ffcb4f);
-	background-image: -webkit-gradient(linear, center top, center bottom, from(#ffa61a), 									to(#ffcb4f));
-	background-image: -webkit-linear-gradient(top, #ffa61a, #ffcb4f);
-	background-image: linear-gradient(top, #ffa61a, #ffcb4f);
-  }
+ }
   
  a.whats-tex-button:hover{
  	background-image: -moz-linear-gradient(top, #03cdff, #cffeff);
@@ -2817,8 +2828,18 @@ div#sidebar-me h4{
 }
 
 /*ページトップに戻るボタン*/
-#pagetop_link{
-	text-align: right;
+#pagetop_link a{
+	text-align: center;
+	display: block;
+	width: 100%;
+	font-size: 1.2em;
+	border-radius: 4px;
+	background-image: -moz-linear-gradient(top, #09a1ab, #9aaeba);
+	background-image: -ms-linear-gradient(top, #09a1ab, #9aaeba);
+	background-image: -o-linear-gradient(top, #09a1ab, #9aaeba);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#09a1ab), to(#9aaeba));
+	background-image: -webkit-linear-gradient(top, #09a1ab, #9aaeba);
+	background-image: linear-gradient(top, #09a1ab, #9aaeba);
 }
 /*フッター部分*/
 

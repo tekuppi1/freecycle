@@ -83,11 +83,11 @@ wp_enqueue_script('freecycleScript');
 
 <?php if(!is_user_logged_in()){ ?>
 <div class="whats-tex-button">
-	<a href="<?php echo home_url() . "/about"; ?>"  class="whats-tex-button">初めての方は<br>こちら！！！</a>
+	<a href="<?php echo home_url() . "/about"; ?>"  class="whats-tex-button">初めての方はこちら！</a>
 </div>			
 <?php } ?>	
 
-<div class="header_form_">
+<div class="header_form">
 		<?php if(bp_is_front_page() || is_archive() || is_search() || is_single()){ ?>
 	<div id="search-23" class="widget widget_search"><!-- 検索バー -->
 				<form role="search" method="get" id="searchform_main" action="<?php echo home_url(); ?>">
@@ -130,7 +130,7 @@ wp_enqueue_script('freecycleScript');
 </script>
 
 	</div><!-- categories-header -->
-</div>	
+</div><!-- header_form -->
 		<!--<hr class="line-search"> -->
 		<?php } ?>
 		<div id="container">
