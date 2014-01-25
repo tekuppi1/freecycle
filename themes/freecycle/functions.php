@@ -1169,6 +1169,13 @@ function disable_admin_pages() {
 // short code
 add_shortcode('home_url','home_url');
 
+function endsWith($haystack, $needle){
+    $length = (strlen($haystack) - strlen($needle));
+    // 文字列長が足りていない場合はFALSEを返します。
+    if($length < 0) return FALSE;
+    return strpos($haystack, $needle, $length) !== FALSE;
+}
+
 /**
  * override default function
  * header image is always get_header_image()
