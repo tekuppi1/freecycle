@@ -673,6 +673,9 @@ select#cat{
 /*
 				初めてボタン
 */
+div.whats-tex-button{
+	background-color: #fff;
+}
 a.whats-tex-button{
 	width:90%;
   	color:#ffffff;
@@ -1610,7 +1613,9 @@ select#cat{
 }
 
 div.whats-tex-button{
+	background-color: #fff;
 }
+
 a.whats-tex-button{
 	width:90%;
   	color:#ffffff;
@@ -2539,6 +2544,10 @@ select#cat{
 	margin: 0 auto;
 	
 }
+div.whats-tex-button{
+	background-color: #fff;
+}
+
 
 a.whats-tex-button{
 	width:60%;
