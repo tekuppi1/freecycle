@@ -675,7 +675,8 @@ select#cat{
 */
 div.whats-tex-button{
 	background-color: #fff;
-	padding:	3px auto;
+	padding:	0;
+	margin: 0;
 }
 a.whats-tex-button{
 	width:90%;
@@ -686,7 +687,7 @@ a.whats-tex-button{
   	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
   	text-align:center;
   	display:block;
-  	margin: 0 auto;
+  	margin: 3px auto;
    	text-decoration:none;
   	border:1px solid #225588;
   	padding:12px 0 8px 0;
@@ -1627,7 +1628,7 @@ a.whats-tex-button{
   	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
   	text-align:center;
   	display:block;
-  	margin: 0 auto;
+  	margin: 3px auto;
   	text-decoration:none;
   	border:1px solid #225588;
   	padding:12px 0 8px 0;
@@ -2548,7 +2549,8 @@ select#cat{
 }
 div.whats-tex-button{
 	background-color: #fff;
-	padding: 3px auto;
+	height: 48px;
+	padding-top: 3px;
 }
 
 
@@ -2561,7 +2563,7 @@ a.whats-tex-button{
   	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
   	text-align:center;
   	display:block;
-  	margin: 0 auto;
+  	margin: 0 auto 3px;
     text-decoration:none;
   	border:1px solid #225588;
   	padding:12px 0 8px 0;
