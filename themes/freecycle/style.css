@@ -686,6 +686,7 @@ a.whats-tex-button{
   	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
   	text-align:center;
   	display:block;
+  	margin: 0 auto;
    	text-decoration:none;
   	border:1px solid #225588;
   	padding:12px 0 8px 0;
@@ -1626,6 +1627,7 @@ a.whats-tex-button{
   	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
   	text-align:center;
   	display:block;
+  	margin: 0 auto;
   	text-decoration:none;
   	border:1px solid #225588;
   	padding:12px 0 8px 0;
@@ -2547,7 +2549,6 @@ select#cat{
 div.whats-tex-button{
 	background-color: #fff;
 	padding: 3px auto;
-
 }
 
 
@@ -2560,6 +2561,7 @@ a.whats-tex-button{
   	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
   	text-align:center;
   	display:block;
+  	margin: 0 auto;
     text-decoration:none;
   	border:1px solid #225588;
   	padding:12px 0 8px 0;
