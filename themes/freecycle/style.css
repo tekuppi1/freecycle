@@ -675,6 +675,7 @@ select#cat{
 */
 div.whats-tex-button{
 	background-color: #fff;
+	padding:	3px auto;
 }
 a.whats-tex-button{
 	width:90%;
@@ -685,8 +686,7 @@ a.whats-tex-button{
   	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
   	text-align:center;
   	display:block;
-  	margin: 3px auto;
-  	text-decoration:none;
+   	text-decoration:none;
   	border:1px solid #225588;
   	padding:12px 0 8px 0;
   	border-radius:5px;
@@ -1614,7 +1614,8 @@ select#cat{
 
 div.whats-tex-button{
 	background-color: #fff;
-}
+	padding: 3px auto;
+	}
 
 a.whats-tex-button{
 	width:90%;
@@ -1625,7 +1626,6 @@ a.whats-tex-button{
   	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
   	text-align:center;
   	display:block;
-  	margin: 3px auto;
   	text-decoration:none;
   	border:1px solid #225588;
   	padding:12px 0 8px 0;
@@ -2546,6 +2546,8 @@ select#cat{
 }
 div.whats-tex-button{
 	background-color: #fff;
+	padding: 3px auto;
+
 }
 
 
@@ -2558,8 +2560,7 @@ a.whats-tex-button{
   	text-shadow:0 -1px 0px #225588,0 -2px 0px #225588;
   	text-align:center;
   	display:block;
-  	margin: 3px auto;
-  	text-decoration:none;
+    text-decoration:none;
   	border:1px solid #225588;
   	padding:12px 0 8px 0;
   	border-radius:5px;
