@@ -1036,12 +1036,33 @@ div#pagetop_link{
 	width: 100%;
 	font-size: 1.2em;
 	border-radius: 4px;
-	background-image: -moz-linear-gradient(top, #09a1ab, #9aaeba);
-	background-image: -ms-linear-gradient(top, #09a1ab, #9aaeba);
-	background-image: -o-linear-gradient(top, #09a1ab, #9aaeba);
-	background-image: -webkit-gradient(linear, center top, center bottom, from(#09a1ab), to(#9aaeba));
-	background-image: -webkit-linear-gradient(top, #09a1ab, #9aaeba);
-	background-image: linear-gradient(top, #09a1ab, #9aaeba);
+	margin: 3px auto;
+	-moz-border-radius: 19px;
+-webkit-border-radius: 19px;
+border-radius: 19px;
+/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+-moz-box-shadow: 0px 0px 6px #000000;
+-webkit-box-shadow: 0px 0px 6px #000000;
+box-shadow: 0px 0px 6px #000000;
+/*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#08e5ff', endColorstr = '#dae3e3');
+/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#08e5ff', endColorstr = '#dae3e3')";
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+background-image: -moz-linear-gradient(top, #08e5ff, #dae3e3);
+background-image: -ms-linear-gradient(top, #08e5ff, #dae3e3);
+background-image: -o-linear-gradient(top, #08e5ff, #dae3e3);
+background-image: -webkit-gradient(linear, center top, center bottom, from(#08e5ff), to(#dae3e3));
+background-image: -webkit-linear-gradient(top, #08e5ff, #dae3e3);
+background-image: linear-gradient(top, #08e5ff, #dae3e3);
+-moz-background-clip: padding;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+/*--IE9 WILL PLACE THE FILTER ON TOP OF THE ROUNDED CORNERS--*/
 }
 
 /*フッター部分*/
@@ -1983,12 +2004,33 @@ div#sidebar-me h4{
 	width: 100%;
 	font-size: 1.2em;
 	border-radius: 4px;
-	background-image: -moz-linear-gradient(top, #09a1ab, #9aaeba);
-	background-image: -ms-linear-gradient(top, #09a1ab, #9aaeba);
-	background-image: -o-linear-gradient(top, #09a1ab, #9aaeba);
-	background-image: -webkit-gradient(linear, center top, center bottom, from(#09a1ab), to(#9aaeba));
-	background-image: -webkit-linear-gradient(top, #09a1ab, #9aaeba);
-	background-image: linear-gradient(top, #09a1ab, #9aaeba);
+	margin: 3px auto;
+	-moz-border-radius: 19px;
+-webkit-border-radius: 19px;
+border-radius: 19px;
+/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+-moz-box-shadow: 0px 0px 6px #000000;
+-webkit-box-shadow: 0px 0px 6px #000000;
+box-shadow: 0px 0px 6px #000000;
+/*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#08e5ff', endColorstr = '#dae3e3');
+/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#08e5ff', endColorstr = '#dae3e3')";
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+background-image: -moz-linear-gradient(top, #08e5ff, #dae3e3);
+background-image: -ms-linear-gradient(top, #08e5ff, #dae3e3);
+background-image: -o-linear-gradient(top, #08e5ff, #dae3e3);
+background-image: -webkit-gradient(linear, center top, center bottom, from(#08e5ff), to(#dae3e3));
+background-image: -webkit-linear-gradient(top, #08e5ff, #dae3e3);
+background-image: linear-gradient(top, #08e5ff, #dae3e3);
+-moz-background-clip: padding;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+/*--IE9 WILL PLACE THE FILTER ON TOP OF THE ROUNDED CORNERS--*/
 }
 
 /*フッター部分*/
@@ -2957,12 +2999,32 @@ div#sidebar-me h4{
 	font-size: 1.2em;
 	border-radius: 4px;
 	margin: 3px auto;
-	background-image: -moz-linear-gradient(top, #09a1ab, #9aaeba);
-	background-image: -ms-linear-gradient(top, #09a1ab, #9aaeba);
-	background-image: -o-linear-gradient(top, #09a1ab, #9aaeba);
-	background-image: -webkit-gradient(linear, center top, center bottom, from(#09a1ab), to(#9aaeba));
-	background-image: -webkit-linear-gradient(top, #09a1ab, #9aaeba);
-	background-image: linear-gradient(top, #09a1ab, #9aaeba);
+	-moz-border-radius: 19px;
+-webkit-border-radius: 19px;
+border-radius: 19px;
+/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+-moz-box-shadow: 0px 0px 6px #000000;
+-webkit-box-shadow: 0px 0px 6px #000000;
+box-shadow: 0px 0px 6px #000000;
+/*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#08e5ff', endColorstr = '#dae3e3');
+/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#08e5ff', endColorstr = '#dae3e3')";
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+background-image: -moz-linear-gradient(top, #08e5ff, #dae3e3);
+background-image: -ms-linear-gradient(top, #08e5ff, #dae3e3);
+background-image: -o-linear-gradient(top, #08e5ff, #dae3e3);
+background-image: -webkit-gradient(linear, center top, center bottom, from(#08e5ff), to(#dae3e3));
+background-image: -webkit-linear-gradient(top, #08e5ff, #dae3e3);
+background-image: linear-gradient(top, #08e5ff, #dae3e3);
+-moz-background-clip: padding;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+/*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
+/*--IE9 WILL PLACE THE FILTER ON TOP OF THE ROUNDED CORNERS--*/
 }
 /*フッター部分*/
 
