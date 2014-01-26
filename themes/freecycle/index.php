@@ -9,7 +9,7 @@
 		<?php if(endsWith(home_url() . '/', $_SERVER['REQUEST_URI'])) : ?>
 			<div class="page" id="topic-items">
 			<?php
-				$topics_arg = 'category_name=就活';
+				$topics_arg = 'category_name=shukatsu';
 				$topics_query = new WP_Query($topics_arg);
 			?>
 			<?php if ($topics_query->have_posts()) : ?>
