@@ -704,7 +704,34 @@ a.whats-tex-button{
 	background-image: linear-gradient(top, #03cdff, #cffeff);
 	opacity: 0.7;
  }
-  
+ 
+
+/*
+			トピックアイテム
+*/ 
+
+h4#topic-h4{
+	font: bold normal 12px "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
+    color: #FF6600;
+    background-color: #fff;
+}
+
+h4#post-list-h4{
+	font: bold normal 1em "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
+
+}
 /*コンテンツ部分*/
 
 
@@ -1518,7 +1545,6 @@ div.header_img_navi_contents{
 	display: block;
 	margin: 0 auto;
 	padding: 5px;
-	background: orange;
 	border-radius: 10px;
 	width: 95%;
 	height: 55px;
@@ -1645,6 +1671,33 @@ a.whats-tex-button{
 	background-image: linear-gradient(top, #03cdff, #cffeff);
 	opacity: 0.7;
  }
+
+/*
+			トピックアイテム
+*/ 
+
+h4#topic-h4{
+	font: bold normal 12px "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
+    color: #FF6600;
+    background-color: #fff;
+}
+
+h4#post-list-h4{
+	font: bold normal 1em "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
+
+}
 
 /*コンテンツ部分*/
 
@@ -2581,6 +2634,33 @@ a.whats-tex-button{
 	opacity: 0.7;
  }
 
+/*
+			トピックアイテム
+*/ 
+
+h4#topic-h4{
+	font: bold normal 12px "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
+    color: #FF6600;
+    background-color: #fff;
+}
+
+h4#post-list-h4{
+	font: bold normal 1em "メイリオ", Meiryo,
+		"ヒラギノ角ゴ Pro W3",
+		"HIragino Kaku Gothic Pro W3",
+		"HIragino Kaku Gothic Pro",
+		Osaka,
+		"ＭＳ Ｐゴシック", "MS P Gothic",
+		sans-serif;
+
+}
+
 /*コンテンツ部分*/
 
 div.page#blog-latest{
@@ -2851,6 +2931,7 @@ div#sidebar-me h4{
 	width: 100%;
 	font-size: 1.2em;
 	border-radius: 4px;
+	margin: 3px auto;
 	background-image: -moz-linear-gradient(top, #09a1ab, #9aaeba);
 	background-image: -ms-linear-gradient(top, #09a1ab, #9aaeba);
 	background-image: -o-linear-gradient(top, #09a1ab, #9aaeba);

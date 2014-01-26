@@ -13,7 +13,7 @@
 				$topics_query = new WP_Query($topics_arg);
 			?>
 			<?php if ($topics_query->have_posts()) : ?>
-			<h4>注目のカテゴリ:就活</h4>
+			<h4 id="topic-h4">注目のカテゴリ:就活</h4>
 				<?php $count = 1; ?>
 				<?php $max_count = 4; ?>
 				<?php $row = 2; ?>
@@ -57,7 +57,7 @@
 			<a href="<?php echo home_url() . '/?' . $topics_arg ?>"><p>注目の商品をもっと見る</p></a>
 			</div><!-- page -->
 		<?php endif; ?>
-		<h4>商品一覧</h4>
+		<h4 id="post-list-h4">商品一覧</h4>
 		<div class="page" id="blog-latest" role="main">
 
 			<?php if ( have_posts() ) : ?>
