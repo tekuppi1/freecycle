@@ -711,7 +711,7 @@ a.whats-tex-button{
 */ 
 
 h4#topic-h4{
-	font: bold normal 12px "メイリオ", Meiryo,
+	font: bold normal 1.5em "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
 		"HIragino Kaku Gothic Pro W3",
 		"HIragino Kaku Gothic Pro",
@@ -730,7 +730,6 @@ h4#post-list-h4{
 		Osaka,
 		"ＭＳ Ｐゴシック", "MS P Gothic",
 		sans-serif;
-
 }
 /*コンテンツ部分*/
 
@@ -1677,7 +1676,7 @@ a.whats-tex-button{
 */ 
 
 h4#topic-h4{
-	font: bold normal 12px "メイリオ", Meiryo,
+	font: bold normal 1.5em "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
 		"HIragino Kaku Gothic Pro W3",
 		"HIragino Kaku Gothic Pro",
@@ -2639,7 +2638,7 @@ a.whats-tex-button{
 */ 
 
 h4#topic-h4{
-	font: bold normal 12px "メイリオ", Meiryo,
+	font: bold normal 1.5em "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
 		"HIragino Kaku Gothic Pro W3",
 		"HIragino Kaku Gothic Pro",
@@ -2948,6 +2947,7 @@ div#sidebar-me h4{
 #footer{
 	font: italic 0.7em meirio;
 	color: gray;
+	margin: 10px 0;
 }
 
 ul#menu-footer_menu li a{
