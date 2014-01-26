@@ -2326,7 +2326,7 @@ div.header_form{
 	background-color: #FBA848;
 	padding: 0 0 5px;
 	border-radius: 4px;
-	width: 95%;
+	width: 100%;
 	margin: 0 auto;
 }
 
@@ -2465,7 +2465,7 @@ div.grobal_nav_div  li{
 }
 
 div.grobal_nav_div  li:first-child{
-	margin-left: 125px;
+	margin-left: 20px;
 }
 
 div.grobal_nav_div  li:last-child{
