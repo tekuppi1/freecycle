@@ -710,6 +710,10 @@ a.whats-tex-button{
 			トピックアイテム
 */ 
 
+div.page#topic-items{
+	background-color:#FFFF99;
+}
+
 h4#topic-h4{
 	font: bold normal 1.5em "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
@@ -1674,6 +1678,10 @@ a.whats-tex-button{
 /*
 			トピックアイテム
 */ 
+div.page#topic-items{
+	background-color:#FFFF99;
+}
+
 
 h4#topic-h4{
 	font: bold normal 1.5em "メイリオ", Meiryo,
@@ -2636,6 +2644,10 @@ a.whats-tex-button{
 /*
 			トピックアイテム
 */ 
+div.page#topic-items{
+	background-color:#FFFF99;
+}
+
 
 h4#topic-h4{
 	font: bold normal 1.5em "メイリオ", Meiryo,
