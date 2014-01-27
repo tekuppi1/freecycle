@@ -9,11 +9,10 @@
 		<?php if(endsWith(home_url() . '/', $_SERVER['REQUEST_URI'])) : ?>
 			<div class="page" id="topic-items">
 			<?php
-				$topics_arg = 'category_name=shukatsu';
-				$topics_query = new WP_Query($topics_arg);
+				$topics_query = new WP_Query(get_option('topic-items-condition'));
 			?>
 			<?php if ($topics_query->have_posts()) : ?>
-			<h4 id="topic-h4">注目のカテゴリ:就活</h4>
+			<h4 id="topic-h4">注目の商品：<?php echo get_option('topic-items-name')?></h4>
 				<?php $count = 1; ?>
 				<?php $max_count = 4; ?>
 				<?php $row = 2; ?>
@@ -52,9 +51,9 @@
 						</div><!-- post名 -->
 					</div><!-- posts-row -->
 					<hr class="hr-posts-row">
-				<?php endif; ?>			
+				<?php endif; ?>
+				<a href="<?php echo home_url() . '/?' . get_option('topic-items-condition') ?>"><p>注目の商品をもっと見る</p></a>
 			<?php endif; ?>
-			<a href="<?php echo home_url() . '/?' . $topics_arg ?>"><p>注目の商品をもっと見る</p></a>
 			</div><!-- page -->
 		<?php endif; ?>
 		<h4 id="post-list-h4">商品一覧</h4>

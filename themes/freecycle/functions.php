@@ -1196,4 +1196,41 @@ function bp_dtheme_header_style() {
 	</style>
 <?php
 }
+
+/**
+ * add settings menu
+ */
+function add_settings_page() {
+    $siteurl = get_option( 'siteurl' );
+?>
+<div class="wrap">
+    <h2>テクスチェンジ設定</h2>
+    <form method="post" action="options.php">
+    <?php wp_nonce_field('update-options'); ?>
+    <h3>注目商品</h3>
+    <table class="form-table">
+		<tr valign="top">
+		<th scope="row">表示名</th>
+		<td><input type="text" name="topic-items-name" value="<?php echo get_option('topic-items-name'); ?>" /></td>
+		</tr>
+		<tr>
+		<th scope="row">検索条件</th>
+		<td><input type="text" name="topic-items-condition" value="<?php echo get_option('topic-items-condition'); ?>" /></td>
+		</tr>
+    </table>
+    <input type="hidden" name="action" value="update" />
+    <input type="hidden" name="page_options" value="topic-items-name, topic-items-condition" />
+    <p class="submit">
+	<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+	</p>
+    </form>
+</div>
+<?php
+}
+function add_custom_menu() {
+    add_options_page('テクスチェンジ', 'テクスチェンジ', 'read',
+		   __FILE__, 'add_settings_page');
+}
+add_action( 'admin_menu', 'add_custom_menu' );
+ 
 ?>
