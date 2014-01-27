@@ -97,9 +97,9 @@ wp_enqueue_script('freecycleScript');
 					  	</div>
 						<div id="searchform_text_pulldown">
 							<div id="searchform_pulldown">
-								<select name="categories_seachform">
-									<option value="#">すべて</option>
-									<option value="#">ください可能</option>
+								<select name="seachform_itemstatus">
+									<option value="all">すべて</option>
+									<option value="givemeable">ください可能</option>
 								</select>
 							</div>
 							<div id="searchform_submit">

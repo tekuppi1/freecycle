@@ -56,7 +56,8 @@ function add_custom_where($where){
 	global $wpdb;
 	global $table_prefix;
 	// 一覧ページには取引相手確定済の記事を表示しない。
-	if(is_front_page()){
+	// 「ください可能」のみの条件で検索された場合も、同様に表示しない。
+	if(is_front_page() || $_REQUEST['seachform_itemstatus'] == 'givemeable'){
 		$where .= "AND (" . $table_prefix . "fmt_giveme_state.confirmed_flg <> 1 "
 				. " OR " . $table_prefix . "fmt_giveme_state.confirmed_flg is NULL)";
 	}
