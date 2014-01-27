@@ -55,6 +55,12 @@ function add_costom_join($join){
 function add_custom_where($where){
 	global $wpdb;
 	global $table_prefix;
+
+	// 検索結果に固定ページを含めない	
+	if(is_search()) {
+		$where .= "AND post_type = 'post' ";
+	}
+
 	// 一覧ページには取引相手確定済の記事を表示しない。
 	// 「ください可能」のみの条件で検索された場合も、同様に表示しない。
 	if(is_front_page() || $_REQUEST['seachform_itemstatus'] == 'givemeable'){
