@@ -55,10 +55,10 @@ function add_costom_join($join){
 function add_custom_where($where){
 	global $wpdb;
 	global $table_prefix;
-	// 一覧ページには取引完了済みの記事を表示しない。
+	// 一覧ページには取引相手確定済の記事を表示しない。
 	if(is_front_page()){
-		$where .= "AND (" . $table_prefix . "fmt_giveme_state.finished_flg <> 1 "
-				. " OR " . $table_prefix . "fmt_giveme_state.finished_flg is NULL)";
+		$where .= "AND (" . $table_prefix . "fmt_giveme_state.confirmed_flg <> 1 "
+				. " OR " . $table_prefix . "fmt_giveme_state.confirmed_flg is NULL)";
 	}
 	return $where;
 }
