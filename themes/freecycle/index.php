@@ -56,7 +56,8 @@
 			<?php endif; ?>
 			</div><!-- page -->
 		<?php endif; ?>
-		<h4 id="post-list-h4">商品一覧</h4>
+		<h4 id="post-list-h4">商品一覧(<?php global $wp_query; echo $wp_query->found_posts;?>件)
+		</h4>
 		<div class="page" id="blog-latest" role="main">
 
 			<?php if ( have_posts() ) : ?>
