@@ -1174,7 +1174,15 @@ function disable_admin_pages() {
 }
 
 // short code
+function social_login_button(){
+	if(function_exists('gianism_login')){
+    	gianism_login();
+	}
+}
+
 add_shortcode('home_url','home_url');
+add_shortcode('social_login_button','social_login_button');
+
 
 function endsWith($haystack, $needle){
     $length = (strlen($haystack) - strlen($needle));

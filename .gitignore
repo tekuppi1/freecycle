@@ -10,6 +10,7 @@ plugins/buddypress
 plugins/theme-my-login
 plugins/buddypress-translations
 plugins/contact-form-7
+plugins/gianism
 
 #themes
 themes/*.php
