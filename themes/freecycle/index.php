@@ -9,15 +9,16 @@
 		<?php if(endsWith(home_url() . '/', $_SERVER['REQUEST_URI'])) : ?>
 			<div class="page" id="topic-items">
 			<?php
-				$topics_query = new WP_Query(get_option('topic-items-condition'));
+				$static_condition = '&orderby=rand'; // random display
+				$topics_showposts = 4;
+				$topics_query = new WP_Query(get_option('topic-items-condition') . $static_condition . '&showposts=' . $topics_showposts);
 			?>
 			<?php if ($topics_query->have_posts()) : ?>
 			<h4 id="topic-h4">注目の商品：<?php echo get_option('topic-items-name')?></h4>
 				<?php $count = 1; ?>
-				<?php $max_count = 4; ?>
 				<?php $row = 2; ?>
 				<?php $is_closed = false; ?>
-				<?php while ($topics_query->have_posts() && $count <= $max_count) : $topics_query->the_post(); ?>
+				<?php while ($topics_query->have_posts()) : $topics_query->the_post(); ?>
 				<?php if($count%$row == 1) {
 					$is_closed = false;
 				?>
