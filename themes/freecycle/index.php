@@ -55,8 +55,55 @@
 				<?php endif; ?>
 				<a href="<?php echo home_url() . '/?' . get_option('topic-items-condition') ?>"><p>注目の商品をもっと見る</p></a>
 			<?php endif; ?>
-			</div><!-- page -->
+		</div><!-- page -->
+
+		<!-- category roop -->
+		<h3>カテゴリピックアップ</h3>
+		<?php
+			$categories_num = 3; 
+			$categories_showposts = 2; 
+
+			$categories = get_terms('category');
+			$category_keys = array_rand($categories, $categories_num);
+
+			foreach ($category_keys as $key) : $category = $categories[$key];
+				$categories_query =
+					new WP_Query(
+						'category_name=' . $category->slug .
+						'&showposts=' . $categories_showposts .
+						'&orderby=rand');
+				if($categories_query->have_posts()) :
+		?>
+		<h4><?php echo $category->name; ?></h4>
+		<div class="page" id="blog-latest" role="main">
+			<div class="posts-row">
+			<?php
+				while ($categories_query->have_posts()) : $categories_query->the_post();
+			?>
+				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?> class="entry-on-index">
+					<div class="post-content">
+						<div class="entry">	
+							<a href="<?php the_permalink(); ?>" class="post-img-contents"><?php the_post_thumbnail(array(150, 150)) ?></a>					
+							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
+							<span class="index-item-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></span>
+						</div>							
+					</div><!-- post-content -->					
+				</div><!-- post名 -->
+			<?php
+				endwhile;
+			?>
+			</div>
+			<hr class="hr-posts-row">
+			<a href="<?php echo home_url() . '/?category_name=' . $category->slug ?>"><p>全部見る</p></a>
+		</div>
+		<?php
+				endif;
+			endforeach;
+		?>
+		<h5><a href="<?php echo home_url() . "/page/1" ?>">すべての商品を見る(<?php global $wp_query; echo $wp_query->found_posts;?>件)</a><h5>
 		<?php endif; ?>
+
+		<?php if(!endsWith(home_url() . '/', $_SERVER['REQUEST_URI'])) : ?>
 		<h4 id="post-list-h4">商品一覧(<?php global $wp_query; echo $wp_query->found_posts;?>件)
 		</h4>
 		<div class="page" id="blog-latest" role="main">
@@ -65,7 +112,7 @@
 
 				<?php bp_dtheme_content_nav( 'nav-above' ); ?>
 				<?php $count = 1; ?>
-				<?php $row= 2; ?>
+				<?php $row = 2; ?>
 				<?php $is_closed = false; ?>
 				<?php while (have_posts()) : the_post(); ?>
 					<?php do_action( 'bp_before_blog_post' ); ?>
@@ -107,12 +154,12 @@
 
 			<?php endif; ?>
 		</div><!-- page ? -->
+		<?php endif; ?>
 
 		<?php do_action( 'bp_after_blog_home' ); ?>
 
 		</div><!-- .padder -->
-		
-		
+
 	</div><!-- #content -->
 
 	<?php get_sidebar(); ?>
