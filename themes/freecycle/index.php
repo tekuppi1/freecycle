@@ -94,7 +94,7 @@
 			?>
 			</div>
 			<hr class="hr-posts-row">
-			<a href="<?php echo home_url() . '/?category_name=' . $category->slug ?>"><p>全部見る</p></a>
+			<a href="<?php echo home_url() . '/?category_name=' . $category->slug ?>"><p>全部見る(<?php echo $categories_query->found_posts ?>件)</p></a>
 		</div>
 		<?php
 				endif;
