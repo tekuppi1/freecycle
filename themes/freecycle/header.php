@@ -84,7 +84,8 @@ wp_enqueue_script('freecycleScript');
 <?php if(!is_user_logged_in()){ ?>
 <div class="whats-tex-button">
 	<a href="<?php echo home_url() . "/about"; ?>"  class="whats-tex-button">初めての方はこちら！</a>
-</div>			
+</div>
+<?php social_login_button(); ?>
 <?php } ?>	
 
 <div class="header_form">
