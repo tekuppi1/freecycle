@@ -11,6 +11,7 @@ add_action('wp_ajax_bidder_evaluation', 'bidder_evaluation');
 add_action('wp_ajax_finish', 'finish');
 add_action('wp_ajax_new_entry', 'new_entry');
 add_action('wp_ajax_delete_post', 'delete_post');
+add_action('wp_ajax_update_comment', 'update_comment');
 add_action('user_register', 'on_user_added');
 
 function redirect_to_home(){
@@ -473,6 +474,16 @@ function new_entry(){
 
 function delete_post(){
 	wp_delete_post($_POST['postID']);
+	die;
+}
+
+function update_comment(){
+	$comment_ID = $_POST['comment_ID'];
+	$comment_content = $_POST['comment_content'];
+	wp_update_comment(array(
+			'comment_ID' => $comment_ID,
+			'comment_content' => $comment_content
+		));
 	die;
 }
 
@@ -1209,6 +1220,71 @@ function bp_dtheme_header_style() {
 		#header h1 a, #desc { color:#<?php header_textcolor(); ?>; }
 		<?php } ?>
 	</style>
+<?php
+}
+
+/**
+ * override default function
+ * enable to edit comment on single page
+ */
+function bp_dtheme_blog_comments( $comment, $args, $depth ) {
+	$GLOBALS['comment'] = $comment;
+	global $user_ID;
+
+	if ( 'pingback' == $comment->comment_type )
+		return false;
+
+	if ( 1 == $depth )
+		$avatar_size = 50;
+	else
+		$avatar_size = 25;
+	?>
+
+	<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
+		<div class="comment-avatar-box">
+			<div class="avb">
+				<a href="<?php echo get_comment_author_url(); ?>" rel="nofollow">
+					<?php if ( $comment->user_id ) : ?>
+						<?php echo bp_core_fetch_avatar( array( 'item_id' => $comment->user_id, 'width' => $avatar_size, 'height' => $avatar_size, 'email' => $comment->comment_author_email ) ); ?>
+					<?php else : ?>
+						<?php echo get_avatar( $comment, $avatar_size ); ?>
+					<?php endif; ?>
+				</a>
+			</div>
+		</div>
+
+		<div class="comment-content">
+			<div class="comment-meta">
+				<p>
+					<?php
+						/* translators: 1: comment author url, 2: comment author name, 3: comment permalink, 4: comment date/timestamp*/
+						printf( __( '<a href="%1$s" rel="nofollow">%2$s</a> said on <a href="%3$s"><span class="time-since">%4$s</span></a>', 'buddypress' ), get_comment_author_url(), get_comment_author(), get_comment_link(), get_comment_date() );
+					?>
+				</p>
+			</div>
+
+			<div class="comment-entry">
+				<?php if ( $comment->comment_approved == '0' ) : ?>
+				 	<em class="moderate"><?php _e( 'Your comment is awaiting moderation.', 'buddypress' ); ?></em>
+				<?php endif; ?>
+
+				<?php comment_text(); ?>
+			</div>
+
+			<div class="comment-options">
+					<?php if ( comments_open() ) : ?>
+						<?php comment_reply_link( array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ); ?>
+					<?php endif; ?>
+
+					<?php if ( $user_ID == $comment->user_id ) : ?>
+						<?php //printf( '<a class="button comment-edit-link bp-secondary-action" href="%1$s" title="%2$s">%3$s</a> ', get_update_comment_link( $comment->comment_ID ), esc_attr__( 'Edit comment', 'buddypress' ), __( 'Edit', 'buddypress' ) ); ?>
+						<?php printf( '<a class="button comment-edit-link bp-secondary-action edit-button" onClick="%1$s" title="%2$s">%3$s</a> ', 'onClickEditCommentButton('. $comment->comment_ID .')', esc_attr__( 'Edit comment', 'buddypress' ), __( 'Edit', 'buddypress' ) ); ?>
+					<?php endif; ?>
+
+			</div>
+
+		</div>
+
 <?php
 }
 

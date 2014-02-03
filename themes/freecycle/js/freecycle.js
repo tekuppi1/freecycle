@@ -85,3 +85,33 @@ function onConfirmGiveme(postID, url){
 		jQuery("input[type=button]").attr("disabled",false);
 	}
 }
+
+function onClickEditCommentButton(commentID){
+	var commentArea = jQuery("#comment-" + commentID + " .comment-entry");
+	var currentComment = jQuery.trim(commentArea.text());
+	var editForm = '<textarea name="comment" area-required="true">' + currentComment + '</textarea>'
+	var editButton = jQuery("#comment-" + commentID + " .comment-options .edit-button");
+	var confirmButton = '<a class="button comment-edit-link bp-secondary-action confirm-button" onClick="onClickConfirmCommentButton(' + commentID + ')" title="編集確定">確定</a>'
+
+	commentArea.hide();
+	commentArea.after(editForm);
+	editButton.hide();
+	editButton.after(confirmButton);
+}
+
+function onClickConfirmCommentButton(commentID){
+	var commentArea = jQuery("#comment-" + commentID + " .comment-entry");
+	var editForm = jQuery("#comment-" + commentID + " .comment-content textarea");
+	var updatedComment = editForm.val();
+	var editButton = jQuery("#comment-" + commentID + " .comment-options .edit-button");
+	var confirmButton = jQuery("#comment-" + commentID + " .comment-options .confirm-button");
+
+	commentArea.text(updatedComment);
+
+	editForm.remove();
+	confirmButton.remove();
+
+	commentArea.show();
+	editButton.show();
+	updateComment(commentID, updatedComment);
+}

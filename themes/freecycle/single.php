@@ -159,6 +159,21 @@
 			jQuery("#finish").replaceWith('<div id="evaluation">落札者の評価:</br><select name="score" id="score"><option value="invalid" selected>--選択--</option><option value="5" >とても良い</option><option value="4" >良い</option><option value="3" >普通</option><option value="2" >悪い</option><option value="1" >とても悪い</option></select></br>コメント(任意 100字以内 改行も1文字と数えます)</br><textarea name="trade_comment" id="trade_comment" rows="5" cols="40"></textarea></br><input type="button" id="evaluation" value="評価する" onClick="onBidderEvaluation();"></div>');
 		}
 		
+		function updateComment(commentID, updatedComment){
+			jQuery.ajax({
+				type: "POST",
+				url: '<?php echo admin_url('admin-ajax.php'); ?>',
+				data: {
+					"action": "update_comment",
+					"comment_ID": commentID,
+					"comment_content": updatedComment
+				},
+				success: function(msg){
+
+				}
+			});
+		}
+
 	</script>
 	
 	
