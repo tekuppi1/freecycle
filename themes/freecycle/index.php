@@ -57,6 +57,41 @@
 			<?php endif; ?>
 		</div><!-- page -->
 
+		<!-- latest items -->
+		<h3>最新の出品</h3>
+		<?php
+			$latestitems_showposts = 4;
+			$latestitems_query =
+				new WP_Query(
+					'&showposts=' . $latestitems_showposts);
+			if($latestitems_query->have_posts()) :
+		?>
+		<h4><?php echo $category->name; ?></h4>
+		<div class="page" id="blog-latest" role="main">
+			<div class="posts-row">
+			<?php
+				while ($latestitems_query->have_posts()) : $latestitems_query->the_post();
+			?>
+				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?> class="entry-on-index">
+					<div class="post-content">
+						<div class="entry">	
+							<a href="<?php the_permalink(); ?>" class="post-img-contents"><?php the_post_thumbnail(array(150, 150)) ?></a>					
+							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
+							<span class="index-item-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></span>
+						</div>							
+					</div><!-- post-content -->					
+				</div><!-- post名 -->
+			<?php
+				endwhile;
+			?>
+			</div>
+			<hr class="hr-posts-row">
+			<a href="<?php echo home_url() . "/page/1" ?>">すべての商品を見る(<?php global $wp_query; echo $wp_query->found_posts;?>件)</a>
+		</div>
+		<?php
+				endif;
+		?>
+
 		<!-- category roop -->
 		<h3>カテゴリピックアップ</h3>
 		<?php
