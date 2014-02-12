@@ -782,11 +782,46 @@ function my_setup_nav() {
 			'name' => $entry_list_name, 
 			'slug' => 'entry_list', 
 			'position' => 65,
-			'screen_function' => 'entry_list_link',
+			'screen_function' => 'entry_list_notinprogress_link',
 			'show_for_displayed_user' => true,
 			'item_css_id' => 'entry-list'
 			) );
-	
+		bp_core_new_subnav_item( array( 
+			'name' => __( 'ください待ち', 'buddypress' ), 
+			'slug' => 'notinprogress', 
+			'parent_url' => trailingslashit($bp->displayed_user->domain . 'entry_list'),
+			'parent_slug' => 'entry_list',
+			'position' => 66,
+			'screen_function' => 'entry_list_notinprogress_link',
+			'item_css_id' => 'notinprogress'
+		) );
+		bp_core_new_subnav_item( array( 
+			'name' => __( '取引相手確定待ち', 'buddypress' ), 
+			'slug' => 'toconfirm', 
+			'parent_url' => trailingslashit($bp->displayed_user->domain . 'entry_list'),
+			'parent_slug' => 'entry_list',
+			'position' => 67,
+			'screen_function' => 'entry_list_toconfirm_link',
+			'item_css_id' => 'toconfirm'
+		) );
+		bp_core_new_subnav_item( array( 
+			'name' => __( '取引中', 'buddypress' ), 
+			'slug' => 'inprogress', 
+			'parent_url' => trailingslashit($bp->displayed_user->domain . 'entry_list'),
+			'parent_slug' => 'entry_list',
+			'position' => 68,
+			'screen_function' => 'entry_list_inprogress_link',
+			'item_css_id' => 'inprogress'
+		) );
+		bp_core_new_subnav_item( array( 
+			'name' => __( '取引完了', 'buddypress' ), 
+			'slug' => 'finished', 
+			'parent_url' => trailingslashit($bp->displayed_user->domain . 'entry_list'),
+			'parent_slug' => 'entry_list',
+			'position' => 69,
+			'screen_function' => 'entry_list_finished_link',
+			'item_css_id' => 'finished'
+		) );
 
 		bp_core_new_nav_item( array( 
 			'name' => __( '新規出品', 'buddypress' ), 
@@ -863,9 +898,66 @@ function entry_list_link(){
 	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
 }
 
+
+function entry_list_notinprogress_title() {
+	echo 'ください待ちの出品一覧';
+}
+
+function entry_list_notinprogress_content() {
+	include_once "members/single/entry-list-notinprogress.php";
+}
+
+function entry_list_notinprogress_link(){
+	add_action( 'bp_template_title', 'entry_list_notinprogress_title' );
+	add_action( 'bp_template_content', 'entry_list_notinprogress_content' );
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
+
+function entry_list_toconfirm_title() {
+	echo '取引相手確定待ちの出品一覧';
+}
+
+function entry_list_toconfirm_content() {
+	include_once "members/single/entry-list-toconfirm.php";
+}
+
+function entry_list_toconfirm_link(){
+	add_action( 'bp_template_title', 'entry_list_toconfirm_title' );
+	add_action( 'bp_template_content', 'entry_list_toconfirm_content' );
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
+
+function entry_list_inprogress_title() {
+	echo '取引中の出品一覧';
+}
+
+function entry_list_inprogress_content() {
+	include_once "members/single/entry-list-inprogress.php";
+}
+
+function entry_list_inprogress_link(){
+	add_action( 'bp_template_title', 'entry_list_inprogress_title' );
+	add_action( 'bp_template_content', 'entry_list_inprogress_content' );
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
+
+function entry_list_finished_title() {
+	echo '取引完了した出品一覧';
+}
+
+function entry_list_finished_content() {
+	include_once "members/single/entry-list-finished.php";
+}
+
+function entry_list_finished_link(){
+	add_action( 'bp_template_title', 'entry_list_finished_title' );
+	add_action( 'bp_template_content', 'entry_list_finished_content' );
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
+
 function has_todo_in_entry_list(){
 	global $user_ID;
-	$entry_list = get_posts(array('author' => $user_ID));
+	$entry_list = get_posts(array('author' => $user_ID, 'showposts' => -1));
 	foreach($entry_list as $entry){
 		if(isFinish($entry->ID)){
 			if(isBidderEvaluated($entry->ID)){
@@ -888,6 +980,10 @@ function has_todo_in_entry_list(){
  * 「新規出品」表示時に使う関数一式
  **********************************************
  */
+function get_new_entry_url() {
+	return bp_loggedin_user_domain() . "new_entry/";
+}
+
 function new_entry_title() {
 	echo '新規出品';
 }

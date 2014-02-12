@@ -1,57 +1,81 @@
 <?php
-	if(has_todo_in_entry_list()){
+function show_entry_list($user_ID, $mode){
+	global $post;
+	$count = 1;
+	$row = 2;
+	$is_closed = false;
+	$entrylist_query =
+			new WP_Query(array(
+					'author' => $user_ID,
+					'showposts' => -1,
+					'order' => 'DESC'
+				));
+	if($entrylist_query->have_posts()){
+		while($entrylist_query->have_posts()) : $entrylist_query->the_post();
 ?>
-	<div class="alert-todo-text">
-		出品した商品に「やること」が残っています！
-	</div>
-<?php } ?>
-	<div id="entrylist-labels" class="entrylist-labels">
-		<span id="posttitle-label" class="posttitle-label">商品名</span>
-		<span id="poststatus-label" class="poststatus-label">状態</span>
-		<span id="posttodo-label" class="posttodo-label">やること</span>
-	</div>
+		<?php
+			if($mode === 'notinprogress'){
+				if(isGiveme($post->ID)){
+					continue;
+				}
+			}elseif($mode === 'toconfirm'){
+				if(!isGiveme($post->ID) || isConfirm($post->ID)){
+					continue;
+				}
+			}elseif($mode === 'inprogress'){
+				if(!isConfirm($post->ID) || isBidderEvaluated($post->ID)){
+					continue;
+				}
+			}elseif($mode === 'finished'){
+				if(!isBidderEvaluated($post->ID)){
+					continue;
+				}
+			}
+			if($count%$row == 1) {
+			$is_closed = false;
+		?>
+			<div class="posts-row">
+		<?php } ?>
+	<div id="post-<?php the_ID(); ?>" <?php post_class(); ?> class="entry-on-index">
+		<div class="post-content">
+			<div class="entry">	
+				<a href="<?php the_permalink(); ?>" class="post-img-contents"><?php the_post_thumbnail(array(150, 150)) ?></a>					
+				<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
+				<span class="index-item-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></span>
+			</div>
+		</div><!-- post-content -->					
+	</div><!-- post名 -->
+	<?php if($count%$row == 0) {
+			$is_closed = true;
+	?>
+	</div><!-- posts-row -->
+	<hr class="hr-posts-row">
+	<?php } ?>
 <?php
-	global $user_ID;
-	$entry_list = get_posts(array('author' => $user_ID, 'numberposts' => -1));
-	foreach($entry_list as $entry){
+		$count++;
+		endwhile;
+		if($count > 1 && !$is_closed){
 ?>
-	<div id="post_<?php echo $entry->ID; ?>" class="entry">
-		<span class="posttitle"><a href="<?php echo get_permalink($entry->ID) ?>"><?php echo get_post($entry->ID)->post_title; ?></a></span>
-		<span class="poststatus">
-			<?php
-				if(isFinish($entry->ID)){
-					if(isBidderEvaluated($entry->ID)){
-					echo "取引完了";
-					}else{
-					echo "落札者未評価";
-					}
-				}elseif(isConfirm($entry->ID)){
-					echo "取引未完了";
-				}elseif(isGiveme($entry->ID)){
-					echo "落札者未確定";
-				}else{
-					echo "ください待ち";
-				}
-			?>
-		</span>
-		<span class="posttodo">
-			<?php
-				if(isFinish($entry->ID)){
-					if(isBidderEvaluated($entry->ID)){
-					echo "";
-					}else{
-					echo "<a href='" . get_permalink($entry->ID) . "'>落札者を評価してください。";
-					}
-				}elseif(isConfirm($entry->ID)){
-					echo "<a href='" . get_permalink($entry->ID) . "'>商品を受渡し、取引を完了させてください。";
-				}elseif(isGiveme($entry->ID)){
-					echo "<a href='" . get_giveme_from_others_url() . "'>落札者を確定してください。";
-				}else{
-					echo "";
-				}
-			?>
-		</a></span>
-	</div>
+		<div id="post-dummy" <?php post_class(); ?> class="entry-on-index">
+			<div class="post-content">
+				<div class="entry">	
+				</div>
+			</div><!-- post-content -->					
+		</div><!-- post名 -->
+	</div><!-- posts-row -->
+	<hr class="hr-posts-row">
+<?php
+		}
+		if($count === 1){
+?>
+	<p>該当の出品はありません。</p>
+<?php
+		}	
+	}else{
+?>
+	<p>出品がまだありません。</p>
+	<p><a href="<?php echo get_new_entry_url(); ?>">こちらから出品してみましょう！</a></p>
 <?php
 	}
+}
 ?>
