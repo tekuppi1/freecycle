@@ -48,8 +48,8 @@ function onConfirmGiveme(postID, url){
 
 	var confirmText = "取引相手を確定させます。変更やキャンセルはできません。よろしいですか？\n";
 	confirmText += "商品:"+ jQuery("#post_"+ postID + " .posttitle").text() + "\n";
-	confirmText += "取引相手:"+ jQuery("input[name='sendto_user_"+postID+"']:checked").text() + "\n";
-	confirmText += "受渡希望日時:\n"
+	confirmText += "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked+label").text() + "\n";
+	confirmText += "受渡希望日時\n"
 	for(var i=1; i<tradedates.length; i++){
 		confirmText += "第" + i + "希望:" + tradedates[i] + "\n";
 	}
