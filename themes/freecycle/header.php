@@ -17,8 +17,24 @@ wp_enqueue_script('freecycleScript');
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?><meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
 		<title><?php wp_title( '|', true, 'right' ); bloginfo( 'name' ); ?></title>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+		<link rel="stylesheet" href="<?php get_stylesheet_directory_uri() . '/bootstrap/css/bootstrap.min.css'; ?>" />
 		<?php bp_head(); ?>
 		<?php wp_head(); ?>
+	<script>
+		function onClickSearchWantedBook(){
+			jQuery.ajax({
+				type: "POST",
+				url: '<?php echo admin_url('admin-ajax.php'); ?>',
+				data: {
+					"action": "search_wantedbook",
+					"keyword": jQuery("#keyword").val()
+				},
+				success: function(result){
+					jQuery('#search_result').html(result);
+				}
+			});	
+		}
+	</script>
 	</head>
 
 	<body <?php body_class(); ?> id="bp-default">

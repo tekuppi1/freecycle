@@ -12,6 +12,7 @@ add_action('wp_ajax_finish', 'finish');
 add_action('wp_ajax_new_entry', 'new_entry');
 add_action('wp_ajax_delete_post', 'delete_post');
 add_action('wp_ajax_update_comment', 'update_comment');
+add_action('wp_ajax_search_wantedbook', 'search_wantedbook');
 add_action('user_register', 'on_user_added');
 
 function redirect_to_home(){
@@ -487,6 +488,85 @@ function update_comment(){
 	die;
 }
 
+function search_wantedbook(){
+	$xml = get_search_result_from_amazon($_POST['keyword']);
+	$items = $xml->Items->Item;
+	$return = '';
+	foreach ($items as $item) {
+		$return .= create_item_detail($item);
+	}
+	echo $return;
+	die;
+}
+
+
+
+/**********************************************
+ * Using Amazon API
+ **********************************************
+ */
+
+function get_search_result_from_amazon($keyword){
+	// TODO Register in Database
+	$accesss_key_id = 'AKIAJRLJRJDZGH57XPBA';
+	$secret_access_key = '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';
+	$associate_tag = '7072-3416-5582';
+
+	$baseurl = 'http://ecs.amazonaws.jp/onca/xml';
+	$params = array();
+	$params['Service'] = 'AWSECommerceService';
+	$params['AWSAccessKeyId'] = $accesss_key_id;
+	$params['AssociateTag'] = $associate_tag;
+	$params['Version'] = '2009-03-31';
+	$params['Operation'] = 'ItemSearch';
+	$params['ResponseGroup'] = 'Images,ItemAttributes';
+	$params['SearchIndex'] = 'Books';
+	$params['Keywords'] = $keyword;
+
+	$params['Timestamp'] = gmdate('Y-m-d\TH:i:s\Z');
+
+	ksort($params);
+
+	$canonical_string = '';
+	foreach ($params as $k => $v ) {
+		$canonical_string .= '&' . urlencode_rfc2986($k) . '=' . urlencode_rfc2986($v);
+	}
+
+	$canonical_string = substr($canonical_string, 1);
+	$parsed_url = parse_url($baseurl);
+	$string_to_sign = "GET\n{$parsed_url['host']}\n{$parsed_url['path']}\n{$canonical_string}";
+	$signature = base64_encode(hash_hmac('sha256', $string_to_sign, $secret_access_key, true));
+
+	$url = $baseurl . '?' . $canonical_string . '&Signature=' . urlencode_rfc2986($signature);
+	$xml = @simplexml_load_file($url);
+	return $xml;
+}
+
+function urlencode_rfc2986($str){
+	return str_replace('%7E', '~', rawurlencode($str));
+}
+
+function create_item_detail($item){
+	$return = '';
+	$return .= '<div style="height:' . $item->MediumImage->Height .'px;margin:5px 5px 5px 5px;">';
+	$return .= '<img src="' . $item->MediumImage->URL . '" style="float:left;">';
+	$return .= '<div>' . $item->ItemAttributes->Title . '</div>';
+	$return .= '<ul>';
+	if($item->ItemAttributes->Author){
+		$return .= '<li>著者:' . $item->ItemAttributes->Author . '</li>';
+	}
+	if($item->ItemAttributes->Publisher){
+		$return .= '<li">出版社:' . $item->ItemAttributes->Publisher . '</li>';
+	}
+	if($item->ItemAttributes->ReleaseDate){
+		$return .= '<li">発行日:' . $item->ItemAttributes->ReleaseDate . '</li>';
+	}
+	$return .= '</ul>';
+	$return .= '<input type="button" value="追加">';
+	$return .= '</div>';
+	return $return;
+}
+
 /**********************************************
  * 取引状態確認用関数群
  **********************************************
@@ -875,6 +955,36 @@ function my_setup_nav() {
 			'item_css_id' => 'giveme-from-others'
 			) );
 
+		bp_core_new_nav_item( array( 
+			'name' => __( 'ほしいものリスト', 'buddypress' ),  
+			'slug' => 'wanted-list', 
+			'position' => 105,
+			'screen_function' => 'new_wanted_list_link',
+			'show_for_displayed_user' => true,
+			'default_subnav_slug' => 'wanted-list',
+			'item_css_id' => 'wanted-list'
+			) );
+
+		bp_core_new_subnav_item( array( 
+			'name' => __( '新規登録', 'buddypress' ), 
+			'slug' => 'new-wanted-list', 
+			'parent_url' => trailingslashit($bp->displayed_user->domain . 'wanted-list'),
+			'parent_slug' => 'wanted-list',
+			'position' => 106,
+			'screen_function' => 'new_wanted_list_link',
+			'item_css_id' => 'wanted-list'
+			) );
+
+		bp_core_new_subnav_item( array( 
+			'name' => __( 'ほしいもの一覧', 'buddypress' ), 
+			'slug' => 'show-wanted-list', 
+			'parent_url' => trailingslashit($bp->displayed_user->domain . 'wanted-list'),
+			'parent_slug' => 'wanted-list',
+			'position' => 107,
+			'screen_function' => 'show_wanted_list_link',
+			'item_css_id' => 'wanted-list'
+			) );
+
 	}
 }
  
@@ -1223,6 +1333,31 @@ function get_your_giveme_list(){
 		
 	return $givemes;
 }
+
+/**********************************************
+ * 「ほしいものリスト」表示時に使う関数一式
+ **********************************************
+ */
+function get_wanted_list_url() {
+	return bp_loggedin_user_domain() . "wanted-list/";
+}
+
+function new_wanted_list_title() {
+	echo 'ほしいものを登録';
+}
+
+function new_wanted_list_content() {
+	include_once "members/single/new-wanted-list.php";
+}
+
+function new_wanted_list_link(){
+	add_action( 'bp_template_title', 'new_wanted_list_title' );
+	add_action( 'bp_template_content', 'new_wanted_list_content' );
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
+
+
+
 
 // デバッグログ吐き出しメソッド
 function debug_log($str){
