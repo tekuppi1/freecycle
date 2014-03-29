@@ -185,6 +185,26 @@
 		});
 	}
 
+	function delWantedListFromIndex(asin){
+		disableButtons();
+		jQuery.ajax({
+			type: "POST",
+			url: '<?php echo admin_url('admin-ajax.php'); ?>',
+			data: {
+				"action": "del_wanted_item_by_asin",
+				"asin": asin
+			},
+			success: function(){
+				jQuery("#" + asin).hide(1000);
+				enableButtons();
+			},
+			error: function(){
+				alert("削除できませんでした。しばらくしてからもう一度おためしください。");
+				enableButtons();
+			}
+		});		
+	}
+
 	function exhibitToWanted(wanted_item_id){
 		disableButtons();
 		jQuery.ajax({
