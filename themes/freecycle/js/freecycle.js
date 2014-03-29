@@ -1,3 +1,11 @@
+function disableButtons(){
+	jQuery("input[type=button]").attr("disabled",true);
+}
+
+function enableButtons(){
+	jQuery("input[type=button]").attr("disabled",false);
+}
+
 function onClickMenuIcon(){
 	jQuery(".grobal_nav_div_sp").slideToggle();
 }
@@ -12,13 +20,13 @@ function onChangeTradeWay(postID){
 }
 
 function onConfirmGiveme(postID, url){
-	jQuery("input[type=button]").attr("disabled",true);
+	disableButtons();
 	// ラジオボタンのチェック確認
 	// 取引相手のユーザIDを取得
 	var userID = jQuery("input[name='sendto_user_"+postID+"']:checked").val();
 	if(!userID){
 		alert("ユーザが選択されていません。");
-		jQuery("input[type=button]").attr("disabled",false);
+		enableButtons();
 		return false;
 	}
 
@@ -35,14 +43,14 @@ function onConfirmGiveme(postID, url){
 
 		if(!tradedates[i-1] && tradedates[i] && i != 1){
 			alert("第" + (i-1) + "希望が入力されていません。");
-			jQuery("input[type=button]").attr("disabled",false);
+			enableButtons();
 			return false;
 		}
 	}
 
 	if(!jQuery("#place_" + postID).val() && jQuery("#tradeway_" + postID).val() === "handtohand"){
 		alert("受渡希望場所を記入してください。");
-		jQuery("input[type=button]").attr("disabled",false);
+		enableButtons();
 		return false;
 	}
 
@@ -77,12 +85,12 @@ function onConfirmGiveme(postID, url){
 					success: function(msg){
 						jQuery("#post_"+postID).hide(1000,function(){
 						alert("取引相手を確定し、受渡希望条件を通知しました！\n取引相手からの返信をお待ちください。");
-						jQuery("input[type=button]").attr("disabled",false);
+						enableButtons();
 					});
 				}
 			});
 	}else{
-		jQuery("input[type=button]").attr("disabled",false);
+		enableButtons();
 	}
 }
 

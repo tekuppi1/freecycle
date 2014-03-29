@@ -13,6 +13,10 @@ add_action('wp_ajax_new_entry', 'new_entry');
 add_action('wp_ajax_delete_post', 'delete_post');
 add_action('wp_ajax_update_comment', 'update_comment');
 add_action('wp_ajax_search_wantedbook', 'search_wantedbook');
+add_action('wp_ajax_search_wantedlist', 'search_wantedlist');
+add_action('wp_ajax_add_wanted_item', 'add_wanted_item');
+add_action('wp_ajax_del_wanted_item_by_asin', 'del_wanted_item_by_asin');
+add_action('wp_ajax_exhibit_to_wanted', 'exhibit_to_wanted');
 add_action('user_register', 'on_user_added');
 
 function redirect_to_home(){
@@ -438,6 +442,9 @@ function new_entry(){
 		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
 		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$bp->loggedin_user->id), true);
 		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$bp->loggedin_user->id), true);
+		if($_POST['wanted_item_id']){
+			add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);			
+		}
 
 		// image upload
 		global $post;
@@ -473,6 +480,54 @@ function new_entry(){
 	die;
 }
 
+function exhibit_to_wanted(){
+	global $bp;
+	global $user_ID;
+
+	$post = array(  
+	'comment_status' => 'open', // open comment
+	'ping_status' => 'closed', // pinback, trackback off
+	'post_author' => $bp->loggedin_user->id, // login user ID
+	'post_category' => array($_POST['field_3']),
+	'post_content' => htmlentities($_POST['field_2'], ENT_QUOTES, 'UTF-8'), // item desctiption
+	'post_date' => date('Y-m-d H:i:s'), 
+	'post_date_gmt' => date('Y-m-d H:i:s'),
+	'post_status' => 'publish', // public open
+	'post_title' => strip_tags($_POST['field_1']), // title
+	'post_type' => 'post', // entry type name
+	'tags_input' => str_replace(array(" ", "　"), array("," ,",") , $_POST['field_4']) // スペース(半角および全角)をカンマに置換
+	);  
+
+	$insert_id = wp_insert_post($post);
+
+	if($insert_id){
+		// success
+		// add custom field
+		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
+		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$bp->loggedin_user->id), true);
+		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$bp->loggedin_user->id), true);
+		add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);
+
+		$image_url = $_POST['image_url'];
+		media_sideload_image($image_url ,$insert_id);
+		// attach_idはinsert_id+1になる。
+		// media_sideload_image は attach_idを返さないのでこれ以上の実装方法が見つからない。汗
+		update_post_meta($insert_id,'_thumbnail_id',$insert_id + 1);
+	}
+
+	// 出品があった旨を通知
+	messages_new_message(array(
+	'sender_id' => $user_ID,
+	'recipients' => get_others_wanted_list($user_ID, '', $_POST['wanted_item_id'])[0]->user_id,
+	'subject' => 'あなたのほしいものが出品されました！',
+	'content' => bp_core_get_userlink($user_ID) . 'さんが、あなたのほしいものを出品しました。くださいしてみましょう！' . PHP_EOL .
+					'<a href="' . get_permalink($insert_id) . '">' . get_post($insert_id)->post_title . '</a>'
+	));
+
+	echo $insert_id;
+	die;
+}
+
 function delete_post(){
 	wp_delete_post($_POST['postID']);
 	die;
@@ -489,7 +544,7 @@ function update_comment(){
 }
 
 function search_wantedbook(){
-	$xml = get_search_result_from_amazon($_POST['keyword']);
+	$xml = get_search_result_from_amazon(array('keyword' => $_POST['keyword']));
 	$items = $xml->Items->Item;
 	$return = '';
 	foreach ($items as $item) {
@@ -499,14 +554,46 @@ function search_wantedbook(){
 	die;
 }
 
+function search_wantedlist(){
+	$items = get_others_wanted_list($_POST['user_id'], $_POST['keyword']);
+	$return = '';
+	foreach ($items as $item) {
+		$return .= create_wanted_item_detail($item);
+	}
+	echo $return;
+	die;
+}
 
+function add_wanted_item(){
+	global $wpdb;
+	global $table_prefix;
+	global $user_ID;
+	$wpdb->query($wpdb->prepare("
+		INSERT INTO " . $table_prefix . "fmt_wanted_list
+		(update_timestamp, user_id, item_name, ASIN, image_url) 
+		VALUES (current_timestamp, %d, %s, %s, %s)",
+		$user_ID, $_POST['item_name'], $_POST['asin'], $_POST['image_url']));
+	die;
+}
+
+function del_wanted_item_by_asin(){
+	global $wpdb;
+	global $table_prefix;
+	global $user_ID;
+	$wpdb->query($wpdb->prepare("
+		DELETE FROM " . $table_prefix . "fmt_wanted_list 
+		WHERE user_id = %d
+		AND ASIN = %s",
+		$user_ID, $_POST['asin']));
+	die;
+}
 
 /**********************************************
  * Using Amazon API
  **********************************************
  */
 
-function get_search_result_from_amazon($keyword){
+function get_search_result_from_amazon($array){
 	// TODO Register in Database
 	$accesss_key_id = 'AKIAJRLJRJDZGH57XPBA';
 	$secret_access_key = '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';
@@ -521,8 +608,9 @@ function get_search_result_from_amazon($keyword){
 	$params['Operation'] = 'ItemSearch';
 	$params['ResponseGroup'] = 'Images,ItemAttributes';
 	$params['SearchIndex'] = 'Books';
-	$params['Keywords'] = $keyword;
-
+	if($array['keyword']){
+		$params['Keywords'] = $array['keyword'];
+	}
 	$params['Timestamp'] = gmdate('Y-m-d\TH:i:s\Z');
 
 	ksort($params);
@@ -548,21 +636,33 @@ function urlencode_rfc2986($str){
 
 function create_item_detail($item){
 	$return = '';
-	$return .= '<div style="height:' . $item->MediumImage->Height .'px;margin:5px 5px 5px 5px;">';
-	$return .= '<img src="' . $item->MediumImage->URL . '" style="float:left;">';
-	$return .= '<div>' . $item->ItemAttributes->Title . '</div>';
+	if($item->MediumImage->URL){
+		$return .= '<div class="item_detail" id="' . $item->ASIN . '" style="height:' . $item->MediumImage->Height .'px;margin:15px 5px 15px 5px;">';
+		$return .= '<img src="' . $item->MediumImage->URL . '" style="float:left;">';
+	}else{
+		$return .= '<div class="item_detail" id="' . $item->ASIN . '" style="height:160px;margin:15px 5px 15px 5px;">';
+		$return .= '<img src="' . get_stylesheet_directory_uri() . '/images/noimg.jpg" style="float:left;">';
+	}
+	$return .= '<div id="name_'. $item->ASIN .'">' . $item->ItemAttributes->Title . '</div>';
 	$return .= '<ul>';
 	if($item->ItemAttributes->Author){
-		$return .= '<li>著者:' . $item->ItemAttributes->Author . '</li>';
+		$return .= '<li name="author">著者:' . $item->ItemAttributes->Author . '</li>';
 	}
 	if($item->ItemAttributes->Publisher){
-		$return .= '<li">出版社:' . $item->ItemAttributes->Publisher . '</li>';
+		$return .= '<li>出版社:' . $item->ItemAttributes->Publisher . '</li>';
 	}
 	if($item->ItemAttributes->ReleaseDate){
-		$return .= '<li">発行日:' . $item->ItemAttributes->ReleaseDate . '</li>';
+		$return .= '<li>発行日:' . $item->ItemAttributes->ReleaseDate . '</li>';
+	}
+	if($item->ItemAttributes->ListPrice->FormattedPrice){
+		$return .= '<li>価格:' . $item->ItemAttributes->ListPrice->FormattedPrice . '</li>';
 	}
 	$return .= '</ul>';
-	$return .= '<input type="button" value="追加">';
+	if(get_wanted_item_by_asin($item->ASIN)){
+		$return .= '<input type="button" class="button_del_wanted" id="button_'. $item->ASIN .'" value="追加済" asin="' . $item->ASIN .'">';
+	}else{
+		$return .= '<input type="button" class="button_add_wanted" id="button_'. $item->ASIN .'" value="追加" asin="' . $item->ASIN .'">';
+	}
 	$return .= '</div>';
 	return $return;
 }
@@ -861,7 +961,7 @@ function my_setup_nav() {
 		bp_core_new_nav_item( array( 
 			'name' => $entry_list_name, 
 			'slug' => 'entry_list', 
-			'position' => 65,
+			'position' => 55,
 			'screen_function' => 'entry_list_notinprogress_link',
 			'show_for_displayed_user' => true,
 			'item_css_id' => 'entry-list'
@@ -871,7 +971,7 @@ function my_setup_nav() {
 			'slug' => 'notinprogress', 
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'entry_list'),
 			'parent_slug' => 'entry_list',
-			'position' => 66,
+			'position' => 56,
 			'screen_function' => 'entry_list_notinprogress_link',
 			'item_css_id' => 'notinprogress'
 		) );
@@ -880,7 +980,7 @@ function my_setup_nav() {
 			'slug' => 'toconfirm', 
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'entry_list'),
 			'parent_slug' => 'entry_list',
-			'position' => 67,
+			'position' => 57,
 			'screen_function' => 'entry_list_toconfirm_link',
 			'item_css_id' => 'toconfirm'
 		) );
@@ -889,7 +989,7 @@ function my_setup_nav() {
 			'slug' => 'inprogress', 
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'entry_list'),
 			'parent_slug' => 'entry_list',
-			'position' => 68,
+			'position' => 58,
 			'screen_function' => 'entry_list_inprogress_link',
 			'item_css_id' => 'inprogress'
 		) );
@@ -898,7 +998,7 @@ function my_setup_nav() {
 			'slug' => 'finished', 
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'entry_list'),
 			'parent_slug' => 'entry_list',
-			'position' => 69,
+			'position' => 59,
 			'screen_function' => 'entry_list_finished_link',
 			'item_css_id' => 'finished'
 		) );
@@ -911,7 +1011,27 @@ function my_setup_nav() {
 			'show_for_displayed_user' => true,
 			'item_css_id' => 'new-entry'
 			) );
+
+		bp_core_new_subnav_item( array( 
+			'name' => __( '通常出品', 'buddypress' ), 
+			'slug' => 'normal', 
+			'parent_url' => trailingslashit($bp->displayed_user->domain . 'new_entry'),
+			'parent_slug' => 'new_entry',
+			'position' => 66,
+			'screen_function' => 'new_entry_link',
+			'item_css_id' => 'new-entry'
+		) );
 	
+		bp_core_new_subnav_item( array( 
+			'name' => __( 'ほしいものリストへ出品', 'buddypress' ), 
+			'slug' => 'to_wanted_list', 
+			'parent_url' => trailingslashit($bp->displayed_user->domain . 'new_entry'),
+			'parent_slug' => 'new_entry',
+			'position' => 67,
+			'screen_function' => 'to_wanted_list_link',
+			'item_css_id' => 'new-entry'
+		) );
+
 		$giveme_name;
 		if(get_count_giveme_from_others() > 0){
 			$giveme_name = 'ください<span>！</span>';
@@ -976,7 +1096,7 @@ function my_setup_nav() {
 			) );
 
 		bp_core_new_subnav_item( array( 
-			'name' => __( 'ほしいもの一覧', 'buddypress' ), 
+			'name' => __( '一覧', 'buddypress' ), 
 			'slug' => 'show-wanted-list', 
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'wanted-list'),
 			'parent_slug' => 'wanted-list',
@@ -1108,6 +1228,77 @@ function new_entry_link(){
 	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
 }
 
+function to_wanted_list_title() {
+	echo 'ほしいものリストへ出品';
+}
+
+function to_wanted_list_content() {
+	include_once "members/single/to-wanted-list.php";
+}
+
+function to_wanted_list_link(){
+	add_action( 'bp_template_title', 'to_wanted_list_title' );
+	add_action( 'bp_template_content', 'to_wanted_list_content' );
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
+
+function create_wanted_item_detail($item){
+	global $user_ID;
+
+	$return = '';
+	$return .= '<div class="item_detail" id="' . $item->wanted_item_id . '" style="height:160px;margin:15px 5px 15px 5px;">';
+	$return .= '<img src="' . $item->image_url . '" style="float:left;">';
+
+	$return .= '<div id="title_'. $item->wanted_item_id .'"><strong>' . $item->item_name . '</strong></div>';
+	$return .= '<div>ほしがっている人:' . get_user_by('id', $item->user_id)->display_name . '</div>';
+	if($item->ASIN){
+		$return .= '<ul>';
+		$i = get_search_result_from_amazon(array('keyword'=>$item->ASIN))->Items->Item;
+		if($i->ItemAttributes->Author){
+			$return .= '<li name="author">著者:' . $i->ItemAttributes->Author . '</li>';
+		}
+		if($i->ItemAttributes->Publisher){
+			$return .= '<li>出版社:' . $i->ItemAttributes->Publisher . '</li>';
+		}
+		if($i->ItemAttributes->ReleaseDate){
+			$return .= '<li>発行日:' . $i->ItemAttributes->ReleaseDate . '</li>';
+		}
+		if($i->ItemAttributes->ListPrice->FormattedPrice){
+			$return .= '<li>価格:' . $i->ItemAttributes->ListPrice->FormattedPrice . '</li>';
+		}
+		$return .= '</ul>';
+	}
+	$return .='
+	<label for="item_status">状態:</label>
+	<select name="item_status">
+	<option value="verygood">'. get_display_item_status("verygood") .'</option>
+	<option value="good">' . get_display_item_status("good") .'</option>
+	<option value="bad">' . get_display_item_status("bad") .'</option>
+	</select>
+	</br>
+	';
+	$post_id = get_post_id_to_wanted($user_ID, $item->wanted_item_id);
+	if($post_id){
+		$return .= '<input type="button" class="button_del_exhibition_to_wanted" id="button_'. $item->wanted_item_id .'" value="出品済" wanted_item_id="' . $item->wanted_item_id .'" post_id="' . $post_id .'">';
+	}else{
+		$return .= '<input type="button" class="button_exhibit_to_wanted" id="button_'. $item->wanted_item_id .'" value="出品" wanted_item_id="' . $item->wanted_item_id .'">';
+	}
+	$return .= '</div>';
+	return $return;
+}
+
+function get_post_id_to_wanted($user_id, $wanted_item_id){
+	global $wpdb;
+	global $table_prefix;
+	$sql = "SELECT post_id FROM " . $wpdb->posts . ", " . $wpdb->postmeta
+			 . " WHERE " . $wpdb->posts . ".ID = " . $wpdb->postmeta . ".post_id "
+			 . " AND " . $wpdb->postmeta . ".meta_key = 'wanted_item_id'"
+			 . " AND " . $wpdb->postmeta . ".meta_value = %s"
+			 . " AND " . $wpdb->posts . ".post_author = %d"
+			 . " AND " . $wpdb->posts . ".post_status = 'publish'";
+	$post_id = $wpdb->get_var($wpdb->prepare($sql, $wanted_item_id, $user_id));
+	return $post_id;
+}
 
 /**********************************************
  * 「くださいリクエスト」一覧表示時に使う関数一式
@@ -1354,6 +1545,70 @@ function new_wanted_list_link(){
 	add_action( 'bp_template_title', 'new_wanted_list_title' );
 	add_action( 'bp_template_content', 'new_wanted_list_content' );
 	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
+
+function show_wanted_list_title() {
+	echo 'ほしいものリスト';
+}
+
+function show_wanted_list_content() {
+	include_once "members/single/show-wanted-list.php";
+}
+
+function show_wanted_list_link(){
+	add_action( 'bp_template_title', 'show_wanted_list_title' );
+	add_action( 'bp_template_content', 'show_wanted_list_content' );
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
+
+function test_get_wanted_list($user_id){
+	echo $user_id;
+}
+
+function get_wanted_list($user_id){
+	global $wpdb;
+	global $table_prefix;
+	$wanted_list;
+	$sql = "SELECT wanted_item_id, user_id, item_name, ASIN, image_url
+			FROM ". $table_prefix . "fmt_wanted_list";
+	if($user_id){
+		$sql .= " WHERE user_id = %d ORDER BY wanted_item_id desc";
+		$wanted_list = $wpdb->get_results($wpdb->prepare($sql, $user_id));
+	}else{
+		$sql .= " ORDER BY wanted_item_id desc";
+		$wanted_list = $wpdb->get_results($sql);	
+	}
+	return $wanted_list;
+}
+
+function get_others_wanted_list($user_id, $keyword, $wanted_item_id=0){
+	global $wpdb;
+	global $table_prefix;
+	$wanted_list;
+	$sql = "SELECT wanted_item_id, user_id, item_name, ASIN, image_url
+			FROM ". $table_prefix . "fmt_wanted_list";
+	$sql .= " WHERE user_id <> %d";
+	$sql .= " AND item_name LIKE '%s'";
+	if($wanted_item_id){
+		$sql .= " AND wanted_item_id = %d";
+	}else{
+		$sql .= " AND wanted_item_id <> %d";		
+	}
+	$sql .=	" ORDER BY wanted_item_id desc";
+	$wanted_list = $wpdb->get_results($wpdb->prepare($sql, $user_id, '%' . $keyword . '%', $wanted_item_id));
+	return $wanted_list;
+}
+
+function get_wanted_item_by_asin($asin){
+	global $wpdb;
+	global $table_prefix;
+	global $user_ID;
+	$wanted_item_id = $wpdb->query($wpdb->prepare("
+		SELECT wanted_item_id FROM " . $table_prefix . "fmt_wanted_list
+		WHERE user_id = %d
+		AND ASIN = %s",
+		$user_ID, $asin));
+	return $wanted_item_id;
 }
 
 

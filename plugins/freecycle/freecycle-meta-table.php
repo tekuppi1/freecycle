@@ -14,6 +14,7 @@ class FreecycleMetaTable {
 	var $fmt_points;
 	var $fmt_trade_history;
 	var $fmt_user_giveme;
+	var $fmt_wanted_list;
 	
 	public function __construct(){
 		global $wpdb;
@@ -21,6 +22,7 @@ class FreecycleMetaTable {
 		$this->fmt_points = $wpdb->prefix . 'fmt_points';
 		$this->fmt_trade_history = $wpdb->prefix . 'fmt_trade_history';
 		$this->fmt_user_giveme = $wpdb->prefix . 'fmt_user_giveme';
+		$this->fmt_wanted_list = $wpdb->prefix . 'fmt_wanted_list';
 		// activate when plugin is activated
 		register_activation_hook(__FILE__, array($this, 'fmt_activate'));
 	}
@@ -29,7 +31,7 @@ class FreecycleMetaTable {
 	function fmt_activate(){
 		global $wpdb;
 		//DB version
-		$fmt_db_version = '0.9';
+		$fmt_db_version = '1.01';
 		//current DB version
 		$installed_ver = get_option( 'fmt_meta_version' );
 			// if versions are different tables are created
@@ -79,6 +81,20 @@ class FreecycleMetaTable {
 						`confirmed_flg` int(1) unsigned NOT NULL DEFAULT '0',
 						PRIMARY KEY (`user_id`,`post_id`)
 						) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+						";
+				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+				dbDelta($sql);
+
+				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_wanted_list . "` (
+  						`insert_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  						`update_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  						`wanted_item_id` int(8) NOT NULL AUTO_INCREMENT,
+  						`user_id` bigint(20) NOT NULL,
+  						`item_name` varchar(200) CHARACTER SET utf8 NOT NULL,
+ 						`ASIN` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
+  						`image_url` varchar(150) CHARACTER SET utf8 DEFAULT NULL,
+  						PRIMARY KEY (`wanted_item_id`)
+						) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 						";
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 				dbDelta($sql);

@@ -16,16 +16,16 @@
 	}
 	
 	function callOnNewEntry(){
-		jQuery("input[type=button]").attr("disabled",true);
+		disableButtons();
 		if(jQuery("#field_1").val().length == 0){
 			alert("商品名が未入力です。");
-			jQuery("input[type=button]").attr("disabled",false);
+			enableButtons();
 			return false;
 		}
 
 		if(jQuery("#field_2").val().length == 0){
 			alert("商品説明が未入力です。");
-			jQuery("input[type=button]").attr("disabled",false);
+			enableButtons();
 			return false;
 		}
 		
@@ -37,14 +37,14 @@
 			}
 			if(fileName && !fileName.match(/\.(jpeg|jpg|png)$/i)){
 				alert("不正なファイルです。\n.jpeg,.jpg,.png ファイルのみアップロードできます。");
-				jQuery("input[type=button]").attr("disabled",false);
+				enableButtons();
 				return false;
 			}
 		}
 
 		if(!isAttachedFlg){
 			alert("写真を添付してください。");
-			jQuery("input[type=button]").attr("disabled",false);
+			enableButtons();
 			return false;
 		}
 
@@ -62,7 +62,7 @@
 				success: function(permalink){
 					alert("商品を出品しました。");
 					// reload new entry page
-					jQuery("input[type=button]").attr("disabled",false);
+					enableButtons();
 					location.href = "<?php echo bp_loggedin_user_domain(); ?>" + "new_entry/#newentry";
 					jQuery("input[type='text'], input[type='file'], textarea").val("");
 					jQuery("option").attr("selected", false);
@@ -70,7 +70,173 @@
 			});
 		}
 	}
-	
+
+	function onClickSearchWantedBook(){
+		disableButtons();
+		jQuery('#search_result').html('<div align=center><img src="<?php echo get_stylesheet_directory_uri() ?>/images/ajax-loader.gif"></div>');
+		jQuery.ajax({
+			type: "POST",
+			url: '<?php echo admin_url('admin-ajax.php'); ?>',
+			data: {
+				"action": "search_wantedbook",
+				"keyword": jQuery("#keyword").val()
+			},
+			success: function(result){
+				jQuery('#search_result').html(result);
+				jQuery('.button_add_wanted').click(function(){
+					addWantedList(jQuery(this).attr('asin'));
+				});
+				jQuery('.button_del_wanted').click(function(){
+					delWantedListByASIN(jQuery(this).attr('asin'));
+				});
+				jQuery('.item_detail').hover(function(){
+					jQuery(this).css('background-color', '#ffffe0');
+				},
+				function(){
+					jQuery(this).css('background-color', '#ffffff');
+				});
+				enableButtons();
+			}
+		});
+	}
+
+	function onClickSearchWantedList(){
+		disableButtons();
+		jQuery('#wanted_list').html('<div align=center><img src="<?php echo get_stylesheet_directory_uri() ?>/images/ajax-loader.gif"></div>');
+		jQuery.ajax({
+			type: "POST",
+			url: '<?php echo admin_url('admin-ajax.php'); ?>',
+			data: {
+				"action": "search_wantedlist",
+				"user_id": "<?php echo $user_ID; ?>",
+				"keyword": jQuery("#keyword").val()
+			},
+			success: function(result){
+				if(!result){
+					jQuery('#wanted_list').html("ほしいものリストが見つかりません。");
+					return;
+				}
+				jQuery('#wanted_list').html(result);
+				jQuery('.button_exhibit_to_wanted').click(function(){
+					exhibitToWanted(jQuery(this).attr('wanted_item_id'));
+				});
+				jQuery('.button_del_exhibition_to_wanted').click(function(){
+					delExhibitionToWanted(jQuery(this).attr('post_id'), jQuery(this).attr('wanted_item_id'));
+				});
+				jQuery('.item_detail').hover(function(){
+					jQuery(this).css('background-color', '#ffffe0');
+				},
+				function(){
+					jQuery(this).css('background-color', '#ffffff');
+				});
+				enableButtons();
+			}
+		});
+	}
+
+	function addWantedList(asin){
+		disableButtons();
+		jQuery.ajax({
+			type: "POST",
+			url: '<?php echo admin_url('admin-ajax.php'); ?>',
+			data: {
+				"action": "add_wanted_item",
+				"asin": asin,
+				"item_name": jQuery("#name_" + asin).text(),
+				"image_url": jQuery("#" + asin + " img").attr("src")
+			},
+			success: function(){
+				jQuery("#button_" + asin).val("追加済");
+				jQuery("#button_" + asin)
+					.unbind('click')
+					.click(function(){
+						delWantedListByASIN(asin);
+					});
+				enableButtons();
+			},
+			error: function(){
+				alert("登録できませんでした。しばらくしてからもう一度おためしください。");
+			}
+		});
+	}
+
+	function delWantedListByASIN(asin){
+		disableButtons();
+		jQuery.ajax({
+			type: "POST",
+			url: '<?php echo admin_url('admin-ajax.php'); ?>',
+			data: {
+				"action": "del_wanted_item_by_asin",
+				"asin": asin
+			},
+			success: function(){
+				jQuery("#button_" + asin).val("追加");
+				jQuery("#button_" + asin)
+					.unbind('click')
+					.click(function(){
+						addWantedList(asin);
+					});
+				enableButtons();
+			},
+			error: function(){
+				alert("削除できませんでした。しばらくしてからもう一度おためしください。");
+				enableButtons();
+			}
+		});
+	}
+
+	function exhibitToWanted(wanted_item_id){
+		disableButtons();
+		jQuery.ajax({
+			type: "POST",
+			url: '<?php echo admin_url('admin-ajax.php'); ?>',
+			data: {
+				"action": "exhibit_to_wanted",
+				"field_1": jQuery('#title_' + wanted_item_id).text(),
+				"item_status": jQuery('#' + wanted_item_id + ' [name="item_status"]').val(),
+				"image_url":jQuery('#' + wanted_item_id + ' img').attr('src'),
+				"wanted_item_id": wanted_item_id
+			},
+			success: function(insert_id){
+				jQuery("#button_" + wanted_item_id).val("出品済");
+				jQuery("#button_" + wanted_item_id)
+					.unbind('click')
+					.click(function(){
+						delExhibitionToWanted(insert_id, wanted_item_id);
+					});
+				enableButtons();
+			},
+			error: function(){
+				alert("出品できませんでした。しばらくしてからもう一度おためしください。");
+				enableButtons();
+			}
+		});
+	 }
+
+	 function delExhibitionToWanted(post_id, wanted_item_id){
+	 	disableButtons();
+		jQuery.ajax({
+			type: "POST",
+			url: '<?php echo admin_url('admin-ajax.php'); ?>',
+			data: {
+				"action": "delete_post",
+				"postID": post_id 
+			},
+			success: function(){
+				jQuery("#button_" + wanted_item_id).val("出品");
+				jQuery("#button_" + wanted_item_id)
+					.unbind('click')
+					.click(function(){
+						exhibitToWanted(wanted_item_id);
+					});
+				enableButtons();
+			},
+			false: function(msg){
+				alert("取り消しに失敗しました。しばらくしてからもう一度おためしください。");
+				enableButtons();
+			}
+		});
+	 }
 </script>
 <div id="item-header-avatar">
 
