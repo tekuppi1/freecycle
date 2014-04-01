@@ -15,7 +15,7 @@
 		<ul>
 		<li><strong><?php echo $wanted_item->item_name?></strong></li>
 		<ul>
-		<input type='button' value='削除' onclick='delWantedListFromIndex(<?php echo $wanted_item->ASIN ?>)'>
+		<input type='button' value='削除' onclick='delWantedListFromIndex("<?php echo $wanted_item->ASIN ?>")'>
 		</div>
 	<?php
 		$count++;
