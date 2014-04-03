@@ -10,10 +10,17 @@
 			<div class="page" id="topic-items">
 			<?php
 				$static_condition = '&orderby=rand'; // random display
+				$topics_items_condition = '';
 				$topics_showposts = 4;
-				$topics_query = new WP_Query(get_option('topic-items-condition') . $static_condition . '&showposts=' . $topics_showposts);
+				if(get_option('topic-items-condition-category') && get_option('use-topic-items-condition-category') == 'on'){
+					$topics_items_condition .= '&cat=' . get_option('topic-items-condition-category');
+				}
+				if(get_option('topic-items-condition-title') && get_option('use-topic-items-condition-title') == 'on'){
+					$topics_items_condition .= '&s=' . get_option('topic-items-condition-title');
+				}
+				$topics_query = new WP_Query($static_condition . $topics_items_condition . '&showposts=' . $topics_showposts);
 			?>
-			<?php if ($topics_query->have_posts()) : ?>
+			<?php if ($topics_query->have_posts() && get_option('use-topic-items')=='on') : ?>
 			<h4 id="topic-h4">注目の商品：<?php echo get_option('topic-items-name')?></h4>
 				<?php $count = 1; ?>
 				<?php $row = 2; ?>
@@ -53,7 +60,7 @@
 					</div><!-- posts-row -->
 					<hr class="hr-posts-row">
 				<?php endif; ?>
-				<a href="<?php echo home_url() . '/?' . get_option('topic-items-condition') ?>"><p>注目の商品をもっと見る</p></a>
+				<a href="<?php echo home_url() . '/?' . $topics_items_condition ?>"><p>注目の商品をもっと見る</p></a>
 			<?php endif; ?>
 		</div><!-- page -->
 
