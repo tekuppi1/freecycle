@@ -18,6 +18,7 @@ add_action('wp_ajax_add_wanted_item', 'add_wanted_item');
 add_action('wp_ajax_del_wanted_item_by_asin', 'del_wanted_item_by_asin');
 add_action('wp_ajax_exhibit_to_wanted', 'exhibit_to_wanted');
 add_action('user_register', 'on_user_added');
+remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 
 function redirect_to_home(){
 	$redirect_url = get_option('home');
