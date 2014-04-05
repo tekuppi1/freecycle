@@ -101,6 +101,25 @@
 
 		<!-- category roop -->
 		<h3>カテゴリピックアップ</h3>
+	<div id="categories-header" class="widget widget_categories">
+				<h3 class="categories_h3">カテゴリー検索はこちら</h3>
+	<?php
+			$cat_args = array('orderby' => 'name', 'show_count' => '1', 'hierarchical' => '1');
+			$cat_args['show_option_none'] = __('Select Category');
+			wp_dropdown_categories(apply_filters('widget_categories_dropdown_args', $cat_args));
+	?>
+	<script type='text/javascript'>
+	/* <![CDATA[ */
+		var dropdown = document.getElementById("cat");
+		function onCatChange() {
+			if ( dropdown.options[dropdown.selectedIndex].value > 0 ) {
+				location.href = "<?php echo home_url(); ?>/?cat="+dropdown.options[dropdown.selectedIndex].value;
+			}
+		}
+		dropdown.onchange = onCatChange;
+	/* ]]> */
+	</script>
+	</div><!-- categories-header -->
 		<?php
 			$categories_num = 3; 
 			$categories_showposts = 2; 
