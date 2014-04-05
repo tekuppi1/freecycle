@@ -94,11 +94,9 @@ wp_enqueue_script('freecycleScript');
 		<?php if(bp_is_front_page() || is_archive() || is_search() || is_single()){ ?>
 	<div id="search-23" class="widget widget_search"><!-- 検索バー -->
 				<form role="search" method="get" id="searchform_main" action="<?php echo home_url(); ?>">
-					<!-- <label>検索：</label> -->
-						<div id="searchform_text">
+						<div id="searchform_text"> 
 					  			<input type="text" id="searchtext" value="" name="s" id="s" />
 					  	</div>
-						<div id="searchform_text_pulldown">
 							<div id="searchform_pulldown">
 								<select name="seachform_itemstatus">
 									<option value="all">すべて</option>
@@ -106,7 +104,7 @@ wp_enqueue_script('freecycleScript');
 								</select>
 							</div>
 							<div id="searchform_submit">
-								<input type="submit" id="searchsubmit" value="Search" />
+								<input type="submit" id="searchsubmit" value="検索" />
 							</div> 
 						</div> 
 				</form>
@@ -116,6 +114,7 @@ wp_enqueue_script('freecycleScript');
 				  <button type="button" class="btn btn-default" onclick="location.href='<?php echo bp_loggedin_user_domain(); ?>wanted-list/new-wanted-list/'">ほしいものリスト</button>
 				</div>
 				<?php } ?>
+				</form>	
 	</div><!-- 検索バー -->
 </div><!-- header_form -->
 		<!--<hr class="line-search"> -->

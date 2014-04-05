@@ -624,7 +624,7 @@ nav li:last-child a {
 	display: block;
 	padding: 0;
 	margin-bottom: 3px;
-	width: 95%;
+	width: 60%;
 	height: 22px;
 }
 
@@ -632,13 +632,11 @@ nav li:last-child a {
 	display: none;
 }
 
-#searchform_pulldown{
+#searchform_pulldown,#searchform_submit{
 	float: left;
+	width: 20px;
 }
 
-#searchform_submit{
-	float: left;
-}
 
 /*
 				ヘッダーカテゴリ
@@ -2553,6 +2551,7 @@ div.grobal_nav_div  li a:hover{
 
 
 /*サーチバー*/
+
 #search-23{
 	padding-top:2px;
 }
