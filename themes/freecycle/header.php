@@ -80,8 +80,8 @@ wp_enqueue_script('freecycleScript');
 					　		<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
 					　		<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>wanted-list/new-wanted-list/" >ほしいものリスト</a></li>
 					　		<?php }else{ ?>
-					　		<li class="grobal_nav"><a href="http://texchg.com/how-to-use">How to use</a></li>
-					　		<li class="grobal_nav"><a href="http://texchg.com/review">利用者の声</a></li>
+					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/how-to-use">How to use</a></li>
+					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/review">利用者の声</a></li>
 							<?php } ?>
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
 					　		<li class="grobal_nav blue_navi"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>

@@ -2543,7 +2543,7 @@ div.grobal_nav_div  li:first-child{
 
 
 div.grobal_nav_div  li a{
-	color: black !important;
+	color: #444;
 	font-size: 15px;
 	display: block;
 	/*background: gold;*/
@@ -2556,6 +2556,7 @@ div.grobal_nav_div  li a{
 
 div.grobal_nav_div  li a:hover{
 	background: #f5f5f5;
+	color: black;
 }
 
 .important_navi{
