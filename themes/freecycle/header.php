@@ -74,9 +74,12 @@ wp_enqueue_script('freecycleScript');
 					　		<li class="grobal_nav"><a href="<?php echo home_url(); ?>" >ホーム</a></li>
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
-					　		<?php } ?>
-					　		<li class="grobal_nav"><a href="http://texchg.com/how-to-use" >How to use</a></li>
-					　		<li class="grobal_nav"><a href="http://texchg.com/review" >利用者の声</a></li>
+					　		<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
+					　		<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>wanted-list/new-wanted-list/" >ほしいものリスト</a></li>
+					　		<?php }else{ ?>
+					　		<li class="grobal_nav"><a href="http://texchg.com/how-to-use">How to use</a></li>
+					　		<li class="grobal_nav"><a href="http://texchg.com/review">利用者の声</a></li>
+							<?php } ?>
 					　		<li class="grobal_nav"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
 					　		<li class="grobal_nav"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>
 					</ul>
@@ -108,13 +111,6 @@ wp_enqueue_script('freecycleScript');
 							</div> 
 						</div> 
 				</form>
-				<?php if(is_user_logged_in()){ ?>				
-				<div class="btn-group">
-				  <button type="button" class="btn btn-default" onclick="location.href='<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/'">新規出品</button>
-				  <button type="button" class="btn btn-default" onclick="location.href='<?php echo bp_loggedin_user_domain(); ?>wanted-list/new-wanted-list/'">ほしいものリスト</button>
-				</div>
-				<?php } ?>
-				</form>	
 	</div><!-- 検索バー -->
 </div><!-- header_form -->
 		<!--<hr class="line-search"> -->
