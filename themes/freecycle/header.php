@@ -17,7 +17,6 @@ wp_enqueue_script('freecycleScript');
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?><meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
 		<title><?php wp_title( '|', true, 'right' ); bloginfo( 'name' ); ?></title>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-		<link rel="stylesheet" href="<?php get_stylesheet_directory_uri() . '/bootstrap/css/bootstrap.min.css'; ?>" />
 		<?php bp_head(); ?>
 		<?php wp_head(); ?>
 	<script>
@@ -110,9 +109,14 @@ wp_enqueue_script('freecycleScript');
 								<input type="submit" id="searchsubmit" value="Search" />
 							</div> 
 						</div> 
-				</form>	
+				</form>
+				<?php if(is_user_logged_in()){ ?>				
+				<div class="btn-group">
+				  <button type="button" class="btn btn-default" onclick="location.href='<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/'">新規出品</button>
+				  <button type="button" class="btn btn-default" onclick="location.href='<?php echo bp_loggedin_user_domain(); ?>wanted-list/new-wanted-list/'">ほしいものリスト</button>
+				</div>
+				<?php } ?>
 	</div><!-- 検索バー -->
-	
 </div><!-- header_form -->
 		<!--<hr class="line-search"> -->
 		<?php } ?>
