@@ -2078,7 +2078,7 @@ input[type="button" ][disabled="true"]:hover{
 }
 
 html{
-	background: #fff;
+	background-color: #fffacd;
 	color: #696969;
 	margin: auto;
 	padding: 0;
@@ -2091,12 +2091,13 @@ html{
 		"ＭＳ Ｐゴシック", "MS P Gothic",
 		sans-serif;
 	font-size: 17px;
-	width: 700px;
 	height: 100%;
 }
 
 body{
 	background-color: #fff;
+	width: 700px;
+	padding: 10px 50px;
 }
 
 input{
