@@ -359,7 +359,7 @@ div#header_copy{
 /* ヘッダーフォーム */
 
 div.header_form{
-	background-color: #FBA848;
+	background-color: lightcyan;
 	padding: 0 0 5px;
 	border-radius: 4px;
 }
@@ -511,6 +511,10 @@ div#grobal_nav_div{
 	
 }
 
+
+.important_navi{
+	border: solid 2px;
+	}
 
 
 /*nav{
@@ -1413,7 +1417,7 @@ div#header_copy  img{
 /* ヘッダーフォーム */
 
 div.header_form{
-	background-color: #FBA848;
+	background-color: lightcyan;
 	padding: 0 0 5px;
 	border-radius: 4px;
 }
@@ -1567,6 +1571,7 @@ div.header_img_navi_contents{
 
 #search-23{
 	padding-top:2px;
+	margin-top: 5px;
 }
 
 #searchform_main{
@@ -2384,7 +2389,7 @@ div#must_checkbox{
 
 /* ヘッダーフォーム */
 div.header_form{
-	background-color: #FBA848;
+	background-color: lightcyan;
 	padding: 0 0 5px;
 	border-radius: 4px;
 	width: 100%;
@@ -2498,7 +2503,6 @@ div.grobal_nav_div{
 	height: 30px;
 	margin: 0;
 	overflow: hidden;
-	background-color: gold;
 	border-radius: 4px;
 }
 
@@ -2517,11 +2521,14 @@ div.grobal_nav_div  li{
 	float: left;
 	text-align: center;
 	font-weight: bold;
+	margin-right: 2px;
 	/*border: solid 1px #000;*/
 	/*border-left: solid 1px #FFF;*/
 	width:auto;
 	display: block;
-	border-right: solid 1px #000;
+	/*border-right: solid 1px #000;
+	border-top: solid 2px orange;*/
+	
 	
 }
 
@@ -2529,14 +2536,14 @@ div.grobal_nav_div  li:first-child{
 	margin-left: 20px;
 }
 
-div.grobal_nav_div  li:last-child{
+/*div.grobal_nav_div  li:last-child{
 	border: none;		
-}
+}*/
 
 
 
 div.grobal_nav_div  li a{
-	color: black !important;
+	color: #444;
 	font-size: 15px;
 	display: block;
 	/*background: gold;*/
@@ -2548,14 +2555,23 @@ div.grobal_nav_div  li a{
 }
 
 div.grobal_nav_div  li a:hover{
-	background: orange;
+	background: #f5f5f5;
+	color: black;
 }
 
+.important_navi{
+	border-top: solid 5px  orange;
+}
+
+.blue_navi{
+	border-top: solid 5px lightblue;
+}
 
 /*サーチバー*/
 
 #search-23{
 	padding-top:2px;
+	margin-top: 7px;
 }
 
 
