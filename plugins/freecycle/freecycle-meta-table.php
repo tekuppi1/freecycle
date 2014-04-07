@@ -31,7 +31,7 @@ class FreecycleMetaTable {
 	function fmt_activate(){
 		global $wpdb;
 		//DB version
-		$fmt_db_version = '1.01';
+		$fmt_db_version = '1.02';
 		//current DB version
 		$installed_ver = get_option( 'fmt_meta_version' );
 			// if versions are different tables are created
@@ -49,7 +49,22 @@ class FreecycleMetaTable {
 						";
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 				dbDelta($sql);
-				
+			
+				$sql = "ALTER TABLE `" . $this->fmt_giveme_state . "` 
+						ADD `insert_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP FIRST,
+						ADD `update_timestamp` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `insert_timestamp`;
+						";
+				$wpdb->query($sql);
+				$sql = "UPDATE `" . $this->fmt_giveme_state ."`
+						SET `insert_timestamp`= CURRENT_TIMESTAMP
+						WHERE `insert_timestamp` = '0000-00-00 00:00:00'";
+				$wpdb->query($sql);
+				$sql = "UPDATE `" . $this->fmt_giveme_state ."`
+						SET `update_timestamp`= CURRENT_TIMESTAMP
+						WHERE `update_timestamp` = '0000-00-00 00:00:00'";
+				$wpdb->query($sql);
+
+
 				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_points . "` (
 						`user_id` bigint(20) unsigned NOT NULL COMMENT 'ユーザID',
 						`got_points` int(8) unsigned NOT NULL DEFAULT '0' COMMENT '獲得ポイント',
@@ -60,6 +75,20 @@ class FreecycleMetaTable {
 						";
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 				dbDelta($sql);
+
+				$sql = "ALTER TABLE `" . $this->fmt_points . "` 
+						ADD `insert_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP FIRST,
+						ADD `update_timestamp` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `insert_timestamp`;
+						";
+				$wpdb->query($sql);
+				$sql = "UPDATE `" . $this->fmt_points ."`
+						SET `insert_timestamp`= CURRENT_TIMESTAMP
+						WHERE `insert_timestamp` = '0000-00-00 00:00:00'";
+				$wpdb->query($sql);
+				$sql = "UPDATE `" . $this->fmt_points ."`
+						SET `update_timestamp`= CURRENT_TIMESTAMP
+						WHERE `update_timestamp` = '0000-00-00 00:00:00'";
+				$wpdb->query($sql);
 
 				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_trade_history . "` (
 						`post_id` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -75,6 +104,20 @@ class FreecycleMetaTable {
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 				dbDelta($sql);
 
+				$sql = "ALTER TABLE `" . $this->fmt_trade_history . "` 
+						ADD `insert_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP FIRST,
+						ADD `update_timestamp` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `insert_timestamp`;
+						";
+				$wpdb->query($sql);
+				$sql = "UPDATE `" . $this->fmt_trade_history ."`
+						SET `insert_timestamp`= CURRENT_TIMESTAMP
+						WHERE `insert_timestamp` = '0000-00-00 00:00:00'";
+				$wpdb->query($sql);
+				$sql = "UPDATE `" . $this->fmt_trade_history ."`
+						SET `update_timestamp`= CURRENT_TIMESTAMP
+						WHERE `update_timestamp` = '0000-00-00 00:00:00'";
+				$wpdb->query($sql);
+
 				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_user_giveme . "` (
 						`user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
 						`post_id` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -84,6 +127,20 @@ class FreecycleMetaTable {
 						";
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 				dbDelta($sql);
+
+				$sql = "ALTER TABLE `" . $this->fmt_user_giveme . "` 
+						ADD `insert_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP FIRST,
+						ADD `update_timestamp` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `insert_timestamp`;
+						";
+				$wpdb->query($sql);
+				$sql = "UPDATE `" . $this->fmt_user_giveme ."`
+						SET `insert_timestamp`= CURRENT_TIMESTAMP
+						WHERE `insert_timestamp` = '0000-00-00 00:00:00'";
+				$wpdb->query($sql);
+				$sql = "UPDATE `" . $this->fmt_user_giveme ."`
+						SET `update_timestamp`= CURRENT_TIMESTAMP
+						WHERE `update_timestamp` = '0000-00-00 00:00:00'";
+				$wpdb->query($sql);
 
 				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_wanted_list . "` (
   						`insert_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

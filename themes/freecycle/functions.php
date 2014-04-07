@@ -167,14 +167,15 @@ function giveme(){
 	if(!is_null($current_state)){
 		$wpdb->query($wpdb->prepare("
 			UPDATE " . $table_prefix . "fmt_giveme_state
-			SET giveme_flg = 1
+			SET update_timestamp = current_timestamp,
+			giveme_flg = 1
 			WHERE post_id= %d",
 			$postID));
 	}else{
 		$wpdb->query($wpdb->prepare("
 			INSERT INTO " . $table_prefix . "fmt_giveme_state
-			(post_id, giveme_flg)
-			VALUES (%d, 1)",
+			(update_timestamp, post_id, giveme_flg)
+			VALUES (current_timestamp, %d, 1)",
 			$postID));
 	}
 	
@@ -184,8 +185,8 @@ function giveme(){
 	if($current_giveme == 0){
 		$wpdb->query($wpdb->prepare("
 			INSERT INTO " . $table_prefix . "fmt_user_giveme
-			(user_id, post_id)
-			VALUES (%d, %d)",
+			(update_timestamp, user_id, post_id)
+			VALUES (current_timestamp, %d, %d)",
 			$userID, $postID));
 	}
 	
@@ -226,7 +227,7 @@ function cancelGiveme(){
 	if($current_giveme == 0){
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_giveme_state
-		SET giveme_flg = 0
+		SET update_timestamp = current_timestamp, giveme_flg = 0
 		WHERE post_id = %d",
 		$postID));
 	}
@@ -254,14 +255,16 @@ function confirmGiveme(){
 	// 記事の状態を確定済にする
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_giveme_state
-		SET confirmed_flg = 1
+		SET update_timestamp = current_timestamp,
+		confirmed_flg = 1
 		WHERE post_id = %d",
 		$postID));
 	
 	// ユーザ確定情報の登録
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_user_giveme
-		SET confirmed_flg = 1
+		SET update_timestamp = current_timestamp,
+		confirmed_flg = 1
 		WHERE post_id = %d
 		AND user_id = %d",
 		$postID, $userID));
@@ -269,8 +272,8 @@ function confirmGiveme(){
 	// 取引履歴を登録
 	$wpdb->query($wpdb->prepare("
 		INSERT INTO " . $table_prefix . "fmt_trade_history
-		(post_id, bidder_id, exhibiter_id)
-		VALUES (%d, %d, %d)",
+		(update_timestamp, post_id, bidder_id, exhibiter_id)
+		VALUES (current_timestamp, %d, %d, %d)",
 		$postID, $userID,get_post_author($postID)));
 
 	// 取引相手の仮払ポイントを1p減算
@@ -327,14 +330,16 @@ function exhibiter_evaluation(){
 	// 記事の状態を出品者評価済に変更
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_giveme_state
-		SET exhibiter_evaluated_flg = 1
+		SET update_timestamp = current_timestamp,
+		exhibiter_evaluated_flg = 1
 		WHERE post_id = %d",
 		$postID));
 	
 	// 取引履歴を更新
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_trade_history
-		SET exhibiter_score = %d,
+		SET update_timestamp = current_timestamp,
+		exhibiter_score = %d,
 		exhibiter_comment = %s
 		WHERE post_id = %d",
 		$score, $comment, $postID));
@@ -355,14 +360,16 @@ function bidder_evaluation(){
 	// 記事の状態を落札者評価済に変更
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_giveme_state
-		SET bidder_evaluated_flg = 1
+		SET update_timestamp = current_timestamp,
+		bidder_evaluated_flg = 1
 		WHERE post_id = %d",
 		$postID));
 
 	// 取引履歴を更新
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_trade_history
-		SET bidder_score = %d,
+		SET update_timestamp = current_timestamp,
+		bidder_score = %d,
 		bidder_comment = %s
 		WHERE post_id = %d",
 		$score, $comment, $postID));
@@ -382,7 +389,8 @@ function finish(){
 	// 記事の状態を取引完了済に変更
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_giveme_state
-		SET finished_flg = 1
+		SET update_timestamp = current_timestamp,
+		finished_flg = 1
 		WHERE post_id = %d",
 		$postID));
 		
@@ -840,7 +848,8 @@ function add_got_points($user_id, $point){
 	// 引数がマイナスの場合減算されます
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_points
-		SET got_points = got_points + %d
+		SET update_timestamp = current_timestamp,
+		got_points = got_points + %d
 		WHERE user_id = %d",
 		$point, $user_id));
 }
@@ -855,7 +864,8 @@ function add_temp_used_points($user_id, $point){
 	// 引数がマイナスの場合減算されます
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_points
-		SET temp_used_points = temp_used_points + %d
+		SET update_timestamp = current_timestamp,
+		temp_used_points = temp_used_points + %d
 		WHERE user_id = %d",
 		$point, $user_id));
 }
@@ -870,7 +880,8 @@ function add_used_points($user_id, $point){
 	// 引数がマイナスの場合減算されます
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_points
-		SET used_points = temp_used_points + %d
+		SET update_timestamp = current_timestamp,
+		used_points = used_points + %d
 		WHERE user_id = %d",
 		$point, $user_id));
 }
@@ -885,8 +896,8 @@ function on_user_added($user_id){
 	// ユーザ追加時にポイントを付与
 	$wpdb->query($wpdb->prepare("
 		INSERT INTO " . $table_prefix . "fmt_points
-		(user_id, got_points, temp_used_points, used_points)
-		VALUES (%d, 3, 0, 0)",
+		(update_timestamp, user_id, got_points, temp_used_points, used_points)
+		VALUES (current_timestamp, %d, 3, 0, 0)",
 		$user_id));
 }
 
