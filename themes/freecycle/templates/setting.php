@@ -20,14 +20,14 @@
 	<?php
 	$view = isset($_REQUEST['view']) ? (string)$_REQUEST['view'] : '';
 	switch($view):
-		case 'setup':
-			require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'how-to-setup.php';
+		case 'setting':
+			require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'setting.php';
 			break;
 		case 'point-setting':
 			require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'point-setting.php';
 			break;
-		case 'advanced':
-			require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'advanced.php';
+		case 'external-serveces':
+			require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'external-serveces-setting.php';
 			break;
 		default:
     ?>

@@ -603,10 +603,9 @@ function del_wanted_item_by_asin(){
  */
 
 function get_search_result_from_amazon($array){
-	// TODO Register in Database
-	$accesss_key_id = 'AKIAJRLJRJDZGH57XPBA';
-	$secret_access_key = '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';
-	$associate_tag = '7072-3416-5582';
+	$accesss_key_id = get_option('amazon_accesss_key_id'); 
+	$secret_access_key = get_option('amazon_secret_access_key');
+	$associate_tag = get_option('amazon_associate_tag');
 
 	$baseurl = 'http://ecs.amazonaws.jp/onca/xml';
 	$params = array();
