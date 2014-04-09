@@ -548,7 +548,7 @@ p#wpg-login{
 
 a.fb_button:link, .fb_button:visited, .fb_button_rtl:link, .fb_button_rtl:visited {
 	width:50%;
-	height: 15px;
+	margin: 2px 0 0 2px;
 }
 
 a.wpg_tw_btn{
@@ -1955,9 +1955,7 @@ div#evaluation{
 div#evaluation textarea#trade_comment{
 	width:70%;
 }
-/*---------------------------------
-						メッセージ
-------------------------------------------------*/
+/*---------------------------------メッセージ-----------------------------*/
 
 a.button-confirm{
 	display: block;
@@ -1971,7 +1969,7 @@ td.thread-info a{
 }
 
 
-/*---設定--*/
+/*---------------------------------設定-----------------------------*/
 input#submit{
 	width: 200px;
 	height: 50px;
@@ -1984,7 +1982,7 @@ input#submit:hover{
 	color: orange;
 }
 
-/*サイドバー部分*/
+/*---------------------------------サイドバー-----------------------------*/
 
 #sidebar-login-form{
 	display: block;
