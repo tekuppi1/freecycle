@@ -1,4 +1,4 @@
-<?php
+#ffe3ad<?php
 wp_register_script(
 	'freecycleScript',
 	get_stylesheet_directory_uri() . '/js/freecycle.js',

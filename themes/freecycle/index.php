@@ -65,7 +65,7 @@
 		</div><!-- page -->
 
 		<!-- latest items -->
-		<h3>最新の出品</h3>
+		<h3 id="latest-topic">最新の出品</h3>
 		<?php
 			$latestitems_showposts = 4;
 			$latestitems_query =
