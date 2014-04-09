@@ -897,8 +897,8 @@ function on_user_added($user_id){
 	$wpdb->query($wpdb->prepare("
 		INSERT INTO " . $table_prefix . "fmt_points
 		(update_timestamp, user_id, got_points, temp_used_points, used_points)
-		VALUES (current_timestamp, %d, 3, 0, 0)",
-		$user_id));
+		VALUES (current_timestamp, %d, %d, 0, 0)",
+		$user_id, get_option('register-point')));
 }
 
 /**********************************************
@@ -1791,9 +1791,7 @@ function render(){
 }
 
 function add_custom_menu() {
-    add_options_page('テクスチェンジ', 'テクスチェンジ', 'read',
-		   __FILE__, 'render');
+    add_options_page('テクスチェンジ', 'テクスチェンジ', 'read', 'texchange', 'render');
 }
 add_action( 'admin_menu', 'add_custom_menu' );
- 
 ?>

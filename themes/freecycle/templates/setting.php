@@ -3,8 +3,34 @@
     <form method="post" action="options.php">
     <?php wp_nonce_field('update-options'); ?>
     <h2 class='nav-tab-wrapper'>
-    	<a class='nav-tab'>注目商品</a>
-    </h2>
+ 	<a class="nav-tab<?php if(!isset($_REQUEST['view'])) echo ' nav-tab-active'; ?>" href="<?php echo admin_url('options-general.php?page=texchange');?>">
+		注目商品
+	</a>
+	<?php
+		foreach(array(
+			'point-setting' => 'ポイント',
+			'external-serveces' => '外部連携'
+		) as $key => $val):
+	?>
+	<a class="nav-tab<?php if(isset($_REQUEST['view']) && $_REQUEST['view'] == $key) echo ' nav-tab-active'; ?>" href="<?php echo admin_url('options-general.php?page=texchange&view='.$key);?>">
+		<?php echo $val; ?>
+	</a>
+	<?php endforeach; ?>
+	</h2>
+	<?php
+	$view = isset($_REQUEST['view']) ? (string)$_REQUEST['view'] : '';
+	switch($view):
+		case 'setup':
+			require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'how-to-setup.php';
+			break;
+		case 'point-setting':
+			require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'point-setting.php';
+			break;
+		case 'advanced':
+			require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'advanced.php';
+			break;
+		default:
+    ?>
     <table class="form-table">
 		<tr valign="top">
 		<th>注目商品を使用する</th>
@@ -59,5 +85,9 @@
     <p class="submit">
 	<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
 	</p>
+	<?php 
+			break;
+	endswitch;
+	?>
     </form>
 </div>
