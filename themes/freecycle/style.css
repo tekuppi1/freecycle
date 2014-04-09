@@ -340,6 +340,7 @@ div#header_copy img{
 	height: 150px;
 }
 
+
 div#header_copy{
 	height: 150px;
 }
@@ -539,6 +540,21 @@ nav li:last-child a {
     border: none;
 }*/
 
+/*-------------------------facebook,twitterログインボタン--------------------------------------*/
+p#wpg-login{
+	background-image: none;
+	margin: 0;
+}
+
+a.fb_button:link, .fb_button:visited, .fb_button_rtl:link, .fb_button_rtl:visited {
+	width:50%;
+	height: 15px;
+}
+
+a.wpg_tw_btn{
+	width: 48%;
+	height: 28px;
+}
 
 
 /*
