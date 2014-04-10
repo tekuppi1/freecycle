@@ -11,8 +11,8 @@ Tags: buddypress
 
 /*ページ全体の枠組み*/
 
+@media screen and (min-width: 0px) and (max-width: 480px) {
 
-@media screen and (max-width: 320px) {
 a:link { color: #000080; }
 a:visited { color: #000090; }
 a:hover { color: #00bfff; }
@@ -71,23 +71,23 @@ h2{
 }
 
 h3{
-	font: normal bold 1.4em/1.4 "メイリオ", Meiryo,
+	font: normal bold 1.3em/1.4 "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
 		"HIragino Kaku Gothic Pro W3",
 		"HIragino Kaku Gothic Pro",
 		Osaka,
 		"ＭＳ Ｐゴシック", "MS P Gothic",
 		sans-serif;
-	border-left: double 2px black;
+	border-left: double 5px gold;
 	text-align: left;
 	width:auto;
 	padding-left: 3px;
-	background-color: gold;
+	/*background-color: gold;*/
 	color: black;
 }
 
 h4{
-	font: normal bold 1.3em/1.4 "メイリオ", Meiryo,
+	font: normal bold 1.2em/1.4 "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
 		"HIragino Kaku Gothic Pro W3",
 		"HIragino Kaku Gothic Pro",
@@ -110,6 +110,7 @@ hr{
 	margin: 0;
 	margin-top: -25px;
 }
+
 p{
 	line-height: 1.4;
 	font-size: 1em;
@@ -135,18 +136,7 @@ textarea{
 	font-size: 1em;
 }
 
-/*img{
-	width: 100;
-	height: 100;
-}
 
-img:after{
-	content: "";
-    clear: both;
-    height: 0;
-    display: block;
-    visibility: hidden;
- }*/
 
 /*-----------FAQ------------*/
 h2.pagetitle{
@@ -198,6 +188,7 @@ h5.faq_heading{
 }
 
 /*-----------テクスチェンジとは--------------*/
+
 h3.whats_tex{
 	font: normal 1.4em/1.4 "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
@@ -336,9 +327,7 @@ div.grobal_nav_div_sp{
 	margin: 0;
 }
 
-div.header_img_navi{
-	/*clear: both;*/
-}
+
 
 /*---------------------------------------------------
 				キャッチコピー
@@ -348,11 +337,13 @@ div#header_copy img{
 	margin:0;
 	padding: 0;
 	width: 100%;
-	height: 120px;
+	height: 150px;
 }
 
+
 div#header_copy{
-	height: 120px;
+	height: 150px;
+	margin-top: 50px;
 }
 
 
@@ -368,13 +359,9 @@ form[name=login-form]{
 	text-align: left;
 	display: block;
 	margin: auto;
-	/*margin-bottom: 1px;
-	margin-top: 1px;*/
 	padding: 7px;
-	/*order-radius: 6px;*/
 	width: 95%;
 	clear: both;
-	/*border: solid 1px;*/
 	color: black;
 	
 	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -441,14 +428,12 @@ div.login_form_button button:hover{
 
 
 /*ナビゲーション*/
+
 div.header_img_navi{
 	width: 100%;
-	/*padding: 10px 0;*/
+	height: 150px;
 }
 
-div.header_img_navi_contents{
-	margin-top: 20px;
-}
 	
 div.grobal_nav_div{
 	display: none;
@@ -469,7 +454,7 @@ nav ul,li	{
 nav li{
 	float: left;
 	text-align: center;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	border: solid 1px #000;
 	border-radius: 2px;
 	/*border-right: solid 1px #000;
@@ -486,15 +471,18 @@ nav li a{
 	width: auto;
 	padding: 3px;
 	border-radius: 2px;
-	background: #ffd700;
+	background: lightblue;
 	text-decoration: none;
 	/*border-bottom: solid 1px #000;*/
 }
 
-nav li a:hover{
+nav li.important_navi a{
+	background-color:#ffe3ad;
+}
+/*nav li a:hover{
 	background: #ffa500;
 	color: #fff;
-}
+}*/
 
 div#grobal_nav_div{
 	margin: 0;
@@ -506,10 +494,6 @@ div#grobal_nav_div{
 .grobal_nav_div_sp{
 	display: none;
 	}
-
-.grobal_nav_div_sp.active {
-	
-}
 
 
 .important_navi{
@@ -557,6 +541,21 @@ nav li:last-child a {
     border: none;
 }*/
 
+/*-------------------------facebook,twitterログインボタン--------------------------------------*/
+p#wpg-login{
+	background-image: none;
+	margin: 0;
+}
+
+a.fb_button:link, .fb_button:visited, .fb_button_rtl:link, .fb_button_rtl:visited {
+	width:50%;
+	margin: 2px 0 0 2px;
+}
+
+a.wpg_tw_btn{
+	width: 150px;
+	height: 28px;
+}
 
 
 /*
@@ -595,10 +594,10 @@ nav li:last-child a {
 }
 
 #searchsubmit{
-	margin:auto;
+	margin: 0 0 0 80px;
 	padding: 3px;
 	display: block;
-	width: 170px;
+	width: 200px;
 	height: 25px;
 	font: bold 1.1em/1.0 "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
@@ -629,7 +628,7 @@ nav li:last-child a {
 	display: block;
 	padding: 0;
 	margin-bottom: 3px;
-	width: 60%;
+	width: 99%;
 	height: 22px;
 }
 
@@ -789,6 +788,9 @@ div.trade_status_notconfirmed,div.trade_status_confirmed{
 	for amazon like layout begin
 */
 
+h3#latest-topic{
+	margin: 0 0 -15px 0;
+}
 .entry {
 	width: 100%;
 	height: 120px;
@@ -1055,7 +1057,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#08e5ff', en
 -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#08e5ff', endColorstr = '#dae3e3')";
 /*Element must have a height (not auto)*/
 /*All filters must be placed together*/
-background-image: -moz-linear-gradient(top, #08e5ff, #dae3e3);
+/*background-image: -moz-linear-gradient(top, #08e5ff, #dae3e3);
 background-image: -ms-linear-gradient(top, #08e5ff, #dae3e3);
 background-image: -o-linear-gradient(top, #08e5ff, #dae3e3);
 background-image: -webkit-gradient(linear, center top, center bottom, from(#08e5ff), to(#dae3e3));
@@ -1063,7 +1065,8 @@ background-image: -webkit-linear-gradient(top, #08e5ff, #dae3e3);
 background-image: linear-gradient(top, #08e5ff, #dae3e3);
 -moz-background-clip: padding;
 -webkit-background-clip: padding-box;
-background-clip: padding-box;
+background-clip: padding-box;*/
+background-color: lightblue;
 /*Use "background-clip: padding-box" when using rounded corners to avoid the gradient bleeding through the corners*/
 /*--IE9 WILL PLACE THE FILTER ON TOP OF THE ROUNDED CORNERS--*/
 }
@@ -1083,9 +1086,11 @@ ul#menu-footer_menu li a{
 	line-height: 120%;
 }
 
-}
-/*--------------------------------------------------------------------------------------------------------------------------------------*/
-@media screen and (min-width: 321px) and (max-width: 480px) {
+}/*スマホスタイルの終了*/
+
+
+/*-------------------------------------------------タブレットのスタイル-------------------------------------------------------------------------------------*/
+@media screen and (min-width: 481px) and (max-width: 768px) {
 
 @charset: utf-8;
 
@@ -1951,9 +1956,7 @@ div#evaluation{
 div#evaluation textarea#trade_comment{
 	width:70%;
 }
-/*---------------------------------
-						メッセージ
-------------------------------------------------*/
+/*---------------------------------メッセージ-----------------------------*/
 
 a.button-confirm{
 	display: block;
@@ -1967,7 +1970,7 @@ td.thread-info a{
 }
 
 
-/*---設定--*/
+/*---------------------------------設定-----------------------------*/
 input#submit{
 	width: 200px;
 	height: 50px;
@@ -1980,7 +1983,7 @@ input#submit:hover{
 	color: orange;
 }
 
-/*サイドバー部分*/
+/*---------------------------------サイドバー-----------------------------*/
 
 #sidebar-login-form{
 	display: block;
@@ -2055,8 +2058,9 @@ ul#menu-footer_menu li a{
 
 
 
-/*---------------------------------------------------------------------------------------------------------------------------------------*/
-@media screen and (min-width: 481px) {
+/*---------------------------------------PCのスタイル------------------------------------------------------------------------------------------------*/
+@media screen and (min-width: 769px) {
+
 a:link { color: #000080; }
 a:visited { color: #000090; }
 a:hover { color: #00bfff; }
@@ -2482,12 +2486,6 @@ div.login_form_button button:hover{
 }
 
 /*ナビゲーション*/
-/*.header_img_navi{
-	padding-top: 2px;
-	padding-bottom: 2px;
-	background: gold;
-	height: 30px;
-}*/
 
 div.grobal_nav_div_sp{
 	display: none;
@@ -2522,13 +2520,8 @@ div.grobal_nav_div  li{
 	text-align: center;
 	font-weight: bold;
 	margin-right: 2px;
-	/*border: solid 1px #000;*/
-	/*border-left: solid 1px #FFF;*/
 	width:auto;
-	display: block;
-	/*border-right: solid 1px #000;
-	border-top: solid 2px orange;*/
-	
+	display: block;	
 	
 }
 

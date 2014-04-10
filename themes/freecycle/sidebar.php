@@ -42,7 +42,7 @@
 	<?php do_action( 'bp_inside_after_sidebar' ); ?>
 
 	<?php wp_meta(); ?>
-	<div id="pagetop_link"><a href="#logo">Go to pagetop</a></div>
+	
 	</div><!-- .padder -->
 </div><!-- #sidebar -->
 
