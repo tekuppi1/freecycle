@@ -343,6 +343,7 @@ div#header_copy img{
 
 div#header_copy{
 	height: 150px;
+	margin-top: 50px;
 }
 
 
@@ -552,7 +553,7 @@ a.fb_button:link, .fb_button:visited, .fb_button_rtl:link, .fb_button_rtl:visite
 }
 
 a.wpg_tw_btn{
-	width: 48%;
+	width: 150px;
 	height: 28px;
 }
 
@@ -596,7 +597,7 @@ a.wpg_tw_btn{
 	margin: 0 0 0 80px;
 	padding: 3px;
 	display: block;
-	width: 239px;
+	width: 200px;
 	height: 25px;
 	font: bold 1.1em/1.0 "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
