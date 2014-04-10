@@ -948,6 +948,35 @@ function get_display_tradeway($tradeway){
  **********************************************
  */
 
+function fmt_messages_screen_conversation() {
+
+	// Bail if not viewing a single message
+	if ( !bp_is_messages_component() || !bp_is_current_action( 'view' ) )
+		return false;
+
+	$thread_id = (int) bp_action_variable( 0 );
+
+	if ( empty( $thread_id ) || !messages_is_valid_thread( $thread_id ) || ( !messages_check_thread_access( $thread_id ) && !bp_current_user_can( 'bp_moderate' ) ) )
+		bp_core_redirect( trailingslashit( bp_displayed_user_domain() . bp_get_messages_slug() ) );
+
+	// Load up BuddyPress one time
+	$bp = buddypress();
+
+	// Decrease the unread count in the nav before it's rendered
+	/*** custom begin ***/
+	if(bp_get_total_unread_messages_count() > 0){
+		$bp->bp_nav[$bp->messages->slug]['name'] = sprintf( __( 'Messages <span>%s</span>', 'buddypress' ), bp_get_total_unread_messages_count() );
+	}else{
+		$bp->bp_nav[$bp->messages->slug]['name'] = sprintf( __( 'Messages', 'buddypress' ));		
+	}
+	/*** custom end ***/
+	do_action( 'messages_screen_conversation' );
+
+	bp_core_load_template( apply_filters( 'messages_template_view_message', 'members/single/home' ) );
+}
+
+remove_action( 'bp_screens', 'messages_screen_conversation' );
+add_action( 'bp_screens', 'fmt_messages_screen_conversation' );
 
 /**
  * マイページのメニューを編集
@@ -960,6 +989,23 @@ function my_setup_nav() {
 	if(!current_user_can('administrator')){
 		bp_core_remove_subnav_item(BP_MESSAGES_SLUG, 'compose');
 	}
+
+	// override buddypress default mypage menu
+	$messages_name;
+	if(bp_get_total_unread_messages_count() > 0){
+		$messages_name = sprintf( __( 'Messages <span>%s</span>', 'buddypress' ), bp_get_total_unread_messages_count() );
+	}else{
+		$messages_name = sprintf( __( 'Messages', 'buddypress' ));
+	}
+	bp_core_new_nav_item(array(
+		'name'                    => $messages_name,
+		'slug'                    => BP_MESSAGES_SLUG,
+		'position'                => 50,
+		'show_for_displayed_user' => false,
+		'screen_function'         => 'messages_screen_inbox',
+		'default_subnav_slug'     => 'inbox',
+		'item_css_id'			  => $bp->messages->id
+	));
 
 	// ログインユーザのプロフィールにのみ表示させるメニュー。
 	if($user_ID == bp_displayed_user_id()){
