@@ -123,4 +123,3 @@ function onClickConfirmCommentButton(commentID){
 	editButton.show();
 	updateComment(commentID, updatedComment);
 }
-

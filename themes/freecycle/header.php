@@ -1,13 +1,4 @@
-<?php
-wp_register_script(
-	'freecycleScript',
-	get_stylesheet_directory_uri() . '/js/freecycle.js',
-	false,
-	'20131028'
-);
 
-wp_enqueue_script('freecycleScript');
-?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
@@ -19,7 +10,33 @@ wp_enqueue_script('freecycleScript');
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php bp_head(); ?>
 		<?php wp_head(); ?>
+		<?php
+		wp_register_script(
+			'freecycleScript',
+			get_stylesheet_directory_uri() . '/js/freecycle.js',
+			false,
+			'20131028'
+		);
+		wp_register_script(
+			'flexSliderScript',
+			get_stylesheet_directory_uri() . '/js/jquery.flexslider-min.js'
+		);
+		wp_register_style(
+			'flexSliderStyle',
+			get_stylesheet_directory_uri() . '/style/flexslider.css'
+		);
+
+		wp_enqueue_script('freecycleScript');
+		wp_enqueue_script('flexSliderScript');
+		wp_enqueue_style('flexSliderStyle');
+		?>
 	<script>
+	jQuery(document).ready(function(){
+		jQuery("#header_copy").flexslider({
+			animation: "slide",
+			controlNav: false
+		});
+	});
 	</script>
 	</head>
 
@@ -68,7 +85,14 @@ wp_enqueue_script('freecycleScript');
 				
 				<?php if(!is_user_logged_in()){ ?>
 				<div id="header_copy">
-					<img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_20140122.png" alt="てくすちぇんじとは？" width="700px" height="200px">
+					<ul class="slides">
+						<li>
+							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_20140122.png" alt="てくすちぇんじとは？" width="700px" height="200px">
+						</li>
+						<li>
+							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/book_sample.jpg" alt="てくすちぇんじとは？" width="700px" height="200px">
+						</li>
+					</ul>
 				</div>
 				<?php } ?>
 				
