@@ -334,10 +334,11 @@ div.grobal_nav_div_sp{
 ------------------------------------------------------*/
 
 div#header_copy img{
-	margin:0;
-	padding: 0;
-	width: 100%;
-	height: 150px;
+	margin: 0 auto;
+display: block;
+padding: 0;
+width: 85%;
+border-radius: 5px;
 }
 
 
@@ -350,9 +351,15 @@ div#header_copy{
 				ヘッダースライダー
 ------------------------------------------------------*/
 
-.flex-direction-nav a{
-	margin: -460px 0 0;
-}
+.flex-prev, .flex-next {
+			width: 30px;
+			height: 30px;
+			margin-top: -100px;
+			top: 0%;
+			&:before {
+				display: none;
+			}
+			}
 
 /* ヘッダーフォーム */
 
@@ -685,7 +692,7 @@ select#cat{
 div.whats-tex-button{
 	background-color: #fff;
 	padding:	0;
-	margin: 0;
+	margin: 40px 0 10px 0;
 }
 a.whats-tex-button{
 	width:90%;
@@ -1406,9 +1413,11 @@ a.unread_alert{
 ------------------------------------------------------*/
 
 div#header_copy  img{
-	width: 100%;
-	height: 150px;
-	/*margin-bottom: -15px;*/
+	margin: 0 auto;
+display: block;
+padding: 0;
+width: 85%;
+border-radius: 5px;
 }	
 
 
@@ -1688,6 +1697,7 @@ select#cat{
 div.whats-tex-button{
 	background-color: #fff;
 	padding: 3px auto;
+	margin: 40px 0 10px 0;
 	}
 
 a.whats-tex-button{

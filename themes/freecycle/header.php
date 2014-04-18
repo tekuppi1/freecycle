@@ -33,8 +33,13 @@
 	<script>
 	jQuery(document).ready(function(){
 		jQuery("#header_copy").flexslider({
-			animation: "slide",
-			controlNav: false
+			animation: "fade",
+			controlNav: false,
+			directionNav: false,
+			prevText: "",
+			nextText: "",
+			auto: true,
+			intval: 5,
 		});
 	});
 	</script>
@@ -87,13 +92,16 @@
 				<div id="header_copy">
 					<ul class="slides">
 						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_20140122.png" alt="てくすちぇんじとは？" width="700px" height="200px">
+							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_4.png" alt="slide_4" width="640px" >
 						</li>
 						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_2014.png" alt="理念" width="700px" height="200px">
+							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_1.png" alt="slide_1" width="640px" >
 						</li>
 						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_20140117.png" alt="てくすちぇんじヘッダー" width="700px" height="200px">
+							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_2.png" alt="slide_2" width="640px">
+						</li>
+						<li>
+							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_3.png" alt="slide_3" width="640px">
 						</li>
 					</ul>
 				</div>
