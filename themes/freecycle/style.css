@@ -969,6 +969,49 @@ input#upload:hover{
 	height: 50px;
 }
 
+h3.show-points,h5.show-points{
+	font-size: 9px;
+}
+
+h3.show-points{
+	margin: 0;
+}
+
+div.item-list-tabs#object-nav{
+	text-align: center;
+}
+
+#user-pag{
+	margin: 3px 0 0 0;
+}
+
+div#object-nav ul li{
+	border: outset 1px gray;
+	border-radius: 5px;
+	background-color: #f5f5f5;
+	margin: 1px 0;
+}
+
+div#object-nav ul li#new-entry-personal-li,
+div#object-nav ul li#giveme-from-others-personal-li,
+div#object-nav ul li#wanted-list-personal-li{
+	background-color:#fffacd/*lightyellow*/;
+}
+
+div#object-nav ul li#new-entry-personal-li:link,
+div#object-nav ul li#giveme-from-others-personal-li:link,
+div#object-nav ul li#wanted-list-personal-li:link{
+	color: white;
+}
+
+div#subnav>ul>li{
+	border-left: solid 4px skyblue;
+}
+
+div.item-list-tabs ul li.selected a, 
+div.item-list-tabs ul li.current a{
+	background: #98fb98;
+}
 /*---------------------------------評価--------------------------------------*/
 div#evaluation{
 	height: 200px;
