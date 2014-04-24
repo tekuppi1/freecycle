@@ -1439,19 +1439,7 @@ function your_giveme_title() {
  * 「ください」している記事の一覧を表示します。
  */
 function your_giveme_content() {
-	?>
-	<div id="your-giveme" class="your-giveme">
-		あなたは以下の商品に「ください」中です。
-		<?php 
-			$givemes = get_your_giveme_list();
-			foreach($givemes as $giveme){
-		?>
-			<h2 class="posttitle"><a href="<?php echo get_permalink($giveme->post_id) ?>">・<?php echo get_post($giveme->post_id)->post_title; ?></a></h2>
-		<?php
-			}
-		?>
-	</div>
-	<?php
+	include_once "members/single/your-giveme-list.php";
 }
 
 function your_giveme_link(){
