@@ -949,6 +949,9 @@ div#send-private-message{
 	display:none;
 }
 
+#blog-page{
+	padding-bottom: 30px;
+}/****************************ブログページ全体のスタイル。暫定的******************************/
 /*---プロフィールページ--*/
 input#upload{
 	width: 200px;
@@ -973,7 +976,7 @@ input#upload:hover{
 }
 
 h3.show-points,h5.show-points{
-	font-size: 1em;
+	font-size: 0.7em;
 }
 
 h3.show-points{
