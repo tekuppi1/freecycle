@@ -881,10 +881,10 @@ div#item-header-avatar{
 	width: 110px !important;
 }
 
-#item-header-avatar img{
+/*#item-header-avatar img{
 	width: 120px;
 	height: 120px;
-}
+}*/
 
 /*#item-header-content{
 	width: 110px;
@@ -986,10 +986,13 @@ div.item-list-tabs#object-nav{
 }
 
 div#object-nav ul li{
-	border: outset 1px gray;
+	border: solid 1px skyblue;
 	border-radius: 5px;
-	background-color: #f5f5f5;
+	background-color: #ffffff;
 	margin: 1px 0;
+	display: inline-block;
+    width: 45%;
+	vertical-align: top;
 }
 
 div#object-nav ul li#new-entry-personal-li,
@@ -1012,6 +1015,7 @@ div.item-list-tabs ul li.selected a,
 div.item-list-tabs ul li.current a{
 	background: #98fb98;
 }
+
 /*---------------------------------評価--------------------------------------*/
 div#evaluation{
 	height: 200px;
@@ -1039,7 +1043,14 @@ td.thread-info p a{
 	font-size: 1em !important;
 }
 
-/*---設定--*/
+input#send-to-input{
+	width:100%;
+}
+/*---------------------------------プロフページの設定画面ーーーー*/
+form#settings-form{
+	font-size: 0.8em;
+}
+
 input#submit{
 	width: 200px;
 	height: 50px;
