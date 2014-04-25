@@ -361,6 +361,9 @@ div#header_copy img{
 			}
 			}
 
+ul.slides{
+	padding-top:30px;
+}
 /* ヘッダーフォーム */
 
 div.header_form{
