@@ -973,7 +973,7 @@ input#upload:hover{
 }
 
 h3.show-points,h5.show-points{
-	font-size: 9px;
+	font-size: 1em;
 }
 
 h3.show-points{
@@ -1010,6 +1010,9 @@ div#object-nav ul li#wanted-list-personal-li:link{
 	color: white;
 }
 
+div#object-nav ul li#wanted-list-personal-li{
+	font-size: 0.9em;
+}
 div#subnav>ul>li{
 	border-left: solid 4px skyblue;
 }
