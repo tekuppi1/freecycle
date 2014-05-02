@@ -564,10 +564,18 @@ function search_wantedbook(){
 }
 
 function search_wantedlist(){
-	$items = get_others_wanted_list($_POST['user_id'], $_POST['keyword']);
+	$items = get_others_wanted_list($_POST['user_id'], $_POST['keyword'], 0, $_POST['page']);
+	$next_page = $_POST['page'] + 1;
+	$previous_page = $_POST['page'] - 1;
 	$return = '';
 	foreach ($items as $item) {
 		$return .= create_wanted_item_detail($item);
+	}
+	if(get_others_wanted_list($_POST['user_id'], $_POST['keyword'], 0, $next_page)){
+		$return .= '<div class="alignleft"><a href="#" onClick="onClickSearchWantedList(' . $next_page .')">次の10件</a></div>';
+	}
+	if($previous_page >= 0){
+		$return .= '<div class="alignright"><a href="#" onClick="onClickSearchWantedList(' . $previous_page .')">前の10件</a></div>';
 	}
 	echo $return;
 	die;
@@ -1301,30 +1309,18 @@ function to_wanted_list_link(){
 
 function create_wanted_item_detail($item){
 	global $user_ID;
+	$NODATA = 'データがありません';
 
 	$return = '';
-	$return .= '<div class="item_detail" id="' . $item->wanted_item_id . '" style="height:160px;margin:15px 5px 15px 5px;">';
-	$return .= '<img src="' . $item->image_url . '" style="float:left;">';
+	$return .= '<div class="item_detail" id="' . $item->wanted_item_id . '" style="height:auto;margin:15px 5px;padding:0px 0px 0px 0px">';
+	$return .= '<img src="' . $item->image_url . '" style="float:left; width:113px; height:160px; overflow:hidden">';
 
 	$return .= '<div id="title_'. $item->wanted_item_id .'"><strong>' . $item->item_name . '</strong></div>';
-	$return .= '<div>ほしがっている人:' . get_user_by('id', $item->user_id)->display_name . '</div>';
-	if($item->ASIN){
-		$return .= '<ul>';
-		$i = get_search_result_from_amazon(array('keyword'=>$item->ASIN))->Items->Item;
-		if($i->ItemAttributes->Author){
-			$return .= '<li name="author">著者:' . $i->ItemAttributes->Author . '</li>';
-		}
-		if($i->ItemAttributes->Publisher){
-			$return .= '<li>出版社:' . $i->ItemAttributes->Publisher . '</li>';
-		}
-		if($i->ItemAttributes->ReleaseDate){
-			$return .= '<li>発行日:' . $i->ItemAttributes->ReleaseDate . '</li>';
-		}
-		if($i->ItemAttributes->ListPrice->FormattedPrice){
-			$return .= '<li>価格:' . $i->ItemAttributes->ListPrice->FormattedPrice . '</li>';
-		}
-		$return .= '</ul>';
+	$return .= '<div>ほしがっている人:<a href="' . home_url() . '/members/' . get_user_by('id', $item->user_id)->user_nicename .'">'. get_user_by('id', $item->user_id)->display_name . '</a>さん';
+	if($item->count > 1){
+		$return .= ' ほか' . $item->count . '人';
 	}
+	$return .= '</div>';
 	$return .='
 	<label for="item_status">状態:</label>
 	<select name="item_status">
@@ -1336,11 +1332,12 @@ function create_wanted_item_detail($item){
 	';
 	$post_id = get_post_id_to_wanted($user_ID, $item->wanted_item_id);
 	if($post_id){
-		$return .= '<input type="button" class="button_del_exhibition_to_wanted" id="button_'. $item->wanted_item_id .'" value="出品済" wanted_item_id="' . $item->wanted_item_id .'" post_id="' . $post_id .'">';
+		$return .= '<input type="button" class="button_del_exhibition_to_wanted" id="button_'. $item->wanted_item_id .'" value="出品取消" wanted_item_id="' . $item->wanted_item_id .'" post_id="' . $post_id .'">';
 	}else{
 		$return .= '<input type="button" class="button_exhibit_to_wanted" id="button_'. $item->wanted_item_id .'" value="出品" wanted_item_id="' . $item->wanted_item_id .'">';
 	}
 	$return .= '</div>';
+	$return .= '<hr>';
 	return $return;
 }
 
@@ -1523,11 +1520,11 @@ function get_wanted_list($user_id){
 	return $wanted_list;
 }
 
-function get_others_wanted_list($user_id, $keyword, $wanted_item_id=0){
+function get_others_wanted_list($user_id, $keyword, $wanted_item_id=0, $page=0){
 	global $wpdb;
 	global $table_prefix;
 	$wanted_list;
-	$sql = "SELECT wanted_item_id, user_id, item_name, ASIN, image_url
+	$sql = "SELECT wanted_item_id, user_id, item_name, ASIN, image_url, count(*) as count
 			FROM ". $table_prefix . "fmt_wanted_list";
 	$sql .= " WHERE user_id <> %d";
 	$sql .= " AND item_name LIKE '%s'";
@@ -1536,8 +1533,10 @@ function get_others_wanted_list($user_id, $keyword, $wanted_item_id=0){
 	}else{
 		$sql .= " AND wanted_item_id <> %d";		
 	}
+	$sql .=	" GROUP BY item_name";
 	$sql .=	" ORDER BY wanted_item_id desc";
-	$wanted_list = $wpdb->get_results($wpdb->prepare($sql, $user_id, '%' . $keyword . '%', $wanted_item_id));
+	$sql .=	" LIMIT %d, 10";
+	$wanted_list = $wpdb->get_results($wpdb->prepare($sql, $user_id, '%' . $keyword . '%', $wanted_item_id, $page*10));
 	return $wanted_list;
 }
 
@@ -1619,9 +1618,13 @@ function social_login_button(){
 	}
 }
 
+function show_wanted_list(){
+	include_once "wanted-list.php";
+}
+
 add_shortcode('home_url','home_url');
 add_shortcode('social_login_button','social_login_button');
-
+add_shortcode('show_wanted_list', 'show_wanted_list');
 
 function endsWith($haystack, $needle){
     $length = (strlen($haystack) - strlen($needle));

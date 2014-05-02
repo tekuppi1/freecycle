@@ -1,3 +1,4 @@
+<script>
 function disableButtons(){
 	jQuery("input[type=button]").attr("disabled",true);
 }
@@ -123,3 +124,41 @@ function onClickConfirmCommentButton(commentID){
 	editButton.show();
 	updateComment(commentID, updatedComment);
 }
+
+function onClickSearchWantedList(page){
+	disableButtons();
+	jQuery('#wanted_list').html('<div class="loader" align=center><img src="<?php echo get_stylesheet_directory_uri() ?>/images/ajax-loader.gif"></div>');
+	jQuery.ajax({
+		type: "POST",
+		url: '<?php echo admin_url('admin-ajax.php'); ?>',
+		data: {
+			"action": "search_wantedlist",
+			"user_id": "<?php echo $user_ID; ?>",
+			"keyword": jQuery("#keyword").val(),
+			"page":page
+		},
+		success: function(result){
+			if(!result){
+				jQuery('#wanted_list').html("ほしいものリストが見つかりません。");
+				enableButtons();
+				return;
+			}
+			jQuery('#wanted_list').html(result);
+			jQuery('.button_exhibit_to_wanted').click(function(){
+				exhibitToWanted(jQuery(this).attr('wanted_item_id'));
+			});
+			jQuery('.button_del_exhibition_to_wanted').click(function(){
+				delExhibitionToWanted(jQuery(this).attr('post_id'), jQuery(this).attr('wanted_item_id'));
+			});
+			jQuery('.item_detail').hover(function(){
+				jQuery(this).css('background-color', '#ffffe0');
+			},
+			function(){
+				jQuery(this).css('background-color', '#ffffff');
+			});
+			enableButtons();
+		}
+	});
+}
+
+</script>
