@@ -131,6 +131,10 @@
 <?php social_login_button(); ?>
 <?php } ?>	
 
+<?php if(is_user_logged_in()){ ?>
+<span><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >出品する！</a></span>
+<?php } ?>	
+
 <div class="header_form">
 		<?php if(bp_is_front_page() || is_archive() || is_search() || is_single()){ ?>
 	<div id="search-23" class="widget widget_search"><!-- 検索バー -->
