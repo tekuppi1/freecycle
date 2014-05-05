@@ -516,6 +516,7 @@ function exhibit_to_wanted(){
 		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$bp->loggedin_user->id), true);
 		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$bp->loggedin_user->id), true);
 		add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);
+		add_post_meta($insert_id, "asin", $_POST['asin'], true);
 
 		$image_url = $_POST['image_url'];
 		media_sideload_image($image_url ,$insert_id);
@@ -524,15 +525,20 @@ function exhibit_to_wanted(){
 		update_post_meta($insert_id,'_thumbnail_id',$insert_id + 1);
 	}
 
-	// 出品があった旨を通知
-	messages_new_message(array(
-	'sender_id' => $user_ID,
-	'recipients' => get_others_wanted_list($user_ID, '', $_POST['wanted_item_id'])[0]->user_id,
-	'subject' => 'あなたのほしいものが出品されました！',
-	'content' => bp_core_get_userlink($user_ID) . 'さんが、あなたのほしいものを出品しました。くださいしてみましょう！' . PHP_EOL .
-					'<a href="' . get_permalink($insert_id) . '">' . get_post($insert_id)->post_title . '</a>'
-	));
-
+	$recipients = get_others_wanted_list(array(
+		'user_id' => $user_ID,
+		'asin' => $_POST['asin']
+		));
+	foreach ($recipients as $recipient) {
+		// 出品があった旨を通知
+		messages_new_message(array(
+		'sender_id' => $user_ID,
+		'recipients' => $recipient->user_id,
+		'subject' => 'あなたのほしいものが出品されました！',
+		'content' => bp_core_get_userlink($user_ID) . 'さんが、あなたのほしいものを出品しました。くださいしてみましょう！' . PHP_EOL .
+						'<a href="' . get_permalink($insert_id) . '">' . get_post($insert_id)->post_title . '</a>'
+		));
+	}
 	echo $insert_id;
 	die;
 }
@@ -564,14 +570,21 @@ function search_wantedbook(){
 }
 
 function search_wantedlist(){
-	$items = get_others_wanted_list($_POST['user_id'], $_POST['keyword'], 0, $_POST['page']);
+	$items = get_others_wanted_list(array(
+		'user_id' => $_POST['user_id'],
+		'keyword' => $_POST['keyword'],
+		'page' => $_POST['page'],
+		'count' => true));
 	$next_page = $_POST['page'] + 1;
 	$previous_page = $_POST['page'] - 1;
 	$return = '';
 	foreach ($items as $item) {
 		$return .= create_wanted_item_detail($item);
 	}
-	if(get_others_wanted_list($_POST['user_id'], $_POST['keyword'], 0, $next_page)){
+	if(get_others_wanted_list(array(
+		'user_id' => $_POST['user_id'],
+		'keyword' => $_POST['keyword'],
+		'page' => $next_page))){
 		$return .= '<div class="alignleft"><a href="#" onClick="onClickSearchWantedList(' . $next_page .')">次の10件</a></div>';
 	}
 	if($previous_page >= 0){
@@ -1332,9 +1345,9 @@ function create_wanted_item_detail($item){
 	';
 	$post_id = get_post_id_to_wanted($user_ID, $item->wanted_item_id);
 	if($post_id){
-		$return .= '<input type="button" class="button_del_exhibition_to_wanted" id="button_'. $item->wanted_item_id .'" value="出品取消" wanted_item_id="' . $item->wanted_item_id .'" post_id="' . $post_id .'">';
+		$return .= '<input type="button" class="button_del_exhibition_to_wanted" id="button_'. $item->wanted_item_id .'" value="出品取消" wanted_item_id="' . $item->wanted_item_id .'" post_id="' . $post_id .'", asin="' . $item->ASIN . '">';
 	}else{
-		$return .= '<input type="button" class="button_exhibit_to_wanted" id="button_'. $item->wanted_item_id .'" value="出品" wanted_item_id="' . $item->wanted_item_id .'">';
+		$return .= '<input type="button" class="button_exhibit_to_wanted" id="button_'. $item->wanted_item_id .'" value="出品" wanted_item_id="' . $item->wanted_item_id .'", asin="' . $item->ASIN . '">';
 	}
 	$return .= '</div>';
 	$return .= '<hr>';
@@ -1520,23 +1533,45 @@ function get_wanted_list($user_id){
 	return $wanted_list;
 }
 
-function get_others_wanted_list($user_id, $keyword, $wanted_item_id=0, $page=0){
+function get_others_wanted_list($args=''){
 	global $wpdb;
+	global $bp;
 	global $table_prefix;
+
 	$wanted_list;
-	$sql = "SELECT wanted_item_id, user_id, item_name, ASIN, image_url, count(*) as count
-			FROM ". $table_prefix . "fmt_wanted_list";
-	$sql .= " WHERE user_id <> %d";
+	$sql = "SELECT wanted_item_id, " . $table_prefix . "fmt_wanted_list.user_id, item_name, ASIN, image_url, value as department";
+	if($args['count']){
+		$sql .= ", count(*) as count";
+	}
+	$sql .= " FROM ". $table_prefix . "fmt_wanted_list";
+	$sql .= " LEFT JOIN " . $bp->profile->table_name_data . "";
+	$sql .= " ON " . $table_prefix . "fmt_wanted_list.user_id = " . $bp->profile->table_name_data . ".user_id";
+	$sql .= " AND " . $bp->profile->table_name_data . ".field_id = " . xprofile_get_field_id_from_name('学部');
+	$sql .= " WHERE " . $table_prefix . "fmt_wanted_list.user_id <> %d";
 	$sql .= " AND item_name LIKE '%s'";
-	if($wanted_item_id){
+	if($args['wanted_item_id']){
 		$sql .= " AND wanted_item_id = %d";
 	}else{
 		$sql .= " AND wanted_item_id <> %d";		
 	}
-	$sql .=	" GROUP BY item_name";
+	if($args['asin']){
+		$sql .= " AND ASIN = %s";
+	}else{
+		$args['asin'] = 'DUMMY'; // to get all results
+		$sql .= " AND ASIN <> %s";		
+	}
+	if($args['count']){
+		$sql .=	" GROUP BY ASIN";
+	}
 	$sql .=	" ORDER BY wanted_item_id desc";
-	$sql .=	" LIMIT %d, 10";
-	$wanted_list = $wpdb->get_results($wpdb->prepare($sql, $user_id, '%' . $keyword . '%', $wanted_item_id, $page*10));
+	if($args['page'] >= 0){
+		$sql .=	" LIMIT %d, 10";
+	}else{
+		$args['page'] = 0;
+		$sql .=	" LIMIT %d, 100000";		
+	}
+
+	$wanted_list = $wpdb->get_results($wpdb->prepare($sql, $args['user_id'], '%' . $args['keyword'] . '%', $args['wanted_item_id'], $args['asin'],  ($args['page'])*10));
 	return $wanted_list;
 }
 

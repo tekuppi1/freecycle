@@ -170,59 +170,6 @@
 			}
 		});		
 	}
-
-	function exhibitToWanted(wanted_item_id){
-		disableButtons();
-		jQuery.ajax({
-			type: "POST",
-			url: '<?php echo admin_url('admin-ajax.php'); ?>',
-			data: {
-				"action": "exhibit_to_wanted",
-				"field_1": jQuery('#title_' + wanted_item_id).text(),
-				"item_status": jQuery('#' + wanted_item_id + ' [name="item_status"]').val(),
-				"image_url":jQuery('#' + wanted_item_id + ' img').attr('src'),
-				"wanted_item_id": wanted_item_id
-			},
-			success: function(insert_id){
-				jQuery("#button_" + wanted_item_id).val("出品済");
-				jQuery("#button_" + wanted_item_id)
-					.unbind('click')
-					.click(function(){
-						delExhibitionToWanted(insert_id, wanted_item_id);
-					});
-				enableButtons();
-			},
-			error: function(){
-				alert("出品できませんでした。しばらくしてからもう一度おためしください。");
-				enableButtons();
-			}
-		});
-	 }
-
-	 function delExhibitionToWanted(post_id, wanted_item_id){
-	 	disableButtons();
-		jQuery.ajax({
-			type: "POST",
-			url: '<?php echo admin_url('admin-ajax.php'); ?>',
-			data: {
-				"action": "delete_post",
-				"postID": post_id 
-			},
-			success: function(){
-				jQuery("#button_" + wanted_item_id).val("出品");
-				jQuery("#button_" + wanted_item_id)
-					.unbind('click')
-					.click(function(){
-						exhibitToWanted(wanted_item_id);
-					});
-				enableButtons();
-			},
-			false: function(msg){
-				alert("取り消しに失敗しました。しばらくしてからもう一度おためしください。");
-				enableButtons();
-			}
-		});
-	 }
 </script>
 <div id="item-header-avatar">
 
