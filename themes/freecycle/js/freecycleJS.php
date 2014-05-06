@@ -135,7 +135,8 @@ function onClickSearchWantedList(page){
 			"action": "search_wantedlist",
 			"user_id": "<?php echo $user_ID; ?>",
 			"keyword": jQuery("#keyword").val(),
-			"page":page
+			"page":page,
+			"department": jQuery("#department").val()
 		},
 		success: function(result){
 			if(!result){

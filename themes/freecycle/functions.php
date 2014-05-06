@@ -574,6 +574,7 @@ function search_wantedlist(){
 		'user_id' => $_POST['user_id'],
 		'keyword' => $_POST['keyword'],
 		'page' => $_POST['page'],
+		'department' => $_POST['department'],
 		'count' => true));
 	$next_page = $_POST['page'] + 1;
 	$previous_page = $_POST['page'] - 1;
@@ -584,7 +585,8 @@ function search_wantedlist(){
 	if(get_others_wanted_list(array(
 		'user_id' => $_POST['user_id'],
 		'keyword' => $_POST['keyword'],
-		'page' => $next_page))){
+		'page' => $next_page,
+		'department' => $_POST['department']))){
 		$return .= '<div class="alignleft"><a href="#" onClick="onClickSearchWantedList(' . $next_page .')">次の10件</a></div>';
 	}
 	if($previous_page >= 0){
@@ -1560,6 +1562,12 @@ function get_others_wanted_list($args=''){
 		$args['asin'] = 'DUMMY'; // to get all results
 		$sql .= " AND ASIN <> %s";		
 	}
+	if($args['department']){
+		$sql .= " AND value = %s";
+	}else{
+		$args['department'] = 'DUMMY'; // to get all results
+		$sql .= " AND ifnull(value,0) <> %s";
+	}
 	if($args['count']){
 		$sql .=	" GROUP BY ASIN";
 	}
@@ -1570,8 +1578,14 @@ function get_others_wanted_list($args=''){
 		$args['page'] = 0;
 		$sql .=	" LIMIT %d, 100000";		
 	}
-
-	$wanted_list = $wpdb->get_results($wpdb->prepare($sql, $args['user_id'], '%' . $args['keyword'] . '%', $args['wanted_item_id'], $args['asin'],  ($args['page'])*10));
+debug_log($sql);
+debug_log($args['user_id']);
+debug_log($args['keyword']);
+debug_log($args['wanted_item_id']);
+debug_log($args['asin']);
+debug_log($args['department']);
+debug_log($args['page']);
+	$wanted_list = $wpdb->get_results($wpdb->prepare($sql, $args['user_id'], '%' . $args['keyword'] . '%', $args['wanted_item_id'], $args['asin'],  $args['department'], ($args['page'])*10));
 	return $wanted_list;
 }
 
@@ -1585,6 +1599,23 @@ function get_wanted_item_by_asin($asin){
 		AND ASIN = %s",
 		$user_ID, $asin));
 	return $wanted_item_id;
+}
+
+// 学部の一覧が標準関数で取れないので無理やり作りました。
+// テスト環境と本番環境でIDが同じなので動きますが、
+// プロフィール欄の項目を追加するとおかしくなる可能性があります。
+// やり方に気づいていないだけかもしれないので、標準関数での実装を探してほしい……
+function get_department_options(){
+	global $wpdb, $bp;
+	$group_id = 1;
+	$parent_id = 2;
+	$html = "<option value=''>すべて</option>";
+	$sql = "SELECT name FROM ". $bp->profile->table_name_fields . " WHERE group_id = " . $group_id . " AND parent_id = " . $parent_id . " ORDER BY id;";
+	$departments = $wpdb->get_results($sql);
+	foreach($departments as $department){
+		$html .= "<option value='" . $department->name ."'>" . $department->name . "</option>";
+	}
+	return $html;
 }
 
 
