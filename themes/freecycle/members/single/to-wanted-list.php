@@ -6,4 +6,3 @@
 <div id="wanted_list">
 <div align=center><img src="<?php echo get_stylesheet_directory_uri() ?>/images/ajax-loader.gif"></div>
 </div>
-<hr> <!-- 仕切り線 -->

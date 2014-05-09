@@ -13,7 +13,7 @@
 
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-					<div class="entry">
+					<div class="page-entry">
 
 						<?php the_content( __( '<p class="serif">Read the rest of this page &rarr;</p>', 'buddypress' ) ); ?>
 
