@@ -127,7 +127,7 @@
 
 <?php if(is_user_logged_in()){ ?>
      <div class="header_entry_button">
-     <a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/"  class="header_entry_button">出品する！</a>
+     <a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/"  class="header_entry_button">さっそく出品する！</a>
      </div>
 <?php } ?>	
 
