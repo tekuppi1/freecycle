@@ -14,6 +14,7 @@ add_action('wp_ajax_delete_post', 'delete_post');
 add_action('wp_ajax_update_comment', 'update_comment');
 add_action('wp_ajax_search_wantedbook', 'search_wantedbook');
 add_action('wp_ajax_search_wantedlist', 'search_wantedlist');
+add_action('wp_ajax_nopriv_search_wantedlist', 'search_wantedlist');
 add_action('wp_ajax_add_wanted_item', 'add_wanted_item');
 add_action('wp_ajax_del_wanted_item_by_asin', 'del_wanted_item_by_asin');
 add_action('wp_ajax_exhibit_to_wanted', 'exhibit_to_wanted');
@@ -1336,20 +1337,22 @@ function create_wanted_item_detail($item){
 		$return .= ' ほか' . $item->count . '人';
 	}
 	$return .= '</div>';
-	$return .='
-	<label for="item_status">状態:</label>
-	<select name="item_status">
-	<option value="verygood">'. get_display_item_status("verygood") .'</option>
-	<option value="good">' . get_display_item_status("good") .'</option>
-	<option value="bad">' . get_display_item_status("bad") .'</option>
-	</select>
-	</br>
-	';
-	$post_id = get_post_id_to_wanted($user_ID, $item->wanted_item_id);
-	if($post_id){
-		$return .= '<input type="button" class="button_del_exhibition_to_wanted" id="button_'. $item->wanted_item_id .'" value="出品取消" wanted_item_id="' . $item->wanted_item_id .'" post_id="' . $post_id .'", asin="' . $item->ASIN . '">';
-	}else{
-		$return .= '<input type="button" class="button_exhibit_to_wanted" id="button_'. $item->wanted_item_id .'" value="出品" wanted_item_id="' . $item->wanted_item_id .'", asin="' . $item->ASIN . '">';
+	if(is_user_logged_in()){
+		$return .='
+		<label for="item_status">状態:</label>
+		<select name="item_status">
+		<option value="verygood">'. get_display_item_status("verygood") .'</option>
+		<option value="good">' . get_display_item_status("good") .'</option>
+		<option value="bad">' . get_display_item_status("bad") .'</option>
+		</select>
+		</br>
+		';
+		$post_id = get_post_id_to_wanted($user_ID, $item->wanted_item_id);
+		if($post_id){
+			$return .= '<input type="button" class="button_del_exhibition_to_wanted" id="button_'. $item->wanted_item_id .'" value="出品取消" wanted_item_id="' . $item->wanted_item_id .'" post_id="' . $post_id .'", asin="' . $item->ASIN . '">';
+		}else{
+			$return .= '<input type="button" class="button_exhibit_to_wanted" id="button_'. $item->wanted_item_id .'" value="出品" wanted_item_id="' . $item->wanted_item_id .'", asin="' . $item->ASIN . '">';
+		}
 	}
 	$return .= '</div>';
 	$return .= '<hr>';
@@ -1549,6 +1552,9 @@ function get_others_wanted_list($args=''){
 	$sql .= " LEFT JOIN " . $bp->profile->table_name_data . "";
 	$sql .= " ON " . $table_prefix . "fmt_wanted_list.user_id = " . $bp->profile->table_name_data . ".user_id";
 	$sql .= " AND " . $bp->profile->table_name_data . ".field_id = " . xprofile_get_field_id_from_name('学部');
+	if($args['user_id'] < 0){
+		$args['user_id'] = 0;
+	}
 	$sql .= " WHERE " . $table_prefix . "fmt_wanted_list.user_id <> %d";
 	$sql .= " AND item_name LIKE '%s'";
 	if($args['wanted_item_id']){
@@ -1578,13 +1584,6 @@ function get_others_wanted_list($args=''){
 		$args['page'] = 0;
 		$sql .=	" LIMIT %d, 100000";		
 	}
-debug_log($sql);
-debug_log($args['user_id']);
-debug_log($args['keyword']);
-debug_log($args['wanted_item_id']);
-debug_log($args['asin']);
-debug_log($args['department']);
-debug_log($args['page']);
 	$wanted_list = $wpdb->get_results($wpdb->prepare($sql, $args['user_id'], '%' . $args['keyword'] . '%', $args['wanted_item_id'], $args['asin'],  $args['department'], ($args['page'])*10));
 	return $wanted_list;
 }
