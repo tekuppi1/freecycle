@@ -425,6 +425,64 @@ function insert_attachment($file_handler,$post_id,$setthumb='false'){
 }
 
 /**
+ * Override original media_sideload_image method
+ * to avoid 404 error with filename containing '%'.
+ *
+ * @param string $file The URL of the image to download
+ * @param int $post_id The post ID the media is to be associated with
+ * @param string $desc Optional. Description of the image
+ * @return string|WP_Error Populated HTML img tag on success
+ */
+function fcl_media_sideload_image($file, $post_id, $desc = null) {
+	if ( ! empty($file) ) {
+		// Download file to temp location
+		$tmp = download_url( $file );
+
+		// Set variables for storage
+		// fix file filename for query strings
+		preg_match( '/[^\?]+\.(jpe?g|jpe|gif|png)\b/i', $file, $matches );
+		// Override
+		// replace '%' to blank
+		$file_array['name'] = validate_filename(basename($matches[0]));
+		$file_array['tmp_name'] = $tmp;
+
+		// If error storing temporarily, unlink
+		if ( is_wp_error( $tmp ) ) {
+			@unlink($file_array['tmp_name']);
+			$file_array['tmp_name'] = '';
+		}
+
+		// do the validation and storage stuff
+		$id = media_handle_sideload( $file_array, $post_id, $desc );
+		// If error storing permanently, unlink
+		if ( is_wp_error($id) ) {
+			@unlink($file_array['tmp_name']);
+			return $id;
+		}
+
+		$src = wp_get_attachment_url( $id );
+	}
+
+	// Finally check to make sure the file has been saved, then return the html
+	if ( ! empty($src) ) {
+		$alt = isset($desc) ? esc_attr($desc) : '';
+		$html = "<img src='$src' alt='$alt' />";
+		return $html;
+	}
+}
+/**
+ * Use to validate filename.
+ * When uploading file, you must use this.
+ * Why this was created is that names containing '%' cause 404 error.
+ * If there are any additional conditions, fix this function.
+ * @param  {String} name of file
+ * @return {String} validated name
+ */
+function validate_filename($filename){
+	return str_replace('%', '', $filename);
+}
+
+/**
  * 新規出品時に呼ばれる関数
  */
 function new_entry(){
@@ -470,7 +528,7 @@ function new_entry(){
 			foreach ($files['name'] as $key => $value){
 				if ($files['name'][$key]){
 					$file = array(
-						'name'     => $files['name'][$key],
+						'name'     => validate_filename($files['name'][$key]),
 						'type'     => $files['type'][$key],
 						'tmp_name' => $files['tmp_name'][$key],
 						'error'    => $files['error'][$key],
@@ -520,9 +578,9 @@ function exhibit_to_wanted(){
 		add_post_meta($insert_id, "asin", $_POST['asin'], true);
 
 		$image_url = $_POST['image_url'];
-		media_sideload_image($image_url ,$insert_id);
+		fcl_media_sideload_image($image_url ,$insert_id);
 		// attach_idはinsert_id+1になる。
-		// media_sideload_image は attach_idを返さないのでこれ以上の実装方法が見つからない。汗
+		// fcl_media_sideload_image は attach_idを返さないのでこれ以上の実装方法が見つからない。汗
 		update_post_meta($insert_id,'_thumbnail_id',$insert_id + 1);
 	}
 
