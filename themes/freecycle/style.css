@@ -368,15 +368,22 @@ ul.slides{
 /*ヘッダー出品ボタン*/
 div.header_entry_button_div{
 	text-align: center;
-	background-color:#00ff00;
 }
+
 a#header_entry_button{
-    padding:3px 8px;
-    box-shadow:0px 0px 6px #00ff00;
+	display: none;
+	border: none;
+	border-radius: 5px;
+	text-decoration: none;
+	color: #47EA7E;
+	background: #fff;
+    padding:5px 50px;
+    box-shadow:0px 0px 6px orange;
     /*text-decoration:none;*/
-    font-size: 1.2em;
+    font-size: 1em;
     /*background-image:url(../images/menu_icon.png) no-repeat left;*/
-    padding-left: 20px;
+    /*padding-left: 20px;*/
+    
 }
 
 
@@ -460,7 +467,9 @@ div.login_form_button button:hover{
 }
 
 
-/*ナビゲーション*/
+/***************************************
+ナビゲーション
+***************************************/
 
 div.header_img_navi{
 	width: 100%;
@@ -499,7 +508,7 @@ nav li{
 
 
 nav li a{
-	color: black !important;
+	color: black ;
 	font-size: 12px;
 	display: block;
 	width: auto;
@@ -507,16 +516,11 @@ nav li a{
 	border-radius: 2px;
 	background: lightblue;
 	text-decoration: none;
-	/*border-bottom: solid 1px #000;*/
 }
 
 nav li.important_navi a{
 	background-color:#ffe3ad;
 }
-/*nav li a:hover{
-	background: #ffa500;
-	color: #fff;
-}*/
 
 div#grobal_nav_div{
 	margin: 0;
@@ -534,6 +538,19 @@ div#grobal_nav_div{
 	border: solid 2px;
 	}
 
+li.grobal_nav_blue_navi a,
+li.grobal_nav_important_navi a{
+	height: 20px;
+	color: #555;
+}
+
+li.grobal_nav_blue_navi,
+li.grobal_nav_important_navi,{
+}
+
+li.grobal_nav_important_navi a{
+	background-color: orange;
+}
 
 /*nav{
 	width: 100%;
@@ -1027,7 +1044,10 @@ div#send-private-message{
 
 #blog-page{
 	padding-bottom: 30px;
-}/****************************ブログページ全体のスタイル。暫定的******************************/
+	
+}
+
+/****************************ブログページ全体のスタイル。暫定的******************************/
 /*---プロフィールページ--*/
 input#upload{
 	width: 200px;
@@ -1224,7 +1244,9 @@ ul#menu-footer_menu li a{
 	line-height: 120%;
 }
 
-}/*スマホスタイルの終了*/
+}
+
+/*スマホスタイルの終了*/
 
 
 /*-------------------------------------------------タブレットのスタイル-------------------------------------------------------------------------------------*/
@@ -2921,7 +2943,7 @@ div#entry_login_form_pc{
 	background: #fff;
 	display: inline-block;
 	position: relative;
-	top: -70px;
+	top: -20px;
 	right: -10px;
 	width: 260px;
 	/*height: 244px;*/
