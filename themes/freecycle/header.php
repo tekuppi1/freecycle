@@ -119,15 +119,17 @@
 </div><!-- .header_img_navi -->
 
 <?php if(!is_user_logged_in()){ ?>
-<div class="whats-tex-button">
-	<a href="<?php echo home_url() . "/about"; ?>"  class="whats-tex-button">初めての方はこちら！</a>
+<div id="entry_login_form">
+	<a href="<?php echo home_url(); ?>/register" class="entry_buttons" id="entry_form">新規登録</a>
+	<a href="<?php echo home_url(); ?>/login" class="entry_buttons" id="login_form" >ログイン</a>
+	<?php social_login_button(); ?>
+	<a href="<?php echo home_url() . "/about"; ?>"  class="entry_buttons" id="detail_texchange">→てくすちぇんじってどんなサービス？</a>
 </div>
-<?php social_login_button(); ?>
-<?php } ?>	
+<?php } ?>
 
 <?php if(is_user_logged_in()){ ?>
-     <div class="header_entry_button">
-     <a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/"  class="header_entry_button">さっそく出品する！</a>
+     <div class="header_entry_button_div">
+     <a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/"  id="header_entry_button">さっそく出品する！</a>
      </div>
 <?php } ?>	
 
