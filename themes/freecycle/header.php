@@ -85,16 +85,16 @@
 				<div id="header_copy">
 					<ul class="slides">
 						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_4.png" alt="slide_4" width="640px" >
+							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_4.jpg" alt="slide_4" width="640px" >
 						</li>
 						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_1.png" alt="slide_1" width="640px" >
+							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_1.jpg" alt="slide_1" width="640px" >
 						</li>
 						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_2.png" alt="slide_2" width="640px">
+							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_2.jpg" alt="slide_2" width="640px">
 						</li>
 						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_3.png" alt="slide_3" width="640px">
+							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_3.jpg" alt="slide_3" width="640px">
 						</li>
 					</ul>
 				</div>
