@@ -700,6 +700,7 @@ div#entry_login_form{
 	border: 5px solid #888;
 	border-radius: 5px;
 	padding: 10px 10px 5px 10px;
+	background: #fff;
 }
 
 .entry_buttons{
@@ -731,6 +732,7 @@ a#entry_form{
 
 a#login_form{
 	font-size: 1.1em;
+	margin-bottom: 5px;
 }
 
 a#detail_texchange{
