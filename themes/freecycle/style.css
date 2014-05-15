@@ -719,7 +719,7 @@ a#entry_form,a#login_form{
       border:none;
       position:relative;
       cursor:pointer;
-      margin:10px 10px 0 0;
+      margin:5px 0;
       vertical-align: middle;
       width: 80%;
 }
@@ -727,12 +727,13 @@ a#entry_form,a#login_form{
 a#entry_form{
 	font-size: 1.5em;
 	background: #FBA848;
+	padding:10px 7px 10px 8px;
 	
 }
 
 a#login_form{
 	font-size: 1.1em;
-	margin-bottom: 5px;
+	margin-bottom: 6px;
 }
 
 a#detail_texchange{
