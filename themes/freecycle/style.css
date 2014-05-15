@@ -2921,7 +2921,7 @@ div#entry_login_form_pc{
 	background: #fff;
 	display: inline-block;
 	position: absolute;
-	left: 480px;
+	left: 600px;
 	width: 260px;
 	/*height: 244px;*/
 }
@@ -2954,7 +2954,7 @@ a#entry_form:hover,a#login_form:hover{
 a#entry_form{
 	font-size: 1.5em;
 	background: #FBA848;
-	padding:50px 7px 50px 8px;
+	padding:45px 7px 45px 8px;
 	
 }
 
