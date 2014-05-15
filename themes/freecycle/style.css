@@ -2920,8 +2920,9 @@ div#entry_login_form_pc{
 	padding: 10px 10px 5px 10px;
 	background: #fff;
 	display: inline-block;
-	position: absolute;
-	left: 600px;
+	position: relative;
+	top: -70px;
+	right: -10px;
 	width: 260px;
 	/*height: 244px;*/
 }

@@ -55,7 +55,6 @@
 		<div class="grobal_nav_div_sp">
 				<nav>
 					<ul class="navi" >
-					　		<li class="grobal_nav blue_navi"><a href="<?php echo home_url(); ?>" >ホーム</a></li>
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					　		<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
@@ -109,7 +108,6 @@
 				
 				<div class="grobal_nav_div">
 					<ul class="navi" >
-					　		<li class="grobal_nav blue_navi"><a href="<?php echo home_url(); ?>" >ホーム</a></li>
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					　		<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
