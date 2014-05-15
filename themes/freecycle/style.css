@@ -384,7 +384,7 @@ a#header_entry_button{
 
 div.header_form{
 	background-color: lightcyan;
-	padding: 25px 0 0 5px;
+	padding: 5px 0 0 5px;
 	border-radius: 4px;
 }
 
@@ -697,7 +697,7 @@ select#cat{
 
 div#entry_login_form{
 	text-align:center;
-	border: 5px solid #888;
+	border: 4px solid lightgray;
 	border-radius: 5px;
 	padding: 10px 10px 5px 10px;
 	background: #fff;
