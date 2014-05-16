@@ -4,7 +4,7 @@
 		<?php do_action( 'bp_before_footer'   ); ?>
 
 		<div id="footer">
-		<div id="pagetop_link"><a href="#logo">Go to pagetop</a></div>
+		<!-- <div id="pagetop_link"><a href="#logo">Go to pagetop</a></div> -->
 			<?php if ( is_active_sidebar( 'first-footer-widget-area' ) || is_active_sidebar( 'second-footer-widget-area' ) || is_active_sidebar( 'third-footer-widget-area' ) || is_active_sidebar( 'fourth-footer-widget-area' ) ) : ?>
 				<div id="footer-widgets">
 					<?php get_sidebar( 'footer' ); ?>
