@@ -52,6 +52,7 @@
 				<?php } ?>
 			</div>
 		</header><!-- header -->
+		
 		<div class="grobal_nav_div_sp">
 				<nav>
 					<ul class="navi" >
@@ -63,7 +64,7 @@
 					　		<li class="grobal_nav"><a href="http://texchg.com/review">利用者の声</a></li>
 							<?php } ?>
 					　		<li class="grobal_nav_important_navi"><a href="<?php echo home_url(); ?>/wanted-list" >ほしいものリスト</a></li>
-							<!-- <li class="grobal_nav"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li> -->
+							<li class="grobal_nav"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
 					　		<li class="grobal_nav_blue_navi"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>			
 					</ul>
 				</nav>
