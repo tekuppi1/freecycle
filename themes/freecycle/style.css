@@ -466,6 +466,9 @@ div.login_form_button button:hover{
 	background: #40AAEF;
 }
 
+ul#menu-footer_menu,div.widget widget_mycategoryorder{
+	line-height: 200%;
+}
 
 /***************************************
 ナビゲーション
