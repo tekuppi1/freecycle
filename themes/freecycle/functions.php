@@ -21,6 +21,31 @@ add_action('wp_ajax_exhibit_to_wanted', 'exhibit_to_wanted');
 add_action('user_register', 'on_user_added');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 
+//写真を自動で回転して縦にする
+function edit_images_before_upload($file)
+{
+	if($file['type'] == 'image/jpeg')
+	{
+		$image = wp_get_image_editor($file['file']);
+		if(!is_wp_error($image))
+		{
+			$exif			= exif_read_data($file['file']);
+			$orientation	= $exif['Orientation'];
+			if(!empty($orientation))
+			{
+				switch($orientation){
+					case 8:	$image->rotate(90);  break;
+					case 3: $image->rotate(180); break;
+					case 6: $image->rotate(-90); break;
+				}
+			}
+				$image->save($file['file']);
+		}
+	}
+	return $file;
+}
+add_action('wp_handle_upload','edit_images_before_upload');
+	
 function redirect_to_home(){
 	$redirect_url = get_option('home');
 	header("Location: ".$redirect_url);
