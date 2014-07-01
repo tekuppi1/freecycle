@@ -18,6 +18,7 @@ add_action('wp_ajax_nopriv_search_wantedlist', 'search_wantedlist');
 add_action('wp_ajax_add_wanted_item', 'add_wanted_item');
 add_action('wp_ajax_del_wanted_item_by_asin', 'del_wanted_item_by_asin');
 add_action('wp_ajax_exhibit_to_wanted', 'exhibit_to_wanted');
+add_action('wp_ajax_cancel_trade', 'cancel_trade');
 add_action('user_register', 'on_user_added');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 
@@ -260,7 +261,7 @@ function cancelGiveme(){
 	
 	// 仮払ポイントを1p減算
 	add_temp_used_points($userID, -1);
-	echo "cancel";
+	echo "取引をキャンセルしました。";
 	die;
 }
 
@@ -432,6 +433,80 @@ function finish(){
 						'<a href="' . get_permalink($postID) . '">' . get_permalink($postID) . '</a>'
 	));
 
+	die;
+}
+
+function set_confirmed_flg($post_id, $user_id, $val){
+    global $wpdb;//WordPressでDBを操作するオブジェクト
+	global $table_prefix;//テーブルの接頭辞
+
+	$wpdb->query($wpdb->prepare("
+		UPDATE " . $table_prefix . "fmt_giveme_state
+		SET update_timestamp = current_timestamp,
+		confirmed_flg = %d
+		WHERE post_id = %d",
+		$val, $post_id));//prepared statement
+
+	$wpdb->query($wpdb->prepare("
+		UPDATE " . $table_prefix . "fmt_user_giveme
+		SET update_timestamp = current_timestamp,
+		confirmed_flg = %d
+		WHERE post_id = %d
+		AND user_id = %d",
+		$val, $post_id, $user_id));//prepared statement
+}
+
+function delete_trade_history($post_id){
+    global $wpdb;//WordPressでDBを操作するオブジェクト
+	global $table_prefix;//テーブルの接頭辞
+
+	$wpdb->query($wpdb->prepare("
+		DELETE FROM ". $table_prefix . "fmt_trade_history
+		WHERE post_id = %d",
+		$post_id));
+}
+
+function delete_user_giveme($post_id, $user_id=""){
+    global $wpdb;//WordPressでDBを操作するオブジェクト
+	global $table_prefix;//テーブルの接頭辞
+
+	$sql = "DELETE FROM ". $table_prefix . "fmt_user_giveme WHERE post_id = %d";
+	if($user_id){
+		$sql .= " AND user_id = %d";
+		$wpdb->query($wpdb->prepare($sql, $post_id, $user_id));
+	}else{
+		$wpdb->query($wpdb->prepare($sql, $post_id));
+	}
+}
+
+function cancel_trade(){
+    $postID = $_POST['postID'];
+	$confirmed_user_id = get_confirmed_user_id($postID);
+	//実際のキャンセル処理
+	//商品の確定済フラグを下げる
+	set_confirmed_flg($postID, $confirmed_user_id, 0);
+
+	// 取引履歴の削除
+	delete_trade_history($postID);
+
+	// TODO fmt_user_giveme のデータ削除
+	// 条件: post_id = $postID
+	delete_user_giveme($postID);
+
+	// 取引相手の使用済みポイントを1p減算
+	add_used_points($confirmed_user_id, -1);
+	// 取引相手の獲得ポイントを1p加算
+	add_got_points($confirmed_user_id, 1);
+
+	messages_new_message(array(
+		'sender_id' => bp_loggedin_user_id(),
+		'recipients' => $confirmed_user_id,
+		'subject' => '【自動送信】取引をキャンセルしました',
+		'content' => '以下の商品の取引をキャンセルしました' .
+						'<a href="' . get_permalink($postID) . '">' . get_the_title($postID) . '</a>'
+	));
+
+	echo"cancel!!";
 	die;
 }
 

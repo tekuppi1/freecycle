@@ -142,15 +142,36 @@
 			}
 		}
 
+		function onCancelTrade(){
+			// 確認ダイアログを表示
+			if(confirm('現在の相手との取引をキャンセルします。よろしいですか？')){
+			　　　　jQuery.ajax({
+				　　　　type: "POST",
+					url: '<?php echo admin_url('admin-ajax.php'); ?>',
+					data: {
+						"action": "cancel_trade",
+						"postID": "<?php echo $post->ID ?>"
+					},
+					success: function(msg){
+						jQuery('<a href="javaScript:onDeletePost();">出品取り消し</a>').replaceAll(jQuery("#cancelTrade"));
+						alert(msg);						
+					}
+				});　　
+			}
+			// OKが押されたら取り消し処理(Ajax)を動かす。	
+		}
+
 		function switchGiveme(){
 			if(jQuery("#giveme").size() > 0){
 				jQuery('<input type="button" id="cancelGiveme" value="ください取消" onClick="onCencelGiveme();">').replaceAll(jQuery("#giveme"));
 				
 			}else{
-				jQuery('<input type="button" id="giveme" value="ください" onClick="onGiveme();">').replaceAll(jQuery("#cancelGiveme"));
+				jQuery('<input type="button" id="giveme" value="ください" onClick="onGiveme();">').replFaceAll(jQuery("#cancelGiveme"));
 			}
 		}
-
+        
+	
+		
 		function afterEvaluation(){
 			jQuery("#evaluation").replaceWith("この商品は評価済です。");
 		}
@@ -295,6 +316,7 @@
 							<!-- edit entry is not available -->
 							<!-- <span class="post-utility alignright"><?php edit_post_link( __( 'Edit this entry', 'buddypress' ) ); ?></span> -->
 							<?php if($user_ID == $authordata->ID && !isGiveme($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onDeletePost();">出品取り消し</a></span><?php } ?>
+							<?php if($user_ID == $authordata->ID && isConfirm($post->ID) && !isFinish($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onCancelTrade();" id="cancelTrade">取引キャンセル</a></span><?php } ?>							
 						</p>
 
 						<div class="entry">
