@@ -276,7 +276,7 @@
 						<?php }elseif(!is_user_logged_in()){?>
 						<!-- information is hidden for un-login users -->
 						<?php }elseif(isConfirm($post->ID)){
-								if(get_confirmed_user_id($post->ID) == $user_ID){
+								if(get_bidder_id($post->ID) == $user_ID){
 									if(isExhibiterEvaluated($post->ID)){ ?>
 										この商品は評価済です。
 								<?php }elseif(isFinish($post->ID)){ ?>
@@ -316,7 +316,7 @@
 							<!-- edit entry is not available -->
 							<!-- <span class="post-utility alignright"><?php edit_post_link( __( 'Edit this entry', 'buddypress' ) ); ?></span> -->
 							<?php if($user_ID == $authordata->ID && !isGiveme($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onDeletePost();">出品取り消し</a></span><?php } ?>
-							<?php if($user_ID == $authordata->ID && isConfirm($post->ID) && !isFinish($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onCancelTrade();" id="cancelTrade">取引キャンセル</a></span><?php } ?>							
+							<?php if($user_ID == $authordata->ID && isConfirm($post->ID) && !isFinish($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onCancelTrade();" id="cancelTrade">取引キャンセル</a></span><?php } ?>
 						</p>
 
 						<div class="entry">

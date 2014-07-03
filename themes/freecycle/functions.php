@@ -427,7 +427,7 @@ function finish(){
 	// 取引完了メールを送信
 	messages_new_message(array(
 		'sender_id' => $userID,
-		'recipients' => get_confirmed_user_id($postID),
+		'recipients' => get_bidder_id($postID),
 		'subject' => '【自動送信】出品者の評価をしてください！',
 		'content' => '出品者が取引を完了状態にしました。以下のリンクから出品者の評価を実施してください。' .
 						'<a href="' . get_permalink($postID) . '">' . get_permalink($postID) . '</a>'
@@ -492,7 +492,7 @@ function delete_user_giveme($post_id, $user_id=""){
 
 function cancel_trade(){
     $postID = $_POST['postID'];
-	$confirmed_user_id = get_confirmed_user_id($postID);
+	$confirmed_user_id = get_bidder_id($postID);
 	//実際のキャンセル処理
 	//商品の確定済フラグを下げる
 	set_confirmed_flg($postID, $confirmed_user_id, 0);
@@ -876,7 +876,7 @@ function create_item_detail($item){
 /**
  * 記事IDから取引相手のユーザIDを取得する関数
  */
-function get_confirmed_user_id($post_id){
+function get_bidder_id($post_id){
 	global $wpdb;
 	global $table_prefix;
 	$confirmed_user_id = $wpdb->get_var($wpdb->prepare("
