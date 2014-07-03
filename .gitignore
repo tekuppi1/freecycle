@@ -5,12 +5,15 @@ uploads/
 
 #plugins
 plugins/*.php
+plugins/adminer
 plugins/akismet
+plugins/backwpup
 plugins/buddypress
 plugins/theme-my-login
 plugins/buddypress-translations
 plugins/contact-form-7
 plugins/gianism
+plugins/json-api
 
 #themes
 themes/*.php

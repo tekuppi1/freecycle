@@ -436,6 +436,17 @@ function finish(){
 	die;
 }
 
+function set_giveme_flg($post_id, $val){
+	global $wpdb;
+	global $table_prefix;
+	$wpdb->query($wpdb->prepare("
+		UPDATE " . $table_prefix . "fmt_giveme_state
+		SET update_timestamp = current_timestamp,
+		giveme_flg = %d
+		WHERE post_id = %d",
+		$val, $post_id));	
+}
+
 function set_confirmed_flg($post_id, $user_id, $val){
     global $wpdb;//WordPressでDBを操作するオブジェクト
 	global $table_prefix;//テーブルの接頭辞
@@ -489,9 +500,9 @@ function cancel_trade(){
 	// 取引履歴の削除
 	delete_trade_history($postID);
 
-	// TODO fmt_user_giveme のデータ削除
-	// 条件: post_id = $postID
+	// givemeの履歴削除
 	delete_user_giveme($postID);
+	set_giveme_flg($postID, 0);
 
 	// 取引相手の使用済みポイントを1p減算
 	add_used_points($confirmed_user_id, -1);
@@ -506,7 +517,7 @@ function cancel_trade(){
 						'<a href="' . get_permalink($postID) . '">' . get_the_title($postID) . '</a>'
 	));
 
-	echo"cancel!!";
+	echo "取引をキャンセルしました。";
 	die;
 }
 
