@@ -188,6 +188,13 @@ function giveme(){
 	global $table_prefix;
 	$postID = $_POST['postID'];
 	$userID = $_POST['userID'];
+
+	//ください済み確認
+	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where user_id = %d and post_id = %d", $userID, $postID));
+	if($current_giveme > 0){
+		echo "くださいリクエストされています";
+		die;
+	}
 	
 	// 記事の状態を「ください」に変更(現在の状態が無い場合はレコードを登録)
 	$current_state = $wpdb->get_var($wpdb->prepare("SELECT giveme_flg FROM " . $table_prefix . "fmt_giveme_state where post_id = %d", $postID));
@@ -208,7 +215,6 @@ function giveme(){
 	
 	// ログインユーザ→投稿記事に対して「ください」リクエストした記録をつける
 	// 既にデータが登録済の場合は何もしません
-	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where user_id = %d and post_id = %d", $userID, $postID));
 	if($current_giveme == 0){
 		$wpdb->query($wpdb->prepare("
 			INSERT INTO " . $table_prefix . "fmt_user_giveme
@@ -229,7 +235,7 @@ function giveme(){
 					'<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>'
 	));
 	
-	echo $current_giveme;
+	echo "くださいリクエスト送信されました";
 	die;
 }
 
@@ -241,6 +247,14 @@ function cancelGiveme(){
 	global $table_prefix;
 	$postID = $_POST['postID'];
 	$userID = $_POST['userID'];
+
+	//ください取消確認
+	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where post_id = %d", $postID));
+	if($current_giveme == 0){
+		echo "ください取り消しされています";
+		die;
+	}
+
 
 	// 「ください」リクエストの情報を削除
 	$wpdb->query($wpdb->prepare("

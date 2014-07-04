@@ -36,7 +36,7 @@
 					},
 					success: function(msg){
 						switchGiveme();
-						alert("くださいリクエストを送信しました！");
+						alert(msg);
 					}
 				});
 			}
@@ -45,7 +45,7 @@
 		/**
 		 This function is called when cancelGiveme button is clicked.
 		 */
-		function onCencelGiveme(){
+		function onCancelGiveme(){
 			if(confirm("くださいリクエストを取消します。よろしいですか？")){
 				jQuery.ajax({
 					type: "POST",
@@ -57,7 +57,7 @@
 					},
 					success: function(msg){
 						switchGiveme();
-						alert("くださいリクエストを取消しました！");
+						alert(msg);
 					}
 				});
 			}
@@ -163,10 +163,10 @@
 
 		function switchGiveme(){
 			if(jQuery("#giveme").size() > 0){
-				jQuery('<input type="button" id="cancelGiveme" value="ください取消" onClick="onCencelGiveme();">').replaceAll(jQuery("#giveme"));
+				jQuery('<input type="button" id="cancelGiveme" value="ください取消" onClick="onCancelGiveme();">').replaceAll(jQuery("#giveme"));
 				
 			}else{
-				jQuery('<input type="button" id="giveme" value="ください" onClick="onGiveme();">').replFaceAll(jQuery("#cancelGiveme"));
+				jQuery('<input type="button" id="giveme" value="ください" onClick="onGiveme();">').replaceAll(jQuery("#cancelGiveme"));
 			}
 		}
         
@@ -303,7 +303,7 @@
 							<?php } ?>
 						<?php }elseif(is_user_logged_in()){
 								if(doneGiveme($post->ID, $user_ID)){ ?>
-						<input type="button" id="cancelGiveme" value="ください取消" onClick="onCencelGiveme();">
+						<input type="button" id="cancelGiveme" value="ください取消" onClick="onCancelGiveme();">
 							<?php }elseif(get_usable_point($user_ID) > 0){ ?>
 						<input type="button" id="giveme" value="ください" onClick="onGiveme();">
 							<?php }else{ ?>
