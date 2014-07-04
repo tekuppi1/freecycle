@@ -166,7 +166,7 @@
 				jQuery('<input type="button" id="cancelGiveme" value="ください取消" onClick="onCencelGiveme();">').replaceAll(jQuery("#giveme"));
 				
 			}else{
-				jQuery('<input type="button" id="giveme" value="ください" onClick="onGiveme();">').replFaceAll(jQuery("#cancelGiveme"));
+				jQuery('<input type="button" id="giveme" value="ください" onClick="onGiveme();">').replaceAll(jQuery("#cancelGiveme"));
 			}
 		}
         
