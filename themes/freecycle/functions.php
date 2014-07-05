@@ -612,29 +612,22 @@ function validate_filename($filename){
  */
 function new_entry(){
 	global $bp;
+	$exhibitor_id = $_POST['exhibitor_id'];
 
-	$post = array(  
-	'comment_status' => 'open', // open comment
-	'ping_status' => 'closed', // pinback, trackback off
-	'post_author' => $bp->loggedin_user->id, // login user ID
-	'post_category' => array($_POST['field_3']),
-	'post_content' => htmlentities($_POST['field_2'], ENT_QUOTES, 'UTF-8'), // item desctiption
-	'post_date' => date('Y-m-d H:i:s'), 
-	'post_date_gmt' => date('Y-m-d H:i:s'),
-	'post_status' => 'publish', // public open
-	'post_title' => strip_tags($_POST['field_1']), // title
-	'post_type' => 'post', // entry type name
-	'tags_input' => str_replace(array(" ", "　"), array("," ,",") , $_POST['field_4']) // スペース(半角および全角)をカンマに置換
-	);  
-
-	$insert_id = wp_insert_post($post);
+	$insert_id = exhibit(array(
+		'exhibitor_id' => $exhibitor_id,
+		'item_name' => $_POST['field_1'],
+		'item_description' => $_POST['field_2'],
+		'item_category' => $_POST['field_3'],
+		'tags' => $_POST['field_4']
+	));
 
 	if($insert_id){
 		// success
 		// add custom field
 		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
-		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$bp->loggedin_user->id), true);
-		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$bp->loggedin_user->id), true);
+		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$exhibitor_id), true);
+		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$exhibitor_id), true);
 		if($_POST['wanted_item_id']){
 			add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);			
 		}
@@ -674,33 +667,25 @@ function new_entry(){
 }
 
 function exhibit_to_wanted(){
-	global $bp;
-	global $user_ID;
+	$exhibitor_id = $_POST['exhibitor_id'];
+	$asin = $_POST['asin'];
 
-	$post = array(  
-	'comment_status' => 'open', // open comment
-	'ping_status' => 'closed', // pinback, trackback off
-	'post_author' => $bp->loggedin_user->id, // login user ID
-	'post_category' => array($_POST['field_3']),
-	'post_content' => htmlentities($_POST['field_2'], ENT_QUOTES, 'UTF-8'), // item desctiption
-	'post_date' => date('Y-m-d H:i:s'), 
-	'post_date_gmt' => date('Y-m-d H:i:s'),
-	'post_status' => 'publish', // public open
-	'post_title' => strip_tags($_POST['field_1']), // title
-	'post_type' => 'post', // entry type name
-	'tags_input' => str_replace(array(" ", "　"), array("," ,",") , $_POST['field_4']) // スペース(半角および全角)をカンマに置換
-	);  
-
-	$insert_id = wp_insert_post($post);
+	$insert_id = exhibit(array(
+		'exhibitor_id' => $exhibitor_id,
+		'item_name' => $_POST['field_1'],
+		'item_description' => $_POST['field_2'],
+		'item_category' => $_POST['field_3'],
+		'tags' => $_POST['field_4']
+	));
 
 	if($insert_id){
 		// success
 		// add custom field
 		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
-		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$bp->loggedin_user->id), true);
-		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$bp->loggedin_user->id), true);
+		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$exhibitor_id), true);
+		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$exhibitor_id), true);
 		add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);
-		add_post_meta($insert_id, "asin", $_POST['asin'], true);
+		add_post_meta($insert_id, "asin", $asin, true);
 
 		$image_url = $_POST['image_url'];
 		fcl_media_sideload_image($image_url ,$insert_id);
@@ -710,16 +695,16 @@ function exhibit_to_wanted(){
 	}
 
 	$recipients = get_others_wanted_list(array(
-		'user_id' => $user_ID,
-		'asin' => $_POST['asin']
+		'user_id' => $exhibitor_id,
+		'asin' => $asin
 		));
 	foreach ($recipients as $recipient) {
 		// 出品があった旨を通知
 		messages_new_message(array(
-		'sender_id' => $user_ID,
+		'sender_id' => $exhibitor_id,
 		'recipients' => $recipient->user_id,
 		'subject' => 'あなたのほしいものが出品されました！',
-		'content' => bp_core_get_userlink($user_ID) . 'さんが、あなたのほしいものを出品しました。くださいしてみましょう！' . PHP_EOL .
+		'content' => bp_core_get_userlink($exhibitor_id) . 'さんが、あなたのほしいものを出品しました。くださいしてみましょう！' . PHP_EOL .
 						'<a href="' . get_permalink($insert_id) . '">' . get_post($insert_id)->post_title . '</a>'
 		));
 	}
@@ -1471,9 +1456,54 @@ function has_todo_in_entry_list(){
 }
 
 /**********************************************
- * 「新規出品」表示時に使う関数一式
+ * 「新規出品」関連関数一式
  **********************************************
  */
+
+/**
+ * common function to exhibit.
+ * valid parameters:
+ * - exhibitor_id -> user id of author (required)
+ * - item_name -> name of item (required) 
+ * - item_description
+ * - item_category
+ * - tags -> item tags, sprit by space
+ * @param array parameters
+ * @return int insert_id
+ */
+function exhibit(array $args){
+	$post = array(
+	'comment_status' => 'open', // open comment
+	'ping_status' => 'closed', // pinback, trackback off
+	'post_date' => date('Y-m-d H:i:s'), 
+	'post_date_gmt' => date('Y-m-d H:i:s'),
+	'post_status' => 'publish', // public open
+	'post_type' => 'post' // entry type name
+	);
+
+	if($args['exhibitor_id'] !== null){
+		$post['post_author'] = $args['exhibitor_id'];
+	}
+
+	if($args['item_name'] !== null){
+		$post['post_title'] = strip_tags($args['item_name']);
+	}
+
+	if($args['item_description'] !== null){
+		$post['post_content'] = htmlentities($args['item_description'], ENT_QUOTES, 'UTF-8');
+	}
+
+	if($args['item_category'] !== null){
+		$post['post_category'] = array($args['item_category']);
+	}
+
+	if($args['tags'] !== null){
+		$post['tags_input'] = str_replace(array(" ", "　"), array("," ,",") , $args['tags']);
+	}
+
+	return wp_insert_post($post);
+}
+
 function get_new_entry_url() {
 	return bp_loggedin_user_domain() . "new_entry/";
 }

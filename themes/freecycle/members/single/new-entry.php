@@ -36,7 +36,7 @@
 <input type="file" class="multi" name="upload_attachment[]" ></br>
 <input type="file" class="multi" name="upload_attachment[]" ></br>
 <input type="file" class="multi" name="upload_attachment[]" ></br>
-
+<input type="hidden" name="exhibitor_id" value="<?php global $bp; echo $bp->loggedin_user->id ?>">
 <input type="button" value="出品" onClick="callOnNewEntry()" >
 <p>注意:出品後の記事の編集はできません。内容を十分確認して下さい。</p>
 </form>

@@ -169,6 +169,7 @@ function exhibitToWanted(wanted_item_id, asin){
 		url: '<?php echo admin_url('admin-ajax.php'); ?>',
 		data: {
 			"action": "exhibit_to_wanted",
+			"exhibitor_id": <?php global $bp; echo $bp->loggedin_user->id ?>,
 			"field_1": jQuery('#title_' + wanted_item_id).text(),
 			"item_status": jQuery('#' + wanted_item_id + ' [name="item_status"]').val(),
 			"image_url":jQuery('#' + wanted_item_id + ' img').attr('src'),
