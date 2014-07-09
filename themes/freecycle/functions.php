@@ -18,6 +18,7 @@ add_action('wp_ajax_nopriv_search_wantedlist', 'search_wantedlist');
 add_action('wp_ajax_add_wanted_item', 'add_wanted_item');
 add_action('wp_ajax_del_wanted_item_by_asin', 'del_wanted_item_by_asin');
 add_action('wp_ajax_exhibit_to_wanted', 'exhibit_to_wanted');
+add_action('wp_ajax_nopriv_exhibit_from_app', 'exhibit_from_app');
 add_action('wp_ajax_cancel_trade', 'cancel_trade');
 add_action('user_register', 'on_user_added');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
@@ -612,29 +613,22 @@ function validate_filename($filename){
  */
 function new_entry(){
 	global $bp;
+	$exhibitor_id = $_POST['exhibitor_id'];
 
-	$post = array(  
-	'comment_status' => 'open', // open comment
-	'ping_status' => 'closed', // pinback, trackback off
-	'post_author' => $bp->loggedin_user->id, // login user ID
-	'post_category' => array($_POST['field_3']),
-	'post_content' => htmlentities($_POST['field_2'], ENT_QUOTES, 'UTF-8'), // item desctiption
-	'post_date' => date('Y-m-d H:i:s'), 
-	'post_date_gmt' => date('Y-m-d H:i:s'),
-	'post_status' => 'publish', // public open
-	'post_title' => strip_tags($_POST['field_1']), // title
-	'post_type' => 'post', // entry type name
-	'tags_input' => str_replace(array(" ", "　"), array("," ,",") , $_POST['field_4']) // スペース(半角および全角)をカンマに置換
-	);  
-
-	$insert_id = wp_insert_post($post);
+	$insert_id = exhibit(array(
+		'exhibitor_id' => $exhibitor_id,
+		'item_name' => $_POST['field_1'],
+		'item_description' => $_POST['field_2'],
+		'item_category' => $_POST['field_3'],
+		'tags' => $_POST['field_4']
+	));
 
 	if($insert_id){
 		// success
 		// add custom field
 		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
-		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$bp->loggedin_user->id), true);
-		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$bp->loggedin_user->id), true);
+		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$exhibitor_id), true);
+		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$exhibitor_id), true);
 		if($_POST['wanted_item_id']){
 			add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);			
 		}
@@ -674,56 +668,74 @@ function new_entry(){
 }
 
 function exhibit_to_wanted(){
-	global $bp;
-	global $user_ID;
+	$exhibitor_id = $_POST['exhibitor_id'];
+	$asin = $_POST['asin'];
 
-	$post = array(  
-	'comment_status' => 'open', // open comment
-	'ping_status' => 'closed', // pinback, trackback off
-	'post_author' => $bp->loggedin_user->id, // login user ID
-	'post_category' => array($_POST['field_3']),
-	'post_content' => htmlentities($_POST['field_2'], ENT_QUOTES, 'UTF-8'), // item desctiption
-	'post_date' => date('Y-m-d H:i:s'), 
-	'post_date_gmt' => date('Y-m-d H:i:s'),
-	'post_status' => 'publish', // public open
-	'post_title' => strip_tags($_POST['field_1']), // title
-	'post_type' => 'post', // entry type name
-	'tags_input' => str_replace(array(" ", "　"), array("," ,",") , $_POST['field_4']) // スペース(半角および全角)をカンマに置換
-	);  
-
-	$insert_id = wp_insert_post($post);
+	$insert_id = exhibit(array(
+		'exhibitor_id' => $exhibitor_id,
+		'item_name' => $_POST['field_1'],
+		'item_description' => $_POST['field_2'],
+		'item_category' => $_POST['field_3'],
+		'tags' => $_POST['field_4'],
+		'image_url' => $_POST['image_url']
+	));
 
 	if($insert_id){
 		// success
 		// add custom field
 		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
-		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$bp->loggedin_user->id), true);
-		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$bp->loggedin_user->id), true);
+		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$exhibitor_id), true);
+		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$exhibitor_id), true);
 		add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);
-		add_post_meta($insert_id, "asin", $_POST['asin'], true);
-
-		$image_url = $_POST['image_url'];
-		fcl_media_sideload_image($image_url ,$insert_id);
-		// attach_idはinsert_id+1になる。
-		// fcl_media_sideload_image は attach_idを返さないのでこれ以上の実装方法が見つからない。汗
-		update_post_meta($insert_id,'_thumbnail_id',$insert_id + 1);
+		add_post_meta($insert_id, "asin", $asin, true);
 	}
 
 	$recipients = get_others_wanted_list(array(
-		'user_id' => $user_ID,
-		'asin' => $_POST['asin']
+		'user_id' => $exhibitor_id,
+		'asin' => $asin
 		));
 	foreach ($recipients as $recipient) {
 		// 出品があった旨を通知
 		messages_new_message(array(
-		'sender_id' => $user_ID,
+		'sender_id' => $exhibitor_id,
 		'recipients' => $recipient->user_id,
 		'subject' => 'あなたのほしいものが出品されました！',
-		'content' => bp_core_get_userlink($user_ID) . 'さんが、あなたのほしいものを出品しました。くださいしてみましょう！' . PHP_EOL .
+		'content' => bp_core_get_userlink($exhibitor_id) . 'さんが、あなたのほしいものを出品しました。くださいしてみましょう！' . PHP_EOL .
 						'<a href="' . get_permalink($insert_id) . '">' . get_post($insert_id)->post_title . '</a>'
 		));
 	}
 	echo $insert_id;
+	die;
+}
+
+/**
+
+ * exhibition method called from app.
+ * 
+ */
+function exhibit_from_app(){
+	$exhibitor = get_user_by('login', $_POST['exhibitor_id']);
+
+	if(!$exhibitor || !wp_check_password($_POST['password'], $exhibitor->data->user_pass, $exhibitor->ID)){
+		echo "ユーザ名とパスワードの組合せが不正です。";
+		die;
+	}
+
+	$exhibitor = get_user_by('login', $_POST['exhibitor_id']);
+
+	$insert_id = exhibit(array(
+		'exhibitor_id' => $exhibitor->ID,
+		'item_name' => $_POST['item_name'],
+		'image_url' => $_POST['image_url'],
+		'department' => xprofile_get_field_data('学部', $exhibitor->ID),
+		'course' => xprofile_get_field_data('学科', $exhibitor->ID),
+	));
+
+	if($insert_id !== 0){
+		echo "出品を完了しました！";
+	}else{
+		echo "出品に失敗しました。しばらくたってから再度試してください。";
+	}
 	die;
 }
 
@@ -1471,9 +1483,88 @@ function has_todo_in_entry_list(){
 }
 
 /**********************************************
- * 「新規出品」表示時に使う関数一式
+ * 「新規出品」関連関数一式
  **********************************************
  */
+
+/**
+ * common function to exhibit.
+ * valid parameters:
+ * - exhibitor_id -> user id of author (required)
+ * - item_name -> name of item (required) 
+ * - item_description
+ * - item_category
+ * - item_status
+ * - tags -> item tags, sprit by space
+ * - department
+ * - course
+ * - image_url -> url of image on the internet. Not attached files.
+ * @param array parameters
+ * @return int insert_id
+ */
+function exhibit(array $args){
+	$insert_id;
+	$post = array(
+	'comment_status' => 'open', // open comment
+	'ping_status' => 'closed', // pinback, trackback off
+	'post_date' => date('Y-m-d H:i:s'), 
+	'post_date_gmt' => date('Y-m-d H:i:s'),
+	'post_status' => 'publish', // public open
+	'post_type' => 'post' // entry type name
+	);
+
+	if($args['exhibitor_id'] !== null){
+		$post['post_author'] = $args['exhibitor_id'];
+	}
+
+	if($args['item_name'] !== null){
+		$post['post_title'] = strip_tags($args['item_name']);
+	}
+
+	if($args['item_description'] !== null){
+		$post['post_content'] = htmlentities($args['item_description'], ENT_QUOTES, 'UTF-8');
+	}
+
+	if($args['item_category'] !== null){
+		$post['post_category'] = array($args['item_category']);
+	}
+
+	if($args['tags'] !== null){
+		$post['tags_input'] = str_replace(array(" ", "　"), array("," ,",") , $args['tags']);
+	}
+
+	$insert_id = wp_insert_post($post);
+
+	if($insert_id === 0){
+		return $insert_id;
+	}
+
+	if($args['department'] !== null){
+		add_post_meta($insert_id, "department", $args['department'], true);
+	}
+
+	if($args['course'] !== null){
+		add_post_meta($insert_id, "course", $args['course'], true);
+	}
+
+	if($args['item_status'] !== null){
+		add_post_meta($insert_id, "item_status", $args['item_status'], true);
+	}
+
+	if($args['asin'] !== null){
+		add_post_meta($insert_id, "asin", $args['asin'], true);
+	}
+
+	if($args['image_url'] !== null){
+		// attach_idはinsert_id+1になる。
+		// fcl_media_sideload_image は attach_idを返さないのでこれ以上の実装方法が見つからない。汗
+		fcl_media_sideload_image($args['image_url'] ,$insert_id);
+		update_post_meta($insert_id,'_thumbnail_id',$insert_id + 1);
+	}
+
+	return $insert_id;
+}
+
 function get_new_entry_url() {
 	return bp_loggedin_user_domain() . "new_entry/";
 }
