@@ -192,7 +192,7 @@ function giveme(){
 	//ください済み確認
 	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where user_id = %d and post_id = %d", $userID, $postID));
 	if($current_giveme > 0){
-		echo "くださいリクエストされています";
+		echo "既にくださいリクエスト済みです。";
 		die;
 	}
 	
@@ -235,7 +235,7 @@ function giveme(){
 					'<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>'
 	));
 	
-	echo "くださいリクエスト送信されました";
+	echo "くださいリクエストが送信されました。";
 	die;
 }
 
@@ -251,7 +251,7 @@ function cancelGiveme(){
 	//ください取消確認
 	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where post_id = %d", $postID));
 	if($current_giveme == 0){
-		echo "ください取り消しされています";
+		echo "既にくださいが取消されています。";
 		die;
 	}
 
@@ -275,7 +275,7 @@ function cancelGiveme(){
 	
 	// 仮払ポイントを1p減算
 	add_temp_used_points($userID, -1);
-	echo "取引をキャンセルしました。";
+	echo "くださいを取消しました。";
 	die;
 }
 
