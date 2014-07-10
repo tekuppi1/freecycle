@@ -741,6 +741,8 @@ function exhibit_from_app(){
 
 function delete_post(){
 	wp_delete_post($_POST['postID']);
+	// minus 1 point on delete post
+	add_got_points($_POST['userID'], -1);
 	die;
 }
 
@@ -1561,6 +1563,9 @@ function exhibit(array $args){
 		fcl_media_sideload_image($args['image_url'] ,$insert_id);
 		update_post_meta($insert_id,'_thumbnail_id',$insert_id + 1);
 	}
+
+	// add 1 point on exhibition
+	add_got_points($args['exhibitor_id'], 1);
 
 	return $insert_id;
 }
