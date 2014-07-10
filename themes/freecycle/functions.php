@@ -741,8 +741,8 @@ function exhibit_from_app(){
 
 function delete_post(){
 	wp_delete_post($_POST['postID']);
-	// minus 1 point on delete post
-	add_got_points($_POST['userID'], -1);
+	// minus point on delete post
+	add_got_points($_POST['userID'], -1 * get_option('exhibition-point'));
 	die;
 }
 
@@ -1564,8 +1564,8 @@ function exhibit(array $args){
 		update_post_meta($insert_id,'_thumbnail_id',$insert_id + 1);
 	}
 
-	// add 1 point on exhibition
-	add_got_points($args['exhibitor_id'], 1);
+	// add point on exhibition
+	add_got_points($args['exhibitor_id'], get_option('exhibition-point'));
 
 	return $insert_id;
 }
