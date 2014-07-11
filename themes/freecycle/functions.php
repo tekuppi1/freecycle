@@ -18,6 +18,7 @@ add_action('wp_ajax_nopriv_search_wantedlist', 'search_wantedlist');
 add_action('wp_ajax_add_wanted_item', 'add_wanted_item');
 add_action('wp_ajax_del_wanted_item_by_asin', 'del_wanted_item_by_asin');
 add_action('wp_ajax_exhibit_to_wanted', 'exhibit_to_wanted');
+add_action('wp_ajax_exhibit_from_app', 'exhibit_from_app');
 add_action('wp_ajax_nopriv_exhibit_from_app', 'exhibit_from_app');
 add_action('wp_ajax_cancel_trade', 'cancel_trade');
 add_action('user_register', 'on_user_added');
@@ -715,13 +716,10 @@ function exhibit_to_wanted(){
  */
 function exhibit_from_app(){
 	$exhibitor = get_user_by('login', $_POST['exhibitor_id']);
-
 	if(!$exhibitor || !wp_check_password($_POST['password'], $exhibitor->data->user_pass, $exhibitor->ID)){
 		echo "ユーザ名とパスワードの組合せが不正です。";
 		die;
 	}
-
-	$exhibitor = get_user_by('login', $_POST['exhibitor_id']);
 
 	$insert_id = exhibit(array(
 		'exhibitor_id' => $exhibitor->ID,
