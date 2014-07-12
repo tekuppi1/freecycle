@@ -437,9 +437,6 @@ function finish(){
 		WHERE post_id = %d",
 		$postID));
 		
-	// 獲得ポイントを1p加算
-	add_got_points($userID, 1);
-	
 	// 取引完了メールを送信
 	messages_new_message(array(
 		'sender_id' => $userID,
