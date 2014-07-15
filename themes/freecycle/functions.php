@@ -1334,9 +1334,9 @@ function my_setup_nav() {
 
 		$giveme_from_others_name;
 		if(get_count_giveme_from_others() > 0){
-			$giveme_from_others_name = sprintf('みんなからのください<span>%s</span>', get_count_giveme_from_others());
+			$giveme_from_others_name = sprintf('あなたの出品へのください<span>%s</span>', get_count_giveme_from_others());
 		}else{
-			$giveme_from_others_name = 'みんなからのください';
+			$giveme_from_others_name = 'あなたの出品へのください';
 		}
 		bp_core_new_subnav_item( array( 
 			'name' => $giveme_from_others_name,
