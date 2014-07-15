@@ -74,6 +74,9 @@
 <div class="header_img_navi">
 
 				<div class="header_img_navi_contents">
+					<?php if(get_option('use-topics') === 'on' && is_home()){ ?>
+						<b><p><a class="unread_alert" href="<?php echo get_option('topics-link') ?>"><?php echo get_option('topics-text') ?></a></p></b>
+					<?php } ?>
 					<?php if(is_user_logged_in()) { 
 								 if(messages_get_unread_count() > 0){ 
 					?>
