@@ -49,6 +49,8 @@
 				<a href="javascript:onClickMenuIcon();"  id="menu_icon_sp" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img  id="menu_icon" src="<?php echo get_stylesheet_directory_uri() ?>/images/menu_icon.png" alt="ヘッダー" width="50px" height="50px"></a>
 				<?php if(!is_user_logged_in()){ ?>
 				<a href="<?php echo home_url(); ?>/login"  id="user_icon_sp" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img  id="user_icon" src="<?php echo get_stylesheet_directory_uri() ?>/images/user_icon.png" alt="ヘッダー" width="50px" height="50px"></a>
+				<?php }else{ ?>
+				<a href="<?php echo home_url(); ?>" id="home_icon_sp"><img id="home_icon" src="<?php echo get_stylesheet_directory_uri() ?>/images/home_icon.png" alt="ホーム" width="100%" height="100%"></a>
 				<?php } ?>
 			</div>
 		</header><!-- header -->
