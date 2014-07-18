@@ -4,6 +4,7 @@
 		 This function is called when finish button is clicked.
 		 */
 		function onFinish(){
+			disableButtons();
 			if(confirm("商品の受け渡しが完了していますか？")){
 				jQuery.ajax({
 					type: "POST",
@@ -16,8 +17,11 @@
 					success: function(msg){
 						afterFinish();
 						alert("取引が完了しました。落札者の評価を行ってください！");
+						enableButtons();
 					}
 				});
+			}else{
+				enableButtons();
 			}
 		}
 		
@@ -74,12 +78,16 @@
 		function onExhibiterEvaluation(){
 			var score = jQuery("#score").val();
 			var comment = jQuery("#trade_comment").val();
+
+			disableButtons();
 			// check input values
 			if(score === "invalid"){
 				alert("評価を選択してください。");
+				enableButtons();
 				return;
 			}else if(comment.length > 100){
 				alert("コメントは100文字以内で記入してください。");
+				enableButtons();
 				return;
 			}
 			// send values
@@ -95,19 +103,24 @@
 				success: function(msg){
 					afterEvaluation();
 					alert("取引評価を行いました！");
+					enableButtons();
 				}
 			});
 		}
 		
 		function onBidderEvaluation(){
+			disableButtons();
+
 			var score = jQuery("#score").val();
 			var comment = jQuery("#trade_comment").val();
 			// check input values
 			if(score === "invalid"){
 				alert("評価を選択してください。");
+				enableButtons();
 				return;
 			}else if(comment.length > 100){
 				alert("コメントは100文字以内で記入してください。");
+				enableButtons();
 				return;
 			}
 			// send values
@@ -123,6 +136,7 @@
 				success: function(msg){
 					afterEvaluation();
 					alert("取引評価を行いました！");
+					enableButtons();
 				}
 			});
 		}
