@@ -25,6 +25,7 @@
 		 This function is called when giveme button is clicked.
 		 */
 		function onGiveme(){
+			disableButtons();
 			if(confirm("くださいリクエストをします。よろしいですか？")){
 				jQuery.ajax({
 					type: "POST",
@@ -37,8 +38,11 @@
 					success: function(msg){
 						switchGiveme();
 						alert(msg);
+						enableButtons();
 					}
 				});
+			}else{
+				enableButtons();
 			}
 		}
 
@@ -46,6 +50,7 @@
 		 This function is called when cancelGiveme button is clicked.
 		 */
 		function onCancelGiveme(){
+			disableButtons();
 			if(confirm("くださいリクエストを取消します。よろしいですか？")){
 				jQuery.ajax({
 					type: "POST",
@@ -58,8 +63,11 @@
 					success: function(msg){
 						switchGiveme();
 						alert(msg);
+						enableButtons();
 					}
 				});
+			}else{
+				enableButtons();
 			}
 		}
 		
