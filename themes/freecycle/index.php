@@ -67,13 +67,12 @@
 		<!-- latest items -->
 		<h3 id="latest-topic">最新の出品</h3>
 		<?php
-			$latestitems_showposts = 4;
+			$latestitems_showposts = 6;
 			$latestitems_query =
 				new WP_Query(
 					'&showposts=' . $latestitems_showposts);
 			if($latestitems_query->have_posts()) :
 		?>
-		<h4><?php echo $category->name; ?></h4>
 		<div class="page" id="blog-latest" role="main">
 			<div class="posts-row">
 			<?php
@@ -99,69 +98,7 @@
 				endif;
 		?>
 
-		<!-- category roop -->
-		<h3>カテゴリピックアップ</h3>
-	<div id="categories-header" class="widget widget_categories">
-				<h3 class="categories_h3">カテゴリー検索はこちら</h3>
-	<?php
-			$cat_args = array('orderby' => 'name', 'show_count' => '1', 'hierarchical' => '1');
-			$cat_args['show_option_none'] = __('Select Category');
-			wp_dropdown_categories(apply_filters('widget_categories_dropdown_args', $cat_args));
-	?>
-	<script type='text/javascript'>
-	/* <![CDATA[ */
-		var dropdown = document.getElementById("cat");
-		function onCatChange() {
-			if ( dropdown.options[dropdown.selectedIndex].value > 0 ) {
-				location.href = "<?php echo home_url(); ?>/?cat="+dropdown.options[dropdown.selectedIndex].value;
-			}
-		}
-		dropdown.onchange = onCatChange;
-	/* ]]> */
-	</script>
-	</div><!-- categories-header -->
-		<?php
-			$categories_num = 3; 
-			$categories_showposts = 2; 
 
-			$categories = get_terms('category');
-			$category_keys = array_rand($categories, $categories_num);
-
-			foreach ($category_keys as $key) : $category = $categories[$key];
-				$categories_query =
-					new WP_Query(
-						'category_name=' . $category->slug .
-						'&showposts=' . $categories_showposts .
-						'&orderby=rand');
-				if($categories_query->have_posts()) :
-		?>
-		<h4><?php echo $category->name; ?></h4>
-		<div class="page" id="blog-latest" role="main">
-			<div class="posts-row">
-			<?php
-				while ($categories_query->have_posts()) : $categories_query->the_post();
-			?>
-				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?> class="entry-on-index">
-					<div class="post-content">
-						<div class="entry">	
-							<a href="<?php the_permalink(); ?>" class="post-img-contents"><?php the_post_thumbnail(array(150, 150)) ?></a>					
-							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
-							<span class="index-item-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></span>
-						</div>							
-					</div><!-- post-content -->					
-				</div><!-- post名 -->
-			<?php
-				endwhile;
-			?>
-			</div>
-			<hr class="hr-posts-row">
-			<a href="<?php echo home_url() . '/?category_name=' . $category->slug ?>"><p>全部見る(<?php echo $categories_query->found_posts ?>件)</p></a>
-		</div>
-		<?php
-				endif;
-			endforeach;
-		?>
-		<h5><a href="<?php echo home_url() . "/page/1" ?>">すべての商品を見る(<?php global $wp_query; echo $wp_query->found_posts;?>件)</a><h5>
 		<?php endif; ?>
 
 		<?php if(!endsWith(home_url() . '/', $_SERVER['REQUEST_URI'])) : ?>

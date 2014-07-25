@@ -57,6 +57,18 @@ function redirect_to_home(){
 add_action('wp_login', 'redirect_to_home');
 
 
+if(strpos($_SERVER['REQUEST_URI'] ,'archives/category') > 0){
+	redirect_to_404();
+}
+//redirect(/archive/category => 404.php(bp-default直下))
+function redirect_to_404(){
+	global $wp_query;
+	$wp_query -> is_404 = true;
+}
+
+
+
+
 function custom_init(){
 	add_action('comment_post', 'on_comment_post');	
 }
