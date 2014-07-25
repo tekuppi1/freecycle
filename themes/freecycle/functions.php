@@ -20,7 +20,8 @@ add_action('wp_ajax_del_wanted_item_by_asin', 'del_wanted_item_by_asin');
 add_action('wp_ajax_exhibit_to_wanted', 'exhibit_to_wanted');
 add_action('wp_ajax_exhibit_from_app', 'exhibit_from_app');
 add_action('wp_ajax_nopriv_exhibit_from_app', 'exhibit_from_app');
-add_action('wp_ajax_cancel_trade', 'cancel_trade');
+add_action('wp_ajax_cancel_trade_from_exhibitor', 'cancel_trade_from_exhibitor');
+add_action('wp_ajax_cancel_trade_from_bidder', 'cancel_trade_from_bidder');
 add_action('user_register', 'on_user_added');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 
@@ -514,38 +515,57 @@ function delete_user_giveme($post_id, $user_id=""){
 		$wpdb->query($wpdb->prepare($sql, $post_id));
 	}
 }
+function cancel_trade($post_id){
+	$confirmed_user_id = get_bidder_id($post_id);
 
-function cancel_trade(){
-    $postID = $_POST['postID'];
-	$confirmed_user_id = get_bidder_id($postID);
 	//実際のキャンセル処理
 	//商品の確定済フラグを下げる
-	set_confirmed_flg($postID, $confirmed_user_id, 0);
+	set_confirmed_flg($post_id, $confirmed_user_id, 0);
 
 	// 取引履歴の削除
-	delete_trade_history($postID);
+	delete_trade_history($post_id);
 
 	// givemeの履歴削除
-	delete_user_giveme($postID);
-	set_giveme_flg($postID, 0);
+	delete_user_giveme($post_id);
+	set_giveme_flg($post_id, 0);
 
 	// 取引相手の使用済みポイントを1p減算
 	add_used_points($confirmed_user_id, -1);
 	// 取引相手の獲得ポイントを1p加算
 	add_got_points($confirmed_user_id, 1);
+}
 
-	messages_new_message(array(
+function cancel_trade_from_exhibitor(){
+   $post_id = $_POST['postID'];
+   $bidder_id = get_bidder_id($post_id);
+   cancel_trade($post_id);
+   messages_new_message(array(
 		'sender_id' => bp_loggedin_user_id(),
-		'recipients' => $confirmed_user_id,
-		'subject' => '【自動送信】取引をキャンセルしました',
-		'content' => '以下の商品の取引をキャンセルしました' .
-						'<a href="' . get_permalink($postID) . '">' . get_the_title($postID) . '</a>'
+		'recipients' => $bidder_id,
+		'subject' => '【自動送信】取引がキャンセルされました',
+		'content' => '以下の商品の取引がキャンセルされました。' .
+						'<a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a>'
 	));
 
-	echo "取引をキャンセルしました。";
+	echo "出品者から取引をキャンセルしました。";
 	die;
 }
 
+function cancel_trade_from_bidder(){
+    $post_id = $_POST['postID'];
+	cancel_trade($post_id);
+	messages_new_message(array(
+		'sender_id' => bp_loggedin_user_id(),
+		'recipients' => get_post($post_id)->post_author,
+		'subject' => '【自動送信】取引がキャンセルされました',
+		'content' => '以下の商品の取引がキャンセルされました。' .
+						'<a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a>'
+	));
+	
+	echo "落札者から取引をキャンセルしました。";
+	die;
+}	
+	
 function insert_attachment($file_handler,$post_id,$setthumb='false'){  
 	if ($_FILES[$file_handler]['error'] !== UPLOAD_ERR_OK) __return_false();
 	
