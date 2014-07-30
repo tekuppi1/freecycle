@@ -20,6 +20,7 @@ add_action('wp_ajax_del_wanted_item_by_asin', 'del_wanted_item_by_asin');
 add_action('wp_ajax_exhibit_to_wanted', 'exhibit_to_wanted');
 add_action('wp_ajax_exhibit_from_app', 'exhibit_from_app');
 add_action('wp_ajax_nopriv_exhibit_from_app', 'exhibit_from_app');
+add_action('wp_ajax_register_app_information', 'register_app_information');
 add_action('wp_ajax_cancel_trade', 'cancel_trade');
 add_action('user_register', 'on_user_added');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
@@ -706,8 +707,12 @@ function exhibit_to_wanted(){
 	die;
 }
 
-/**
 
+/*************************************
+ * functions used from smartphone app
+ *************************************/
+
+/**
  * exhibition method called from app.
  * 
  */
@@ -733,6 +738,112 @@ function exhibit_from_app(){
 	}
 	die;
 }
+
+/**
+ * register or update information used for app.
+ * infrormation includes;
+ * - device_token
+ */
+function register_app_information(){
+	// add device_token key as a user meta data
+	global $current_user;
+	if(get_user_meta($current_user->get('ID'), 'device_token')){
+		update_user_meta($current_user->get('ID'), 'device_token', $_POST['deviceToken']);
+	}else{
+		add_user_meta($current_user->get('ID'), 'device_token', $_POST['deviceToken'], true);
+	}
+	die;
+}
+
+add_action('messages_message_sent', 'do_action_after_message_sent', 10, 1);
+
+function do_action_after_message_sent($sent_message){
+	$to_tokens = array();
+	foreach ($sent_message->recipients as $recipient) {
+		$token = get_user_meta($recipient->user_id, 'device_token', true);
+		if(strlen($token) > 0){
+			$to_tokens[] = $token;
+		}
+		send_push_notification($token, array(
+			'alert'		=> 'メッセージが届きました！',
+			'title'		=> $sent_message->subject,
+			'vibrate'	=> 'true',
+			'sound'		=> 'default',
+			'badge'		=> messages_get_unread_count($recipient->user_id)
+		));
+	}
+}
+
+/**
+ * send push notification.<br/>
+ * Valid parameters should be refered at Titanium documents.
+ * 
+ * @param {String} recipients comma separated device tokens
+ * @param {array} parameters
+ * 
+ */
+function send_push_notification($recipients, $args){
+	/*** SETUP ***************************************************/
+    $key        = get_option('acs_app_key');
+    $username   = get_option('acs_user_name');
+    $password   = get_option('acs_password');
+    $channel    = "news_alerts";
+    $alert    	= $args['alert'];
+    $title      = $args['title'];
+    $tmp_fname  = 'cookie.txt';
+    $json = '';
+
+    foreach ($args as $k => $v) {
+    	if(strlen($json) > 0) {
+    		$json .= ',';
+    	}
+    	$json = $json .'"' . $k . '":"' . $v . '"';
+    }
+    $json = '{' . $json . '}';
+
+    /*** PUSH NOTIFICATION ***********************************/
+ 
+    $post_array = array('login' => $username, 'password' => $password);
+ 
+    /*** INIT CURL ******************************************/
+    $curlObj    = curl_init();
+    curl_setopt($curlObj, CURLOPT_SSL_VERIFYPEER, false);
+    $c_opt      = array(CURLOPT_URL => 'https://api.cloud.appcelerator.com/v1/users/login.json?key='.$key,
+                        CURLOPT_COOKIEJAR => $tmp_fname, 
+                        CURLOPT_COOKIEFILE => $tmp_fname, 
+                        CURLOPT_RETURNTRANSFER => true, 
+                        CURLOPT_POST => 1,
+                        CURLOPT_POSTFIELDS  =>  "login=".$username."&password=".$password,
+                        CURLOPT_FOLLOWLOCATION  =>  1,
+                        CURLOPT_TIMEOUT => 60);
+ 
+    /*** LOGIN **********************************************/
+    curl_setopt_array($curlObj, $c_opt); 
+    $session = curl_exec($curlObj);
+
+    /*** SEND PUSH ******************************************/
+    $c_opt[CURLOPT_URL]         = "https://api.cloud.appcelerator.com/v1/push_notification/notify_tokens.json?key=".$key; 
+    $c_opt[CURLOPT_POSTFIELDS]  = "channel=".$channel."&to_tokens=".$recipients."&payload=".urlencode($json); 
+ 
+    curl_setopt_array($curlObj, $c_opt); 
+    $session = curl_exec($curlObj);
+
+    /*** THE END ********************************************/
+    curl_close($curlObj);
+}
+
+
+function push_unread_message_count(){
+	global $user_ID;
+	$token = get_user_meta($user_ID, 'device_token', true);
+	if($token){
+		send_push_notification($token, array(
+			'badge'		=> messages_get_unread_count()
+		));
+	}
+}
+add_action('messages_delete_thread', 'push_unread_message_count'); 
+add_action('messages_action_conversation', 'push_unread_message_count');
 
 function delete_post(){
 	wp_delete_post($_POST['postID']);
