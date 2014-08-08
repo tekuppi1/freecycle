@@ -20,7 +20,6 @@
 			'flexSliderStyle',
 			get_stylesheet_directory_uri() . '/style/flexslider.css'
 		);
-
 		wp_enqueue_script('flexSliderScript');
 		wp_enqueue_style('flexSliderStyle');
 		?>
@@ -34,6 +33,9 @@
 			nextText: "",
 			auto: true,
 			intval: 5,
+			start: function(slider){
+				jQuery("#slide_body").css("display", "block");
+			}
 		});
 	});
 	</script>
@@ -90,12 +92,12 @@
 				
 				<?php if(!is_user_logged_in()){ ?>
 				<div id="header_copy">
-					<ul class="slides">
+					<ul id="slide_body" class="slides" style="display:none">
 						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_4.jpg" alt="slide_4" width="640px" >
+							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_4.jpg" alt="slide_4" width="640px">
 						</li>
 						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_1.jpg" alt="slide_1" width="640px" >
+							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_1.jpg" alt="slide_1" width="640px">
 						</li>
 						<li>
 							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_2.jpg" alt="slide_2" width="640px">

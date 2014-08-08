@@ -94,12 +94,44 @@
 			<hr class="hr-posts-row">
 			<a href="<?php echo home_url() . "/page/1" ?>">すべての商品を見る(<?php global $wp_query; echo $wp_query->found_posts;?>件)</a>
 		</div>
+
 		<?php
-				endif;
+			endif;
 		?>
+
+		<!-- ほしいものリスト -->
+		<h4 id="wantedlist">ほしいものリスト</h4>
+		<div id="wanted_list"></div>
+		<script>
+		function onClickSearchWantedListHome(page){
+			jQuery.ajax({
+				type: "POST",
+				url: '<?php echo admin_url('admin-ajax.php'); ?>',
+				data: {
+					"action":"home_wantedlist",
+					"user_id":"<?php echo $user_ID; ?>",
+					"page":page,
+				},
+				success: function(result){
+					if(!result){
+						jQuery("#wanted_list").html("ほしいものリストが見つかりません。");
+						return;
+					}
+					jQuery("#wanted_list").html(result);
+				},
+				error: function(result){
+					console.log("error");
+				} 
+			});
+		}
+		onClickSearchWantedListHome(0);
+		</script>
 
 
 		<?php endif; ?>
+
+	
+
 
 		<?php if(!endsWith(home_url() . '/', $_SERVER['REQUEST_URI'])) : ?>
 		<h4 id="post-list-h4">商品一覧(<?php global $wp_query; echo $wp_query->found_posts;?>件)

@@ -946,6 +946,14 @@ div .post-content {
 	position: absolute;
 }
 
+.wantedlist_image{
+	height: 140px;
+	width: 90px; 
+	float: left; 
+	margin: 9px;
+	border: none;
+}
+
 /*
 	for amazon like layout end
 */
@@ -2070,6 +2078,14 @@ div .post-content {
 	position: absolute;
 }
 
+.wantedlist_image{
+	height: 140px;
+	width: 94px; 
+	float: left; 
+	margin: 10px;
+	border: none;
+}
+
 /*
 	for amazon like layout end
 */
@@ -3141,6 +3157,13 @@ div .post-content {
 	white-space: nowrap;
 	width: 100%;
 	position: absolute;
+}
+
+.wantedlist_image{
+	height: 30%; 
+	float: left; 
+	margin: 10px;
+	border: none;
 }
 
 /*

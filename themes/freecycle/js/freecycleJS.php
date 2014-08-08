@@ -125,7 +125,7 @@ function onClickConfirmCommentButton(commentID){
 	updateComment(commentID, updatedComment);
 }
 
-function onClickSearchWantedList(page){
+function onClickSearchWantedList(page,keyword){
 	disableButtons();
 	jQuery('#wanted_list').html('<div class="loader" align=center><img src="<?php echo get_stylesheet_directory_uri() ?>/images/ajax-loader.gif"></div>');
 	jQuery.ajax({
@@ -134,7 +134,7 @@ function onClickSearchWantedList(page){
 		data: {
 			"action": "search_wantedlist",
 			"user_id": "<?php echo $user_ID; ?>",
-			"keyword": jQuery("#keyword").val(),
+			"keyword": keyword,
 			"page":page,
 			"department": jQuery("#department").val()
 		},
@@ -216,4 +216,11 @@ function delExhibitionToWanted(post_id, wanted_item_id, asin){
 		}
 	});
  }
+
+ //Enter押下時読み込まれる関数
+function go(f){
+	if(window.event.keyCode == 13){
+		f();
+	}
+}
 </script>
