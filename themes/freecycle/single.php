@@ -165,19 +165,38 @@
 			}
 		}
 
-		function onCancelTrade(){
+		function onCancelTradeFromExhibitor(){
 			// 確認ダイアログを表示
 			if(confirm('現在の相手との取引をキャンセルします。よろしいですか？')){
+			　　　　jQuery.ajax({
+				　　　type: "POST",
+					url: '<?php echo admin_url('admin-ajax.php'); ?>',
+					data: {
+						"action": "cancel_trade_from_exhibitor",
+						"postID": "<?php echo $post->ID ?>"
+					},
+					success: function(msg){
+						jQuery('<a href="javaScript:onDeletePost();">出品取り消し</a>').replaceAll(jQuery("#cancelTradeFromExhibitor"));
+						alert(msg);						
+					}
+				});　　
+			}
+			// OKが押されたら取り消し処理(Ajax)を動かす。	
+		}
+		
+		function onCancelTradeFromBidder(){
+			// 確認ダイアログを表示
+			if(confirm('取引をキャンセルします。よろしいですか？')){
 			　　　　jQuery.ajax({
 				　　　　type: "POST",
 					url: '<?php echo admin_url('admin-ajax.php'); ?>',
 					data: {
-						"action": "cancel_trade",
+						"action": "cancel_trade_from_bidder",
 						"postID": "<?php echo $post->ID ?>"
 					},
 					success: function(msg){
-						jQuery('<a href="javaScript:onDeletePost();">出品取り消し</a>').replaceAll(jQuery("#cancelTrade"));
-						alert(msg);						
+						alert(msg);	
+                        location.href = "<?php echo home_url(); ?>";					
 					}
 				});　　
 			}
@@ -200,7 +219,7 @@
 		}
 
 		function afterFinish(){
-			jQuery("#finish").replaceWith('<div id="evaluation">落札者の評価:</br><select name="score" id="score"><option value="invalid" selected>--選択--</option><option value="5" >とても良い</option><option value="4" >良い</option><option value="3" >普通</option><option value="2" >悪い</option><option value="1" >とても悪い</option></select></br>コメント(任意 100字以内 改行も1文字と数えます)</br><textarea name="trade_comment" id="trade_comment" rows="5" cols="40"></textarea></br><input type="button" id="evaluation" value="評価する" onClick="onBidderEvaluation();"></div>');
+			jQuery("#finish").replaceWith('<div id="evaluation">落札者の評価:</br><select name="score" id="score"><option value="invalid" selected>--選択--</option><option value="5" >とても良い</option><option value="4" >良い</option><option value="3" >普通</option><option value="2" >悪い</option><option value="1" >とても悪い</option></select></br>コメント(任意 100字以内)</br><textarea name="trade_comment" id="trade_comment" rows="5" cols="40"></textarea></br><input type="button" id="evaluation" value="評価する" onClick="onBidderEvaluation();"></div>');
 		}
 		
 		function updateComment(commentID, updatedComment){
@@ -278,7 +297,7 @@
 										<option value="1" >とても悪い</option>
 									</select>
 									</br>
-									コメント(任意 100字以内 改行も1文字と数えます)</br>
+									コメント(任意 100字以内)</br>
 									<textarea name="trade_comment" id="trade_comment" rows="5" cols="40"></textarea></br>
 									<input type="button" id="evaluation" value="評価する" onClick="onBidderEvaluation();">
 								</div>
@@ -335,11 +354,13 @@
 						<?php } ?>
 						
 						<p class="date">
-							<?php printf( __( '%1$s <span>in %2$s</span>', 'buddypress' ), get_the_date(), get_the_category_list( ', ' ) ); ?>
+							<!-- <span></span>がないと次の<span>がイタリックになる -->
+							<?php printf( __( '%1$s <span></span>', 'buddypress' ), get_the_date()); ?>
 							<!-- edit entry is not available -->
 							<!-- <span class="post-utility alignright"><?php edit_post_link( __( 'Edit this entry', 'buddypress' ) ); ?></span> -->
 							<?php if($user_ID == $authordata->ID && !isGiveme($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onDeletePost();">出品取り消し</a></span><?php } ?>
-							<?php if($user_ID == $authordata->ID && isConfirm($post->ID) && !isFinish($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onCancelTrade();" id="cancelTrade">取引キャンセル</a></span><?php } ?>
+							<?php if($user_ID == $authordata->ID && isConfirm($post->ID) && !isFinish($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onCancelTradeFromExhibitor();" id="cancelTradeFromExhibitor">取引キャンセル</a></span><?php } ?>
+							<?php if($user_ID == get_bidder_id($post->ID) && isConfirm($post->ID) && !isFinish($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onCancelTradeFromBidder();" id="cancelTradeFromBidder">取引キャンセル</a></span><?php } ?>
 						</p>
 
 						<div class="entry">

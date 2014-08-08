@@ -9,17 +9,7 @@
 <label for="field_2">商品説明(必須)</label></br>
 <textarea rows="5" cols="40" name="field_2" id="field_2"></textarea></br>
 
-<!-- category -->
-<label for="field_3">カテゴリ</label></br>
-<?php
-	wp_dropdown_categories(array(
-		'orderby'		=> 'ID',
-		'hide_empty'	=> 0,
-		'exclude'		=> '1',
-		'name'			=> 'field_3'
-	));
-?>
-<br/>
+
 <!-- status -->
 <label for="item_status">状態</label></br>
 <select name="item_status">
@@ -37,7 +27,9 @@
 <input type="file" class="multi" name="upload_attachment[]" ></br>
 <input type="file" class="multi" name="upload_attachment[]" ></br>
 <input type="hidden" name="exhibitor_id" value="<?php global $bp; echo $bp->loggedin_user->id ?>">
+<br/>
 <input type="button" value="出品" onClick="callOnNewEntry()" >
+<br/>
 <p>注意:出品後の記事の編集はできません。内容を十分確認して下さい。</p>
 </form>
 <br/>

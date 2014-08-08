@@ -58,6 +58,16 @@ function redirect_to_home(){
 add_action('wp_login', 'redirect_to_home');
 
 
+if(strpos($_SERVER['REQUEST_URI'] ,'archives/category') > 0){
+	redirect_to_404();
+}
+//redirect(/archive/category => 404.php(bp-default直下))
+function redirect_to_404(){
+	global $wp_query;
+	$wp_query -> is_404 = true;
+}
+
+
 function custom_init(){
 	add_action('comment_post', 'on_comment_post');	
 }
@@ -882,7 +892,7 @@ function search_wantedbook(){
 
 function search_wantedlist(){
 	$items = get_others_wanted_list(array(
-		'user_id' => $_POST['user_id'],
+		//'user_id' => $_POST['user_id'],
 		'keyword' => $_POST['keyword'],
 		'page' => $_POST['page'],
 		'department' => $_POST['department'],
@@ -894,7 +904,7 @@ function search_wantedlist(){
 		$return .= create_wanted_item_detail($item);
 	}
 	if(get_others_wanted_list(array(
-		'user_id' => $_POST['user_id'],
+		//'user_id' => $_POST['user_id'],
 		'keyword' => $_POST['keyword'],
 		'page' => $next_page,
 		'department' => $_POST['department']))){
@@ -906,6 +916,39 @@ function search_wantedlist(){
 	echo $return;
 	die;
 }
+
+
+//ホームにほしいものリストを表示
+function home_wantedlist(){
+	debug_log("hekkk!");
+	$lists = get_others_wanted_list(array(
+		'user_id'    => $_POST['user_id'],
+		'page'       => $_POST['page'],
+		'count'      => true));
+	$return = '';
+	$i = 0;
+	foreach($lists as $list){
+		if( $i >= 9 ){
+			break;
+		}
+		$return .= create_wanted_item_detail_home($list);
+		$i += 1; 
+	}
+	echo $return;
+	die;
+}
+add_action('wp_ajax_nopriv_home_wantedlist','home_wantedlist');
+add_action('wp_ajax_home_wantedlist','home_wantedlist');
+
+//ほしいものリストレイアウト
+function create_wanted_item_detail_home($list){
+	$return = '';
+	$return .= '<div class="wantedlist_detail" id="'. $list->wanted_item_id .'">';
+	//画像
+	$return .= '<a href="' . home_url() .'/wanted-list?item_name='. urlencode($list->item_name) .'"><img class="wantedlist_image" src="' .$list->image_url .'">';
+	return $return;
+}
+
 
 function add_wanted_item(){
 	global $wpdb;
@@ -1941,7 +1984,7 @@ function get_others_wanted_list($args=''){
 		$sql .= ", count(*) as count";
 	}
 	$sql .= " FROM ". $table_prefix . "fmt_wanted_list";
-	$sql .= " LEFT JOIN " . $bp->profile->table_name_data . "";
+	$sql .= " LEFT JOIN " . $bp->profile->table_name_data;
 	$sql .= " ON " . $table_prefix . "fmt_wanted_list.user_id = " . $bp->profile->table_name_data . ".user_id";
 	$sql .= " AND " . $bp->profile->table_name_data . ".field_id = " . xprofile_get_field_id_from_name('学部');
 	if($args['user_id'] < 0){

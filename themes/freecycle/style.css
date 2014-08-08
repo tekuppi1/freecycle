@@ -946,6 +946,14 @@ div .post-content {
 	position: absolute;
 }
 
+.wantedlist_image{
+	height: 140px;
+	width: 90px; 
+	float: left; 
+	margin: 9px;
+	border: none;
+}
+
 /*
 	for amazon like layout end
 */
@@ -1139,7 +1147,9 @@ div#evaluation{
 }
 
 div#evaluation textarea#trade_comment{
-	width:70%;
+	width:97%;
+	height: 20%;
+	resize: none;
 }
 
 /*---------------------------------
@@ -2068,6 +2078,14 @@ div .post-content {
 	position: absolute;
 }
 
+.wantedlist_image{
+	height: 140px;
+	width: 94px; 
+	float: left; 
+	margin: 10px;
+	border: none;
+}
+
 /*
 	for amazon like layout end
 */
@@ -2409,6 +2427,13 @@ ol li.whats_tex{
 textarea{
 	font-size: 1em;
 }
+
+#trade_comment{
+	height: 38px;
+	width: 240%;
+	resize: none;
+}
+
 
 /*img{
 	width: 200;
@@ -3132,6 +3157,13 @@ div .post-content {
 	white-space: nowrap;
 	width: 100%;
 	position: absolute;
+}
+
+.wantedlist_image{
+	height: 30%; 
+	float: left; 
+	margin: 10px;
+	border: none;
 }
 
 /*
