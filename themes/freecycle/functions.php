@@ -717,18 +717,24 @@ function exhibit_to_wanted(){
  * 
  */
 function exhibit_from_app(){
-	$exhibitor = get_user_by('login', $_POST['exhibitor_id']);
-	if(!$exhibitor || !wp_check_password($_POST['password'], $exhibitor->data->user_pass, $exhibitor->ID)){
-		echo "ユーザ名とパスワードの組合せが不正です。";
-		die;
+	// $exhibitor = get_user_by('login', $_POST['exhibitor_id']);
+	// if(!$exhibitor || !wp_check_password($_POST['password'], $exhibitor->data->user_pass, $exhibitor->ID)){
+	// 	echo "ユーザ名とパスワードの組合せが不正です。";
+	// 	die;
+	// }
+
+	$current_user_id = get_current_user_id();
+
+	if($current_user_id === 0){
+		echo "ログインされていないため出品できません。";
 	}
 
 	$insert_id = exhibit(array(
-		'exhibitor_id' => $exhibitor->ID,
+		'exhibitor_id' => $current_user_id,
 		'item_name' => $_POST['item_name'],
 		'image_url' => $_POST['image_url'],
-		'department' => xprofile_get_field_data('学部', $exhibitor->ID),
-		'course' => xprofile_get_field_data('学科', $exhibitor->ID),
+		'department' => xprofile_get_field_data('学部', $current_user_id),
+		'course' => xprofile_get_field_data('学科', $current_user_id),
 	));
 
 	if($insert_id !== 0){
@@ -844,6 +850,7 @@ function push_unread_message_count(){
 }
 add_action('messages_delete_thread', 'push_unread_message_count'); 
 add_action('messages_action_conversation', 'push_unread_message_count');
+add_action('wp_login', 'push_unread_message_count');
 
 function delete_post(){
 	wp_delete_post($_POST['postID']);
