@@ -10,7 +10,8 @@
 		foreach(array(
 			'point-setting' => 'ポイント',
 			'external-serveces' => '外部連携',
-			'application' => 'アプリ'
+			'application' => 'アプリ',
+			'mail-magazine' => 'メールマガジン'
 		) as $key => $val):
 	?>
 	<a class="nav-tab<?php if(isset($_REQUEST['view']) && $_REQUEST['view'] == $key) echo ' nav-tab-active'; ?>" href="<?php echo admin_url('options-general.php?page=texchange&view='.$key);?>">
@@ -33,6 +34,9 @@
 		case 'application':
 			require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'application-setting.php';
 			break;
+		case 'mail-magazine':
+		    require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'mail-magazine-setting.php';
+		    break;
 		default:
     ?>
     <table class="form-table">
