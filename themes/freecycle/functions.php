@@ -1275,6 +1275,13 @@ function on_user_added($user_id){
 		(update_timestamp, user_id, got_points, temp_used_points, used_points)
 		VALUES (current_timestamp, %d, %d, 0, 0)",
 		$user_id, get_option('register-point')));
+	// メッセージを送付
+	messages_new_message(array(
+		'sender_id' => get_option('newuser_message_sender'),
+		'recipients' => $user_id,
+		'subject' => '登録ありがとうございます！',
+		'content' => get_option('newuser_message_content')
+		));
 }
 
 /**********************************************
