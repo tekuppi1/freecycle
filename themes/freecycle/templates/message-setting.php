@@ -1,10 +1,11 @@
     <?php wp_nonce_field('update-options'); ?>
-    <h2>Amazon API</h2>
     <table class="form-table">
+    	<h3>新規登録時メッセージ</h3>
 		<tr valign="top">
 		<th scope="row">送信元ユーザ</th>
 		<td>
 		<select name="newuser_message_sender">
+		<option value='-1'>※送信を停止</option>
 <?php
 		$admins = get_users(array('role' => 'Administrator'));
 		foreach ($admins as $admin) {

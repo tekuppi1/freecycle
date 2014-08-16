@@ -1276,12 +1276,14 @@ function on_user_added($user_id){
 		VALUES (current_timestamp, %d, %d, 0, 0)",
 		$user_id, get_option('register-point')));
 	// メッセージを送付
-	messages_new_message(array(
-		'sender_id' => get_option('newuser_message_sender'),
-		'recipients' => $user_id,
-		'subject' => '登録ありがとうございます！',
-		'content' => get_option('newuser_message_content')
-		));
+	if(get_option('newuser_message_sender') != -1){
+		messages_new_message(array(
+			'sender_id' => get_option('newuser_message_sender'),
+			'recipients' => $user_id,
+			'subject' => '登録ありがとうございます！',
+			'content' => get_option('newuser_message_content')
+			));
+	}
 }
 
 /**********************************************
