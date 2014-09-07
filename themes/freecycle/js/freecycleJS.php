@@ -76,7 +76,8 @@ function onConfirmGiveme(postID, url){
 					data: {
 						"action": "confirmGiveme",
 						"postID": postID,
-						"userID": userID,
+						"userID": userID,//落札者相手ユーザーＩＤ
+						"euserID": "<?php echo $user_ID ?>",//出品者ユーザーＩＤ
 						"uncheckedUserIDs": uncheckedUserIDs.join(),
 						"tradeway": jQuery("#tradeway_" + postID).val(),
 						"tradedates": tradedates.join(),

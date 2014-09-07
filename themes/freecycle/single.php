@@ -97,6 +97,7 @@
 				data: {
 					"action": "exhibiter_evaluation",
 					"postID": "<?php echo $post->ID ?>",
+					"userID": "<?php echo $user_ID ?>",
 					"score" : score,
 					"comment" : comment
 				},
@@ -130,6 +131,7 @@
 				data: {
 					"action": "bidder_evaluation",
 					"postID": "<?php echo $post->ID ?>",
+					"userID": "<?php echo $user_ID ?>",
 					"score" : score,
 					"comment" : comment
 				},
@@ -251,6 +253,7 @@
 					　<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 							<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+							
 
 						<div class="author-box">
 						<?php echo get_avatar( get_the_author_meta( 'user_email' ), '50' ); ?>

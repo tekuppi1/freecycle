@@ -1,6 +1,7 @@
 <div id="wanted_list">
 	<?php
 		global $user_ID;
+		
 		$wanted_list = get_wanted_list($user_ID);
 		if(!$wanted_list){
 	?>

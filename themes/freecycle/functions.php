@@ -201,6 +201,9 @@ function giveme(){
 	$postID = $_POST['postID'];
 	$userID = $_POST['userID'];
 
+	//todoリストに追加
+	add_todo_confirm_bidder();
+
 	//ください済み確認
 	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where user_id = %d and post_id = %d", $userID, $postID));
 	if($current_giveme > 0){
@@ -243,11 +246,14 @@ function giveme(){
 	'sender_id' => $userID,
 	'recipients' => get_post_author($postID),
 	'subject' => '【自動送信】あなたの商品に「ください」がされました',
-	'content' => bp_core_get_userlink($userID) . 'さんが以下の商品に「ください」をしています！<br>' .
-					'<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>'
+	'content' => bp_core_get_userlink($userID) . 'さんが以下の商品に「ください」をしています!<br><br>'.
+					'以下のリンクから取引確定処理を行ってください<br>' .
+					'<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>'//bug:改行がきかない
 	));
 	
 	echo "くださいリクエストが送信されました。";
+
+	
 	die;
 }
 
@@ -288,6 +294,10 @@ function cancelGiveme(){
 	// 仮払ポイントを1p減算
 	add_temp_used_points($userID, -1);
 	echo "くださいを取消しました。";
+
+	//todoリストstatus="finished",更新処理未実装
+	finish_todo();
+
 	die;
 }
 
@@ -299,6 +309,7 @@ function confirmGiveme(){
 	global $table_prefix;
 	$postID = $_POST['postID'];
 	$userID = $_POST['userID'];
+	$exhibiter_userID = $_POST['euserID'];
 	$uncheckedUserIDs = explode(",", $_POST['uncheckedUserIDs']);
 	$tradeway = $_POST['tradeway'];
 	$tradedates = explode(",", $_POST['tradedates']);
@@ -367,6 +378,18 @@ function confirmGiveme(){
 	));
 
 	echo "confirm";
+
+	//todoリストの状態をfinishedにする
+	$nexttodo = get_next_todo($exhibiter_userID, $postID);
+	$todoID = $nexttodo->todo_id;
+	change_todo_status($todoID, "finished");
+
+	change_todo_modified($todoID);//更新
+
+	//todoリストに追加
+	add_todo_trade_finished();
+	add_todo_dealing();
+
 	die;
 }
 
@@ -376,6 +399,7 @@ function confirmGiveme(){
 function exhibiter_evaluation(){
 	global $wpdb;
 	global $table_prefix;
+	$userID = $_POST['userID'];
 	$postID = $_POST['postID'];
 	$score  = $_POST['score'];
 	$comment  = $_POST['comment'];
@@ -396,6 +420,19 @@ function exhibiter_evaluation(){
 		exhibiter_comment = %s
 		WHERE post_id = %d",
 		$score, $comment, $postID));
+
+	//todoリストの状態をfinishedにする
+	$nexttodo = get_next_todo($userID, $postID);
+	$todoID = $nexttodo->todo_id;
+	change_todo_status($todoID, "finished");
+
+	debug_log($userID."ex");
+	debug_log($nexttodo);
+	debug_log($todoID);
+
+	change_todo_modified($todoID);//更新
+
+
 	
 	die;
 }
@@ -406,6 +443,7 @@ function exhibiter_evaluation(){
 function bidder_evaluation(){
 	global $wpdb;
 	global $table_prefix;
+	$userID = $_POST['userID'];
 	$postID = $_POST['postID'];
 	$score  = $_POST['score'];
 	$comment  = $_POST['comment'];
@@ -426,9 +464,17 @@ function bidder_evaluation(){
 		bidder_comment = %s
 		WHERE post_id = %d",
 		$score, $comment, $postID));
+
+	//todoリストの状態をfinishedにする、評価後
+	$nexttodo = get_next_todo($userID, $postID);
+	$todoID = $nexttodo->todo_id;
+	change_todo_status($todoID, "finished");
+
+	change_todo_modified($todoID);//更新
 	
 	die;
 }
+
 
 /**
  * 取引完了時に呼ばれる関数。
@@ -455,6 +501,30 @@ function finish(){
 		'content' => '出品者が取引を完了状態にしました。以下のリンクから出品者の評価を実施してください。' .
 						'<a href="' . get_permalink($postID) . '">' . get_permalink($postID) . '</a>'
 	));
+
+	//todoリストの状態をfinishedにする-exhibiter
+	$nexttodo = get_next_todo($userID, $postID);
+	$todoID = $nexttodo->todo_id;
+	change_todo_status($todoID, "finished");
+
+	change_todo_modified($todoID);//更新
+
+	//todoリストの状態をfinishedにする-bidder
+	$deal = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."fmt_trade_history 
+		   	WHERE post_id=%d",
+		   	$postID));
+	$bidder_userID = $deal->bidder_id;
+	$nexttodo = get_next_todo($bidder_userID, $postID);
+	$todoID = $nexttodo->todo_id;
+	change_todo_status($todoID, "finished");
+
+	change_todo_modified($todoID);//更新
+
+	//todoリストに追加
+	add_todo_bidder_value();
+	add_todo_exhibiter_value();
+
+	
 
 	die;
 }
@@ -541,6 +611,10 @@ function cancel_trade(){
 	));
 
 	echo "取引をキャンセルしました。";
+
+	//todoリストstatus="finished"
+	finish_todo();
+
 	die;
 }
 
@@ -717,7 +791,6 @@ function exhibit_to_wanted(){
 }
 
 /**
-
  * exhibition method called from app.
  * 
  */
@@ -802,7 +875,6 @@ function search_wantedlist(){
 
 //ホームにほしいものリストを表示
 function home_wantedlist(){
-	debug_log("hekkk!");
 	$lists = get_others_wanted_list(array(
 		'user_id'    => $_POST['user_id'],
 		'page'       => $_POST['page'],
@@ -1421,10 +1493,107 @@ function my_setup_nav() {
 			'item_css_id' => 'wanted-list'
 			) );
 
+		bp_core_new_nav_item( array( 
+			'name' => __( 'TODOリスト', 'buddypress' ),  
+			'slug' => 'todo-list', 
+			'position' => 115,
+			'screen_function' => 'todo_list_link',
+			'show_for_displayed_user' => true,
+			'default_subnav_slug' => 'unfinished-todo-list',
+			'item_css_id' => 'todo-list'
+			) );
+
+		bp_core_new_subnav_item( array( 
+			'name' => __( '未完了', 'buddypress' ), 
+			'slug' => 'unfinished-todo-list', 
+			'parent_url' => trailingslashit($bp->displayed_user->domain . 'todo-list'),
+			'parent_slug' => 'todo-list',
+			'position' => 116,
+			'screen_function' => 'unfinished_todo_list_link',
+			'item_css_id' => 'todo-list'
+			) );
+
+		bp_core_new_subnav_item( array( 
+			'name' => __( '完了済み', 'buddypress' ), 
+			'slug' => 'finished-todo-list', 
+			'parent_url' => trailingslashit($bp->displayed_user->domain . 'todo-list'),
+			'parent_slug' => 'todo-list',
+			'position' => 117,
+			'screen_function' => 'finished_todo_list_link',
+			'item_css_id' => 'todo-list'
+			) );
+
 	}
 }
  
 add_action( 'bp_setup_nav', 'my_setup_nav', 1000 );
+
+
+/**
+	todoリストの表示関数一式
+*/
+function todo_list_link(){
+	add_action( 'bp_template_title', 'todo_list_title' );
+	add_action( 'bp_template_content', 'todo_list_content' );
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
+
+function todo_list_title(){
+	echo "TODOリスト一覧";
+}
+
+function todo_list_content(){
+	include_once "members/single/your-todo-list.php";
+}
+
+function get_todo_list($user_id,$status){
+	global $wpdb;
+	global $table_prefix;
+	$todo_list = $wpdb->get_results($wpdb->prepare(
+					"SELECT * FROM ".$table_prefix."todo WHERE user_id =%d AND status =%s",$user_id ,$status));
+	
+	return $todo_list;
+}
+
+
+function your_todo_title(){
+	echo "完了済みTODOリスト";
+}
+
+function your_todo_content(){
+	include_once "members/single/finish-todo-list.php";
+}
+
+
+function finished_todo_list_link(){
+	add_action( 'bp_template_title', 'your_todo_title' );
+	add_action( 'bp_template_content', 'your_todo_content' );
+	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**********************************************
  * 「出品一覧」表示時に使う関数一式
@@ -2109,4 +2278,168 @@ function add_custom_menu() {
     add_options_page('テクスチェンジ', 'テクスチェンジ', 'read', 'texchange', 'render');
 }
 add_action( 'admin_menu', 'add_custom_menu' );
+
+
+/**
+	todoリスト系関数
+*/
+
+//todoリストに追加をする関数
+function add_todo($user_ID, $item_ID, $message){
+	global $table_prefix;
+	global $wpdb;
+
+	$wpdb->query($wpdb->prepare(
+		"INSERT INTO " .$table_prefix. "todo
+			(user_id, item_id, message, created, modified)
+			VALUES
+			( %d, %d, %s, current_timestamp, current_timestamp)",$user_ID ,$item_ID ,$message));
+	
+}
+
+//キャンセル処理されたときの関数
+function finish_todo(){
+	global $table_prefix;
+	global $wpdb;
+	$item_ID = $_POST['postID'];
+	$status = "finished";
+	$wpdb->query($wpdb->prepare(
+			"UPDATE ".$table_prefix."todo SET status=%s WHERE item_id=%d",$status ,$item_ID));
+
+	debug_log($item_ID);
+	debug_log("UPDATE ".$table_prefix."todo SET status=%s WHERE item_id=%d");
+}
+
+
+
+//todoテーブルの特定のユーザーＩＤと商品ＩＤをもつ列を返す関数
+function get_next_todo($user_ID, $item_ID){
+	global $table_prefix;
+	global $wpdb;
+
+	return $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."todo 
+		   WHERE user_id=%d AND item_id=%d AND status='unfinished'",
+		   $user_ID ,$item_ID));
+
+}
+
+
+function change_todo_status($todo_ID, $status){
+	global $table_prefix;
+	global $wpdb;
+
+	$wpdb->query($wpdb->prepare(
+		"UPDATE ".$table_prefix."todo SET status=%s where todo_id= %d ",$status,$todo_ID));
+
+}
+
+function change_todo_modified($todo_ID){
+	global $table_prefix;
+	global $wpdb;
+
+	$wpdb->query($wpdb->prepare(
+		"UPDATE ".$table_prefix."todo SET modified = current_timestamp WHERE todo_id=%d",$todo_ID));
+}
+
+/*
+//wp_deal_usersテーブルに情報を追加する関数
+function add_deal_users($item_ID, $exhibiter_ID, $bidder_ID){
+	global $table_prefix;
+	global $wpdb;
+
+	$wpdb->query($wpdb->prepare(
+		"INSERT INTO " .$table_prefix. "deal_users
+			(item_id, exhibiter_id, bidder_id, created, modified)
+			VALUES
+			( %d, %d, %d, current_timestamp, current_timestamp)",$item_ID ,$exhibiter_ID ,$bidder_ID));
+}
+
+//deal_usersテーブルの特定のユーザーＩＤと商品ＩＤをもつ列を返す関数
+function get_next_deal_users($item_ID){
+	global $table_prefix;
+	global $wpdb;
+
+	debug_log("next_deal");
+
+	return $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."deal_users 
+		   WHERE item_id=%d AND status='unfinished'",
+		   $item_ID));
+
+}
+
+function change_deal_users_status($deal_ID, $status){
+	global $table_prefix;
+	global $wpdb;
+
+	$wpdb->query($wpdb->prepare(
+		"UPDATE ".$table_prefix."deal_users SET status= %s where deal_id= %d ",$status ,$deal_ID));
+
+}
+
+function change_deal_users_modified($deal_ID){
+	global $table_prefix;
+	global $wpdb;
+
+	$wpdb->query($wpdb->prepare(
+		"UPDATE ".$table_prefix."deal_users SET modified = current_timestamp WHERE deal_id=%d",$deal_ID));
+
+}
+*/
+
+
+function add_todo_confirm_bidder(){
+	global $table_prefix;
+	global $wpdb;
+	$item_ID = $_POST['postID'];
+	$deal = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."posts 
+		   	WHERE ID=%d",
+		   	$item_ID));
+	$user_ID = $deal->post_author;
+
+	
+	add_todo($user_ID, $item_ID, '<a href = "' . home_url() . '/archives/' . $item_ID . '">取引相手を確定させてください</a>');
+}
+
+function add_todo_trade_finished(){
+	$user_ID = $_POST['euserID'];
+	$item_ID = $_POST['postID'];
+
+	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">取引完了ボタンを押してください</a>');
+
+}
+
+function add_todo_bidder_value(){
+	$user_ID = $_POST['userID'];
+	$item_ID = $_POST['postID'];
+
+	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">落札者を評価してください</a>');
+}
+
+function add_todo_exhibiter_value(){
+	global $table_prefix;
+	global $wpdb;
+	$item_ID = $_POST['postID'];
+	$deal = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."fmt_trade_history 
+		   	WHERE post_id=%d",
+		   	$item_ID));
+	$user_ID = $deal->bidder_id;
+
+	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">出品者を評価してください</a>');
+}
+
+function add_todo_dealing(){
+	global $table_prefix;
+	global $wpdb;
+	$item_ID = $_POST['postID'];
+	$deal = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."fmt_trade_history 
+		   	WHERE post_id=%d",
+		   	$item_ID));
+	$user_ID = $deal->bidder_id;
+	
+	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">取引が確定しました。取引を行ってください</a>');
+}
+
+
+
+
 ?>
