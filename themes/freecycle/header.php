@@ -130,16 +130,6 @@
 					</ul>
 				</div><!-- .grobal_nav_img -->
 </div><!-- .header_img_navi -->
-
-<?php if(!is_user_logged_in()){ ?>
-<div id="entry_login_form">
-	<a href="<?php echo home_url(); ?>/register" class="entry_buttons" id="entry_form">新規登録</a>
-	<a href="<?php echo home_url(); ?>/login" class="entry_buttons" id="login_form" >ログイン</a>
-	<?php social_login_button(); ?>
-	<a href="<?php echo home_url() . "/about"; ?>"  class="entry_buttons" id="detail_texchange">→てくすちぇんじってどんなサービス？</a>
-</div>
-<?php } ?>
-
 	
 
 <div class="header_form">
