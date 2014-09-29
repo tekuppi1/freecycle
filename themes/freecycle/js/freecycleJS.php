@@ -30,40 +30,10 @@ function onConfirmGiveme(postID, url){
 		enableButtons();
 		return false;
 	}
-
-	// TODO 日付の厳密なチェックを再実装する。
-	var tradedates = new Array();
-
-	for (var i=1; i<=3; i++) {
-		var month = document.getElementById("month_" + postID + "_" + i).value;
-		var date  = document.getElementById("date_" + postID + "_" + i).value;
-		var time  = document.getElementById("tradetime_" + postID + "_" + i).value;
-		if(month && date && time){
-			tradedates[i] = month + "/" + date + " " + time;
-		}
-
-		if(!tradedates[i-1] && tradedates[i] && i != 1){
-			alert("第" + (i-1) + "希望が入力されていません。");
-			enableButtons();
-			return false;
-		}
-	}
-
-	if(!jQuery("#place_" + postID).val() && jQuery("#tradeway_" + postID).val() === "handtohand"){
-		alert("受渡希望場所を記入してください。");
-		enableButtons();
-		return false;
-	}
-
 	var confirmText = "取引相手を確定させます。変更やキャンセルはできません。よろしいですか？\n";
-	confirmText += "商品:"+ jQuery("#post_"+ postID + " .posttitle").text() + "\n";
+	confirmText += "商品:"+ jQuery("#post_"+ postID + " .index-item-title").text() + "\n";
 	confirmText += "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked+label").text() + "\n";
-	confirmText += "受渡希望日時\n"
-	for(var i=1; i<tradedates.length; i++){
-		confirmText += "第" + i + "希望:" + tradedates[i] + "\n";
-	}
-	confirmText += "受渡希望場所:" + jQuery("#place_" + postID).val();
-
+	confirmText += "メッセージ:"+ jQuery("#message_" + postID).val();
 	if(confirm(confirmText)){
 					// 取引相手でないユーザID一覧を取得
 					var uncheckedUserIDs = new Array();
@@ -79,17 +49,17 @@ function onConfirmGiveme(postID, url){
 						"userID": userID,//落札者相手ユーザーＩＤ
 						"euserID": "<?php echo $user_ID ?>",//出品者ユーザーＩＤ
 						"uncheckedUserIDs": uncheckedUserIDs.join(),
-						"tradeway": jQuery("#tradeway_" + postID).val(),
-						"tradedates": tradedates.join(),
-						"place": jQuery("#place_" + postID).val(),
 						"message": jQuery("#message_" + postID).val(),
 					},
 					success: function(msg){
 						jQuery("#post_"+postID).hide(1000,function(){
 						alert("取引相手を確定し、受渡希望条件を通知しました！\n取引相手からの返信をお待ちください。");
 						enableButtons();
-					});
-				}
+						});
+					},
+					error:function(){
+						alert("error!!");
+					}
 			});
 	}else{
 		enableButtons();

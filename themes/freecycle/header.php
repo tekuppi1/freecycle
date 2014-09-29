@@ -16,12 +16,26 @@
 			'flexSliderScript',
 			get_stylesheet_directory_uri() . '/js/jquery.flexslider-min.js'
 		);
+		wp_register_script(
+			'tooltipsterScript',
+			get_stylesheet_directory_uri() . '/js/tooltipster-master/js/jquery.tooltipster.min.js'
+		);
 		wp_register_style(
 			'flexSliderStyle',
 			get_stylesheet_directory_uri() . '/style/flexslider.css'
 		);
+		wp_register_style(
+			'tooltipsterStyle',
+			get_stylesheet_directory_uri() . '/js/tooltipster-master/css/tooltipster.css'
+		);
+		wp_register_style(
+			'tooltipsterStyle-noir',
+			get_stylesheet_directory_uri() . '/js/tooltipster-master/css/themes/tooltipster-noir.css'
+		);	
 		wp_enqueue_script('flexSliderScript');
 		wp_enqueue_style('flexSliderStyle');
+		wp_enqueue_script('tooltipsterScript');
+		wp_enqueue_style('tooltipsterStyle');
 		?>
 	<script>
 	jQuery(document).ready(function(){
@@ -37,6 +51,7 @@
 				jQuery("#slide_body").css("display", "block");
 			}
 		});
+		jQuery('.tooltip').tooltipster({theme: "tooltipster-noir"
 	});
 	</script>
 	</head>
