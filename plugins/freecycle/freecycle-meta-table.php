@@ -15,6 +15,7 @@ class FreecycleMetaTable {
 	var $fmt_trade_history;
 	var $fmt_user_giveme;
 	var $fmt_wanted_list;
+	var $fmt_todo;
 	
 	public function __construct(){
 		global $wpdb;
@@ -23,6 +24,7 @@ class FreecycleMetaTable {
 		$this->fmt_trade_history = $wpdb->prefix . 'fmt_trade_history';
 		$this->fmt_user_giveme = $wpdb->prefix . 'fmt_user_giveme';
 		$this->fmt_wanted_list = $wpdb->prefix . 'fmt_wanted_list';
+		$this->fmt_todo = $wpdb->prefix . 'todo';
 		// activate when plugin is activated
 		register_activation_hook(__FILE__, array($this, 'fmt_activate'));
 	}
@@ -31,7 +33,7 @@ class FreecycleMetaTable {
 	function fmt_activate(){
 		global $wpdb;
 		//DB version
-		$fmt_db_version = '1.02';
+		$fmt_db_version = '1.03';
 		//current DB version
 		$installed_ver = get_option( 'fmt_meta_version' );
 			// if versions are different tables are created
@@ -41,8 +43,8 @@ class FreecycleMetaTable {
 						`entry_flg` int(1) unsigned NOT NULL DEFAULT '1',
 						`giveme_flg` int(1) unsigned NOT NULL DEFAULT '0',
 						`confirmed_flg` int(1) unsigned NOT NULL DEFAULT '0',
-						`exhibiter_evaluated_flg` int(1) unsigned NOT NULL DEFAULT '0' COMMENT 'o•iŽÒ•]‰¿Ïƒtƒ‰ƒO',
-						`bidder_evaluated_flg` int(1) unsigned NOT NULL DEFAULT '0' COMMENT '—ŽŽDŽÒ•]‰¿Ïƒtƒ‰ƒO',
+						`exhibiter_evaluated_flg` int(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Âoâ€¢iÅ½Ã’â€¢]â€°Â¿ÂÃÆ’tÆ’â€°Æ’O',
+						`bidder_evaluated_flg` int(1) unsigned NOT NULL DEFAULT '0' COMMENT 'â€”Å½Å½DÅ½Ã’â€¢]â€°Â¿ÂÃÆ’tÆ’â€°Æ’O',
 						`finished_flg` int(1) unsigned NOT NULL DEFAULT '0',
 						PRIMARY KEY (`post_id`)
 						) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -66,10 +68,10 @@ class FreecycleMetaTable {
 
 
 				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_points . "` (
-						`user_id` bigint(20) unsigned NOT NULL COMMENT 'ƒ†[ƒUID',
-						`got_points` int(8) unsigned NOT NULL DEFAULT '0' COMMENT 'Šl“¾ƒ|ƒCƒ“ƒg',
+						`user_id` bigint(20) unsigned NOT NULL COMMENT 'Æ’â€ Â[Æ’UID',
+						`got_points` int(8) unsigned NOT NULL DEFAULT '0' COMMENT 'Å lâ€œÂ¾Æ’|Æ’CÆ’â€œÆ’g',
 						`temp_used_points` int(8) unsigned NOT NULL DEFAULT '0',
-						`used_points` int(8) unsigned NOT NULL DEFAULT '0' COMMENT 'Žg—pÏƒ|ƒCƒ“ƒg',
+						`used_points` int(8) unsigned NOT NULL DEFAULT '0' COMMENT 'Å½gâ€”pÂÃÆ’|Æ’CÆ’â€œÆ’g',
 						PRIMARY KEY (`user_id`)
 						) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 						";
@@ -151,6 +153,19 @@ class FreecycleMetaTable {
  						`ASIN` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
   						`image_url` varchar(150) CHARACTER SET utf8 DEFAULT NULL,
   						PRIMARY KEY (`wanted_item_id`)
+						) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+						";
+				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+				dbDelta($sql);
+
+				$sql = "CREATE TABLE IF NOT EXISTS `". $this->fmt_todo."` (
+						`todo_id` int(11) NOT NULL,
+  						`status` varchar(11) NOT NULL DEFAULT 'unfinished',
+						`user_id` int(11) NOT NULL,
+						`item_id` int(11) NOT NULL,
+						`message` longtext NOT NULL,
+						`created` datetime(6) NOT NULL,
+						`modified` datetime(6) NOT NULL
 						) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 						";
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');

@@ -224,4 +224,20 @@ function go(f){
 		f();
 	}
 }
+
+function todo_dealing(user_ID, item_ID){
+	console.log(user_ID+","+item_ID);
+	jQuery.ajax({
+		type: "POST",
+		url:  '<?php echo admin_url('admin-ajax.php'); ?>',
+		data: {
+			action: "todo_dealing",
+			userID: user_ID,
+			itemID: item_ID
+		},
+		success:function(result){
+			return;
+		}
+	});
+}
 </script>

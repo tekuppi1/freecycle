@@ -20,7 +20,9 @@ add_action('wp_ajax_del_wanted_item_by_asin', 'del_wanted_item_by_asin');
 add_action('wp_ajax_exhibit_to_wanted', 'exhibit_to_wanted');
 add_action('wp_ajax_exhibit_from_app', 'exhibit_from_app');
 add_action('wp_ajax_nopriv_exhibit_from_app', 'exhibit_from_app');
-add_action('wp_ajax_cancel_trade', 'cancel_trade');
+add_action('wp_ajax_register_app_information', 'register_app_information');
+add_action('wp_ajax_cancel_trade_from_exhibitor', 'cancel_trade_from_exhibitor');
+add_action('wp_ajax_cancel_trade_from_bidder', 'cancel_trade_from_bidder');
 add_action('user_register', 'on_user_added');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 
@@ -202,7 +204,7 @@ function giveme(){
 	$userID = $_POST['userID'];
 
 	//todoリストに追加
-	add_todo_confirm_bidder();
+	add_todo_confirm_bidder($postID);
 
 	//ください済み確認
 	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where user_id = %d and post_id = %d", $userID, $postID));
@@ -296,7 +298,7 @@ function cancelGiveme(){
 	echo "くださいを取消しました。";
 
 	//todoリストstatus="finished",更新処理未実装
-	finish_todo();
+	cancel_todo($postID);
 
 	die;
 }
@@ -370,25 +372,24 @@ function confirmGiveme(){
 		$content .= '【メッセージ】:' . $message . PHP_EOL;
 	}
 
-	messages_new_message(array(
-		'sender_id' => bp_loggedin_user_id(),
-		'recipients' => $userID,
-		'subject' => '【自動送信】くださいリクエストが承認されました！',
-		'content' => $content
-	));
+	$message_ID = messages_new_message(array(
+					'sender_id' => bp_loggedin_user_id(),
+					'recipients' => $userID,
+					'subject' => '【自動送信】くださいリクエストが承認されました！',
+					'content' => $content
+					));
 
 	echo "confirm";
 
 	//todoリストの状態をfinishedにする
-	$nexttodo = get_next_todo($exhibiter_userID, $postID);
-	$todoID = $nexttodo->todo_id;
+	$todo_row = get_todo_row($exhibiter_userID, $postID);
+	$todoID = $todo_row->todo_id;
 	change_todo_status($todoID, "finished");
 
-	change_todo_modified($todoID);//更新
 
 	//todoリストに追加
-	add_todo_trade_finished();
-	add_todo_dealing();
+	add_todo_finish_trade($postID);
+	add_todo_dealing($postID, $message_ID);
 
 	die;
 }
@@ -422,17 +423,9 @@ function exhibiter_evaluation(){
 		$score, $comment, $postID));
 
 	//todoリストの状態をfinishedにする
-	$nexttodo = get_next_todo($userID, $postID);
-	$todoID = $nexttodo->todo_id;
+	$todo_row = get_todo_row($userID, $postID);
+	$todoID = $todo_row->todo_id;
 	change_todo_status($todoID, "finished");
-
-	debug_log($userID."ex");
-	debug_log($nexttodo);
-	debug_log($todoID);
-
-	change_todo_modified($todoID);//更新
-
-
 	
 	die;
 }
@@ -466,11 +459,10 @@ function bidder_evaluation(){
 		$score, $comment, $postID));
 
 	//todoリストの状態をfinishedにする、評価後
-	$nexttodo = get_next_todo($userID, $postID);
-	$todoID = $nexttodo->todo_id;
+	$todo_row = get_todo_row($userID, $postID);
+	$todoID = $todo_row->todo_id;
 	change_todo_status($todoID, "finished");
 
-	change_todo_modified($todoID);//更新
 	
 	die;
 }
@@ -503,26 +495,23 @@ function finish(){
 	));
 
 	//todoリストの状態をfinishedにする-exhibiter
-	$nexttodo = get_next_todo($userID, $postID);
-	$todoID = $nexttodo->todo_id;
+	$todo_row = get_todo_row($userID, $postID);
+	$todoID = $todo_row->todo_id;
 	change_todo_status($todoID, "finished");
 
-	change_todo_modified($todoID);//更新
 
 	//todoリストの状態をfinishedにする-bidder
 	$deal = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."fmt_trade_history 
 		   	WHERE post_id=%d",
 		   	$postID));
 	$bidder_userID = $deal->bidder_id;
-	$nexttodo = get_next_todo($bidder_userID, $postID);
-	$todoID = $nexttodo->todo_id;
+	$todo_row = get_todo_row($bidder_userID, $postID);
+	$todoID = $todo_row->todo_id;
 	change_todo_status($todoID, "finished");
 
-	change_todo_modified($todoID);//更新
-
 	//todoリストに追加
-	add_todo_bidder_value();
-	add_todo_exhibiter_value();
+	add_todo_evaluate_bidder($userID, $postID);
+	add_todo_evaluate_exhibitor($postID);
 
 	
 
@@ -583,37 +572,65 @@ function delete_user_giveme($post_id, $user_id=""){
 	}
 }
 
-function cancel_trade(){
-    $postID = $_POST['postID'];
-	$confirmed_user_id = get_bidder_id($postID);
+function cancel_trade($post_id){
+	$confirmed_user_id = get_bidder_id($post_id);
+
 	//実際のキャンセル処理
 	//商品の確定済フラグを下げる
-	set_confirmed_flg($postID, $confirmed_user_id, 0);
+	set_confirmed_flg($post_id, $confirmed_user_id, 0);
 
 	// 取引履歴の削除
-	delete_trade_history($postID);
+	delete_trade_history($post_id);
 
 	// givemeの履歴削除
-	delete_user_giveme($postID);
-	set_giveme_flg($postID, 0);
+	delete_user_giveme($post_id);
+	set_giveme_flg($post_id, 0);
 
 	// 取引相手の使用済みポイントを1p減算
 	add_used_points($confirmed_user_id, -1);
 	// 取引相手の獲得ポイントを1p加算
 	add_got_points($confirmed_user_id, 1);
 
-	messages_new_message(array(
+	//todoリストstatus="finished"
+	cancel_todo($post_id);
+}
+
+function cancel_trade_from_exhibitor(){
+   $post_id = $_POST['postID'];
+   $bidder_id = get_bidder_id($post_id);
+   cancel_trade($post_id);
+   messages_new_message(array(
 		'sender_id' => bp_loggedin_user_id(),
-		'recipients' => $confirmed_user_id,
-		'subject' => '【自動送信】取引をキャンセルしました',
-		'content' => '以下の商品の取引をキャンセルしました' .
-						'<a href="' . get_permalink($postID) . '">' . get_the_title($postID) . '</a>'
+		'recipients' => $bidder_id,
+		'subject' => '【自動送信】取引がキャンセルされました',
+		'content' => '以下の商品の取引がキャンセルされました。' .
+						'<a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a>'
 	));
 
 	echo "取引をキャンセルしました。";
 
 	//todoリストstatus="finished"
-	finish_todo();
+	cancel_todo($post_id);
+
+	echo "出品者から取引をキャンセルしました。";
+	die;
+}
+
+function cancel_trade_from_bidder(){
+    $post_id = $_POST['postID'];
+	cancel_trade($post_id);
+	messages_new_message(array(
+		'sender_id' => bp_loggedin_user_id(),
+		'recipients' => get_post($post_id)->post_author,
+		'subject' => '【自動送信】取引がキャンセルされました',
+		'content' => '以下の商品の取引がキャンセルされました。' .
+						'<a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a>'
+	));
+	
+	echo "落札者から取引をキャンセルしました。";
+
+	//todoリストstatus="finished"
+	cancel_todo($post_id);
 
 	die;
 }
@@ -790,23 +807,36 @@ function exhibit_to_wanted(){
 	die;
 }
 
+
+
+/*************************************
+ * functions used from smartphone app
+ *************************************/
+
+
 /**
  * exhibition method called from app.
  * 
  */
 function exhibit_from_app(){
-	$exhibitor = get_user_by('login', $_POST['exhibitor_id']);
-	if(!$exhibitor || !wp_check_password($_POST['password'], $exhibitor->data->user_pass, $exhibitor->ID)){
-		echo "ユーザ名とパスワードの組合せが不正です。";
-		die;
+	// $exhibitor = get_user_by('login', $_POST['exhibitor_id']);
+	// if(!$exhibitor || !wp_check_password($_POST['password'], $exhibitor->data->user_pass, $exhibitor->ID)){
+	// 	echo "ユーザ名とパスワードの組合せが不正です。";
+	// 	die;
+	// }
+
+	$current_user_id = get_current_user_id();
+
+	if($current_user_id === 0){
+		echo "ログインされていないため出品できません。";
 	}
 
 	$insert_id = exhibit(array(
-		'exhibitor_id' => $exhibitor->ID,
+		'exhibitor_id' => $current_user_id,
 		'item_name' => $_POST['item_name'],
 		'image_url' => $_POST['image_url'],
-		'department' => xprofile_get_field_data('学部', $exhibitor->ID),
-		'course' => xprofile_get_field_data('学科', $exhibitor->ID),
+		'department' => xprofile_get_field_data('学部', $current_user_id),
+		'course' => xprofile_get_field_data('学科', $current_user_id),
 	));
 
 	if($insert_id !== 0){
@@ -816,6 +846,113 @@ function exhibit_from_app(){
 	}
 	die;
 }
+
+/**
+ * register or update information used for app.
+ * infrormation includes;
+ * - device_token
+ */
+function register_app_information(){
+	// add device_token key as a user meta data
+	global $current_user;
+	if(get_user_meta($current_user->get('ID'), 'device_token')){
+		update_user_meta($current_user->get('ID'), 'device_token', $_POST['deviceToken']);
+	}else{
+		add_user_meta($current_user->get('ID'), 'device_token', $_POST['deviceToken'], true);
+	}
+	die;
+}
+
+add_action('messages_message_sent', 'do_action_after_message_sent', 10, 1);
+
+function do_action_after_message_sent($sent_message){
+	$to_tokens = array();
+	foreach ($sent_message->recipients as $recipient) {
+		$token = get_user_meta($recipient->user_id, 'device_token', true);
+		if(strlen($token) > 0){
+			$to_tokens[] = $token;
+		}
+		send_push_notification($token, array(
+			'alert'		=> 'メッセージが届きました！',
+			'title'		=> $sent_message->subject,
+			'vibrate'	=> 'true',
+			'sound'		=> 'default',
+			'badge'		=> messages_get_unread_count($recipient->user_id)
+		));
+	}
+}
+
+/**
+ * send push notification.<br/>
+ * Valid parameters should be refered at Titanium documents.
+ * 
+ * @param {String} recipients comma separated device tokens
+ * @param {array} parameters
+ * 
+ */
+function send_push_notification($recipients, $args){
+	/*** SETUP ***************************************************/
+    $key        = get_option('acs_app_key');
+    $username   = get_option('acs_user_name');
+    $password   = get_option('acs_password');
+    $channel    = "news_alerts";
+    $alert    	= $args['alert'];
+    $title      = $args['title'];
+    $tmp_fname  = 'cookie.txt';
+    $json = '';
+
+    foreach ($args as $k => $v) {
+    	if(strlen($json) > 0) {
+    		$json .= ',';
+    	}
+    	$json = $json .'"' . $k . '":"' . $v . '"';
+    }
+    $json = '{' . $json . '}';
+
+    /*** PUSH NOTIFICATION ***********************************/
+ 
+    $post_array = array('login' => $username, 'password' => $password);
+ 
+    /*** INIT CURL ******************************************/
+    $curlObj    = curl_init();
+    curl_setopt($curlObj, CURLOPT_SSL_VERIFYPEER, false);
+    $c_opt      = array(CURLOPT_URL => 'https://api.cloud.appcelerator.com/v1/users/login.json?key='.$key,
+                        CURLOPT_COOKIEJAR => $tmp_fname, 
+                        CURLOPT_COOKIEFILE => $tmp_fname, 
+                        CURLOPT_RETURNTRANSFER => true, 
+                        CURLOPT_POST => 1,
+                        CURLOPT_POSTFIELDS  =>  "login=".$username."&password=".$password,
+                        CURLOPT_FOLLOWLOCATION  =>  1,
+                        CURLOPT_TIMEOUT => 60);
+ 
+    /*** LOGIN **********************************************/
+    curl_setopt_array($curlObj, $c_opt); 
+    $session = curl_exec($curlObj);
+
+    /*** SEND PUSH ******************************************/
+    $c_opt[CURLOPT_URL]         = "https://api.cloud.appcelerator.com/v1/push_notification/notify_tokens.json?key=".$key; 
+    $c_opt[CURLOPT_POSTFIELDS]  = "channel=".$channel."&to_tokens=".$recipients."&payload=".urlencode($json); 
+ 
+    curl_setopt_array($curlObj, $c_opt); 
+    $session = curl_exec($curlObj);
+
+    /*** THE END ********************************************/
+    curl_close($curlObj);
+}
+
+
+function push_unread_message_count(){
+	global $user_ID;
+	$token = get_user_meta($user_ID, 'device_token', true);
+	if($token){
+		send_push_notification($token, array(
+			'badge'		=> messages_get_unread_count()
+		));
+	}
+}
+add_action('messages_delete_thread', 'push_unread_message_count'); 
+add_action('messages_action_conversation', 'push_unread_message_count');
+add_action('wp_login', 'push_unread_message_count');
 
 function delete_post(){
 	wp_delete_post($_POST['postID']);
@@ -1229,6 +1366,15 @@ function on_user_added($user_id){
 		(update_timestamp, user_id, got_points, temp_used_points, used_points)
 		VALUES (current_timestamp, %d, %d, 0, 0)",
 		$user_id, get_option('register-point')));
+	// メッセージを送付
+	if(get_option('newuser_message_sender') != -1){
+		messages_new_message(array(
+			'sender_id' => get_option('newuser_message_sender'),
+			'recipients' => $user_id,
+			'subject' => '登録ありがとうございます！',
+			'content' => get_option('newuser_message_content')
+			));
+	}
 }
 
 /**********************************************
@@ -1513,16 +1659,6 @@ function my_setup_nav() {
 			'item_css_id' => 'todo-list'
 			) );
 
-		bp_core_new_subnav_item( array( 
-			'name' => __( '完了済み', 'buddypress' ), 
-			'slug' => 'finished-todo-list', 
-			'parent_url' => trailingslashit($bp->displayed_user->domain . 'todo-list'),
-			'parent_slug' => 'todo-list',
-			'position' => 117,
-			'screen_function' => 'finished_todo_list_link',
-			'item_css_id' => 'todo-list'
-			) );
-
 	}
 }
  
@@ -1545,52 +1681,6 @@ function todo_list_title(){
 function todo_list_content(){
 	include_once "members/single/your-todo-list.php";
 }
-
-function get_todo_list($user_id,$status){
-	global $wpdb;
-	global $table_prefix;
-	$todo_list = $wpdb->get_results($wpdb->prepare(
-					"SELECT * FROM ".$table_prefix."todo WHERE user_id =%d AND status =%s",$user_id ,$status));
-	
-	return $todo_list;
-}
-
-
-function your_todo_title(){
-	echo "完了済みTODOリスト";
-}
-
-function your_todo_content(){
-	include_once "members/single/finish-todo-list.php";
-}
-
-
-function finished_todo_list_link(){
-	add_action( 'bp_template_title', 'your_todo_title' );
-	add_action( 'bp_template_content', 'your_todo_content' );
-	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2284,7 +2374,14 @@ add_action( 'admin_menu', 'add_custom_menu' );
 	todoリスト系関数
 */
 
-//todoリストに追加をする関数
+/**
+ * wp_todoテーブルに情報を加える関数
+ * statusはデフォルトでunfinishedに設定されている
+ * @param {int} $user_ID
+ * @param {int} $item_ID 商品のＩＤ
+ * @param {string} $message TODOリストに表示するメッセージ（リンク先込）
+ * @return {int} 追加したtodo_id
+ */
 function add_todo($user_ID, $item_ID, $message){
 	global $table_prefix;
 	global $wpdb;
@@ -2294,26 +2391,45 @@ function add_todo($user_ID, $item_ID, $message){
 			(user_id, item_id, message, created, modified)
 			VALUES
 			( %d, %d, %s, current_timestamp, current_timestamp)",$user_ID ,$item_ID ,$message));
+
+	return $wpdb->insert_id;//確認！！TODO
 	
 }
 
-//キャンセル処理されたときの関数
-function finish_todo(){
-	global $table_prefix;
-	global $wpdb;
-	$item_ID = $_POST['postID'];
-	$status = "finished";
-	$wpdb->query($wpdb->prepare(
-			"UPDATE ".$table_prefix."todo SET status=%s WHERE item_id=%d",$status ,$item_ID));
+/**
+ * 取引キャンセル時に呼ばれる関数
+ * @param $item_ID 取引商品ＩＤ
+ * @return 空 
+ */
+function cancel_todo($item_ID){
 
-	debug_log($item_ID);
-	debug_log("UPDATE ".$table_prefix."todo SET status=%s WHERE item_id=%d");
+	$exhibitor_ID = get_post($item_ID)->post_author;
+	$bidder_ID = get_bidder_id($item_ID);
+
+	$exhibitor_todo_ID = get_todo_row($exhibitor_ID, $item_ID)->todo_id;
+	change_todo_status($exhibitor_todo_ID, "finished");
+	change_todo_modified($exhibitor_todo_ID);
+
+	$bidder_todo_ID = get_todo_row($bidder_ID, $item_ID)->todo_id;
+	if($bidder_todo_ID){
+		change_todo_status($bidder_todo_ID, "finished");
+		change_todo_modified($bidder_todo_ID);
+
+	}else{
+		debug_log("ないよー");
+		return ;
+	}
+
 }
 
 
-
-//todoテーブルの特定のユーザーＩＤと商品ＩＤをもつ列を返す関数
-function get_next_todo($user_ID, $item_ID){
+/**
+ * todoテーブルの特定のユーザーＩＤと商品ＩＤをもち、未完了の行を返す関数
+ * @param {int} $user_ID
+ * @param {int} $item_ID 商品のＩＤ
+ * @return {Object} 特定のユーザーＩＤと商品ＩＤをもち、未完了の行
+ */
+function get_todo_row($user_ID, $item_ID){
 	global $table_prefix;
 	global $wpdb;
 
@@ -2323,16 +2439,31 @@ function get_next_todo($user_ID, $item_ID){
 
 }
 
-
+/**
+ * 特定のtodo_idを持つ行のstatusを変更する
+ * @param {int} $todo_ID todo_id
+ * @param {string} $status 変更したいstatus("finished"もしくは"unfinished")
+ */
 function change_todo_status($todo_ID, $status){
 	global $table_prefix;
 	global $wpdb;
 
-	$wpdb->query($wpdb->prepare(
-		"UPDATE ".$table_prefix."todo SET status=%s where todo_id= %d ",$status,$todo_ID));
+	if($status == "finished" || $status == "unfinished"){
+
+		$wpdb->query($wpdb->prepare(
+			"UPDATE ".$table_prefix."todo SET status=%s where todo_id= %d ",$status,$todo_ID));
+
+		change_todo_modified($todo_ID);
+	}else{
+		return ;
+	}
 
 }
 
+/**
+ * 情報が更新された際に更新時間（=modified)を現在時刻に変更する関数
+ * @param {int} $todo_ID todo_id
+ */
 function change_todo_modified($todo_ID){
 	global $table_prefix;
 	global $wpdb;
@@ -2341,105 +2472,119 @@ function change_todo_modified($todo_ID){
 		"UPDATE ".$table_prefix."todo SET modified = current_timestamp WHERE todo_id=%d",$todo_ID));
 }
 
-/*
-//wp_deal_usersテーブルに情報を追加する関数
-function add_deal_users($item_ID, $exhibiter_ID, $bidder_ID){
-	global $table_prefix;
-	global $wpdb;
 
-	$wpdb->query($wpdb->prepare(
-		"INSERT INTO " .$table_prefix. "deal_users
-			(item_id, exhibiter_id, bidder_id, created, modified)
-			VALUES
-			( %d, %d, %d, current_timestamp, current_timestamp)",$item_ID ,$exhibiter_ID ,$bidder_ID));
-}
-
-//deal_usersテーブルの特定のユーザーＩＤと商品ＩＤをもつ列を返す関数
-function get_next_deal_users($item_ID){
-	global $table_prefix;
-	global $wpdb;
-
-	debug_log("next_deal");
-
-	return $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."deal_users 
-		   WHERE item_id=%d AND status='unfinished'",
-		   $item_ID));
-
-}
-
-function change_deal_users_status($deal_ID, $status){
-	global $table_prefix;
-	global $wpdb;
-
-	$wpdb->query($wpdb->prepare(
-		"UPDATE ".$table_prefix."deal_users SET status= %s where deal_id= %d ",$status ,$deal_ID));
-
-}
-
-function change_deal_users_modified($deal_ID){
-	global $table_prefix;
-	global $wpdb;
-
-	$wpdb->query($wpdb->prepare(
-		"UPDATE ".$table_prefix."deal_users SET modified = current_timestamp WHERE deal_id=%d",$deal_ID));
-
-}
-*/
-
-
-function add_todo_confirm_bidder(){
-	global $table_prefix;
-	global $wpdb;
-	$item_ID = $_POST['postID'];
-	$deal = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."posts 
-		   	WHERE ID=%d",
-		   	$item_ID));
-	$user_ID = $deal->post_author;
-
+/**
+ * 取引相手を確定するTODOを追加する関数※出品者のTODO
+ * @param {int} $item_ID くださいされた商品ＩＤ
+ */
+function add_todo_confirm_bidder($item_ID){
 	
+	$user_ID = get_post($item_ID)->post_author;
+
 	add_todo($user_ID, $item_ID, '<a href = "' . home_url() . '/archives/' . $item_ID . '">取引相手を確定させてください</a>');
 }
 
-function add_todo_trade_finished(){
-	$user_ID = $_POST['euserID'];
-	$item_ID = $_POST['postID'];
+/**
+ * 取引を完了させるTODOを追加する関数※出品者のTODO
+ * @param {int} $user_ID 出品者ＩＤ
+ * @param {int} $item_ID 取引商品ＩＤ
+ */
+function add_todo_finish_trade($item_ID){
+	$user_ID = get_post($item_ID)->post_author;
 
 	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">取引完了ボタンを押してください</a>');
 
 }
 
-function add_todo_bidder_value(){
-	$user_ID = $_POST['userID'];
-	$item_ID = $_POST['postID'];
+/**
+ * 落札者を評価するTODOを追加する関数※出品者のTODO
+ * @param {int} $user_ID 出品者ＩＤ
+ * @param {int} $item_ID 取引商品ＩＤ
+ */
+function add_todo_evaluate_bidder($user_ID, $item_ID){
 
 	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">落札者を評価してください</a>');
 }
 
-function add_todo_exhibiter_value(){
-	global $table_prefix;
-	global $wpdb;
-	$item_ID = $_POST['postID'];
-	$deal = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."fmt_trade_history 
-		   	WHERE post_id=%d",
-		   	$item_ID));
-	$user_ID = $deal->bidder_id;
+/**
+ * 出品者を評価するTODOを追加する関数※落札者のTODO
+ * @param {int} $item_ID 取引商品ＩＤ
+ */
+function add_todo_evaluate_exhibitor($item_ID){
+	
+	$user_ID = get_bidder_id($item_ID);
 
 	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">出品者を評価してください</a>');
 }
 
-function add_todo_dealing(){
+/** 
+ * 取引詳細をメッセージでやり取りするTODOを追加する関数※落札者のTODO
+ * @param {int} $item_ID 取引商品ＩＤ
+ * @param {int} $message_ID 取引相手確定メッセージのid
+ */
+function add_todo_dealing($item_ID, $thread_ID){
 	global $table_prefix;
 	global $wpdb;
-	$item_ID = $_POST['postID'];
-	$deal = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."fmt_trade_history 
-		   	WHERE post_id=%d",
-		   	$item_ID));
-	$user_ID = $deal->bidder_id;
-	
-	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">取引が確定しました。取引を行ってください</a>');
+
+	$user_ID = get_bidder_id($item_ID);
+	$user = get_user_by('id', $user_ID);
+	$user_login_name = $user->user_login;
+
+	/*
+	$message_row = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."bp_messages_messages
+													WHERE id = %d",$message_ID));
+	$thread_ID = $message_row->thread_id;
+	*/
+	add_todo($user_ID, $item_ID, 
+		'<a href = "'. home_url() . '/members/' . $user_login_name .'/messages/view/' .$thread_ID. '" onClick="todo_dealing('.$user_ID.','.$item_ID.')">
+			くださいリクエストが承認されました。承認メッセージに返信してください</a>');
 }
 
+function todo_dealing_finished(){
+	$user_ID = $_POST[userID];
+	$item_ID = $_POST[itemID];
+	debug_log($user_ID."u");
+	debug_log($item_ID."i");
 
+	$todo_ID = get_todo_row($user_ID, $item_ID)->todo_id;
+	change_todo_status($todo_ID, "finished");
+
+}
+add_action('wp_ajax_todo_dealing', 'todo_dealing_finished');
+
+/**
+ * ユーザーのtodoをすべて取り出す関数
+ * @param {int} $user_ID 取り出すユーザーID
+ * @param {int} $status todoの状態("finished"もしくは"unfinished")
+ */
+function get_todo_list($user_ID,$status){
+	global $wpdb;
+	global $table_prefix;
+	$todo_list = $wpdb->get_results($wpdb->prepare(
+					"SELECT * FROM ".$table_prefix."todo WHERE user_id =%d AND status =%s",$user_ID ,$status));
+	
+	return $todo_list;
+}
+
+/**
+ * 取引相手のIDを返す関数
+ * @param {int} $item_ID 取引商品ＩＤ
+ * @param {int} $user_ID 自分のID
+ */
+function deal_user($item_ID, $userID){
+
+	$exhibitor_ID = get_post($item_ID)->post_author;
+	$bidder_ID = get_bidder_id($item_ID);
+
+	if($userID == $exhibitor_ID){
+		$deal_user_id = $bidder_ID;
+	}else if($userID == $bidder_ID){
+		$deal_user_id = $exhibitor_ID;
+	}
+
+	return $deal_user_id;
+
+}
 
 
 ?>
