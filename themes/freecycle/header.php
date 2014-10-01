@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 
@@ -16,12 +14,26 @@
 			'flexSliderScript',
 			get_stylesheet_directory_uri() . '/js/jquery.flexslider-min.js'
 		);
+		wp_register_script(
+			'tooltipsterScript',
+			get_stylesheet_directory_uri() . '/js/tooltipster-master/js/jquery.tooltipster.min.js'
+		);
 		wp_register_style(
 			'flexSliderStyle',
 			get_stylesheet_directory_uri() . '/style/flexslider.css'
 		);
+		wp_register_style(
+			'tooltipsterStyle',
+			get_stylesheet_directory_uri() . '/js/tooltipster-master/css/tooltipster.css'
+		);
+		wp_register_style(
+			'tooltipsterStyle-noir',
+			get_stylesheet_directory_uri() . '/js/tooltipster-master/css/themes/tooltipster-noir.css'
+		);	
 		wp_enqueue_script('flexSliderScript');
 		wp_enqueue_style('flexSliderStyle');
+		wp_enqueue_script('tooltipsterScript');
+		wp_enqueue_style('tooltipsterStyle');
 		?>
 	<script>
 	jQuery(document).ready(function(){
@@ -37,6 +49,7 @@
 				jQuery("#slide_body").css("display", "block");
 			}
 		});
+		jQuery('.tooltip').tooltipster({theme: "tooltipster-noir"});
 	});
 	</script>
 	</head>
@@ -130,7 +143,7 @@
 					</ul>
 				</div><!-- .grobal_nav_img -->
 </div><!-- .header_img_navi -->
-	
+
 
 <div class="header_form">
 	<!-- <?php if(is_user_logged_in()){ ?>
