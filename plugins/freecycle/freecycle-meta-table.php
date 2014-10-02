@@ -158,14 +158,15 @@ class FreecycleMetaTable {
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 				dbDelta($sql);
 
-				$sql = "CREATE TABLE IF NOT EXISTS `". $this->fmt_todo."` (
-						`todo_id` int(11) NOT NULL,
-  						`status` varchar(11) NOT NULL DEFAULT 'unfinished',
+				$sql = "CREATE TABLE IF NOT EXISTS `". $this->fmt_todo ."` (
+						`todo_id` int(11) NOT NULL AUTO_INCREMENT,
+						`status` varchar(11) NOT NULL DEFAULT 'unfinished',
 						`user_id` int(11) NOT NULL,
 						`item_id` int(11) NOT NULL,
 						`message` longtext NOT NULL,
-						`created` datetime(6) NOT NULL,
-						`modified` datetime(6) NOT NULL
+						`created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+						`modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+						PRIMARY KEY (`todo_id`)
 						) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 						";
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
