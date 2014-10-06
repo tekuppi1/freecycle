@@ -3,8 +3,8 @@ function echo_message_section($last_post_id){
 	$uri = get_stylesheet_directory_uri();
 	echo <<<MESSAGE_SECTION
 	</p>
-						<label for="message_$last_post_id" class="tooltip" title="【例】日時：8月20日13：00　場所：テクスチェンジ大学Ａ棟前　\nよろしくお願いします！">メッセージ <img src="$uri/images/help.png" width="12" height="12" alt="?"> :</label></br>
-						<textarea id="message_$last_post_id" name="message_$last_post_id" rows=3 cols=30></textarea></br>
+						<p>メッセージ : 例 今週は水曜から金曜の午後に名古屋大学にいるので、大学周辺でよければその時間に渡せます！ご都合いかがですか？</p>
+						<textarea id="message_$last_post_id" name="message_$last_post_id" class="trade_message" rows=3 cols=30></textarea></br>
 						<input type="button" value="確定" onClick="callOnConfirmGiveme($last_post_id)">
 					</div><!-- #post_(id) -->
 				</div>

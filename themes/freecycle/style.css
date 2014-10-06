@@ -2447,6 +2447,9 @@ textarea{
 	resize: none;
 }
 
+.trade_message{
+	width: 100%;
+}
 
 /*img{
 	width: 200;
