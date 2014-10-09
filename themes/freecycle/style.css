@@ -3377,3 +3377,28 @@ ul#menu-footer_menu li a{
 }
 }
 
+/* ヘッダー部分のTODOリスト数 */
+div.grobal_nav_div ul li a span {
+	background: #1fb3dd;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	color: #fff;
+	display: inline;
+	font-size: 90%;
+	margin-left: 2px;
+	padding: 1px 6px;
+}
+
+div.grobal_nav_div_sp ul li a span {
+	background: #1fb3dd;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	color: #fff;
+	display: inline;
+	font-size: 90%;
+	margin-left: 2px;
+	padding: 1px 6px;
+}
+

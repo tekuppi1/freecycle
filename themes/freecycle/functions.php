@@ -297,7 +297,7 @@ function cancelGiveme(){
 	add_temp_used_points($userID, -1);
 	echo "くださいを取消しました。";
 
-	//todoリストstatus="finished",更新処理未実装
+	//todoリストstatus="finished"
 	cancel_todo($postID);
 
 	die;
@@ -576,6 +576,10 @@ function cancel_trade($post_id){
 	$confirmed_user_id = get_bidder_id($post_id);
 
 	//実際のキャンセル処理
+
+	//todoリストstatus="finished"
+	cancel_todo($post_id);
+
 	//商品の確定済フラグを下げる
 	set_confirmed_flg($post_id, $confirmed_user_id, 0);
 
@@ -591,8 +595,6 @@ function cancel_trade($post_id){
 	// 取引相手の獲得ポイントを1p加算
 	add_got_points($confirmed_user_id, 1);
 
-	//todoリストstatus="finished"
-	cancel_todo($post_id);
 }
 
 function cancel_trade_from_exhibitor(){
@@ -610,7 +612,7 @@ function cancel_trade_from_exhibitor(){
 	echo "取引をキャンセルしました。";
 
 	//todoリストstatus="finished"
-	cancel_todo($post_id);
+	//cancel_todo($post_id);
 
 	echo "出品者から取引をキャンセルしました。";
 	die;
@@ -630,7 +632,7 @@ function cancel_trade_from_bidder(){
 	echo "落札者から取引をキャンセルしました。";
 
 	//todoリストstatus="finished"
-	cancel_todo($post_id);
+	//cancel_todo($post_id);
 
 	die;
 }
@@ -1639,14 +1641,27 @@ function my_setup_nav() {
 			'item_css_id' => 'wanted-list'
 			) );
 
+		if(bp_get_total_unread_messages_count() > 0){
+		$messages_name = sprintf( __( 'Messages <span>%s</span>', 'buddypress' ), bp_get_total_unread_messages_count() );
+	}else{
+		$messages_name = sprintf( __( 'Messages', 'buddypress' ));
+	}
+
+		$todo_list_name;
+		$todo_list_count = get_todo_list_count($user_ID);
+		if($todo_list_count){
+			$todo_list_name = sprintf( __( 'TODOリスト <span>%d</span>', 'buddypress'), $todo_list_count);
+		}else{
+			$todo_list_name = sprintf( __( 'TODOリスト', 'buddypress' ));
+		}
 		bp_core_new_nav_item( array( 
-			'name' => __( 'TODOリスト', 'buddypress' ),  
+			'name' => $todo_list_name,  
 			'slug' => 'todo-list', 
 			'position' => 115,
 			'screen_function' => 'todo_list_link',
 			'show_for_displayed_user' => true,
 			'default_subnav_slug' => 'unfinished-todo-list',
-			'item_css_id' => 'todo-list'
+			'item_css_id' => 'todo-lists'
 			) );
 
 		bp_core_new_subnav_item( array( 
@@ -2406,10 +2421,12 @@ function cancel_todo($item_ID){
 	$exhibitor_ID = get_post($item_ID)->post_author;
 	$bidder_ID = get_bidder_id($item_ID);
 
+	//出品者側
 	$exhibitor_todo_ID = get_todo_row($exhibitor_ID, $item_ID)->todo_id;
 	change_todo_status($exhibitor_todo_ID, "finished");
 	change_todo_modified($exhibitor_todo_ID);
 
+	//落札者側
 	$bidder_todo_ID = get_todo_row($bidder_ID, $item_ID)->todo_id;
 	if($bidder_todo_ID){
 		change_todo_status($bidder_todo_ID, "finished");
@@ -2492,7 +2509,7 @@ function add_todo_confirm_bidder($item_ID){
 function add_todo_finish_trade($item_ID){
 	$user_ID = get_post($item_ID)->post_author;
 
-	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">取引完了ボタンを押してください</a>');
+	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">商品受け渡し後、取引完了ボタンを押してください</a>');
 
 }
 
@@ -2543,9 +2560,7 @@ function add_todo_dealing($item_ID, $thread_ID){
 function todo_dealing_finished(){
 	$user_ID = $_POST[userID];
 	$item_ID = $_POST[itemID];
-	debug_log($user_ID."u");
-	debug_log($item_ID."i");
-
+	
 	$todo_ID = get_todo_row($user_ID, $item_ID)->todo_id;
 	change_todo_status($todo_ID, "finished");
 
@@ -2586,5 +2601,13 @@ function deal_user($item_ID, $userID){
 
 }
 
-
+/**
+ * TODOの数を返す関数
+ * @param {int} $user_ID ユーザーＩＤ
+ * @return {int} TODOリストの数
+ */
+function get_todo_list_count($user_ID){
+	$todo_list = get_todo_list($user_ID, "unfinished");
+	return count($todo_list);
+}
 ?>

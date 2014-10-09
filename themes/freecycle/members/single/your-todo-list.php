@@ -16,8 +16,12 @@
 			<ul>
 			<ul style="float:right">
 			<li ><?php 
-					$deal_user = deal_user($todo_item->item_id ,$user_ID);
-					echo "取引者　：　".$deal_user; ?>
+					$deal_user_ID = deal_user($todo_item->item_id ,$user_ID);
+					if($deal_user_ID){
+						$deal_user = get_userdata($deal_user_ID)->display_name;
+						echo "取引者　：　".$deal_user;
+					}
+				?>
 			<li><?php echo "商品名　：　".get_post($todo_item->item_id)->post_title; ?>
 			<li><?php echo date("g:i A 　　Y年m月d日",strtotime($todo_item->created)); ?>
 			<ul>
