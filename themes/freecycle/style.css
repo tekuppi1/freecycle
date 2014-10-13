@@ -16,6 +16,14 @@ Tags: buddypress
 		background: #fff;
 		margin: 0;
 	}
+	
+	#entry_login_form_pc {
+		background: #FFF;
+		border:solid 3px #999;
+		text-align:center;
+		padding: 5px;
+}
+
 }
 
 @media screen and (min-width: 0px) and (max-width: 480px) {
@@ -368,7 +376,13 @@ div#header_copy img{
 			&:before {
 				display: none;
 			}
-			}
+
+#entry_login_form_pc {
+	text-align:center;
+}
+
+}
+/*----------------------------------------------------------------------------------タブレットここまで*/
 
 ul.slides{
 	padding-top:30px;
@@ -556,9 +570,11 @@ li.grobal_nav_important_navi a{
 	color: #555;
 }
 
+
 li.grobal_nav_blue_navi,
 li.grobal_nav_important_navi,{
 }
+
 
 li.grobal_nav_important_navi a{
 	background-color: orange;
@@ -723,9 +739,6 @@ select#cat{
 /*************************************************************************
 新規登録、ログイン、ソーシャルログインボタンフォーム
 *************************************************************************/
-div#entry_login_form_pc{
-	display:none;
-}
 
 div#entry_login_form{
 	text-align:center;
@@ -1907,9 +1920,6 @@ a.whats-tex-button{
 新規登録、ログイン、ソーシャルログインボタンフォーム
 *************************************************************************/
 
-div#entry_login_form_pc{
-	display:none;
-}
 div#entry_login_form{
 	text-align:center;
 	border: 4px solid lightgray;
@@ -2299,7 +2309,12 @@ ul#menu-footer_menu li a{
 	line-height: 120%;
 }
 
+#entry_login_form_pc {
+	text-align:center;
 }
+
+}
+/*---------------------------------------スマホここまで！！！------------------------------------------------------------------------------------------------*/
 
 
 

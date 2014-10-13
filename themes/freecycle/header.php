@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 
@@ -51,7 +49,7 @@
 				jQuery("#slide_body").css("display", "block");
 			}
 		});
-		jQuery('.tooltip').tooltipster({theme: "tooltipster-noir"
+		jQuery('.tooltip').tooltipster({theme: "tooltipster-noir"});
 	});
 	</script>
 	</head>
@@ -78,7 +76,7 @@
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav_blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					　		<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
-							<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >TODOリスト
+							<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >TODOリスト
 							<?php 	global $user_ID;
 									$todo_list_count = get_todo_list_count($user_ID);
 									if($todo_list_count){
@@ -144,7 +142,7 @@
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					　		<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
-					　		<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >TODOリスト
+							<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >TODOリスト
 							<?php 	global $user_ID;
 									$todo_list_count = get_todo_list_count($user_ID);
 									if($todo_list_count){
@@ -164,16 +162,6 @@
 				</div><!-- .grobal_nav_img -->
 </div><!-- .header_img_navi -->
 
-<?php if(!is_user_logged_in()){ ?>
-<div id="entry_login_form">
-	<a href="<?php echo home_url(); ?>/register" class="entry_buttons" id="entry_form">新規登録</a>
-	<a href="<?php echo home_url(); ?>/login" class="entry_buttons" id="login_form" >ログイン</a>
-	<?php social_login_button(); ?>
-	<a href="<?php echo home_url() . "/about"; ?>"  class="entry_buttons" id="detail_texchange">→てくすちぇんじってどんなサービス？</a>
-</div>
-<?php } ?>
-
-	
 
 <div class="header_form">
 	<!-- <?php if(is_user_logged_in()){ ?>
@@ -204,3 +192,4 @@
 		<!--<hr class="line-search"> -->
 		<?php } ?>
 		<div id="container">
+
