@@ -76,6 +76,15 @@
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav_blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					　		<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
+							<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >TODOリスト
+							<?php 	global $user_ID;
+									$todo_list_count = get_todo_list_count($user_ID);
+									if($todo_list_count){
+										echo "<span>$todo_list_count</span>";
+									}
+							?>
+							</a>
+							</li>
 					　		<?php }else{ ?>
 					　		<li class="grobal_nav"><a href="http://texchg.com/how-to-use">How to use</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/review">利用者の声</a></li>
@@ -133,6 +142,15 @@
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					　		<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
+							<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >TODOリスト
+							<?php 	global $user_ID;
+									$todo_list_count = get_todo_list_count($user_ID);
+									if($todo_list_count){
+										echo "<span>$todo_list_count</span>";
+									}
+							?>
+							</a>
+							</li>
 					　		<?php }else{ ?>
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/how-to-use">How to use</a></li>
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/review">利用者の声</a></li>
@@ -174,3 +192,4 @@
 		<!--<hr class="line-search"> -->
 		<?php } ?>
 		<div id="container">
+
