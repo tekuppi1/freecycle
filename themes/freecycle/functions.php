@@ -2537,7 +2537,7 @@ function add_todo_evaluate_exhibitor($item_ID){
 /** 
  * 取引詳細をメッセージでやり取りするTODOを追加する関数※落札者のTODO
  * @param {int} $item_ID 取引商品ＩＤ
- * @param {int} $message_ID 取引相手確定メッセージのid
+ * @param {int} $thread_ID 取引相手確定メッセージのid
  */
 function add_todo_dealing($item_ID, $thread_ID){
 	global $table_prefix;
