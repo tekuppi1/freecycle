@@ -2610,4 +2610,6 @@ function get_todo_list_count($user_ID){
 	$todo_list = get_todo_list($user_ID, "unfinished");
 	return count($todo_list);
 }
+
+//hiiii
 ?>
