@@ -195,24 +195,5 @@ function go(f){
 	}
 }
 
-/**
- * todoをクリック時に消すためのphpへの中継
- * @param {int} user_ID ユーザーＩＤ
- * @param {int} item_ID 取引商品ＩＤ
- */
-function todo_dealing(user_ID, item_ID){
-	console.log(user_ID + "Hi!!" + item_ID);
-	jQuery.ajax({
-		type: "POST",
-		url:  '<?php echo admin_url('admin-ajax.php'); ?>',
-		data: {
-			action: "todo_dealing",
-			userID: user_ID,
-			itemID: item_ID
-		},
-		success:function(result){
-			return;
-		}
-	});
-}
+
 </script>

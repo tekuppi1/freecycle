@@ -2512,6 +2512,24 @@ function add_todo_finish_trade($item_ID){
 
 }
 
+/** 
+ * 取引詳細をメッセージでやり取りするTODOを追加する関数※落札者のTODO
+ * @param {int} $item_ID 取引商品ＩＤ
+ * @param {int} $thread_ID 取引相手確定メッセージのid
+ */
+function add_todo_dealing($item_ID, $thread_ID){
+	global $table_prefix;
+	global $wpdb;
+
+	$user_ID = get_bidder_id($item_ID);
+	$user = get_user_by('id', $user_ID);
+	$user_login_name = $user->user_login;
+
+	add_todo($user_ID, $item_ID, 
+		'<a href = "'. home_url() . '/members/' . $user_login_name .'/messages/view/' .$thread_ID. '" onClick="todo_dealing('.$user_ID.','.$item_ID.')">
+			くださいリクエストが承認されました。承認メッセージに返信してください</a>');
+}
+
 /**
  * 落札者を評価するTODOを追加する関数※出品者のTODO
  * @param {int} $user_ID 出品者ＩＤ
@@ -2533,43 +2551,14 @@ function add_todo_evaluate_exhibitor($item_ID){
 	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">出品者を評価してください</a>');
 }
 
-/** 
- * 取引詳細をメッセージでやり取りするTODOを追加する関数※落札者のTODO
- * @param {int} $item_ID 取引商品ＩＤ
- * @param {int} $thread_ID 取引相手確定メッセージのid
- */
-function add_todo_dealing($item_ID, $thread_ID){
-	global $table_prefix;
-	global $wpdb;
-
-	$user_ID = get_bidder_id($item_ID);
-	$user = get_user_by('id', $user_ID);
-	$user_login_name = $user->user_login;
-
-	/*
-	$message_row = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."bp_messages_messages
-													WHERE id = %d",$message_ID));
-	$thread_ID = $message_row->thread_id;
-	*/
-	add_todo($user_ID, $item_ID, 
-		'<a href = "'. home_url() . '/members/' . $user_login_name .'/messages/view/' .$thread_ID. '" onClick="todo_dealing('.$user_ID.','.$item_ID.')">
-			くださいリクエストが承認されました。承認メッセージに返信してください</a>');
-}
-
 /**
- * POSTされた、ユーザーと商品ＩＤをもつTODOを消す関数
+ * POSTされた、ユーザーIDと商品ＩＤをもつTODOを消す関数
  */
 function todo_dealing_finished(){
 	$user_ID = $_POST[userID];
 	$item_ID = $_POST[itemID];
-	debug_log($user_ID . " user_ID");
-	debug_log($item_ID . " item_ID");
 	
 	$todo_ID = get_todo_row($user_ID, $item_ID)->todo_id;
-	debug_log(get_todo_row($user_ID, $item_ID)->user_id . " todo_user_id");
-	debug_log(get_todo_row($user_ID, $item_ID)->item_id . " todo_item_id");
-	debug_log(get_todo_row($user_ID, $item_ID)->status . " todo_status");
-
 	change_todo_status($todo_ID, "finished");
 
 }
@@ -2606,7 +2595,6 @@ function deal_user($item_ID, $userID){
 	}
 
 	return $deal_user_id;
-
 }
 
 /**

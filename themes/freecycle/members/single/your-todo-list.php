@@ -1,4 +1,20 @@
 <div id="todo-list">
+	<script>
+	function todo_dealing(user_ID, item_ID){
+		jQuery.ajax({
+			type: "POST",
+			url:  '<?php echo admin_url('admin-ajax.php'); ?>',
+			data: {
+				action: "todo_dealing",
+				userID: user_ID,
+				itemID: item_ID
+			},
+			success:function(result){
+				return;
+			}
+		});
+	}
+	</script>
 	<?php
 		global $user_ID;
 		$todo_asc_list = get_todo_list($user_ID, "unfinished");
