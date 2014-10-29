@@ -311,7 +311,7 @@ function confirmGiveme(){
 	global $table_prefix;
 	$postID = $_POST['postID'];
 	$userID = $_POST['userID'];
-	$exhibiter_userID = $_POST['euserID'];
+	//$exhibiter_userID = $_POST['euserID'];
 	$uncheckedUserIDs = explode(",", $_POST['uncheckedUserIDs']);
 	$tradeway = $_POST['tradeway'];
 	$tradedates = explode(",", $_POST['tradedates']);
@@ -382,12 +382,8 @@ function confirmGiveme(){
 	echo "confirm";
 
 	//todoリストの状態をfinishedにする
-	$todo_row = get_todo_row($exhibiter_userID, $postID);
+	$todo_row = get_todo_row(get_post_author($postID), $postID);
 	$todoID = $todo_row->todo_id;
-	debug_log($todo_row->user_id . "cG_u");
-	debug_log($todo_row->item_id . "cG_i");
-	debug_log($todo_row->status . "cG_s");
-
 	change_todo_status($todoID, "finished");
 
 	//todoリストに追加
@@ -2560,11 +2556,20 @@ function add_todo_dealing($item_ID, $thread_ID){
 			くださいリクエストが承認されました。承認メッセージに返信してください</a>');
 }
 
+/**
+ * POSTされた、ユーザーと商品ＩＤをもつTODOを消す関数
+ */
 function todo_dealing_finished(){
 	$user_ID = $_POST[userID];
 	$item_ID = $_POST[itemID];
+	debug_log($user_ID . " user_ID");
+	debug_log($item_ID . " item_ID");
 	
 	$todo_ID = get_todo_row($user_ID, $item_ID)->todo_id;
+	debug_log(get_todo_row($user_ID, $item_ID)->user_id . " todo_user_id");
+	debug_log(get_todo_row($user_ID, $item_ID)->item_id . " todo_item_id");
+	debug_log(get_todo_row($user_ID, $item_ID)->status . " todo_status");
+
 	change_todo_status($todo_ID, "finished");
 
 }

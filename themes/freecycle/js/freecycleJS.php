@@ -47,7 +47,7 @@ function onConfirmGiveme(postID, url){
 						"action": "confirmGiveme",
 						"postID": postID,
 						"userID": userID,//落札者相手ユーザーＩＤ
-						"euserID": "<?php echo $user_ID ?>",//出品者ユーザーＩＤ
+						"euserID": <?php echo $user_ID ?>,//出品者ユーザーＩＤ
 						"uncheckedUserIDs": uncheckedUserIDs.join(),
 						"message": jQuery("#message_" + postID).val(),
 					},
@@ -195,8 +195,13 @@ function go(f){
 	}
 }
 
+/**
+ * todoをクリック時に消すためのphpへの中継
+ * @param {int} user_ID ユーザーＩＤ
+ * @param {int} item_ID 取引商品ＩＤ
+ */
 function todo_dealing(user_ID, item_ID){
-	console.log(user_ID+","+item_ID);
+	console.log(user_ID + "Hi!!" + item_ID);
 	jQuery.ajax({
 		type: "POST",
 		url:  '<?php echo admin_url('admin-ajax.php'); ?>',
