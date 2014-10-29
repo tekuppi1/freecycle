@@ -384,8 +384,11 @@ function confirmGiveme(){
 	//todoリストの状態をfinishedにする
 	$todo_row = get_todo_row($exhibiter_userID, $postID);
 	$todoID = $todo_row->todo_id;
-	change_todo_status($todoID, "finished");
+	debug_log($todo_row->user_id . "cG_u");
+	debug_log($todo_row->item_id . "cG_i");
+	debug_log($todo_row->status . "cG_s");
 
+	change_todo_status($todoID, "finished");
 
 	//todoリストに追加
 	add_todo_finish_trade($postID);
@@ -2433,7 +2436,7 @@ function cancel_todo($item_ID){
 		change_todo_modified($bidder_todo_ID);
 
 	}else{
-		debug_log("ないよー");
+		//debug_log("ないよー");
 		return ;
 	}
 
@@ -2611,5 +2614,4 @@ function get_todo_list_count($user_ID){
 	return count($todo_list);
 }
 
-//hiiii
 ?>
