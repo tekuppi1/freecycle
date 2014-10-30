@@ -47,7 +47,6 @@ function onConfirmGiveme(postID, url){
 						"action": "confirmGiveme",
 						"postID": postID,
 						"userID": userID,//落札者相手ユーザーＩＤ
-						"euserID": <?php echo $user_ID ?>,//出品者ユーザーＩＤ
 						"uncheckedUserIDs": uncheckedUserIDs.join(),
 						"message": jQuery("#message_" + postID).val(),
 					},
@@ -194,6 +193,21 @@ function go(f){
 		f();
 	}
 }
+
+function todo_dealing(user_ID, item_ID){
+		jQuery.ajax({
+			type: "POST",
+			url:  '<?php echo admin_url('admin-ajax.php'); ?>',
+			data: {
+				action: "todo_dealing",
+				userID: user_ID,
+				itemID: item_ID
+			},
+			success:function(result){
+				return;
+			}
+		});
+	}
 
 
 </script>
