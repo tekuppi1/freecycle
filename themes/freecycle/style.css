@@ -1,3 +1,4 @@
+
 /*
 Theme Name: Freecycle
 Theme URI: http://example.org/themes/dusk/
@@ -570,11 +571,9 @@ li.grobal_nav_important_navi a{
 	color: #555;
 }
 
-
 li.grobal_nav_blue_navi,
 li.grobal_nav_important_navi,{
 }
-
 
 li.grobal_nav_important_navi a{
 	background-color: orange;
@@ -2449,6 +2448,9 @@ textarea{
 	resize: none;
 }
 
+.trade_message{
+	width: 100%;
+}
 
 /*img{
 	width: 200;
@@ -3416,4 +3418,3 @@ div.grobal_nav_div_sp ul li a span {
 	margin-left: 2px;
 	padding: 1px 6px;
 }
-

@@ -52,7 +52,7 @@ function onConfirmGiveme(postID, url){
 					},
 					success: function(msg){
 						jQuery("#post_"+postID).hide(1000,function(){
-						alert("取引相手を確定し、受渡希望条件を通知しました！\n取引相手からの返信をお待ちください。");
+						alert("取引相手を確定し、メッセージを送信しました！\n取引相手からの返信をお待ちください。");
 						enableButtons();
 						});
 					},

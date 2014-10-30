@@ -354,20 +354,6 @@ function confirmGiveme(){
 
 	// 取引相手に確定されたことを通知
 	$content = 'あなたが以下の商品の取引相手に選ばれました！' . PHP_EOL . ' 【商品名】:<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>' . PHP_EOL;
-	$content .= '【受渡方法】:' . get_display_tradeway($tradeway) . PHP_EOL;
-	$content .= PHP_EOL;
-	if($tradeway == "handtohand"){
-		$content .= '以下の受渡希望条件を確認してください。問題なければ「OKです」と返信してください！' . PHP_EOL;
-		$content .= 'もし不都合があれば、代わりの日時、場所を記入して返信してください。'. PHP_EOL;
-		$content .= '【受渡希望日時】:' . PHP_EOL;
-		for($i=1; $i<count($tradedates); $i++){
-			$content .= ' 第' . $i .'希望:' . $tradedates[$i] . PHP_EOL;
-		}
-		$content .= '【受渡希望場所】:' . $place . PHP_EOL;
-	}elseif($tradeway == "delivery"){
-		$content .= '配送による受渡に同意する場合、受取先の住所と名前を記入して返信してください！' . PHP_EOL;
-		$content .= '同意しない場合、直接手渡しの希望日時、場所を記入して返信してください。	' . PHP_EOL;
-	}
 	if($message){
 		$content .= '【メッセージ】:' . $message . PHP_EOL;
 	}
