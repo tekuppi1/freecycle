@@ -243,16 +243,6 @@ function giveme(){
 	// 仮払ポイントを1p増
 	add_temp_used_points($userID, 1);
 	
-	// 「ください」リクエストが来たことを記事投稿者に通知する
-	messages_new_message(array(
-	'sender_id' => $userID,
-	'recipients' => get_post_author($postID),
-	'subject' => '【自動送信】あなたの商品に「ください」がされました',
-	'content' => bp_core_get_userlink($userID) . 'さんが以下の商品に「ください」をしています!<br><br>'.
-					'以下のリンクから取引確定処理を行ってください<br>' .
-					'<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>'//bug:改行がきかない
-	));
-	
 	echo "くださいリクエストが送信されました。";
 
 	
@@ -469,15 +459,6 @@ function finish(){
 		finished_flg = 1
 		WHERE post_id = %d",
 		$postID));
-		
-	// 取引完了メールを送信
-	messages_new_message(array(
-		'sender_id' => $userID,
-		'recipients' => get_bidder_id($postID),
-		'subject' => '【自動送信】出品者の評価をしてください！',
-		'content' => '出品者が取引を完了状態にしました。以下のリンクから出品者の評価を実施してください。' .
-						'<a href="' . get_permalink($postID) . '">' . get_permalink($postID) . '</a>'
-	));
 
 	//todoリストの状態をfinishedにする-exhibiter
 	$todo_row = get_todo_row($userID, $postID);
@@ -2483,7 +2464,8 @@ function add_todo_confirm_bidder($item_ID){
 	
 	$user_ID = get_post($item_ID)->post_author;
 
-	add_todo($user_ID, $item_ID, '<a href = "' . home_url() . '/archives/' . $item_ID . '">取引相手を確定させてください</a>');
+	add_todo($user_ID, $item_ID, '<a href = "' . home_url() . '/archives/' . $item_ID . '">
+		あなたの商品に「ください」がされました。取引相手を確定させてください</a>');
 }
 
 /**
