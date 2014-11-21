@@ -1,13 +1,4 @@
 <?php
-/*
-Plugin Name: Freecycle
-Plugin URI: http://www.hoge.net/
-Description: for TexChange core system
-Author: Hashikuchi Kazunori
-Version: 0.1
-Author URI: http://moyasystemengineer.hatenablog.com/
-*/
-
 class FreecycleMetaTable {
 	// plugin custom table names
 	var $fmt_giveme_state;
