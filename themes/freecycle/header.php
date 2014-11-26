@@ -170,7 +170,7 @@
      </div>
 <?php } ?> -->
 
-		<?php if(bp_is_front_page() || is_archive() || is_search() || is_single()){ ?>
+		<?php if(is_front_page() || is_archive() || is_search() || is_single()){ ?>
 	<div id="search-23" class="widget widget_search"><!-- 検索バー -->
 				<form role="search" method="get" id="searchform_main" action="<?php echo home_url(); ?>">
 						<div id="searchform_text"> 
