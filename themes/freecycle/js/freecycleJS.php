@@ -106,7 +106,7 @@ function onClickSearchWantedList(page,keyword){
 			"user_id": "<?php echo $user_ID; ?>",
 			"keyword": keyword,
 			"page":page,
-			"department": jQuery("#department").val()
+			//"department": jQuery("#department").val()
 		},
 		success: function(result){
 			if(!result){
