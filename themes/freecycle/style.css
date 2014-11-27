@@ -386,7 +386,7 @@ div#header_copy img{
 /*----------------------------------------------------------------------------------タブレットここまで*/
 
 ul.slides{
-	padding-top:30px;
+	padding-top:30px;　　　　
 }
 
 /*ヘッダー出品ボタン*/
@@ -1272,6 +1272,10 @@ ul#menu-footer_menu li a{
 	line-height: 120%;
 }
 
+div.header_img_navi_contents{
+	/*margin-top: 20px;*/
+}
+
 }
 
 /*スマホスタイルの終了*/
@@ -1589,8 +1593,9 @@ header a:active{
 未読メッセージアラート
 */
 a.unread_alert{
-	font-size: 1.1em
+	font-size: 1.1em;
 }
+
 
 /*---------------------------------------------------
 				キャッチコピー

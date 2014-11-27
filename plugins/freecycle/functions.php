@@ -1616,9 +1616,9 @@ function my_setup_nav() {
 		$todo_list_name;
 		$todo_list_count = get_todo_list_count($user_ID);
 		if($todo_list_count){
-			$todo_list_name = sprintf( __( 'TODOリスト <span>%d</span>', 'buddypress'), $todo_list_count);
+			$todo_list_name = sprintf( __( 'your next action <span>%d</span>', 'buddypress'), $todo_list_count);
 		}else{
-			$todo_list_name = sprintf( __( 'TODOリスト', 'buddypress' ));
+			$todo_list_name = sprintf( __( 'your next action', 'buddypress' ));
 		}
 		bp_core_new_nav_item( array( 
 			'name' => $todo_list_name,  
@@ -1656,7 +1656,7 @@ function todo_list_link(){
 }
 
 function todo_list_title(){
-	echo "TODOリスト一覧";
+	echo "your next action";
 }
 
 function todo_list_content(){

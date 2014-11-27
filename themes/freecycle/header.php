@@ -76,7 +76,7 @@
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav_blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					　		<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
-							<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >TODOリスト
+							<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >your next action
 							<?php 	global $user_ID;
 									$todo_list_count = get_todo_list_count($user_ID);
 									if($todo_list_count){
@@ -107,9 +107,15 @@
 					<?php if(is_user_logged_in()) { 
 								 if(messages_get_unread_count() > 0){ 
 					?>
-							<a class="unread_alert" href="<?php echo bp_loggedin_user_domain() . "messages"; ?>">未読メッセージが<?php echo messages_get_unread_count();?>件あります！</a>
+							<a class="unread_alert" href="<?php echo bp_loggedin_user_domain() . "messages"; ?>">未読メッセージが<?php echo messages_get_unread_count();?>件あります！</a></br>
 					<?php 		} 
-						} ?> 
+								global $user_ID;
+								if(get_todo_list_count($user_ID)){
+					?>
+							<a class="unread_alert" href="<?php echo bp_loggedin_user_domain(); ?>todo-list/">your next actionが<?php echo get_todo_list_count($user_ID);?>件あります！</a>
+					<?php
+								}
+						} ?>
 				</div>
 				
 				<?php if(!is_user_logged_in()){ ?>
@@ -142,7 +148,7 @@
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					　		<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
-							<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >TODOリスト
+							<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >your next action
 							<?php 	global $user_ID;
 									$todo_list_count = get_todo_list_count($user_ID);
 									if($todo_list_count){
