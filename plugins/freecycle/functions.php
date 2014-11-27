@@ -951,23 +951,22 @@ function search_wantedbook(){
 }
 
 function search_wantedlist(){
+	$keyword = isset($_POST['keyword'])?$_POST['keyword']:"";
+	$page = isset($_POST['page'])?$_POST['page']:0;
+
 	$items = get_others_wanted_list(array(
-		//'user_id' => $_POST['user_id'],
-		'keyword' => $_POST['keyword'],
-		'page' => $_POST['page'],
-		//'department' => $_POST['department'],
+		'keyword' => $keyword,
+		'page' => $page,
 		'count' => true));
-	$next_page = $_POST['page'] + 1;
-	$previous_page = $_POST['page'] - 1;
+	$next_page = $page + 1;
+	$previous_page = $page - 1;
 	$return = '';
 	foreach ($items as $item) {
 		$return .= create_wanted_item_detail($item);
 	}
 	if(get_others_wanted_list(array(
-		//'user_id' => $_POST['user_id'],
-		'keyword' => $_POST['keyword'],
+		'keyword' => $keyword,
 		'page' => $next_page,
-		//'department' => $_POST['department']
 		))){
 		$return .= '<div class="alignleft"><a href="#" onClick="onClickSearchWantedList(' . $next_page .')">次の10件</a></div>';
 	}
@@ -2099,7 +2098,7 @@ function get_others_wanted_list($args=''){
 
 	$wanted_list;
 	$sql = "SELECT wanted_item_id, " . $table_prefix . "fmt_wanted_list.user_id, item_name, ASIN, image_url, value as department";
-	if(isset($args['count'])){
+	if(isset($args['count']) && $args['count'] == true){
 		$sql .= ", count(*) as count";
 	}
 	$sql .= " FROM ". $table_prefix . "fmt_wanted_list";
@@ -2132,7 +2131,7 @@ function get_others_wanted_list($args=''){
 		$args['department'] = 'DUMMY'; // to get all results
 		$sql .= " AND ifnull(value,0) <> %s";
 	}
-	if(isset($args['count'])){
+	if(isset($args['count']) && $args['count'] == true){
 		$sql .=	" GROUP BY ASIN";
 	}
 	$sql .=	" ORDER BY wanted_item_id desc";
