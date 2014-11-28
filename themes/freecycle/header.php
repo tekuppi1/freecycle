@@ -112,7 +112,7 @@
 								global $user_ID;
 								if(get_todo_list_count($user_ID)){
 					?>
-							<a class="unread_alert" href="<?php echo bp_loggedin_user_domain(); ?>todo-list/">your next actionが<?php echo get_todo_list_count($user_ID);?>件あります！</a>
+							<a id="nextaction_alert" class="unread_alert" href="<?php echo bp_loggedin_user_domain(); ?>todo-list/">your next actionが<?php echo get_todo_list_count($user_ID);?>件あります！</a>
 					<?php
 								}
 						} ?>
