@@ -29,10 +29,6 @@ Tags: buddypress
 
 @media screen and (min-width: 0px) and (max-width: 480px) {
 
-#nextaction_alert {
-	display: none;
-}
-
 a:link { color: #000080; }
 a:visited { color: #000090; }
 a:hover { color: #00bfff; }
@@ -2645,6 +2641,10 @@ header a:active{
 */
 a.unread_alert{
 	font-size: 1.1em
+}
+
+#nextaction_alert {
+	display: none;
 }
 
 /*---------------------------------------------------
