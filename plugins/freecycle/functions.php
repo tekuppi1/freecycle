@@ -981,7 +981,6 @@ function search_wantedlist(){
 //ホームにほしいものリストを表示
 function home_wantedlist(){
 	$lists = get_others_wanted_list(array(
-		'user_id'    => $_POST['user_id'],
 		'page'       => $_POST['page'],
 		'count'      => true));
 	$return = '';

@@ -109,7 +109,6 @@
 				url: '<?php echo admin_url('admin-ajax.php'); ?>',
 				data: {
 					"action":"home_wantedlist",
-					"user_id":"<?php echo $user_ID; ?>",
 					"page":page,
 				},
 				success: function(result){
