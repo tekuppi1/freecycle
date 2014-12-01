@@ -5,7 +5,7 @@
 		$todo_list = array_reverse($todo_asc_list);
 		if(!$todo_list){
 	?>
-		<p>your next actionはありません</p>
+		<p>next actionはありません</p>
 	<?php 
 		}
 		foreach($todo_list as $todo_item){

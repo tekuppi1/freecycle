@@ -3426,7 +3426,7 @@ div.grobal_nav_div ul li a span {
 	padding: 1px 6px;
 }
 
-div.grobal_nav_div ul li#red_todo_list a{
+div.grobal_nav_div ul li#color_todo_list a{
 	color: #FF0000;
 	font-style: italic;
 }
@@ -3444,3 +3444,6 @@ div.grobal_nav_div_sp ul li a span {
 	padding: 1px 6px;
 }
 
+#user-exist_todo{
+	color: #FF0000;
+}

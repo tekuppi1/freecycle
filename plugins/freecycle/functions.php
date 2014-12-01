@@ -1615,10 +1615,13 @@ function my_setup_nav() {
 
 		$todo_list_name;
 		$todo_list_count = get_todo_list_count($user_ID);
+		$todo_list_style_id;
 		if($todo_list_count){
-			$todo_list_name = sprintf( __( 'your next action <span>%d</span>', 'buddypress'), $todo_list_count);
+			$todo_list_name = sprintf( __( 'next action <span>%d</span>', 'buddypress'), $todo_list_count);
+			$todo_list_style_id = "exist_todo";
 		}else{
-			$todo_list_name = sprintf( __( 'your next action', 'buddypress' ));
+			$todo_list_name = sprintf( __( 'next action', 'buddypress' ));
+			$todo_list_style_id = "none_todo";
 		}
 		bp_core_new_nav_item( array( 
 			'name' => $todo_list_name,  
@@ -1627,7 +1630,7 @@ function my_setup_nav() {
 			'screen_function' => 'todo_list_link',
 			'show_for_displayed_user' => true,
 			'default_subnav_slug' => 'unfinished-todo-list',
-			'item_css_id' => 'todo-lists'
+			'item_css_id' => $todo_list_style_id
 			) );
 
 		bp_core_new_subnav_item( array( 
@@ -1656,7 +1659,7 @@ function todo_list_link(){
 }
 
 function todo_list_title(){
-	echo "your next action";
+	echo "next action";
 }
 
 function todo_list_content(){

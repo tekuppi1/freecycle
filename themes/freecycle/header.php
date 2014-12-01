@@ -76,7 +76,7 @@
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav_blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					　		<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
-							<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >your next action<?php
+							<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >next action<?php
 								global $user_ID;
 								$todo_list_count = get_todo_list_count($user_ID);
 								if($todo_list_count){
@@ -112,7 +112,7 @@
 								global $user_ID;
 								if(get_todo_list_count($user_ID)){
 					?>
-							<a id="nextaction_alert" class="unread_alert" href="<?php echo bp_loggedin_user_domain(); ?>todo-list/">your next actionが<?php echo get_todo_list_count($user_ID);?>件あります！</a>
+							<a id="nextaction_alert" class="unread_alert" href="<?php echo bp_loggedin_user_domain(); ?>todo-list/">next actionが<?php echo get_todo_list_count($user_ID);?>件あります！</a>
 					<?php
 								}
 						} ?>
@@ -153,10 +153,10 @@
 									global $user_ID;
 									$todo_list_count = get_todo_list_count($user_ID);
 									if($todo_list_count){
-									echo "red_todo_list";
+									echo "color_todo_list";
 									}
 								?>"
-							><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >your next action<?php
+							><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >next action<?php
 								if($todo_list_count){
 										echo "<span>$todo_list_count</span>";
 								}
