@@ -579,6 +579,8 @@ li.grobal_nav_important_navi a{
 	background-color: orange;
 }
 
+
+
 /*nav{
 	width: 100%;
 	margin: 10px auto;
@@ -1274,6 +1276,10 @@ ul#menu-footer_menu li a{
 
 div.header_img_navi_contents{
 	/*margin-top: 20px;*/
+}
+
+#nextaction_alert{
+	color: #FF0000;
 }
 
 }
@@ -2315,6 +2321,10 @@ ul#menu-footer_menu li a{
 
 #entry_login_form_pc {
 	text-align:center;
+}
+
+#nextaction_alert{
+	color: #FF0000;
 }
 
 }
@@ -3416,6 +3426,12 @@ div.grobal_nav_div ul li a span {
 	padding: 1px 6px;
 }
 
+div.grobal_nav_div ul li#red_todo_list a{
+	color: #FF0000;
+	font-style: italic;
+}
+
+
 div.grobal_nav_div_sp ul li a span {
 	background: #1fb3dd;
 	-moz-border-radius: 3px;
@@ -3427,3 +3443,4 @@ div.grobal_nav_div_sp ul li a span {
 	margin-left: 2px;
 	padding: 1px 6px;
 }
+
