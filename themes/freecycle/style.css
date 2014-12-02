@@ -386,7 +386,7 @@ div#header_copy img{
 /*----------------------------------------------------------------------------------タブレットここまで*/
 
 ul.slides{
-	padding-top:30px;
+	padding-top:30px;　　　　
 }
 
 /*ヘッダー出品ボタン*/
@@ -578,6 +578,8 @@ li.grobal_nav_important_navi,{
 li.grobal_nav_important_navi a{
 	background-color: orange;
 }
+
+
 
 /*nav{
 	width: 100%;
@@ -1272,6 +1274,14 @@ ul#menu-footer_menu li a{
 	line-height: 120%;
 }
 
+div.header_img_navi_contents{
+	/*margin-top: 20px;*/
+}
+
+#nextaction_alert{
+	color: #FF0000;
+}
+
 }
 
 /*スマホスタイルの終了*/
@@ -1589,8 +1599,9 @@ header a:active{
 未読メッセージアラート
 */
 a.unread_alert{
-	font-size: 1.1em
+	font-size: 1.1em;
 }
+
 
 /*---------------------------------------------------
 				キャッチコピー
@@ -2312,6 +2323,10 @@ ul#menu-footer_menu li a{
 	text-align:center;
 }
 
+#nextaction_alert{
+	color: #FF0000;
+}
+
 }
 /*---------------------------------------スマホここまで！！！------------------------------------------------------------------------------------------------*/
 
@@ -2636,6 +2651,10 @@ header a:active{
 */
 a.unread_alert{
 	font-size: 1.1em
+}
+
+#nextaction_alert {
+	display: none;
 }
 
 /*---------------------------------------------------
@@ -3407,6 +3426,11 @@ div.grobal_nav_div ul li a span {
 	padding: 1px 6px;
 }
 
+#header_todo_exist{
+	color: #FF0000;
+}
+
+
 div.grobal_nav_div_sp ul li a span {
 	background: #1fb3dd;
 	-moz-border-radius: 3px;
@@ -3417,4 +3441,8 @@ div.grobal_nav_div_sp ul li a span {
 	font-size: 90%;
 	margin-left: 2px;
 	padding: 1px 6px;
+}
+
+#user-exist_todo{
+	color: #FF0000;
 }

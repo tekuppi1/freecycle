@@ -76,12 +76,12 @@
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav_blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					　		<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
-							<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >TODOリスト
-							<?php 	global $user_ID;
-									$todo_list_count = get_todo_list_count($user_ID);
-									if($todo_list_count){
+							<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >next action<?php
+								global $user_ID;
+								$todo_list_count = get_todo_list_count($user_ID);
+								if($todo_list_count){
 										echo "<span>$todo_list_count</span>";
-									}
+								}
 							?>
 							</a>
 							</li>
@@ -107,9 +107,15 @@
 					<?php if(is_user_logged_in()) { 
 								 if(messages_get_unread_count() > 0){ 
 					?>
-							<a class="unread_alert" href="<?php echo bp_loggedin_user_domain() . "messages"; ?>">未読メッセージが<?php echo messages_get_unread_count();?>件あります！</a>
+							<a class="unread_alert" href="<?php echo bp_loggedin_user_domain() . "messages"; ?>">未読メッセージが<?php echo messages_get_unread_count();?>件あります！</a></br>
 					<?php 		} 
-						} ?> 
+								global $user_ID;
+								if(get_todo_list_count($user_ID)){
+					?>
+							<a id="nextaction_alert" class="unread_alert" href="<?php echo bp_loggedin_user_domain(); ?>todo-list/">next actionが<?php echo get_todo_list_count($user_ID);?>件あります！</a>
+					<?php
+								}
+						} ?>
 				</div>
 				
 				<?php if(!is_user_logged_in()){ ?>
@@ -142,12 +148,18 @@
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
 					　		<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
-							<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/" >TODOリスト
-							<?php 	global $user_ID;
+							<li class="grobal_nav important_navi">
+							<a href="<?php echo bp_loggedin_user_domain(); ?>todo-list/"
+								<?php
+									global $user_ID;
 									$todo_list_count = get_todo_list_count($user_ID);
 									if($todo_list_count){
-										echo "<span>$todo_list_count</span>";
+									echo 'id="header_todo_exist"';
 									}
+								?>>next action<?php
+								if($todo_list_count){
+										echo "<span>$todo_list_count</span>";
+								}
 							?>
 							</a>
 							</li>
