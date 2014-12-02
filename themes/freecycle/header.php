@@ -182,11 +182,11 @@
      </div>
 <?php } ?> -->
 
-		<?php if(bp_is_front_page() || is_archive() || is_search() || is_single()){ ?>
+		<?php if(is_front_page() || is_archive() || is_search() || is_single()){ ?>
 	<div id="search-23" class="widget widget_search"><!-- 検索バー -->
 				<form role="search" method="get" id="searchform_main" action="<?php echo home_url(); ?>">
 						<div id="searchform_text"> 
-					  			<input type="text" id="searchtext" name="s" id="s" value="<?php echo $_GET['s'];?>"/>
+					  			<input type="text" id="searchtext" name="s" id="s" value="<?php if(isset($_GET['s'])){ echo $_GET['s']; } ?>"/>
 					  	</div>
 							<div id="searchform_pulldown">
 								<select name="seachform_itemstatus">

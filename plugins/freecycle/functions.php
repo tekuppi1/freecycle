@@ -111,7 +111,7 @@ function add_custom_where($where){
 
 	// 一覧ページには取引相手確定済の記事を表示しない。
 	// 「ください可能」のみの条件で検索された場合も、同様に表示しない。
-	if(is_front_page() || $_REQUEST['seachform_itemstatus'] == 'givemeable'){
+	if(is_front_page() || (isset($_REQUEST['seachform_itemstatus']) && $_REQUEST['seachform_itemstatus'] == 'givemeable')){
 		$where .= "AND (" . $table_prefix . "fmt_giveme_state.confirmed_flg <> 1 "
 				. " OR " . $table_prefix . "fmt_giveme_state.confirmed_flg is NULL)";
 	}
@@ -951,23 +951,23 @@ function search_wantedbook(){
 }
 
 function search_wantedlist(){
+	$keyword = isset($_POST['keyword'])?$_POST['keyword']:"";
+	$page = isset($_POST['page'])?$_POST['page']:0;
+
 	$items = get_others_wanted_list(array(
-		//'user_id' => $_POST['user_id'],
-		'keyword' => $_POST['keyword'],
-		'page' => $_POST['page'],
-		'department' => $_POST['department'],
+		'keyword' => $keyword,
+		'page' => $page,
 		'count' => true));
-	$next_page = $_POST['page'] + 1;
-	$previous_page = $_POST['page'] - 1;
+	$next_page = $page + 1;
+	$previous_page = $page - 1;
 	$return = '';
 	foreach ($items as $item) {
 		$return .= create_wanted_item_detail($item);
 	}
 	if(get_others_wanted_list(array(
-		//'user_id' => $_POST['user_id'],
-		'keyword' => $_POST['keyword'],
+		'keyword' => $keyword,
 		'page' => $next_page,
-		'department' => $_POST['department']))){
+		))){
 		$return .= '<div class="alignleft"><a href="#" onClick="onClickSearchWantedList(' . $next_page .')">次の10件</a></div>';
 	}
 	if($previous_page >= 0){
@@ -981,7 +981,6 @@ function search_wantedlist(){
 //ホームにほしいものリストを表示
 function home_wantedlist(){
 	$lists = get_others_wanted_list(array(
-		'user_id'    => $_POST['user_id'],
 		'page'       => $_POST['page'],
 		'count'      => true));
 	$return = '';
@@ -2101,36 +2100,40 @@ function get_others_wanted_list($args=''){
 
 	$wanted_list;
 	$sql = "SELECT wanted_item_id, " . $table_prefix . "fmt_wanted_list.user_id, item_name, ASIN, image_url, value as department";
-	if($args['count']){
+	if(isset($args['count']) && $args['count'] == true){
 		$sql .= ", count(*) as count";
 	}
 	$sql .= " FROM ". $table_prefix . "fmt_wanted_list";
 	$sql .= " LEFT JOIN " . $bp->profile->table_name_data;
 	$sql .= " ON " . $table_prefix . "fmt_wanted_list.user_id = " . $bp->profile->table_name_data . ".user_id";
 	$sql .= " AND " . $bp->profile->table_name_data . ".field_id = " . xprofile_get_field_id_from_name('学部');
-	if($args['user_id'] < 0){
+	if(isset($args['user_id']) && $args['user_id'] < 0){
+		$args['user_id'] = 0;
+	}
+	if(!isset($args['user_id'])){
 		$args['user_id'] = 0;
 	}
 	$sql .= " WHERE " . $table_prefix . "fmt_wanted_list.user_id <> %d";
 	$sql .= " AND item_name LIKE '%s'";
-	if($args['wanted_item_id']){
+	if(isset($args['wanted_item_id'])){
 		$sql .= " AND wanted_item_id = %d";
 	}else{
+		$args['wanted_item_id'] = 0;
 		$sql .= " AND wanted_item_id <> %d";		
 	}
-	if($args['asin']){
+	if(isset($args['asin'])){
 		$sql .= " AND ASIN = %s";
 	}else{
 		$args['asin'] = 'DUMMY'; // to get all results
 		$sql .= " AND ASIN <> %s";		
 	}
-	if($args['department']){
+	if(isset($args['department'])){
 		$sql .= " AND value = %s";
 	}else{
 		$args['department'] = 'DUMMY'; // to get all results
 		$sql .= " AND ifnull(value,0) <> %s";
 	}
-	if($args['count']){
+	if(isset($args['count']) && $args['count'] == true){
 		$sql .=	" GROUP BY ASIN";
 	}
 	$sql .=	" ORDER BY wanted_item_id desc";
@@ -2140,6 +2143,10 @@ function get_others_wanted_list($args=''){
 		$args['page'] = 0;
 		$sql .=	" LIMIT %d, 100000";		
 	}
+	if(!isset($args['keyword'])){
+		$args['keyword'] = "";
+	}
+
 	$wanted_list = $wpdb->get_results($wpdb->prepare($sql, $args['user_id'], '%' . $args['keyword'] . '%', $args['wanted_item_id'], $args['asin'],  $args['department'], ($args['page'])*10));
 	return $wanted_list;
 }
