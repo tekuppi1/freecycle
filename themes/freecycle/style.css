@@ -3426,7 +3426,7 @@ div.grobal_nav_div ul li a span {
 	padding: 1px 6px;
 }
 
-div.grobal_nav_div ul li#color_todo_list a{
+#header_todo_exist{
 	color: #FF0000;
 	font-style: italic;
 }
