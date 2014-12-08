@@ -1342,6 +1342,11 @@ function on_user_added($user_id){
 			'content' => get_option('newuser_message_content')
 			));
 	}
+	//メールマガジンを受け取る処理もし入れなかったらデフォルトでオンにする
+	$get_mail_magazine = xprofile_get_field_data('メールマガジンを受け取りますか？' ,$user_id);
+	if($get_mail_magazine == ""){
+		xprofile_set_field_data( 'メールマガジンを受け取りますか？',$user_id, '受け取る');
+	}
 }
 
 /**********************************************
