@@ -70,6 +70,7 @@
 			</div>
 		</header><!-- header -->
 		
+		<?php if(is_user_logged_in()) : //ログインしているかどうか判定?>
 		<div class="grobal_nav_div_sp">
 				<nav>
 					<ul class="navi" >
@@ -204,4 +205,5 @@
 		<!--<hr class="line-search"> -->
 		<?php } ?>
 		<div id="container">
+	<?php endif; //ログインしているかどうか判定エンド?>
 

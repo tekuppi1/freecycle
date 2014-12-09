@@ -3411,6 +3411,8 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#08e5ff', en
 ul#menu-footer_menu li a{
 	line-height: 120%;
 }
+
+
 }
 
 /* ヘッダー部分のTODOリスト数 */
@@ -3446,3 +3448,121 @@ div.grobal_nav_div_sp ul li a span {
 #user-exist_todo{
 	color: #FF0000;
 }
+
+
+
+
+/**
+	トップページ
+**/
+
+#top_page{
+	height: 100%;
+}
+
+#header_top{
+	height: 15%;
+	width: 100%;
+	padding-bottom: 2px;
+	background-color: white;
+}
+
+div#header_menu_top{
+	background: #fff;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	top: 0;
+}
+
+#logo_top{
+	width: 50%;
+	height: 30%;
+}
+
+div a#logo_top img{
+	width: 60%;
+	height: 80%;
+	margin: auto;
+	margin-bottom: -30px;
+	margin-top: 15px;
+}
+
+div a img#home_icon{
+	display: none;
+}
+
+div a img#menu_icon{
+	display: none;
+}
+
+div a img#user_icon{
+	width: 50px;
+	height: 55px;
+	float: right;
+	margin: 30px 30px 0 0;
+}
+
+#content_top{
+	height: 100%;
+	margin: 0 0;
+}
+
+#new_entry_background{
+	background: url("images/slide_1.png");
+	display: block;
+	background-position: center;
+	background-size: contain;
+	width: 100%;
+	height: 80%;
+}
+
+#test_top{
+	position: absolute;
+	top: 50%;
+	left: 60%;
+	background-color: white;
+}
+
+/*
+header{	
+	width: 100%;
+	background: white;
+	padding: 10px 0;
+	height: 90px;
+}
+
+div#header_menu{
+	background: #fff;
+	overflow: hidden;
+	width: 100%;
+	height: 90px;
+	position: relative;
+	top: 5px;
+}
+
+
+header a#logo img{
+	width: 60%;
+	height:80px;
+	margin: auto;
+	margin-bottom: -30px;
+	margin-top: 15px;
+}
+
+header a img#home_icon{
+	display: none;
+}
+
+header a img#menu_icon{
+	display: none;
+}
+
+header a img#user_icon{
+	width: 50px;
+	height: 55px;
+	float: right;
+	margin: 30px 30px 0 0;
+}
+*/
