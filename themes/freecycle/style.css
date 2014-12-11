@@ -768,6 +768,7 @@ a#entry_form,a#login_form{
       margin:5px 0;
       vertical-align: middle;
       width: 80%;
+      text-align: center;
 }
 
 a#entry_form{
@@ -1284,7 +1285,7 @@ div.header_img_navi_contents{
 
 }
 
-/*スマホスタイルの終了*/
+/****************************スマホスタイルの終了****************************************************/
 
 
 /*-------------------------------------------------
@@ -3050,19 +3051,17 @@ a#entry_form:hover,a#login_form:hover{
 a#entry_form{
 	font-size: 1.5em;
 	background: #FBA848;
-	padding:45px 7px 45px 8px;
-	
+	padding:15px 7px 15px 8px;
 }
 
 a#login_form{
 	font-size: 1.1em;
-	padding: 10px 7px 10px 8px;
-	margin-bottom: 6px;
+	padding: 15px 7px 15px 8px;
 }
 
 a#detail_texchange{
 	font-size: 0.7em;
-	text-align: right;
+	text-align: left;
 	margin-top: 10px;
 }
 
@@ -3457,51 +3456,34 @@ div.grobal_nav_div_sp ul li a span {
 **/
 
 #top_page{
-	height: 100%;
+	padding: 0 0;
 }
 
-#header_top{
-	height: 15%;
-	width: 100%;
-	padding-bottom: 2px;
-	background-color: white;
-}
 
-div#header_menu_top{
+#header_menu_top{
 	background: #fff;
 	overflow: hidden;
 	width: 100%;
-	height: 100%;
+	height: 55px;
 	position: relative;
 	top: 0;
 }
 
 #logo_top{
 	width: 50%;
-	height: 30%;
+	height: 100%;
 }
 
 div a#logo_top img{
-	width: 60%;
-	height: 80%;
-	margin: auto;
-	margin-bottom: -30px;
-	margin-top: 15px;
-}
-
-div a img#home_icon{
-	display: none;
-}
-
-div a img#menu_icon{
-	display: none;
+	width: 40%;
+	height: 100%;
 }
 
 div a img#user_icon{
 	width: 50px;
 	height: 55px;
 	float: right;
-	margin: 30px 30px 0 0;
+	margin: 30px 3px 0 0;
 }
 
 #content_top{
@@ -3513,16 +3495,77 @@ div a img#user_icon{
 	background: url("images/slide_1.png");
 	display: block;
 	background-position: center;
-	background-size: contain;
+	background-size: cover;
 	width: 100%;
-	height: 80%;
+	height: 523px;
+	
 }
 
-#test_top{
+#black_background{
+	background-color: rgba(0, 0, 0, 0.5);
+	width: 100%;
+	height: 100%;
+}
+
+#home_block{
+	position: relative;
+	left: 15%;
+	top: 25%;
+	/*background-color: white;*/
+	width: 70%;
+	height: 300px;
+
+}
+
+#home_block h1{
+	color: white;
+	padding-bottom: 5px;
+	font-size: 30px;
+}
+#home_message{
+	position: relative;
+	top: 10px;
+	color: white;
+}
+
+#home_login{
+	position: relative;
+	top: 60px;
+	/*background: rgba(255,255,255,0.6);*/
+}
+
+
+@media screen and (min-width: 0px) and (max-width: 480px){
+
+#home_block{
 	position: absolute;
-	top: 50%;
-	left: 60%;
-	background-color: white;
+	left: 8%;
+	top: 20%;
+	/*background-color: white;*/
+	width: 90%;
+	height: 100%;
+}
+
+#home_login{
+	top: 15%;
+}
+
+#header_menu_top{
+	background: #fff;
+	overflow: hidden;
+	width: 100%;
+	height: 70px;
+	position: relative;
+	top: 0;
+}
+
+div a#logo_top img{
+	width: 60%;
+	height: 100%;
+	margin: 12px 0 0 0;
+}
+
+
 }
 
 /*
