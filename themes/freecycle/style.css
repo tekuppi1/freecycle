@@ -756,7 +756,7 @@ div#entry_login_form{
 a#entry_form,a#login_form{
       background:lightblue;
       display:inline-block;
-      padding:3px 7px 2px 8px;
+      padding:9px 7px 9px 7px;
       color:#ffffff;
       text-decoration:none;
       -moz-border-radius:4px;
@@ -765,16 +765,16 @@ a#entry_form,a#login_form{
       border:none;
       position:relative;
       cursor:pointer;
-      margin:5px 0;
       vertical-align: middle;
-      width: 80%;
+      width: 100%;
       text-align: center;
 }
 
 a#entry_form{
 	font-size: 1.5em;
 	background: #FBA848;
-	padding:10px 7px 10px 8px;
+	padding:10px 7px 10px 7px;
+	margin-bottom: 10px;
 	
 }
 
@@ -3042,6 +3042,7 @@ a#entry_form,a#login_form{
       margin:5px 0;
       vertical-align: middle;
       width: 80%;
+      text-align: center;
 }
 
 a#entry_form:hover,a#login_form:hover{
@@ -3479,20 +3480,13 @@ div a#logo_top img{
 	height: 100%;
 }
 
-div a img#user_icon{
-	width: 50px;
-	height: 55px;
-	float: right;
-	margin: 30px 3px 0 0;
-}
-
-#content_top{
+#top_content{
 	height: 100%;
 	margin: 0 0;
 }
 
-#new_entry_background{
-	background: url("images/slide_1.png");
+#top_background{
+	background: url("images/top_bokasi4.jpg");
 	display: block;
 	background-position: center;
 	background-size: cover;
@@ -3501,52 +3495,45 @@ div a img#user_icon{
 	
 }
 
-#black_background{
-	background-color: rgba(0, 0, 0, 0.5);
+#top_black_background{
+	/*background-color: rgba(0, 0, 0, 0.2);*/
 	width: 100%;
 	height: 100%;
 }
 
-#home_block{
-	position: relative;
-	left: 15%;
-	top: 25%;
-	/*background-color: white;*/
-	width: 70%;
-	height: 300px;
 
-}
-
-#home_block h1{
+#top_block h1{
 	color: white;
 	padding-bottom: 5px;
 	font-size: 30px;
 }
-#home_message{
+
+#top_block_message{
 	position: relative;
 	top: 10px;
 	color: white;
 }
 
-#home_login{
+#top_block_login{
 	position: relative;
 	top: 60px;
 	/*background: rgba(255,255,255,0.6);*/
 }
 
 
+/*スマホ表示*/
 @media screen and (min-width: 0px) and (max-width: 480px){
 
-#home_block{
-	position: absolute;
-	left: 8%;
+#top_block{
+	position: relative;
 	top: 20%;
 	/*background-color: white;*/
-	width: 90%;
+	width: 80%;
 	height: 100%;
+	margin: 0 auto;
 }
 
-#home_login{
+#top_block_login{
 	top: 15%;
 }
 
@@ -3565,47 +3552,51 @@ div a#logo_top img{
 	margin: 12px 0 0 0;
 }
 
-
 }
 
-/*
-header{	
+/*タブレット表示*/
+@media screen and (min-width: 481px) and (max-width: 768px){
+
+#top_page{
 	width: 100%;
-	background: white;
-	padding: 10px 0;
-	height: 90px;
+	margin: 0 0;
+	max-width: none;
 }
 
-div#header_menu{
-	background: #fff;
-	overflow: hidden;
-	width: 100%;
-	height: 90px;
+#top_block{
 	position: relative;
-	top: 5px;
+	top: 25%;
+	/*background-color: white;*/
+	width: 70%;
+	height: 300px;
+	margin: 0 auto;
+
 }
 
-
-header a#logo img{
-	width: 60%;
-	height:80px;
-	margin: auto;
-	margin-bottom: -30px;
-	margin-top: 15px;
 }
 
-header a img#home_icon{
-	display: none;
+/*PC表示*/
+@media screen and (min-width: 769px){
+
+#top_page{
+	width: 100%;
+	margin: 0 0;
+	max-width: none;
 }
 
-header a img#menu_icon{
-	display: none;
+div a#logo_top img{
+	width: 30%;
+	height: 100%;
 }
 
-header a img#user_icon{
-	width: 50px;
-	height: 55px;
-	float: right;
-	margin: 30px 30px 0 0;
+#top_block{
+	position: relative;
+	top: 25%;
+	/*background-color: white;*/
+	width: 70%;
+	height: 300px;
+	margin: 0 auto;
+
 }
-*/
+
+}
