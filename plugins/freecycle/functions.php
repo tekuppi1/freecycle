@@ -797,6 +797,7 @@ function exhibit_from_app(){
 
 	if($current_user_id === 0){
 		echo "ログインされていないため出品できません。";
+		die;
 	}
 
 	$insert_id = exhibit(array(
