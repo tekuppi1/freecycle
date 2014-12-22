@@ -30,10 +30,20 @@
 			'tooltipsterStyle-noir',
 			get_stylesheet_directory_uri() . '/js/tooltipster-master/css/themes/tooltipster-noir.css'
 		);	
+		wp_register_script(
+			'sweetalertScript',
+			get_stylesheet_directory_uri() . '/lib/sweetalert-master/lib/sweet-alert.min.js'
+		);
+		wp_register_style(
+			'sweetalertStyle',
+			get_stylesheet_directory_uri() . '/lib/sweetalert-master/lib/sweet-alert.css'
+		);
 		wp_enqueue_script('flexSliderScript');
 		wp_enqueue_style('flexSliderStyle');
 		wp_enqueue_script('tooltipsterScript');
 		wp_enqueue_style('tooltipsterStyle');
+		wp_enqueue_script('sweetalertScript');
+		wp_enqueue_style('sweetalertStyle');
 		?>
 	<script>
 	jQuery(document).ready(function(){

@@ -574,9 +574,6 @@ function cancel_trade_from_exhibitor(){
 		'content' => '以下の商品の取引がキャンセルされました。' .
 						'<a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a>'
 	));
-
-	echo "取引をキャンセルしました。";
-
 	//todoリストstatus="finished"
 	//cancel_todo($post_id);
 
