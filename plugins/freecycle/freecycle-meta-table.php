@@ -16,8 +16,6 @@ class FreecycleMetaTable {
 		$this->fmt_user_giveme = $wpdb->prefix . 'fmt_user_giveme';
 		$this->fmt_wanted_list = $wpdb->prefix . 'fmt_wanted_list';
 		$this->fmt_todo = $wpdb->prefix . 'todo';
-		// activate when plugin is activated
-		register_activation_hook(__FILE__, array($this, 'fmt_activate'));
 	}
 	
 	
@@ -30,12 +28,14 @@ class FreecycleMetaTable {
 			// if versions are different tables are created
 			if( $installed_ver != $fmt_db_version ) {
 				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_giveme_state . "` (
+						`insert_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+						`update_timestamp` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
 						`post_id` bigint(20) unsigned NOT NULL DEFAULT '0',
 						`entry_flg` int(1) unsigned NOT NULL DEFAULT '1',
 						`giveme_flg` int(1) unsigned NOT NULL DEFAULT '0',
 						`confirmed_flg` int(1) unsigned NOT NULL DEFAULT '0',
-						`exhibiter_evaluated_flg` int(1) unsigned NOT NULL DEFAULT '0' COMMENT 'o•iŽÒ•]‰¿Ïƒtƒ‰ƒO',
-						`bidder_evaluated_flg` int(1) unsigned NOT NULL DEFAULT '0' COMMENT '—ŽŽDŽÒ•]‰¿Ïƒtƒ‰ƒO',
+						`exhibiter_evaluated_flg` int(1) unsigned NOT NULL DEFAULT '0',
+						`bidder_evaluated_flg` int(1) unsigned NOT NULL DEFAULT '0',
 						`finished_flg` int(1) unsigned NOT NULL DEFAULT '0',
 						PRIMARY KEY (`post_id`)
 						) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -43,47 +43,22 @@ class FreecycleMetaTable {
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 				dbDelta($sql);
 			
-				$sql = "ALTER TABLE `" . $this->fmt_giveme_state . "` 
-						ADD `insert_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP FIRST,
-						ADD `update_timestamp` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `insert_timestamp`;
-						";
-				$wpdb->query($sql);
-				$sql = "UPDATE `" . $this->fmt_giveme_state ."`
-						SET `insert_timestamp`= CURRENT_TIMESTAMP
-						WHERE `insert_timestamp` = '0000-00-00 00:00:00'";
-				$wpdb->query($sql);
-				$sql = "UPDATE `" . $this->fmt_giveme_state ."`
-						SET `update_timestamp`= CURRENT_TIMESTAMP
-						WHERE `update_timestamp` = '0000-00-00 00:00:00'";
-				$wpdb->query($sql);
-
-
 				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_points . "` (
-						`user_id` bigint(20) unsigned NOT NULL COMMENT 'ƒ†[ƒUID',
-						`got_points` int(8) unsigned NOT NULL DEFAULT '0' COMMENT 'Šl“¾ƒ|ƒCƒ“ƒg',
+						`insert_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+						`update_timestamp` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+						`user_id` bigint(20) unsigned NOT NULL,
+						`got_points` int(8) unsigned NOT NULL DEFAULT '0',
 						`temp_used_points` int(8) unsigned NOT NULL DEFAULT '0',
-						`used_points` int(8) unsigned NOT NULL DEFAULT '0' COMMENT 'Žg—pÏƒ|ƒCƒ“ƒg',
+						`used_points` int(8) unsigned NOT NULL DEFAULT '0',
 						PRIMARY KEY (`user_id`)
 						) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 						";
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 				dbDelta($sql);
 
-				$sql = "ALTER TABLE `" . $this->fmt_points . "` 
-						ADD `insert_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP FIRST,
-						ADD `update_timestamp` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `insert_timestamp`;
-						";
-				$wpdb->query($sql);
-				$sql = "UPDATE `" . $this->fmt_points ."`
-						SET `insert_timestamp`= CURRENT_TIMESTAMP
-						WHERE `insert_timestamp` = '0000-00-00 00:00:00'";
-				$wpdb->query($sql);
-				$sql = "UPDATE `" . $this->fmt_points ."`
-						SET `update_timestamp`= CURRENT_TIMESTAMP
-						WHERE `update_timestamp` = '0000-00-00 00:00:00'";
-				$wpdb->query($sql);
-
 				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_trade_history . "` (
+						`insert_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+						`update_timestamp` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
 						`post_id` bigint(20) unsigned NOT NULL DEFAULT '0',
 						`bidder_id` bigint(20) unsigned NOT NULL DEFAULT '0',
 						`bidder_score` int(1) unsigned NOT NULL DEFAULT '0',
@@ -97,21 +72,9 @@ class FreecycleMetaTable {
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 				dbDelta($sql);
 
-				$sql = "ALTER TABLE `" . $this->fmt_trade_history . "` 
-						ADD `insert_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP FIRST,
-						ADD `update_timestamp` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `insert_timestamp`;
-						";
-				$wpdb->query($sql);
-				$sql = "UPDATE `" . $this->fmt_trade_history ."`
-						SET `insert_timestamp`= CURRENT_TIMESTAMP
-						WHERE `insert_timestamp` = '0000-00-00 00:00:00'";
-				$wpdb->query($sql);
-				$sql = "UPDATE `" . $this->fmt_trade_history ."`
-						SET `update_timestamp`= CURRENT_TIMESTAMP
-						WHERE `update_timestamp` = '0000-00-00 00:00:00'";
-				$wpdb->query($sql);
-
 				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_user_giveme . "` (
+						`insert_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+						`update_timestamp` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
 						`user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
 						`post_id` bigint(20) unsigned NOT NULL DEFAULT '0',
 						`confirmed_flg` int(1) unsigned NOT NULL DEFAULT '0',
@@ -120,20 +83,6 @@ class FreecycleMetaTable {
 						";
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 				dbDelta($sql);
-
-				$sql = "ALTER TABLE `" . $this->fmt_user_giveme . "` 
-						ADD `insert_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP FIRST,
-						ADD `update_timestamp` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' AFTER `insert_timestamp`;
-						";
-				$wpdb->query($sql);
-				$sql = "UPDATE `" . $this->fmt_user_giveme ."`
-						SET `insert_timestamp`= CURRENT_TIMESTAMP
-						WHERE `insert_timestamp` = '0000-00-00 00:00:00'";
-				$wpdb->query($sql);
-				$sql = "UPDATE `" . $this->fmt_user_giveme ."`
-						SET `update_timestamp`= CURRENT_TIMESTAMP
-						WHERE `update_timestamp` = '0000-00-00 00:00:00'";
-				$wpdb->query($sql);
 
 				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_wanted_list . "` (
   						`insert_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -170,3 +119,4 @@ class FreecycleMetaTable {
 }
 
 $exmeta = new FreecycleMetaTable;
+$exmeta->fmt_activate();
