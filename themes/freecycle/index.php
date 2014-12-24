@@ -1,5 +1,4 @@
 <?php
-	var_dump(home_url().'/wp-content/themes/freecycle/top-page.php');
 	if(!is_user_logged_in()){
 		header('Location:' . home_url() . '/wp-content/themes/freecycle/top-page.php');
 	}

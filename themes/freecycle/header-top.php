@@ -7,7 +7,20 @@
 		<title><?php wp_title( '|', true, 'right' ); bloginfo( 'name' ); ?></title>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<link href="<?php echo home_url(); ?>/wp-content/themes/freecycle/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"><?php bp_head(); ?>
-		<link href="<?php echo home_url(); ?>/wp-content/themes/freecycle/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen"><?php bp_head(); ?>
+		<link href="<?php echo home_url(); ?>/wp-content/themes/freecycle/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+		<!-- jQuery library -->
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<!-- bxSlider Javascript file -->
+		<script src="js/jquery.bxslider.min.js"></script>
+		<!-- bxSlider CSS file -->
+		<link href="style/jquery.bxslider.css" rel="stylesheet" />
+		<?php include_once "js/freecycleJS.php" ?>
+		<style type="text/css">
+		.bx-custom-pager{bottom: -50px !important;}
+		.bx-custom-pager .bx-pager-item{width: 33%}
+		.bx-pager-item .active img{opacity: 0.1}
+		</style>
+		<?php bp_head(); ?>
 		<?php wp_head(); ?>
 		<?php include_once "js/freecycleJS.php" ?>
 		<?php

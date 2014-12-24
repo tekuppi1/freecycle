@@ -208,5 +208,18 @@ function todo_dealing(user_ID, item_ID){
 		});
 	}
 
+//トップページのスライドショー表示
+function topSlide(){
+	$('#top_slide').bxSlider({
+		auto:true,
+		pause: 6500,
+		speed: 1000,
+		captions: true,
+		infiniteLoop: false,
+		hideControlOnEnd: true,
+		autoDelay: 3000,
+		controls: true
+	});
+}
 
 </script>
