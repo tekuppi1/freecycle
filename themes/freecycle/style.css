@@ -1283,6 +1283,72 @@ div.header_img_navi_contents{
 	color: #FF0000;
 }
 
+/*トップページ*/
+#header_menu_top{
+	background: #fff;
+	overflow: hidden;
+	width: 100%;
+	height: 70px;
+	position: relative;
+	top: 0;
+}
+
+div a#logo_top img{
+	width: 60%;
+	height: 100%;
+	margin: 12px 0 0 0;
+}
+
+#top_background{
+	background: url("images/top_bokasi4.jpg");
+	display: block;
+	background-position: center;
+	background-size: cover;
+	width: 100%;
+	height: 523px;
+	
+}
+
+#top_block{
+	position: relative;
+	top: 10%;
+	/*background-color: white;*/
+	width: 80%;
+	height: 100%;
+	margin: 0 auto;
+	color: white;
+}
+
+#top_block h1{
+	color: white;
+	font-size: 25px
+}
+
+#top_block_message{
+	position: relative;
+	top: 2%;
+}
+
+#top_block_message p{
+	color: white;
+	font-size: 15px;
+}
+
+#top_block_login{
+	top: 10%;
+}
+
+.bx-caption span{
+	font-size: 20px !important;
+	padding: 15px !important;
+}
+
+#top_slide_title{
+	font-size: 20px;
+	background-color: white;
+	padding: 10px;
+}
+
 }
 
 /****************************スマホスタイルの終了****************************************************/
@@ -2329,8 +2395,81 @@ ul#menu-footer_menu li a{
 	color: #FF0000;
 }
 
+/*トップページ*/
+#top_page{
+	padding: 0 0;
+	width: 100%;
+	margin: 0 0;
+	max-width: none;
 }
-/*---------------------------------------スマホここまで！！！------------------------------------------------------------------------------------------------*/
+
+#header_menu_top{
+	background: #fff;
+	overflow: hidden;
+	width: 100%;
+	height: 65px;
+	position: relative;
+	top: 0;
+}
+
+div a#logo_top img{
+	width: 60%;
+	height: 100%;
+	margin: 12px 0 0 0;
+}
+
+#top_background{
+	background: url("images/top_bokasi4.jpg");
+	display: block;
+	background-position: center;
+	background-size: cover;
+	width: 100%;
+	height: 523px;
+	
+}
+
+#top_block{
+	position: relative;
+	top: 15%;
+	/*background-color: white;*/
+	width: 70%;
+	height: 300px;
+	margin: 0 auto;
+	color: white;
+}
+
+#top_block h1{
+	color: white;
+	font-size: 25px
+}
+
+#top_block_message{
+	position: relative;
+	top: 2%;
+}
+
+#top_block_message p{
+	color: white;
+	font-size: 15px;
+}
+
+#top_block_login{
+	top: 10%;
+}
+
+.bx-caption span{
+	font-size: 20px !important;
+	padding: 15px !important;
+}
+
+#top_slide_title{
+	font-size: 20px;
+	background-color: white;
+	padding: 10px;
+}
+
+}
+/*---------------------------------------タブレットここまで！！！------------------------------------------------------------------------------------------------*/
 
 
 
@@ -3413,217 +3552,6 @@ ul#menu-footer_menu li a{
 	line-height: 120%;
 }
 
-
-}
-
-/* ヘッダー部分のTODOリスト数 */
-div.grobal_nav_div ul li a span {
-	background: #1fb3dd;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	color: #fff;
-	display: inline;
-	font-size: 90%;
-	margin-left: 2px;
-	padding: 1px 6px;
-}
-
-#header_todo_exist{
-	color: #FF0000;
-}
-
-
-div.grobal_nav_div_sp ul li a span {
-	background: #1fb3dd;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	color: #fff;
-	display: inline;
-	font-size: 90%;
-	margin-left: 2px;
-	padding: 1px 6px;
-}
-
-#user-exist_todo{
-	color: #FF0000;
-}
-
-
-
-/**
-	トップページ
-**/
-
-#logo_top{
-	width: 50%;
-	height: 100%;
-}
-
-#top_content{
-	margin: 0 0;
-}
-
-#top_black_background{
-	background-color: rgba(0, 0, 0, 0.2);
-	width: 100%;
-	height: 100%;
-}
-
-/*gianismにidを付加*/
-#twi_btn{
-	color: rgb(37,28,130);
-}
-
-/*スマホ表示*/
-@media screen and (min-width: 0px) and (max-width: 480px){
-#header_menu_top{
-	background: #fff;
-	overflow: hidden;
-	width: 100%;
-	height: 70px;
-	position: relative;
-	top: 0;
-}
-
-div a#logo_top img{
-	width: 60%;
-	height: 100%;
-	margin: 12px 0 0 0;
-}
-
-#top_background{
-	background: url("images/top_bokasi4.jpg");
-	display: block;
-	background-position: center;
-	background-size: cover;
-	width: 100%;
-	height: 523px;
-	
-}
-
-#top_block{
-	position: relative;
-	top: 10%;
-	/*background-color: white;*/
-	width: 80%;
-	height: 100%;
-	margin: 0 auto;
-	color: white;
-}
-
-#top_block h1{
-	color: white;
-	font-size: 25px
-}
-
-#top_block_message{
-	position: relative;
-	top: 2%;
-}
-
-#top_block_message p{
-	color: white;
-	font-size: 15px;
-}
-
-#top_block_login{
-	top: 10%;
-}
-
-.bx-caption span{
-	font-size: 20px !important;
-	padding: 15px !important;
-}
-
-#top_slide_title{
-	font-size: 20px;
-	background-color: white;
-	padding: 10px;
-}
-
-}
-
-
-/*タブレット表示*/
-@media screen and (min-width: 481px) and (max-width: 768px){
-#top_page{
-	padding: 0 0;
-	width: 100%;
-	margin: 0 0;
-	max-width: none;
-}
-
-#header_menu_top{
-	background: #fff;
-	overflow: hidden;
-	width: 100%;
-	height: 65px;
-	position: relative;
-	top: 0;
-}
-
-div a#logo_top img{
-	width: 60%;
-	height: 100%;
-	margin: 12px 0 0 0;
-}
-
-#top_background{
-	background: url("images/top_bokasi4.jpg");
-	display: block;
-	background-position: center;
-	background-size: cover;
-	width: 100%;
-	height: 523px;
-	
-}
-
-#top_block{
-	position: relative;
-	top: 15%;
-	/*background-color: white;*/
-	width: 70%;
-	height: 300px;
-	margin: 0 auto;
-	color: white;
-}
-
-#top_block h1{
-	color: white;
-	font-size: 25px
-}
-
-#top_block_message{
-	position: relative;
-	top: 2%;
-}
-
-#top_block_message p{
-	color: white;
-	font-size: 15px;
-}
-
-#top_block_login{
-	top: 10%;
-}
-
-.bx-caption span{
-	font-size: 20px !important;
-	padding: 15px !important;
-}
-
-#top_slide_title{
-	font-size: 20px;
-	background-color: white;
-	padding: 10px;
-}
-
-}
-
-/*PC表示*/
-@media screen and (min-width: 769px){
 #header_menu_top{
 	background: #fff;
 	overflow: hidden;
@@ -3701,4 +3629,65 @@ div a#logo_top img{
 	padding: 20px !important;
 }
 
+}
+/**************PC表示終了********************/
+
+
+/* ヘッダー部分のTODOリスト数 */
+div.grobal_nav_div ul li a span {
+	background: #1fb3dd;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	color: #fff;
+	display: inline;
+	font-size: 90%;
+	margin-left: 2px;
+	padding: 1px 6px;
+}
+
+#header_todo_exist{
+	color: #FF0000;
+}
+
+
+div.grobal_nav_div_sp ul li a span {
+	background: #1fb3dd;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	color: #fff;
+	display: inline;
+	font-size: 90%;
+	margin-left: 2px;
+	padding: 1px 6px;
+}
+
+#user-exist_todo{
+	color: #FF0000;
+}
+
+
+
+/**
+	トップページ
+**/
+#logo_top{
+	width: 50%;
+	height: 100%;
+}
+
+#top_content{
+	margin: 0 0;
+}
+
+#top_black_background{
+	background-color: rgba(0, 0, 0, 0.2);
+	width: 100%;
+	height: 100%;
+}
+
+/*gianismにidを付加*/
+#twi_btn{
+	color: rgb(37,28,130);
 }
