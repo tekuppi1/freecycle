@@ -1,3 +1,8 @@
+<?php
+	if(!is_user_logged_in()){
+		header('Location:' . home_url() . '/top-page.php');
+	}
+?>
 <?php get_header(); ?>
 
 	<div id="content">
@@ -125,11 +130,7 @@
 		}
 		onClickSearchWantedListHome(0);
 		</script>
-
-
 		<?php endif; ?>
-
-	
 
 
 		<?php if(!endsWith(home_url() . '/', $_SERVER['REQUEST_URI'])) : ?>
@@ -188,9 +189,8 @@
 		<?php do_action( 'bp_after_blog_home' ); ?>
 
 		</div><!-- .padder -->
-
 	</div><!-- #content -->
-
+	
 	<?php get_sidebar(); ?>
 
 <?php get_footer(); ?>
