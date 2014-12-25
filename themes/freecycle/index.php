@@ -1,6 +1,6 @@
 <?php
 	if(!is_user_logged_in()){
-		header('Location:' . home_url() . '/wp-content/themes/freecycle/top-page.php');
+		header('Location:' . home_url() . '/top-page.php');
 	}
 ?>
 <?php get_header(); ?>

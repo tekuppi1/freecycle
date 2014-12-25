@@ -11,9 +11,9 @@
 		<!-- jQuery library -->
 		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 		<!-- bxSlider Javascript file -->
-		<script src="js/jquery.bxslider.min.js"></script>
+		<script src="wp-content/themes/freecycle/js/jquery.bxslider.min.js"></script>
 		<!-- bxSlider CSS file -->
-		<link href="style/jquery.bxslider.css" rel="stylesheet" />
+		<link href="wp-content/themes/freecycle/style/jquery.bxslider.css" rel="stylesheet" />
 		<?php include_once "js/freecycleJS.php" ?>
 		<style type="text/css">
 		.bx-custom-pager{bottom: -50px !important;}
@@ -22,7 +22,7 @@
 		</style>
 		<?php bp_head(); ?>
 		<?php wp_head(); ?>
-		<?php include_once "js/freecycleJS.php" ?>
+		<?php include_once "wp-content/themes/freecycle/js/freecycleJS.php" ?>
 		<?php
 		wp_register_script(
 			'flexSliderScript',
