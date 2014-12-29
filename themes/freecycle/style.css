@@ -1331,7 +1331,7 @@ div a#logo_top img{
 
 #top_block_message p{
 	color: white;
-	font-size: 15px;
+	font-size: 16px;
 }
 
 #top_block_login{
@@ -1339,8 +1339,8 @@ div a#logo_top img{
 }
 
 .bx-caption span{
-	font-size: 20px !important;
-	padding: 15px !important;
+	font-size: 18px !important;
+	padding: 13px !important;
 }
 
 #top_slide_title{
@@ -3552,6 +3552,7 @@ ul#menu-footer_menu li a{
 	line-height: 120%;
 }
 
+/*****トップページ******/
 #header_menu_top{
 	background: #fff;
 	overflow: hidden;
@@ -3598,7 +3599,7 @@ div a#logo_top img{
 
 #top_block_message{
 	position: relative;
-	top: 20%;
+	top: 10%;
 }
 
 #top_block_message p{
@@ -3690,4 +3691,8 @@ div.grobal_nav_div_sp ul li a span {
 /*gianismにidを付加*/
 #twi_btn{
 	color: rgb(37,28,130);
+}
+
+#top_enhance{
+	color: rgb(255, 255, 90);
 }
