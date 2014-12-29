@@ -1,4 +1,4 @@
-		</div> <!-- #container -->
+	<!-- #container -->
 
 		<?php do_action( 'bp_after_container' ); ?>
 		<?php do_action( 'bp_before_footer'   ); ?>
@@ -25,6 +25,7 @@
 		<?php do_action( 'bp_after_footer' ); ?>
 
 		<?php wp_footer(); ?>
+	<script src="<?php echo home_url(); ?>/wp-content/themes/freecycle/bootstrap/js/bootstrap.min.js"></script> 
 	</body>
 
 </html>
