@@ -170,6 +170,8 @@
 			}
 		});		
 	}
+
+
 </script>
 <div id="item-header-avatar">
 

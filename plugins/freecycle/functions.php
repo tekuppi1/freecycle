@@ -204,7 +204,9 @@ function giveme(){
 	$userID = $_POST['userID'];
 
 	//todoリストに追加
-	add_todo_confirm_bidder($postID);
+	if(!isGiveme($postID)){
+		add_todo_confirm_bidder($postID);
+	}
 
 	//ください済み確認
 	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where user_id = %d and post_id = %d", $userID, $postID));
@@ -288,7 +290,9 @@ function cancelGiveme(){
 	echo "くださいを取消しました。";
 
 	//todoリストstatus="finished"
-	cancel_todo($postID);
+	if($current_giveme == 0){
+		cancel_todo($postID);
+	}
 
 	die;
 }
@@ -362,14 +366,9 @@ function confirmGiveme(){
 
 
 	//todoリストの状態をfinishedにする
-	$uncheckedUserID_count = count($uncheckedUserIDs); //くださいが承認されなかった人数
-	$giveme_count = $uncheckedUserID_count + 1; //くださいした人数
-	do{
 		$todo_row = get_todo_row(get_post_author($postID), $postID);
 		$todoID = $todo_row->todo_id;
 		change_todo_status($todoID, "finished");
-		$giveme_count--;
-	}while($giveme_count);
 
 	//todoリストに追加
 	add_todo_finish_trade($postID);
