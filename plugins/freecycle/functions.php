@@ -342,6 +342,8 @@ function confirmGiveme(){
 		add_temp_used_points($uncheckedUserID, -1);
 	}
 
+	
+
 	// 取引相手に確定されたことを通知
 	$content = 'あなたが以下の商品の取引相手に選ばれました！' . PHP_EOL . ' 【商品名】:<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>' . PHP_EOL;
 	if($message){
@@ -357,10 +359,17 @@ function confirmGiveme(){
 
 	echo "confirm";
 
+
+
 	//todoリストの状態をfinishedにする
-	$todo_row = get_todo_row(get_post_author($postID), $postID);
-	$todoID = $todo_row->todo_id;
-	change_todo_status($todoID, "finished");
+	$uncheckedUserID_count = count($uncheckedUserIDs); //くださいが承認されなかった人数
+	$giveme_count = $uncheckedUserID_count + 1; //くださいした人数
+	do{
+		$todo_row = get_todo_row(get_post_author($postID), $postID);
+		$todoID = $todo_row->todo_id;
+		change_todo_status($todoID, "finished");
+		$giveme_count--;
+	}while($giveme_count);
 
 	//todoリストに追加
 	add_todo_finish_trade($postID);
@@ -2411,7 +2420,6 @@ function cancel_todo($item_ID){
 		change_todo_modified($bidder_todo_ID);
 
 	}else{
-		//debug_log("ないよー");
 		return ;
 	}
 
