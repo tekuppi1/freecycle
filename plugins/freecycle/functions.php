@@ -360,7 +360,7 @@ function confirmGiveme(){
 	//todoリストの状態をfinishedにする
 	$todo_row = get_todo_row(get_post_author($postID), $postID);
 	$todoID = $todo_row->todo_id;
-	change_todo_status($todoID, "finished");
+	change_todo_status_finished($todoID);
 
 	//todoリストに追加
 	add_todo_finish_trade($postID);
@@ -400,7 +400,7 @@ function exhibiter_evaluation(){
 	//todoリストの状態をfinishedにする
 	$todo_row = get_todo_row($userID, $postID);
 	$todoID = $todo_row->todo_id;
-	change_todo_status($todoID, "finished");
+	change_todo_status_finished($todoID);
 	
 	die;
 }
@@ -436,7 +436,7 @@ function bidder_evaluation(){
 	//todoリストの状態をfinishedにする、評価後
 	$todo_row = get_todo_row($userID, $postID);
 	$todoID = $todo_row->todo_id;
-	change_todo_status($todoID, "finished");
+	change_todo_status_finished($todoID);
 
 	
 	die;
@@ -463,7 +463,7 @@ function finish(){
 	//todoリストの状態をfinishedにする-exhibiter
 	$todo_row = get_todo_row($userID, $postID);
 	$todoID = $todo_row->todo_id;
-	change_todo_status($todoID, "finished");
+	change_todo_status_finished($todoID);
 
 
 	//todoリストの状態をfinishedにする-bidder
@@ -473,7 +473,7 @@ function finish(){
 	$bidder_userID = $deal->bidder_id;
 	$todo_row = get_todo_row($bidder_userID, $postID);
 	$todoID = $todo_row->todo_id;
-	change_todo_status($todoID, "finished");
+	change_todo_status_finished($todoID);
 
 	//todoリストに追加
 	add_todo_evaluate_bidder($userID, $postID);
@@ -846,7 +846,7 @@ function do_action_after_message_sent($sent_message){
 			'title'		=> $sent_message->subject,
 			'vibrate'	=> 'true',
 			'sound'		=> 'default',
-			'badge'		=> messages_get_unread_count($recipient->user_id)
+			'badge'		=> messages_get_unread_count($recipient->user_id) + get_todo_list_count($recipient->user_id)
 		));
 	}
 }
@@ -865,8 +865,8 @@ function send_push_notification($recipients, $args){
     $username   = get_option('acs_user_name');
     $password   = get_option('acs_password');
     $channel    = "news_alerts";
-    $alert    	= $args['alert'];
-    $title      = $args['title'];
+    $alert    	= isset($args['alert'])?$args['alert']:'';
+    $title      = isset($args['title'])?$args['title']:'';
     $tmp_fname  = 'cookie.txt';
     $json = '';
 
@@ -904,24 +904,30 @@ function send_push_notification($recipients, $args){
  
     curl_setopt_array($curlObj, $c_opt); 
     $session = curl_exec($curlObj);
-
     /*** THE END ********************************************/
     curl_close($curlObj);
 }
 
 
-function push_unread_message_count(){
+/**
+ * ログインユーザの未読メッセージ件数および未完了next action件数の合計を通知します。メッセージは通知されません。
+ * メッセージを既読にしたときや削除したときなど、メッセージを通知する必要のないときに呼び出してください。
+ * Push notification of the count of unread messages and unfinished actions
+ * of the login user. This sends only the count number, does not include any messages.
+ * This should be called when a message is read or deleted.
+ */
+function push_updated_count(){
 	global $user_ID;
 	$token = get_user_meta($user_ID, 'device_token', true);
 	if($token){
 		send_push_notification($token, array(
-			'badge'		=> messages_get_unread_count()
+			'badge'		=> messages_get_unread_count($user_ID) + get_todo_list_count($user_ID)
 		));
 	}
 }
-add_action('messages_delete_thread', 'push_unread_message_count'); 
-add_action('messages_action_conversation', 'push_unread_message_count');
-add_action('wp_login', 'push_unread_message_count');
+add_action('messages_delete_thread', 'push_updated_count'); 
+add_action('messages_action_conversation', 'push_updated_count');
+add_action('wp_login', 'push_updated_count');
 
 function delete_post(){
 	wp_delete_post($_POST['postID']);
@@ -2369,6 +2375,7 @@ add_action( 'admin_menu', 'add_custom_menu' );
 
 /**
  * wp_todoテーブルに情報を加える関数
+ * todo追加時にアプリにpush通知を送信する
  * statusはデフォルトでunfinishedに設定されている
  * @param {int} $user_ID
  * @param {int} $item_ID 商品のＩＤ
@@ -2385,8 +2392,16 @@ function add_todo($user_ID, $item_ID, $message){
 			VALUES
 			( %d, %d, %s, current_timestamp, current_timestamp)",$user_ID ,$item_ID ,$message));
 
+	$token = get_user_meta($user_ID, 'device_token', true);
+	if($token){
+		send_push_notification($token, array(
+			'alert'		=> 'NextActionが追加されました！',
+			'vibrate'	=> 'true',
+			'sound'		=> 'default',
+			'badge'		=> messages_get_unread_count($user_ID) + get_todo_list_count($user_ID)
+		));
+	}
 	return $wpdb->insert_id;//確認！！TODO
-	
 }
 
 /**
@@ -2401,18 +2416,17 @@ function cancel_todo($item_ID){
 
 	//出品者側
 	$exhibitor_todo_ID = get_todo_row($exhibitor_ID, $item_ID)->todo_id;
-	change_todo_status($exhibitor_todo_ID, "finished");
+	change_todo_status_finished($exhibitor_todo_ID);
 	change_todo_modified($exhibitor_todo_ID);
 
 	//落札者側
 	$bidder_todo_ID = get_todo_row($bidder_ID, $item_ID)->todo_id;
 	if($bidder_todo_ID){
-		change_todo_status($bidder_todo_ID, "finished");
+		change_todo_status_finished($bidder_todo_ID);
 		change_todo_modified($bidder_todo_ID);
 
 	}else{
-		//debug_log("ないよー");
-		return ;
+		return;
 	}
 
 }
@@ -2453,6 +2467,24 @@ function change_todo_status($todo_ID, $status){
 		return ;
 	}
 
+}
+
+/**
+ * 特定のtodo_idを持つ行のstatusをfinishedに変更する
+ * todoが完了状態になった時のためのファサード関数
+ * @param {int} $todo_ID todo_id
+ */
+function change_todo_status_finished($todo_ID){
+	change_todo_status($todo_ID, 'finished');
+
+	// send push notification
+	$user_ID = get_user_id_by_todo_id($todo_ID);
+	$token = get_user_meta($user_ID, 'device_token', true);
+	if($token){
+		send_push_notification($token, array(
+			'badge'		=> messages_get_unread_count($user_ID) + get_todo_list_count($user_ID)
+		));
+	}
 }
 
 /**
@@ -2539,7 +2571,7 @@ function todo_dealing_finished(){
 	$item_ID = $_POST[itemID];
 	
 	$todo_ID = get_todo_row($user_ID, $item_ID)->todo_id;
-	change_todo_status($todo_ID, "finished");
+	change_todo_status_finished($todo_ID);
 
 }
 add_action('wp_ajax_todo_dealing', 'todo_dealing_finished');
@@ -2585,6 +2617,19 @@ function deal_user($item_ID, $userID){
 function get_todo_list_count($user_ID){
 	$todo_list = get_todo_list($user_ID, "unfinished");
 	return count($todo_list);
+}
+
+/**
+ * TODOのIDからユーザIDを検索して返します
+ * @param {int} $todo_ID todoリストID
+ * @return {int} $user_ID ユーザID 
+ */
+function get_user_id_by_todo_id($todo_ID){
+	global $wpdb;
+	global $table_prefix;
+	$sql = "SELECT user_id FROM " . $table_prefix . "todo where todo_id = %d";
+	$user_ID = $wpdb->get_var($wpdb->prepare($sql, $todo_ID));
+	return $user_ID;	
 }
 
 ?>
