@@ -846,7 +846,7 @@ function do_action_after_message_sent($sent_message){
 			'title'		=> $sent_message->subject,
 			'vibrate'	=> 'true',
 			'sound'		=> 'default',
-			'badge'		=> messages_get_unread_count($recipient->user_id)
+			'badge'		=> messages_get_unread_count($recipient->user_id) + get_todo_list_count($recipient->user_id)
 		));
 	}
 }
@@ -904,24 +904,30 @@ function send_push_notification($recipients, $args){
  
     curl_setopt_array($curlObj, $c_opt); 
     $session = curl_exec($curlObj);
-
     /*** THE END ********************************************/
     curl_close($curlObj);
 }
 
 
-function push_unread_message_count(){
+/**
+ * ログインユーザの未読メッセージ件数および未完了next action件数の合計を通知します。メッセージは通知されません。
+ * メッセージを既読にしたときや削除したときなど、メッセージを通知する必要のないときに呼び出してください。
+ * Push notification of the count of unread messages and unfinished actions
+ * of the login user. This sends only the count number, does not include any messages.
+ * This should be called when a message is read or deleted.
+ */
+function push_updated_count(){
 	global $user_ID;
 	$token = get_user_meta($user_ID, 'device_token', true);
 	if($token){
 		send_push_notification($token, array(
-			'badge'		=> messages_get_unread_count()
+			'badge'		=> messages_get_unread_count($user_ID) + get_todo_list_count($user_ID)
 		));
 	}
 }
-add_action('messages_delete_thread', 'push_unread_message_count'); 
-add_action('messages_action_conversation', 'push_unread_message_count');
-add_action('wp_login', 'push_unread_message_count');
+add_action('messages_delete_thread', 'push_updated_count'); 
+add_action('messages_action_conversation', 'push_updated_count');
+add_action('wp_login', 'push_updated_count');
 
 function delete_post(){
 	wp_delete_post($_POST['postID']);
@@ -2369,6 +2375,7 @@ add_action( 'admin_menu', 'add_custom_menu' );
 
 /**
  * wp_todoテーブルに情報を加える関数
+ * todo追加時にアプリにpush通知を送信する
  * statusはデフォルトでunfinishedに設定されている
  * @param {int} $user_ID
  * @param {int} $item_ID 商品のＩＤ
@@ -2419,8 +2426,7 @@ function cancel_todo($item_ID){
 		change_todo_modified($bidder_todo_ID);
 
 	}else{
-		//debug_log("ないよー");
-		return ;
+		return;
 	}
 
 }
