@@ -213,7 +213,7 @@ function topSlide(){
 	$('#top_slide').bxSlider({
 		auto:true,
 		pause: 6500,
-		speed: 1000,
+		speed: 700,
 		captions: true,
 		infiniteLoop: false,
 		hideControlOnEnd: true,
