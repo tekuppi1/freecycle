@@ -341,9 +341,20 @@ function confirmGiveme(){
 	// 取引相手の使用済ポイントをを1p加算
 	add_used_points($userID, 1);
 	
-	// 取引相手以外の仮払ポイントを1p減算
+	
 	foreach($uncheckedUserIDs as $uncheckedUserID){
+		// 取引相手以外の仮払ポイントを1p減算
 		add_temp_used_points($uncheckedUserID, -1);
+
+		//取引相手以外にくださいが承認されなかった旨を通知
+		$content_unchecked = '以下の商品に対するくださいは他のユーザーが承認されました' . PHP_EOL . '【商品名】:<a href="' . get_permalink($postID) . '"> '. get_post($postID)->post_title .'</a>';
+		messages_new_message(array(
+			'sender_id' => bp_loggedin_user_id(),
+			'recipients' => $uncheckedUserID,
+			'subject' => '【自動送信】くださいリクエストが承認されませんでした',
+			'content' => $content_unchecked
+			));
+
 	}
 
 	
@@ -366,9 +377,9 @@ function confirmGiveme(){
 
 
 	//todoリストの状態をfinishedにする
-		$todo_row = get_todo_row(get_post_author($postID), $postID);
-		$todoID = $todo_row->todo_id;
-		change_todo_status($todoID, "finished");
+	$todo_row = get_todo_row(get_post_author($postID), $postID);
+	$todoID = $todo_row->todo_id;
+	change_todo_status($todoID, "finished");
 
 	//todoリストに追加
 	add_todo_finish_trade($postID);
@@ -584,9 +595,6 @@ function cancel_trade_from_exhibitor(){
 	));
 
 	echo "取引をキャンセルしました。";
-
-	//todoリストstatus="finished"
-	//cancel_todo($post_id);
 
 	echo "出品者から取引をキャンセルしました。";
 	die;
