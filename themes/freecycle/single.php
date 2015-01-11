@@ -239,6 +239,43 @@
 			});
 		}
 
+		function onEdit(itemStatus){
+			//表示内容の削除
+			var content = document.getElementById("post-content-edit");
+			while(content.firstChild){
+				content.removeChild(content.firstChild);
+			}
+
+			//編集内容の表示
+			var templete = document.getElementById("edit");
+			var newNode = templete.cloneNode(true);
+			newNode.style.display = '';
+			newNode.id = 'edit_content';
+			content.appendChild(newNode);
+
+			//出品物の状態を保持
+			var displayMap = {
+				"verygood" : 0,
+				"good"     : 1,
+				"bad"      : 2
+			};
+			var targetOption = document.getElementById("eval" + displayMap[itemStatus]);
+			targetOption.setAttribute("selected", "selected");
+		}
+
+		function onFinishEdit(){
+			jQuery.ajax({
+				type : "POST",
+				url: '<?php echo admin_url('admin-ajax.php'); ?>',
+				data: {
+					action : "edit_item"
+				},
+				success : function(msg){
+					location.reload();
+				}
+			});
+		}
+
 	</script>
 	
 	
@@ -255,13 +292,13 @@
 							<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 							
 
-						<div class="author-box">
+						<div class="author-box" >
 						<?php echo get_avatar( get_the_author_meta( 'user_email' ), '50' ); ?>
 						<p><?php printf( _x( 'by %s', 'Post written by...', 'buddypress' ), str_replace( '<a href=', '<a rel="author" href=', bp_core_get_userlink( $post->post_author ) ) ); ?></p>
 						</div>			
 					
 
-					<div class="post-content">
+					<div class="post-content" id="post-content-edit">
 						<h2 class="posttitle"><?php the_title(); ?></h2>	
 								
 							
@@ -314,7 +351,8 @@
 							<!-- when status is giveme -->
 						<a href="<?php echo get_giveme_from_others_url(); ?>">取引相手を確定させてください。</a>
 							<?php }else{ ?>
-									この商品は「ください」待ちです。
+									この商品は「ください」待ちです。<br>
+									<input type="button" id="edit" value="編集" onClick='onEdit("<?php echo $item_status[0]; ?>");'>
 						<?php     } ?>
 						
 						<!-- when login user is not author -->
@@ -418,7 +456,25 @@
 			
 		</div><!-- .padder -->
 	</div><!-- #content -->
-	
+
+	<div id="edit" style="display : none">
+	<form id="edit_form" method="post">
+	<?php if($attachments){
+			foreach($attachments as $attachment){
+				echo wp_get_attachment_image( $attachment->ID, $size);
+			}
+	} ?>
+	<br>
+	<label>商品名</label><br><input type="text" name="item_name" value="<?php echo get_the_title(); ?>" ><br>
+	<label>状態</label><br><select name="item_status" >
+				<option id="eval0" value="verygood"><?php echo get_display_item_status("verygood"); ?></option>
+				<option id="eval1" value="good" ><?php echo get_display_item_status("good"); ?></option>
+				<option id="eval2" value="bad"><?php echo get_display_item_status("bad"); ?></option>
+			</select><br>
+	<label>商品説明</label><br><textarea rows="5" cols="40" name="item_exp" ><?php remove_filter('the_content', 'wpautop'); the_content(); ?></textarea></br>
+	<input type="button" value="編集完了" onClick="onFinishEdit();">
+	</form>
+	</div><!-- hidden_content -->
 
 	<?php get_sidebar(); ?>
 
