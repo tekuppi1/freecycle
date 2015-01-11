@@ -357,8 +357,6 @@ function confirmGiveme(){
 
 	}
 
-	
-
 	// 取引相手に確定されたことを通知
 	$content = 'あなたが以下の商品の取引相手に選ばれました！' . PHP_EOL . ' 【商品名】:<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>' . PHP_EOL;
 	if($message){
@@ -373,8 +371,6 @@ function confirmGiveme(){
 					));
 
 	echo "confirm";
-
-
 
 	//todoリストの状態をfinishedにする
 	$todo_row = get_todo_row(get_post_author($postID), $postID);
