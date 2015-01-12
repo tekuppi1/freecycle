@@ -1,6 +1,6 @@
 <div class="wrap">
     <h2>テクスチェンジ設定</h2>
-    <form method="post" action="options.php">
+    <form method="post">
     <?php wp_nonce_field('update-options'); ?>
     <h2 class='nav-tab-wrapper'>
  	<a class="nav-tab<?php if(!isset($_REQUEST['view'])) echo ' nav-tab-active'; ?>" href="<?php echo admin_url('options-general.php?page=texchange');?>">
@@ -9,10 +9,10 @@
 	<?php
 		foreach(array(
 			'point-setting' => 'ポイント',
-			'external-serveces' => '外部連携',
-			'application' => 'アプリ',
-			'mail-magazine' => 'メールマガジン',			
-			'message' => 'メッセージ',
+			'external-serveces-setting' => '外部連携',
+			'application-setting' => 'アプリ',
+			'mail-magazine-setting' => 'メールマガジン',
+			'message-setting' => 'メッセージ',
 		) as $key => $val):
 	?>
 	<a class="nav-tab<?php if(isset($_REQUEST['view']) && $_REQUEST['view'] == $key) echo ' nav-tab-active'; ?>" href="<?php echo admin_url('options-general.php?page=texchange&view='.$key);?>">
@@ -21,6 +21,14 @@
 	<?php endforeach; ?>
 	</h2>
 	<?php
+	// update option values
+	if(isset($_POST['page_options'])){
+		$options = explode(",", str_replace(' ', '', $_POST['page_options']));
+		foreach ($options as $option) {
+			update_option(trim($option), $_POST[trim($option)]);
+		}
+	}
+
 	$view = isset($_REQUEST['view']) ? (string)$_REQUEST['view'] : '';
 	switch($view):
 		case 'setting':
@@ -29,16 +37,16 @@
 		case 'point-setting':
 			require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'point-setting.php';
 			break;
-		case 'external-serveces':
+		case 'external-serveces-setting':
 			require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'external-serveces-setting.php';
 			break;
-		case 'application':
+		case 'application-setting':
 			require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'application-setting.php';
 			break;
-		case 'mail-magazine':
+		case 'mail-magazine-setting':
 		    require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'mail-magazine-setting.php';
 		    break;
-		case 'message':
+		case 'message-setting':
 		    require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'message-setting.php';
 		    break;
 		default:
