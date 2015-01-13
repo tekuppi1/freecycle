@@ -2632,4 +2632,22 @@ function get_user_id_by_todo_id($todo_ID){
 	return $user_ID;	
 }
 
+/**
+ * 商品の編集を反映させる関数
+ */
+function edit_item(){
+	global $wpdb;
+	global $table_prefix;
+	$item_edit = array();
+	$item_edit["ID"] = $_POST['itemID'];
+	$item_edit["post_title"] = $_POST['item_name'];
+	$item_edit["post_content"] = $_POST['item_content'];
+	$item_edit["item_status"] = $_POST['item_status'];
+
+	wp_update_post($item_edit);
+	update_post_meta($item_edit["ID"], 'item_status', $item_edit["item_status"]);
+
+}
+add_action('wp_ajax_edit_item', 'edit_item');
+
 ?>

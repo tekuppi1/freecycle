@@ -170,8 +170,8 @@
 		function onCancelTradeFromExhibitor(){
 			// 確認ダイアログを表示
 			if(confirm('現在の相手との取引をキャンセルします。よろしいですか？')){
-			　　　　jQuery.ajax({
-				　　　type: "POST",
+				jQuery.ajax({
+					type: "POST",
 					url: '<?php echo admin_url('admin-ajax.php'); ?>',
 					data: {
 						"action": "cancel_trade_from_exhibitor",
@@ -181,7 +181,7 @@
 						jQuery('<a href="javaScript:onDeletePost();">出品取り消し</a>').replaceAll(jQuery("#cancelTradeFromExhibitor"));
 						alert(msg);						
 					}
-				});　　
+				});
 			}
 			// OKが押されたら取り消し処理(Ajax)を動かす。	
 		}
@@ -189,8 +189,8 @@
 		function onCancelTradeFromBidder(){
 			// 確認ダイアログを表示
 			if(confirm('取引をキャンセルします。よろしいですか？')){
-			　　　　jQuery.ajax({
-				　　　　type: "POST",
+				jQuery.ajax({
+					type: "POST",
 					url: '<?php echo admin_url('admin-ajax.php'); ?>',
 					data: {
 						"action": "cancel_trade_from_bidder",
@@ -200,7 +200,7 @@
 						alert(msg);	
                         location.href = "<?php echo home_url(); ?>";					
 					}
-				});　　
+				});
 			}
 			// OKが押されたら取り消し処理(Ajax)を動かす。	
 		}
@@ -264,12 +264,17 @@
 		}
 
 		function onFinishEdit(){
+			var form = jQuery("#edit_form")[0];
+			var fd = new FormData(form);
+			fd.append("action", "edit_item");
+			fd.append("itemID", "<?php echo $post->ID; ?>")
 			jQuery.ajax({
 				type : "POST",
-				url: '<?php echo admin_url('admin-ajax.php'); ?>',
-				data: {
-					action : "edit_item"
-				},
+				url: "<?php echo admin_url('admin-ajax.php'); ?>",
+				processData: false,
+				contentType: false,
+				mimeType: "multipart/form-data",
+				data: fd,
 				success : function(msg){
 					location.reload();
 				}
@@ -287,7 +292,7 @@
 
 					<div class="page" id="blog-single" role="main">
 
-					　<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+						<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 							<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 							
@@ -458,7 +463,7 @@
 	</div><!-- #content -->
 
 	<div id="edit" style="display : none">
-	<form id="edit_form" method="post">
+	<form id="edit_form" method="post" enctype="multipart/form-data">
 	<?php if($attachments){
 			foreach($attachments as $attachment){
 				echo wp_get_attachment_image( $attachment->ID, $size);
@@ -471,7 +476,7 @@
 				<option id="eval1" value="good" ><?php echo get_display_item_status("good"); ?></option>
 				<option id="eval2" value="bad"><?php echo get_display_item_status("bad"); ?></option>
 			</select><br>
-	<label>商品説明</label><br><textarea rows="5" cols="40" name="item_exp" ><?php remove_filter('the_content', 'wpautop'); the_content(); ?></textarea></br>
+	<label>商品説明</label><br><textarea rows="5" cols="40" name="item_content" ><?php remove_filter('the_content', 'wpautop'); the_content(); ?></textarea></br>
 	<input type="button" value="編集完了" onClick="onFinishEdit();">
 	</form>
 	</div><!-- hidden_content -->
