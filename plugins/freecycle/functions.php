@@ -204,7 +204,9 @@ function giveme(){
 	$userID = $_POST['userID'];
 
 	//todoリストに追加
-	add_todo_confirm_bidder($postID);
+	if(!isGiveme($postID)){
+		add_todo_confirm_bidder($postID);
+	}
 
 	//ください済み確認
 	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where user_id = %d and post_id = %d", $userID, $postID));
@@ -288,7 +290,9 @@ function cancelGiveme(){
 	echo "くださいを取消しました。";
 
 	//todoリストstatus="finished"
-	cancel_todo($postID);
+	if($current_giveme == 0){
+		cancel_todo($postID);
+	}
 
 	die;
 }
@@ -337,9 +341,20 @@ function confirmGiveme(){
 	// 取引相手の使用済ポイントをを1p加算
 	add_used_points($userID, 1);
 	
-	// 取引相手以外の仮払ポイントを1p減算
+	
 	foreach($uncheckedUserIDs as $uncheckedUserID){
+		// 取引相手以外の仮払ポイントを1p減算
 		add_temp_used_points($uncheckedUserID, -1);
+
+		//取引相手以外にくださいが承認されなかった旨を通知
+		$content_unchecked = '以下の商品に対するくださいは他のユーザーが承認されました' . PHP_EOL . '【商品名】:<a href="' . get_permalink($postID) . '"> '. get_post($postID)->post_title .'</a>';
+		messages_new_message(array(
+			'sender_id' => bp_loggedin_user_id(),
+			'recipients' => $uncheckedUserID,
+			'subject' => '【自動送信】くださいリクエストが承認されませんでした',
+			'content' => $content_unchecked
+			));
+
 	}
 
 	// 取引相手に確定されたことを通知
@@ -576,9 +591,6 @@ function cancel_trade_from_exhibitor(){
 	));
 
 	echo "取引をキャンセルしました。";
-
-	//todoリストstatus="finished"
-	//cancel_todo($post_id);
 
 	echo "出品者から取引をキャンセルしました。";
 	die;
@@ -2649,5 +2661,3 @@ function edit_item(){
 
 }
 add_action('wp_ajax_edit_item', 'edit_item');
-
-?>

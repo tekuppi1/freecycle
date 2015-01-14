@@ -1,6 +1,6 @@
 <script>
 	
-	onClickSearchWantedList(0,"<?php echo (urldecode($_GET['item_name'])) ?>");
+	onClickSearchWantedList(0,"<?php echo isset($_GET['item_name'])?urldecode($_GET['item_name']):'' ?>");
 		
 		
 	//Enter押下時読み込まれる関数
