@@ -9,6 +9,7 @@
 ?>
 
 <?php do_action( 'bp_before_member_header' ); ?>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCmhfQEie0qbsIR-F2xNVxzpV8IxzrwDBE&sensor=false"></script>
 <script type="text/javascript">
 
 	function callOnConfirmGiveme(postID){
@@ -170,6 +171,47 @@
 			}
 		});		
 	}
+
+	function showMap(map, location){
+		var mapOptions = {
+	    	zoom: 17,
+	    	center: location,
+	    	mapTypeId: google.maps.MapTypeId.ROADMAP
+  		}
+		var newMap = new google.maps.Map(map, mapOptions);
+		var marker = new google.maps.Marker({
+			map: newMap,
+			position: location,
+			draggable: true
+		});
+		google.maps.event.addListener(marker, 'dragend', function(ev){
+			// イベントの引数evの、プロパティ.latLngが緯度経度。
+			console.log(ev.latLng.lat());
+			console.log(ev.latLng.lng());
+		});
+	}
+
+	function initializeMap(){
+		var maps = document.getElementsByName("map-canvas");
+		var geocoder;
+		var location;
+		if(maps){
+			var uni = "<?php global $current_user; echo xprofile_get_field_data("大学", $current_user->get('ID')); ?>";
+			if(uni){
+				geocoder = new google.maps.Geocoder();
+				geocoder.geocode({'address': uni}, function(results, status){
+				if(status == google.maps.GeocoderStatus.OK){
+        			location = results[0].geometry.location;
+   					for (var i = maps.length-1; i >= 0; i--) {
+						showMap(maps[i], location);
+					}
+  				}else{
+        			console.log("Geocode was not successful for the following reason: " + status);
+      			}});
+			}
+  		}
+	}
+	google.maps.event.addDomListener(window, "load", initializeMap);
 
 	//ページスクロール
 	var url = location.href;

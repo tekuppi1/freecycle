@@ -23,8 +23,11 @@ Tags: buddypress
 		border:solid 3px #999;
 		text-align:center;
 		padding: 5px;
-}
+	}
 
+	div[name="map-canvas"]{
+		height: 300px;
+	}
 }
 
 @media screen and (min-width: 0px) and (max-width: 480px) {

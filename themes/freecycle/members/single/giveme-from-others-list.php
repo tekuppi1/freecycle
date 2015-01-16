@@ -1,4 +1,10 @@
 <?php
+function echo_map_section($last_post_id){
+echo <<<MAP_SECTION
+	<p>取引場所:</p>
+	<div id="map_canvas_$last_post_id" name="map-canvas"></div>
+MAP_SECTION;
+}
 function echo_message_section($last_post_id){
 	$uri = get_stylesheet_directory_uri();
 	echo <<<MESSAGE_SECTION
@@ -24,7 +30,9 @@ MESSAGE_SECTION;
 			if($last_post_id != $giveme->post_id){
 				if($last_post_id != ""){
 	?>
-	<?php	
+
+	<?php
+	echo_map_section($last_post_id);
 	echo_message_section($last_post_id);	
 	?>
 				<hr>
@@ -57,8 +65,9 @@ MESSAGE_SECTION;
 		}
 		?>
 		<?php if($last_post_id != ""){ ?>
-	<?php	
-	echo_message_section($last_post_id);	
+	<?php
+	echo_map_section($last_post_id);
+	echo_message_section($last_post_id);
 	?>			
 		<hr>
 		<?php } ?>
