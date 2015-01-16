@@ -2645,19 +2645,52 @@ function get_user_id_by_todo_id($todo_ID){
 }
 
 /**
- * 商品の編集を反映させる関数
+ * ajaxにて商品編集情報を受け取る関数
  */
-function edit_item(){
-	global $wpdb;
-	global $table_prefix;
-	$item_edit = array();
-	$item_edit["ID"] = $_POST['itemID'];
-	$item_edit["post_title"] = $_POST['item_name'];
-	$item_edit["post_content"] = $_POST['item_content'];
-	$item_edit["item_status"] = $_POST['item_status'];
+function ajax_edit_item(){
+	$itemID = isset($_POST['itemID'])?$_POST['itemID']:"";
+	$item_title = isset($_POST['item_title'])?$_POST['item_title']:"";
+	$item_content = isset($_POST['item_content'])?$_POST['item_content']:"";
+	$item_status = isset($_POST['item_status'])?$_POST['item_status']:"";
+	$userID = isset($_POST['userID'])?$_POST['userID']:"";
+
+	if(confirm_editer($itemID, $userID)){
+		edit_item($itemID, $item_title, $item_content, $item_status);
+	}
+	
+}
+add_action('wp_ajax_edit_item', 'ajax_edit_item');
+
+/**
+ * 商品の編集を実行する関数
+ * @param {int} $itemID 商品ID
+ * @param {string} $item_title 商品名
+ * @param {string} $item_content 商品説明
+ * @param {string} $item_status 商品の状態('verygood','good','bad')
+ */
+function edit_item($itemID, $item_title, $item_content, $item_status){
+	$item_edit = array(
+		"ID" => $itemID,
+		"post_title" => $item_title,
+		"post_content" => $item_content,
+		);
 
 	wp_update_post($item_edit);
-	update_post_meta($item_edit["ID"], 'item_status', $item_edit["item_status"]);
+	update_post_meta($item_edit["ID"], 'item_status', $item_status);
 
 }
-add_action('wp_ajax_edit_item', 'edit_item');
+
+/**
+ * 商品の出品者かどうか確かめる関数
+ * @param {int} $itemID 商品ID
+ * @param {string} $item_title 商品名
+ * @return {boolean} 出品者だった場合true,違った場合false 
+ */
+function confirm_editer($itemID, $userID){
+	$item = get_post($itemID);
+	if($item){
+		return ($item->post_author == $userID)?true:false;
+	}
+
+	return false;
+}

@@ -263,15 +263,6 @@
 			targetOption.setAttribute("selected", "selected");
 		}
 
-		function editConfirm(){
-			var confirmtext = "商品情報を以下の内容に変更してよろしいですか？\n";
-				confirmtext += "商品名 :" + jQuery('input[name=item_name]').val() + "\n";
-				confirmtext += "状態 :" + getDisplayItemStatus(jQuery('select[name=item_status]').val()) + "\n";
-				confirmtext += "商品説明 :" + jQuery('textarea[name=item_content]').val() + "\n"; 
-
-			return confirm(confirmtext);
-		}
-
 		function getDisplayItemStatus(status){
 			var displayStatus = {
 				"verygood" : "良",
@@ -282,26 +273,20 @@
 		}
 
 		function onUpdateEdit(){
-			if(editConfirm()){
-				var form = jQuery("#edit_form")[0];
-				var fd = new FormData(form);
-				fd.append("action", "edit_item");
-				fd.append("itemID", "<?php echo $post->ID; ?>");
-				jQuery.ajax({
-					type : "POST",
-					url: "<?php echo admin_url('admin-ajax.php'); ?>",
-					processData: false,
-					contentType: false,
-					mimeType: "multipart/form-data",
-					data: fd,
-					success : function(msg){
-						location.reload();
-					}
-				});
-			}else{
-				alert("変更をキャンセルしました!!");
-				location.reload();
-			}
+			var form = jQuery("#edit_form")[0];
+			var fd = new FormData(form);
+			fd.append("action", "edit_item");
+			jQuery.ajax({
+				type : "POST",
+				url: "<?php echo admin_url('admin-ajax.php'); ?>",
+				processData: false,
+				contentType: false,
+				mimeType: "multipart/form-data",
+				data: fd,
+				success : function(msg){
+					location.reload();
+				}
+			});
 		}
 
 	</script>
@@ -493,13 +478,15 @@
 			}
 	} ?>
 	<br>
-	<label>商品名</label><br><input type="text" name="item_name" value="<?php echo get_the_title(); ?>" ><br>
+	<label>商品名</label><br><input type="text" name="item_title" value="<?php echo get_the_title(); ?>" ><br>
 	<label>状態</label><br><select name="item_status" >
 				<option id="eval0" value="verygood"><?php echo get_display_item_status("verygood"); ?></option>
 				<option id="eval1" value="good" ><?php echo get_display_item_status("good"); ?></option>
 				<option id="eval2" value="bad"><?php echo get_display_item_status("bad"); ?></option>
 			</select><br>
 	<label>商品説明</label><br><textarea rows="5" cols="40" name="item_content" ><?php remove_filter('the_content', 'wpautop'); the_content(); ?></textarea></br>
+	<input type="hidden" name="userID" value="<?php echo $user_ID;?>">
+	<input type="hidden" name="itemID" value="<?php echo $post->ID; ?>">
 	<input type="button" value="編集完了" onClick="onUpdateEdit();">
 	</form>
 	</div><!-- hidden_content -->
