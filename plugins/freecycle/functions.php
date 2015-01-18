@@ -26,6 +26,10 @@ add_action('wp_ajax_cancel_trade_from_bidder', 'cancel_trade_from_bidder');
 add_action('user_register', 'on_user_added');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 
+// ファイル読み込み
+require_once('categories/freecycle-categories.php');
+
+
 //写真を自動で回転して縦にする
 function edit_images_before_upload($file)
 {
@@ -698,7 +702,7 @@ function new_entry(){
 		'exhibitor_id' => $exhibitor_id,
 		'item_name' => $_POST['field_1'],
 		'item_description' => $_POST['field_2'],
-		'item_category' => $_POST['field_3'],
+		'item_category' => isset($_POST['subcategory'])?$_POST['subcategory']:"1",
 		'tags' => $_POST['field_4']
 	));
 
@@ -708,6 +712,7 @@ function new_entry(){
 		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
 		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$exhibitor_id), true);
 		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$exhibitor_id), true);
+
 		if($_POST['wanted_item_id']){
 			add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);			
 		}

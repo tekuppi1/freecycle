@@ -1,5 +1,5 @@
 <!-- <form action="" method="post" enctype="multipart/form-data" id="newentry"> -->
-<form action="new_entry" method="post" enctype="multipart/form-data" id="newentry">
+<form action="new_entry" method="post" enctype="multipart/form-data" id="newentry" name="newentry">
 
 <!-- item name -->
 <label for="field_1">商品名(必須)</label></br>
@@ -9,7 +9,27 @@
 <label for="field_2">商品説明(必須)</label></br>
 <textarea rows="5" cols="40" name="field_2" id="field_2"></textarea></br>
 
-
+<!-- category -->
+<label for="main_category">カテゴリ</label></br>
+<select name="main_category" onChange="onChangeMainCategory()">
+<option value="">-- 親カテゴリ --</option>
+<?php
+	$main_categories = get_categories(array(
+		"parent" => 0,
+		"hide_empty" => 0,
+		"exclude" => 1 //'uncategorized'
+	));
+	foreach ($main_categories as $category) {
+		$value = $category->term_id;
+		$name = $category->name;
+		echo "<option value='$value'>$name</option>";
+	}
+?>
+</select>
+<select name="subcategory">
+<option value="">-- 子カテゴリ --</option>
+</select>
+</br>
 <!-- status -->
 <label for="item_status">状態</label></br>
 <select name="item_status">
