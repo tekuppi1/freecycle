@@ -50,7 +50,7 @@ function edit_images_before_upload($file)
 	return $file;
 }
 add_action('wp_handle_upload','edit_images_before_upload');
-	
+
 function redirect_to_home(){
 	$redirect_url = get_option('home');
 	header("Location: ".$redirect_url);
@@ -70,7 +70,7 @@ function redirect_to_404(){
 
 
 function custom_init(){
-	add_action('comment_post', 'on_comment_post');	
+	add_action('comment_post', 'on_comment_post');
 }
 
 // コメント投稿時にメッセージを飛ばす
@@ -104,7 +104,7 @@ function add_custom_where($where){
 	global $wpdb;
 	global $table_prefix;
 
-	// 検索結果に固定ページを含めない	
+	// 検索結果に固定ページを含めない
 	if(is_search()) {
 		$where .= "AND post_type = 'post' ";
 	}
@@ -214,7 +214,7 @@ function giveme(){
 		echo "既にくださいリクエスト済みです。";
 		die;
 	}
-	
+
 	// 記事の状態を「ください」に変更(現在の状態が無い場合はレコードを登録)
 	$current_state = $wpdb->get_var($wpdb->prepare("SELECT giveme_flg FROM " . $table_prefix . "fmt_giveme_state where post_id = %d", $postID));
 	if(!is_null($current_state)){
@@ -231,7 +231,7 @@ function giveme(){
 			VALUES (current_timestamp, %d, 1)",
 			$postID));
 	}
-	
+
 	// ログインユーザ→投稿記事に対して「ください」リクエストした記録をつける
 	// 既にデータが登録済の場合は何もしません
 	if($current_giveme == 0){
@@ -241,13 +241,13 @@ function giveme(){
 			VALUES (current_timestamp, %d, %d)",
 			$userID, $postID));
 	}
-	
+
 	// 仮払ポイントを1p増
 	add_temp_used_points($userID, 1);
-	
+
 	echo "くださいリクエストが送信されました。";
 
-	
+
 	die;
 }
 
@@ -274,7 +274,7 @@ function cancelGiveme(){
 		where user_id = %d
 		and post_id = %d",
 		$userID, $postID));
-	
+
 	// 「ください」件数が0になった場合はgiveme状態をオフにする
 	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where post_id = %d", $postID));
 	if($current_giveme == 0){
@@ -284,7 +284,7 @@ function cancelGiveme(){
 		WHERE post_id = %d",
 		$postID));
 	}
-	
+
 	// 仮払ポイントを1p減算
 	add_temp_used_points($userID, -1);
 	echo "くださいを取消しました。";
@@ -319,7 +319,7 @@ function confirmGiveme(){
 		confirmed_flg = 1
 		WHERE post_id = %d",
 		$postID));
-	
+
 	// ユーザ確定情報の登録
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_user_giveme
@@ -340,8 +340,8 @@ function confirmGiveme(){
 	add_temp_used_points($userID, -1);
 	// 取引相手の使用済ポイントをを1p加算
 	add_used_points($userID, 1);
-	
-	
+
+
 	foreach($uncheckedUserIDs as $uncheckedUserID){
 		// 取引相手以外の仮払ポイントを1p減算
 		add_temp_used_points($uncheckedUserID, -1);
@@ -402,7 +402,7 @@ function exhibiter_evaluation(){
 		exhibiter_evaluated_flg = 1
 		WHERE post_id = %d",
 		$postID));
-	
+
 	// 取引履歴を更新
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_trade_history
@@ -416,7 +416,7 @@ function exhibiter_evaluation(){
 	$todo_row = get_todo_row($userID, $postID);
 	$todoID = $todo_row->todo_id;
 	change_todo_status_finished($todoID);
-	
+
 	die;
 }
 
@@ -453,7 +453,7 @@ function bidder_evaluation(){
 	$todoID = $todo_row->todo_id;
 	change_todo_status_finished($todoID);
 
-	
+
 	die;
 }
 
@@ -466,7 +466,7 @@ function finish(){
 	global $table_prefix;
 	$postID = $_POST['postID'];
 	$userID = $_POST['userID'];
-	
+
 	// 記事の状態を取引完了済に変更
 	$wpdb->query($wpdb->prepare("
 		UPDATE " . $table_prefix . "fmt_giveme_state
@@ -482,7 +482,7 @@ function finish(){
 
 
 	//todoリストの状態をfinishedにする-bidder
-	$deal = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."fmt_trade_history 
+	$deal = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."fmt_trade_history
 		   	WHERE post_id=%d",
 		   	$postID));
 	$bidder_userID = $deal->bidder_id;
@@ -494,7 +494,7 @@ function finish(){
 	add_todo_evaluate_bidder($userID, $postID);
 	add_todo_evaluate_exhibitor($postID);
 
-	
+
 
 	die;
 }
@@ -507,7 +507,7 @@ function set_giveme_flg($post_id, $val){
 		SET update_timestamp = current_timestamp,
 		giveme_flg = %d
 		WHERE post_id = %d",
-		$val, $post_id));	
+		$val, $post_id));
 }
 
 function set_confirmed_flg($post_id, $user_id, $val){
@@ -606,7 +606,7 @@ function cancel_trade_from_bidder(){
 		'content' => '以下の商品の取引がキャンセルされました。' .
 						'<a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a>'
 	));
-	
+
 	echo "落札者から取引をキャンセルしました。";
 
 	//todoリストstatus="finished"
@@ -615,9 +615,9 @@ function cancel_trade_from_bidder(){
 	die;
 }
 
-function insert_attachment($file_handler,$post_id,$setthumb='false'){  
+function insert_attachment($file_handler,$post_id,$setthumb='false'){
 	if ($_FILES[$file_handler]['error'] !== UPLOAD_ERR_OK) __return_false();
-	
+
 	require_once(ABSPATH . "wp-admin" . '/includes/image.php');
 	require_once(ABSPATH . "wp-admin" . '/includes/file.php');
 	require_once(ABSPATH . "wp-admin" . '/includes/media.php');
@@ -709,36 +709,38 @@ function new_entry(){
 		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$exhibitor_id), true);
 		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$exhibitor_id), true);
 		if($_POST['wanted_item_id']){
-			add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);			
+			add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);
 		}
 
 		// image upload
 		global $post;
-		if($_FILES){
-			$files = $_FILES['upload_attachment'];
-			// reverse sort
-			arsort($files['name'],SORT_NUMERIC);
-			arsort($files['type'],SORT_NUMERIC);
-			arsort($files['tmp_name'],SORT_NUMERIC);
-			arsort($files['error'],SORT_NUMERIC);
-			arsort($files['size'],SORT_NUMERIC);
+		upload_itempictures($insert_id);
 
-			foreach ($files['name'] as $key => $value){
-				if ($files['name'][$key]){
-					$file = array(
-						'name'     => validate_filename($files['name'][$key]),
-						'type'     => $files['type'][$key],
-						'tmp_name' => $files['tmp_name'][$key],
-						'error'    => $files['error'][$key],
-						'size'     => $files['size'][$key]
-					);  
-					$_FILES = array("upload_attachment" => $file);
-					foreach ($_FILES as $file => $array){
-						$newupload = insert_attachment($file,$insert_id);
-					}
-				}
-			}
-		}
+		// if($_FILES){
+		// 	$files = $_FILES['upload_attachment'];
+		// 	// reverse sort
+		// 	arsort($files['name'],SORT_NUMERIC);
+		// 	arsort($files['type'],SORT_NUMERIC);
+		// 	arsort($files['tmp_name'],SORT_NUMERIC);
+		// 	arsort($files['error'],SORT_NUMERIC);
+		// 	arsort($files['size'],SORT_NUMERIC);
+		//
+		// 	foreach ($files['name'] as $key => $value){
+		// 		if ($files['name'][$key]){
+		// 			$file = array(
+		// 				'name'     => validate_filename($files['name'][$key]),
+		// 				'type'     => $files['type'][$key],
+		// 				'tmp_name' => $files['tmp_name'][$key],
+		// 				'error'    => $files['error'][$key],
+		// 				'size'     => $files['size'][$key]
+		// 			);
+		// 			$_FILES = array("upload_attachment" => $file);
+		// 			foreach ($_FILES as $file => $array){
+		// 				$newupload = insert_attachment($file,$insert_id);
+		// 			}
+		// 		}
+		// 	}
+		// }
 	}else{
 	// failure
 	}
@@ -796,7 +798,7 @@ function exhibit_to_wanted(){
 
 /**
  * exhibition method called from app.
- * 
+ *
  */
 function exhibit_from_app(){
 	// $exhibitor = get_user_by('login', $_POST['exhibitor_id']);
@@ -866,10 +868,10 @@ function do_action_after_message_sent($sent_message){
 /**
  * send push notification.<br/>
  * Valid parameters should be refered at Titanium documents.
- * 
+ *
  * @param {String} recipients comma separated device tokens
  * @param {array} parameters
- * 
+ *
  */
 function send_push_notification($recipients, $args){
 	/*** SETUP ***************************************************/
@@ -891,30 +893,30 @@ function send_push_notification($recipients, $args){
     $json = '{' . $json . '}';
 
     /*** PUSH NOTIFICATION ***********************************/
- 
+
     $post_array = array('login' => $username, 'password' => $password);
- 
+
     /*** INIT CURL ******************************************/
     $curlObj    = curl_init();
     curl_setopt($curlObj, CURLOPT_SSL_VERIFYPEER, false);
     $c_opt      = array(CURLOPT_URL => 'https://api.cloud.appcelerator.com/v1/users/login.json?key='.$key,
-                        CURLOPT_COOKIEJAR => $tmp_fname, 
-                        CURLOPT_COOKIEFILE => $tmp_fname, 
-                        CURLOPT_RETURNTRANSFER => true, 
+                        CURLOPT_COOKIEJAR => $tmp_fname,
+                        CURLOPT_COOKIEFILE => $tmp_fname,
+                        CURLOPT_RETURNTRANSFER => true,
                         CURLOPT_POST => 1,
                         CURLOPT_POSTFIELDS  =>  "login=".$username."&password=".$password,
                         CURLOPT_FOLLOWLOCATION  =>  1,
                         CURLOPT_TIMEOUT => 60);
- 
+
     /*** LOGIN **********************************************/
-    curl_setopt_array($curlObj, $c_opt); 
+    curl_setopt_array($curlObj, $c_opt);
     $session = curl_exec($curlObj);
 
     /*** SEND PUSH ******************************************/
-    $c_opt[CURLOPT_URL]         = "https://api.cloud.appcelerator.com/v1/push_notification/notify_tokens.json?key=".$key; 
-    $c_opt[CURLOPT_POSTFIELDS]  = "channel=".$channel."&to_tokens=".$recipients."&payload=".urlencode($json); 
- 
-    curl_setopt_array($curlObj, $c_opt); 
+    $c_opt[CURLOPT_URL]         = "https://api.cloud.appcelerator.com/v1/push_notification/notify_tokens.json?key=".$key;
+    $c_opt[CURLOPT_POSTFIELDS]  = "channel=".$channel."&to_tokens=".$recipients."&payload=".urlencode($json);
+
+    curl_setopt_array($curlObj, $c_opt);
     $session = curl_exec($curlObj);
     /*** THE END ********************************************/
     curl_close($curlObj);
@@ -937,7 +939,7 @@ function push_updated_count(){
 		));
 	}
 }
-add_action('messages_delete_thread', 'push_updated_count'); 
+add_action('messages_delete_thread', 'push_updated_count');
 add_action('messages_action_conversation', 'push_updated_count');
 add_action('wp_login', 'push_updated_count');
 
@@ -1009,7 +1011,7 @@ function home_wantedlist(){
 			break;
 		}
 		$return .= create_wanted_item_detail_home($list);
-		$i += 1; 
+		$i += 1;
 	}
 	echo $return;
 	die;
@@ -1033,7 +1035,7 @@ function add_wanted_item(){
 	global $user_ID;
 	$wpdb->query($wpdb->prepare("
 		INSERT INTO " . $table_prefix . "fmt_wanted_list
-		(update_timestamp, user_id, item_name, ASIN, image_url) 
+		(update_timestamp, user_id, item_name, ASIN, image_url)
 		VALUES (current_timestamp, %d, %s, %s, %s)",
 		$user_ID, $_POST['item_name'], $_POST['asin'], $_POST['image_url']));
 	die;
@@ -1044,7 +1046,7 @@ function del_wanted_item_by_asin(){
 	global $table_prefix;
 	global $user_ID;
 	$wpdb->query($wpdb->prepare("
-		DELETE FROM " . $table_prefix . "fmt_wanted_list 
+		DELETE FROM " . $table_prefix . "fmt_wanted_list
 		WHERE user_id = %d
 		AND ASIN = %s",
 		$user_ID, $_POST['asin']));
@@ -1057,7 +1059,7 @@ function del_wanted_item_by_asin(){
  */
 
 function get_search_result_from_amazon($array){
-	$accesss_key_id = get_option('amazon_accesss_key_id'); 
+	$accesss_key_id = get_option('amazon_accesss_key_id');
 	$secret_access_key = get_option('amazon_secret_access_key');
 	$associate_tag = get_option('amazon_associate_tag');
 
@@ -1435,7 +1437,7 @@ function fmt_messages_screen_conversation() {
 	if(bp_get_total_unread_messages_count() > 0){
 		$bp->bp_nav[$bp->messages->slug]['name'] = sprintf( __( 'Messages <span>%s</span>', 'buddypress' ), bp_get_total_unread_messages_count() );
 	}else{
-		$bp->bp_nav[$bp->messages->slug]['name'] = sprintf( __( 'Messages', 'buddypress' ));		
+		$bp->bp_nav[$bp->messages->slug]['name'] = sprintf( __( 'Messages', 'buddypress' ));
 	}
 	/*** custom end ***/
 	do_action( 'messages_screen_conversation' );
@@ -1483,44 +1485,44 @@ function my_setup_nav() {
 		}else{
 			$entry_list_name = '出品一覧';
 		}
-		bp_core_new_nav_item( array( 
-			'name' => $entry_list_name, 
-			'slug' => 'entry_list', 
+		bp_core_new_nav_item( array(
+			'name' => $entry_list_name,
+			'slug' => 'entry_list',
 			'position' => 55,
 			'screen_function' => 'entry_list_notinprogress_link',
 			'show_for_displayed_user' => true,
 			'item_css_id' => 'entry-list'
 			) );
-		bp_core_new_subnav_item( array( 
-			'name' => __( 'ください待ち', 'buddypress' ), 
-			'slug' => 'notinprogress', 
+		bp_core_new_subnav_item( array(
+			'name' => __( 'ください待ち', 'buddypress' ),
+			'slug' => 'notinprogress',
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'entry_list'),
 			'parent_slug' => 'entry_list',
 			'position' => 56,
 			'screen_function' => 'entry_list_notinprogress_link',
 			'item_css_id' => 'notinprogress'
 		) );
-		bp_core_new_subnav_item( array( 
-			'name' => __( '取引相手確定待ち', 'buddypress' ), 
-			'slug' => 'toconfirm', 
+		bp_core_new_subnav_item( array(
+			'name' => __( '取引相手確定待ち', 'buddypress' ),
+			'slug' => 'toconfirm',
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'entry_list'),
 			'parent_slug' => 'entry_list',
 			'position' => 57,
 			'screen_function' => 'entry_list_toconfirm_link',
 			'item_css_id' => 'toconfirm'
 		) );
-		bp_core_new_subnav_item( array( 
-			'name' => __( '取引中', 'buddypress' ), 
-			'slug' => 'inprogress', 
+		bp_core_new_subnav_item( array(
+			'name' => __( '取引中', 'buddypress' ),
+			'slug' => 'inprogress',
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'entry_list'),
 			'parent_slug' => 'entry_list',
 			'position' => 58,
 			'screen_function' => 'entry_list_inprogress_link',
 			'item_css_id' => 'inprogress'
 		) );
-		bp_core_new_subnav_item( array( 
-			'name' => __( '取引完了', 'buddypress' ), 
-			'slug' => 'finished', 
+		bp_core_new_subnav_item( array(
+			'name' => __( '取引完了', 'buddypress' ),
+			'slug' => 'finished',
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'entry_list'),
 			'parent_slug' => 'entry_list',
 			'position' => 59,
@@ -1528,28 +1530,28 @@ function my_setup_nav() {
 			'item_css_id' => 'finished'
 		) );
 
-		bp_core_new_nav_item( array( 
-			'name' => __( '新規出品', 'buddypress' ), 
-			'slug' => 'new_entry', 
+		bp_core_new_nav_item( array(
+			'name' => __( '新規出品', 'buddypress' ),
+			'slug' => 'new_entry',
 			'position' => 65,
 			'screen_function' => 'new_entry_link',
 			'show_for_displayed_user' => true,
 			'item_css_id' => 'new-entry'
 			) );
 
-		bp_core_new_subnav_item( array( 
-			'name' => __( '通常出品', 'buddypress' ), 
-			'slug' => 'normal', 
+		bp_core_new_subnav_item( array(
+			'name' => __( '通常出品', 'buddypress' ),
+			'slug' => 'normal',
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'new_entry'),
 			'parent_slug' => 'new_entry',
 			'position' => 66,
 			'screen_function' => 'new_entry_link',
 			'item_css_id' => 'new-entry'
 		) );
-	
-		bp_core_new_subnav_item( array( 
-			'name' => __( 'ほしいものリストへ出品', 'buddypress' ), 
-			'slug' => 'to_wanted_list', 
+
+		bp_core_new_subnav_item( array(
+			'name' => __( 'ほしいものリストへ出品', 'buddypress' ),
+			'slug' => 'to_wanted_list',
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'new_entry'),
 			'parent_slug' => 'new_entry',
 			'position' => 67,
@@ -1564,9 +1566,9 @@ function my_setup_nav() {
 			$giveme_name = 'ください';
 		}
 
-		bp_core_new_nav_item( array( 
-			'name' => $giveme_name, 
-			'slug' => 'giveme', 
+		bp_core_new_nav_item( array(
+			'name' => $giveme_name,
+			'slug' => 'giveme',
 			'position' => 75,
 			'screen_function' => 'your_giveme_link',
 			'show_for_displayed_user' => true,
@@ -1574,9 +1576,9 @@ function my_setup_nav() {
 			'item_css_id' => 'giveme-from-others'
 			) );
 
-		bp_core_new_subnav_item( array( 
-			'name' => __( 'あなたのください', 'buddypress' ), 
-			'slug' => 'your-giveme', 
+		bp_core_new_subnav_item( array(
+			'name' => __( 'あなたのください', 'buddypress' ),
+			'slug' => 'your-giveme',
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'giveme'),
 			'parent_slug' => 'giveme',
 			'position' => 85,
@@ -1590,9 +1592,9 @@ function my_setup_nav() {
 		}else{
 			$giveme_from_others_name = 'あなたの出品へのください';
 		}
-		bp_core_new_subnav_item( array( 
+		bp_core_new_subnav_item( array(
 			'name' => $giveme_from_others_name,
-			'slug' => 'giveme-from-others', 
+			'slug' => 'giveme-from-others',
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'giveme'),
 			'parent_slug' => 'giveme',
 			'position' => 95,
@@ -1600,9 +1602,9 @@ function my_setup_nav() {
 			'item_css_id' => 'giveme-from-others'
 			) );
 
-		bp_core_new_nav_item( array( 
-			'name' => __( 'ほしいものリスト', 'buddypress' ),  
-			'slug' => 'wanted-list', 
+		bp_core_new_nav_item( array(
+			'name' => __( 'ほしいものリスト', 'buddypress' ),
+			'slug' => 'wanted-list',
 			'position' => 105,
 			'screen_function' => 'new_wanted_list_link',
 			'show_for_displayed_user' => true,
@@ -1610,9 +1612,9 @@ function my_setup_nav() {
 			'item_css_id' => 'wanted-list'
 			) );
 
-		bp_core_new_subnav_item( array( 
-			'name' => __( '新規登録', 'buddypress' ), 
-			'slug' => 'new-wanted-list', 
+		bp_core_new_subnav_item( array(
+			'name' => __( '新規登録', 'buddypress' ),
+			'slug' => 'new-wanted-list',
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'wanted-list'),
 			'parent_slug' => 'wanted-list',
 			'position' => 106,
@@ -1620,9 +1622,9 @@ function my_setup_nav() {
 			'item_css_id' => 'wanted-list'
 			) );
 
-		bp_core_new_subnav_item( array( 
-			'name' => __( '一覧', 'buddypress' ), 
-			'slug' => 'show-wanted-list', 
+		bp_core_new_subnav_item( array(
+			'name' => __( '一覧', 'buddypress' ),
+			'slug' => 'show-wanted-list',
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'wanted-list'),
 			'parent_slug' => 'wanted-list',
 			'position' => 107,
@@ -1646,9 +1648,9 @@ function my_setup_nav() {
 			$todo_list_name = sprintf( __( 'next action', 'buddypress' ));
 			$todo_list_style_id = "none_todo";
 		}
-		bp_core_new_nav_item( array( 
-			'name' => $todo_list_name,  
-			'slug' => 'todo-list', 
+		bp_core_new_nav_item( array(
+			'name' => $todo_list_name,
+			'slug' => 'todo-list',
 			'position' => 115,
 			'screen_function' => 'todo_list_link',
 			'show_for_displayed_user' => true,
@@ -1656,9 +1658,9 @@ function my_setup_nav() {
 			'item_css_id' => $todo_list_style_id
 			) );
 
-		bp_core_new_subnav_item( array( 
-			'name' => __( '未完了', 'buddypress' ), 
-			'slug' => 'unfinished-todo-list', 
+		bp_core_new_subnav_item( array(
+			'name' => __( '未完了', 'buddypress' ),
+			'slug' => 'unfinished-todo-list',
 			'parent_url' => trailingslashit($bp->displayed_user->domain . 'todo-list'),
 			'parent_slug' => 'todo-list',
 			'position' => 116,
@@ -1668,7 +1670,7 @@ function my_setup_nav() {
 
 	}
 }
- 
+
 add_action( 'bp_setup_nav', 'my_setup_nav', 1000 );
 
 
@@ -1793,7 +1795,7 @@ function has_todo_in_entry_list(){
  * common function to exhibit.
  * valid parameters:
  * - exhibitor_id -> user id of author (required)
- * - item_name -> name of item (required) 
+ * - item_name -> name of item (required)
  * - item_description
  * - item_category
  * - item_status
@@ -1809,7 +1811,7 @@ function exhibit(array $args){
 	$post = array(
 	'comment_status' => 'open', // open comment
 	'ping_status' => 'closed', // pinback, trackback off
-	'post_date' => date('Y-m-d H:i:s'), 
+	'post_date' => date('Y-m-d H:i:s'),
 	'post_date_gmt' => date('Y-m-d H:i:s'),
 	'post_status' => 'publish', // public open
 	'post_type' => 'post' // entry type name
@@ -1999,7 +2001,7 @@ function get_giveme_from_others_list(){
 		AND " . $table_prefix . "posts.post_author = %d
 		ORDER BY post_id",
 		$user_ID));
-		
+
 	return $givemes;
 }
 
@@ -2008,14 +2010,14 @@ function get_count_giveme_from_others(){
 	global $table_prefix;
 	global $user_ID;
 	$count = $wpdb->get_var($wpdb->prepare("
-		SELECT count(DISTINCT(" . $table_prefix . "posts.ID))  
+		SELECT count(DISTINCT(" . $table_prefix . "posts.ID))
 		FROM " . $table_prefix . "fmt_user_giveme, " . $table_prefix . "posts, " . $table_prefix . "fmt_giveme_state
 		WHERE " . $table_prefix . "fmt_user_giveme.post_id = " . $table_prefix . "posts.ID
 		AND " . $table_prefix . "fmt_user_giveme.post_id = " . $table_prefix . "fmt_giveme_state.post_id
 		AND " . $table_prefix . "fmt_giveme_state.confirmed_flg = 0
 		AND " . $table_prefix . "posts.post_author = %d",
 		$user_ID));
-		
+
 	return $count;
 }
 
@@ -2057,7 +2059,7 @@ function get_your_giveme_list(){
 		AND " . $table_prefix . "fmt_giveme_state.confirmed_flg = 0
 		ORDER BY post_id",
 		$user_ID));
-		
+
 	return $givemes;
 }
 
@@ -2112,7 +2114,7 @@ function get_wanted_list($user_id){
 		$wanted_list = $wpdb->get_results($wpdb->prepare($sql, $user_id));
 	}else{
 		$sql .= " ORDER BY wanted_item_id desc";
-		$wanted_list = $wpdb->get_results($sql);	
+		$wanted_list = $wpdb->get_results($sql);
 	}
 	return $wanted_list;
 }
@@ -2143,13 +2145,13 @@ function get_others_wanted_list($args=''){
 		$sql .= " AND wanted_item_id = %d";
 	}else{
 		$args['wanted_item_id'] = 0;
-		$sql .= " AND wanted_item_id <> %d";		
+		$sql .= " AND wanted_item_id <> %d";
 	}
 	if(isset($args['asin'])){
 		$sql .= " AND ASIN = %s";
 	}else{
 		$args['asin'] = 'DUMMY'; // to get all results
-		$sql .= " AND ASIN <> %s";		
+		$sql .= " AND ASIN <> %s";
 	}
 	if(isset($args['department'])){
 		$sql .= " AND value = %s";
@@ -2165,7 +2167,7 @@ function get_others_wanted_list($args=''){
 		$sql .=	" LIMIT %d, 10";
 	}else{
 		$args['page'] = 0;
-		$sql .=	" LIMIT %d, 100000";		
+		$sql .=	" LIMIT %d, 100000";
 	}
 	if(!isset($args['keyword'])){
 		$args['keyword'] = "";
@@ -2419,7 +2421,7 @@ function add_todo($user_ID, $item_ID, $message){
 /**
  * 取引キャンセル時に呼ばれる関数
  * @param $item_ID 取引商品ＩＤ
- * @return 空 
+ * @return 空
  */
 function cancel_todo($item_ID){
 
@@ -2454,7 +2456,7 @@ function get_todo_row($user_ID, $item_ID){
 	global $table_prefix;
 	global $wpdb;
 
-	return $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."todo 
+	return $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."todo
 		   WHERE user_id=%d AND item_id=%d AND status='unfinished'",
 		   $user_ID ,$item_ID));
 
@@ -2517,7 +2519,7 @@ function change_todo_modified($todo_ID){
  * @param {int} $item_ID くださいされた商品ＩＤ
  */
 function add_todo_confirm_bidder($item_ID){
-	
+
 	$user_ID = get_post($item_ID)->post_author;
 
 	add_todo($user_ID, $item_ID, '<a href = "' . home_url() . '/archives/' . $item_ID . '">
@@ -2536,7 +2538,7 @@ function add_todo_finish_trade($item_ID){
 
 }
 
-/** 
+/**
  * 取引詳細をメッセージでやり取りするTODOを追加する関数※落札者のTODO
  * @param {int} $item_ID 取引商品ＩＤ
  * @param {int} $thread_ID 取引相手確定メッセージのid
@@ -2549,7 +2551,7 @@ function add_todo_dealing($item_ID, $thread_ID){
 	$user = get_user_by('id', $user_ID);
 	$user_login_name = $user->user_login;
 
-	add_todo($user_ID, $item_ID, 
+	add_todo($user_ID, $item_ID,
 		'<a href = "'. home_url() . '/members/' . $user_login_name .'/messages/view/' .$thread_ID. '" onClick="todo_dealing('.$user_ID.','.$item_ID.')">
 			くださいリクエストが承認されました。承認メッセージに返信してください</a>');
 }
@@ -2569,7 +2571,7 @@ function add_todo_evaluate_bidder($user_ID, $item_ID){
  * @param {int} $item_ID 取引商品ＩＤ
  */
 function add_todo_evaluate_exhibitor($item_ID){
-	
+
 	$user_ID = get_bidder_id($item_ID);
 
 	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">出品者を評価してください</a>');
@@ -2581,7 +2583,7 @@ function add_todo_evaluate_exhibitor($item_ID){
 function todo_dealing_finished(){
 	$user_ID = $_POST[userID];
 	$item_ID = $_POST[itemID];
-	
+
 	$todo_ID = get_todo_row($user_ID, $item_ID)->todo_id;
 	change_todo_status_finished($todo_ID);
 
@@ -2598,7 +2600,7 @@ function get_todo_list($user_ID,$status){
 	global $table_prefix;
 	$todo_list = $wpdb->get_results($wpdb->prepare(
 					"SELECT * FROM ".$table_prefix."todo WHERE user_id =%d AND status =%s",$user_ID ,$status));
-	
+
 	return $todo_list;
 }
 
@@ -2634,14 +2636,14 @@ function get_todo_list_count($user_ID){
 /**
  * TODOのIDからユーザIDを検索して返します
  * @param {int} $todo_ID todoリストID
- * @return {int} $user_ID ユーザID 
+ * @return {int} $user_ID ユーザID
  */
 function get_user_id_by_todo_id($todo_ID){
 	global $wpdb;
 	global $table_prefix;
 	$sql = "SELECT user_id FROM " . $table_prefix . "todo where todo_id = %d";
 	$user_ID = $wpdb->get_var($wpdb->prepare($sql, $todo_ID));
-	return $user_ID;	
+	return $user_ID;
 }
 
 /**
@@ -2657,7 +2659,7 @@ function ajax_edit_item(){
 	if(confirm_editer($itemID, $userID)){
 		edit_item($itemID, $item_title, $item_content, $item_status);
 	}
-	
+
 }
 add_action('wp_ajax_edit_item', 'ajax_edit_item');
 
@@ -2675,6 +2677,8 @@ function edit_item($itemID, $item_title, $item_content, $item_status){
 		"post_content" => $item_content,
 		);
 
+	delete_itempictures($itemID);
+	upload_itempictures($itemID);
 	wp_update_post($item_edit);
 	update_post_meta($item_edit["ID"], 'item_status', $item_status);
 
@@ -2684,7 +2688,7 @@ function edit_item($itemID, $item_title, $item_content, $item_status){
  * 商品の出品者かどうか確かめる関数
  * @param {int} $itemID 商品ID
  * @param {string} $item_title 商品名
- * @return {boolean} 出品者だった場合true,違った場合false 
+ * @return {boolean} 出品者だった場合true,違った場合false
  */
 function confirm_editer($itemID, $userID){
 	$item = get_post($itemID);
@@ -2693,4 +2697,49 @@ function confirm_editer($itemID, $userID){
 	}
 
 	return false;
+}
+
+/**
+* 商品写真を削除する関数
+* @param {int} $itemID 商品ID
+*/
+function delete_itempictures($itemID){
+	global $table_prefix;
+	global $wpdb;
+	$sql = 'DELETE FROM ' . $table_prefix. 'posts WHERE post_parent = %d';
+
+	$wpdb->query($wpdb->prepare($sql, $itemID));
+
+}
+
+/**
+* 商品写真をインサートする関数
+* @param {int} $itemID 商品ID
+*/
+function upload_itempictures($itemID){
+	if($_FILES){
+		$files = $_FILES['upload_attachment'];
+		// reverse sort
+		arsort($files['name'],SORT_NUMERIC);
+		arsort($files['type'],SORT_NUMERIC);
+		arsort($files['tmp_name'],SORT_NUMERIC);
+		arsort($files['error'],SORT_NUMERIC);
+		arsort($files['size'],SORT_NUMERIC);
+
+		foreach ($files['name'] as $key => $value){
+			if ($files['name'][$key]){
+				$file = array(
+					'name'     => validate_filename($files['name'][$key]),
+					'type'     => $files['type'][$key],
+					'tmp_name' => $files['tmp_name'][$key],
+					'error'    => $files['error'][$key],
+					'size'     => $files['size'][$key]
+				);
+				$_FILES = array("upload_attachment" => $file);
+				foreach ($_FILES as $file => $array){
+					$newupload = insert_attachment($file,$itemID);
+				}
+			}
+		}
+	}
 }
