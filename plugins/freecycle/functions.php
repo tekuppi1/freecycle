@@ -2647,7 +2647,7 @@ function get_user_id_by_todo_id($todo_ID){
 }
 
 /**
- * ajaxにて商品編集情報を受け取る関数
+ * ajaxにて商品編集を行う関数
  */
 function ajax_edit_item(){
 	$itemID = isset($_POST['itemID'])?$_POST['itemID']:"";
@@ -2658,6 +2658,7 @@ function ajax_edit_item(){
 
 	if(confirm_editer($itemID, $userID)){
 		edit_item($itemID, $item_title, $item_content, $item_status);
+		upload_itempictures($itemID);
 	}
 
 }
@@ -2677,8 +2678,6 @@ function edit_item($itemID, $item_title, $item_content, $item_status){
 		"post_content" => $item_content,
 		);
 
-	delete_itempictures($itemID);
-	upload_itempictures($itemID);
 	wp_update_post($item_edit);
 	update_post_meta($item_edit["ID"], 'item_status', $item_status);
 
@@ -2692,7 +2691,7 @@ function edit_item($itemID, $item_title, $item_content, $item_status){
  */
 function confirm_editer($itemID, $userID){
 	$item = get_post($itemID);
-	if($item){
+	if($item && $userID == get_current_user_id()){
 		return ($item->post_author == $userID)?true:false;
 	}
 
@@ -2719,25 +2718,33 @@ function delete_itempictures($itemID){
 function upload_itempictures($itemID){
 	if($_FILES){
 		$files = $_FILES['upload_attachment'];
-		// reverse sort
-		arsort($files['name'],SORT_NUMERIC);
-		arsort($files['type'],SORT_NUMERIC);
-		arsort($files['tmp_name'],SORT_NUMERIC);
-		arsort($files['error'],SORT_NUMERIC);
-		arsort($files['size'],SORT_NUMERIC);
+		$file_count = 0;
+		foreach($files['name'] as $file_name){
+			empty($file_name)?"":$file_count++;
+		}
+		debug_log($file_count);
+		if($file_count){
+			delete_itempictures($itemID);
+			// reverse sort
+			arsort($files['name'],SORT_NUMERIC);
+			arsort($files['type'],SORT_NUMERIC);
+			arsort($files['tmp_name'],SORT_NUMERIC);
+			arsort($files['error'],SORT_NUMERIC);
+			arsort($files['size'],SORT_NUMERIC);
 
-		foreach ($files['name'] as $key => $value){
-			if ($files['name'][$key]){
-				$file = array(
-					'name'     => validate_filename($files['name'][$key]),
-					'type'     => $files['type'][$key],
-					'tmp_name' => $files['tmp_name'][$key],
-					'error'    => $files['error'][$key],
-					'size'     => $files['size'][$key]
-				);
-				$_FILES = array("upload_attachment" => $file);
-				foreach ($_FILES as $file => $array){
-					$newupload = insert_attachment($file,$itemID);
+			foreach ($files['name'] as $key => $value){
+				if ($files['name'][$key]){
+					$file = array(
+						'name'     => validate_filename($files['name'][$key]),
+						'type'     => $files['type'][$key],
+						'tmp_name' => $files['tmp_name'][$key],
+						'error'    => $files['error'][$key],
+						'size'     => $files['size'][$key]
+					);
+					$_FILES = array("upload_attachment" => $file);
+					foreach ($_FILES as $file => $array){
+						$newupload = insert_attachment($file,$itemID);
+					}
 				}
 			}
 		}
