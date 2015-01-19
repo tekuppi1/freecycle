@@ -3696,3 +3696,7 @@ div.grobal_nav_div_sp ul li a span {
 #top_enhance{
 	color: rgb(255, 255, 90);
 }
+
+#edit_form{
+	float: left;
+}
