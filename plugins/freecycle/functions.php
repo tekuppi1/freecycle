@@ -2654,9 +2654,9 @@ function ajax_edit_item(){
 	$item_title = isset($_POST['item_title'])?$_POST['item_title']:"";
 	$item_content = isset($_POST['item_content'])?$_POST['item_content']:"";
 	$item_status = isset($_POST['item_status'])?$_POST['item_status']:"";
-	$userID = isset($_POST['userID'])?$_POST['userID']:"";
+	$userID = get_current_user_id();
 
-	if(confirm_editer($itemID, $userID)){
+	if(is_exhibitor($itemID, $userID)){
 		edit_item($itemID, $item_title, $item_content, $item_status);
 		upload_itempictures($itemID);
 	}
@@ -2686,16 +2686,16 @@ function edit_item($itemID, $item_title, $item_content, $item_status){
 /**
  * 商品の出品者かどうか確かめる関数
  * @param {int} $itemID 商品ID
- * @param {string} $item_title 商品名
+ * @param {int} $userID ユーザーID
  * @return {boolean} 出品者だった場合true,違った場合false
  */
-function confirm_editer($itemID, $userID){
+function is_exhibitor($itemID, $userID){
 	$item = get_post($itemID);
-	if($item && $userID == get_current_user_id()){
+	if($item){
 		return ($item->post_author == $userID)?true:false;
+	}else{
+		return false;
 	}
-
-	return false;
 }
 
 /**
@@ -2703,12 +2703,19 @@ function confirm_editer($itemID, $userID){
 * @param {int} $itemID 商品ID
 */
 function delete_itempictures($itemID){
-	global $table_prefix;
-	global $wpdb;
-	$sql = 'DELETE FROM ' . $table_prefix. 'posts WHERE post_parent = %d';
+	$arg = array(
+		"post_parent" => $itemID,
+		"post_type" => "attachment",
+		"post_mime_type" => "image"
+	);
+	$images = get_children($arg);
 
-	$wpdb->query($wpdb->prepare($sql, $itemID));
-
+	if(!empty($images)){
+		// 添付画像がある場合
+		foreach($images as $attachment_id => $attachment){
+			wp_delete_attachment($attachment_id);
+		}
+	}
 }
 
 /**
@@ -2722,7 +2729,6 @@ function upload_itempictures($itemID){
 		foreach($files['name'] as $file_name){
 			empty($file_name)?"":$file_count++;
 		}
-		debug_log($file_count);
 		if($file_count){
 			delete_itempictures($itemID);
 			// reverse sort

@@ -489,7 +489,6 @@
 		<input type="file" class="multi" name="upload_attachment[]" ></br>
 		<input type="file" class="multi" name="upload_attachment[]" ></br>
 		<input type="file" class="multi" name="upload_attachment[]" ></br><br>
-	<input type="hidden" name="userID" value="<?php echo $user_ID;?>">
 	<input type="hidden" name="itemID" value="<?php echo $post->ID; ?>">
 	<input type="button" value="編集完了" onClick="onUpdateEdit();">
 	</form>
