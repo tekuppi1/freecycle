@@ -12,7 +12,7 @@
 <!-- category -->
 <label for="main_category">カテゴリ</label></br>
 <select name="main_category" onChange="onChangeMainCategory()">
-<option value="">-- 親カテゴリ --</option>
+<option value="">-- 大学名 --</option>
 <?php
 	$main_categories = get_categories(array(
 		"parent" => 0,
@@ -27,7 +27,7 @@
 ?>
 </select>
 <select name="subcategory">
-<option value="">-- 子カテゴリ --</option>
+<option value="">-- 学部 --</option>
 </select>
 </br>
 <!-- status -->
