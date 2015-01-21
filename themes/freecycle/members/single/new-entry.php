@@ -19,15 +19,39 @@
 		"hide_empty" => 0,
 		"exclude" => 1 //'uncategorized'
 	));
-	foreach ($main_categories as $category) {
+	global $user_ID;
+	$user_college = xprofile_get_field_data('大学名', $user_ID);
+	foreach ((array)$main_categories as $category) {
 		$value = $category->term_id;
 		$name = $category->name;
-		echo "<option value='$value'>$name</option>";
+		if($user_college == $name){
+			echo "<option value='$value' selected >$name</option>";
+		}else{
+			echo "<option value='$value'>$name</option>";
+		}
 	}
+
 ?>
 </select>
 <select name="subcategory">
 <option value="">-- 学部 --</option>
+<?php
+		$user_department = xprofile_get_field_data('学部', $user_ID);
+		$user_college_ID = get_cat_ID($user_college);
+		$department_IDs = get_term_children($user_college_ID, 'category');
+
+		foreach((array)$department_IDs as $department_ID){
+			$department = get_category($department_ID);
+			$value = $department->term_id;
+			$name = $department->name;
+			if($user_department == $name){
+				echo "<option value='$value' selected >$name</option>";
+			}else{
+				echo "<option value='$value'>$name</option>";
+			}
+		}
+
+?>
 </select>
 </br>
 <!-- status -->

@@ -291,7 +291,6 @@
 
 </div><!-- #item-header-content -->
 <div id="mypage"></div>
-
 <?php do_action( 'bp_after_member_header' ); ?>
 
 <?php do_action( 'template_notices' ); ?>
