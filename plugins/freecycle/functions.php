@@ -26,6 +26,10 @@ add_action('wp_ajax_cancel_trade_from_bidder', 'cancel_trade_from_bidder');
 add_action('user_register', 'on_user_added');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 
+// load files
+require_once('functions.kses.php');
+require_once('map/freecycle-map.php');
+
 //写真を自動で回転して縦にする
 function edit_images_before_upload($file)
 {
@@ -311,6 +315,8 @@ function confirmGiveme(){
 	$tradedates = explode(",", $_POST['tradedates']);
 	$place = $_POST['place'];
 	$message = $_POST['message'];
+	$lat = isset($_POST['lat'])?$_POST['lat']:''; // latitude
+	$lng = isset($_POST['lng'])?$_POST['lng']:''; // longitude
 
 	// 記事の状態を確定済にする
 	$wpdb->query($wpdb->prepare("
@@ -361,6 +367,11 @@ function confirmGiveme(){
 	$content = 'あなたが以下の商品の取引相手に選ばれました！' . PHP_EOL . ' 【商品名】:<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>' . PHP_EOL;
 	if($message){
 		$content .= '【メッセージ】:' . $message . PHP_EOL;
+	}
+
+	if(isset($lat) && isset($lng)){
+		$content .= "【取引場所】" . PHP_EOL;
+		$content .= "<div name='map-canvas-message' lat='$lat' lng='$lng'></div>" . PHP_EOL;
 	}
 
 	$message_ID = messages_new_message(array(

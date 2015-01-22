@@ -13,6 +13,7 @@
 			'application-setting' => 'アプリ',
 			'mail-magazine-setting' => 'メールマガジン',
 			'message-setting' => 'メッセージ',
+			'map-setting' => '取引場所',
 		) as $key => $val):
 	?>
 	<a class="nav-tab<?php if(isset($_REQUEST['view']) && $_REQUEST['view'] == $key) echo ' nav-tab-active'; ?>" href="<?php echo admin_url('options-general.php?page=texchange&view='.$key);?>">
@@ -49,6 +50,18 @@
 		case 'message-setting':
 		    require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'message-setting.php';
 		    break;
+		case 'map-setting':
+		    require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'map-setting.php';
+		    break;
+		case 'map-setting-places':
+		    require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'map-setting-places.php';
+		    break;		    
+		case 'map-setting-uni-update':
+		    require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'map-setting-uni-update.php';
+		    break;
+		case 'map-setting-places-update':
+		    require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'map-setting-places-update.php';
+		    break;		    
 		default:
     ?>
     <table class="form-table">

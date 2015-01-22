@@ -35,11 +35,15 @@ function onConfirmGiveme(postID, url){
 	confirmText += "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked+label").text() + "\n";
 	confirmText += "メッセージ:"+ jQuery("#message_" + postID).val();
 	if(confirm(confirmText)){
-					// 取引相手でないユーザID一覧を取得
 					var uncheckedUserIDs = new Array();
+					var map = document.getElementById("map_canvas_" + postID);
+					var lat = map.getAttribute("lat")?map.getAttribute("lat"):""; // latitude
+					var lng = map.getAttribute("lng")?map.getAttribute("lng"):""; // longitude
+					// 取引相手でないユーザID一覧を取得
 					jQuery("[name=sendto_user_"+ postID + "]" + ":not(:checked)").each(function(){
 						uncheckedUserIDs.push(this.value);
 					});
+
 					jQuery.ajax({
 					type: "POST",
 					url: url,
@@ -49,6 +53,8 @@ function onConfirmGiveme(postID, url){
 						"userID": userID,//落札者相手ユーザーＩＤ
 						"uncheckedUserIDs": uncheckedUserIDs.join(),
 						"message": jQuery("#message_" + postID).val(),
+						"lat": lat, 
+						"lng": lng 
 					},
 					success: function(msg){
 						jQuery("#post_"+postID).hide(1000,function(){

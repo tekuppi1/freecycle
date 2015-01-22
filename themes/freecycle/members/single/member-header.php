@@ -9,7 +9,7 @@
 ?>
 
 <?php do_action( 'bp_before_member_header' ); ?>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCmhfQEie0qbsIR-F2xNVxzpV8IxzrwDBE&sensor=false"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCmhfQEie0qbsIR-F2xNVxzpV8IxzrwDBE&libraries=places&sensor=false"></script>
 <script type="text/javascript">
 
 	function callOnConfirmGiveme(postID){
@@ -179,35 +179,89 @@
 	    	mapTypeId: google.maps.MapTypeId.ROADMAP
   		}
 		var newMap = new google.maps.Map(map, mapOptions);
+		return newMap;
+	}
+
+	function showMarker(map, mapelm, location, draggable){
 		var marker = new google.maps.Marker({
-			map: newMap,
+			map: map,
 			position: location,
-			draggable: true
+			draggable: draggable
 		});
-		google.maps.event.addListener(marker, 'dragend', function(ev){
-			// イベントの引数evの、プロパティ.latLngが緯度経度。
-			console.log(ev.latLng.lat());
-			console.log(ev.latLng.lng());
-		});
+
+		if(draggable){
+			google.maps.event.addListener(marker, 'dragend', function(ev){
+				mapelm.setAttribute("lat", ev.latLng.lat()); // latitude
+				mapelm.setAttribute("lng", ev.latLng.lng()); // longitude
+			});
+		}
+		return marker;
 	}
 
 	function initializeMap(){
 		var maps = document.getElementsByName("map-canvas");
+		var mapsInMessages = document.getElementsByName("map-canvas-message");
 		var geocoder;
 		var location;
 		if(maps){
-			var uni = "<?php global $current_user; echo xprofile_get_field_data("大学", $current_user->get('ID')); ?>";
+			// set the university in user profile as a default location of maps
+			var uni = "<?php global $current_user; echo xprofile_get_field_data("大学名", $current_user->get('ID')); ?>";
+			var shownMap;
+			var marker;
+			var input;
+			var searchbox;
 			if(uni){
 				geocoder = new google.maps.Geocoder();
 				geocoder.geocode({'address': uni}, function(results, status){
 				if(status == google.maps.GeocoderStatus.OK){
         			location = results[0].geometry.location;
    					for (var i = maps.length-1; i >= 0; i--) {
-						showMap(maps[i], location);
+						shownMap = showMap(maps[i], location);
+						marker = showMarker(shownMap, maps[i], location, false);
+
+						maps[i].setAttribute("lat", location.lat()); // latitude
+						maps[i].setAttribute("lng", location.lng()); // longitude
+						var itemID = maps[i].getAttribute("id").replace("map_canvas_", "");
+						input = document.getElementById("map_search_" + itemID);
+						// set the input form as a place search form of the map
+						shownMap.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+						function _create_callback(map, input, marker, mapelm){
+							var bounds;
+							var location;
+							return function(){
+								var val = input.value;
+								var lat, lng, position;
+								if(val.length == 0){
+									return;
+								}else{
+									lat = val.split(',')[0] * 1; // parse string to number
+									lng = val.split(',')[1] * 1; // parse string to number
+									position = {lat: lat, lng: lng};
+									marker.setPosition(position);
+									map.setCenter(position);
+									map.setZoom(17);
+
+									mapelm.setAttribute("lat", lat); // latitude
+									mapelm.setAttribute("lng", lng); // longitude
+								}								
+							}
+						}
+						var func = _create_callback(shownMap, input, marker, maps[i]);
+						input.onchange = func;
 					}
   				}else{
         			console.log("Geocode was not successful for the following reason: " + status);
       			}});
+			}
+  		}
+
+  		if(mapsInMessages){
+			for (var i = mapsInMessages.length-1; i >= 0; i--) {
+				var lat = mapsInMessages[i].getAttribute('lat');
+				var lng = mapsInMessages[i].getAttribute('lng');
+				var location = new google.maps.LatLng(lat, lng, false);
+				shownMap = showMap(mapsInMessages[i], location);
+				showMarker(shownMap, mapsInMessages[i], location, false);
 			}
   		}
 	}
