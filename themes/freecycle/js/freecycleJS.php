@@ -26,43 +26,79 @@ function onConfirmGiveme(postID, url){
 	// 取引相手のユーザIDを取得
 	var userID = jQuery("input[name='sendto_user_"+postID+"']:checked").val();
 	if(!userID){
-		alert("ユーザが選択されていません。");
+		swal({   
+			title: "ユーザーが選択されていません。",  
+			type: "error",   
+			showCancelButton: false,   
+			confirmButtonColor: "#AEDEF4", 
+			confirmButtonText: "OK",      
+			closeOnConfirm: true
+		});
 		enableButtons();
 		return false;
 	}
-	var confirmText = "取引相手を確定させます。変更やキャンセルはできません。よろしいですか？\n";
+
+	var confirmText = "変更やキャンセルはできません。よろしいですか？\n";
 	confirmText += "商品:"+ jQuery("#post_"+ postID + " .index-item-title").text() + "\n";
 	confirmText += "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked+label").text() + "\n";
 	confirmText += "メッセージ:"+ jQuery("#message_" + postID).val();
-	if(confirm(confirmText)){
-					// 取引相手でないユーザID一覧を取得
-					var uncheckedUserIDs = new Array();
-					jQuery("[name=sendto_user_"+ postID + "]" + ":not(:checked)").each(function(){
-						uncheckedUserIDs.push(this.value);
-					});
-					jQuery.ajax({
-					type: "POST",
-					url: url,
-					data: {
-						"action": "confirmGiveme",
-						"postID": postID,
-						"userID": userID,//落札者相手ユーザーＩＤ
-						"uncheckedUserIDs": uncheckedUserIDs.join(),
-						"message": jQuery("#message_" + postID).val(),
-					},
-					success: function(msg){
-						jQuery("#post_"+postID).hide(1000,function(){
-						alert("取引相手を確定し、メッセージを送信しました！\n取引相手からの返信をお待ちください。");
-						enableButtons();
-						});
-					},
-					error:function(){
-						alert("error!!");
-					}
+	swal({   
+		title: "取引相手を確定させます。",     
+		text: confirmText,
+		type: "warning",   
+		showCancelButton: true,   
+		confirmButtonColor: "#DD6B55",   
+		confirmButtonText: "はい",   
+		cancelButtonText: "いいえ",   
+		closeOnConfirm: false,   
+		closeOnCancel: true 
+	}, 
+	function(isConfirm){
+		if (isConfirm) {
+			var uncheckedUserIDs = new Array();
+			jQuery("[name=sendto_user_"+ postID + "]" + ":not(:checked)").each(function(){
+				uncheckedUserIDs.push(this.value);
 			});
-	}else{
+			jQuery.ajax({
+			type: "POST",
+			url: url,
+			data: {
+				"action": "confirmGiveme",
+				"postID": postID,
+				"userID": userID,//落札者相手ユーザーＩＤ
+				"uncheckedUserIDs": uncheckedUserIDs.join(),
+				"message": jQuery("#message_" + postID).val(),
+			},
+			success: function(msg){
+				jQuery("#post_"+postID).hide(1000,function(){
+				swal({   
+					title: "取引相手を確定し、メッセージを送信しました！",  
+					text: "取引相手からの返信をお待ちください。",
+					type: "success",   
+					showCancelButton: false,   
+					confirmButtonColor: "#AEDEF4", 
+					confirmButtonText: "OK",      
+					closeOnConfirm: true
+				});
+				enableButtons();
+				});
+			},
+			error:function(){
+				swal({   
+					title: "error!",  
+					type: "error",   
+					showCancelButton: false,   
+					confirmButtonColor: "#AEDEF4", 
+					confirmButtonText: "OK",      
+					closeOnConfirm: true
+				});
+			}
+		});
+
+		}else{
 		enableButtons();
-	}
+		} 
+	});
 }
 
 function onClickEditCommentButton(commentID){
@@ -155,7 +191,15 @@ function exhibitToWanted(wanted_item_id, asin){
 			enableButtons();
 		},
 		error: function(){
-			alert("出品できませんでした。しばらくしてからもう一度おためしください。");
+			swal({   
+				title: "出品できませんでした。",  
+				text: "しばらくしてからもう一度おためしください。",
+				type: "error",   
+				showCancelButton: false,   
+				confirmButtonColor: "#AEDEF4", 
+				confirmButtonText: "OK",      
+				closeOnConfirm: true
+			});
 			enableButtons();
 		}
 	});
@@ -180,7 +224,15 @@ function delExhibitionToWanted(post_id, wanted_item_id, asin){
 			enableButtons();
 		},
 		false: function(msg){
-			alert("取り消しに失敗しました。しばらくしてからもう一度おためしください。");
+			swal({   
+				title: "取り消しに失敗しました。",  
+				text: "しばらくしてからもう一度おためしください。",
+				type: "error",   
+				showCancelButton: false,   
+				confirmButtonColor: "#AEDEF4", 
+				confirmButtonText: "OK",      
+				closeOnConfirm: true
+			});
 			enableButtons();
 		}
 	});

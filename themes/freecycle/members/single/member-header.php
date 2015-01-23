@@ -170,6 +170,22 @@
 			}
 		});		
 	}
+
+	//ページスクロール
+	var url = location.href;
+	var str = url.substr(url.indexOf("members"));
+	var count = 0;
+	var pos = str.indexOf("/");
+
+	while ( pos != -1 ) {
+	   count++;
+	   pos = str.indexOf("/", pos + 1);
+	}
+
+	if(count >= 3){
+	 location.href = "#mypage";
+	}
+
 </script>
 <div id="item-header-avatar">
 
@@ -232,6 +248,7 @@
 	</div><!-- #item-meta -->
 
 </div><!-- #item-header-content -->
+<div id="mypage"></div>
 
 <?php do_action( 'bp_after_member_header' ); ?>
 

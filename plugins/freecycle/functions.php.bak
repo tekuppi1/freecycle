@@ -589,8 +589,13 @@ function cancel_trade_from_exhibitor(){
 		'content' => '以下の商品の取引がキャンセルされました。' .
 						'<a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a>'
 	));
+<<<<<<< HEAD
+	//todoリストstatus="finished"
+	//cancel_todo($post_id);
+=======
 
 	echo "取引をキャンセルしました。";
+>>>>>>> ea06743a2db98cbf9530e7eb1ead579085c816c5
 
 	echo "出品者から取引をキャンセルしました。";
 	die;
