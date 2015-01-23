@@ -18,7 +18,7 @@
 			function(isConfirm){
 				if (isConfirm) {
 					jQuery.ajax({
-						type: "success",
+						type: "POST",
 						url: '<?php echo admin_url('admin-ajax.php'); ?>',
 						data: {
 							"action": "finish",
