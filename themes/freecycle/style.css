@@ -1785,6 +1785,7 @@ div.login_form_button button:hover{
 /*ナビゲーション*/
 .grobal_nav_div_sp{
 	display: none;
+	height: 220px;
 }
 
 	
@@ -2924,7 +2925,7 @@ div.login_form_button button:hover{
 /*ナビゲーション*/
 
 div.grobal_nav_div_sp{
-	display: none;
+	display: none !important;
 }
 	
 div.grobal_nav_div{
