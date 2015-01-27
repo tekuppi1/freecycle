@@ -51,7 +51,7 @@
 				title: "くださいリクエストをします。",   
 				text: "よろしいですか？",     
 				showCancelButton: true,   
-				confirmButtonColor: "#DD6B55",   
+				confirmButtonColor: "#AEDEF4",   
 				confirmButtonText: "はい",   
 				cancelButtonText: "いいえ",   
 				closeOnConfirm: false,   
@@ -251,14 +251,16 @@
 						},
 						success: function(msg){
 							swal({   
-								title: "商品を取り消しました。",  
+								title: "商品を取り消しました。", 
 								type: "success",   
 								showCancelButton: false,   
 								confirmButtonColor: "#AEDEF4", 
 								confirmButtonText: "OK",      
 								closeOnConfirm: false
-							}); 
+							},
+							function(){
 							location.href = "<?php echo home_url(); ?>";
+							});
 						},
 						false: function(msg){
 							swal({   
