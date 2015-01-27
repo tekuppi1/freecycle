@@ -4,7 +4,7 @@ function echo_map_section($last_post_id){
 
 echo <<<MAP_SECTION
 	<span class="label">取引場所:</span>
-	<select name="map_search"  id="map_search_$last_post_id">
+	<select name="map_search" id="map_search_$last_post_id">
 		<option value="">取引場所を選択</option>
 MAP_SECTION;
 	foreach ($map_indexes as $index) {

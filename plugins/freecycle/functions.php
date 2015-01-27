@@ -1643,42 +1643,51 @@ function my_setup_nav() {
 			'item_css_id' => 'wanted-list'
 			) );
 
-		if(bp_get_total_unread_messages_count() > 0){
+	if(bp_get_total_unread_messages_count() > 0){
 		$messages_name = sprintf( __( 'Messages <span>%s</span>', 'buddypress' ), bp_get_total_unread_messages_count() );
 	}else{
 		$messages_name = sprintf( __( 'Messages', 'buddypress' ));
 	}
 
-		$todo_list_name;
-		$todo_list_count = get_todo_list_count($user_ID);
-		$todo_list_style_id;
-		if($todo_list_count){
-			$todo_list_name = sprintf( __( 'next action <span>%d</span>', 'buddypress'), $todo_list_count);
-			$todo_list_style_id = "exist_todo";
-		}else{
-			$todo_list_name = sprintf( __( 'next action', 'buddypress' ));
-			$todo_list_style_id = "none_todo";
-		}
-		bp_core_new_nav_item( array(
-			'name' => $todo_list_name,
-			'slug' => 'todo-list',
-			'position' => 115,
-			'screen_function' => 'todo_list_link',
-			'show_for_displayed_user' => true,
-			'default_subnav_slug' => 'unfinished-todo-list',
-			'item_css_id' => $todo_list_style_id
-			) );
+	$todo_list_name;
+	$todo_list_count = get_todo_list_count($user_ID);
+	$todo_list_style_id;
+	if($todo_list_count){
+		$todo_list_name = sprintf( __( 'next action <span>%d</span>', 'buddypress'), $todo_list_count);
+		$todo_list_style_id = "exist_todo";
+	}else{
+		$todo_list_name = sprintf( __( 'next action', 'buddypress' ));
+		$todo_list_style_id = "none_todo";
+	}
+	bp_core_new_nav_item( array(
+		'name' => $todo_list_name,
+		'slug' => 'todo-list',
+		'position' => 115,
+		'screen_function' => 'todo_list_link',
+		'show_for_displayed_user' => true,
+		'default_subnav_slug' => 'unfinished-todo-list',
+		'item_css_id' => $todo_list_style_id
+		) );
 
-		bp_core_new_subnav_item( array(
-			'name' => __( '未完了', 'buddypress' ),
-			'slug' => 'unfinished-todo-list',
-			'parent_url' => trailingslashit($bp->displayed_user->domain . 'todo-list'),
-			'parent_slug' => 'todo-list',
-			'position' => 116,
-			'screen_function' => 'unfinished_todo_list_link',
-			'item_css_id' => 'todo-list'
-			) );
+	bp_core_new_subnav_item( array(
+		'name' => __( '未完了', 'buddypress' ),
+		'slug' => 'unfinished-todo-list',
+		'parent_url' => trailingslashit($bp->displayed_user->domain . 'todo-list'),
+		'parent_slug' => 'todo-list',
+		'position' => 116,
+		'screen_function' => 'unfinished_todo_list_link',
+		'item_css_id' => 'todo-list'
+		) );
 
+	/** add a custom detail settings page **/
+	bp_core_new_subnav_item( array(
+		'name' => "詳細",
+		'slug' => 'detail',
+		'parent_url' => trailingslashit($bp->displayed_user->domain . 'settings'),
+		'parent_slug' => 'settings',
+		'position' => 15,
+		'screen_function' => 'detail_settings_link'
+		));
 	}
 }
 
@@ -1701,6 +1710,25 @@ function todo_list_title(){
 function todo_list_content(){
 	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."members/single/your-todo-list.php";
 }
+
+/**********************************************
+ * 「詳細設定」表示時に使う関数一式
+ **********************************************
+ */
+function detail_settings_link(){
+	add_action( 'bp_template_title', 'detail_settings_title' );
+	add_action( 'bp_template_content', 'detail_settings_content' );
+	bp_core_load_template( apply_filters('bp_core_template_plugin', 'members/single/plugins'));
+}
+
+function detail_settings_title(){
+	echo "詳細";
+}
+
+function detail_settings_content(){
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."members/single/detail-settings.php";
+}
+
 
 
 

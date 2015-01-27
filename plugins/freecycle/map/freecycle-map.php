@@ -104,4 +104,23 @@ function get_max_display_order_of_map_index(){
 	return $wpdb->get_var("SELECT max(display_order) FROM ".$table_prefix."fmt_trade_maps WHERE parent_id = 0");
 }
 
+/**
+ * 取引場所
+ */
+function echo_map_select_options($name, $id){
+	$map_indexes = get_trade_map_indexes();
+echo <<<MAP_SECTION
+	<select name="$name" id="$id">
+		<option value="">取引場所を選択</option>
+MAP_SECTION;
+	foreach ($map_indexes as $index) {
+		echo "<option value=''>$index->name</option>";
+		$children = get_child_trade_map($index->map_id);
+		foreach ($children as $child) {
+			echo "<option value='$child->latitude,$child->longitude'>&nbsp;&nbsp;$child->name</option>";
+
+		}
+	}
+echo "</select>";
+}
 ?>
