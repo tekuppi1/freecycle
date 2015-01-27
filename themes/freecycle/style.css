@@ -1837,6 +1837,7 @@ div.login_form_button button:hover{
 /*ナビゲーション*/
 .grobal_nav_div_sp{
 	display: none;
+	height: 220px;
 }
 
 	
@@ -2976,7 +2977,7 @@ div.login_form_button button:hover{
 /*ナビゲーション*/
 
 div.grobal_nav_div_sp{
-	display: none;
+	display: none !important;
 }
 	
 div.grobal_nav_div{
@@ -3747,4 +3748,8 @@ div.grobal_nav_div_sp ul li a span {
 
 #top_enhance{
 	color: rgb(255, 255, 90);
+}
+
+#edit_form{
+	float: left;
 }
