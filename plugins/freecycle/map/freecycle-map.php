@@ -201,21 +201,12 @@ function delete_trade_map($map_id){
 					array("%d"));	
 }
 
-/**
- *
- */
+
 function get_max_display_order($parent_id=0){
 	global $table_prefix;
 	global $wpdb;
 
 	return $wpdb->get_var($wpdb->prepare("SELECT max(display_order) FROM ".$table_prefix."fmt_trade_maps WHERE parent_id = %d", $parent_id));
-}
-
-function get_max_display_order_of_map_index(){
-	global $table_prefix;
-	global $wpdb;
-
-	return $wpdb->get_var("SELECT max(display_order) FROM ".$table_prefix."fmt_trade_maps WHERE parent_id = 0");
 }
 
 /**
