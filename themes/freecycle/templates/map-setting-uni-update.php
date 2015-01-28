@@ -7,7 +7,7 @@
         $map;
         $url = get_site_url();
 
-        if(isset($map_id)){
+        if(!empty($map_id)){
             $map = get_trade_map($map_id);
             $name = $map->name;
             $display_order = $map->display_order;
@@ -27,7 +27,7 @@
                 break;
             case 'update':
                 $map_id = $_POST['map_id'];
-                update_trade_map($map_id, $name, 0, 0, 0, $display_order);
+                update_trade_map($map_id, $name, 0, 0, 0, $display_order, 0);
                 break;
             default:
                 break;

@@ -12,7 +12,7 @@
         $map;
         $url = get_site_url();
 
-        if(isset($map_id)){
+        if(!empty($map_id)){
             $map = get_trade_map($map_id);
             $name = $map->name;
             $latitude = $map->latitude;
