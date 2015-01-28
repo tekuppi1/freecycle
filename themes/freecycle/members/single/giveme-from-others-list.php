@@ -1,17 +1,29 @@
 <?php
 function echo_map_section($last_post_id){
+	global $user_ID;
 	$map_indexes = get_trade_map_indexes();
-
+	$mylocation = get_user_meta($user_ID, "default_trade_location", true);
 echo <<<MAP_SECTION
 	<span class="label">取引場所:</span>
+MAP_SECTION;
+	if(!$mylocation){
+		echo "<p>標準取引場所を設定すると、取引場所を選択する手間が省けます。<a href='".
+			bp_displayed_user_domain() . bp_get_settings_slug() . "/detail'>こちらから設定してください。</a></p>";
+		$mylocation = get_default_map()->map_id;
+	};
+echo <<<MAP_SECTION
 	<select name="map_search" id="map_search_$last_post_id">
-		<option value="">取引場所を選択</option>
+		<option value="">-- 選択 --</option>
 MAP_SECTION;
 	foreach ($map_indexes as $index) {
 		echo "<option value=''>$index->name</option>";
 		$children = get_child_trade_map($index->map_id);
 		foreach ($children as $child) {
-			echo "<option value='$child->latitude,$child->longitude'>&nbsp;&nbsp;$child->name</option>";
+			$selected = "";
+			if($child->map_id == $mylocation){
+				$selected = "selected";
+			}
+			echo "<option value='$child->map_id' $selected>&nbsp;&nbsp;$child->name</option>";
 
 		}
 	}

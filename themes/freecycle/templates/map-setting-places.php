@@ -22,6 +22,7 @@
 		<th scope="column">緯度</th>
 		<th scope="column">経度</th>
 		<th scope="column">表示順</th>
+		<th scope="column">デフォルト</th>
 		<td></td>
 		<td></td>
 		</tr>
@@ -33,6 +34,7 @@
 	<td>$child->latitude</td>
 	<td>$child->longitude</td>
 	<td>$child->display_order</td>
+	<td>$child->default_flg</td>
 	<td><a href="{$url}/wp-admin/options-general.php?page=texchange&view=map-setting-places-update&map_id=$child->map_id&parent_id=$parent_id&process=update">詳細編集</a></td>
 	<td><a href="{$url}/wp-admin/options-general.php?page=texchange&view=map-setting-places&parent_id=$parent_id&map_id=$child->map_id&process=delete">削除</a></td>
 	</tr>

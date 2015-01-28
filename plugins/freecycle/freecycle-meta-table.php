@@ -7,7 +7,8 @@ class FreecycleMetaTable {
 	var $fmt_user_giveme;
 	var $fmt_wanted_list;
 	var $fmt_todo;
-	
+	var $fmt_trade_maps;
+
 	public function __construct(){
 		global $wpdb;
 		$this->fmt_giveme_state = $wpdb->prefix . 'fmt_giveme_state';
@@ -16,13 +17,14 @@ class FreecycleMetaTable {
 		$this->fmt_user_giveme = $wpdb->prefix . 'fmt_user_giveme';
 		$this->fmt_wanted_list = $wpdb->prefix . 'fmt_wanted_list';
 		$this->fmt_todo = $wpdb->prefix . 'todo';
+		$this->fmt_trade_maps = $wpdb->prefix . 'fmt_trade_maps';
 	}
 	
 	
 	function fmt_activate(){
 		global $wpdb;
 		//DB version
-		$fmt_db_version = '1.03';
+		$fmt_db_version = '1.04';
 		//current DB version
 		$installed_ver = get_option( 'fmt_meta_version' );
 			// if versions are different tables are created
@@ -107,6 +109,22 @@ class FreecycleMetaTable {
 						`created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 						`modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
 						PRIMARY KEY (`todo_id`)
+						) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+						";
+				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+				dbDelta($sql);
+
+				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_trade_maps . "` (
+						`insert_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+						`update_timestamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+						`map_id` int(8) NOT NULL AUTO_INCREMENT,
+						`name` varchar(200) CHARACTER SET utf8 NOT NULL,
+						`parent_id` int(8) NOT NULL DEFAULT '0',
+						`latitude` double(17,14) NOT NULL DEFAULT '0.00000000000000',
+						`longitude` double(17,14) NOT NULL DEFAULT '0.00000000000000',
+						`display_order` int(8) NOT NULL,
+						`default_flg` tinyint(1) NOT NULL,
+						PRIMARY KEY (`map_id`)
 						) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 						";
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');

@@ -1,4 +1,6 @@
 <script>
+var ADMIN_URL = '<?php echo admin_url('admin-ajax.php'); ?>';
+
 function disableButtons(){
 	jQuery("input[type=button]").attr("disabled",true);
 }

@@ -203,24 +203,34 @@
 		var mapsInMessages = document.getElementsByName("map-canvas-message");
 		var geocoder;
 		var location;
-		if(maps){
+		if(maps.length > 0){
 			// set the university in user profile as a default location of maps
-			var uni = "<?php global $current_user; echo xprofile_get_field_data("大学名", $current_user->get('ID')); ?>";
+			var mylocation = "<?php echo get_user_meta(get_current_user_id(), 'default_trade_location', true) ?>";
 			var shownMap;
 			var marker;
 			var input;
 			var searchbox;
-			if(uni){
-				geocoder = new google.maps.Geocoder();
-				geocoder.geocode({'address': uni}, function(results, status){
-				if(status == google.maps.GeocoderStatus.OK){
-        			location = results[0].geometry.location;
-   					for (var i = maps.length-1; i >= 0; i--) {
-						shownMap = showMap(maps[i], location);
-						marker = showMarker(shownMap, maps[i], location, false);
-
-						maps[i].setAttribute("lat", location.lat()); // latitude
-						maps[i].setAttribute("lng", location.lng()); // longitude
+			if(!mylocation){
+				// if user default trade location is not set, set default
+				mylocation = "<?php echo get_default_map()->map_id ?>";
+			}
+			jQuery.ajax({
+				type: "POST",
+				url: ADMIN_URL,
+				data: {
+					"action": "get_trade_map",
+					"map_id": mylocation
+				},
+				success: function(res){
+					var location = jQuery.parseJSON(res);
+					var lat = location.latitude * 1;
+					var lng = location.longitude * 1;
+					for (var i = maps.length-1; i >= 0; i--) {
+						var pos = new google.maps.LatLng(lat, lng, false);
+						shownMap = showMap(maps[i], pos);
+						marker = showMarker(shownMap, maps[i], pos, false);
+						maps[i].setAttribute("lat", lat); // latitude
+						maps[i].setAttribute("lng", lng); // longitude
 						var itemID = maps[i].getAttribute("id").replace("map_canvas_", "");
 						input = document.getElementById("map_search_" + itemID);
 						// set the input form as a place search form of the map
@@ -230,29 +240,38 @@
 							var location;
 							return function(){
 								var val = input.value;
-								var lat, lng, position;
+								console.log(val);
 								if(val.length == 0){
 									return;
 								}else{
-									lat = val.split(',')[0] * 1; // parse string to number
-									lng = val.split(',')[1] * 1; // parse string to number
-									position = {lat: lat, lng: lng};
-									marker.setPosition(position);
-									map.setCenter(position);
-									map.setZoom(17);
+									jQuery.ajax({
+										type: "POST",
+										url: ADMIN_URL,
+										data: {
+											"action": "get_trade_map",
+											"map_id": val
+										},
+										success: function(res){
+											var location = jQuery.parseJSON(res);
+											var lat, lng, position;
+											lat = location.latitude * 1; // parse string to number
+											lng = location.longitude * 1; // parse string to number
+											position = {lat: lat, lng: lng};
+											marker.setPosition(position);
+											map.setCenter(position);
+											map.setZoom(17);
 
-									mapelm.setAttribute("lat", lat); // latitude
-									mapelm.setAttribute("lng", lng); // longitude
+											mapelm.setAttribute("lat", lat); // latitude
+											mapelm.setAttribute("lng", lng); // longitude
+										}
+									});
 								}								
 							}
 						}
-						var func = _create_callback(shownMap, input, marker, maps[i]);
-						input.onchange = func;
+						input.onchange = _create_callback(shownMap, input, marker, maps[i]);
 					}
-  				}else{
-        			console.log("Geocode was not successful for the following reason: " + status);
-      			}});
-			}
+				}
+			});
   		}
 
   		if(mapsInMessages){

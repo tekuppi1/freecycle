@@ -7,6 +7,8 @@
         $display_order = "";
         $latitude = 0;
         $longitude = 0;
+        $default_flg = 0;
+        $default_checked = "";
         $map;
         $url = get_site_url();
 
@@ -16,6 +18,7 @@
             $latitude = $map->latitude;
             $longitude = $map->longitude;
             $display_order = $map->display_order;
+            $default_flg = $map->default_flg;
         }else{
             $display_order = get_max_display_order($parent_id) + 1;
         }
@@ -27,18 +30,23 @@
             $latitude = isset($_POST['latitude'])?$_POST['latitude']:"";
             $longitude = isset($_POST['longitude'])?$_POST['longitude']:"";
             $display_order = isset($_POST['display_order'])?$_POST['display_order']:"";
+            $default_flg = isset($_POST['default_flg'])?1:0;
             switch ($_POST['map_action']) {
                 case 'add':
-                    $map_id = add_trade_map($name, $parent_id, $latitude, $longitude, $display_order);
+                    $map_id = add_trade_map($name, $parent_id, $latitude, $longitude, $display_order, $default_flg);
                     $process = "update";
                     break;
                 case 'update':
                     $map_id = $_POST['map_id'];
-                    update_trade_map($map_id, $name, $parent_id, $latitude, $longitude, $display_order);
+                    update_trade_map($map_id, $name, $parent_id, $latitude, $longitude, $display_order, $default_flg);
                     break;
                 default:
                     break;
             }
+        }
+
+        if($default_flg == 1){
+            $default_checked = "checked";
         }
 
     ?>
@@ -82,6 +90,12 @@ OPTIONS;
 			<input type="number" min='1' max='30' name="display_order" value="<?php echo $display_order ?>" />
 		</td>
 		</tr>
+        <tr valign="top">
+        <th>デフォルト</th>
+        <td>
+            <input type="checkbox" name="default_flg" value="1" <?php echo $default_checked ?>/>
+        </td>
+        </tr>
 		</tbody>	
     </table>
     <input type="hidden" name="map_id" value="<?php echo $map_id?>" />

@@ -21,8 +21,8 @@
         $display_order = $_POST['display_order'];
         switch ($_POST['map_action']) {
             case 'add':
-                $map_id = add_trade_map_index($name, $display_order);
-                $display_order = get_max_display_order_of_map_index();
+                $map_id = add_trade_map_parent($name, $display_order);
+                $display_order = get_max_display_order();
                 $process = "update";
                 break;
             case 'update':
