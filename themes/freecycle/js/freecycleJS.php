@@ -50,7 +50,7 @@ function onConfirmGiveme(postID, url){
 		confirmButtonColor: "#DD6B55",   
 		confirmButtonText: "はい",   
 		cancelButtonText: "いいえ",   
-		closeOnConfirm: false,   
+		closeOnConfirm: true,   
 		closeOnCancel: true 
 	}, 
 	function(isConfirm){

@@ -12,7 +12,7 @@
 				confirmButtonColor: "#DD6B55",   
 				confirmButtonText: "はい",   
 				cancelButtonText: "いいえ",   
-				closeOnConfirm: false,   
+				closeOnConfirm: true,   
 				closeOnCancel: true 
 			}, 
 			function(isConfirm){
@@ -57,7 +57,7 @@
 				confirmButtonColor: "#AEDEF4",   
 				confirmButtonText: "はい",   
 				cancelButtonText: "いいえ",   
-				closeOnConfirm: false,   
+				closeOnConfirm: true,   
 				closeOnCancel: true 
 			}, 
 			function(isConfirm){
@@ -95,7 +95,7 @@
 				confirmButtonColor: "#DD6B55",   
 				confirmButtonText: "はい",   
 				cancelButtonText: "いいえ",   
-				closeOnConfirm: false,   
+				closeOnConfirm: true,   
 				closeOnCancel: true 
 			}, 
 			function(isConfirm){
@@ -133,7 +133,7 @@
 					showCancelButton: false,   
 					confirmButtonColor: "#AEDEF4", 
 					confirmButtonText: "OK",      
-					closeOnConfirm: false
+					closeOnConfirm: true
 				}); 
 				enableButtons();
 				return;
@@ -144,7 +144,7 @@
 					showCancelButton: false,   
 					confirmButtonColor: "#AEDEF4", 
 					confirmButtonText: "OK",      
-					closeOnConfirm: false
+					closeOnConfirm: true
 				}); 
 				enableButtons();
 				return;
@@ -168,7 +168,7 @@
 						showCancelButton: false,   
 						confirmButtonColor: "#AEDEF4", 
 						confirmButtonText: "OK",      
-						closeOnConfirm: false
+						closeOnConfirm: true
 					}); 
 					enableButtons();
 				}
@@ -188,7 +188,7 @@
 					showCancelButton: false,   
 					confirmButtonColor: "#AEDEF4", 
 					confirmButtonText: "OK",      
-					closeOnConfirm: false
+					closeOnConfirm: true
 				}); 
 				enableButtons();
 				return;
@@ -199,7 +199,7 @@
 					showCancelButton: false,   
 					confirmButtonColor: "#AEDEF4", 
 					confirmButtonText: "OK",      
-					closeOnConfirm: false
+					closeOnConfirm: true
 				}); 
 				enableButtons();
 				return;
@@ -223,7 +223,7 @@
 						showCancelButton: false,   
 						confirmButtonColor: "#AEDEF4", 
 						confirmButtonText: "OK",      
-						closeOnConfirm: false
+						closeOnConfirm: true
 					});
 					enableButtons();
 				}
@@ -239,7 +239,7 @@
 				confirmButtonColor: "#DD6B55",   
 				confirmButtonText: "はい",   
 				cancelButtonText: "いいえ",   
-				closeOnConfirm: false,   
+				closeOnConfirm: true,   
 				closeOnCancel: true 
 			}, 
 			function(isConfirm){
@@ -259,7 +259,7 @@
 								showCancelButton: false,   
 								confirmButtonColor: "#AEDEF4", 
 								confirmButtonText: "OK",      
-								closeOnConfirm: false
+								closeOnConfirm: true
 							},
 							function(){
 							location.href = "<?php echo home_url(); ?>";
@@ -272,7 +272,7 @@
 								showCancelButton: false,   
 								confirmButtonColor: "#AEDEF4", 
 								confirmButtonText: "OK",      
-								closeOnConfirm: false
+								closeOnConfirm: true
 							}); 
 						}
 					});
@@ -292,7 +292,7 @@
 				confirmButtonColor: "#DD6B55",   
 				confirmButtonText: "はい",   
 				cancelButtonText: "いいえ",   
-				closeOnConfirm: false,   
+				closeOnConfirm: true,   
 				closeOnCancel: true,
 			}, 
 			function(isConfirm){   
@@ -323,7 +323,7 @@
 				confirmButtonColor: "#DD6B55",   
 				confirmButtonText: "はい",   
 				cancelButtonText: "いいえ",   
-				closeOnConfirm: false,   
+				closeOnConfirm: true,   
 				closeOnCancel: true,
 			}, 
 			function(isConfirm){   
