@@ -944,9 +944,18 @@ add_action('messages_action_conversation', 'push_updated_count');
 add_action('wp_login', 'push_updated_count');
 
 function delete_post(){
-	wp_delete_post($_POST['postID']);
-	// minus point on delete post
-	add_got_points($_POST['userID'], -1 * get_option('exhibition-point'));
+	global $user_ID;
+	$postID = isset($_POST['postID'])?$_POST['postID']:"";
+	if($postID == ""){
+    die;
+	}
+	$item = get_post($postID);
+	$author = $item->post_author;
+	if($user_ID == $author){
+		wp_delete_post($postID);
+		// minus point on delete post
+		add_got_points($author, -1 * get_option('exhibition-point'));
+	}
 	die;
 }
 

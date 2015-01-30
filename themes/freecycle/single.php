@@ -152,7 +152,6 @@
 					data: {
 						"action": "delete_post",
 						"postID": "<?php echo $post->ID ?>",
-						"userID": "<?php echo $user_ID ?>"
 					},
 					success: function(msg){
 						alert("出品を取り消しました。");
