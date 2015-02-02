@@ -5,24 +5,44 @@
 		 */
 		function onFinish(){
 			disableButtons();
-			if(confirm("商品の受け渡しが完了していますか？")){
-				jQuery.ajax({
-					type: "POST",
-					url: '<?php echo admin_url('admin-ajax.php'); ?>',
-					data: {
-						"action": "finish",
-						"postID": "<?php echo $post->ID ?>",
-						"userID": "<?php echo $user_ID ?>"
-					},
-					success: function(msg){
-						afterFinish();
-						alert("取引が完了しました。落札者の評価を行ってください！");
-						enableButtons();
-					}
-				});
-			}else{
+			swal({   
+				title: "商品の受け渡しが完了していますか？",      
+				type: "warning",   
+				showCancelButton: true,   
+				confirmButtonColor: "#DD6B55",   
+				confirmButtonText: "はい",   
+				cancelButtonText: "いいえ",   
+				closeOnConfirm: true,   
+				closeOnCancel: true 
+			}, 
+			function(isConfirm){
+				if (isConfirm) {
+					jQuery.ajax({
+						type: "POST",
+						url: '<?php echo admin_url('admin-ajax.php'); ?>',
+						data: {
+							"action": "finish",
+							"postID": "<?php echo $post->ID ?>",
+							"userID": "<?php echo $user_ID ?>"
+						},
+						success: function(msg){
+							afterFinish();
+							swal({   
+								title: "取引が完了しました。",  
+								text: "落札者の評価を行ってください！",
+								type: "success",   
+								showCancelButton: false,   
+								confirmButtonColor: "#AEDEF4", 
+								confirmButtonText: "OK",      
+								closeOnConfirm: true
+							});
+							enableButtons();
+						}
+					});
+				}else{
 				enableButtons();
-			}
+				} 
+			});
 		}
 
 		/**
@@ -30,50 +50,75 @@
 		 */
 		function onGiveme(){
 			disableButtons();
-			if(confirm("くださいリクエストをします。よろしいですか？")){
-				jQuery.ajax({
-					type: "POST",
-					url: '<?php echo admin_url('admin-ajax.php'); ?>',
-					data: {
-						"action": "giveme",
-						"postID": "<?php echo $post->ID ?>",
-						"userID": "<?php echo $user_ID ?>"
-					},
-					success: function(msg){
-						switchGiveme();
-						alert(msg);
-						enableButtons();
-					}
-				});
-			}else{
-				enableButtons();
-			}
+			swal({   
+				title: "くださいリクエストをします。",   
+				text: "よろしいですか？",     
+				showCancelButton: true,   
+				confirmButtonColor: "#AEDEF4",   
+				confirmButtonText: "はい",   
+				cancelButtonText: "いいえ",   
+				closeOnConfirm: true,   
+				closeOnCancel: true 
+			}, 
+			function(isConfirm){
+				if (isConfirm) {
+					jQuery.ajax({
+						type: "POST",
+						url: '<?php echo admin_url('admin-ajax.php'); ?>',
+						data: {
+							"action": "giveme",
+							"postID": "<?php echo $post->ID ?>",
+							"userID": "<?php echo $user_ID ?>"
+						},
+						success: function(msg){
+							switchGiveme();
+							swal(msg);
+							enableButtons();
+						}
+					});
+				} else {
+					enableButtons();   
+				} 
+			});
 		}
-
+		
 		/**
 		 This function is called when cancelGiveme button is clicked.
 		 */
 		function onCancelGiveme(){
 			disableButtons();
-			if(confirm("くださいリクエストを取消します。よろしいですか？")){
-				jQuery.ajax({
-					type: "POST",
-					url: '<?php echo admin_url('admin-ajax.php'); ?>',
-					data: {
-						"action": "cancelGiveme",
-						"postID": "<?php echo $post->ID ?>",
-						"userID": "<?php echo $user_ID ?>"
-					},
-					success: function(msg){
-						switchGiveme();
-						alert(msg);
-						enableButtons();
-					}
-				});
-			}else{
-				enableButtons();
-			}
-		}
+			swal({
+				title: "くださいリクエストを取消します。",   
+				text: "よろしいですか？",   
+				type: "warning",   
+				showCancelButton: true,   
+				confirmButtonColor: "#DD6B55",   
+				confirmButtonText: "はい",   
+				cancelButtonText: "いいえ",   
+				closeOnConfirm: true,   
+				closeOnCancel: true 
+			}, 
+			function(isConfirm){
+				if (isConfirm) {
+					jQuery.ajax({
+						type: "POST",
+						url: '<?php echo admin_url('admin-ajax.php'); ?>',
+						data: {
+							"action": "cancelGiveme",
+							"postID": "<?php echo $post->ID ?>",
+							"userID": "<?php echo $user_ID ?>"
+						},
+						success: function(msg){
+							switchGiveme();
+							swal(msg);
+							enableButtons();
+						}
+					});
+				}else{
+					enableButtons();
+				}
+			});
+		}	
 
 		function onExhibiterEvaluation(){
 			var score = jQuery("#score").val();
@@ -82,11 +127,25 @@
 			disableButtons();
 			// check input values
 			if(score === "invalid"){
-				alert("評価を選択してください。");
+				swal({   
+					title: "評価を選択してください。",  
+					type: "error",   
+					showCancelButton: false,   
+					confirmButtonColor: "#AEDEF4", 
+					confirmButtonText: "OK",      
+					closeOnConfirm: true
+				}); 
 				enableButtons();
 				return;
 			}else if(comment.length > 100){
-				alert("コメントは100文字以内で記入してください。");
+				swal({   
+					title: "コメントは100文字以内で記入してください。",  
+					type: "error",   
+					showCancelButton: false,   
+					confirmButtonColor: "#AEDEF4", 
+					confirmButtonText: "OK",      
+					closeOnConfirm: true
+				}); 
 				enableButtons();
 				return;
 			}
@@ -103,7 +162,14 @@
 				},
 				success: function(msg){
 					afterEvaluation();
-					alert("取引評価を行いました！");
+					swal({   
+						title: "取引評価を行いました！",  
+						type: "success",   
+						showCancelButton: false,   
+						confirmButtonColor: "#AEDEF4", 
+						confirmButtonText: "OK",      
+						closeOnConfirm: true
+					}); 
 					enableButtons();
 				}
 			});
@@ -116,11 +182,25 @@
 			var comment = jQuery("#trade_comment").val();
 			// check input values
 			if(score === "invalid"){
-				alert("評価を選択してください。");
+				swal({   
+					title: "評価を選択してください。",  
+					type: "error",   
+					showCancelButton: false,   
+					confirmButtonColor: "#AEDEF4", 
+					confirmButtonText: "OK",      
+					closeOnConfirm: true
+				}); 
 				enableButtons();
 				return;
 			}else if(comment.length > 100){
-				alert("コメントは100文字以内で記入してください。");
+				swal({   
+					title: "コメントは100文字以内で記入してください。",  
+					type: "error",   
+					showCancelButton: false,   
+					confirmButtonColor: "#AEDEF4", 
+					confirmButtonText: "OK",      
+					closeOnConfirm: true
+				}); 
 				enableButtons();
 				return;
 			}
@@ -137,13 +217,21 @@
 				},
 				success: function(msg){
 					afterEvaluation();
-					alert("取引評価を行いました！");
+					swal({   
+						title: "取引評価を行いました！",  
+						type: "success",   
+						showCancelButton: false,   
+						confirmButtonColor: "#AEDEF4", 
+						confirmButtonText: "OK",      
+						closeOnConfirm: true
+					});
 					enableButtons();
 				}
 			});
 		}
 
 		function onDeletePost(){
+<<<<<<< HEAD
 			if(confirm("取り消した出品は復活できません。よろしいですか？")){
 				// send values
 				jQuery.ajax({
@@ -162,48 +250,121 @@
 					}
 				});
 			}else{
+=======
+			swal({   
+				title: "取り消した出品は復活できません。",   
+				text: "よろしいですか？",   
+				type: "warning",   
+				showCancelButton: true,   
+				confirmButtonColor: "#DD6B55",   
+				confirmButtonText: "はい",   
+				cancelButtonText: "いいえ",   
+				closeOnConfirm: true,   
+				closeOnCancel: true 
+			}, 
+			function(isConfirm){
+				if (isConfirm) {
+					jQuery.ajax({
+						type: "POST",
+						url: '<?php echo admin_url('admin-ajax.php'); ?>',
+						data: {
+							"action": "delete_post",
+							"postID": "<?php echo $post->ID ?>",
+							"userID": "<?php echo $user_ID ?>"
+						},
+						success: function(msg){
+							swal({   
+								title: "商品を取り消しました。", 
+								type: "success",   
+								showCancelButton: false,   
+								confirmButtonColor: "#AEDEF4", 
+								confirmButtonText: "OK",      
+								closeOnConfirm: true
+							},
+							function(){
+							location.href = "<?php echo home_url(); ?>";
+							});
+						},
+						false: function(msg){
+							swal({   
+								title: "商品を取り消しに失敗しました。",  
+								type: "error",   
+								showCancelButton: false,   
+								confirmButtonColor: "#AEDEF4", 
+								confirmButtonText: "OK",      
+								closeOnConfirm: true
+							}); 
+						}
+					});
+				}else{
+>>>>>>> 7572b07f43a95cc2495a6eff333d1782749c9d95
 				return false;
-			}
+				}
+			});
 		}
 
 		function onCancelTradeFromExhibitor(){
 			// 確認ダイアログを表示
-			if(confirm('現在の相手との取引をキャンセルします。よろしいですか？')){
-				jQuery.ajax({
-					type: "POST",
-					url: '<?php echo admin_url('admin-ajax.php'); ?>',
-					data: {
-						"action": "cancel_trade_from_exhibitor",
-						"postID": "<?php echo $post->ID ?>"
-					},
+			swal({   
+				title: "取引をキャンセルします。",   
+				text: "よろしいですか？",   
+				type: "warning",   
+				showCancelButton: true,   
+				confirmButtonColor: "#DD6B55",   
+				confirmButtonText: "はい",   
+				cancelButtonText: "いいえ",   
+				closeOnConfirm: true,   
+				closeOnCancel: true,
+			}, 
+			function(isConfirm){   
+				if (isConfirm) {     
+					jQuery.ajax({
+						type: "POST",
+						url: '<?php echo admin_url('admin-ajax.php'); ?>',
+						data: {
+							"action": "cancel_trade_from_exhibitor",
+							"postID": "<?php echo $post->ID ?>"
+						},
 					success: function(msg){
 						jQuery('<a href="javaScript:onDeletePost();">出品取り消し</a>').replaceAll(jQuery("#cancelTradeFromExhibitor"));
-						alert(msg);
+						swal(msg);						
 					}
-				});
-			}
-			// OKが押されたら取り消し処理(Ajax)を動かす。
+				})
+				} 
+			});
 		}
 
 		function onCancelTradeFromBidder(){
 			// 確認ダイアログを表示
-			if(confirm('取引をキャンセルします。よろしいですか？')){
-				jQuery.ajax({
-					type: "POST",
-					url: '<?php echo admin_url('admin-ajax.php'); ?>',
-					data: {
-						"action": "cancel_trade_from_bidder",
-						"postID": "<?php echo $post->ID ?>"
-					},
-					success: function(msg){
-						alert(msg);
-                        location.href = "<?php echo home_url(); ?>";
-					}
-				});
-			}
-			// OKが押されたら取り消し処理(Ajax)を動かす。
+			swal({
+				title: "取引をキャンセルします。",   
+				text: "よろしいですか？",   
+				type: "warning",   
+				showCancelButton: true,   
+				confirmButtonColor: "#DD6B55",   
+				confirmButtonText: "はい",   
+				cancelButtonText: "いいえ",   
+				closeOnConfirm: true,   
+				closeOnCancel: true,
+			}, 
+			function(isConfirm){   
+				if (isConfirm) {     
+			　		jQuery.ajax({
+				　　　	type: "POST",
+						url: '<?php echo admin_url('admin-ajax.php'); ?>',
+						data: {
+							"action": "cancel_trade_from_bidder",
+							"postID": "<?php echo $post->ID ?>"
+						},
+						success: function(msg){
+							swal(msg);	
+							location.href = "<?php echo home_url(); ?>";					
+						}
+					});
+				} 
+			});
 		}
-
+		
 		function switchGiveme(){
 			if(jQuery("#giveme").size() > 0){
 				jQuery('<input type="button" id="cancelGiveme" value="ください取消" onClick="onCancelGiveme();">').replaceAll(jQuery("#giveme"));
