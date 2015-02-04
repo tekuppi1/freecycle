@@ -804,25 +804,33 @@ function exhibit_to_wanted(){
  * 
  */
 function exhibit_from_app(){
-	// $exhibitor = get_user_by('login', $_POST['exhibitor_id']);
-	// if(!$exhibitor || !wp_check_password($_POST['password'], $exhibitor->data->user_pass, $exhibitor->ID)){
-	// 	echo "ユーザ名とパスワードの組合せが不正です。";
-	// 	die;
-	// }
-
 	$current_user_id = get_current_user_id();
+	$item_name = isset($_POST['item_name'])?$_POST['item_name']:"";
+	$image_url = isset($_POST['image_url'])?$_POST['image_url']:"";
+	$category = isset($_POST['category'])?$_POST['category']:"";
 
 	if($current_user_id === 0){
 		echo "ログインされていないため出品できません。";
 		die;
 	}
 
+	if(strlen($item_name) <= 0){
+		echo "商品名が入力されていません。";
+		die;
+	}
+
+	if(strlen($image_url) <= 0){
+		echo "画像がありません。";
+		die;
+	}
+
 	$insert_id = exhibit(array(
 		'exhibitor_id' => $current_user_id,
-		'item_name' => $_POST['item_name'],
-		'image_url' => $_POST['image_url'],
+		'item_name' => $item_name, 
+		'image_url' => $image_url, 
 		'department' => xprofile_get_field_data('学部', $current_user_id),
 		'course' => xprofile_get_field_data('学科', $current_user_id),
+		'item_category' => $category
 	));
 
 	if($insert_id !== 0){
