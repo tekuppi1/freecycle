@@ -12,7 +12,7 @@
 <!-- category -->
 <label for="main_category">カテゴリ</label></br>
 <select name="main_category" onChange="onChangeMainCategory()">
-<option value="">-- 大学名 --</option>
+<option value="">-- 親カテゴリ --</option>
 <?php
 	$main_categories = get_categories(array(
 		"parent" => 0,
@@ -34,7 +34,7 @@
 ?>
 </select>
 <select name="subcategory">
-<option value="">-- 学部 --</option>
+<option value="">-- 子カテゴリ --</option>
 <?php
 		$user_department = xprofile_get_field_data('学部', $user_ID);
 		$user_college_ID = get_cat_ID($user_college);

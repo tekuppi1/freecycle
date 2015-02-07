@@ -272,7 +272,16 @@
 						?>
 						</div>
 						<div>
-							学部,学科: <?php echo get_post_custom_values("department")["0"] ?>,<?php echo get_post_custom_values("course")["0"] ?>
+							<?php 
+								$child_category = get_the_category();
+								if($child_category[0]->cat_name == 'Uncategorized'):
+									echo "カテゴリ:未設定";
+								else:
+									$parent_category = get_category($child_category[0]->parent); 
+								?>
+	 							親カテゴリ: <?php echo $parent_category->cat_name;?> <br>
+	 							子カテゴリ: <?php echo $child_category[0]->cat_name; ?>
+ 							<?php endif; ?>	
 						</div>
 						<?php
 						/*

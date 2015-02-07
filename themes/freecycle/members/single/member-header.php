@@ -31,14 +31,14 @@
 
 		var mainCategory = jQuery('[name=main_category]').val();
 		if(mainCategory == ""){
-			alert("大学名が未入力です。");
+			alert("親カテゴリが未入力です。");
 			enableButtons();
 			return false;
 		}
 
 		var subCategory = jQuery('[name=subcategory]').val();
 		if(subCategory == ""){
-			alert("学部名が未入力です。");
+			alert("子カテゴリが未入力です。");
 			enableButtons();
 			return false;
 		}
@@ -200,7 +200,7 @@
 
 		newentry.subcategory.length = 1;
 		newentry.subcategory[0].value = "";
-		newentry.subcategory[0].text = "-- 学部 --";
+		newentry.subcategory[0].text = "-- 子カテゴリ --";
 
 		if(!subcategories){
 			return;
