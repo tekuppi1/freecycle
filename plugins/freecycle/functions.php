@@ -2758,3 +2758,44 @@ function upload_itempictures($itemID){
 		}
 	}
 }
+
+function main_category(){
+	$main_categories = get_categories(array(
+		"parent" => 0,
+		"hide_empty" => 0,
+		"exclude" => 1 //'uncategorized'
+	));
+
+	global $user_ID;
+	$user_college = xprofile_get_field_data('大学名', $user_ID);
+	foreach ((array)$main_categories as $category) {
+		$value = $category->term_id;
+		$name = $category->name;
+		if($user_college == $name){
+			echo "<option value='$value' selected >$name</option>";
+		}else{
+			echo "<option value='$value'>$name</option>";
+		}
+	}
+
+	return $user_college;
+}
+
+function sub_category($user_college){
+	global $user_ID;
+	$user_department = xprofile_get_field_data('学部', $user_ID);
+	$user_college_ID = get_cat_ID($user_college);
+	$department_IDs = get_term_children($user_college_ID, 'category');
+
+	foreach((array)$department_IDs as $department_ID){
+		$department = get_category($department_ID);
+		$value = $department->term_id;
+		$name = $department->name;
+		if($user_department == $name){
+			echo "<option value='$value' selected >$name</option>";
+		}else{
+			echo "<option value='$value'>$name</option>";
+		}
+	}
+
+}
