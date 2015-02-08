@@ -462,14 +462,14 @@
 						</div>
 						<div>
 							<?php 
-								$child_category = get_the_category();
-								if($child_category[0]->cat_name == 'Uncategorized'):
+								$sub_category = get_the_category();
+								if($sub_category[0]->cat_name == 'Uncategorized'):
 									echo "カテゴリ:未設定";
 								else:
-									$parent_category = get_category($child_category[0]->parent); 
+									$main_category = get_category($sub_category[0]->parent); 
 								?>
-	 							親カテゴリ: <?php echo $parent_category->cat_name;?> <br>
-	 							子カテゴリ: <?php echo $child_category[0]->cat_name; ?>
+	 							親カテゴリ: <?php echo $main_category->cat_name;?> <br>
+	 							子カテゴリ: <?php echo $sub_category[0]->cat_name; ?>
  							<?php endif; ?>	
 						</div>
 						<?php
@@ -633,6 +633,32 @@
 				<option id="eval2" value="bad"><?php echo get_display_item_status("bad"); ?></option>
 			</select><br>
 	<label>商品説明</label><br><textarea rows="5" cols="40" name="item_content" ><?php remove_filter('the_content', 'wpautop'); the_content(); ?></textarea></br>
+	<label>カテゴリ</label></br>
+	<select name="main_category" onChange="onChangeMainCategory(1)">
+	<?php 
+		$sub_category = get_the_category();
+		if($sub_category[0]->cat_name == 'Uncategorized'):
+	?>
+			<option value="">-- 親カテゴリ --</option>
+			<?php $item_main_category_name = output_main_category(0); ?>
+			</select>
+			<select name="subcategory">
+			<option value="">-- 子カテゴリ --</option>
+			<?php output_sub_category($item_main_category_name,0); ?>
+			</select><br>
+	<?php
+		else:
+			$main_category = get_category($sub_category[0]->parent);
+	?>
+			<option value="">-- 親カテゴリ --</option>
+			<?php $item_main_category_name = output_main_category($main_category->cat_name); ?>
+			</select>
+			<select name="subcategory">
+			<option value="">-- 子カテゴリ --</option>
+			<?php output_sub_category($item_main_category_name, $sub_category[0]->cat_name); ?>
+			</select><br>
+	<?php endif; ?>	
+	
 	<label>写真</label><br>
 		<input type="file" class="multi" name="upload_attachment[]" ></br>
 		<input type="file" class="multi" name="upload_attachment[]" ></br>

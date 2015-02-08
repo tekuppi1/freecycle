@@ -2759,7 +2759,7 @@ function upload_itempictures($itemID){
 	}
 }
 
-function main_category(){
+function output_main_category($item_main_category_name){
 	$main_categories = get_categories(array(
 		"parent" => 0,
 		"hide_empty" => 0,
@@ -2767,31 +2767,36 @@ function main_category(){
 	));
 
 	global $user_ID;
-	$user_college = xprofile_get_field_data('大学名', $user_ID);
+	if($item_main_category_name === 0){
+		$item_main_category_name = xprofile_get_field_data('大学名', $user_ID);
+	}
+
 	foreach ((array)$main_categories as $category) {
 		$value = $category->term_id;
 		$name = $category->name;
-		if($user_college == $name){
+		if($item_main_category_name == $name){
 			echo "<option value='$value' selected >$name</option>";
 		}else{
 			echo "<option value='$value'>$name</option>";
 		}
 	}
 
-	return $user_college;
+	return $item_main_category_name;
 }
 
-function sub_category($user_college){
+function output_sub_category($item_main_category_name, $item_sub_category_name){
 	global $user_ID;
-	$user_department = xprofile_get_field_data('学部', $user_ID);
-	$user_college_ID = get_cat_ID($user_college);
-	$department_IDs = get_term_children($user_college_ID, 'category');
+	if($item_sub_category_name === 0){
+		$item_sub_category_name = xprofile_get_field_data('学部', $user_ID);
+	}
+	$user_main_category_ID = get_cat_ID($item_main_category_name);
+	$department_IDs = get_term_children($user_main_category_ID, 'category');
 
 	foreach((array)$department_IDs as $department_ID){
 		$department = get_category($department_ID);
 		$value = $department->term_id;
 		$name = $department->name;
-		if($user_department == $name){
+		if($item_sub_category_name == $name){
 			echo "<option value='$value' selected >$name</option>";
 		}else{
 			echo "<option value='$value'>$name</option>";
