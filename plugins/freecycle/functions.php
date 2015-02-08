@@ -2656,11 +2656,14 @@ function ajax_edit_item(){
 	$item_title = isset($_POST['item_title'])?$_POST['item_title']:"";
 	$item_content = isset($_POST['item_content'])?$_POST['item_content']:"";
 	$item_status = isset($_POST['item_status'])?$_POST['item_status']:"";
+	$item_sub_category = isset($_POST['subcategory'])?$_POST['subcategory']:"";
+
 	$userID = get_current_user_id();
 
 	if(is_exhibitor($itemID, $userID)){
 		edit_item($itemID, $item_title, $item_content, $item_status);
 		upload_itempictures($itemID);
+		update_sub_category($item_sub_category, $itemID);
 	}
 
 }
@@ -2759,6 +2762,10 @@ function upload_itempictures($itemID){
 	}
 }
 
+/**
+* 親カテゴリを出力する関数
+* @param {string} $item_main_category_name 親カテゴリ名
+*/
 function output_main_category($item_main_category_name){
 	$main_categories = get_categories(array(
 		"parent" => 0,
@@ -2784,6 +2791,11 @@ function output_main_category($item_main_category_name){
 	return $item_main_category_name;
 }
 
+/**
+* 子カテゴリを出力する関数
+* @param {string} $item_main_category_name 親カテゴリ名
+* @param {string} $item_sub_category_name 子カテゴリ名
+*/
 function output_sub_category($item_main_category_name, $item_sub_category_name){
 	global $user_ID;
 	if($item_sub_category_name === 0){
@@ -2802,5 +2814,13 @@ function output_sub_category($item_main_category_name, $item_sub_category_name){
 			echo "<option value='$value'>$name</option>";
 		}
 	}
+
+}
+
+function update_sub_category($item_sub_category, $itemID){
+	global $wpdb;
+	global $table_prefix;
+
+	$wpdb->update($table_prefix."term_relationships", array('term_taxonomy_id' => $item_sub_category), array('object_id' => $itemID));
 
 }

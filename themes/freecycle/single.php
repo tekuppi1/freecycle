@@ -643,7 +643,7 @@
 			<?php $item_main_category_name = output_main_category(0); ?>
 			</select>
 			<select name="subcategory">
-			<option value="">-- 子カテゴリ --</option>
+			<option value="1">-- 子カテゴリ --</option>
 			<?php output_sub_category($item_main_category_name,0); ?>
 			</select><br>
 	<?php
@@ -654,7 +654,7 @@
 			<?php $item_main_category_name = output_main_category($main_category->cat_name); ?>
 			</select>
 			<select name="subcategory">
-			<option value="">-- 子カテゴリ --</option>
+			<option value="1">-- 子カテゴリ --</option>
 			<?php output_sub_category($item_main_category_name, $sub_category[0]->cat_name); ?>
 			</select><br>
 	<?php endif; ?>	
