@@ -392,6 +392,11 @@
 			newNode.id = 'edit_content';
 			content.appendChild(newNode);
 
+			//隠していた編集内容の削除
+			while(templete.firstChild){
+				templete.removeChild(templete.firstChild);
+			}
+
 			//出品物の状態を保持
 			var statusLabel = {
 				"verygood" : 0,
