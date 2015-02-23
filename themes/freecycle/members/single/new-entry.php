@@ -13,11 +13,11 @@
 <label for="main_category">カテゴリ</label></br>
 <select name="main_category" onChange="onChangeMainCategory(0)">
 <option value="">-- 親カテゴリ --</option>
-<?php $main_category = output_main_category(); ?>
+<?php $main_category = output_main_category(0); ?>
 </select>
 <select name="subcategory">
 <option value="">-- 子カテゴリ --</option>
-<?php output_sub_category($main_category); ?>
+<?php output_sub_category($main_category,0); ?>
 </select>
 </br>
 <!-- status -->

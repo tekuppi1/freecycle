@@ -2774,6 +2774,7 @@ function output_main_category($item_main_category_name){
 	));
 
 	global $user_ID;
+	//親カテゴリがない場合
 	if($item_main_category_name === 0){
 		$item_main_category_name = xprofile_get_field_data('大学名', $user_ID);
 	}
@@ -2798,6 +2799,7 @@ function output_main_category($item_main_category_name){
 */
 function output_sub_category($item_main_category_name, $item_sub_category_name){
 	global $user_ID;
+	//子カテゴリがない場合
 	if($item_sub_category_name === 0){
 		$item_sub_category_name = xprofile_get_field_data('学部', $user_ID);
 	}
