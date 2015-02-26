@@ -5,11 +5,14 @@ function onChangeUniversity(){
 	var form = document.getElementById("settings-form");
 	var map_id = form.trade_location_university.value;
 
+	form.trade_location.disabled = "true";
+
 	form.trade_location.length = 1;
 	form.trade_location[0].value = "";
 	form.trade_location[0].text = "-- 取引場所を選択 --";
 
 	if(map_id === ""){
+		form.trade_location.disabled = "";
 		return;
 	}
 
@@ -30,6 +33,7 @@ function onChangeUniversity(){
 					form.trade_location[form.trade_location.length-1].value = location.map_id;
 					form.trade_location[form.trade_location.length-1].text = location.name;					
 				});
+				form.trade_location.disabled = "";
 			}
 	});
 }
