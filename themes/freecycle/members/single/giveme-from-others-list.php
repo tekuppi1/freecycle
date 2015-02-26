@@ -16,14 +16,13 @@ echo <<<MAP_SECTION
 		<option value="">-- 選択 --</option>
 MAP_SECTION;
 	foreach ($map_indexes as $index) {
-		echo "<option value=''>$index->name</option>";
 		$children = get_child_trade_map($index->map_id);
 		foreach ($children as $child) {
 			$selected = "";
 			if($child->map_id == $mylocation){
 				$selected = "selected";
 			}
-			echo "<option value='$child->map_id' $selected>&nbsp;&nbsp;$child->name</option>";
+			echo "<option value='$child->map_id' $selected>{$index->name}&nbsp-&nbsp$child->name</option>";
 
 		}
 	}
