@@ -19,13 +19,19 @@
 	function callOnNewEntry(){
 		disableButtons();
 		if(jQuery("#field_1").val().length == 0){
-			alert("商品名が未入力です。");
+			swal({   
+				title: "商品名が未入力です。",  
+				type: "error",    
+			}); 			
 			enableButtons();
 			return false;
 		}
 
 		if(jQuery("#field_2").val().length == 0){
-			alert("商品説明が未入力です。");
+			swal({
+				title: "商品説明が未入力です。",  
+				type: "error",    
+			}); 
 			enableButtons();
 			return false;
 		}
@@ -37,19 +43,24 @@
 				isAttachedFlg = true;
 			}
 			if(fileName && !fileName.match(/\.(jpeg|jpg|png)$/i)){
-				alert("不正なファイルです。\n.jpeg,.jpg,.png ファイルのみアップロードできます。");
+				swal({   
+					title: "不正なファイルです。",
+					text: ".jpeg,.jpg,.png ファイルのみアップロードできます。",
+					type: "error",    
+				}); 
 				enableButtons();
 				return false;
 			}
 		}
 
 		if(!isAttachedFlg){
-			alert("写真を添付してください。");
+			swal({   
+				title: "写真を添付してください。",  
+				type: "error",    
+			}); 
 			enableButtons();
 			return false;
 		}
-
-		if(confirm("出品後の記事の編集はできません。出品しますか？")){
 			var form = jQuery("#newentry").get()[0];
 			var fd = new FormData(form);
 			fd.append("action", "new_entry");
@@ -61,7 +72,10 @@
 				mimeType:"multipart/form-data",
 				data: fd,
 				success: function(permalink){
-					alert("商品を出品しました。");
+					swal({   
+						title: "商品を出品しました。",  
+						type: "success",    
+					}); 
 					// reload new entry page
 					enableButtons();
 					location.href = "<?php echo bp_loggedin_user_domain(); ?>" + "new_entry/#newentry";
@@ -69,7 +83,6 @@
 					jQuery("option").attr("selected", false);
 				}
 			});
-		}
 	}
 
 	function onClickSearchWantedBook(){
@@ -122,7 +135,10 @@
 				enableButtons();
 			},
 			error: function(){
-				alert("登録できませんでした。しばらくしてからもう一度おためしください。");
+				swal({   
+					title: "登録できませんでした。しばらくしてからもう一度おためしください。",  
+					type: "error",    
+				}); 
 			}
 		});
 	}
@@ -146,7 +162,10 @@
 				enableButtons();
 			},
 			error: function(){
-				alert("削除できませんでした。しばらくしてからもう一度おためしください。");
+				swal({   
+					title: "削除できませんでした。しばらくしてからもう一度おためしください。",  
+					type: "error",    
+				}); 
 				enableButtons();
 			}
 		});
@@ -166,7 +185,10 @@
 				enableButtons();
 			},
 			error: function(){
-				alert("削除できませんでした。しばらくしてからもう一度おためしください。");
+				swal({   
+					title: "削除できませんでした。しばらくしてからもう一度おためしください。",  
+					type: "error",    
+				}); 
 				enableButtons();
 			}
 		});		
@@ -240,7 +262,6 @@
 							var location;
 							return function(){
 								var val = input.value;
-								console.log(val);
 								if(val.length == 0){
 									return;
 								}else{
