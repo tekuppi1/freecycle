@@ -40,9 +40,23 @@ function onConfirmGiveme(postID, url){
 		return false;
 	}
 
+	if(jQuery("#map_search_" + postID).val() === ""){
+		swal({   
+			title: "取引場所が選択されていません。",  
+			type: "error",   
+			showCancelButton: false,   
+			confirmButtonColor: "#AEDEF4", 
+			confirmButtonText: "OK",      
+			closeOnConfirm: true
+		});
+		enableButtons();
+		return false;		
+	}
+
 	var confirmText = "変更やキャンセルはできません。よろしいですか？\n";
 	confirmText += "商品:"+ jQuery("#post_"+ postID + " .index-item-title").text() + "\n";
 	confirmText += "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked").next().text() + "\n";
+	confirmText += "取引場所:" + jQuery("#map_search_" + postID +" option:selected").text() + "\n";
 	confirmText += "メッセージ:"+ jQuery("#message_" + postID).val();
 	swal({   
 		title: "取引相手を確定させます。",     
