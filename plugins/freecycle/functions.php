@@ -2657,13 +2657,12 @@ function ajax_edit_item(){
 	$item_content = isset($_POST['item_content'])?$_POST['item_content']:"";
 	$item_status = isset($_POST['item_status'])?$_POST['item_status']:"";
 	$item_sub_category = isset($_POST['subcategory'])?$_POST['subcategory']:"";
-
 	$userID = get_current_user_id();
 
 	if(is_exhibitor($itemID, $userID)){
 		edit_item($itemID, $item_title, $item_content, $item_status);
 		upload_itempictures($itemID);
-		update_sub_category($item_sub_category, $itemID);
+		wp_set_post_categories($itemID, $item_sub_category);
 	}
 
 }
@@ -2816,13 +2815,4 @@ function output_sub_category($item_main_category_name, $item_sub_category_name){
 			echo "<option value='$value'>$name</option>";
 		}
 	}
-
-}
-
-function update_sub_category($item_sub_category, $itemID){
-	global $wpdb;
-	global $table_prefix;
-
-	$wpdb->update($table_prefix."term_relationships", array('term_taxonomy_id' => $item_sub_category), array('object_id' => $itemID));
-
 }

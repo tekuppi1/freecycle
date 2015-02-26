@@ -468,10 +468,10 @@
 						<div>
 							<?php 
 								$sub_category = get_the_category();
-								if($sub_category[0]->cat_name == 'Uncategorized'):
+								if($sub_category[0]->term_id == '1'):
 									echo "カテゴリ:未設定";
 								else:
-									$main_category = get_category($sub_category[0]->parent); 
+									$main_category = get_category($sub_category[0]->parent);
 								?>
 	 							親カテゴリ: <?php echo $main_category->cat_name;?> <br>
 	 							子カテゴリ: <?php echo $sub_category[0]->cat_name; ?>
@@ -642,27 +642,23 @@
 	<select name="main_category" onChange="onChangeMainCategory(1)">
 	<?php 
 		$sub_category = get_the_category();
-		if($sub_category[0]->cat_name == 'Uncategorized'):
+		$main;
+		$sub;
+		if($sub_category[0]->cat_name == 'Uncategorized'){
+			$main = 0;
+			$sub = 0;
+		}else{
+			$main = get_category($sub_category[0]->parent)->cat_name;
+			$sub = $sub_category[0]->cat_name;
+		}
 	?>
 			<option value="">-- 親カテゴリ --</option>
-			<?php $item_main_category_name = output_main_category(0); ?>
+			<?php $item_main_category_name = output_main_category($main); ?>
 			</select>
 			<select name="subcategory">
 			<option value="1">-- 子カテゴリ --</option>
-			<?php output_sub_category($item_main_category_name,0); ?>
+			<?php output_sub_category($item_main_category_name,$sub); ?>
 			</select><br>
-	<?php
-		else:
-			$main_category = get_category($sub_category[0]->parent);
-	?>
-			<option value="">-- 親カテゴリ --</option>
-			<?php $item_main_category_name = output_main_category($main_category->cat_name); ?>
-			</select>
-			<select name="subcategory">
-			<option value="1">-- 子カテゴリ --</option>
-			<?php output_sub_category($item_main_category_name, $sub_category[0]->cat_name); ?>
-			</select><br>
-	<?php endif; ?>	
 	
 	<label>写真</label><br>
 		<input type="file" class="multi" name="upload_attachment[]" ></br>
