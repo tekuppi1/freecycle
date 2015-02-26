@@ -88,9 +88,7 @@ function onConfirmGiveme(postID, url){
 				"userID": userID,//落札者相手ユーザーＩＤ
 				"uncheckedUserIDs": uncheckedUserIDs.join(),
 				"message": jQuery("#message_" + postID).val(),
-				"message": jQuery("#message_" + postID).val(),
-				"lat": lat,
-				"lng": lng
+				"mapID": jQuery("#map_search_" + postID).val()
 			},
 			success: function(msg){
 				jQuery("#post_"+postID).hide(1000,function(){

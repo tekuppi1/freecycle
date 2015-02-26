@@ -315,8 +315,7 @@ function confirmGiveme(){
 	$tradedates = explode(",", $_POST['tradedates']);
 	$place = $_POST['place'];
 	$message = $_POST['message'];
-	$lat = isset($_POST['lat'])?$_POST['lat']:''; // latitude
-	$lng = isset($_POST['lng'])?$_POST['lng']:''; // longitude
+	$mapID = isset($_POST['mapID'])?$_POST['mapID']:0;
 
 	// 記事の状態を確定済にする
 	$wpdb->query($wpdb->prepare("
@@ -369,9 +368,11 @@ function confirmGiveme(){
 		$content .= '【メッセージ】:' . $message . PHP_EOL;
 	}
 
-	if(isset($lat) && isset($lng)){
-		$content .= "【取引場所】" . PHP_EOL;
-		$content .= "<div name='map-canvas-message' lat='$lat' lng='$lng'></div>" . PHP_EOL;
+	if(isset($mapID)){
+		$map = get_trade_map($mapID);
+		$unimap = get_parent_trade_map($mapID);
+		$content .= "【取引場所】:{$unimap->name} - {$map->name}" . PHP_EOL;
+		$content .= "<div name='map-canvas-message' lat='{$map->latitude}' lng='{$map->longitude}'></div>" . PHP_EOL;
 	}
 
 	$message_ID = messages_new_message(array(
