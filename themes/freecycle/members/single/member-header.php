@@ -198,7 +198,8 @@
 		var mapOptions = {
 	    	zoom: 17,
 	    	center: location,
-	    	mapTypeId: google.maps.MapTypeId.ROADMAP
+	    	mapTypeId: google.maps.MapTypeId.ROADMAP,
+	    	mapTypeControl: false
   		}
 		var newMap = new google.maps.Map(map, mapOptions);
 		return newMap;
