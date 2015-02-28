@@ -25,6 +25,16 @@ Tags: buddypress
 		padding: 5px;
 	}
 
+	div[name="map-canvas"]{
+		margin: 0px;
+		padding: 0px;
+		height: 300px;
+	}
+
+	div[name="map-canvas-message"]{
+		height: 300px;
+	}
+
 	button,
 	a.button,
 	input[type=submit],

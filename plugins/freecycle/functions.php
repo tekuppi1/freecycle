@@ -26,6 +26,10 @@ add_action('wp_ajax_cancel_trade_from_bidder', 'cancel_trade_from_bidder');
 add_action('user_register', 'on_user_added');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 
+// load files
+require_once('functions.kses.php');
+require_once('map/freecycle-map.php');
+
 //写真を自動で回転して縦にする
 function edit_images_before_upload($file)
 {
@@ -311,6 +315,7 @@ function confirmGiveme(){
 	$tradedates = explode(",", $_POST['tradedates']);
 	$place = $_POST['place'];
 	$message = $_POST['message'];
+	$mapID = isset($_POST['mapID'])?$_POST['mapID']:0;
 
 	// 記事の状態を確定済にする
 	$wpdb->query($wpdb->prepare("
@@ -361,6 +366,13 @@ function confirmGiveme(){
 	$content = 'あなたが以下の商品の取引相手に選ばれました！' . PHP_EOL . ' 【商品名】:<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>' . PHP_EOL;
 	if($message){
 		$content .= '【メッセージ】:' . $message . PHP_EOL;
+	}
+
+	if(isset($mapID)){
+		$map = get_trade_map($mapID);
+		$unimap = get_parent_trade_map($mapID);
+		$content .= "【取引場所】:{$unimap->name} - {$map->name}" . PHP_EOL;
+		$content .= "<div name='map-canvas-message' lat='{$map->latitude}' lng='{$map->longitude}'></div>" . PHP_EOL;
 	}
 
 	$message_ID = messages_new_message(array(
@@ -1632,42 +1644,51 @@ function my_setup_nav() {
 			'item_css_id' => 'wanted-list'
 			) );
 
-		if(bp_get_total_unread_messages_count() > 0){
+	if(bp_get_total_unread_messages_count() > 0){
 		$messages_name = sprintf( __( 'Messages <span>%s</span>', 'buddypress' ), bp_get_total_unread_messages_count() );
 	}else{
 		$messages_name = sprintf( __( 'Messages', 'buddypress' ));
 	}
 
-		$todo_list_name;
-		$todo_list_count = get_todo_list_count($user_ID);
-		$todo_list_style_id;
-		if($todo_list_count){
-			$todo_list_name = sprintf( __( 'next action <span>%d</span>', 'buddypress'), $todo_list_count);
-			$todo_list_style_id = "exist_todo";
-		}else{
-			$todo_list_name = sprintf( __( 'next action', 'buddypress' ));
-			$todo_list_style_id = "none_todo";
-		}
-		bp_core_new_nav_item( array(
-			'name' => $todo_list_name,
-			'slug' => 'todo-list',
-			'position' => 115,
-			'screen_function' => 'todo_list_link',
-			'show_for_displayed_user' => true,
-			'default_subnav_slug' => 'unfinished-todo-list',
-			'item_css_id' => $todo_list_style_id
-			) );
+	$todo_list_name;
+	$todo_list_count = get_todo_list_count($user_ID);
+	$todo_list_style_id;
+	if($todo_list_count){
+		$todo_list_name = sprintf( __( 'next action <span>%d</span>', 'buddypress'), $todo_list_count);
+		$todo_list_style_id = "exist_todo";
+	}else{
+		$todo_list_name = sprintf( __( 'next action', 'buddypress' ));
+		$todo_list_style_id = "none_todo";
+	}
+	bp_core_new_nav_item( array(
+		'name' => $todo_list_name,
+		'slug' => 'todo-list',
+		'position' => 115,
+		'screen_function' => 'todo_list_link',
+		'show_for_displayed_user' => true,
+		'default_subnav_slug' => 'unfinished-todo-list',
+		'item_css_id' => $todo_list_style_id
+		) );
 
-		bp_core_new_subnav_item( array(
-			'name' => __( '未完了', 'buddypress' ),
-			'slug' => 'unfinished-todo-list',
-			'parent_url' => trailingslashit($bp->displayed_user->domain . 'todo-list'),
-			'parent_slug' => 'todo-list',
-			'position' => 116,
-			'screen_function' => 'unfinished_todo_list_link',
-			'item_css_id' => 'todo-list'
-			) );
+	bp_core_new_subnav_item( array(
+		'name' => __( '未完了', 'buddypress' ),
+		'slug' => 'unfinished-todo-list',
+		'parent_url' => trailingslashit($bp->displayed_user->domain . 'todo-list'),
+		'parent_slug' => 'todo-list',
+		'position' => 116,
+		'screen_function' => 'unfinished_todo_list_link',
+		'item_css_id' => 'todo-list'
+		) );
 
+	/** add a custom detail settings page **/
+	bp_core_new_subnav_item( array(
+		'name' => "詳細",
+		'slug' => 'detail',
+		'parent_url' => trailingslashit($bp->displayed_user->domain . 'settings'),
+		'parent_slug' => 'settings',
+		'position' => 15,
+		'screen_function' => 'detail_settings_link'
+		));
 	}
 }
 
@@ -1690,6 +1711,25 @@ function todo_list_title(){
 function todo_list_content(){
 	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."members/single/your-todo-list.php";
 }
+
+/**********************************************
+ * 「詳細設定」表示時に使う関数一式
+ **********************************************
+ */
+function detail_settings_link(){
+	add_action( 'bp_template_title', 'detail_settings_title' );
+	add_action( 'bp_template_content', 'detail_settings_content' );
+	bp_core_load_template( apply_filters('bp_core_template_plugin', 'members/single/plugins'));
+}
+
+function detail_settings_title(){
+	echo "詳細";
+}
+
+function detail_settings_content(){
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."members/single/detail-settings.php";
+}
+
 
 
 

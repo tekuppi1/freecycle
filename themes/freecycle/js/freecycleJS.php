@@ -1,4 +1,6 @@
 <script>
+var ADMIN_URL = '<?php echo admin_url('admin-ajax.php'); ?>';
+
 function disableButtons(){
 	jQuery("input[type=button]").attr("disabled",true);
 }
@@ -38,9 +40,23 @@ function onConfirmGiveme(postID, url){
 		return false;
 	}
 
+	if(jQuery("#map_search_" + postID).val() === ""){
+		swal({   
+			title: "取引場所が選択されていません。",  
+			type: "error",   
+			showCancelButton: false,   
+			confirmButtonColor: "#AEDEF4", 
+			confirmButtonText: "OK",      
+			closeOnConfirm: true
+		});
+		enableButtons();
+		return false;		
+	}
+
 	var confirmText = "変更やキャンセルはできません。よろしいですか？\n";
 	confirmText += "商品:"+ jQuery("#post_"+ postID + " .index-item-title").text() + "\n";
-	confirmText += "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked+label").text() + "\n";
+	confirmText += "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked").next().text() + "\n";
+	confirmText += "取引場所:" + jQuery("#map_search_" + postID +" option:selected").text() + "\n";
 	confirmText += "メッセージ:"+ jQuery("#message_" + postID).val();
 	swal({   
 		title: "取引相手を確定させます。",     
@@ -56,6 +72,10 @@ function onConfirmGiveme(postID, url){
 	function(isConfirm){
 		if (isConfirm) {
 			var uncheckedUserIDs = new Array();
+			var map = document.getElementById("map_canvas_" + postID);
+			var lat = map.getAttribute("lat")?map.getAttribute("lat"):""; // latitude
+			var lng = map.getAttribute("lng")?map.getAttribute("lng"):""; // longitude
+			// 取引相手でないユーザID一覧を取得
 			jQuery("[name=sendto_user_"+ postID + "]" + ":not(:checked)").each(function(){
 				uncheckedUserIDs.push(this.value);
 			});
@@ -68,6 +88,7 @@ function onConfirmGiveme(postID, url){
 				"userID": userID,//落札者相手ユーザーＩＤ
 				"uncheckedUserIDs": uncheckedUserIDs.join(),
 				"message": jQuery("#message_" + postID).val(),
+				"mapID": jQuery("#map_search_" + postID).val()
 			},
 			success: function(msg){
 				jQuery("#post_"+postID).hide(1000,function(){
