@@ -295,4 +295,43 @@ function topSlide(){
 	});
 }
 
+var categories = jQuery.parseJSON('<?php echo get_freecycle_category_JSON(array('hide_empty' => 0)); ?>');
+
+/**
+*	formID
+*	0->新規出品
+*	1->商品編集
+**/
+function onChangeMainCategory(formID){
+	// create subcategories select menu
+	var maincategory = jQuery("[name='main_category']").val();
+	var subcategories = [];
+	for (var i = categories.length - 1; i >= 0; i--) {
+		if(categories[i].parent == maincategory){
+			subcategories.push(categories[i]);
+		}
+	};
+
+	switch(formID){
+		case 0: formID = newentry; break;
+		case 1: formID = edit_form; break;
+		default : return;
+ 	}
+
+	formID.subcategory.length = 1;
+	formID.subcategory[0].value = "1";
+	formID.subcategory[0].text = "-- 子カテゴリ --";
+
+	if(!subcategories){
+		return;
+	}
+
+	subcategories.forEach(function(subcategory){
+		formID.subcategory.length++;
+		formID.subcategory[formID.subcategory.length-1].value = subcategory.term_id;
+		formID.subcategory[formID.subcategory.length-1].text = subcategory.name;
+	});
+}
+
+
 </script>

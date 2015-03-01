@@ -35,6 +35,21 @@
 			enableButtons();
 			return false;
 		}
+
+		var mainCategory = jQuery('[name=main_category]').val();
+		if(mainCategory == ""){
+			alert("親カテゴリが未入力です。");
+			enableButtons();
+			return false;
+		}
+
+		var subCategory = jQuery('[name=subcategory]').val();
+		if(subCategory == ""){
+			alert("子カテゴリが未入力です。");
+			enableButtons();
+			return false;
+		}
+
 		
 		var isAttachedFlg = false;
 		for (var i = jQuery(".multi").length - 1; i >= 0; i--) {
@@ -191,7 +206,7 @@
 				}); 
 				enableButtons();
 			}
-		});		
+		});
 	}
 
 	function showMap(map, location){
@@ -386,7 +401,6 @@
 
 </div><!-- #item-header-content -->
 <div id="mypage"></div>
-
 <?php do_action( 'bp_after_member_header' ); ?>
 
 <?php do_action( 'template_notices' ); ?>
