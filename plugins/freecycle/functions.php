@@ -257,43 +257,51 @@ function giveme(){
 function cancelGiveme(){
 	global $wpdb;
 	global $table_prefix;
-	$postID = $_POST['postID'];
-	$userID = $_POST['userID'];
+	$postID = isset($_POST['postID'])?$_POST['postID']:"";
+	$userID = isset($_POST['userID'])?$_POST['userID']:"";
+
+	// 商品IDまたはユーザIDが空の場合は処理をしない
+	if($postID == "" || $userID == ""){
+		die;
+	}	
+
+	// ログインユーザとキャンセルするユーザが異なる場合は処理をしない
+	if(get_current_user_id() != $userID){
+		die;
+	}
 
 	//ください取消確認
-	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where post_id = %d", $postID));
-	if($current_giveme == 0){
+	if(!doneGiveme($postID, $userID)){
 		echo "既にくださいが取消されています。";
 		die;
 	}
 
 
-	// 「ください」リクエストの情報を削除
-	$wpdb->query($wpdb->prepare("
-		DELETE FROM " . $table_prefix . "fmt_user_giveme
-		where user_id = %d
-		and post_id = %d",
-		$userID, $postID));
+		// 「ください」リクエストの情報を削除
+		$wpdb->query($wpdb->prepare("
+			DELETE FROM " . $table_prefix . "fmt_user_giveme
+			where user_id = %d
+			and post_id = %d",
+			$userID, $postID));
 
-	// 「ください」件数が0になった場合はgiveme状態をオフにする
-	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where post_id = %d", $postID));
-	if($current_giveme == 0){
-	$wpdb->query($wpdb->prepare("
-		UPDATE " . $table_prefix . "fmt_giveme_state
-		SET update_timestamp = current_timestamp, giveme_flg = 0
-		WHERE post_id = %d",
-		$postID));
-	}
+		// 「ください」件数が0になった場合はgiveme状態をオフにする
+		$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where post_id = %d", $postID));
+		if($current_giveme == 0){
+		$wpdb->query($wpdb->prepare("
+			UPDATE " . $table_prefix . "fmt_giveme_state
+			SET update_timestamp = current_timestamp, giveme_flg = 0
+			WHERE post_id = %d",
+			$postID));
+		}
 
-	// 仮払ポイントを1p減算
-	add_temp_used_points($userID, -1);
-	echo "くださいを取消しました。";
+		// 仮払ポイントを1p減算
+		add_temp_used_points($userID, -1);
+		echo "くださいを取消しました。";
 
-	//todoリストstatus="finished"
-	if($current_giveme == 0){
-		cancel_todo($postID);
-	}
-
+		//todoリストstatus="finished"
+		if($current_giveme == 0){
+			cancel_todo($postID);
+		}
 	die;
 }
 
