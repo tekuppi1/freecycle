@@ -231,26 +231,6 @@
 		}
 
 		function onDeletePost(){
-<<<<<<< HEAD
-			if(confirm("取り消した出品は復活できません。よろしいですか？")){
-				// send values
-				jQuery.ajax({
-					type: "POST",
-					url: '<?php echo admin_url('admin-ajax.php'); ?>',
-					data: {
-						"action": "delete_post",
-						"postID": "<?php echo $post->ID ?>",
-					},
-					success: function(msg){
-						alert("出品を取り消しました。");
-						location.href = "<?php echo home_url(); ?>";
-					},
-					false: function(msg){
-						alert("取り消しに失敗しました。");
-					}
-				});
-			}else{
-=======
 			swal({   
 				title: "取り消した出品は復活できません。",   
 				text: "よろしいですか？",   
@@ -297,7 +277,6 @@
 						}
 					});
 				}else{
->>>>>>> 7572b07f43a95cc2495a6eff333d1782749c9d95
 				return false;
 				}
 			});
