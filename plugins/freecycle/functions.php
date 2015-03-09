@@ -26,6 +26,11 @@ add_action('wp_ajax_cancel_trade_from_bidder', 'cancel_trade_from_bidder');
 add_action('user_register', 'on_user_added');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 
+// load files
+require_once('functions.kses.php');
+require_once('map/freecycle-map.php');
+require_once('categories/freecycle-categories.php');
+
 //写真を自動で回転して縦にする
 function edit_images_before_upload($file)
 {
@@ -57,17 +62,6 @@ function redirect_to_home(){
 	exit;
 }
 add_action('wp_login', 'redirect_to_home');
-
-
-if(strpos($_SERVER['REQUEST_URI'] ,'archives/category') > 0){
-	redirect_to_404();
-}
-//redirect(/archive/category => 404.php(bp-default直下))
-function redirect_to_404(){
-	global $wp_query;
-	$wp_query -> is_404 = true;
-}
-
 
 function custom_init(){
 	add_action('comment_post', 'on_comment_post');
@@ -319,6 +313,7 @@ function confirmGiveme(){
 	$tradedates = explode(",", $_POST['tradedates']);
 	$place = $_POST['place'];
 	$message = $_POST['message'];
+	$mapID = isset($_POST['mapID'])?$_POST['mapID']:0;
 
 	// 記事の状態を確定済にする
 	$wpdb->query($wpdb->prepare("
@@ -369,6 +364,13 @@ function confirmGiveme(){
 	$content = 'あなたが以下の商品の取引相手に選ばれました！' . PHP_EOL . ' 【商品名】:<a href="' . get_permalink($postID) . '">' . get_post($postID)->post_title . '</a>' . PHP_EOL;
 	if($message){
 		$content .= '【メッセージ】:' . $message . PHP_EOL;
+	}
+
+	if(isset($mapID)){
+		$map = get_trade_map($mapID);
+		$unimap = get_parent_trade_map($mapID);
+		$content .= "【取引場所】:{$unimap->name} - {$map->name}" . PHP_EOL;
+		$content .= "<div name='map-canvas-message' lat='{$map->latitude}' lng='{$map->longitude}'></div>" . PHP_EOL;
 	}
 
 	$message_ID = messages_new_message(array(
@@ -706,7 +708,7 @@ function new_entry(){
 		'exhibitor_id' => $exhibitor_id,
 		'item_name' => $_POST['field_1'],
 		'item_description' => $_POST['field_2'],
-		'item_category' => $_POST['field_3'],
+		'item_category' => isset($_POST['subcategory'])?$_POST['subcategory']:"1",
 		'tags' => $_POST['field_4']
 	));
 
@@ -716,6 +718,7 @@ function new_entry(){
 		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
 		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$exhibitor_id), true);
 		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$exhibitor_id), true);
+
 		if($_POST['wanted_item_id']){
 			add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);
 		}
@@ -809,25 +812,33 @@ function exhibit_to_wanted(){
  *
  */
 function exhibit_from_app(){
-	// $exhibitor = get_user_by('login', $_POST['exhibitor_id']);
-	// if(!$exhibitor || !wp_check_password($_POST['password'], $exhibitor->data->user_pass, $exhibitor->ID)){
-	// 	echo "ユーザ名とパスワードの組合せが不正です。";
-	// 	die;
-	// }
-
 	$current_user_id = get_current_user_id();
+	$item_name = isset($_POST['item_name'])?$_POST['item_name']:"";
+	$image_url = isset($_POST['image_url'])?$_POST['image_url']:"";
+	$category = isset($_POST['category'])?$_POST['category']:"";
 
 	if($current_user_id === 0){
 		echo "ログインされていないため出品できません。";
 		die;
 	}
 
+	if(strlen($item_name) <= 0){
+		echo "商品名が入力されていません。";
+		die;
+	}
+
+	if(strlen($image_url) <= 0){
+		echo "画像がありません。";
+		die;
+	}
+
 	$insert_id = exhibit(array(
 		'exhibitor_id' => $current_user_id,
-		'item_name' => $_POST['item_name'],
-		'image_url' => $_POST['image_url'],
+		'item_name' => $item_name, 
+		'image_url' => $image_url, 
 		'department' => xprofile_get_field_data('学部', $current_user_id),
 		'course' => xprofile_get_field_data('学科', $current_user_id),
+		'item_category' => $category
 	));
 
 	if($insert_id !== 0){
@@ -1652,42 +1663,51 @@ function my_setup_nav() {
 			'item_css_id' => 'wanted-list'
 			) );
 
-		if(bp_get_total_unread_messages_count() > 0){
+	if(bp_get_total_unread_messages_count() > 0){
 		$messages_name = sprintf( __( 'Messages <span>%s</span>', 'buddypress' ), bp_get_total_unread_messages_count() );
 	}else{
 		$messages_name = sprintf( __( 'Messages', 'buddypress' ));
 	}
 
-		$todo_list_name;
-		$todo_list_count = get_todo_list_count($user_ID);
-		$todo_list_style_id;
-		if($todo_list_count){
-			$todo_list_name = sprintf( __( 'next action <span>%d</span>', 'buddypress'), $todo_list_count);
-			$todo_list_style_id = "exist_todo";
-		}else{
-			$todo_list_name = sprintf( __( 'next action', 'buddypress' ));
-			$todo_list_style_id = "none_todo";
-		}
-		bp_core_new_nav_item( array(
-			'name' => $todo_list_name,
-			'slug' => 'todo-list',
-			'position' => 115,
-			'screen_function' => 'todo_list_link',
-			'show_for_displayed_user' => true,
-			'default_subnav_slug' => 'unfinished-todo-list',
-			'item_css_id' => $todo_list_style_id
-			) );
+	$todo_list_name;
+	$todo_list_count = get_todo_list_count($user_ID);
+	$todo_list_style_id;
+	if($todo_list_count){
+		$todo_list_name = sprintf( __( 'next action <span>%d</span>', 'buddypress'), $todo_list_count);
+		$todo_list_style_id = "exist_todo";
+	}else{
+		$todo_list_name = sprintf( __( 'next action', 'buddypress' ));
+		$todo_list_style_id = "none_todo";
+	}
+	bp_core_new_nav_item( array(
+		'name' => $todo_list_name,
+		'slug' => 'todo-list',
+		'position' => 115,
+		'screen_function' => 'todo_list_link',
+		'show_for_displayed_user' => true,
+		'default_subnav_slug' => 'unfinished-todo-list',
+		'item_css_id' => $todo_list_style_id
+		) );
 
-		bp_core_new_subnav_item( array(
-			'name' => __( '未完了', 'buddypress' ),
-			'slug' => 'unfinished-todo-list',
-			'parent_url' => trailingslashit($bp->displayed_user->domain . 'todo-list'),
-			'parent_slug' => 'todo-list',
-			'position' => 116,
-			'screen_function' => 'unfinished_todo_list_link',
-			'item_css_id' => 'todo-list'
-			) );
+	bp_core_new_subnav_item( array(
+		'name' => __( '未完了', 'buddypress' ),
+		'slug' => 'unfinished-todo-list',
+		'parent_url' => trailingslashit($bp->displayed_user->domain . 'todo-list'),
+		'parent_slug' => 'todo-list',
+		'position' => 116,
+		'screen_function' => 'unfinished_todo_list_link',
+		'item_css_id' => 'todo-list'
+		) );
 
+	/** add a custom detail settings page **/
+	bp_core_new_subnav_item( array(
+		'name' => "詳細",
+		'slug' => 'detail',
+		'parent_url' => trailingslashit($bp->displayed_user->domain . 'settings'),
+		'parent_slug' => 'settings',
+		'position' => 15,
+		'screen_function' => 'detail_settings_link'
+		));
 	}
 }
 
@@ -1710,6 +1730,25 @@ function todo_list_title(){
 function todo_list_content(){
 	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."members/single/your-todo-list.php";
 }
+
+/**********************************************
+ * 「詳細設定」表示時に使う関数一式
+ **********************************************
+ */
+function detail_settings_link(){
+	add_action( 'bp_template_title', 'detail_settings_title' );
+	add_action( 'bp_template_content', 'detail_settings_content' );
+	bp_core_load_template( apply_filters('bp_core_template_plugin', 'members/single/plugins'));
+}
+
+function detail_settings_title(){
+	echo "詳細";
+}
+
+function detail_settings_content(){
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."members/single/detail-settings.php";
+}
+
 
 
 
@@ -2674,11 +2713,13 @@ function ajax_edit_item(){
 	$item_title = isset($_POST['item_title'])?$_POST['item_title']:"";
 	$item_content = isset($_POST['item_content'])?$_POST['item_content']:"";
 	$item_status = isset($_POST['item_status'])?$_POST['item_status']:"";
+	$item_sub_category = isset($_POST['subcategory'])?$_POST['subcategory']:"";
 	$userID = get_current_user_id();
 
 	if(is_exhibitor($itemID, $userID)){
 		edit_item($itemID, $item_title, $item_content, $item_status);
 		upload_itempictures($itemID);
+		wp_set_post_categories($itemID, $item_sub_category);
 	}
 
 }
@@ -2773,6 +2814,62 @@ function upload_itempictures($itemID){
 					}
 				}
 			}
+		}
+	}
+}
+
+/**
+* 親カテゴリを出力する関数
+* @param {string} $item_main_category_name 親カテゴリ名
+*/
+function output_main_category($item_main_category_name){
+	$main_categories = get_categories(array(
+		"parent" => 0,
+		"hide_empty" => 0,
+		"exclude" => 1 //'uncategorized'
+	));
+
+	global $user_ID;
+	//親カテゴリがない場合
+	if($item_main_category_name === 0){
+		$item_main_category_name = xprofile_get_field_data('大学名', $user_ID);
+	}
+
+	foreach ((array)$main_categories as $category) {
+		$value = $category->term_id;
+		$name = $category->name;
+		if($item_main_category_name == $name){
+			echo "<option value='$value' selected >$name</option>";
+		}else{
+			echo "<option value='$value'>$name</option>";
+		}
+	}
+
+	return $item_main_category_name;
+}
+
+/**
+* 子カテゴリを出力する関数
+* @param {string} $item_main_category_name 親カテゴリ名
+* @param {string} $item_sub_category_name 子カテゴリ名
+*/
+function output_sub_category($item_main_category_name, $item_sub_category_name){
+	global $user_ID;
+	//子カテゴリがない場合
+	if($item_sub_category_name === 0){
+		$item_sub_category_name = xprofile_get_field_data('学部', $user_ID);
+	}
+	$user_main_category_ID = get_cat_ID($item_main_category_name);
+	$department_IDs = get_term_children($user_main_category_ID, 'category');
+
+	foreach((array)$department_IDs as $department_ID){
+		$department = get_category($department_ID);
+		$value = $department->term_id;
+		$name = $department->name;
+		if($item_sub_category_name == $name){
+			echo "<option value='$value' selected >$name</option>";
+		}else{
+			echo "<option value='$value'>$name</option>";
 		}
 	}
 }

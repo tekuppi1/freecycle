@@ -9,6 +9,7 @@
 ?>
 
 <?php do_action( 'bp_before_member_header' ); ?>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCmhfQEie0qbsIR-F2xNVxzpV8IxzrwDBE&libraries=places&sensor=false"></script>
 <script type="text/javascript">
 
 	function callOnConfirmGiveme(postID){
@@ -34,6 +35,21 @@
 			enableButtons();
 			return false;
 		}
+
+		var mainCategory = jQuery('[name=main_category]').val();
+		if(mainCategory == ""){
+			alert("親カテゴリが未入力です。");
+			enableButtons();
+			return false;
+		}
+
+		var subCategory = jQuery('[name=subcategory]').val();
+		if(subCategory == ""){
+			alert("子カテゴリが未入力です。");
+			enableButtons();
+			return false;
+		}
+
 		
 		var isAttachedFlg = false;
 		for (var i = jQuery(".multi").length - 1; i >= 0; i--) {
@@ -190,8 +206,122 @@
 				}); 
 				enableButtons();
 			}
-		});		
+		});
 	}
+
+	function showMap(map, location){
+		var mapOptions = {
+	    	zoom: 17,
+	    	center: location,
+	    	mapTypeId: google.maps.MapTypeId.ROADMAP,
+	    	mapTypeControl: false
+  		}
+		var newMap = new google.maps.Map(map, mapOptions);
+		return newMap;
+	}
+
+	function showMarker(map, mapelm, location, draggable){
+		var marker = new google.maps.Marker({
+			map: map,
+			position: location,
+			draggable: draggable
+		});
+
+		if(draggable){
+			google.maps.event.addListener(marker, 'dragend', function(ev){
+				mapelm.setAttribute("lat", ev.latLng.lat()); // latitude
+				mapelm.setAttribute("lng", ev.latLng.lng()); // longitude
+			});
+		}
+		return marker;
+	}
+
+	function initializeMap(){
+		var maps = document.getElementsByName("map-canvas");
+		var mapsInMessages = document.getElementsByName("map-canvas-message");
+		var geocoder;
+		var location;
+		if(maps.length > 0){
+			// set the university in user profile as a default location of maps
+			var mylocation = "<?php echo get_user_meta(get_current_user_id(), 'default_trade_location', true) ?>";
+			var shownMap;
+			var marker;
+			var input;
+			var searchbox;
+			if(!mylocation){
+				// if user default trade location is not set, set default
+				mylocation = "<?php echo get_default_map()->map_id ?>";
+			}
+			jQuery.ajax({
+				type: "POST",
+				url: ADMIN_URL,
+				data: {
+					"action": "get_trade_map",
+					"map_id": mylocation
+				},
+				success: function(res){
+					var location = jQuery.parseJSON(res);
+					var lat = location.latitude * 1;
+					var lng = location.longitude * 1;
+					for (var i = maps.length-1; i >= 0; i--) {
+						var pos = new google.maps.LatLng(lat, lng, false);
+						shownMap = showMap(maps[i], pos);
+						marker = showMarker(shownMap, maps[i], pos, false);
+						maps[i].setAttribute("lat", lat); // latitude
+						maps[i].setAttribute("lng", lng); // longitude
+						var itemID = maps[i].getAttribute("id").replace("map_canvas_", "");
+						input = document.getElementById("map_search_" + itemID);
+						// set the input form as a place search form of the map
+						shownMap.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+						function _create_callback(map, input, marker, mapelm){
+							var bounds;
+							var location;
+							return function(){
+								var val = input.value;
+								if(val.length == 0){
+									return;
+								}else{
+									jQuery.ajax({
+										type: "POST",
+										url: ADMIN_URL,
+										data: {
+											"action": "get_trade_map",
+											"map_id": val
+										},
+										success: function(res){
+											var location = jQuery.parseJSON(res);
+											var lat, lng, position;
+											lat = location.latitude * 1; // parse string to number
+											lng = location.longitude * 1; // parse string to number
+											position = {lat: lat, lng: lng};
+											marker.setPosition(position);
+											map.setCenter(position);
+											map.setZoom(17);
+
+											mapelm.setAttribute("lat", lat); // latitude
+											mapelm.setAttribute("lng", lng); // longitude
+										}
+									});
+								}								
+							}
+						}
+						input.onchange = _create_callback(shownMap, input, marker, maps[i]);
+					}
+				}
+			});
+  		}
+
+  		if(mapsInMessages){
+			for (var i = mapsInMessages.length-1; i >= 0; i--) {
+				var lat = mapsInMessages[i].getAttribute('lat');
+				var lng = mapsInMessages[i].getAttribute('lng');
+				var location = new google.maps.LatLng(lat, lng, false);
+				shownMap = showMap(mapsInMessages[i], location);
+				showMarker(shownMap, mapsInMessages[i], location, false);
+			}
+  		}
+	}
+	google.maps.event.addDomListener(window, "load", initializeMap);
 
 	//ページスクロール
 	var url = location.href;
@@ -271,7 +401,6 @@
 
 </div><!-- #item-header-content -->
 <div id="mypage"></div>
-
 <?php do_action( 'bp_after_member_header' ); ?>
 
 <?php do_action( 'template_notices' ); ?>

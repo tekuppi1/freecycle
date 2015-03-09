@@ -392,6 +392,11 @@
 			newNode.id = 'edit_content';
 			content.appendChild(newNode);
 
+			//隠していた編集内容の削除
+			while(templete.firstChild){
+				templete.removeChild(templete.firstChild);
+			}
+
 			//出品物の状態を保持
 			var statusLabel = {
 				"verygood" : 0,
@@ -461,7 +466,16 @@
 						?>
 						</div>
 						<div>
-							学部,学科: <?php echo get_post_custom_values("department")["0"] ?>,<?php echo get_post_custom_values("course")["0"] ?>
+							<?php 
+								$sub_category = get_the_category();
+								if($sub_category[0]->term_id == '1'):
+									echo "カテゴリ:未設定";
+								else:
+									$main_category = get_category($sub_category[0]->parent);
+								?>
+	 							親カテゴリ: <?php echo $main_category->cat_name;?> <br>
+	 							子カテゴリ: <?php echo $sub_category[0]->cat_name; ?>
+ 							<?php endif; ?>	
 						</div>
 						<?php
 						/*
@@ -624,6 +638,28 @@
 				<option id="eval2" value="bad"><?php echo get_display_item_status("bad"); ?></option>
 			</select><br>
 	<label>商品説明</label><br><textarea rows="5" cols="40" name="item_content" ><?php remove_filter('the_content', 'wpautop'); the_content(); ?></textarea></br>
+	<label>カテゴリ</label></br>
+	<select name="main_category" onChange="onChangeMainCategory(1)">
+	<?php 
+		$sub_category = get_the_category();
+		$main;
+		$sub;
+		if($sub_category[0]->cat_name == 'Uncategorized'){
+			$main = 0;
+			$sub = 0;
+		}else{
+			$main = get_category($sub_category[0]->parent)->cat_name;
+			$sub = $sub_category[0]->cat_name;
+		}
+	?>
+			<option value="">-- 親カテゴリ --</option>
+			<?php $item_main_category_name = output_main_category($main); ?>
+			</select>
+			<select name="subcategory">
+			<option value="1">-- 子カテゴリ --</option>
+			<?php output_sub_category($item_main_category_name,$sub); ?>
+			</select><br>
+	
 	<label>写真</label><br>
 		<input type="file" class="multi" name="upload_attachment[]" ></br>
 		<input type="file" class="multi" name="upload_attachment[]" ></br>
