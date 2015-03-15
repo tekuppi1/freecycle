@@ -24,6 +24,7 @@ add_action('wp_ajax_register_app_information', 'register_app_information');
 add_action('wp_ajax_cancel_trade_from_exhibitor', 'cancel_trade_from_exhibitor');
 add_action('wp_ajax_cancel_trade_from_bidder', 'cancel_trade_from_bidder');
 add_action('user_register', 'on_user_added');
+add_action('delete_user', 'on_user_deleted');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 
 // load files
@@ -1399,6 +1400,20 @@ function on_user_added($user_id){
 	if($get_mail_magazine == ""){
 		xprofile_set_field_data( 'メールマガジンを受け取りますか？',$user_id, '受け取る');
 	}
+}
+
+/**
+ * ユーザ削除時に呼ばれる関数。
+ */
+function on_user_deleted($user_id){
+	global $wpdb;
+	global $table_prefix;
+
+	// ポイントのテーブルを削除
+	$wpdb->query($wpdb->prepare("
+		DELETE FROM " . $table_prefix . "fmt_points 
+		WHERE user_id = %d",
+		$user_id));
 }
 
 /**********************************************
