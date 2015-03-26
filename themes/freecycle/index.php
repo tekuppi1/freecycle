@@ -86,7 +86,7 @@
 				<div id="post-<?php the_ID(); ?>" <?php post_class(); ?> class="entry-on-index">
 					<div class="post-content">
 						<div class="entry">	
-							<a href="<?php the_permalink(); ?>" class="post-img-contents"><?php the_post_thumbnail(array(150, 150)) ?></a>					
+							<a href="<?php the_permalink(); ?>" class="post-img-contents"><?php the_post_thumbnail(array(50, 150)) ?></a>					
 							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
 							<span class="index-item-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></span>
 						</div>							

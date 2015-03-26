@@ -1405,7 +1405,7 @@ div a#logo_top img{
 	padding: 13px !important;
 }
 
-#top_slide_title{
+.top_sub_title{
 	font-size: 20px;
 	background-color: white;
 	padding: 10px;
@@ -2525,7 +2525,7 @@ div a#logo_top img{
 	padding: 15px !important;
 }
 
-#top_slide_title{
+.top_sub_title{
 	font-size: 20px;
 	background-color: white;
 	padding: 10px;
@@ -3674,13 +3674,14 @@ div a#logo_top img{
 	top: 20%;
 }
 
-#top_slide_title{
+.top_sub_title{
 	width: 550px;
 	margin:0 auto;
 	position: relative;
 	padding: 30px;
 	margin: 0 auto;
 	font-size: 40px;
+	text-align: center;
 }
 
 .bx-wrapper{
@@ -3762,4 +3763,21 @@ div.grobal_nav_div_sp ul li a span {
 
 #edit_form{
 	float: left;
+}
+
+.top_sumnail img{
+	height : 245px;
+	width  : 180px;
+	margin : 10px;
+}
+
+#top_image_box{
+	width : 100%;
+	padding-left : 5%;
+	margin-top: 20px;
+}
+
+#top_image{
+	margin: 0 auto;
+	width: 80%;
 }
