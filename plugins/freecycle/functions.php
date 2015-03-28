@@ -2909,8 +2909,9 @@ function get_item_image_urls_on_toppage(){
 		$child = get_children($arg);
 
 		//$childがとれたかどうかチェック
-		if(is_array($child) && empty($array)){
-			array_push($image_urls, array_shift($child)->guid);	
+		$image_url = array_shift($child)->guid;
+		if(isset($image_url)){
+			array_push($image_urls, $image_url);	
 		}
 	}
 	echo json_encode($image_urls);
