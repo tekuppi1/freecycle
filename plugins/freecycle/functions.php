@@ -2907,10 +2907,10 @@ function get_item_image_urls_on_toppage(){
 		    'numberposts' => 1
 		);
 		$child = get_children($arg);
-		
+
 		//$childがとれたかどうかチェック
-		if(isset($child)){
-			array_push($image_urls, array_shift($child)->guid);
+		if(is_array($child) && empty($array)){
+			array_push($image_urls, array_shift($child)->guid);	
 		}
 	}
 	echo json_encode($image_urls);
