@@ -49,6 +49,9 @@
 		wp_enqueue_script('tooltipsterScript');
 		wp_enqueue_style('tooltipsterStyle');
 		?>
+		<script src="<?php echo home_url(); ?>/wp-content/themes/freecycle/js/owl-carousel/owl.carousel.js"></script>
+		<link rel="stylesheet" href="<?php echo home_url(); ?>/wp-content/themes/freecycle/js/owl-carousel/owl.carousel.css">
+		<link rel="stylesheet" href="<?php echo home_url(); ?>/wp-content/themes/freecycle/js/owl-carousel/owl.theme.css">
 	</head>
 
 	<body <?php body_class(); ?> id="top_page">

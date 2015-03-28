@@ -99,8 +99,6 @@ function add_custom_where($where){
 	global $wpdb;
 	global $table_prefix;
 
-	debug_log($_REQUEST["req"]);
-	debug_log($where);
 	// 検索結果に固定ページを含めない
 	if(is_search()) {
 		$where .= "AND post_type = 'post' ";
@@ -108,7 +106,7 @@ function add_custom_where($where){
 
 	// 一覧ページには取引相手確定済の記事を表示しない。
 	// 「ください可能」のみの条件で検索された場合も、同様に表示しない。
-	if(is_front_page() || (isset($_REQUEST['seachform_itemstatus']) && $_REQUEST['seachform_itemstatus'] == 'givemeable' || $_REQUEST["req"] == "top_page")){
+	if(is_front_page() || (isset($_REQUEST['seachform_itemstatus']) && $_REQUEST['seachform_itemstatus'] == 'givemeable') || (isset($_REQUEST["req"]) && $_REQUEST["req"] == "top_page")){
 		$where .= "AND (" . $table_prefix . "fmt_giveme_state.confirmed_flg <> 1 "
 				. " OR " . $table_prefix . "fmt_giveme_state.confirmed_flg is NULL)";
 	}
@@ -2894,7 +2892,7 @@ function output_sub_category($item_main_category_name, $item_sub_category_name){
 function get_item_image_urls_on_toppage(){
 	//管理画面から変更可能にできるように
 	$args = array(
-			'posts_per_page' => 5,
+			'posts_per_page' => 7,
 			'orderby' => 'rand',
 			'post_type' => 'post'
 		);

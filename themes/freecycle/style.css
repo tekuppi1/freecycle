@@ -1411,6 +1411,23 @@ div a#logo_top img{
 	padding: 10px;
 }
 
+/*トップページ画像*/
+.top_sumnail img{
+	height : 136px;
+	width  : 100px;
+	margin : 10px;
+}
+
+#top_image_box{
+	width : 100%;
+	background-color: white;
+}
+
+#top_image{
+	margin: 0 auto;
+	width: 100%;
+}
+
 }
 
 /****************************スマホスタイルの終了****************************************************/
@@ -2529,6 +2546,23 @@ div a#logo_top img{
 	font-size: 20px;
 	background-color: white;
 	padding: 10px;
+}
+
+/*トップページ出品本画像*/
+.top_sumnail img{
+	height : 136px;
+	width  : 100px;
+	margin : 10px;
+}
+
+#top_image_box{
+	width : 100%;
+	background-color: white;
+}
+
+#top_image{
+	margin: 0 auto;
+	width: 100%;
 }
 
 }
@@ -3694,6 +3728,26 @@ div a#logo_top img{
 	padding: 20px !important;
 }
 
+/*トップページに画像表示*/
+.top_sumnail img{
+	height : 245px;
+	width  : 180px;
+	margin : 10px;
+}
+
+#top_image_box{
+	width : 100%;
+}
+
+#top_image{
+	margin: 0 auto;
+	width: 1000px;
+}
+
+#top_about{
+	font-size: 25px;
+	text-align: center;
+}
 }
 /**************PC表示終了********************/
 
@@ -3765,19 +3819,3 @@ div.grobal_nav_div_sp ul li a span {
 	float: left;
 }
 
-.top_sumnail img{
-	height : 245px;
-	width  : 180px;
-	margin : 10px;
-}
-
-#top_image_box{
-	width : 100%;
-	padding-left : 5%;
-	margin-top: 20px;
-}
-
-#top_image{
-	margin: 0 auto;
-	width: 80%;
-}
