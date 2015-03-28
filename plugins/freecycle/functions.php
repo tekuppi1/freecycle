@@ -2892,7 +2892,7 @@ function output_sub_category($item_main_category_name, $item_sub_category_name){
 function get_item_image_urls_on_toppage(){
 	//管理画面から変更可能にできるように
 	$args = array(
-			'posts_per_page' => 7,
+			'posts_per_page' => 15,
 			'orderby' => 'rand',
 			'post_type' => 'post'
 		);
