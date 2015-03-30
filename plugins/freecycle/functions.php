@@ -2899,7 +2899,6 @@ function get_item_image_urls_on_toppage(){
 	$rand_items = new WP_Query($args);
 	$image_urls = array();
 	foreach ($rand_items->posts as $rand_item) {
-		debug_log($rand_item->ID);
 		$arg = array( 
 		    'post_parent' => $rand_item->ID,
 		    'post_type'   => 'attachment', 
