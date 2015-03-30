@@ -3709,7 +3709,7 @@ div a#logo_top img{
 }
 
 .top_sub_title{
-	width: 550px;
+	width: 100%;
 	margin:0 auto;
 	position: relative;
 	padding: 30px;
