@@ -38,14 +38,14 @@
 
 		var mainCategory = jQuery('[name=main_category]').val();
 		if(mainCategory == ""){
-			alert("親カテゴリが未入力です。");
+			alert("大学名が未入力です。");
 			enableButtons();
 			return false;
 		}
 
 		var subCategory = jQuery('[name=subcategory]').val();
 		if(subCategory == ""){
-			alert("子カテゴリが未入力です。");
+			alert("学部名が未入力です。");
 			enableButtons();
 			return false;
 		}

@@ -473,8 +473,8 @@
 								else:
 									$main_category = get_category($sub_category[0]->parent);
 								?>
-	 							親カテゴリ: <?php echo $main_category->cat_name;?> <br>
-	 							子カテゴリ: <?php echo $sub_category[0]->cat_name; ?>
+	 							大学: <?php echo $main_category->cat_name;?> <br>
+	 							学部: <?php echo $sub_category[0]->cat_name; ?>
  							<?php endif; ?>	
 						</div>
 						<?php
@@ -652,11 +652,11 @@
 			$sub = $sub_category[0]->cat_name;
 		}
 	?>
-			<option value="">-- 親カテゴリ --</option>
+			<option value="">-- 大学 --</option>
 			<?php $item_main_category_name = output_main_category($main); ?>
 			</select>
 			<select name="subcategory">
-			<option value="1">-- 子カテゴリ --</option>
+			<option value="1">-- 学部 --</option>
 			<?php output_sub_category($item_main_category_name,$sub); ?>
 			</select><br>
 	
