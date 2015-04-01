@@ -12,11 +12,11 @@
 <!-- category -->
 <label for="main_category">カテゴリ</label></br>
 <select name="main_category" onChange="onChangeMainCategory(0)">
-<option value="">-- 親カテゴリ --</option>
+<option value="">-- 大学 --</option>
 <?php $main_category = output_main_category(0); ?>
 </select>
 <select name="subcategory">
-<option value="">-- 子カテゴリ --</option>
+<option value="">-- 学部 --</option>
 <?php output_sub_category($main_category,0); ?>
 </select>
 </br>
