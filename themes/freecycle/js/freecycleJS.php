@@ -53,11 +53,18 @@ function onConfirmGiveme(postID, url){
 		return false;		
 	}
 
-	var confirmText = "変更やキャンセルはできません。よろしいですか？\n";
-	confirmText += "商品:"+ jQuery("#post_"+ postID + " .index-item-title").text() + "\n";
+	var cutFigureTitle = 15;
+	var title = jQuery("#post_"+ postID + " .index-item-title").text();
+	var titleTrim = jQuery("#post_"+ postID + " .index-item-title").text().substr(0, (cutFigureTitle));
+
+	if(cutFigureTitle < title.length){
+		var confirmText = "商品:" + titleTrim + "..." + "\n";
+	}else{
+		var confirmText = "商品:" + title + "\n";
+	}
+
 	confirmText += "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked").next().text() + "\n";
 	confirmText += "取引場所:" + jQuery("#map_search_" + postID +" option:selected").text() + "\n";
-	confirmText += "メッセージ:"+ jQuery("#message_" + postID).val();
 	swal({   
 		title: "取引相手を確定させます。",     
 		text: confirmText,
