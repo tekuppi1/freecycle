@@ -197,17 +197,42 @@ function giveme(){
 	global $table_prefix;
 	$postID = $_POST['postID'];
 	$userID = $_POST['userID'];
-
+	
+	// 商品IDまたはユーザIDが空の場合は処理をしない
+	if($postID == "" || $userID == ""){
+		die;
+	}
+	
+	// ログインユーザとくださいするユーザが異なる場合は処理をしない
+	if(get_current_user_id() != $userID){
+		die;
+	}
+	
+	//ください済みの場合は処理をしない
+	if(doneGiveme($postID, $userID)){
+		echo "既にくださいされています。";
+		die;
+	}
+	
+	//ポイントが0の場合は処理をしない
+	if(get_usable_point($userID) == 0){
+		die;
+	}
+	
+	//出品者の場合処理をしない
+	$author = get_post_author($postID);
+	if($userID == $author){
+		die;
+	}
+	
+	//取引相手がすでに決まっている場合は処理をしない
+	if(isConfirm($postID)){
+		die;
+	}
+	
 	//todoリストに追加
 	if(!isGiveme($postID)){
 		add_todo_confirm_bidder($postID);
-	}
-
-	//ください済み確認
-	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where user_id = %d and post_id = %d", $userID, $postID));
-	if($current_giveme > 0){
-		echo "既にくださいリクエスト済みです。";
-		die;
 	}
 
 	// 記事の状態を「ください」に変更(現在の状態が無い場合はレコードを登録)
