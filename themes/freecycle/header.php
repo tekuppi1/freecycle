@@ -8,7 +8,14 @@
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php bp_head(); ?>
 		<?php wp_head(); ?>
-		<?php include_once "js/freecycleJS.php" ?>
+		<?php
+		// if facebook dialog has not shown before, show it
+		if(is_user_connected_with('facebook', get_current_user_id()) && !get_user_meta(get_current_user_id(), 'is_fb_share_popup_displayed')){
+			// change status
+			update_user_meta(get_current_user_id(), 'is_fb_share_popup_displayed', 1);
+			include_once "js/fcFbDialog.js.php";
+		}
+		?>
 		<?php
 		wp_register_script(
 			'flexSliderScript',
