@@ -327,7 +327,7 @@ function onChangeMainCategory(formID){
 
 	formID.subcategory.length = 1;
 	formID.subcategory[0].value = "1";
-	formID.subcategory[0].text = "-- 子カテゴリ --";
+	formID.subcategory[0].text = "-- 学部 --";
 
 	if(!subcategories){
 		return;
