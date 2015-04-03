@@ -1374,16 +1374,15 @@ div a#logo_top img{
 #top_block{
 	position: relative;
 	top: 10%;
-	/*background-color: white;*/
-	width: 80%;
-	height: 100%;
+	width: 100%;
 	margin: 0 auto;
 	color: white;
 }
 
 #top_block h1{
 	color: white;
-	font-size: 25px
+	font-size: 25px;
+	padding-left: 4%;
 }
 
 #top_block_message{
@@ -1397,7 +1396,7 @@ div a#logo_top img{
 }
 
 #top_block_login{
-	top: 10%;
+	padding-top: 4%;
 }
 
 .bx-caption span{
@@ -1405,10 +1404,27 @@ div a#logo_top img{
 	padding: 13px !important;
 }
 
-#top_slide_title{
+.top_sub_title{
 	font-size: 20px;
 	background-color: white;
 	padding: 10px;
+}
+
+/*トップページ画像*/
+.top_sumnail img{
+	height : 136px;
+	width  : 100px;
+	margin : 10px;
+}
+
+#top_image_box{
+	width : 100%;
+	background-color: white;
+}
+
+#top_image{
+	margin: 0 auto;
+	width: 100%;
 }
 
 }
@@ -2495,7 +2511,7 @@ div a#logo_top img{
 	position: relative;
 	top: 15%;
 	/*background-color: white;*/
-	width: 70%;
+	width: 100%;
 	height: 300px;
 	margin: 0 auto;
 	color: white;
@@ -2503,7 +2519,8 @@ div a#logo_top img{
 
 #top_block h1{
 	color: white;
-	font-size: 25px
+	font-size: 25px;
+	padding-left: 3%;
 }
 
 #top_block_message{
@@ -2525,16 +2542,31 @@ div a#logo_top img{
 	padding: 15px !important;
 }
 
-#top_slide_title{
+.top_sub_title{
 	font-size: 20px;
 	background-color: white;
 	padding: 10px;
 }
 
+/*トップページ出品本画像*/
+.top_sumnail img{
+	height : 136px;
+	width  : 100px;
+	margin : 10px;
+}
+
+#top_image_box{
+	width : 100%;
+	background-color: white;
+}
+
+#top_image{
+	margin: 0 auto;
+	width: 100%;
+}
+
 }
 /*---------------------------------------タブレットここまで！！！------------------------------------------------------------------------------------------------*/
-
-
 
 /*---------------------------------------PCのスタイル------------------------------------------------------------------------------------------------*/
 @media screen and (min-width: 769px) {
@@ -3674,13 +3706,19 @@ div a#logo_top img{
 	top: 20%;
 }
 
-#top_slide_title{
-	width: 550px;
+#top_block_login p{
+	color: white;
+  	font-size: 20px;
+}
+
+.top_sub_title{
+	width: 100%;
 	margin:0 auto;
 	position: relative;
 	padding: 30px;
 	margin: 0 auto;
 	font-size: 40px;
+	text-align: center;
 }
 
 .bx-wrapper{
@@ -3693,6 +3731,26 @@ div a#logo_top img{
 	padding: 20px !important;
 }
 
+/*トップページに画像表示*/
+.top_sumnail img{
+	height : 245px;
+	width  : 180px;
+	margin : 10px;
+}
+
+#top_image_box{
+	width : 100%;
+}
+
+#top_image{
+	margin: 0 auto;
+	width: 1000px;
+}
+
+#top_about{
+	font-size: 25px;
+	text-align: center;
+}
 }
 /**************PC表示終了********************/
 
@@ -3762,4 +3820,24 @@ div.grobal_nav_div_sp ul li a span {
 
 #edit_form{
 	float: left;
+}
+
+
+@media screen and (max-width: 990px) and (min-width: 769px) {
+#top_block {
+	position: relative;
+	top: 2%;
+	width: 85%;
+	height: 300px;
+	margin: 0 auto;
+}
+
+#top_block_login{
+	top: 15%;
+}
+
+#top_block_login p{
+	color: white;
+  	font-size: 20px;
+}
 }

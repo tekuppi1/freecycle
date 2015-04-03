@@ -106,7 +106,7 @@ function add_custom_where($where){
 
 	// 一覧ページには取引相手確定済の記事を表示しない。
 	// 「ください可能」のみの条件で検索された場合も、同様に表示しない。
-	if(is_front_page() || (isset($_REQUEST['seachform_itemstatus']) && $_REQUEST['seachform_itemstatus'] == 'givemeable')){
+	if(is_front_page() || (isset($_REQUEST['seachform_itemstatus']) && $_REQUEST['seachform_itemstatus'] == 'givemeable') || (isset($_REQUEST["req"]) && $_REQUEST["req"] == "top_page")){
 		$where .= "AND (" . $table_prefix . "fmt_giveme_state.confirmed_flg <> 1 "
 				. " OR " . $table_prefix . "fmt_giveme_state.confirmed_flg is NULL)";
 	}
@@ -2888,3 +2888,34 @@ function output_sub_category($item_main_category_name, $item_sub_category_name){
 		}
 	}
 }
+
+function get_item_image_urls_on_toppage(){
+	//管理画面から変更可能にできるように
+	$args = array(
+			'posts_per_page' => 15,
+			'orderby' => 'rand',
+			'post_type' => 'post'
+		);
+	$rand_items = new WP_Query($args);
+	$image_urls = array();
+	foreach ($rand_items->posts as $rand_item) {
+		$arg = array( 
+		    'post_parent' => $rand_item->ID,
+		    'post_type'   => 'attachment', 
+		    'post_mime_type' => 'image',
+		    'numberposts' => 1
+		);
+		$child = get_children($arg);
+
+		//$childがとれたかどうかチェック
+		$image = array_shift($child);
+		if(!empty($image) && !empty($image->guid)){
+			array_push($image_urls, $image->guid);
+		}
+	}
+	echo json_encode($image_urls);
+	die;
+}
+
+add_action('wp_ajax_nopriv_top_images', 'get_item_image_urls_on_toppage');
+add_action('wp_ajax_top_images', 'get_item_image_urls_on_toppage');

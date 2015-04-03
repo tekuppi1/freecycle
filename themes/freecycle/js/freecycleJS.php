@@ -320,7 +320,7 @@ function onChangeMainCategory(formID){
 
 	formID.subcategory.length = 1;
 	formID.subcategory[0].value = "1";
-	formID.subcategory[0].text = "-- 子カテゴリ --";
+	formID.subcategory[0].text = "-- 学部 --";
 
 	if(!subcategories){
 		return;
@@ -333,5 +333,30 @@ function onChangeMainCategory(formID){
 	});
 }
 
+function displayImages(){
+	jQuery.ajax({
+		type: "POST",
+		url: '<?php echo admin_url('admin-ajax.php'); ?>',
+		data: {
+			"action" : "top_images",
+			"req" : "top_page"
+		},
+		success: function(data){
+			var image_urls = JSON.parse(data);
+			var elm;
+			for(var i = 0; i < image_urls.length; i++){
+				elm = "<a class='top_sumnail'><img src='" + image_urls[i] +  "' class='attachment-100x150 wp-post-image'  height='100' width='100'></a>";
+				jQuery("#top_image").append(elm);
+			}
+			jQuery("#top_image").owlCarousel({
+				autoPlay: 2500,
+				items : 5,
+				itemsTablet : [768, 3],
+				itemsMobile : [481, 3],
+				rewindSpeed : 1000,
+			});
+		}
+	});
+}
 
 </script>
