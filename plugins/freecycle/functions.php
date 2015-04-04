@@ -252,16 +252,6 @@ function giveme(){
 			$postID));
 	}
 
-	// ログインユーザ→投稿記事に対して「ください」リクエストした記録をつける
-	// 既にデータが登録済の場合は何もしません
-	if($current_giveme == 0){
-		$wpdb->query($wpdb->prepare("
-			INSERT INTO " . $table_prefix . "fmt_user_giveme
-			(update_timestamp, user_id, post_id)
-			VALUES (current_timestamp, %d, %d)",
-			$userID, $postID));
-	}
-
 	// 仮払ポイントを1p増
 	add_temp_used_points($userID, 1);
 
