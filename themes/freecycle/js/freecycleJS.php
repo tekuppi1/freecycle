@@ -55,15 +55,16 @@ function onConfirmGiveme(postID, url){
 
 	var cutFigureTitle = 15;
 	var title = jQuery("#post_"+ postID + " .index-item-title").text();
-	var titleTrim = jQuery("#post_"+ postID + " .index-item-title").text().substr(0, (cutFigureTitle));
+	var titleTrim = title.substr(0, (cutFigureTitle));
+	var confirmText = "商品:"
 
 	if(cutFigureTitle < title.length){
-		var confirmText = "商品:" + titleTrim + "..." + "\n";
+		confirmText += titleTrim + "...";
 	}else{
-		var confirmText = "商品:" + title + "\n";
+		confirmText += title;
 	}
 
-	confirmText += "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked").next().text() + "\n";
+	confirmText += "\n" + "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked").next().text() + "\n";
 	confirmText += "取引場所:" + jQuery("#map_search_" + postID +" option:selected").text() + "\n";
 	swal({   
 		title: "取引相手を確定させます。",     
