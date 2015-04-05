@@ -235,6 +235,15 @@ function giveme(){
 		add_todo_confirm_bidder($postID);
 	}
 
+	// ログインユーザ→投稿記事に対して「ください」リクエストした記録をつける
+	// 既にデータが登録済の場合は何もしません
+	$wpdb->query($wpdb->prepare("
+		INSERT INTO " . $table_prefix . "fmt_user_giveme
+		(update_timestamp, user_id, post_id)
+		VALUES (current_timestamp, %d, %d)",
+		$userID, $postID));
+	
+	
 	// 記事の状態を「ください」に変更(現在の状態が無い場合はレコードを登録)
 	$current_state = $wpdb->get_var($wpdb->prepare("SELECT giveme_flg FROM " . $table_prefix . "fmt_giveme_state where post_id = %d", $postID));
 	if(!is_null($current_state)){
