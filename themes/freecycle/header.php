@@ -10,11 +10,17 @@
 		<?php wp_head(); ?>
 		<?php include_once "js/freecycleJS.php" ?>
 		<?php
-		// if facebook dialog has not shown before, show it
+		// if facebook dialog has not be shown before, show it
 		if(is_user_connected_with('facebook', get_current_user_id()) && !get_user_meta(get_current_user_id(), 'is_fb_share_popup_displayed')){
 			// change status
 			update_user_meta(get_current_user_id(), 'is_fb_share_popup_displayed', 1);
 			include_once "js/fcFbDialog.js.php";
+		}
+		// if twitter dialog has not be shown before, show it
+		if(is_user_connected_with('twitter', get_current_user_id()) && !get_user_meta(get_current_user_id(), 'is_twitter_popup_displayed')){
+			// change status
+			update_user_meta(get_current_user_id(), 'is_twitter_popup_displayed', 1);
+			include_once "js/fcTwitterDialog.js.php";
 		}
 		?>
 		<?php
