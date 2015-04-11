@@ -69,7 +69,6 @@ function onConfirmGiveme(postID, url){
 	swal({   
 		title: "取引相手を確定させます。",     
 		text: confirmText,
-		type: "warning",   
 		showCancelButton: true,   
 		confirmButtonColor: "#DD6B55",   
 		confirmButtonText: "はい",   
