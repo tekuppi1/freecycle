@@ -26,7 +26,7 @@ function onConfirmGiveme(postID, url){
 	disableButtons();
 	// ラジオボタンのチェック確認
 	// 取引相手のユーザIDを取得
-	var userID = jQuery("input[name='sendto_user_"+postID+"']:checked").val();
+	var userID = jQuery("#postID_" + postID + " option:selected").val();
 	if(!userID){
 		swal({   
 			title: "ユーザーが選択されていません。",  
@@ -55,7 +55,7 @@ function onConfirmGiveme(postID, url){
 
 	var confirmText = "変更やキャンセルはできません。よろしいですか？\n";
 	confirmText += "商品:"+ jQuery("#post_"+ postID + " .index-item-title").text() + "\n";
-	confirmText += "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked").next().text() + "\n";
+	confirmText += "取引相手:"+ jQuery("#postID_" + postID + " option:selected").text() + "\n";
 	confirmText += "取引場所:" + jQuery("#map_search_" + postID +" option:selected").text() + "\n";
 	confirmText += "メッセージ:"+ jQuery("#message_" + postID).val();
 	swal({   

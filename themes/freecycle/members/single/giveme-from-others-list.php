@@ -59,8 +59,9 @@ MESSAGE_SECTION;
 	?>
 
 	<?php
+	echo "</select>";
 	echo_map_section($last_post_id);
-	echo_message_section($last_post_id);	
+	echo_message_section($last_post_id);
 	?>
 				<hr>
 				<?php
@@ -87,14 +88,18 @@ MESSAGE_SECTION;
 		<span class="label">取引相手:</span>
 				<?php
 				$last_post_id = $giveme->post_id;
-			} ?>
-					<label><input type="radio" name="sendto_user_<?php echo $giveme->post_id ?>" value="<?php echo $giveme->user_id ?>" id="post<?php echo $giveme->post_id; ?>_user<?php echo $giveme->user_id ?>"/><a href="<?php echo home_url() . "/members/" . $giveme->user_nicename ?>" id="<?php echo $giveme->user_id ?>_<?php echo $giveme->post_id; ?>">&nbsp;<?php echo $giveme->display_name; ?></a></label>
+				?>
+		<select id='postID_<?php echo $last_post_id;?>'>
 		<?php
+				echo '<option label="-- 選択 --" value="" >';
+			} 
+				echo '<option name="sendto_user_' . $giveme->post_id . '" value="' . $giveme->user_id . '">' . $giveme->display_name . '</option>';
 		}
 		?>
 		<?php if($last_post_id != ""){ ?>
 	</div> <!-- 取引相手 -->
 	<?php
+	echo "</select>";
 	echo_map_section($last_post_id);
 	echo_message_section($last_post_id);
 	?>			
