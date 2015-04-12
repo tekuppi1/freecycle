@@ -64,12 +64,8 @@ function onConfirmGiveme(postID, url){
 		confirmText += title;
 	}
 
-	confirmText += "\n" + "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:selected").text() + "\n";
-	confirmText += "取引場所:" + jQuery("#map_search_" + postID +" option:selected").text() + "\n";
 	swal({   
 		title: "取引相手を確定させます。",     
-		text: confirmText,
-		type: "warning",   
 		showCancelButton: true,   
 		confirmButtonColor: "#DD6B55",   
 		confirmButtonText: "はい",   
@@ -103,7 +99,7 @@ function onConfirmGiveme(postID, url){
 				swal({   
 					title: "取引相手を確定し、メッセージを送信しました！",  
 					text: "取引相手からの返信をお待ちください。",
-					type: "success",   
+					// type: "success",   
 					showCancelButton: false,   
 					confirmButtonColor: "#AEDEF4", 
 					confirmButtonText: "OK",      
