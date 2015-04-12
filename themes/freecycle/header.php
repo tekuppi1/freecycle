@@ -10,6 +10,14 @@
 		<?php wp_head(); ?>
 		<?php include_once "js/freecycleJS.php" ?>
 		<?php
+		// if facebook dialog has not shown before, show it
+		if(is_user_connected_with('facebook', get_current_user_id()) && !get_user_meta(get_current_user_id(), 'is_fb_share_popup_displayed')){
+			// change status
+			update_user_meta(get_current_user_id(), 'is_fb_share_popup_displayed', 1);
+			include_once "js/fcFbDialog.js.php";
+		}
+		?>
+		<?php
 		wp_register_script(
 			'flexSliderScript',
 			get_stylesheet_directory_uri() . '/js/jquery.flexslider-min.js'
@@ -150,7 +158,7 @@
 					</ul>
 				</div>
 				<div id="entry_login_form_pc">
-					<a href="<?php echo home_url(); ?>/register" class="entry_buttons" id="entry_form">新規登録</a>
+					<a href="<?php echo home_url(); ?>/register#signup_form" class="entry_buttons" id="entry_form">新規登録</a>
 					<a href="<?php echo home_url(); ?>/login" class="entry_buttons" id="login_form" >ログイン</a>
 					<?php social_login_button(); ?>
 					<a href="<?php echo home_url() . "/about"; ?>"  class="entry_buttons" id="detail_texchange">→てくすちぇんじってどんなサービス？</a>
