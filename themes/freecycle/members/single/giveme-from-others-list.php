@@ -41,6 +41,7 @@ function echo_message_section($last_post_id){
 						<input type="button" value="確定" onClick="callOnConfirmGiveme($last_post_id)">
 					</div><!-- #post_(id) -->
 				</div>
+			</div>
 MESSAGE_SECTION;
 } ?>
 <div id="giveme-from-others" class="giveme-from-others standard-form">
@@ -102,7 +103,7 @@ MESSAGE_SECTION;
 	echo "</select>";
 	echo_map_section($last_post_id);
 	echo_message_section($last_post_id);
-	?>			
+	?>
 		<hr>
 		<?php } ?>
 </div>
