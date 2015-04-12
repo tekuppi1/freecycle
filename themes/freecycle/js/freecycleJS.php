@@ -101,7 +101,7 @@ function onConfirmGiveme(postID, url){
 				swal({   
 					title: "取引相手を確定し、メッセージを送信しました！",  
 					text: "取引相手からの返信をお待ちください。",
-					type: "success",   
+					// type: "success",   
 					showCancelButton: false,   
 					confirmButtonColor: "#AEDEF4", 
 					confirmButtonText: "OK",      
