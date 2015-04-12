@@ -41,7 +41,6 @@ function echo_message_section($last_post_id){
 						<input type="button" value="確定" onClick="callOnConfirmGiveme($last_post_id)">
 					</div><!-- #post_(id) -->
 				</div>
-			</div>
 MESSAGE_SECTION;
 } ?>
 <div id="giveme-from-others" class="giveme-from-others standard-form">
@@ -85,7 +84,6 @@ MESSAGE_SECTION;
 							</div>
 						</div><!-- post-content -->					
 					</div><!-- post名 -->
-		<div class="radio">
 		<span class="label">取引相手:</span>
 				<?php
 				$last_post_id = $giveme->post_id;
