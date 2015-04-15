@@ -197,19 +197,53 @@ function giveme(){
 	global $table_prefix;
 	$postID = $_POST['postID'];
 	$userID = $_POST['userID'];
-
+	
+	// 商品IDまたはユーザIDが空の場合は処理をしない
+	if($postID == "" || $userID == ""){
+		die;
+	}
+	
+	// ログインユーザとくださいするユーザが異なる場合は処理をしない
+	if(get_current_user_id() != $userID){
+		die;
+	}
+	
+	//ください済みの場合は処理をしない
+	if(doneGiveme($postID, $userID)){
+		echo "既にくださいされています。";
+		die;
+	}
+	
+	//ポイントが0の場合は処理をしない
+	if(get_usable_point($userID) == 0){
+		die;
+	}
+	
+	//出品者の場合処理をしない
+	$author = get_post_author($postID);
+	if($userID == $author){
+		die;
+	}
+	
+	//取引相手がすでに決まっている場合は処理をしない
+	if(isConfirm($postID)){
+		die;
+	}
+	
 	//todoリストに追加
 	if(!isGiveme($postID)){
 		add_todo_confirm_bidder($postID);
 	}
 
-	//ください済み確認
-	$current_giveme = $wpdb->get_var($wpdb->prepare("SELECT count(*) FROM " . $table_prefix . "fmt_user_giveme where user_id = %d and post_id = %d", $userID, $postID));
-	if($current_giveme > 0){
-		echo "既にくださいリクエスト済みです。";
-		die;
-	}
-
+	// ログインユーザ→投稿記事に対して「ください」リクエストした記録をつける
+	// 既にデータが登録済の場合は何もしません
+	$wpdb->query($wpdb->prepare("
+		INSERT INTO " . $table_prefix . "fmt_user_giveme
+		(update_timestamp, user_id, post_id)
+		VALUES (current_timestamp, %d, %d)",
+		$userID, $postID));
+	
+	
 	// 記事の状態を「ください」に変更(現在の状態が無い場合はレコードを登録)
 	$current_state = $wpdb->get_var($wpdb->prepare("SELECT giveme_flg FROM " . $table_prefix . "fmt_giveme_state where post_id = %d", $postID));
 	if(!is_null($current_state)){
@@ -225,16 +259,6 @@ function giveme(){
 			(update_timestamp, post_id, giveme_flg)
 			VALUES (current_timestamp, %d, 1)",
 			$postID));
-	}
-
-	// ログインユーザ→投稿記事に対して「ください」リクエストした記録をつける
-	// 既にデータが登録済の場合は何もしません
-	if($current_giveme == 0){
-		$wpdb->query($wpdb->prepare("
-			INSERT INTO " . $table_prefix . "fmt_user_giveme
-			(update_timestamp, user_id, post_id)
-			VALUES (current_timestamp, %d, %d)",
-			$userID, $postID));
 	}
 
 	// 仮払ポイントを1p増
