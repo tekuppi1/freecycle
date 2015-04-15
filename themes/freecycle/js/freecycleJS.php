@@ -53,15 +53,21 @@ function onConfirmGiveme(postID, url){
 		return false;		
 	}
 
-	var confirmText = "変更やキャンセルはできません。よろしいですか？\n";
-	confirmText += "商品:"+ jQuery("#post_"+ postID + " .index-item-title").text() + "\n";
-	confirmText += "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked").next().text() + "\n";
-	confirmText += "取引場所:" + jQuery("#map_search_" + postID +" option:selected").text() + "\n";
-	confirmText += "メッセージ:"+ jQuery("#message_" + postID).val();
+	var cutFigureTitle = 15;
+	var title = jQuery("#post_"+ postID + " .index-item-title").text();
+	var titleTrim = title.substr(0, (cutFigureTitle));
+	var confirmText = "商品:"
+
+	if(cutFigureTitle < title.length){
+		confirmText += titleTrim + "...";
+	}else{
+		confirmText += title;
+	}
+
+	// confirmText += "\n" + "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked").next().text() + "\n";
+	// confirmText += "取引場所:" + jQuery("#map_search_" + postID +" option:selected").text() + "\n";
 	swal({   
 		title: "取引相手を確定させます。",     
-		text: confirmText,
-		type: "warning",   
 		showCancelButton: true,   
 		confirmButtonColor: "#DD6B55",   
 		confirmButtonText: "はい",   
@@ -95,7 +101,7 @@ function onConfirmGiveme(postID, url){
 				swal({   
 					title: "取引相手を確定し、メッセージを送信しました！",  
 					text: "取引相手からの返信をお待ちください。",
-					type: "success",   
+					// type: "success",   
 					showCancelButton: false,   
 					confirmButtonColor: "#AEDEF4", 
 					confirmButtonText: "OK",      
