@@ -29,8 +29,8 @@ remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_d
 
 // load files
 require_once('functions.kses.php');
-require_once('map/freecycle-map.php');
 require_once('categories/freecycle-categories.php');
+require_once('map/freecycle-map.php');
 
 //写真を自動で回転して縦にする
 function edit_images_before_upload($file)
