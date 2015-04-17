@@ -61,7 +61,7 @@
 				swal({   
 					title: "不正なファイルです。",
 					text: ".jpeg,.jpg,.png ファイルのみアップロードできます。",
-					type: "error",    
+					// type: "error",    
 				}); 
 				enableButtons();
 				return false;

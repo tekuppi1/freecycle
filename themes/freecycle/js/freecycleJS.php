@@ -26,7 +26,7 @@ function onConfirmGiveme(postID, url){
 	disableButtons();
 	// ラジオボタンのチェック確認
 	// 取引相手のユーザIDを取得
-	var userID = jQuery("input[name='sendto_user_"+postID+"']:checked").val();
+	var userID = jQuery("#postID_" + postID + " option:selected").val();
 	if(!userID){
 		swal({   
 			title: "ユーザーが選択されていません。",  
@@ -64,12 +64,8 @@ function onConfirmGiveme(postID, url){
 		confirmText += title;
 	}
 
-	confirmText += "\n" + "取引相手:"+ jQuery("[name=sendto_user_"+postID+"]:checked").next().text() + "\n";
-	confirmText += "取引場所:" + jQuery("#map_search_" + postID +" option:selected").text() + "\n";
 	swal({   
 		title: "取引相手を確定させます。",     
-		text: confirmText,
-		type: "warning",   
 		showCancelButton: true,   
 		confirmButtonColor: "#DD6B55",   
 		confirmButtonText: "はい",   
@@ -84,7 +80,7 @@ function onConfirmGiveme(postID, url){
 			var lat = map.getAttribute("lat")?map.getAttribute("lat"):""; // latitude
 			var lng = map.getAttribute("lng")?map.getAttribute("lng"):""; // longitude
 			// 取引相手でないユーザID一覧を取得
-			jQuery("[name=sendto_user_"+ postID + "]" + ":not(:checked)").each(function(){
+			jQuery("[name=sendto_user_"+ postID + "]" + ":not(:selected)").each(function(){
 				uncheckedUserIDs.push(this.value);
 			});
 			jQuery.ajax({
@@ -103,7 +99,7 @@ function onConfirmGiveme(postID, url){
 				swal({   
 					title: "取引相手を確定し、メッセージを送信しました！",  
 					text: "取引相手からの返信をお待ちください。",
-					type: "success",   
+					// type: "success",   
 					showCancelButton: false,   
 					confirmButtonColor: "#AEDEF4", 
 					confirmButtonText: "OK",      

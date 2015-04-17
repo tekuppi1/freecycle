@@ -164,7 +164,7 @@
 					afterEvaluation();
 					swal({   
 						title: "取引評価を行いました！",  
-						type: "success",   
+						// type: "success",   
 						showCancelButton: false,   
 						confirmButtonColor: "#AEDEF4", 
 						confirmButtonText: "OK",      
@@ -195,7 +195,7 @@
 			}else if(comment.length > 100){
 				swal({   
 					title: "コメントは100文字以内で記入してください。",  
-					type: "error",   
+					// type: "error",   
 					showCancelButton: false,   
 					confirmButtonColor: "#AEDEF4", 
 					confirmButtonText: "OK",      
