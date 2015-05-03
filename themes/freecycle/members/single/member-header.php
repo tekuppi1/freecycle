@@ -10,6 +10,12 @@
 
 <?php do_action( 'bp_before_member_header' ); ?>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCmhfQEie0qbsIR-F2xNVxzpV8IxzrwDBE&libraries=places&sensor=false"></script>
+
+<!--Add(2015/5/4)-->
+<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/start/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+<!--Add(2015/5/4)-->
+
 <script type="text/javascript">
 
 	function callOnConfirmGiveme(postID){
@@ -17,6 +23,7 @@
 	}
 	
 	function callOnNewEntry(){
+        
 		disableButtons();
 		if(jQuery("#field_1").val().length == 0){
 			swal({   
@@ -38,18 +45,23 @@
 
 		var mainCategory = jQuery('[name=main_category]').val();
 		if(mainCategory == ""){
-			alert("大学名が未入力です。");
+			swal({
+				title: "大学名が未入力です。",  
+				type: "error",    
+			}); 
 			enableButtons();
 			return false;
 		}
 
 		var subCategory = jQuery('[name=subcategory]').val();
 		if(subCategory == ""){
-			alert("学部名が未入力です。");
+			swal({
+				title: "学部が未入力です。",  
+				type: "error",    
+			}); 
 			enableButtons();
 			return false;
 		}
-
 		
 		var isAttachedFlg = false;
 		for (var i = jQuery(".multi").length - 1; i >= 0; i--) {
@@ -74,9 +86,79 @@
 				type: "error",    
 			}); 
 			enableButtons();
+            var btnName  = document.fm.button1.value;
 			return false;
 		}
-			var form = jQuery("#newentry").get()[0];
+
+//Add(2015/5/4)//
+        jQuery("#newentry").after("\
+        	<div id='dialog'>\
+            <table border='1'>\
+            <tr style='font-size:150%;'><td align='center'><b>商品名</b></td><td><b>"+jQuery('#field_1').val()+"</b></td></tr>\
+            <tr><td  align='center'>商品説明</td><td>"+jQuery('#field_2').val()+"</td></tr>\
+            <tr><td  align='center'>カテゴリ</td><td>"
+                +jQuery('[name=main_category] option:selected').text()+" "
+                +jQuery('[name=subcategory] option:selected').text()+"</td></tr>\
+            <tr><td  align='center'>状態</td><td>"+jQuery('[name=item_status] option:selected').text()+"</td></tr>\
+            <tr><td  align='center'>タグ</td><td>"+jQuery('#field_4').val()+"</td></tr>\
+            <tr><td  align='center'>写真</td><td><img id='picture1' width='50px'><img id='picture2' width='50px'><img id='picture3' width='50px'></td></tr>\
+            </table>\
+			<p style='font-size:75%;'>写真は一枚目のみ表示されています。</p>\
+            </div>\
+		");
+		
+		var file = jQuery('[name="upload_attachment[]"]').prop('files')[0];
+		var fileReader = new FileReader();
+		fileReader.onload = function(event){
+			jQuery("#picture1").attr('src', event.target.result);
+		};
+		fileReader.readAsDataURL(file);
+
+        jQuery('#dialog').dialog({
+          modal: true,
+          title: "こちらを新しく出品します",
+          draggable: false,
+          show: "fade",
+          hide: "fade",
+          buttons:[
+            {
+                text:'出品',
+                class:'btn-enter',
+                click: function() {
+                    jQuery(this).dialog('close');
+					jQuery('#dialog').remove();
+                    callOnNewEntryFinish();
+                }
+            },{
+                text:'キャンセル',
+                class:'btn-close',
+                click: function() {
+					jQuery('#dialog').remove();
+                    jQuery(this).dialog('close');
+                }
+          }
+        ]});
+        jQuery(document).on("click", ".ui-widget-overlay", function(){
+            jQuery(this).prev().find(".ui-dialog-content").dialog("close");
+        });
+        enableButtons();
+        callOnNewEntryToChangeCSS();
+//Add(2015/5/4)//
+	}
+    
+    //Add(2015/5/4)//
+    function callOnNewEntryToChangeCSS(){
+		jQuery(".ui-dialog-titlebar-close").hide();
+        jQuery('.ui-widget-overlay').css('background','#FFFFFF');
+        jQuery('.ui-widget-overlay').css('opacity','0.7');
+        jQuery('.btn-close').css('background','#EA5549');
+        jQuery('.btn-close').css('border','#FF6666');
+        jQuery('.btn-enter').css('background','#228b22');
+        jQuery('.btn-enter').css('border','#66FF66');
+    }
+    
+    function callOnNewEntryFinish(){
+            var form = jQuery("#newentry").get()[0];
 			var fd = new FormData(form);
 			fd.append("action", "new_entry");
 			jQuery.ajax({
@@ -98,7 +180,7 @@
 					jQuery("option").attr("selected", false);
 				}
 			});
-	}
+    }
 
 	function onClickSearchWantedBook(){
 		disableButtons();
