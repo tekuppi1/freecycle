@@ -400,7 +400,7 @@
 	</div><!-- #item-meta -->
 
 </div><!-- #item-header-content -->
-<div id="mypage"></div>
+<a name="mypage" id="mypage"></a>
 <?php do_action( 'bp_after_member_header' ); ?>
 
 <?php do_action( 'template_notices' ); ?>
