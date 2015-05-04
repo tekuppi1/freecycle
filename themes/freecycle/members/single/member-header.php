@@ -401,7 +401,7 @@
 
 </div><!-- #item-header-content -->
 </br>
-<h3>TODOリスト</h3>
+<h3>next action</h3>
 <div id="todo-list">
 	<?php
 		global $user_ID;
