@@ -165,7 +165,7 @@
 				</div>
 				<div id="entry_login_form_pc">
 					<a href="<?php echo home_url(); ?>/register#signup_form" class="entry_buttons" id="entry_form">新規登録</a>
-					<a href="<?php echo home_url(); ?>/login" class="entry_buttons" id="login_form" >ログイン</a>
+					<a href="<?php echo home_url(); ?>/login#blog-page" class="entry_buttons" id="login_form" >ログイン</a>
 					<?php social_login_button(); ?>
 					<a href="<?php echo home_url() . "/about"; ?>"  class="entry_buttons" id="detail_texchange">→てくすちぇんじってどんなサービス？</a>
 				</div>
