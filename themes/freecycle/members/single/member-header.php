@@ -334,7 +334,7 @@
 	   pos = str.indexOf("/", pos + 1);
 	}
 
-	if(count >= 3){
+	if(count >= 3 && url.lastIndexOf("#") == -1){
 	 location.href = "#mypage";
 	}
 
