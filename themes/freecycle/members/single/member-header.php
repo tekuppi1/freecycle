@@ -324,19 +324,21 @@
 	google.maps.event.addDomListener(window, "load", initializeMap);
 
 	//ページスクロール
-	var url = location.href;
-	var str = url.substr(url.indexOf("members"));
-	var count = 0;
-	var pos = str.indexOf("/");
+	jQuery(document).ready(function() {
+		var url = location.href;
+		var str = url.substr(url.indexOf("members"));
+		var count = 0;
+		var pos = str.indexOf("/");
 
-	while ( pos != -1 ) {
-	   count++;
-	   pos = str.indexOf("/", pos + 1);
-	}
+		while ( pos != -1 ) {
+		   count++;
+		   pos = str.indexOf("/", pos + 1);
+		}
 
-	if(count >= 3){
-	 location.href = "#mypage";
-	}
+		if(count >= 3){
+		 location.href = "#mypage";
+		}
+	});
 
 </script>
 <div id="item-header-avatar">
@@ -434,7 +436,7 @@
 		}
 	?>
 </div>
-<div id="mypage"></div>
+<a name="mypage" id="mypage"></a>
 <?php do_action( 'bp_after_member_header' ); ?>
 
 <?php do_action( 'template_notices' ); ?>
