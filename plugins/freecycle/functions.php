@@ -2570,10 +2570,10 @@ function change_todo_modified($todo_ID){
  * @param {int} $item_ID くださいされた商品ＩＤ
  */
 function add_todo_confirm_bidder($item_ID){
-
 	$user_ID = get_post($item_ID)->post_author;
+	$user_login_name = get_user_by('id', $user_ID)->user_login;
 
-	add_todo($user_ID, $item_ID, '<a href = "' . home_url() . '/archives/' . $item_ID . '">
+	add_todo($user_ID, $item_ID, '<a href = "' . home_url() . '/members/' . $user_login_name . '/giveme/giveme-from-others/#post_'.$item_ID.'">
 		あなたの商品に「ください」がされました。取引相手を確定させてください</a>');
 }
 
