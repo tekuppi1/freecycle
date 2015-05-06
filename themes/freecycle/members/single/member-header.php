@@ -335,8 +335,8 @@
 		   pos = str.indexOf("/", pos + 1);
 		}
 
-		if(count >= 3){
-		 location.href = "#mypage";
+		if(count >= 3 && url.lastIndexOf("#") == -1){
+			location.href = "#mypage";
 		}
 	});
 
@@ -402,6 +402,40 @@
 	</div><!-- #item-meta -->
 
 </div><!-- #item-header-content -->
+<div id="todo-list">
+	<?php
+		global $user_ID;
+		$todo_asc_list = get_todo_list($user_ID, "unfinished");
+		$todo_list = array_reverse($todo_asc_list);
+		$todo_list_count = get_todo_list_count($user_ID);
+		if($todo_list){
+	?>
+	<h3 style="float:left;width:100%">next actionが<?php echo $todo_list_count;?>件あります。</h3>
+	<?php
+			foreach($todo_list as $todo_item){
+	?>
+			<div id="todo-item">
+				<div class="todo-info"><?php echo date("Y年m月d日 A g:i",strtotime($todo_item->created)); ?></div>
+				<?php echo $todo_item->message; ?>
+				<div class="todo-info">
+					<ul>
+					<?php 
+							$deal_user_ID = deal_user($todo_item->item_id ,$user_ID);
+							if($deal_user_ID){
+								$deal_user = get_userdata($deal_user_ID)->display_name;
+								echo "<li>取引者： ".$deal_user."</li></br>";
+							}
+						?>
+					<li><?php echo "商品名： ".get_post($todo_item->item_id)->post_title; ?></li></br>
+					</ul>
+				</div>
+			</div>
+		<hr>
+	<?php 
+			}
+		}
+	?>
+</div>
 <a name="mypage" id="mypage"></a>
 <?php do_action( 'bp_after_member_header' ); ?>
 
