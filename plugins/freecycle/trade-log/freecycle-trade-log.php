@@ -1,13 +1,19 @@
 <?php
+// 取引状態を表す定数群
+define('FC_TRADE_FINISHED', 'finished'); // 取引完了
+define('FC_TRADE_BIDDER_EVALUATED', 'bidder_evaluated'); // 取引相手評価済
+define('FC_TRADE_EXHIBITOR_EVALUATED', 'exhibitor_evaluated'); // 出品者評価済
+define('FC_TRADE_ITEM_PASSED', 'item_passed'); // 商品受け渡し済
+define('FC_TRADE_CONFIRMED', 'confirmed'); // 取引相手確定済
+define('FC_TRADE_GIVEMEED', 'givemed'); // ください済
+define('FC_TRADE_ENTRIED', 'entried'); // 出品済
+define('FC_TRADE_UNKNOWN', 'unknown'); // 不明
 
-define('FC_TRADE_FINISHED', 'finished');
-define('FC_TRADE_BIDDER_EVALUATED', 'bidder_evaluated');
-define('FC_TRADE_EXHIBITOR_EVALUATED', 'exhibitor_evaluated');
-define('FC_TRADE_ITEM_PASSED', 'item_passed');
-define('FC_TRADE_CONFIRMED', 'confirmed');
-define('FC_TRADE_GIVEMEED', 'givemed');
-define('FC_TRADE_ENTRIED', 'entried');
-
+/**
+ * 取引状態を定数値で返します。
+ * @param {int} $id 商品ID(postID)
+ * @return {string} 取引状態の定数値を返します。詳細は上の定数群を参照してください。
+ */
 function get_trade_status($id){
 	if(isFinish($id) && isBidderEvaluated($id) && isExhibiterEvaluated($id)){
 		return FC_TRADE_FINISHED;
@@ -23,8 +29,9 @@ function get_trade_status($id){
 		return FC_TRADE_GIVEMEED;
 	}else if(!isGiveme($id) && isEntry($id)){
 		return FC_TRADE_ENTRIED;
+	}else{
+		return FC_TRADE_UNKNOWN;
 	}
-
 }
 
 /**
