@@ -14,6 +14,7 @@
 			'mail-magazine-setting' => 'メールマガジン',
 			'message-setting' => 'メッセージ',
 			'map-setting' => '取引場所',
+			'trade-log' => '取引履歴',
 		) as $key => $val):
 	?>
 	<a class="nav-tab<?php if(isset($_REQUEST['view']) && $_REQUEST['view'] == $key) echo ' nav-tab-active'; ?>" href="<?php echo admin_url('options-general.php?page=texchange&view='.$key);?>">
@@ -61,7 +62,10 @@
 		    break;
 		case 'map-setting-places-update':
 		    require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'map-setting-places-update.php';
-		    break;		    
+		    break; 
+		case 'trade-log':
+		    require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'trade-log.php';
+		    break; 
 		default:
     ?>
     <table class="form-table">

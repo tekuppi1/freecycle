@@ -31,6 +31,7 @@ remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_d
 require_once('functions.kses.php');
 require_once('categories/freecycle-categories.php');
 require_once('map/freecycle-map.php');
+require_once('trade-log/freecycle-trade-log.php');
 
 //写真を自動で回転して縦にする
 function edit_images_before_upload($file)
@@ -1708,36 +1709,6 @@ function my_setup_nav() {
 		$messages_name = sprintf( __( 'Messages', 'buddypress' ));
 	}
 
-	$todo_list_name;
-	$todo_list_count = get_todo_list_count($user_ID);
-	$todo_list_style_id;
-	if($todo_list_count){
-		$todo_list_name = sprintf( __( 'next action <span>%d</span>', 'buddypress'), $todo_list_count);
-		$todo_list_style_id = "exist_todo";
-	}else{
-		$todo_list_name = sprintf( __( 'next action', 'buddypress' ));
-		$todo_list_style_id = "none_todo";
-	}
-	bp_core_new_nav_item( array(
-		'name' => $todo_list_name,
-		'slug' => 'todo-list',
-		'position' => 115,
-		'screen_function' => 'todo_list_link',
-		'show_for_displayed_user' => true,
-		'default_subnav_slug' => 'unfinished-todo-list',
-		'item_css_id' => $todo_list_style_id
-		) );
-
-	bp_core_new_subnav_item( array(
-		'name' => __( '未完了', 'buddypress' ),
-		'slug' => 'unfinished-todo-list',
-		'parent_url' => trailingslashit($bp->displayed_user->domain . 'todo-list'),
-		'parent_slug' => 'todo-list',
-		'position' => 116,
-		'screen_function' => 'unfinished_todo_list_link',
-		'item_css_id' => 'todo-list'
-		) );
-
 	/** add a custom detail settings page **/
 	bp_core_new_subnav_item( array(
 		'name' => "詳細",
@@ -1752,23 +1723,6 @@ function my_setup_nav() {
 
 add_action( 'bp_setup_nav', 'my_setup_nav', 1000 );
 
-
-/**
-	todoリストの表示関数一式
-*/
-function todo_list_link(){
-	add_action( 'bp_template_title', 'todo_list_title' );
-	add_action( 'bp_template_content', 'todo_list_content' );
-	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
-}
-
-function todo_list_title(){
-	echo "next action";
-}
-
-function todo_list_content(){
-	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."members/single/your-todo-list.php";
-}
 
 /**********************************************
  * 「詳細設定」表示時に使う関数一式
@@ -2617,10 +2571,10 @@ function change_todo_modified($todo_ID){
  * @param {int} $item_ID くださいされた商品ＩＤ
  */
 function add_todo_confirm_bidder($item_ID){
-
 	$user_ID = get_post($item_ID)->post_author;
+	$user_login_name = get_user_by('id', $user_ID)->user_login;
 
-	add_todo($user_ID, $item_ID, '<a href = "' . home_url() . '/archives/' . $item_ID . '">
+	add_todo($user_ID, $item_ID, '<a href = "' . home_url() . '/members/' . $user_login_name . '/giveme/giveme-from-others/#post_'.$item_ID.'">
 		あなたの商品に「ください」がされました。取引相手を確定させてください</a>');
 }
 
