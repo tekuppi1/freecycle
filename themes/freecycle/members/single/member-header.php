@@ -11,10 +11,8 @@
 <?php do_action( 'bp_before_member_header' ); ?>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCmhfQEie0qbsIR-F2xNVxzpV8IxzrwDBE&libraries=places&sensor=false"></script>
 
-<!--Add(2015/5/4)-->
 <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/start/jquery-ui.css" rel="stylesheet">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-<!--Add(2015/5/4)-->
 
 <script type="text/javascript">
 
@@ -86,12 +84,10 @@
 				type: "error",    
 			}); 
 			enableButtons();
-            var btnName  = document.fm.button1.value;
 			return false;
 		}
 
-//Add(2015/5/4)//
-        jQuery("#newentry").after("\
+    jQuery("#newentry").after("\
         	<div id='dialog'>\
             <table border='1'>\
             <tr style='font-size:150%;'><td align='center'><b>商品名</b></td><td><b>"+jQuery('#field_1').val()+"</b></td></tr>\
@@ -143,12 +139,10 @@
         });
         enableButtons();
         callOnNewEntryToChangeCSS();
-//Add(2015/5/4)//
 	}
     
-    //Add(2015/5/4)//
     function callOnNewEntryToChangeCSS(){
-		jQuery(".ui-dialog-titlebar-close").hide();
+        jQuery(".ui-dialog-titlebar-close").hide();
         jQuery('.ui-widget-overlay').css('background','#FFFFFF');
         jQuery('.ui-widget-overlay').css('opacity','0.7');
         jQuery('.btn-close').css('background','#EA5549');
