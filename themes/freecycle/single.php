@@ -432,6 +432,14 @@
 				}
 			});
 		}
+		/*Add(5/6)*/
+		function zoom(i){
+			switch(i){
+					case 0:jQuery("#zoom1").hide();jQuery("#zoom2").hide();jQuery("#zoom0").show();break;
+					case 1:jQuery("#zoom2").hide();jQuery("#zoom0").hide();jQuery("#zoom1").show();break;
+					case 2:jQuery("#zoom0").hide();jQuery("#zoom1").hide();jQuery("#zoom2").show();break;
+			}
+		}
 
 	</script>
 
@@ -583,14 +591,32 @@
 							$size = array(200, 200);
 							$attachments = array_reverse(get_posts($args));
 							if($attachments){
+								/*Add(5/6)*/
+								$i=0;
 								foreach($attachments as $attachment){
-									echo wp_get_attachment_image( $attachment->ID, $size);
+									echo "<span onclick=zoom(";
+									echo $i;
+									echo ")>";
+									echo wp_get_attachment_image( $attachment->ID,'thumbnail');
+									echo "</span>";
+                	$i++;
 								}
 							}
 							?>
 							<?php the_content( __( 'Read the rest of this entry &rarr;', 'buddypress' ) ); ?>
 							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
-
+							<!--Add(5/6)-->
+							<?php
+								$i=0;
+								foreach($attachments as $attachment){
+									echo "<div id=zoom";
+									echo $i;
+									echo " style='display: none;'>";
+									echo wp_get_attachment_image( $attachment->ID,'full');
+									echo "</div>";
+									$i++;
+								}
+							?>
 
 						</div>
 
