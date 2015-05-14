@@ -3895,7 +3895,7 @@ div.grobal_nav_div_sp ul li a span {
 	border: 1px solid;
 	border-radius: 50%;
 	-webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
+	-moz-border-radius: 50%;
 }
 .index-item-title a{
 	/*width: 70%;
@@ -3906,7 +3906,7 @@ div.grobal_nav_div_sp ul li a span {
 	text-align: center;
 	border-radius: 50%;
 	-webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
+	-moz-border-radius: 50%;
 }
 div.post-content div.entry img{
 	width: 30%;
@@ -3921,7 +3921,7 @@ div.post-content div.entry img.attachment-full{
 	width: 80%;
 	height: auto;
 	float: left;
-  padding: 5%;
+	padding: 5%;
 	border: 2px solid;
 }
 div.post-content div.entry p{
