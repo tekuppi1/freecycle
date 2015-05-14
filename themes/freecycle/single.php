@@ -435,9 +435,9 @@
 		/*Add(5/6)*/
 		function zoom(i){
 			switch(i){
-					case 0:jQuery("#zoom1").hide();jQuery("#zoom2").hide();jQuery("#zoom0").show();break;
-					case 1:jQuery("#zoom2").hide();jQuery("#zoom0").hide();jQuery("#zoom1").show();break;
-					case 2:jQuery("#zoom0").hide();jQuery("#zoom1").hide();jQuery("#zoom2").show();break;
+				case 0:jQuery("#zoom1").hide();jQuery("#zoom2").hide();jQuery("#zoom0").show();break;
+				case 1:jQuery("#zoom2").hide();jQuery("#zoom0").hide();jQuery("#zoom1").show();break;
+				case 2:jQuery("#zoom0").hide();jQuery("#zoom1").hide();jQuery("#zoom2").show();break;
 			}
 		}
 
