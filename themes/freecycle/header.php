@@ -187,6 +187,7 @@
 					　		<li class="grobal_nav important_navi" ><a href="<?php echo home_url(); ?>/wanted-list" >ほしいものリスト</a></li>
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
 					　		<li class="grobal_nav blue_navi"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>
+							 <li class="grobal_nav blue_navi"><a href="<?php echo home_url() . "/howtouse"; ?>" >使い方</a></li>
 					</ul>
 				</div><!-- .grobal_nav_img -->
 </div><!-- .header_img_navi -->
