@@ -3893,9 +3893,9 @@ div.grobal_nav_div_sp ul li a span {
 
 .entry img.wp-post-image {
 	border: 1px solid;
-	border-radius: 50%;
-	-webkit-border-radius: 50%;
-	-moz-border-radius: 50%;
+	border-radius: 20%;
+	-webkit-border-radius: 20%;
+	-moz-border-radius: 20%;
 }
 .index-item-title a{
 	/*width: 70%;
