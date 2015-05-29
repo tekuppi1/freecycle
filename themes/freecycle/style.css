@@ -3890,3 +3890,41 @@ div.grobal_nav_div_sp ul li a span {
   	font-size: 20px;
 }
 }
+
+.entry img.wp-post-image {
+	border: 1px solid;
+	border-radius: 20%;
+	-webkit-border-radius: 20%;
+	-moz-border-radius: 20%;
+}
+.index-item-title a{
+	/*width: 70%;
+	margin: 0 15%;*/
+	opacity: 0.9;
+	background-color: #ffd700;
+	color: #000;
+	text-align: center;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+}
+div.post-content div.entry img{
+	width: 30%;
+	height: auto;
+	float: left;
+}
+div.post-content div.entry img.attachment-thumbnail:hover{
+	opacity: 0.6;
+	transition: 0.2s;
+}
+div.post-content div.entry img.attachment-full{
+	width: 80%;
+	height: auto;
+	float: left;
+	padding: 5%;
+	border: 2px solid;
+}
+div.post-content div.entry p{
+	padding:10px;
+	clear:both;
+}
