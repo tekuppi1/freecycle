@@ -3890,3 +3890,41 @@ div.grobal_nav_div_sp ul li a span {
   	font-size: 20px;
 }
 }
+
+.phone_sub_title{
+	width: 100%;
+	margin:0 auto;
+	padding: 10px;
+	margin: 0 auto;
+	font-size: 20px;
+	text-align: center;
+}
+.BlackBoard{
+	width: 100%;
+}
+.BlackBoard div{
+	font-size: 90%;
+	line-height: 1.5;
+	color: white;
+}
+@media screen and (min-width : 768px){
+	.BlackBoard div{
+		font-size: 180%;
+	}
+}
+@media screen and (min-width : 1024px) {
+   .BlackBoard div{
+		font-size: 180%;
+	}
+}
+.BlackBoard .box1{
+	position: absolute;
+	top: 25%;
+	left: 5%;
+	padding-right: 2em;
+}
+.BlackBoard .box2{
+	position: absolute;
+	bottom: 8%;
+	left: 20%;
+}

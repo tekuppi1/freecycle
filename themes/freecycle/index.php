@@ -6,15 +6,23 @@
 
 <?php get_header(); ?>
 	<div id="top_image_box">
-	<div class="top_sub_title">
-		こんな本が出品されてます！
-	</div>
+	<div class="phone_sub_title">こんな本が出品されてます！</div>
 	<div id="top_image"></div>
 	</div>
 
 	<hr class="hr-posts-row">
-	<div id="free_space">
-		hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>
+	<div class="BlackBoard" style="position: relative;">
+		<div class="box1">
+			<span class="yello">○○さん(✩5)</span>へ
+			<span class="pink">「本のタイトル」</span><br>
+			<span class="">
+				ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ</span><br>
+			<span class="yello">○○さん(✩5)</span>より
+		</div>
+		<div class="box2"><span class="white">使ってくれて<br>ありがとうだっぴー</span></div>
+		<?php
+			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/blackboard.bmp" width="100%"/>');
+		?>
 	</div>
 
 	<hr class="hr-posts-row">
@@ -37,12 +45,15 @@
 
 	<hr class="hr-posts-row">
 	<div id="icon">
-		<div class="top_sub_title">何をしますか？</div>
-		<img alt="" src="http://127.0.0.1/wp/wp-content/uploads/2015/06/icon1.png" width="49%"/>
-		<img alt="" src="http://127.0.0.1/wp/wp-content/uploads/2015/06/icon2.png" width="49%"/>
-		<img alt="" src="http://127.0.0.1/wp/wp-content/uploads/2015/06/icon3.png" width="49%"/>
-		<img alt="" src="http://127.0.0.1/wp/wp-content/uploads/2015/06/icon4.png" width="49%"/>
-		<img alt="" src="http://127.0.0.1/wp/wp-content/uploads/2015/06/icon5.png" width="49%"/>
+		<div class="phone_sub_title">何をしますか？</div>
+		<?php
+			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/mypage.png" width="100%"/>');
+			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/icon1.png" width="49%"/>');
+			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/icon2.png" width="49%"/>');
+			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/icon3.png" width="49%"/>');
+			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/icon4.png" width="49%"/>');
+		?>
+	</div><!-- #icon -->
 
 <!-- SlideImageScript -->
 		<!-- jQuery library -->
@@ -68,5 +79,4 @@
 		});
 	</script>
 <!-- SlideImageScript -->
-		</div><!-- #content -->
 <?php get_footer(); ?>
