@@ -5,12 +5,6 @@
 ?>
 
 <?php get_header(); ?>
-	<div id="top_image_box">
-	<div class="phone_sub_title">こんな本が出品されてます！</div>
-	<div id="top_image"></div>
-	</div>
-
-	<hr class="hr-posts-row">
 	<div class="BlackBoard" style="position: relative;">
 		<div class="box1">
 			<span class="yello">○○さん(✩5)</span>へ
@@ -25,7 +19,14 @@
 		?>
 	</div>
 
+	<br>
 	<hr class="hr-posts-row">
+
+	<div id="top_image_box">
+	<div class="phone_sub_title">こんな本が出品されてます！</div>
+	<div id="top_image"></div>
+	</div>
+
 	<div id="app_logo">
 		<div class="textwidget">スマホアプリはこちらから<br>
 			<a href="https://itunes.apple.com/jp/app/tekusuchenji/id913755762?mt=8&uo=4"
