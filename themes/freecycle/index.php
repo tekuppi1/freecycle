@@ -10,7 +10,7 @@
 			<span class="yello">○○さん(✩5)</span>へ
 			<span class="pink">「本のタイトル」</span><br>
 			<span class="">
-				ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ</span><br>
+				あああああああああああああああああああああああああああああああああああああああああああああああああ</span><br>
 			<span class="yello">○○さん(✩5)</span>より
 		</div>
 		<div class="box2"><span class="white">使ってくれて<br>ありがとうだっぴー</span></div>
