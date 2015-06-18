@@ -479,6 +479,7 @@ div.header_form{
 	background-color: lightcyan;
 	padding: 5px 0 0 5px;
 	border-radius: 4px;
+	margin-bottom: 20px;
 }
 
 form[name=login-form]{
@@ -1450,6 +1451,34 @@ div a#logo_top img{
 .todo-info ul li{
 	float: left !important;
 }
+
+/* 検索ページ*/
+.sub_categories {
+	display : none;
+}
+
+.sub_categories div{
+	padding : 5px 0;
+	background-color: #ffd85f;
+	border: 1px solid white;
+}
+
+.sub_categories div a{
+	text-decoration: none;
+	display: block;
+	color : white;
+	font-size: 14px;
+}
+
+.main_categories{
+	width : 100%;
+	font-size: 18px;
+	color: white;
+	background-color: #FBA848;
+	border: 1px solid #DDD;
+
+}
+
 }
 
 /****************************スマホスタイルの終了****************************************************/
@@ -1806,6 +1835,7 @@ div.header_form{
 	background-color: lightcyan;
 	padding: 0 0 5px;
 	border-radius: 4px;
+	margin-bottom: 20px;
 }
 
 form#header-login-form{
@@ -2604,6 +2634,32 @@ div a#logo_top img{
 	float: left !important;
 }
 
+/* 検索ページ */
+.sub_categories {
+	display : none;
+}
+
+.sub_categories div{
+	padding : 5px 0;
+	background-color: #ffd85f;
+	border: 1px solid white;
+}
+
+.sub_categories div a{
+	text-decoration: none;
+	display: block;
+	color : white;
+}
+
+.main_categories{
+	width : 100%;
+	font-size: 18px;
+	color: white;
+	background-color: #FBA848;
+	border: 1px solid #DDD;
+
+}
+
 }
 /*---------------------------------------タブレットここまで！！！------------------------------------------------------------------------------------------------*/
 
@@ -2967,7 +3023,7 @@ div.header_form{
 	padding: 0 0 5px;
 	border-radius: 4px;
 	width: 100%;
-	margin: 0 auto;
+	margin: 0 0 30px 0;
 }
 
 form[name=login-form]{
@@ -3805,6 +3861,33 @@ div a#logo_top img{
 
 .todo-info ul li{
 	float: left !important;
+}
+
+/* 検索ページ */
+.sub_categories {
+	display : none;
+}
+
+.sub_categories div{
+	padding : 5px 0;
+	background-color: #ffd85f;
+	border: 1px solid white;
+}
+
+.sub_categories div a{
+	text-decoration: none;
+	display: block;
+	color : white;
+	font-size: 16px;
+}
+
+.main_categories{
+	width : 100%;
+	font-size: 18px;
+	color: white;
+	background-color: #FBA848;
+	border: 1px solid #DDD;
+	cursor: pointer;
 }
 
 }
