@@ -15,24 +15,18 @@
 		</div>
 		<div class="box2"><span class="white">使ってくれて<br>ありがとうだっぴー</span></div>
 		<?php
-			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/blackboard.bmp" width="100%"/>');
+			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/blackboard1.bmp" width="100%"/>');
 		?>
 	</div>
 
 	<br>
-	<hr class="hr-posts-row">
-
-	<div id="top_image_box">
-	<div class="phone_sub_title">こんな本が出品されてます！</div>
-	<div id="top_image"></div>
-	</div>
 
 	<div id="app_logo">
-		<div class="textwidget">スマホアプリはこちらから<br>
+		<div>スマホアプリはこちらから<br>
 			<a href="https://itunes.apple.com/jp/app/tekusuchenji/id913755762?mt=8&uo=4"
 				 target="itunes_store"
 				 style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/htmlResources/assets/ja_jp//images/web/linkmaker/badge_appstore-lrg.png)
-				 no-repeat;width:135px;height:40px;
+				 no-repeat;width:135px;height:45px;
 				 @media only screen{background-image:url(https://linkmaker.itunes.apple.com/htmlResources/assets/ja_jp//images/web/linkmaker/badge_appstore-lrg.svg);}"
 			></a>
 			<a href="https://play.google.com/store/apps/details?id=com.texchg">
@@ -44,17 +38,39 @@
 		</div>
 	</div>
 
-	<hr class="hr-posts-row">
 	<div id="icon">
-		<div class="phone_sub_title">何をしますか？</div>
 		<?php
-			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/mypage.png" width="100%"/>');
-			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/icon1.png" width="49%"/>');
-			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/icon2.png" width="49%"/>');
-			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/icon3.png" width="49%"/>');
-			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/icon4.png" width="49%"/>');
+			/******/
+			global $user_ID;
+			echo('<a href="'.bp_loggedin_user_domain().'">' );
+			if(get_todo_list_count($user_ID) > 0)
+				echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/mypage_.png" width="100%"/>');
+			else
+				echo('<img src="'.get_stylesheet_directory_uri().'/images/mypage.png" width="100%"/>');
+			echo('</a>');
+			/******/
+			echo('<a href="'.bp_loggedin_user_domain().'new_entry/normal/">' );
+			echo('<img src="'.get_stylesheet_directory_uri().'/images/icon1.png" width="50%"/></a>');
+			/******/
+			echo('<a href="'.bp_loggedin_user_domain().'messages/">' );
+			if(messages_get_unread_count() > 0)
+				echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/icon2_.png" width="50%"/>');
+			else
+				echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/icon2.png" width="50%"/>');
+			echo('</a>');
+			/******/
+			echo('<a href='.home_url().'/howtouse><img alt="" src="'.get_stylesheet_directory_uri().'/images/icon3.png" width="50%"/></a>');
+			/******/
+			echo('<a href='.home_url().'/search-page><img alt="" src="'.get_stylesheet_directory_uri().'/images/icon4.png" width="50%"/></a>');
 		?>
 	</div><!-- #icon -->
+
+	<hr class="hr-posts-row">
+
+	<div id="top_image_box">
+	<div class="phone_sub_title">こんな本が出品されてます！</div>
+	<div id="top_image"></div>
+	</div>
 
 <!-- SlideImageScript -->
 		<!-- jQuery library -->
