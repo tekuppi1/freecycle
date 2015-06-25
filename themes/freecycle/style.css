@@ -3927,6 +3927,9 @@ div.grobal_nav_div_sp ul li a span {
 	.BlackBoard div{
 		font-size: 80%;
 	}
+	.comment{
+		font-size: 70%;
+	}
 	.phone_sub_title{
 		font-size: 150%;
 	}
@@ -3935,9 +3938,15 @@ div.grobal_nav_div_sp ul li a span {
 	.BlackBoard div{
 		font-size: 100%;
 	}
+	.comment{
+		font-size: 90%;
+	}
 }
 @media screen and (min-width : 768px){
 	.BlackBoard div{
 		font-size: 180%;
+	}
+	.comment{
+		font-size: 90%;
 	}
 }
