@@ -191,10 +191,4 @@
 					</ul>
 				</div><!-- .grobal_nav_img -->
 </div><!-- .header_img_navi -->
-
-	<?php
-		if(is_front_page() || is_archive() || is_search() || is_single()){
-			get_search_form();
-		}
-	?>
-	<div id="container">
+<div id="container">

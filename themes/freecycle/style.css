@@ -1458,15 +1458,18 @@ div a#logo_top img{
 }
 
 .sub_categories div{
-	padding : 5px 0;
+	padding : 5px 0 0 5px;
 	background-color: #ffd85f;
-	border: 1px solid white;
+	margin-left: 10px;
+	margin-bottom: 1px;
+	height : 25px;
+	line-height : 25px;
 }
 
 .sub_categories div a{
 	text-decoration: none;
 	display: block;
-	color : white;
+	color : black;
 	font-size: 14px;
 }
 
@@ -1475,8 +1478,10 @@ div a#logo_top img{
 	font-size: 18px;
 	color: white;
 	background-color: #FBA848;
-	border: 1px solid #DDD;
-
+	border: 1px solid white;
+	height: 35px;
+	line-height: 35px;
+	padding-left: 10px;
 }
 
 }
@@ -2640,15 +2645,17 @@ div a#logo_top img{
 }
 
 .sub_categories div{
-	padding : 5px 0;
+	padding : 5px 0 0 5px;
 	background-color: #ffd85f;
-	border: 1px solid white;
+	margin-bottom: 1px;
+	margin-left: 10px;
 }
 
 .sub_categories div a{
 	text-decoration: none;
 	display: block;
-	color : white;
+	color : black;
+	font-size: 15px;
 }
 
 .main_categories{
@@ -2656,8 +2663,10 @@ div a#logo_top img{
 	font-size: 18px;
 	color: white;
 	background-color: #FBA848;
-	border: 1px solid #DDD;
-
+	border: 1px solid white;
+	height: 35px;
+	line-height: 35px;
+	padding-left: 10px;
 }
 
 }
@@ -3869,15 +3878,16 @@ div a#logo_top img{
 }
 
 .sub_categories div{
-	padding : 5px 0;
+	padding : 5px 0 0 5px;
 	background-color: #ffd85f;
-	border: 1px solid white;
+	margin-bottom: 1px;
+	margin-left: 10px;
 }
 
 .sub_categories div a{
 	text-decoration: none;
 	display: block;
-	color : white;
+	color : black;
 	font-size: 16px;
 }
 
@@ -3888,6 +3898,9 @@ div a#logo_top img{
 	background-color: #FBA848;
 	border: 1px solid #DDD;
 	cursor: pointer;
+	height: 25px;
+	line-height: 25px;
+	padding-left: 10px;
 }
 
 }
