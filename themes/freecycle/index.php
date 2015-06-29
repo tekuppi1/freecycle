@@ -5,7 +5,7 @@
 ?>
 
 <?php get_header(); ?>
-<?
+<?php
 	$xml_massage = get_stylesheet_directory_uri()."/xml/message.xml";
 	$xml_texp = get_stylesheet_directory_uri()."/xml/texp.xml";
 	$xmlData_massage = simplexml_load_file($xml_massage);//xmlを読み込む
@@ -13,18 +13,21 @@
 ?>
 	<div class="BlackBoard" style="position: relative;">
 		<div class="box1">
-			<? 
+			<?php 
 				$num = mt_rand(0,$xmlData_massage->obj->item->count()-1);
 				$node = $xmlData_massage->obj->item[$num];
+				echo("<span class=\"yellow\">".$node->from."さん");
+				if(($node->fromrank)!="null")echo("(✩".$node->fromrank.")");
+				echo("</span>から　");
+				echo("<span class=\"yellow\">".$node->to."さん");
+				if(($node->torank)!="null")echo("(✩".$node->torank.")");
+				echo("</span>へ<br>");
+				if(($node->title)!="null")echo("<span class=\"pink\">「".$node->title."」</span><br>");
+				if(($node->text)!="null")echo("<span class=\"comment\">".$node->text."</span><br>");
 			?>
-			<span class="yello"><? echo $node->to; ?>さん(✩<? echo $node->torank; ?>)</span>へ
-			<span class="pink">「<? echo $node->title; ?>」</span><br>
-			<span class="comment"><? echo $node->text; ?></span><br>
-			<span class="yello"><? echo $node->from; ?>さん(✩<? echo $node->fromrank; ?>)</span>より
 		</div>
-		<? $num = mt_rand(0,$xmlData_texp->obj->item->count()-1); ?>
-		<div class="box2"><span class="white"><? echo $xmlData_texp->obj->item[$num]; ?></span></div>
-		<?php
+		<?php $num = mt_rand(0,$xmlData_texp->obj->item->count()-1);
+			echo("<div class=\"box2\"><span class=\"white\">".$xmlData_texp->obj->item[$num]."</span></div>");
 			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/blackboard1.bmp" width="100%"/>');
 		?>
 	</div>

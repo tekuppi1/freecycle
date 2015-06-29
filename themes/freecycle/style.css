@@ -3908,7 +3908,7 @@ div.grobal_nav_div_sp ul li a span {
 }
 .BlackBoard .box1{
 	position: absolute;
-	top: 20%;
+	top: 25%;
 	left: 5%;
 	padding-right: 1em;
 }
@@ -3917,11 +3917,11 @@ div.grobal_nav_div_sp ul li a span {
 	bottom: 8%;
 	left: 20%;
 }
-.yello {
+.yellow{
 	color: yellow;
 }
-.pink{
-	color: hotpink;
+.comment{
+		padding: 5px;
 }
 @media screen and (max-width:480px){
 	.BlackBoard div{
@@ -3929,6 +3929,10 @@ div.grobal_nav_div_sp ul li a span {
 	}
 	.comment{
 		font-size: 70%;
+	}
+	.pink{
+		color: hotpink;
+		font-size: 130%;
 	}
 	.phone_sub_title{
 		font-size: 150%;
@@ -3941,6 +3945,10 @@ div.grobal_nav_div_sp ul li a span {
 	.comment{
 		font-size: 90%;
 	}
+	.pink{
+		color: hotpink;
+		font-size: 110%;
+	}
 }
 @media screen and (min-width : 768px){
 	.BlackBoard div{
@@ -3948,5 +3956,9 @@ div.grobal_nav_div_sp ul li a span {
 	}
 	.comment{
 		font-size: 90%;
+	}
+	.pink{
+		color: hotpink;
+		font-size: 110%;
 	}
 }
