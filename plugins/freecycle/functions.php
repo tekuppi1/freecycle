@@ -77,7 +77,7 @@ function on_comment_post() {
 		messages_new_message(array(
 		'sender_id' => bp_loggedin_user_id(),
 		'recipients' => $post->post_author,
-		'subject' => '【自動送信】あなたの商品にコメントがつきました',
+		'subject' => 'あなたの商品にコメントがつきました',
 		'content' => '以下の商品にコメントが来ています！'
 						. '<a href="' . get_permalink($post->ID) . '">' . $post->post_title . '</a>'
 		));
@@ -380,7 +380,7 @@ function confirmGiveme(){
 		messages_new_message(array(
 			'sender_id' => bp_loggedin_user_id(),
 			'recipients' => $uncheckedUserID,
-			'subject' => '【自動送信】くださいリクエストが承認されませんでした',
+			'subject' => 'くださいリクエストが承認されませんでした',
 			'content' => $content_unchecked
 			));
 
@@ -402,7 +402,7 @@ function confirmGiveme(){
 	$message_ID = messages_new_message(array(
 					'sender_id' => bp_loggedin_user_id(),
 					'recipients' => $userID,
-					'subject' => '【自動送信】くださいリクエストが承認されました！',
+					'subject' => 'くださいリクエストが承認されました！',
 					'content' => $content
 					));
 
@@ -621,7 +621,7 @@ function cancel_trade_from_exhibitor(){
    messages_new_message(array(
 		'sender_id' => bp_loggedin_user_id(),
 		'recipients' => $bidder_id,
-		'subject' => '【自動送信】取引がキャンセルされました',
+		'subject' => '取引がキャンセルされました',
 		'content' => '以下の商品の取引がキャンセルされました。' .
 						'<a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a>'
 	));
@@ -638,7 +638,7 @@ function cancel_trade_from_bidder(){
 	messages_new_message(array(
 		'sender_id' => bp_loggedin_user_id(),
 		'recipients' => get_post($post_id)->post_author,
-		'subject' => '【自動送信】取引がキャンセルされました',
+		'subject' => '取引がキャンセルされました',
 		'content' => '以下の商品の取引がキャンセルされました。' .
 						'<a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a>'
 	));
