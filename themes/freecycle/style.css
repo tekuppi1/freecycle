@@ -3993,3 +3993,113 @@ div.grobal_nav_div_sp ul li a span {
   	font-size: 20px;
 }
 }
+
+.phone_sub_title{
+	width: 100%;
+	margin:0 auto;
+	padding-top: 10px;
+	margin: 0 auto;
+	font-size: 200%;
+	text-align: center;
+}
+.BlackBoard{
+	width: 100%;
+}
+.BlackBoard div{
+	line-height: 1.5;
+	color: white;
+}
+.BlackBoard .box1{
+	position: absolute;
+	top: 25%;
+	left: 5%;
+	padding-right: 1em;
+}
+.BlackBoard .box2{
+	position: absolute;
+	bottom: 8%;
+	left: 20%;
+}
+.yellow{
+	color: yellow;
+}
+.comment{
+		padding: 5px;
+}
+@media screen and (max-width:480px){
+	.BlackBoard div{
+		font-size: 80%;
+	}
+	.comment{
+		font-size: 70%;
+	}
+	.pink{
+		color: hotpink;
+		font-size: 130%;
+	}
+	.phone_sub_title{
+		font-size: 150%;
+	}
+}
+@media screen and (min-width:480px){
+	.BlackBoard div{
+		font-size: 100%;
+	}
+	.comment{
+		font-size: 90%;
+	}
+	.pink{
+		color: hotpink;
+		font-size: 110%;
+	}
+}
+@media screen and (min-width : 768px){
+	.BlackBoard div{
+		font-size: 180%;
+	}
+	.comment{
+		font-size: 90%;
+	}
+	.pink{
+		color: hotpink;
+		font-size: 110%;
+	}
+}
+
+.entry img.wp-post-image {
+	border: 1px solid;
+	border-radius: 20%;
+	-webkit-border-radius: 20%;
+	-moz-border-radius: 20%;
+}
+.index-item-title a{
+	/*width: 70%;
+	margin: 0 15%;*/
+	opacity: 0.9;
+	background-color: #ffd700;
+	color: #000;
+	text-align: center;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+}
+div.post-content div.entry img{
+	width: 30%;
+	height: auto;
+	float: left;
+}
+div.post-content div.entry img.attachment-thumbnail:hover{
+	opacity: 0.6;
+	transition: 0.2s;
+}
+div.post-content div.entry img.attachment-full{
+	width: 80%;
+	height: auto;
+	float: left;
+	padding: 5%;
+	border: 2px solid;
+}
+div.post-content div.entry p{
+	padding:10px;
+	clear:both;
+}
