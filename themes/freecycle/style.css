@@ -4011,7 +4011,7 @@ div.grobal_nav_div_sp ul li a span {
 }
 .BlackBoard .box1{
 	position: absolute;
-	top: 25%;
+	top: 23%;
 	left: 5%;
 	padding-right: 1em;
 }
@@ -4029,9 +4029,12 @@ div.grobal_nav_div_sp ul li a span {
 @media screen and (max-width:480px){
 	.BlackBoard div{
 		font-size: 80%;
+		width: 100%;
 	}
 	.comment{
 		font-size: 70%;
+		width: 65%;
+		display: inline-block;
 	}
 	.pink{
 		color: hotpink;
@@ -4044,9 +4047,12 @@ div.grobal_nav_div_sp ul li a span {
 @media screen and (min-width:480px){
 	.BlackBoard div{
 		font-size: 100%;
+		width: 100%;
 	}
 	.comment{
 		font-size: 90%;
+		width: 65%;
+		display: inline-block;
 	}
 	.pink{
 		color: hotpink;
@@ -4056,9 +4062,12 @@ div.grobal_nav_div_sp ul li a span {
 @media screen and (min-width : 768px){
 	.BlackBoard div{
 		font-size: 180%;
+		width: 100%;
 	}
 	.comment{
 		font-size: 90%;
+		width: 65%;
+		display: inline-block;
 	}
 	.pink{
 		color: hotpink;
