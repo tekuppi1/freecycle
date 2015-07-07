@@ -77,7 +77,7 @@ function on_comment_post() {
 		messages_new_message(array(
 		'sender_id' => bp_loggedin_user_id(),
 		'recipients' => $post->post_author,
-		'subject' => '【自動送信】あなたの商品にコメントがつきました',
+		'subject' => 'あなたの商品にコメントがつきました',
 		'content' => '以下の商品にコメントが来ています！'
 						. '<a href="' . get_permalink($post->ID) . '">' . $post->post_title . '</a>'
 		));
@@ -380,7 +380,7 @@ function confirmGiveme(){
 		messages_new_message(array(
 			'sender_id' => bp_loggedin_user_id(),
 			'recipients' => $uncheckedUserID,
-			'subject' => '【自動送信】くださいリクエストが承認されませんでした',
+			'subject' => 'くださいリクエストが承認されませんでした',
 			'content' => $content_unchecked
 			));
 
@@ -402,7 +402,7 @@ function confirmGiveme(){
 	$message_ID = messages_new_message(array(
 					'sender_id' => bp_loggedin_user_id(),
 					'recipients' => $userID,
-					'subject' => '【自動送信】くださいリクエストが承認されました！',
+					'subject' => 'くださいリクエストが承認されました！',
 					'content' => $content
 					));
 
@@ -621,7 +621,7 @@ function cancel_trade_from_exhibitor(){
    messages_new_message(array(
 		'sender_id' => bp_loggedin_user_id(),
 		'recipients' => $bidder_id,
-		'subject' => '【自動送信】取引がキャンセルされました',
+		'subject' => '取引がキャンセルされました',
 		'content' => '以下の商品の取引がキャンセルされました。' .
 						'<a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a>'
 	));
@@ -638,7 +638,7 @@ function cancel_trade_from_bidder(){
 	messages_new_message(array(
 		'sender_id' => bp_loggedin_user_id(),
 		'recipients' => get_post($post_id)->post_author,
-		'subject' => '【自動送信】取引がキャンセルされました',
+		'subject' => '取引がキャンセルされました',
 		'content' => '以下の商品の取引がキャンセルされました。' .
 						'<a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a>'
 	));
@@ -2897,3 +2897,19 @@ function get_item_image_urls_on_toppage(){
 
 add_action('wp_ajax_nopriv_top_images', 'get_item_image_urls_on_toppage');
 add_action('wp_ajax_top_images', 'get_item_image_urls_on_toppage');
+
+/**
+ * メッセージ一覧のページネーション部分。
+ * buddypress translationsのバグ？のため日本語表示がうまくできないのでオーバーライドしています。
+ */
+function fc_messages_pagination_count() {
+	global $messages_template;
+
+	$start_num = intval( ( $messages_template->pag_page - 1 ) * $messages_template->pag_num ) + 1;
+	$from_num = bp_core_number_format( $start_num );
+	$to_num = bp_core_number_format( ( $start_num + ( $messages_template->pag_num - 1 ) > $messages_template->total_thread_count ) ? $messages_template->total_thread_count : $start_num + ( $messages_template->pag_num - 1 ) );
+	$total = bp_core_number_format( $messages_template->total_thread_count );
+
+	// オーバーライド部分
+	echo sprintf( _n( '%1$s件目から%2$s件目まで表示(%3$s件中)', '%1$s件目から%2$s件目まで表示(%3$s件中)', $total, 'buddypress' ), $from_num, $to_num, number_format_i18n( $total ) ); ?><?php
+}
