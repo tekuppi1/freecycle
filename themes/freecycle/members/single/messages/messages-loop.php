@@ -5,7 +5,7 @@
 	<div class="pagination no-ajax" id="user-pag">
 
 		<div class="pag-count" id="messages-dir-count">
-			<?php bp_messages_pagination_count(); ?>
+			<?php fc_messages_pagination_count(); ?> <!-- カスタムメッセージを呼び出し -->
 		</div>
 
 		<div class="pagination-links" id="messages-dir-pag">

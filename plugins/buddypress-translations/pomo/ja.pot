@@ -3048,9 +3048,8 @@ msgid "Viewing topic %s to %s (of %s total topics%s)"
 msgstr "%s件目から%s件目のトピックを表示中 (合計トピック%s件中%s)"
 
 #: bp-messages/bp-messages-template.php:352
-msgid "Viewing message %1$s to %2$s (of %3$s message)"
-msgid_plural "Viewing message %1$s to %2$s (of %3$s messages)"
-msgstr[0] "%1$s件目から%2$s件目のメッセージを表示中 (メッセージ%3$s件中)"
+msgid "Viewing message %1$s to %2$s (of %3$s messages)"
+msgstr "%1$s件目から%2$s件目のメッセージを表示中 (メッセージ%3$s件中)"
 
 #: bp-groups/bp-groups-template.php:2133
 msgid "Viewing members %1$s to %2$s (of %3$s members)"

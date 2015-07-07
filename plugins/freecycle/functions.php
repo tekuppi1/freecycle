@@ -2897,3 +2897,19 @@ function get_item_image_urls_on_toppage(){
 
 add_action('wp_ajax_nopriv_top_images', 'get_item_image_urls_on_toppage');
 add_action('wp_ajax_top_images', 'get_item_image_urls_on_toppage');
+
+/**
+ * メッセージ一覧のページネーション部分。
+ * buddypress translationsのバグ？のため日本語表示がうまくできないのでオーバーライドしています。
+ */
+function fc_messages_pagination_count() {
+	global $messages_template;
+
+	$start_num = intval( ( $messages_template->pag_page - 1 ) * $messages_template->pag_num ) + 1;
+	$from_num = bp_core_number_format( $start_num );
+	$to_num = bp_core_number_format( ( $start_num + ( $messages_template->pag_num - 1 ) > $messages_template->total_thread_count ) ? $messages_template->total_thread_count : $start_num + ( $messages_template->pag_num - 1 ) );
+	$total = bp_core_number_format( $messages_template->total_thread_count );
+
+	// オーバーライド部分
+	echo sprintf( _n( '%1$s件目から%2$s件目まで表示(%3$s件中)', '%1$s件目から%2$s件目まで表示(%3$s件中)', $total, 'buddypress' ), $from_num, $to_num, number_format_i18n( $total ) ); ?><?php
+}
