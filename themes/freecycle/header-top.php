@@ -8,12 +8,6 @@
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<link href="<?php echo home_url(); ?>/wp-content/themes/freecycle/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"><?php bp_head(); ?>
 		<link href="<?php echo home_url(); ?>/wp-content/themes/freecycle/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
-		<!-- jQuery library -->
-		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-		<!-- bxSlider Javascript file -->
-		<script src="wp-content/themes/freecycle/js/jquery.bxslider.min.js"></script>
-		<!-- bxSlider CSS file -->
-		<link href="wp-content/themes/freecycle/style/jquery.bxslider.css" rel="stylesheet" />
 		<?php include_once "js/freecycleJS.php" ?>
 		<style type="text/css">
 		.bx-custom-pager{bottom: -50px !important;}
@@ -52,6 +46,10 @@
 		<script src="<?php echo home_url(); ?>/wp-content/themes/freecycle/js/owl-carousel/owl.carousel.js"></script>
 		<link rel="stylesheet" href="<?php echo home_url(); ?>/wp-content/themes/freecycle/js/owl-carousel/owl.carousel.css">
 		<link rel="stylesheet" href="<?php echo home_url(); ?>/wp-content/themes/freecycle/js/owl-carousel/owl.theme.css">
+		<!-- bxSlider Javascript file -->
+		<script src="wp-content/themes/freecycle/js/jquery.bxslider.min.js"></script>
+		<!-- bxSlider CSS file -->
+		<link href="wp-content/themes/freecycle/style/jquery.bxslider.css" rel="stylesheet" />
 	</head>
 
 	<body <?php body_class(); ?> id="top_page">
