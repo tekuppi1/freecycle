@@ -318,16 +318,25 @@
 		var geocoder;
 		var location;
 		if(maps.length > 0){
-			// set the university in user profile as a default location of maps
-			var mylocation = "<?php echo get_user_meta(get_current_user_id(), 'default_trade_location', true) ?>";
+			<?php
+				// set the university in user profile as a default location of maps
+				$mylocation = get_user_meta(get_current_user_id(), 'default_trade_location', true);
+				if(!$mylocation){
+					$default_location = get_default_map();
+					if($default_location){
+						// if the system default map is set
+						$mylocation = $default_location->map_id;
+					}else{
+						// if the system default map is not set
+						$mylocation = 0;
+					}
+				}
+			?>
+			var mylocation = "<?php echo $mylocation; ?>";
 			var shownMap;
 			var marker;
 			var input;
 			var searchbox;
-			if(!mylocation){
-				// if user default trade location is not set, set default
-				mylocation = "<?php echo get_default_map()->map_id ?>";
-			}
 			jQuery.ajax({
 				type: "POST",
 				url: ADMIN_URL,
