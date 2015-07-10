@@ -22,6 +22,11 @@
 			update_user_meta(get_current_user_id(), 'is_twitter_popup_displayed', 1);
 			include_once "js/fcTwitterDialog.js.php";
 		}
+		// if first login 
+		if(!get_user_meta(get_current_user_id(), "first_login_page")){
+			add_todo_first_new_entry(get_current_user_id());
+			update_user_meta(get_current_user_id(), "first_login_page", 1);
+		}
 		?>
 		<?php
 		wp_register_script(

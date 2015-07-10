@@ -753,31 +753,13 @@ function new_entry(){
 		global $post;
 		upload_itempictures($insert_id);
 
-		// if($_FILES){
-		// 	$files = $_FILES['upload_attachment'];
-		// 	// reverse sort
-		// 	arsort($files['name'],SORT_NUMERIC);
-		// 	arsort($files['type'],SORT_NUMERIC);
-		// 	arsort($files['tmp_name'],SORT_NUMERIC);
-		// 	arsort($files['error'],SORT_NUMERIC);
-		// 	arsort($files['size'],SORT_NUMERIC);
-		//
-		// 	foreach ($files['name'] as $key => $value){
-		// 		if ($files['name'][$key]){
-		// 			$file = array(
-		// 				'name'     => validate_filename($files['name'][$key]),
-		// 				'type'     => $files['type'][$key],
-		// 				'tmp_name' => $files['tmp_name'][$key],
-		// 				'error'    => $files['error'][$key],
-		// 				'size'     => $files['size'][$key]
-		// 			);
-		// 			$_FILES = array("upload_attachment" => $file);
-		// 			foreach ($_FILES as $file => $array){
-		// 				$newupload = insert_attachment($file,$insert_id);
-		// 			}
-		// 		}
-		// 	}
-		// }
+		// if first new entry
+		if(!get_user_meta($exhibitor_ID, "first_new_entry")){
+			$todo_row = get_todo_row($exhibitor_id, -1);
+			$todoID = $todo_row->todo_id;
+			change_todo_status_finished($todoID);
+			update_user_meta($exhibitor_id, "first_new_entry", 1);
+		}
 	}else{
 	// failure
 	}
@@ -2627,6 +2609,16 @@ function add_todo_evaluate_exhibitor($item_ID){
 	$user_ID = get_bidder_id($item_ID);
 
 	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">出品者を評価してください</a>');
+}
+
+
+/**
+ * 新規出品を行うTODO※初回ログイン時
+ */
+function add_todo_first_new_entry($user_ID){
+	$user = get_user_by("id", $user_ID);
+	$user_login_name = $user->user_login;
+	add_todo($user_ID, -1, '<a href = "' . home_url() .'/members/'. $user_login_name .'/new_entry/#mypage">新規出品をしてみよう</a>' );
 }
 
 /**
