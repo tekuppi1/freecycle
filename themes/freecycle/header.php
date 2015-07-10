@@ -10,31 +10,30 @@
 		<?php wp_head(); ?>
 		<?php include_once "js/freecycleJS.php" ?>
 		<?php
+		$user_ID = get_current_user_id();
 		// if facebook dialog has not be shown before, show it
-		if(is_user_connected_with('facebook', get_current_user_id()) && !get_user_meta(get_current_user_id(), 'is_fb_share_popup_displayed')){
+		if(is_user_connected_with('facebook', $user_ID) && !get_user_meta($user_ID, 'is_fb_share_popup_displayed')){
 			// change status
-			update_user_meta(get_current_user_id(), 'is_fb_share_popup_displayed', 1);
+			update_user_meta($user_ID, 'is_fb_share_popup_displayed', 1);
 			include_once "js/fcFbDialog.js.php";
 		}
 		// if twitter dialog has not be shown before, show it
-		if(is_user_connected_with('twitter', get_current_user_id()) && !get_user_meta(get_current_user_id(), 'is_twitter_popup_displayed')){
+		if(is_user_connected_with('twitter', $user_ID) && !get_user_meta($user_ID, 'is_twitter_popup_displayed')){
 			// change status
-			update_user_meta(get_current_user_id(), 'is_twitter_popup_displayed', 1);
+			update_user_meta($user_ID, 'is_twitter_popup_displayed', 1);
 			include_once "js/fcTwitterDialog.js.php";
 		}
 		// if first login 
-		if(!get_user_meta(get_current_user_id(), "first_login_page")){
-			$user_ID = get_current_user_id();
+		if(!get_user_meta($user_ID, "first_login_page")){
 			add_todo_first_new_entry($user_ID);
 			add_todo_first_giveme($user_ID);
 			if(!xprofile_get_field_data('大学名', $user_ID) || !xprofile_get_field_data('学部', $user_ID)){
 				add_todo_first_category($user_ID);
 			}
-			update_user_meta(get_current_user_id(), "first_login_page", 1);
+			update_user_meta($user_ID, "first_login_page", 1);
 		}
 		//if write category in profile
-		if(!get_user_meta(get_current_user_id(), 'first_write_category')){
-			$user_ID = get_current_user_id();
+		if(!get_user_meta($user_ID, 'first_write_category')){
 			if(xprofile_get_field_data('大学名', $user_ID) && xprofile_get_field_data('学部', $user_ID)){
 				$todo_row = get_todo_row($user_ID, -3);
 				$todoID = $todo_row->todo_id;
