@@ -27,8 +27,21 @@
 			$user_ID = get_current_user_id();
 			add_todo_first_new_entry($user_ID);
 			add_todo_first_giveme($user_ID);
-			
+			if(!xprofile_get_field_data('大学名', $user_ID) || !xprofile_get_field_data('学部', $user_ID)){
+				add_todo_first_category($user_ID);
+			}
 			update_user_meta(get_current_user_id(), "first_login_page", 1);
+		}
+		//if write category in profile
+		if(!get_user_meta(get_current_user_id(), 'first_write_category')){
+			$user_ID = get_current_user_id();
+			if(xprofile_get_field_data('大学名', $user_ID) && xprofile_get_field_data('学部', $user_ID)){
+				$todo_row = get_todo_row($user_ID, -3);
+				$todoID = $todo_row->todo_id;
+				change_todo_status_finished($todoID);
+
+				update_user_meta($user_ID, "first_write_category", 1);
+			}
 		}
 		?>
 		<?php

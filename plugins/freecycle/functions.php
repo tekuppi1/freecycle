@@ -2637,6 +2637,14 @@ function add_todo_first_giveme($user_ID){
 }
 
 /**
+ * 大学・学部入力TODO※初回ログイン時
+ */
+function add_todo_first_category($user_ID){
+	$user = get_user_by("id", $user_ID);
+	$user_login_name = $user->user_login;
+	add_todo($user_ID, -3, '<a href = "' . home_url() .'/members/' . $user_login_name .'/profile/edit/group/1/#mypage" >大学・学部名の入力をお願いします</a>');
+}
+/**
  * POSTされた、ユーザーIDと商品ＩＤをもつTODOを消す関数
  */
 function todo_dealing_finished(){
