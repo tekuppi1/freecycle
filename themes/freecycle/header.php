@@ -24,7 +24,10 @@
 		}
 		// if first login 
 		if(!get_user_meta(get_current_user_id(), "first_login_page")){
-			add_todo_first_new_entry(get_current_user_id());
+			$user_ID = get_current_user_id();
+			add_todo_first_new_entry($user_ID);
+			add_todo_first_giveme($user_ID);
+			
 			update_user_meta(get_current_user_id(), "first_login_page", 1);
 		}
 		?>

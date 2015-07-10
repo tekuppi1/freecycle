@@ -236,6 +236,14 @@ function giveme(){
 		add_todo_confirm_bidder($postID);
 	}
 
+	//todoを削除※初回ください
+	if(!get_user_meta($userID, "first_giveme")){
+		$todo_row = get_todo_row($userID, -2);
+		$todoID = $todo_row->todo_id;
+		change_todo_status_finished($todoID);
+
+		update_user_meta($userID, "first_giveme", 1);
+	}
 	// ログインユーザ→投稿記事に対して「ください」リクエストした記録をつける
 	// 既にデータが登録済の場合は何もしません
 	$wpdb->query($wpdb->prepare("
@@ -2619,6 +2627,13 @@ function add_todo_first_new_entry($user_ID){
 	$user = get_user_by("id", $user_ID);
 	$user_login_name = $user->user_login;
 	add_todo($user_ID, -1, '<a href = "' . home_url() .'/members/'. $user_login_name .'/new_entry/#mypage">新規出品をしてみよう</a>' );
+}
+
+/**
+ * くださいリクエストを行うTODO※初回ログイン時
+ */
+function add_todo_first_giveme($user_ID){
+	add_todo($user_ID, -2, '<a href = "' . home_url() . '/search-page/">本を検索して、「くださいリクエスト」をしてみよう</a>');
 }
 
 /**
