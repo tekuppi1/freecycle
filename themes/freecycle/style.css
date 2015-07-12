@@ -1435,10 +1435,15 @@ div a#logo_top img{
 	width: 100%;
 }
 
+#todo-title{
+	margin-top:30px;
+}
+
 .todo-date{
 	font-size: 10px;
 	float: left;
 	font-style: italic;
+	margin-top: 15px;
 }
 
 .todo-info{
@@ -1447,10 +1452,9 @@ div a#logo_top img{
 	float: left;
 	width :100%;
 	border-bottom: 1px solid #ffa500;
-	margin-bottom: 15px;
 }
 
-#todo-item a{
+.todo-item a{
 	font-size: 15px;
 	width: 100%;
 	display: block;
@@ -1458,8 +1462,8 @@ div a#logo_top img{
 	float: left;
 }
 
-.todo-info ul li{
-	float: left !important;
+.todo-info span{
+	display: table !important;
 }
 
 /* 検索ページ*/
@@ -2633,10 +2637,12 @@ div a#logo_top img{
 	width: 100%;
 }
 
+/*todo-list系*/
 .todo-date{
 	font-size: 10px;
 	float: left;
 	font-style: italic;
+	margin-top: 15px;
 }
 
 .todo-info{
@@ -2645,10 +2651,9 @@ div a#logo_top img{
 	float: left;
 	width :100%;
 	border-bottom: 1px solid #ffa500;
-	margin-bottom: 15px;
 }
 
-#todo-item a{
+.todo-item a{
 	font-size: 15px;
 	width: 100%;
 	display: block;
@@ -2656,8 +2661,8 @@ div a#logo_top img{
 	float: left;
 }
 
-.todo-info ul li{
-	float: left !important;
+.todo-info span{
+	display: table !important;
 }
 
 /* 検索ページ */
@@ -3881,6 +3886,7 @@ div a#logo_top img{
 	font-size: 12px;
 	float: left;
 	font-style: italic;
+	margin-top: 15px;
 }
 
 .todo-info{
@@ -3889,10 +3895,9 @@ div a#logo_top img{
 	float: left;
 	width :100%;
 	border-bottom: 1px solid #ffa500;
-	margin-bottom: 15px;
 }
 
-#todo-item a{
+.todo-item a{
 	font-size: 15px;
 	width: 100%;
 	display: block;
@@ -3900,8 +3905,8 @@ div a#logo_top img{
 	float: left;
 }
 
-.todo-info ul li{
-	float: left !important;
+.todo-info span{
+	display: table !important;
 }
 
 /* 検索ページ */
