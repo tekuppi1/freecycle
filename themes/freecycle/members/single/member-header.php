@@ -500,23 +500,22 @@
 			foreach($todo_list as $todo_item){
 	?>
 			<div id="todo-item">
-				<div class="todo-info"><?php echo date("Y年m月d日 A g:i",strtotime($todo_item->created)); ?></div>
+				<div class="todo-date"><?php echo date("Y年m月d日 A g:i",strtotime($todo_item->created)); ?></div>
 				<?php echo $todo_item->message; ?>
 				<div class="todo-info">
-					<ul>
 					<?php 
 							if(($todo_item->item_id) > 0 ){
 								$deal_user_ID = deal_user($todo_item->item_id ,$user_ID);
 								if($deal_user_ID){
 									$deal_user = get_userdata($deal_user_ID)->display_name;
-									echo "<li>取引者： ".$deal_user."</li></br>";
+									echo "<span>取引者： ".$deal_user."</span></br>";
 								}
-								echo "<li>商品名：" . get_post($todo_item->item_id)->post_title . "</li><br>";
+								echo "<span>商品名：" . get_post($todo_item->item_id)->post_title . "</span>";
 							}
 					?>
 				</div>
 			</div>
-		<hr>
+		<!-- <hr> -->
 	<?php 
 			}
 		}

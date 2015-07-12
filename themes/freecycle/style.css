@@ -1435,9 +1435,19 @@ div a#logo_top img{
 	width: 100%;
 }
 
-.todo-info{
-	font-size: 13px;
+.todo-date{
+	font-size: 10px;
 	float: left;
+	font-style: italic;
+}
+
+.todo-info{
+	font-size: 12px;
+	font-style: italic;
+	float: left;
+	width :100%;
+	border-bottom: 1px solid #ffa500;
+	margin-bottom: 15px;
 }
 
 #todo-item a{
@@ -2623,8 +2633,19 @@ div a#logo_top img{
 	width: 100%;
 }
 
-.todo-info{
+.todo-date{
+	font-size: 10px;
 	float: left;
+	font-style: italic;
+}
+
+.todo-info{
+	font-size: 12px;
+	font-style: italic;
+	float: left;
+	width :100%;
+	border-bottom: 1px solid #ffa500;
+	margin-bottom: 15px;
 }
 
 #todo-item a{
@@ -3856,8 +3877,19 @@ div a#logo_top img{
 	text-align: center;
 }
 
-.todo-info{
+.todo-date{
+	font-size: 12px;
 	float: left;
+	font-style: italic;
+}
+
+.todo-info{
+	font-size: 14px;
+	font-style: italic;
+	float: left;
+	width :100%;
+	border-bottom: 1px solid #ffa500;
+	margin-bottom: 15px;
 }
 
 #todo-item a{
