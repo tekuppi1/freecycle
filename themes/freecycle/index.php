@@ -28,7 +28,7 @@
 		</div>
 		<?php $num = mt_rand(0,$xmlData_texp->obj->item->count()-1);
 			echo("<div class=\"box2\"><span class=\"white\">".$xmlData_texp->obj->item[$num]."</span></div>");
-			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/blackboard1.bmp" width="100%"/>');
+			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/blackboard.png" width="100%"/>');
 		?>
 	</div>
 

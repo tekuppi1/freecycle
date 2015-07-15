@@ -102,16 +102,15 @@
 				<nav>
 					<ul class="navi" >
 					　		<?php if(is_user_logged_in()){ ?>
-					　		<li class="grobal_nav_blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
-					　		<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
+					　		<li class="grobal_nav_important_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
+					　		<li class="grobal_nav" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
+					　		<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>messages" >メッセージ</a></li>
 					　		<?php }else{ ?>
 					　		<li class="grobal_nav"><a href="http://texchg.com/how-to-use">How to use</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/review">利用者の声</a></li>
 							<?php } ?>
-					　		<li class="grobal_nav_important_navi"><a href="<?php echo home_url(); ?>/wanted-list" >ほしいものリスト</a></li>
-					　		<li class="grobal_nav"><a href="<?php echo home_url(); ?>/guide" >操作ガイド</a></li>					
-							<li class="grobal_nav"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
-					　		<li class="grobal_nav_blue_navi"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>			
+							 <li class="grobal_nav" ><a href="<?php echo home_url(); ?>/search-page-php" >検索</a></li>
+					　		<li class="grobal_nav"><a href="<?php echo home_url(); ?>/howtouse">ヘルプ</a></li>
 					</ul>
 				</nav>
 		</div>
@@ -165,7 +164,7 @@
 				<div class="grobal_nav_div">
 					<ul class="navi" >
 					　		<?php if(is_user_logged_in()){ ?>
-					　		<li class="grobal_nav blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>"
+					　		<li class="grobal_nav important_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>"
 							<?php
 								global $user_ID;
 								$todo_list_count = get_todo_list_count($user_ID);
@@ -179,15 +178,14 @@
 							?>
 							</a>
 							</li>
-					　		<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
+					　		<li class="grobal_nav blue_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
+						 	<li class="grobal_nav blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>messages">メッセージ</a></li>
 					　		<?php }else{ ?>
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/how-to-use">How to use</a></li>
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/review">利用者の声</a></li>
 							<?php } ?>
-					　		<li class="grobal_nav important_navi" ><a href="<?php echo home_url(); ?>/wanted-list" >ほしいものリスト</a></li>
-					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
-					　		<li class="grobal_nav blue_navi"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>
-							 <li class="grobal_nav blue_navi"><a href="<?php echo home_url() . "/howtouse"; ?>" >使い方</a></li>
+					　		<li class="grobal_nav blue_navi" ><a href="<?php echo home_url(); ?>/search-page-php" >検索</a></li>
+					　		<li class="grobal_nav blue_navi"><a href="<?php echo home_url(); ?>/howtouse">ヘルプ</a></li>
 					</ul>
 				</div><!-- .grobal_nav_img -->
 </div><!-- .header_img_navi -->
