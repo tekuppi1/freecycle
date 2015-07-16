@@ -43,7 +43,7 @@
 		wp_register_style(
 			'tooltipsterStyle-noir',
 			get_stylesheet_directory_uri() . '/js/tooltipster-master/css/themes/tooltipster-noir.css'
-		);	
+		);
 		wp_register_script(
 			'sweetalertScript',
 			get_stylesheet_directory_uri() . '/lib/sweetalert-master/lib/sweet-alert.min.js'
@@ -88,7 +88,7 @@
 		<header>
 			<div id="header_menu">
 				<a id="logo" href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_b_logosize_2.png" alt="ヘッダー" width="100px" height="50px"></a>
-								
+
 				<a href="javascript:onClickMenuIcon();"  id="menu_icon_sp" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img  id="menu_icon" src="<?php echo get_stylesheet_directory_uri() ?>/images/menu_icon.png" alt="ヘッダー" width="50px" height="50px"></a>
 				<?php if(!is_user_logged_in()){ ?>
 				<a href="<?php echo home_url(); ?>/login"  id="user_icon_sp" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img  id="user_icon" src="<?php echo get_stylesheet_directory_uri() ?>/images/user_icon.png" alt="ヘッダー" width="50px" height="50px"></a>
@@ -97,7 +97,7 @@
 				<?php } ?>
 			</div>
 		</header><!-- header -->
-		
+
 		<div class="grobal_nav_div_sp">
 				<nav>
 					<ul class="navi" >
@@ -109,25 +109,25 @@
 					　		<li class="grobal_nav"><a href="http://texchg.com/how-to-use">How to use</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/review">利用者の声</a></li>
 							<?php } ?>
-							 <li class="grobal_nav" ><a href="<?php echo home_url(); ?>/search-page-php" >検索</a></li>
+							<li class="grobal_nav" ><a href="<?php echo home_url(); ?>/search-page-php" >検索</a></li>
 					　		<li class="grobal_nav"><a href="<?php echo home_url(); ?>/howtouse">ヘルプ</a></li>
 							<li class="grobal_nav important_navi"><a href="<?php echo wp_logout_url( wp_guess_url() ); ?>">ログアウト</a></li>
 					</ul>
 				</nav>
 		</div>
 
-		
+
 <div class="header_img_navi">
 
 				<div class="header_img_navi_contents">
 					<?php if(get_option('use-topics') === 'on' && is_home()){ ?>
 						<b><p><a class="unread_alert" href="<?php echo get_option('topics-link') ?>"><?php echo get_option('topics-text') ?></a></p></b>
 					<?php } ?>
-					<?php if(is_user_logged_in()) { 
-								 if(messages_get_unread_count() > 0){ 
+					<?php if(is_user_logged_in()) {
+								 if(messages_get_unread_count() > 0){
 					?>
 							<a class="unread_alert" href="<?php echo bp_loggedin_user_domain() . "messages"; ?>">未読メッセージが<?php echo messages_get_unread_count();?>件あります！</a></br>
-					<?php 		} 
+					<?php 		}
 								global $user_ID;
 								if(get_todo_list_count($user_ID)){
 					?>
@@ -136,7 +136,7 @@
 								}
 						} ?>
 				</div>
-				
+
 				<?php if(!is_user_logged_in()){ ?>
 				<div id="header_copy">
 					<ul id="slide_body" class="slides" style="display:none">
@@ -161,7 +161,7 @@
 					<a href="<?php echo home_url() . "/about"; ?>"  class="entry_buttons" id="detail_texchange">→てくすちぇんじってどんなサービス？</a>
 				</div>
 				<?php } ?>
-				
+
 				<div class="grobal_nav_div">
 					<ul class="navi" >
 					　		<?php if(is_user_logged_in()){ ?>
@@ -192,14 +192,7 @@
 				</div><!-- .grobal_nav_img -->
 </div><!-- .header_img_navi -->
 
-
 <div class="header_form">
-	<!-- <?php if(is_user_logged_in()){ ?>
-     <div class="header_entry_button_div">
-     <a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/"  id="header_entry_button">いますぐ出品</a>
-     </div>
-<?php } ?> -->
-
 		<?php if(is_archive() || is_search() || is_single()){ ?>
 	<div id="search-23" class="widget widget_search"><!-- 検索バー -->
 				<form role="search" method="get" id="searchform_main" action="<?php echo home_url(); ?>">
