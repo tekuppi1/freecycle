@@ -49,7 +49,7 @@ MESSAGE_SECTION;
 	<?php }else{ ?>
 	くださいリクエストがきている商品はありません。
 	<?php }?>
-	<?php 
+	<?php
 		$givemes = get_giveme_from_others_list();
 		$last_post_id = "";
 		foreach($givemes as $giveme){
@@ -70,19 +70,19 @@ MESSAGE_SECTION;
 				<div class="posts-row">
 					<div id="post_<?php echo $giveme->post_id; ?>">
 					<div id="post-<?php echo $post->ID; ?>" <?php post_class('post'); ?> class="entry-on-index">
-						<div class="post-content">		
-							<div class="entry">				
-							<a href="<?php echo get_permalink($post->ID); ?>" class="post-img-contents"><?php echo get_the_post_thumbnail($post->ID, array(150, 150)) ?></a>					
+						<div class="post-content">
+							<div class="entry">
+							<a href="<?php echo get_permalink($post->ID); ?>" class="post-img-contents"><?php echo get_the_post_thumbnail($post->ID, array(150, 150)) ?></a>
 							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
 							<span class="index-item-title"><a href="<?php echo get_permalink($post->ID); ?>"><?php echo $post->post_title; ?></a></span>
-							</div>							
-						</div><!-- post-content -->					
+							</div>
+						</div><!-- post-content -->
 					</div><!-- post名 -->
 					<div id="post-dummy" <?php post_class('post'); ?> class="entry-on-index">
 						<div class="post-content">
-							<div class="entry">	
+							<div class="entry">
 							</div>
-						</div><!-- post-content -->					
+						</div><!-- post-content -->
 					</div><!-- post名 -->
 		<span class="label">取引相手:</span>
 				<?php
@@ -91,10 +91,14 @@ MESSAGE_SECTION;
 		<select id='postID_<?php echo $last_post_id;?>'>
 		<?php
 				echo '<option label="-- 選択 --" value="" >';
-			} 
+			}
 				echo '<option name="sendto_user_' . $giveme->post_id . '" value="' . $giveme->user_id . '">' . $giveme->display_name . '</option>';
 		}
 		?>
+		<input type = "button" value = "プロフィール確認"  onclick ="   linkToOthersprofile(<?php echo $giveme->display_name; ?>);  " >
+
+
+
 		<?php if($last_post_id != ""){ ?>
 	</div> <!-- 取引相手 -->
 	<?php

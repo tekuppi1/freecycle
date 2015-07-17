@@ -28,12 +28,12 @@ function onConfirmGiveme(postID, url){
 	// 取引相手のユーザIDを取得
 	var userID = jQuery("#postID_" + postID + " option:selected").val();
 	if(!userID){
-		swal({   
-			title: "ユーザーが選択されていません。",  
-			type: "error",   
-			showCancelButton: false,   
-			confirmButtonColor: "#AEDEF4", 
-			confirmButtonText: "OK",      
+		swal({
+			title: "ユーザーが選択されていません。",
+			type: "error",
+			showCancelButton: false,
+			confirmButtonColor: "#AEDEF4",
+			confirmButtonText: "OK",
 			closeOnConfirm: true
 		});
 		enableButtons();
@@ -41,16 +41,16 @@ function onConfirmGiveme(postID, url){
 	}
 
 	if(jQuery("#map_search_" + postID).val() === ""){
-		swal({   
-			title: "取引場所が選択されていません。",  
-			type: "error",   
-			showCancelButton: false,   
-			confirmButtonColor: "#AEDEF4", 
-			confirmButtonText: "OK",      
+		swal({
+			title: "取引場所が選択されていません。",
+			type: "error",
+			showCancelButton: false,
+			confirmButtonColor: "#AEDEF4",
+			confirmButtonText: "OK",
 			closeOnConfirm: true
 		});
 		enableButtons();
-		return false;		
+		return false;
 	}
 
 	var cutFigureTitle = 15;
@@ -64,15 +64,15 @@ function onConfirmGiveme(postID, url){
 		confirmText += title;
 	}
 
-	swal({   
-		title: "取引相手を確定させます。",     
-		showCancelButton: true,   
-		confirmButtonColor: "#DD6B55",   
-		confirmButtonText: "はい",   
-		cancelButtonText: "いいえ",   
-		closeOnConfirm: true,   
-		closeOnCancel: true 
-	}, 
+	swal({
+		title: "取引相手を確定させます。",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "はい",
+		cancelButtonText: "いいえ",
+		closeOnConfirm: true,
+		closeOnCancel: true
+	},
 	function(isConfirm){
 		if (isConfirm) {
 			var uncheckedUserIDs = new Array();
@@ -96,25 +96,25 @@ function onConfirmGiveme(postID, url){
 			},
 			success: function(msg){
 				jQuery("#post_"+postID).hide(1000,function(){
-				swal({   
-					title: "取引相手を確定し、メッセージを送信しました！",  
+				swal({
+					title: "取引相手を確定し、メッセージを送信しました！",
 					text: "取引相手からの返信をお待ちください。",
-					// type: "success",   
-					showCancelButton: false,   
-					confirmButtonColor: "#AEDEF4", 
-					confirmButtonText: "OK",      
+					// type: "success",
+					showCancelButton: false,
+					confirmButtonColor: "#AEDEF4",
+					confirmButtonText: "OK",
 					closeOnConfirm: true
 				});
 				enableButtons();
 				});
 			},
 			error:function(){
-				swal({   
-					title: "error!",  
-					type: "error",   
-					showCancelButton: false,   
-					confirmButtonColor: "#AEDEF4", 
-					confirmButtonText: "OK",      
+				swal({
+					title: "error!",
+					type: "error",
+					showCancelButton: false,
+					confirmButtonColor: "#AEDEF4",
+					confirmButtonText: "OK",
 					closeOnConfirm: true
 				});
 			}
@@ -122,7 +122,7 @@ function onConfirmGiveme(postID, url){
 
 		}else{
 		enableButtons();
-		} 
+		}
 	});
 }
 
@@ -216,13 +216,13 @@ function exhibitToWanted(wanted_item_id, asin){
 			enableButtons();
 		},
 		error: function(){
-			swal({   
-				title: "出品できませんでした。",  
+			swal({
+				title: "出品できませんでした。",
 				text: "しばらくしてからもう一度おためしください。",
-				type: "error",   
-				showCancelButton: false,   
-				confirmButtonColor: "#AEDEF4", 
-				confirmButtonText: "OK",      
+				type: "error",
+				showCancelButton: false,
+				confirmButtonColor: "#AEDEF4",
+				confirmButtonText: "OK",
 				closeOnConfirm: true
 			});
 			enableButtons();
@@ -249,13 +249,13 @@ function delExhibitionToWanted(post_id, wanted_item_id, asin){
 			enableButtons();
 		},
 		false: function(msg){
-			swal({   
-				title: "取り消しに失敗しました。",  
+			swal({
+				title: "取り消しに失敗しました。",
 				text: "しばらくしてからもう一度おためしください。",
-				type: "error",   
-				showCancelButton: false,   
-				confirmButtonColor: "#AEDEF4", 
-				confirmButtonText: "OK",      
+				type: "error",
+				showCancelButton: false,
+				confirmButtonColor: "#AEDEF4",
+				confirmButtonText: "OK",
 				closeOnConfirm: true
 			});
 			enableButtons();
@@ -363,4 +363,17 @@ function displayImages(){
 	});
 }
 
+function linkToOthersprofile(othersname){
+     jQuery.ajax({
+	     type: "POST",
+	     url: '<?php echo admin_url('admin-ajax.php'); ?> ',
+	     data: {
+		     "action" : "othersprofile",
+		     "value" : othersname
+	     },
+	     success function(msg){
+
+	     }
+     });
+}
 </script>

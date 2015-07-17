@@ -198,39 +198,39 @@ function giveme(){
 	global $table_prefix;
 	$postID = $_POST['postID'];
 	$userID = $_POST['userID'];
-	
+
 	// 商品IDまたはユーザIDが空の場合は処理をしない
 	if($postID == "" || $userID == ""){
 		die;
 	}
-	
+
 	// ログインユーザとくださいするユーザが異なる場合は処理をしない
 	if(get_current_user_id() != $userID){
 		die;
 	}
-	
+
 	//ください済みの場合は処理をしない
 	if(doneGiveme($postID, $userID)){
 		echo "既にくださいされています。";
 		die;
 	}
-	
+
 	//ポイントが0の場合は処理をしない
 	if(get_usable_point($userID) == 0){
 		die;
 	}
-	
+
 	//出品者の場合処理をしない
 	$author = get_post_author($postID);
 	if($userID == $author){
 		die;
 	}
-	
+
 	//取引相手がすでに決まっている場合は処理をしない
 	if(isConfirm($postID)){
 		die;
 	}
-	
+
 	//todoリストに追加
 	if(!isGiveme($postID)){
 		add_todo_confirm_bidder($postID);
@@ -243,8 +243,8 @@ function giveme(){
 		(update_timestamp, user_id, post_id)
 		VALUES (current_timestamp, %d, %d)",
 		$userID, $postID));
-	
-	
+
+
 	// 記事の状態を「ください」に変更(現在の状態が無い場合はレコードを登録)
 	$current_state = $wpdb->get_var($wpdb->prepare("SELECT giveme_flg FROM " . $table_prefix . "fmt_giveme_state where post_id = %d", $postID));
 	if(!is_null($current_state)){
@@ -283,7 +283,7 @@ function cancelGiveme(){
 	// 商品IDまたはユーザIDが空の場合は処理をしない
 	if($postID == "" || $userID == ""){
 		die;
-	}	
+	}
 
 	// ログインユーザとキャンセルするユーザが異なる場合は処理をしない
 	if(get_current_user_id() != $userID){
@@ -860,8 +860,8 @@ function exhibit_from_app(){
 
 	$insert_id = exhibit(array(
 		'exhibitor_id' => $current_user_id,
-		'item_name' => $item_name, 
-		'image_url' => $image_url, 
+		'item_name' => $item_name,
+		'image_url' => $image_url,
 		'department' => xprofile_get_field_data('学部', $current_user_id),
 		'course' => xprofile_get_field_data('学科', $current_user_id),
 		'item_category' => $category
@@ -1436,7 +1436,7 @@ function on_user_deleted($user_id){
 
 	// ポイントのテーブルを削除
 	$wpdb->query($wpdb->prepare("
-		DELETE FROM " . $table_prefix . "fmt_points 
+		DELETE FROM " . $table_prefix . "fmt_points
 		WHERE user_id = %d",
 		$user_id));
 }
@@ -2877,9 +2877,9 @@ function get_item_image_urls_on_toppage(){
 	$rand_items = new WP_Query($args);
 	$image_urls = array();
 	foreach ($rand_items->posts as $rand_item) {
-		$arg = array( 
+		$arg = array(
 		    'post_parent' => $rand_item->ID,
-		    'post_type'   => 'attachment', 
+		    'post_type'   => 'attachment',
 		    'post_mime_type' => 'image',
 		    'numberposts' => 1
 		);
@@ -2897,3 +2897,11 @@ function get_item_image_urls_on_toppage(){
 
 add_action('wp_ajax_nopriv_top_images', 'get_item_image_urls_on_toppage');
 add_action('wp_ajax_top_images', 'get_item_image_urls_on_toppage');
+
+// 
+function linkothers(){
+	$value = $_POST['value'];
+	wp_redirect('http://127.0.0.1/wp/members/$valule');
+	exit;
+}
+add_action('wp_ajax_othersprofile', 'linkothers');
