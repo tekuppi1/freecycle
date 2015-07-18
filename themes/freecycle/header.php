@@ -24,23 +24,13 @@
 			include_once "js/fcTwitterDialog.js.php";
 		}
 		// if first login 
-		if(!get_user_meta($user_ID, "first_login_page")){
+		if(!get_user_meta($user_ID, "is_first_login_page_displayed")){
 			add_todo_first_new_entry($user_ID);
 			add_todo_first_giveme($user_ID);
 			if(!xprofile_get_field_data('大学名', $user_ID) || !xprofile_get_field_data('学部', $user_ID)){
 				add_todo_first_category($user_ID);
 			}
-			update_user_meta($user_ID, "first_login_page", 1);
-		}
-		//if write category in profile
-		if(!get_user_meta($user_ID, 'first_write_category')){
-			if(xprofile_get_field_data('大学名', $user_ID) && xprofile_get_field_data('学部', $user_ID)){
-				$todo_row = get_todo_row($user_ID, -3);
-				$todoID = $todo_row->todo_id;
-				change_todo_status_finished($todoID);
-
-				update_user_meta($user_ID, "first_write_category", 1);
-			}
+			update_user_meta($user_ID, "is_first_login_page_displayed", 1);
 		}
 		?>
 		<?php

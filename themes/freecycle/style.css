@@ -1439,6 +1439,10 @@ div a#logo_top img{
 	margin-top:30px;
 }
 
+.todo-item{
+	width: 100%;
+}
+
 .todo-date{
 	font-size: 10px;
 	float: left;
@@ -2638,6 +2642,10 @@ div a#logo_top img{
 }
 
 /*todo-list系*/
+.todo-item{
+	width: 100%;
+}
+
 .todo-date{
 	font-size: 10px;
 	float: left;
@@ -3882,6 +3890,10 @@ div a#logo_top img{
 	text-align: center;
 }
 
+.todo-item{
+	width: 100%;
+}
+
 .todo-date{
 	font-size: 12px;
 	float: left;
@@ -4148,4 +4160,23 @@ div.post-content div.entry img.attachment-full{
 div.post-content div.entry p{
 	padding:10px;
 	clear:both;
+}
+
+.first-todo-header{
+	font-size: 18px;
+}
+.first-todo-title{
+	font-size: 23px;
+}
+.todo-tutorial{
+	width: 100%;
+	float: left;
+	color: white;
+	background-color: #00CC66;
+	font-size: 14px;
+}
+.todo-tutorial-comment{
+	width: 100%;
+	float: left;
+	font-size: 13px;
 }

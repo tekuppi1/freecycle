@@ -50,6 +50,7 @@
 		 */
 		function onGiveme(){
 			disableButtons();
+			var firstGivemeText = "";
 			swal({   
 				title: "くださいリクエストをします。",   
 				text: "よろしいですか？",     
@@ -72,7 +73,10 @@
 						},
 						success: function(msg){
 							switchGiveme();
-							swal(msg);
+							swal({
+								title : msg,
+								html: true
+							});
 							enableButtons();
 						}
 					});

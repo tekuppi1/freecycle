@@ -154,6 +154,7 @@
     function callOnNewEntryFinish(){
             var form = jQuery("#newentry").get()[0];
 			var fd = new FormData(form);
+			var firstEntryText = "";
 			fd.append("action", "new_entry");
 			jQuery.ajax({
 				type: "POST",
@@ -162,16 +163,15 @@
 				contentType: false,
 				mimeType:"multipart/form-data",
 				data: fd,
-				success: function(permalink){
+				success: function(msg){
 					swal({   
-						title: "商品を出品しました。",  
-						type: "success",    
+						title: msg,
+						html: true
 					}); 
 					// reload new entry page
 					enableButtons();
-					location.href = "<?php echo bp_loggedin_user_domain(); ?>" + "new_entry/#newentry";
 					jQuery("input[type='text'], input[type='file'], textarea").val("");
-					jQuery("option").attr("selected", false);
+					jQuery('select[name="item_status"] option').attr("selected", false);
 				}
 			});
     }
@@ -425,6 +425,7 @@
 		}
 	});
 
+
 </script>
 <div id="item-header-avatar">
 
@@ -485,18 +486,18 @@
 		 ?>
 		 
 	</div><!-- #item-meta -->
-
 </div><!-- #item-header-content -->
 	<?php
 		global $user_ID;
 		$todo_asc_list = get_todo_list($user_ID, "unfinished");
 		$todo_list = array_reverse($todo_asc_list);
 		$todo_list_count = get_todo_list_count($user_ID);
+		if($todo_list && $user_ID == bp_displayed_user_id()):
 	?>
 <h3 style="width:100%;margin-top:30px;">next actionが<?php echo $todo_list_count;?>件あります。</h3>
 <ul id="todo-list">
-	<?php if($todo_list){
-			foreach($todo_list as $todo_item){
+	<?php 
+			foreach($todo_list as $todo_item):
 	?>
 			<li class="todo-item">
 				<div class="todo-date"><?php echo date("Y年m月d日 A g:i",strtotime($todo_item->created)); ?></div>
@@ -515,8 +516,8 @@
 				</div>
 			</li>
 	<?php 
-			}
-		}
+			endforeach;
+		endif;
 	?>
 </ul>
 <a name="mypage" id="mypage"></a>
