@@ -109,9 +109,8 @@
 					　		<li class="grobal_nav"><a href="http://texchg.com/how-to-use">How to use</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/review">利用者の声</a></li>
 							<?php } ?>
-							 <li class="grobal_nav" ><a href="<?php echo home_url(); ?>/search-page-php" >検索</a></li>
+							 <li class="grobal_nav" ><a href="<?php echo home_url(); ?>/search-page" >検索</a></li>
 					　		<li class="grobal_nav"><a href="<?php echo home_url(); ?>/howtouse">ヘルプ</a></li>
-							<li class="grobal_nav important_navi"><a href="<?php echo wp_logout_url( wp_guess_url() ); ?>">ログアウト</a></li>
 					</ul>
 				</nav>
 		</div>
@@ -185,9 +184,8 @@
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/how-to-use">How to use</a></li>
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/review">利用者の声</a></li>
 							<?php } ?>
-					　		<li class="grobal_nav blue_navi" ><a href="<?php echo home_url(); ?>/search-page-php" >検索</a></li>
+					　		<li class="grobal_nav blue_navi" ><a href="<?php echo home_url(); ?>/search-page" >検索</a></li>
 					　		<li class="grobal_nav blue_navi"><a href="<?php echo home_url(); ?>/howtouse">ヘルプ</a></li>
-							<li class="grobal_nav important_navi"><a href="<?php echo wp_logout_url( wp_guess_url() ); ?>">ログアウト</a></li>
 					</ul>
 				</div><!-- .grobal_nav_img -->
 </div><!-- .header_img_navi -->
