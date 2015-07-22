@@ -10,17 +10,27 @@
 		<?php wp_head(); ?>
 		<?php include_once "js/freecycleJS.php" ?>
 		<?php
+		$user_ID = get_current_user_id();
 		// if facebook dialog has not be shown before, show it
-		if(is_user_connected_with('facebook', get_current_user_id()) && !get_user_meta(get_current_user_id(), 'is_fb_share_popup_displayed')){
+		if(is_user_connected_with('facebook', $user_ID) && !get_user_meta($user_ID, 'is_fb_share_popup_displayed')){
 			// change status
-			update_user_meta(get_current_user_id(), 'is_fb_share_popup_displayed', 1);
+			update_user_meta($user_ID, 'is_fb_share_popup_displayed', 1);
 			include_once "js/fcFbDialog.js.php";
 		}
 		// if twitter dialog has not be shown before, show it
-		if(is_user_connected_with('twitter', get_current_user_id()) && !get_user_meta(get_current_user_id(), 'is_twitter_popup_displayed')){
+		if(is_user_connected_with('twitter', $user_ID) && !get_user_meta($user_ID, 'is_twitter_popup_displayed')){
 			// change status
-			update_user_meta(get_current_user_id(), 'is_twitter_popup_displayed', 1);
+			update_user_meta($user_ID, 'is_twitter_popup_displayed', 1);
 			include_once "js/fcTwitterDialog.js.php";
+		}
+		// if first login 
+		if(!get_user_meta($user_ID, "is_first_login_page_displayed")){
+			add_todo_first_new_entry($user_ID);
+			add_todo_first_giveme($user_ID);
+			if(!xprofile_get_field_data('大学名', $user_ID) || !xprofile_get_field_data('学部', $user_ID)){
+				add_todo_first_category($user_ID);
+			}
+			update_user_meta($user_ID, "is_first_login_page_displayed", 1);
 		}
 		?>
 		<?php
