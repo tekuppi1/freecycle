@@ -4074,7 +4074,6 @@ div.grobal_nav_div_sp ul li a span {
 		font-size: 110%;
 	}
 }
-
 .entry img.wp-post-image {
 	border: 1px solid;
 	border-radius: 20%;
@@ -4111,4 +4110,8 @@ div.post-content div.entry img.attachment-full{
 div.post-content div.entry p{
 	padding:10px;
 	clear:both;
+}
+div.index_profile{
+	margin:10px;
+	padding:10px 0px;
 }
