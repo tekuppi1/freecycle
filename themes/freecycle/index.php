@@ -24,8 +24,7 @@
 		<div class="title"><?php echo($texbanTitle); ?></div>
 		<div class="box1">
 			<?php 
-				//$num = mt_rand(1,$xmlData_massage->obj->item->count()-1);
-				$num = 0;//フェア開催時に
+				$num = mt_rand(0,$xmlData_massage->obj->item->count()-1);
 				$node = $xmlData_massage->obj->item[$num];
 				echo("<span class=\"yellow\">".$node->from."さん");
 				if(($node->fromrank)!="null")echo("(✩".$node->fromrank.")");
