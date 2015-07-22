@@ -10,17 +10,27 @@
 		<?php wp_head(); ?>
 		<?php include_once "js/freecycleJS.php" ?>
 		<?php
+		$user_ID = get_current_user_id();
 		// if facebook dialog has not be shown before, show it
-		if(is_user_connected_with('facebook', get_current_user_id()) && !get_user_meta(get_current_user_id(), 'is_fb_share_popup_displayed')){
+		if(is_user_connected_with('facebook', $user_ID) && !get_user_meta($user_ID, 'is_fb_share_popup_displayed')){
 			// change status
-			update_user_meta(get_current_user_id(), 'is_fb_share_popup_displayed', 1);
+			update_user_meta($user_ID, 'is_fb_share_popup_displayed', 1);
 			include_once "js/fcFbDialog.js.php";
 		}
 		// if twitter dialog has not be shown before, show it
-		if(is_user_connected_with('twitter', get_current_user_id()) && !get_user_meta(get_current_user_id(), 'is_twitter_popup_displayed')){
+		if(is_user_connected_with('twitter', $user_ID) && !get_user_meta($user_ID, 'is_twitter_popup_displayed')){
 			// change status
-			update_user_meta(get_current_user_id(), 'is_twitter_popup_displayed', 1);
+			update_user_meta($user_ID, 'is_twitter_popup_displayed', 1);
 			include_once "js/fcTwitterDialog.js.php";
+		}
+		// if first login 
+		if(!get_user_meta($user_ID, "is_first_login_page_displayed")){
+			add_todo_first_new_entry($user_ID);
+			add_todo_first_giveme($user_ID);
+			if(!xprofile_get_field_data('大学名', $user_ID) || !xprofile_get_field_data('学部', $user_ID)){
+				add_todo_first_category($user_ID);
+			}
+			update_user_meta($user_ID, "is_first_login_page_displayed", 1);
 		}
 		?>
 		<?php
@@ -102,16 +112,15 @@
 				<nav>
 					<ul class="navi" >
 					　		<?php if(is_user_logged_in()){ ?>
-					　		<li class="grobal_nav_blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
-					　		<li class="grobal_nav_important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
+					　		<li class="grobal_nav_important_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
+					　		<li class="grobal_nav" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
+					　		<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>messages" >メッセージ</a></li>
 					　		<?php }else{ ?>
 					　		<li class="grobal_nav"><a href="http://texchg.com/how-to-use">How to use</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/review">利用者の声</a></li>
 							<?php } ?>
-					　		<li class="grobal_nav_important_navi"><a href="<?php echo home_url(); ?>/wanted-list" >ほしいものリスト</a></li>
-					　		<li class="grobal_nav"><a href="<?php echo home_url(); ?>/guide" >操作ガイド</a></li>
-							<li class="grobal_nav"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
-					　		<li class="grobal_nav_blue_navi"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>
+							<li class="grobal_nav" ><a href="<?php echo home_url(); ?>/search-page" >検索</a></li>
+					　		<li class="grobal_nav"><a href="<?php echo home_url(); ?>/howtouse">ヘルプ</a></li>
 					</ul>
 				</nav>
 		</div>
@@ -165,7 +174,7 @@
 				<div class="grobal_nav_div">
 					<ul class="navi" >
 					　		<?php if(is_user_logged_in()){ ?>
-					　		<li class="grobal_nav blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>"
+					　		<li class="grobal_nav important_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>"
 							<?php
 								global $user_ID;
 								$todo_list_count = get_todo_list_count($user_ID);
@@ -179,15 +188,14 @@
 							?>
 							</a>
 							</li>
-					　		<li class="grobal_nav important_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
+					　		<li class="grobal_nav blue_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
+						 	<li class="grobal_nav blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>messages">メッセージ</a></li>
 					　		<?php }else{ ?>
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/how-to-use">How to use</a></li>
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/review">利用者の声</a></li>
 							<?php } ?>
-					　		<li class="grobal_nav important_navi" ><a href="<?php echo home_url(); ?>/wanted-list" >ほしいものリスト</a></li>
-					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/manage" >運営メンバー紹介</a></li>
-					　		<li class="grobal_nav blue_navi"><a href="<?php echo home_url() . "/faq"; ?>" >FAQ</a></li>
-							 <li class="grobal_nav blue_navi"><a href="<?php echo home_url() . "/howtouse"; ?>" >使い方</a></li>
+					　		<li class="grobal_nav blue_navi" ><a href="<?php echo home_url(); ?>/search-page" >検索</a></li>
+					　		<li class="grobal_nav blue_navi"><a href="<?php echo home_url(); ?>/howtouse">ヘルプ</a></li>
 					</ul>
 				</div><!-- .grobal_nav_img -->
 </div><!-- .header_img_navi -->
