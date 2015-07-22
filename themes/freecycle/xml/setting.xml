@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss>
+<obj>
+<!-- てくばんの設定 -->
+<!-- 
+	<event> : イベントが開催中か(true/false)
+	<message_title> : メッセージを表示するときのタイトル
+	<event_title> : イベント時に表示するタイトル
+	<texp> : イベント中にてくっぴが喋ること。
+-->
+	
+	<item>
+		<event>true</event>
+		<message_title>みんなのお礼のメッセージ</message_title>
+		<event_title>【資格フェア】開催中！</event_title>
+		<texp>&lt;a href=&quot;http://texchg.com/?&amp;cat=24&quot;&gt;実用書コーナー&lt;/a&gt;に&lt;br&gt;行くっぴ。</texp>
+	</item>
+</obj>
+</rss>

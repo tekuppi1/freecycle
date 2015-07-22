@@ -4009,6 +4009,13 @@ div.grobal_nav_div_sp ul li a span {
 	line-height: 1.5;
 	color: white;
 }
+.BlackBoard .title{
+	position: absolute;
+	margin: 3% auto;
+	padding-right: 1em;
+	text-align: center; 
+	color: #FF9900
+}
 .BlackBoard .box1{
 	position: absolute;
 	top: 23%;
@@ -4020,6 +4027,10 @@ div.grobal_nav_div_sp ul li a span {
 	bottom: 8%;
 	left: 20%;
 }
+.BlackBoard .box2 a{
+	color:#ebff00;
+	text-decoration:none;
+}
 .yellow{
 	color: yellow;
 }
@@ -4027,6 +4038,9 @@ div.grobal_nav_div_sp ul li a span {
 		padding: 5px;
 }
 @media screen and (max-width:480px){
+	.BlackBoard .title{
+		font-size: 140%;
+	}
 	.BlackBoard div{
 		font-size: 80%;
 		width: 100%;
@@ -4045,6 +4059,9 @@ div.grobal_nav_div_sp ul li a span {
 	}
 }
 @media screen and (min-width:480px){
+	.BlackBoard .title{
+		font-size: 180%;
+	}
 	.BlackBoard div{
 		font-size: 100%;
 		width: 100%;
@@ -4060,6 +4077,9 @@ div.grobal_nav_div_sp ul li a span {
 	}
 }
 @media screen and (min-width : 768px){
+	.BlackBoard .title{
+		font-size: 360%;
+	}
 	.BlackBoard div{
 		font-size: 180%;
 		width: 100%;
