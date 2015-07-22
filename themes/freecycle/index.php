@@ -28,7 +28,7 @@
 		</div>
 		<?php $num = mt_rand(0,$xmlData_texp->obj->item->count()-1);
 			echo("<div class=\"box2\"><span class=\"white\">".$xmlData_texp->obj->item[$num]."</span></div>");
-			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/blackboard1.bmp" width="100%"/>');
+			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/blackboard.png" width="100%"/>');
 		?>
 	</div>
 
@@ -83,6 +83,12 @@
 	<div id="top_image_box">
 	<div class="phone_sub_title">こんな本が出品されてます！</div>
 	<div id="top_image"></div>
+	
+	<div class="index_profile">
+		<?php bp_loggedin_user_avatar( 'type=thumb&width=30&height=30' ); ?>
+		<span class="user-nicename"><?php echo bp_core_get_userlink( bp_loggedin_user_id() ); ?></span>
+			<a class="button logout" href="<?php echo wp_logout_url( wp_guess_url() ); ?>"><?php _e( 'Log Out', 'buddypress' ); ?></a>
+	</div>
 	</div>
 
 <!-- SlideImageScript -->
