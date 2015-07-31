@@ -4028,7 +4028,7 @@ div.grobal_nav_div_sp ul li a span {
 	left: 20%;
 }
 .BlackBoard .box2 a{
-	color:#ebff00;
+	/*color:#ebff00;*/
 	text-decoration:none;
 }
 .yellow{
@@ -4132,3 +4132,23 @@ div.post-content div.entry p{
 	padding:10px;
 	clear:both;
 }
+
+.event_button{
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 5px 20px;
+		background: -moz-linear-gradient(top,#0099CC 0%,#006699);
+		background: -webkit-gradient(linear, left top, left bottom, from(#0099CC), to(#006699));
+		border: 2px solid #FFF;
+		color: #FFF;
+		border-radius: 4px;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
+		-moz-box-shadow: 1px 1px 1px rgba(000,000,000,0.3);
+		-webkit-box-shadow: 1px 1px 1px rgba(000,000,000,0.3);
+		text-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+}
+.event_button:link {color:#fff;}
+.event_button:visited {color:#fff;}
+.event_button:hover {color:#0ff;}
+.event_button:active {color:#0ff;}

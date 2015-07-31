@@ -13,7 +13,8 @@
 		<event>true</event>
 		<message_title>みんなのお礼のメッセージ</message_title>
 		<event_title>【資格フェア】開催中！</event_title>
-		<texp>&lt;a href=&quot;http://texchg.com/?&amp;cat=24&quot;&gt;実用書コーナー&lt;/a&gt;に&lt;br&gt;行くっぴ。</texp>
-	</item>
+		<event_url>http://texchg.com/?&amp;cat=24</event_url>
+		<texp>フェアのページへ！</texp>
+</item>
 </obj>
 </rss>

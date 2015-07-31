@@ -38,10 +38,14 @@
 		</div>
 		<?php $num = mt_rand(0,$xmlData_texp->obj->item->count()-1);
 			if(($setting->event)=="true")
-				echo("<div class=\"box2\"><span class=\"white\">".$setting->texp."</span></div>");
+				echo("<div class=\"box2\"><a href=\"$setting->event_url\" class='event_button'>$setting->texp</a></div>");
 			else
 				echo("<div class=\"box2\"><span class=\"white\">".$xmlData_texp->obj->item[$num]."</span></div>");
-			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/texban.png" width="100%"/>');
+
+			if(($setting->event)=="true")
+				echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/texban_none.png" width="100%"/>');
+			else
+				echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/texban.png" width="100%"/>');
 		?>
 	</div>
 
