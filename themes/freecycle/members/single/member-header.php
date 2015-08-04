@@ -154,6 +154,7 @@
     function callOnNewEntryFinish(){
             var form = jQuery("#newentry").get()[0];
 			var fd = new FormData(form);
+			var firstEntryText = "";
 			fd.append("action", "new_entry");
 			jQuery.ajax({
 				type: "POST",
@@ -162,16 +163,15 @@
 				contentType: false,
 				mimeType:"multipart/form-data",
 				data: fd,
-				success: function(permalink){
+				success: function(msg){
 					swal({   
-						title: "商品を出品しました。",  
-						type: "success",    
+						title: msg,
+						html: true
 					}); 
 					// reload new entry page
 					enableButtons();
-					location.href = "<?php echo bp_loggedin_user_domain(); ?>" + "new_entry/#newentry";
 					jQuery("input[type='text'], input[type='file'], textarea").val("");
-					jQuery("option").attr("selected", false);
+					jQuery('select[name="item_status"] option').attr("selected", false);
 				}
 			});
     }
@@ -318,16 +318,25 @@
 		var geocoder;
 		var location;
 		if(maps.length > 0){
-			// set the university in user profile as a default location of maps
-			var mylocation = "<?php echo get_user_meta(get_current_user_id(), 'default_trade_location', true) ?>";
+			<?php
+				// set the university in user profile as a default location of maps
+				$mylocation = get_user_meta(get_current_user_id(), 'default_trade_location', true);
+				if(!$mylocation){
+					$default_location = get_default_map();
+					if($default_location){
+						// if the system default map is set
+						$mylocation = $default_location->map_id;
+					}else{
+						// if the system default map is not set
+						$mylocation = 0;
+					}
+				}
+			?>
+			var mylocation = "<?php echo $mylocation; ?>";
 			var shownMap;
 			var marker;
 			var input;
 			var searchbox;
-			if(!mylocation){
-				// if user default trade location is not set, set default
-				mylocation = "<?php echo get_default_map()->map_id ?>";
-			}
 			jQuery.ajax({
 				type: "POST",
 				url: ADMIN_URL,
@@ -416,6 +425,7 @@
 		}
 	});
 
+
 </script>
 <div id="item-header-avatar">
 
@@ -476,42 +486,40 @@
 		 ?>
 		 
 	</div><!-- #item-meta -->
-
 </div><!-- #item-header-content -->
-<div id="todo-list">
 	<?php
 		global $user_ID;
 		$todo_asc_list = get_todo_list($user_ID, "unfinished");
 		$todo_list = array_reverse($todo_asc_list);
 		$todo_list_count = get_todo_list_count($user_ID);
-		if($todo_list){
+		if($todo_list && $user_ID == bp_displayed_user_id()):
 	?>
-	<h3 style="float:left;width:100%">next actionが<?php echo $todo_list_count;?>件あります。</h3>
-	<?php
-			foreach($todo_list as $todo_item){
+<h3 style="width:100%;margin-top:30px;">next actionが<?php echo $todo_list_count;?>件あります。</h3>
+<ul id="todo-list">
+	<?php 
+			foreach($todo_list as $todo_item):
 	?>
-			<div id="todo-item">
-				<div class="todo-info"><?php echo date("Y年m月d日 A g:i",strtotime($todo_item->created)); ?></div>
+			<li class="todo-item">
+				<div class="todo-date"><?php echo date("Y年m月d日 A g:i",strtotime($todo_item->created)); ?></div>
 				<?php echo $todo_item->message; ?>
 				<div class="todo-info">
-					<ul>
 					<?php 
-							$deal_user_ID = deal_user($todo_item->item_id ,$user_ID);
-							if($deal_user_ID){
-								$deal_user = get_userdata($deal_user_ID)->display_name;
-								echo "<li>取引者： ".$deal_user."</li></br>";
+							if(($todo_item->item_id) > 0 ){
+								$deal_user_ID = deal_user($todo_item->item_id ,$user_ID);
+								if($deal_user_ID){
+									$deal_user = get_userdata($deal_user_ID)->display_name;
+									echo "<span>取引者： ".$deal_user."</span>";
+								}
+								echo "<span>商品名：" . get_post($todo_item->item_id)->post_title . "</span>";
 							}
-						?>
-					<li><?php echo "商品名： ".get_post($todo_item->item_id)->post_title; ?></li></br>
-					</ul>
+					?>
 				</div>
-			</div>
-		<hr>
+			</li>
 	<?php 
-			}
-		}
+			endforeach;
+		endif;
 	?>
-</div>
+</ul>
 <a name="mypage" id="mypage"></a>
 <?php do_action( 'bp_after_member_header' ); ?>
 

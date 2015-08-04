@@ -17,7 +17,7 @@ Tags: buddypress
 		/*background: #fff;*/
 		margin: 0;
 	}
-	
+
 	#entry_login_form_pc {
 		background: #FFF;
 		border:solid 3px #999;
@@ -140,12 +140,12 @@ input{
 }
 
 h1{
-	font-size: 1.6em;	
+	font-size: 1.6em;
 	font-weight: bold;
 }
 
 h2{
-	font-size: 1.5em;	
+	font-size: 1.5em;
 	font-weight: bold;
 }
 
@@ -178,7 +178,7 @@ h4{
 }
 
 h5{
-	font-size: 0.8em;	
+	font-size: 0.8em;
 }
 
 
@@ -319,7 +319,7 @@ input[type="button"]:hover{
 
 /*ヘッダー部分*/
 
-header{	
+header{
 	width: 100%;
 	height: 60px;
 	background: white;
@@ -376,8 +376,8 @@ header a img#user_icon{
 	top: 15px;
 }
 
-	
-	
+
+
 /*header #logo{
     font: bold italic 2em/1.5 MS P ゴシック;
     text-shadow: 3px 3px 2px rgba(0,0,0,0.5);
@@ -390,8 +390,8 @@ header a{
 	display: block;
 	padding-left: 10px;
 	margin: 5px;
-	background-color: transparent; 
-} 
+	background-color: transparent;
+}
 
 header a:hover{
 	color: white;
@@ -469,7 +469,7 @@ a#header_entry_button{
     font-size: 1em;
     /*background-image:url(../images/menu_icon.png) no-repeat left;*/
     /*padding-left: 20px;*/
-    
+
 }
 
 
@@ -479,6 +479,7 @@ div.header_form{
 	background-color: lightcyan;
 	padding: 5px 0 0 5px;
 	border-radius: 4px;
+	margin-bottom: 20px;
 }
 
 form[name=login-form]{
@@ -489,7 +490,7 @@ form[name=login-form]{
 	width: 95%;
 	clear: both;
 	color: black;
-	
+
 	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
@@ -501,8 +502,8 @@ form #sidebar-wp-submit{
 	display: block;
 	margin: auto;
 }
-	
-	
+
+
 
 #sidebar-wp-submit{
 	font-size: 25px;
@@ -540,12 +541,12 @@ form #sidebar-wp-submit{
 div.login_form_button button{
 	margin: auto;
 	width: 100%;
-	-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);  
-    -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);  
-    border: 1px solid rgba(0,0,0,0.4);  
-    background: rgba(0,0,0,0.6);  
-    color: #fff !important;  
-    text-shadow: 0 -1px 1px #aaa, -1px 0 1px #aaa, 1px 0 1px #000;  
+	-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);
+    border: 1px solid rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.6);
+    color: #fff !important;
+    text-shadow: 0 -1px 1px #aaa, -1px 0 1px #aaa, 1px 0 1px #000;
 }
 
 div.login_form_button button:hover{
@@ -566,7 +567,7 @@ div.header_img_navi{
 	margin: 20px auto 0 auto;
 }
 
-	
+
 div.grobal_nav_div{
 	display: none;
 }
@@ -658,16 +659,16 @@ nav li{
 	width: 100%
 }
 
-	
+
 nav li a {
     display: block;
     width: 10%;
     padding: 10px;
-     
+
     background: #0E7AC4;
     border-right: 1px solid #fff;
-     
-    color: #fff !important;    
+
+    color: #fff !important;
     font: 400 11px/1.4 'Cutive', Helvetica, Verdana, Arial, sans-serif;
     text-align: center;
     text-decoration: none;
@@ -708,11 +709,15 @@ nav li:last-child a {
 	border-radius: 10px;
 	width: 95%;
 	height: 55px;
-	clear: both;	
-	
+	clear: both;
+
 	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
+}
+
+#searchform_text{
+	width: 100%;
 }
 
 #searchform_text_pulldown{
@@ -720,10 +725,9 @@ nav li:last-child a {
 }
 
 #searchsubmit{
-	margin: 0 0 0 80px;
 	padding: 3px;
 	display: block;
-	width: 200px;
+	width: 100%;
 	height: 25px;
 	font: bold 1.1em/1.0 "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
@@ -762,11 +766,15 @@ nav li:last-child a {
 	display: none;
 }
 
-#searchform_pulldown,#searchform_submit{
+#searchform_pulldown{
 	float: left;
-	width: 20px;
+	width: 30%;
 }
 
+#searchform_submit{
+	float: right;
+	width: 65%;
+}
 
 /*
 				ヘッダーカテゴリ
@@ -837,7 +845,7 @@ a#entry_form{
 	background: #FBA848;
 	padding:10px 7px 10px 7px;
 	margin-bottom: 10px;
-	
+
 }
 
 a#login_form{
@@ -879,7 +887,7 @@ a.whats-tex-button{
   	border-radius:5px;
   	box-shadow:1px 2px 2px rgba(0,0,0,0.3), 0px 1px 0px rgba(255,255,255,0.5) inset, 0px -1px 0px rgba(255,255,255,0.2) inset;
  }
-  
+
  a.whats-tex-button:hover{
  	background-image: -moz-linear-gradient(top, #03cdff, #cffeff);
 	background-image: -ms-linear-gradient(top, #03cdff, #cffeff);
@@ -890,11 +898,11 @@ a.whats-tex-button{
 	opacity: 0.7;
  }*/  /*初めての方はこちらボタンは有効化されていません*/
 
- 
+
 
 /*
 			トピックアイテム
-*/ 
+*/
 
 div.page#topic-items{
 	background-color:#FFFF99;
@@ -943,13 +951,13 @@ div.post-content h2.posttitle{
 
 .posttitle :hover{
 	color: #00bfff;
-}	
+}
 
 div.post-content{
 	padding: 0;
 }
 
-div.post-content div.entry img{	
+div.post-content div.entry img{
 	width: 140px;
 	height: 140px;
 	float: left;
@@ -1025,8 +1033,8 @@ div .post-content {
 
 .wantedlist_image{
 	height: 140px;
-	width: 90px; 
-	float: left; 
+	width: 90px;
+	float: left;
 	margin: 9px;
 	border: none;
 }
@@ -1141,7 +1149,7 @@ div#send-private-message{
 
 #blog-page{
 	padding-bottom: 30px;
-	
+
 }
 
 /****************************
@@ -1154,7 +1162,7 @@ input#upload{
 	height: 50px;
 	font-size: 1.25em;
 	color: black;
-	display: block;	
+	display: block;
 }
 
 input#upload:hover{
@@ -1213,7 +1221,7 @@ div#subnav>ul>li{
 	border-left: solid 4px skyblue;
 }
 
-div.item-list-tabs ul li.selected a, 
+div.item-list-tabs ul li.selected a,
 div.item-list-tabs ul li.current a{
 	background: #98fb98;
 }
@@ -1233,7 +1241,7 @@ div#evaluation textarea#trade_comment{
               message
 --------------------------------------*/
 td.thread-avatar img{
-	width:30px;
+	width:50px;
 }
 
 a.button-confirm{
@@ -1263,7 +1271,7 @@ input#submit{
 	height: 50px;
 	font-size: 1.25em;
 	color: black;
-	display: block;	
+	display: block;
 }
 
 input#submit:hover{
@@ -1368,7 +1376,7 @@ div a#logo_top img{
 	background-size: cover;
 	width: 100%;
 	height: 523px;
-	
+
 }
 
 #top_block{
@@ -1427,12 +1435,30 @@ div a#logo_top img{
 	width: 100%;
 }
 
-.todo-info{
-	font-size: 13px;
-	float: left;
+#todo-title{
+	margin-top:30px;
 }
 
-#todo-item a{
+.todo-item{
+	width: 100%;
+}
+
+.todo-date{
+	font-size: 10px;
+	float: left;
+	font-style: italic;
+	margin-top: 15px;
+}
+
+.todo-info{
+	font-size: 12px;
+	font-style: italic;
+	float: left;
+	width :100%;
+	border-bottom: 1px solid #ffa500;
+}
+
+.todo-item a{
 	font-size: 15px;
 	width: 100%;
 	display: block;
@@ -1440,9 +1466,42 @@ div a#logo_top img{
 	float: left;
 }
 
-.todo-info ul li{
-	float: left !important;
+.todo-info span{
+	display: table !important;
 }
+
+/* 検索ページ*/
+.sub_categories {
+	display : none;
+}
+
+.sub_categories div{
+	padding : 5px 0 0 5px;
+	background-color: #ffd85f;
+	margin-left: 10px;
+	margin-bottom: 1px;
+	height : 25px;
+	line-height : 25px;
+}
+
+.sub_categories div a{
+	text-decoration: none;
+	display: block;
+	color : black;
+	font-size: 14px;
+}
+
+.main_categories{
+	width : 100%;
+	font-size: 18px;
+	color: white;
+	background-color: #FBA848;
+	border: 1px solid white;
+	height: 35px;
+	line-height: 35px;
+	padding-left: 10px;
+}
+
 }
 
 /****************************スマホスタイルの終了****************************************************/
@@ -1501,13 +1560,13 @@ input{
 }
 
 h1{
-	font-size: 1.6em;	
+	font-size: 1.6em;
 	font-weight: bold;
 }
 
 h2{
 	font-size: 1.5em;
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 h3{
@@ -1539,7 +1598,7 @@ h4{
 }
 
 h5{
-	font-size: 0.8em;	
+	font-size: 0.8em;
 }
 
 
@@ -1683,7 +1742,7 @@ input[type="button"]:hover{
 
 /*ヘッダー部分*/
 
-header{	
+header{
 	width: 100%;
 	height: auto;
 	background: white;
@@ -1731,8 +1790,8 @@ header a img#user_icon{
 
 
 
-	
-	
+
+
 /*header #logo{
     font: bold italic 2em/1.5 MS P ゴシック;
     text-shadow: 3px 3px 2px rgba(0,0,0,0.5);
@@ -1745,8 +1804,8 @@ header a{
 	display: block;
 	padding-left: 10px;
 	margin: 5px;
-	background-color: transparent; 
-} 
+	background-color: transparent;
+}
 
 header a:hover{
 	color: white;
@@ -1799,6 +1858,7 @@ div.header_form{
 	background-color: lightcyan;
 	padding: 0 0 5px;
 	border-radius: 4px;
+	margin-bottom: 20px;
 }
 
 form#header-login-form{
@@ -1821,8 +1881,8 @@ form #sidebar-wp-submit{
 	display: block;
 	margin: auto;
 }
-	
-	
+
+
 
 #sidebar-wp-submit{
 	font-size: 25px;
@@ -1863,12 +1923,12 @@ form #sidebar-wp-submit{
 div.login_form_button button{
 	margin: auto;
 	width: 100%;
-	-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);  
-    -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);  
-    border: 1px solid rgba(0,0,0,0.4);  
-    background: rgba(0,0,0,0.6);  
-    color: #fff;  
-    text-shadow: 0 -1px 1px #aaa, -1px 0 1px #aaa, 1px 0 1px #000;  
+	-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);
+    border: 1px solid rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    text-shadow: 0 -1px 1px #aaa, -1px 0 1px #aaa, 1px 0 1px #000;
 }
 
 div.login_form_button button:hover{
@@ -1882,7 +1942,7 @@ div.login_form_button button:hover{
 	height: 220px;
 }
 
-	
+
 div.grobal_nav_div{
 	display: none;
 }
@@ -1937,13 +1997,13 @@ nav li a:hover{
 	color: #fff;
 }
 
-.clearfix:after {  
-  content: " ";   
-  display: block;   
-  height: 0;   
-  clear: both;   
-  visibility: hidden;  
-}  
+.clearfix:after {
+  content: " ";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
 
 div.header_img_navi_contents{
 /*	margin-top: 20px;*/
@@ -1964,8 +2024,8 @@ div.header_img_navi_contents{
 	width: 95%;
 	height: 55px;
 	clear: both;
-	
-	
+
+
 	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
@@ -1974,7 +2034,7 @@ div.header_img_navi_contents{
 #searchsubmit{
 	padding: 3px;
 	display: block;
-	width: 258px;
+	width: 230px;
 	height: 25px;
 	font: bold 1.1em/1.0 "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
@@ -2003,7 +2063,7 @@ div.header_img_navi_contents{
 	display: block;
 	padding: 0;
 	margin-bottom: 3px;
-	width: 95%;
+	width: 99%;
 	height: 20px;
 }
 
@@ -2016,7 +2076,7 @@ div.header_img_navi_contents{
 }
 
 #searchform_submit{
-	float: left;
+	float: right;
 }
 
 #blog-search h2.pagetitle{
@@ -2052,8 +2112,8 @@ select#cat{
 	width: 80%;
 	margin: 0 auto;
 	/*position: relative;
-	left: 50px;*/	
-	
+	left: 50px;*/
+
 }
 /*
 div.whats-tex-button{
@@ -2077,7 +2137,7 @@ a.whats-tex-button{
   	border-radius:5px;
   	box-shadow:1px 2px 2px rgba(0,0,0,0.3), 0px 1px 0px rgba(255,255,255,0.5) inset, 0px -1px 0px rgba(255,255,255,0.2) inset;
  }
-  
+
  a.whats-tex-button:hover{
  	background-image: -moz-linear-gradient(top, #03cdff, #cffeff);
 	background-image: -ms-linear-gradient(top, #03cdff, #cffeff);
@@ -2087,7 +2147,7 @@ a.whats-tex-button{
 	background-image: linear-gradient(top, #03cdff, #cffeff);
 	opacity: 0.7;
  }*/
- 
+
  /*************************************************************************
 新規登録、ログイン、ソーシャルログインボタンフォーム
 *************************************************************************/
@@ -2126,7 +2186,7 @@ a#entry_form{
 	font-size: 1.5em;
 	background: #FBA848;
 	padding:10px 8px 10px 8px;
-	
+
 }
 
 a#login_form{
@@ -2143,7 +2203,7 @@ a#detail_texchange{
 
 /**************************************
 			トピックアイテム
-***************************************/ 
+***************************************/
 
 div.page#topic-items{
 	background-color:#FFFF99;
@@ -2194,7 +2254,7 @@ h4#post-list-h4{
 
 .posttitle:hover{
 	color: #FBA848;
-}	
+}
 
 p.author_name{
 	display: none;
@@ -2224,7 +2284,7 @@ div.trade_status_notconfirmed,div.trade_status_confirmed{
 .entry img.wp-post-image {
  	border: 1px solid;
 	width: 100% !important;
-	height: 100% !important; 
+	height: 100% !important;
 }
 
 .posts-row {
@@ -2263,8 +2323,8 @@ div .post-content {
 
 .wantedlist_image{
 	height: 140px;
-	width: 94px; 
-	float: left; 
+	width: 94px;
+	float: left;
 	margin: 10px;
 	border: none;
 }
@@ -2370,7 +2430,7 @@ input#upload{
 	height: 50px;
 	font-size: 1.25em;
 	color: black;
-	display: block;	
+	display: block;
 }
 
 input#upload:hover{
@@ -2415,7 +2475,7 @@ input#submit{
 	height: 50px;
 	font-size: 1.25em;
 	color: black;
-	display: block;	
+	display: block;
 }
 
 input#submit:hover{
@@ -2520,7 +2580,7 @@ div a#logo_top img{
 	background-size: cover;
 	width: 100%;
 	height: 523px;
-	
+
 }
 
 #top_block{
@@ -2581,11 +2641,27 @@ div a#logo_top img{
 	width: 100%;
 }
 
-.todo-info{
-	float: left;
+/*todo-list系*/
+.todo-item{
+	width: 100%;
 }
 
-#todo-item a{
+.todo-date{
+	font-size: 10px;
+	float: left;
+	font-style: italic;
+	margin-top: 15px;
+}
+
+.todo-info{
+	font-size: 12px;
+	font-style: italic;
+	float: left;
+	width :100%;
+	border-bottom: 1px solid #ffa500;
+}
+
+.todo-item a{
 	font-size: 15px;
 	width: 100%;
 	display: block;
@@ -2593,8 +2669,38 @@ div a#logo_top img{
 	float: left;
 }
 
-.todo-info ul li{
-	float: left !important;
+.todo-info span{
+	display: table !important;
+}
+
+/* 検索ページ */
+.sub_categories {
+	display : none;
+}
+
+.sub_categories div{
+	padding : 5px 0 0 5px;
+	background-color: #ffd85f;
+	margin-bottom: 1px;
+	margin-left: 10px;
+}
+
+.sub_categories div a{
+	text-decoration: none;
+	display: block;
+	color : black;
+	font-size: 15px;
+}
+
+.main_categories{
+	width : 100%;
+	font-size: 18px;
+	color: white;
+	background-color: #FBA848;
+	border: 1px solid white;
+	height: 35px;
+	line-height: 35px;
+	padding-left: 10px;
 }
 
 }
@@ -2656,11 +2762,11 @@ input{
 }
 
 h1{
-	font-size: 1.5em;	
+	font-size: 1.5em;
 }
 
 h2{
-	font-size: 1.4em;	
+	font-size: 1.4em;
 }
 
 h3{
@@ -2693,7 +2799,7 @@ h4{
 
 
 h5{
-	font-size: 0.8em;	
+	font-size: 0.8em;
 }
 
 p{
@@ -2763,7 +2869,7 @@ h2.pagetitle{
 	padding: 4px 0;
 	width:auto;
 	color: black;
-	
+
 }
 h3.faq_heading{
 	font: normal 1.3em/1.4 "メイリオ", Meiryo,
@@ -2848,7 +2954,7 @@ input[type="button"]:hover{
 
 /*ヘッダー部分*/
 
-header{	
+header{
 	width: 100%;
 	background: white;
 	padding: 10px 0;
@@ -2889,8 +2995,8 @@ header a img#user_icon{
 }
 
 
-	
-	
+
+
 /*header #logo{
     font: bold italic 2em/1.5 MS P ゴシック;
     text-shadow: 3px 3px 2px rgba(0,0,0,0.5);
@@ -2903,8 +3009,8 @@ header a{
 	display: block;
 	padding-left: 10px;
 	margin: 5px;
-	background-color: transparent; 
-} 
+	background-color: transparent;
+}
 
 header a:hover{
 	color: white;
@@ -2951,7 +3057,7 @@ div#header_copy{
 div#must_checkbox{
 	/*position: relative;
 	top: 350px;*/
-	height: 80px;	
+	height: 80px;
 }
 
 /* ヘッダーフォーム */
@@ -2960,7 +3066,7 @@ div.header_form{
 	padding: 0 0 5px;
 	border-radius: 4px;
 	width: 100%;
-	margin: 0 auto;
+	margin: 0 0 30px 0;
 }
 
 form[name=login-form]{
@@ -2976,7 +3082,7 @@ form[name=login-form]{
 	clear: both;
 	/*border: solid 1px;*/
 	color: black;
-	
+
 	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
@@ -2992,8 +3098,8 @@ form #sidebar-wp-submit{
 	display: block;
 	margin: auto;
 }
-	
-	
+
+
 #sidebar-wp-submit{
 	font-size: 25px;
 	boder-radius: 10px;
@@ -3029,12 +3135,12 @@ form #sidebar-wp-submit{
 div.login_form_button button{
 	margin: auto;
 	width: 100%;
-	-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);  
-    -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);  
-    border: 1px solid rgba(0,0,0,0.4);  
-    background: rgba(0,0,0,0.6);  
-    color: #fff;  
-    text-shadow: 0 -1px 1px #aaa, -1px 0 1px #aaa, 1px 0 1px #000;  
+	-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.6), inset 0 1px rgba(255,255,255,0.2), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.2), inset 0 -15px 30px rgba(0,0,0,0.6);
+    border: 1px solid rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    text-shadow: 0 -1px 1px #aaa, -1px 0 1px #aaa, 1px 0 1px #000;
 }
 
 div.login_form_button button:hover{
@@ -3053,7 +3159,7 @@ div.login_form_button button:hover{
 div.grobal_nav_div_sp{
 	display: none !important;
 }
-	
+
 div.grobal_nav_div{
 	width: 100%;
 	margin: auto;
@@ -3084,8 +3190,8 @@ div.grobal_nav_div  li{
 	font-weight: bold;
 	margin-right: 2px;
 	width:auto;
-	display: block;	
-	
+	display: block;
+
 }
 
 div.grobal_nav_div  li:first-child{
@@ -3093,7 +3199,7 @@ div.grobal_nav_div  li:first-child{
 }
 
 /*div.grobal_nav_div  li:last-child{
-	border: none;		
+	border: none;
 }*/
 
 
@@ -3136,11 +3242,11 @@ div.grobal_nav_div  li a:hover{
 	margin: 0 auto;
 	padding: 5px 8px 5px 8px;
 	border-radius: 10px;
-	width:90%;
+	width:100%;
 	height: 27px;
 	clear: both;
-	
-	
+
+
 	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
@@ -3150,7 +3256,7 @@ div.grobal_nav_div  li a:hover{
 	margin: auto;
 	padding: 5px;
 	display: block;
-	width: 120px;
+	width: 70px;
 	height: 25px;
 	font: bold 1.1em/1.0 "メイリオ", Meiryo,
 		"ヒラギノ角ゴ Pro W3",
@@ -3231,7 +3337,7 @@ select#cat{
 	display: block;
 	width: 80%;
 	margin: 0 auto;
-	
+
 }
 /*
 div.whats-tex-button{
@@ -3257,7 +3363,7 @@ a.whats-tex-button{
   	border-radius:5px;
   	box-shadow:1px 2px 2px rgba(0,0,0,0.3), 0px 1px 0px rgba(255,255,255,0.5) inset, 0px -1px 0px rgba(255,255,255,0.2) inset;
  }
-  
+
  a.whats-tex-button:hover{
  	background-image: -moz-linear-gradient(top, #03cdff, #cffeff);
 	background-image: -ms-linear-gradient(top, #03cdff, #cffeff);
@@ -3336,7 +3442,7 @@ a#detail_texchange{
 
 /*
 			トピックアイテム
-*/ 
+*/
 div.page#topic-items{
 	background-color:#FFFF99;
 }
@@ -3391,7 +3497,7 @@ div.page#blog-latest{
 
 .posttitle :hover{
 	color: orange;
-}	
+}
 
 div.entry span.posttitle{
 	font-size: 1.4em !important;
@@ -3463,8 +3569,8 @@ div .post-content {
 }
 
 .wantedlist_image{
-	height: 30%; 
-	float: left; 
+	height: 30%;
+	float: left;
 	margin: 10px;
 	border: none;
 }
@@ -3569,7 +3675,7 @@ input#upload{
 	height: 50px;
 	font-size: 1.25em;
 	color: black;
-	display: block;	
+	display: block;
 }
 
 input#upload:hover{
@@ -3596,7 +3702,7 @@ input#submit{
 	height: 50px;
 	font-size: 1.25em;
 	color: black;
-	display: block;	
+	display: block;
 }
 
 input#submit:hover{
@@ -3784,11 +3890,26 @@ div a#logo_top img{
 	text-align: center;
 }
 
-.todo-info{
-	float: left;
+.todo-item{
+	width: 100%;
 }
 
-#todo-item a{
+.todo-date{
+	font-size: 12px;
+	float: left;
+	font-style: italic;
+	margin-top: 15px;
+}
+
+.todo-info{
+	font-size: 14px;
+	font-style: italic;
+	float: left;
+	width :100%;
+	border-bottom: 1px solid #ffa500;
+}
+
+.todo-item a{
 	font-size: 15px;
 	width: 100%;
 	display: block;
@@ -3796,8 +3917,39 @@ div a#logo_top img{
 	float: left;
 }
 
-.todo-info ul li{
-	float: left !important;
+.todo-info span{
+	display: table !important;
+}
+
+/* 検索ページ */
+.sub_categories {
+	display : none;
+}
+
+.sub_categories div{
+	padding : 5px 0 0 5px;
+	background-color: #ffd85f;
+	margin-bottom: 1px;
+	margin-left: 10px;
+}
+
+.sub_categories div a{
+	text-decoration: none;
+	display: block;
+	color : black;
+	font-size: 16px;
+}
+
+.main_categories{
+	width : 100%;
+	font-size: 18px;
+	color: white;
+	background-color: #FBA848;
+	border: 1px solid #DDD;
+	cursor: pointer;
+	height: 25px;
+	line-height: 25px;
+	padding-left: 10px;
 }
 
 }
@@ -3891,6 +4043,106 @@ div.grobal_nav_div_sp ul li a span {
 }
 }
 
+.phone_sub_title{
+	width: 100%;
+	margin:0 auto;
+	padding-top: 10px;
+	margin: 0 auto;
+	font-size: 200%;
+	text-align: center;
+}
+.BlackBoard{
+	width: 100%;
+}
+.BlackBoard div{
+	line-height: 1.5;
+	color: white;
+}
+.BlackBoard .title{
+	position: absolute;
+	margin: 3% auto;
+	padding-right: 1em;
+	text-align: center; 
+	color: #FF9900
+}
+.BlackBoard .box1{
+	position: absolute;
+	top: 23%;
+	left: 5%;
+	padding-right: 1em;
+}
+.BlackBoard .box2{
+	position: absolute;
+	bottom: 8%;
+	left: 20%;
+}
+.BlackBoard .box2 a{
+	/*color:#ebff00;*/
+	text-decoration:none;
+}
+.yellow{
+	color: yellow;
+}
+.comment{
+		padding: 5px;
+}
+@media screen and (max-width:480px){
+	.BlackBoard .title{
+		font-size: 140%;
+	}
+	.BlackBoard div{
+		font-size: 80%;
+		width: 100%;
+	}
+	.comment{
+		font-size: 70%;
+		width: 65%;
+		display: inline-block;
+	}
+	.pink{
+		color: hotpink;
+		font-size: 130%;
+	}
+	.phone_sub_title{
+		font-size: 150%;
+	}
+}
+@media screen and (min-width:480px){
+	.BlackBoard .title{
+		font-size: 180%;
+	}
+	.BlackBoard div{
+		font-size: 100%;
+		width: 100%;
+	}
+	.comment{
+		font-size: 90%;
+		width: 65%;
+		display: inline-block;
+	}
+	.pink{
+		color: hotpink;
+		font-size: 110%;
+	}
+}
+@media screen and (min-width : 768px){
+	.BlackBoard .title{
+		font-size: 360%;
+	}
+	.BlackBoard div{
+		font-size: 180%;
+		width: 100%;
+	}
+	.comment{
+		font-size: 90%;
+		width: 65%;
+		display: inline-block;
+	}
+	.pink{
+		color: hotpink;
+		font-size: 110%;
+	}
+}
 .entry img.wp-post-image {
 	border: 1px solid;
 	border-radius: 20%;
@@ -3928,3 +4180,46 @@ div.post-content div.entry p{
 	padding:10px;
 	clear:both;
 }
+<<<<<<< HEAD
+div.index_profile{
+	margin:10px;
+	padding:10px 0px;
+}
+.first-todo-header{
+	font-size: 18px;
+}
+.first-todo-title{
+	font-size: 23px;
+}
+.todo-tutorial{
+	width: 100%;
+	float: left;
+	color: white;
+	background-color: #00CC66;
+	font-size: 14px;
+}
+.todo-tutorial-comment{
+	width: 100%;
+	float: left;
+	font-size: 13px;
+}
+
+.event_button{
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 5px 20px;
+		background: -moz-linear-gradient(top,#0099CC 0%,#006699);
+		background: -webkit-gradient(linear, left top, left bottom, from(#0099CC), to(#006699));
+		border: 2px solid #FFF;
+		color: #FFF;
+		border-radius: 4px;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
+		-moz-box-shadow: 1px 1px 1px rgba(000,000,000,0.3);
+		-webkit-box-shadow: 1px 1px 1px rgba(000,000,000,0.3);
+		text-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+}
+.event_button:link {color:#fff;}
+.event_button:visited {color:#fff;}
+.event_button:hover {color:#0ff;}
+.event_button:active {color:#0ff;}

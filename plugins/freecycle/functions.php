@@ -77,7 +77,7 @@ function on_comment_post() {
 		messages_new_message(array(
 		'sender_id' => bp_loggedin_user_id(),
 		'recipients' => $post->post_author,
-		'subject' => '【自動送信】あなたの商品にコメントがつきました',
+		'subject' => 'あなたの商品にコメントがつきました',
 		'content' => '以下の商品にコメントが来ています！'
 						. '<a href="' . get_permalink($post->ID) . '">' . $post->post_title . '</a>'
 		));
@@ -198,44 +198,54 @@ function giveme(){
 	global $table_prefix;
 	$postID = $_POST['postID'];
 	$userID = $_POST['userID'];
-	
+	$msg = "くださいリクエストが送信されました。";
+
 	// 商品IDまたはユーザIDが空の場合は処理をしない
 	if($postID == "" || $userID == ""){
 		die;
 	}
-	
+
 	// ログインユーザとくださいするユーザが異なる場合は処理をしない
 	if(get_current_user_id() != $userID){
 		die;
 	}
-	
+
 	//ください済みの場合は処理をしない
 	if(doneGiveme($postID, $userID)){
 		echo "既にくださいされています。";
 		die;
 	}
-	
+
 	//ポイントが0の場合は処理をしない
 	if(get_usable_point($userID) == 0){
 		die;
 	}
-	
+
 	//出品者の場合処理をしない
 	$author = get_post_author($postID);
 	if($userID == $author){
 		die;
 	}
-	
+
 	//取引相手がすでに決まっている場合は処理をしない
 	if(isConfirm($postID)){
 		die;
 	}
-	
+
 	//todoリストに追加
 	if(!isGiveme($postID)){
 		add_todo_confirm_bidder($postID);
 	}
 
+	//if first giveme
+	if(!get_user_meta($userID, "is_first_giveme")){
+		$todo_row = get_todo_row($userID, TODOID_GIVEME);
+		$todoID = $todo_row->todo_id;
+		change_todo_status_finished($todoID);
+
+		update_user_meta($userID, "is_first_giveme", 1);
+		$msg = '<div class="first-todo-header">チュートリアル</div><div class="first-todo-title">【くださいリクエストをしてみよう】</div> <div class="first-todo-complete">Complete!!</div>';
+	}
 	// ログインユーザ→投稿記事に対して「ください」リクエストした記録をつける
 	// 既にデータが登録済の場合は何もしません
 	$wpdb->query($wpdb->prepare("
@@ -243,8 +253,8 @@ function giveme(){
 		(update_timestamp, user_id, post_id)
 		VALUES (current_timestamp, %d, %d)",
 		$userID, $postID));
-	
-	
+
+
 	// 記事の状態を「ください」に変更(現在の状態が無い場合はレコードを登録)
 	$current_state = $wpdb->get_var($wpdb->prepare("SELECT giveme_flg FROM " . $table_prefix . "fmt_giveme_state where post_id = %d", $postID));
 	if(!is_null($current_state)){
@@ -265,7 +275,7 @@ function giveme(){
 	// 仮払ポイントを1p増
 	add_temp_used_points($userID, 1);
 
-	echo "くださいリクエストが送信されました。";
+	echo $msg;
 
 
 	die;
@@ -283,7 +293,7 @@ function cancelGiveme(){
 	// 商品IDまたはユーザIDが空の場合は処理をしない
 	if($postID == "" || $userID == ""){
 		die;
-	}	
+	}
 
 	// ログインユーザとキャンセルするユーザが異なる場合は処理をしない
 	if(get_current_user_id() != $userID){
@@ -380,7 +390,7 @@ function confirmGiveme(){
 		messages_new_message(array(
 			'sender_id' => bp_loggedin_user_id(),
 			'recipients' => $uncheckedUserID,
-			'subject' => '【自動送信】くださいリクエストが承認されませんでした',
+			'subject' => 'くださいリクエストが承認されませんでした',
 			'content' => $content_unchecked
 			));
 
@@ -402,7 +412,7 @@ function confirmGiveme(){
 	$message_ID = messages_new_message(array(
 					'sender_id' => bp_loggedin_user_id(),
 					'recipients' => $userID,
-					'subject' => '【自動送信】くださいリクエストが承認されました！',
+					'subject' => 'くださいリクエストが承認されました！',
 					'content' => $content
 					));
 
@@ -621,7 +631,7 @@ function cancel_trade_from_exhibitor(){
    messages_new_message(array(
 		'sender_id' => bp_loggedin_user_id(),
 		'recipients' => $bidder_id,
-		'subject' => '【自動送信】取引がキャンセルされました',
+		'subject' => '取引がキャンセルされました',
 		'content' => '以下の商品の取引がキャンセルされました。' .
 						'<a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a>'
 	));
@@ -638,7 +648,7 @@ function cancel_trade_from_bidder(){
 	messages_new_message(array(
 		'sender_id' => bp_loggedin_user_id(),
 		'recipients' => get_post($post_id)->post_author,
-		'subject' => '【自動送信】取引がキャンセルされました',
+		'subject' => '取引がキャンセルされました',
 		'content' => '以下の商品の取引がキャンセルされました。' .
 						'<a href="' . get_permalink($post_id) . '">' . get_the_title($post_id) . '</a>'
 	));
@@ -729,6 +739,7 @@ function validate_filename($filename){
 function new_entry(){
 	global $bp;
 	$exhibitor_id = $_POST['exhibitor_id'];
+	$msg = "";
 
 	$insert_id = exhibit(array(
 		'exhibitor_id' => $exhibitor_id,
@@ -744,6 +755,7 @@ function new_entry(){
 		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
 		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$exhibitor_id), true);
 		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$exhibitor_id), true);
+		$msg = "商品を出品しました。";
 
 		if($_POST['wanted_item_id']){
 			add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);
@@ -753,35 +765,19 @@ function new_entry(){
 		global $post;
 		upload_itempictures($insert_id);
 
-		// if($_FILES){
-		// 	$files = $_FILES['upload_attachment'];
-		// 	// reverse sort
-		// 	arsort($files['name'],SORT_NUMERIC);
-		// 	arsort($files['type'],SORT_NUMERIC);
-		// 	arsort($files['tmp_name'],SORT_NUMERIC);
-		// 	arsort($files['error'],SORT_NUMERIC);
-		// 	arsort($files['size'],SORT_NUMERIC);
-		//
-		// 	foreach ($files['name'] as $key => $value){
-		// 		if ($files['name'][$key]){
-		// 			$file = array(
-		// 				'name'     => validate_filename($files['name'][$key]),
-		// 				'type'     => $files['type'][$key],
-		// 				'tmp_name' => $files['tmp_name'][$key],
-		// 				'error'    => $files['error'][$key],
-		// 				'size'     => $files['size'][$key]
-		// 			);
-		// 			$_FILES = array("upload_attachment" => $file);
-		// 			foreach ($_FILES as $file => $array){
-		// 				$newupload = insert_attachment($file,$insert_id);
-		// 			}
-		// 		}
-		// 	}
-		// }
+		// if first new entry
+		if(!get_user_meta($exhibitor_id, "is_first_new_entry")){
+			$todo_row = get_todo_row($exhibitor_id, TODOID_NEWENTRY);
+			$todoID = $todo_row->todo_id;
+			change_todo_status_finished($todoID);
+			update_user_meta($exhibitor_id, "is_first_new_entry", 1);
+			$msg = '<div class="first-todo-header">チュートリアル</div><div class="first-todo-title">【新規出品をしてみよう】</div><div class="first-todo-complete">Complete!!</div>';
+		}
 	}else{
 	// failure
 	}
-	echo "";
+	
+	echo $msg;
 	die;
 }
 
@@ -860,8 +856,8 @@ function exhibit_from_app(){
 
 	$insert_id = exhibit(array(
 		'exhibitor_id' => $current_user_id,
-		'item_name' => $item_name, 
-		'image_url' => $image_url, 
+		'item_name' => $item_name,
+		'image_url' => $image_url,
 		'department' => xprofile_get_field_data('学部', $current_user_id),
 		'course' => xprofile_get_field_data('学科', $current_user_id),
 		'item_category' => $category
@@ -1436,7 +1432,7 @@ function on_user_deleted($user_id){
 
 	// ポイントのテーブルを削除
 	$wpdb->query($wpdb->prepare("
-		DELETE FROM " . $table_prefix . "fmt_points 
+		DELETE FROM " . $table_prefix . "fmt_points
 		WHERE user_id = %d",
 		$user_id));
 }
@@ -2629,6 +2625,31 @@ function add_todo_evaluate_exhibitor($item_ID){
 	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">出品者を評価してください</a>');
 }
 
+
+/**
+ * 新規出品を行うTODO※初回ログイン時
+ */
+function add_todo_first_new_entry($user_ID){
+	$user = get_user_by("id", $user_ID);
+	$user_login_name = $user->user_login;
+	add_todo($user_ID, TODOID_NEWENTRY, '<div class="todo-tutorial">チュートリアル</div><a href = "' . home_url() .'/members/'. $user_login_name .'/new_entry/#mypage">新規出品をしてみよう</a><div class="todo-tutorial-comment">テクスチェンジではあなたの本を求めている人がたくさんいます！！<br>不要な本を出品してみましょう！</div>' );
+}
+
+/**
+ * くださいリクエストを行うTODO※初回ログイン時
+ */
+function add_todo_first_giveme($user_ID){
+	add_todo($user_ID, TODOID_GIVEME, '<div class="todo-tutorial">チュートリアル</div><a href = "' . home_url() . '/search-page/">本を検索して、「くださいリクエスト」をしてみよう</a><div class="todo-tutorial-comment">あなたの欲しい本を探してみましょう！<br>見つかったら「ください」してみましょう！！</div>');
+}
+
+/**
+ * 大学・学部入力TODO※初回ログイン時
+ */
+function add_todo_first_category($user_ID){
+	$user = get_user_by("id", $user_ID);
+	$user_login_name = $user->user_login;
+	add_todo($user_ID, TODOID_CATEGORY, '<div class="todo-tutorial">チュートリアル</div><a href = "' . home_url() .'/members/' . $user_login_name .'/profile/edit/group/1/#mypage" >大学・学部名の入力をお願いします</a>');
+}
 /**
  * POSTされた、ユーザーIDと商品ＩＤをもつTODOを消す関数
  */
@@ -2697,6 +2718,24 @@ function get_user_id_by_todo_id($todo_ID){
 	$user_ID = $wpdb->get_var($wpdb->prepare($sql, $todo_ID));
 	return $user_ID;
 }
+
+/**
+*	チュートリアル(TODO)完了定数
+*/
+define("TODOID_NEWENTRY" , -1);
+define("TODOID_CATEGORY", -2);
+define("TODOID_GIVEME", -3);
+
+function first_set_profile_category(){
+	global $user_ID;
+	debug_log("profile change");
+	$todo_row = get_todo_row($user_ID, TODOID_CATEGORY);
+	$todoID = $todo_row->todo_id;
+	change_todo_status_finished($todoID);
+
+	update_user_meta($user_ID, "is_first_set_profile_category", 1);
+}
+add_action('xprofile_updated_profile', 'first_set_profile_category');
 
 /**
  * ajaxにて商品編集を行う関数
@@ -2877,9 +2916,9 @@ function get_item_image_urls_on_toppage(){
 	$rand_items = new WP_Query($args);
 	$image_urls = array();
 	foreach ($rand_items->posts as $rand_item) {
-		$arg = array( 
+		$arg = array(
 		    'post_parent' => $rand_item->ID,
-		    'post_type'   => 'attachment', 
+		    'post_type'   => 'attachment',
 		    'post_mime_type' => 'image',
 		    'numberposts' => 1
 		);
@@ -2897,3 +2936,27 @@ function get_item_image_urls_on_toppage(){
 
 add_action('wp_ajax_nopriv_top_images', 'get_item_image_urls_on_toppage');
 add_action('wp_ajax_top_images', 'get_item_image_urls_on_toppage');
+
+function show_search_page(){
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."search-page.php";
+}
+
+add_shortcode('show_search_page', 'show_search_page');
+
+/**
+ * メッセージ一覧のページネーション部分。
+ * buddypress translationsのバグ？のため日本語表示がうまくできないのでオーバーライドしています。
+ */
+function fc_messages_pagination_count() {
+	global $messages_template;
+
+	$start_num = intval( ( $messages_template->pag_page - 1 ) * $messages_template->pag_num ) + 1;
+	$from_num = bp_core_number_format( $start_num );
+	$to_num = bp_core_number_format( ( $start_num + ( $messages_template->pag_num - 1 ) > $messages_template->total_thread_count ) ? $messages_template->total_thread_count : $start_num + ( $messages_template->pag_num - 1 ) );
+	$total = bp_core_number_format( $messages_template->total_thread_count );
+
+	// オーバーライド部分
+	echo sprintf( _n( '%1$s件目から%2$s件目まで表示(%3$s件中)', '%1$s件目から%2$s件目まで表示(%3$s件中)', $total, 'buddypress' ), $from_num, $to_num, number_format_i18n( $total ) ); ?><?php
+}
+
+

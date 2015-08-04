@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss>
+<obj>
+<!-- 
+ 	<item>
+		<to>～さんから
+		<torank>✩の数*
+		<title>本のタイトル*
+		<text>メッセージ
+		<from>～さんへ
+		<fromrank>✩の数*
+		*はnullにすると消えます。
+-->
+	
+<!-- 利用者の声より(http://texchg.com/review) -->
+	<item>
+		<to>テクチェ運営</to>
+		<torank>null</torank>
+		<title>null</title>
+		<text>編入生の私は、人よりも授業を多く履習しているため、その分、必要となる教科書が多いので、TexChangeのおかげで、とっても節約になりました！</text>
+		<from>Kさま</from>
+		<fromrank>0</fromrank>
+	</item>
+	<item>
+		<to>テクチェ運営</to>
+		<torank>null</torank>
+		<title>null</title>
+		<text>自分に必要のないもの→他人に必要なものというコンセプトがすごく面白いと思いました。「世界一分かりやすいコンサルティング」「チーズはどこへ消えた」の両方とも読みこみたいとおもいます。</text>
+		<from>土屋公宏</from>
+		<fromrank>0</fromrank>
+	</item>
+<!--  -->
+	<item>
+		<to>あつし</to>
+		<torank>2</torank>
+		<title>もし高校野球の女子マネージャー...</title>
+		<text>貰ってから1日で読み終わりました。最後の結末に泣きました。とても良い本でした(;_;)</text>
+		<from>まき</from>
+		<fromrank>1</fromrank>
+	</item>
+	<item>
+		<to>あかね</to>
+		<torank>1</torank>
+		<title>C言語-入門編-</title>
+		<text>プログラミングの勉強をしたいと思って、貰いました。重要な所に線が引っ張ってあったので助かります。</text>
+		<from>ねこ</from>
+		<fromrank>4</fromrank>
+	</item>
+	<!-- データベースより -->
+	<item>
+		<to>A</to>
+		<torank>null</torank>
+		<title>null</title>
+		<text>頂く側のこちらの都合に合せて頂き本当にありがとうございました。本の状態も良好でした。</text>
+		<from>H</from>
+		<fromrank>null</fromrank>
+	</item>
+	<item>
+		<to>K</to>
+		<torank>null</torank>
+		<title>null</title>
+		<text>本の状態がよく、受け渡しもスムーズにできたので快くありがとうと言えました。</text>
+		<from>K</from>
+		<fromrank>null</fromrank>
+	</item>
+	<item>
+		<to>O</to>
+		<torank>null</torank>
+		<title>null</title>
+		<text>とても良かったです。対応にも好感が持てました。ありがとうございます。</text>
+		<from>H</from>
+		<fromrank>null</fromrank>
+	</item>
+	<item>
+		<to>E</to>
+		<torank>null</torank>
+		<title>null</title>
+		<text>丁寧かつ迅速な対応とこちらの都合に合せてくれる柔軟さがとても助かりました。</text>
+		<from>T</from>
+		<fromrank>null</fromrank>
+	</item>
+	<item>
+		<to>E</to>
+		<torank>null</torank>
+		<title>null</title>
+		<text>買わなくてはいけないところだったので、とても助かりました。</text>
+		<from>O</from>
+		<fromrank>null</fromrank>
+	</item>
+<!-- 運営より -->
+	<item>
+		<to>みなさん</to>
+		<torank>null</torank>
+		<title>null</title>
+		<text>ぜひとも、出品もよろしくお願いします！</text>
+		<from>テクチェ運営</from>
+		<fromrank>null</fromrank>
+	</item>
+</obj>
+</rss>
