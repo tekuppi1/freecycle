@@ -88,6 +88,7 @@ MESSAGE_SECTION;
 				<?php
 				$last_post_id = $giveme->post_id;
 				?>
+		<input type = "button" value = "プロフィール確認"  onclick ="   linkToOthersprofile();" >
 		<select id='postID_<?php echo $last_post_id;?>'>
 		<?php
 				echo '<option label="-- 選択 --" value="" >';
@@ -95,8 +96,6 @@ MESSAGE_SECTION;
 				echo '<option name="sendto_user_' . $giveme->post_id . '" value="' . $giveme->user_id . '">' . $giveme->display_name . '</option>';
 		}
 		?>
-		<input type = "button" value = "プロフィール確認"  onclick ="   linkToOthersprofile(<?php echo $giveme->display_name; ?>);  " >
-
 
 
 		<?php if($last_post_id != ""){ ?>

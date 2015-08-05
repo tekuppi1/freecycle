@@ -2898,10 +2898,4 @@ function get_item_image_urls_on_toppage(){
 add_action('wp_ajax_nopriv_top_images', 'get_item_image_urls_on_toppage');
 add_action('wp_ajax_top_images', 'get_item_image_urls_on_toppage');
 
-// 
-function linkothers(){
-	$value = $_POST['value'];
-	wp_redirect('http://127.0.0.1/wp/members/$valule');
-	exit;
-}
-add_action('wp_ajax_othersprofile', 'linkothers');
+//

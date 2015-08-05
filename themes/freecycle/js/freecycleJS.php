@@ -363,17 +363,14 @@ function displayImages(){
 	});
 }
 
-function linkToOthersprofile(othersname){
-     jQuery.ajax({
-	     type: "POST",
-	     url: '<?php echo admin_url('admin-ajax.php'); ?> ',
-	     data: {
-		     "action" : "othersprofile",
-		     "value" : othersname
-	     },
-	     success function(msg){
+function linkToOthersprofile(){
+			var othersname = jQuery("#postID_<?php echo $last_post_id;?> option:selected").text();
+			if(othersname == ""){
 
-	     }
-     });
+			}else{
+				location.href = "<?php echo home_url(); ?>"+"/members/"+othersname;
+			}
 }
+
+
 </script>
