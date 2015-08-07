@@ -4263,3 +4263,10 @@ div#pagenations div.pagenation-char span{
    color:#33333;
    background-color: #FBA848;
 }
+div#all-item{
+	margin-top: 20px;
+	font-size: 15px;
+}
+div#all-item a{
+	text-decoration: none;
+}
