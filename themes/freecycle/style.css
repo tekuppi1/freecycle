@@ -4062,7 +4062,7 @@ div.grobal_nav_div_sp ul li a span {
 	position: absolute;
 	margin: 3% auto;
 	padding-right: 1em;
-	text-align: center; 
+	text-align: center;
 	color: #FF9900
 }
 .BlackBoard .box1{
@@ -4223,3 +4223,36 @@ div.index_profile{
 .event_button:visited {color:#fff;}
 .event_button:hover {color:#0ff;}
 .event_button:active {color:#0ff;}
+
+div#pagenations{
+   margin-top:10px;
+}
+div#pagenations div.pagenation{
+   margin: 6px 2px;
+   float:left;
+}
+div#pagenations div.pagenation-char{
+   margin: 6px 2px;
+   float:left;
+}
+div#pagenations div.pagenation span{
+   font-size: 12px;
+   padding:6px 14px;
+   text-decoration: none;
+   color:#0066CC;
+   background-color: #FBA848;
+}
+div#pagenations .pagenation a{
+   font-size: 12px;
+   padding:6px 14px;
+   text-decoration: none;
+   color:white;
+   background-color: #FBA848;
+}
+div#pagenations div.pagenation-char a{
+   font-size: 12px;
+   padding:6px 10px;
+   text-decoration: none;
+   color:white;
+   background-color: #FBA848;
+}

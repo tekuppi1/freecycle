@@ -1,6 +1,10 @@
 <?php
     $url = explode("/",$_SERVER["REQUEST_URI"]);
-    $page = end($url);
+    if(is_numeric(end($url))){
+        $page = end($url);
+    }else{
+        $page = 1;
+    }
     $arg = array(
         'posts_per_page' => 10,
         'paged' => $page
@@ -56,6 +60,44 @@
 				<!-- <?php get_search_form(); ?> -->
 
 			<?php endif; ?>
+            <?php  pagenation($page, $items_query->max_num_pages); ?>
 		</div><!-- page ? -->
 
 		<?php do_action( 'bp_after_blog_home' ); ?>
+
+<?php
+    function pagenation($page, $max_num_pages){
+        if($max_num_pages - $page < 3){
+            $range = $max_num_pages;
+        }else{
+            $range = $page + 3;
+        }
+        if(empty($page)){
+            $page = 1;
+        }
+
+        $back = true;
+        //ページネーション表示
+        echo '<div id="pagenations">';
+        for($i = $page - 1; $i <= $range; $i++){
+            //１ページ目の時
+            if($i == 0){
+                $back = false;
+                continue;
+            }
+            if($back == true){
+                echo '<div class="pagenation-char" ><a href="'.home_url().'/all-item/'.$i.'">< Back</a></div>';
+                $back = false;
+            }
+            if($page == $i){
+                echo '<div class="pagenation" ><span>'.$i.'</span></div>';
+            }else{
+                echo '<div class="pagenation" ><a href="'.home_url().'/all-item/'.$i.'">'.$i.'</a></div>';
+            }
+        }
+        $next = $page + 1;
+        echo '<div class="pagenation-char" ><a href="'.home_url().'/all-item/'.$next.'">Next > </a></div>';
+        echo '<div class="pagenation-char" ><a href="'.home_url().'/all-item/'.$max_num_pages.'">Last >></a></div>';
+        echo "</div>";
+    }
+ ?>
