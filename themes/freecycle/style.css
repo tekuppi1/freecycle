@@ -4239,7 +4239,7 @@ div#pagenations div.pagenation span{
    font-size: 12px;
    padding:6px 14px;
    text-decoration: none;
-   color:#0066CC;
+   color:#33333;
    background-color: #FBA848;
 }
 div#pagenations .pagenation a{
@@ -4254,5 +4254,12 @@ div#pagenations div.pagenation-char a{
    padding:6px 10px;
    text-decoration: none;
    color:white;
+   background-color: #FBA848;
+}
+div#pagenations div.pagenation-char span{
+   font-size: 12px;
+   padding:6px 10px;
+   text-decoration: none;
+   color:#33333;
    background-color: #FBA848;
 }

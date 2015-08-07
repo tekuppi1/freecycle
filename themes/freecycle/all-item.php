@@ -49,6 +49,9 @@
 					<?php do_action( 'bp_after_blog_post' ); ?>
 				<?php $count++; ?>
 				<?php endwhile; ?>
+        <?php if($is_closed == false): ?>
+        <hr class="hr-posts-row">
+        <?php endif; ?>
 
 				<?php bp_dtheme_content_nav( 'nav-below' ); ?>
 
@@ -85,6 +88,7 @@
                 $back = false;
                 continue;
             }
+            //Back
             if($back == true){
                 echo '<div class="pagenation-char" ><a href="'.home_url().'/all-item/'.$i.'">< Back</a></div>';
                 $back = false;
@@ -95,9 +99,16 @@
                 echo '<div class="pagenation" ><a href="'.home_url().'/all-item/'.$i.'">'.$i.'</a></div>';
             }
         }
+
+        //Next & Last
         $next = $page + 1;
-        echo '<div class="pagenation-char" ><a href="'.home_url().'/all-item/'.$next.'">Next > </a></div>';
-        echo '<div class="pagenation-char" ><a href="'.home_url().'/all-item/'.$max_num_pages.'">Last >></a></div>';
+        if($next <= $max_num_pages){
+            echo '<div class="pagenation-char" ><a href="'.home_url().'/all-item/'.$next.'">Next ></a></div>';
+            echo '<div class="pagenation-char" ><a href="'.home_url().'/all-item/'.$max_num_pages.'">Last >></a></div>';
+        }else{
+            echo '<div class="pagenation-char" ><span>Next ></span></div>';
+            echo '<div class="pagenation-char" ><span>Last >></span></div>';
+        }
         echo "</div>";
     }
  ?>
