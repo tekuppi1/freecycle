@@ -4213,3 +4213,14 @@ div.index_profile{
 .event_button:visited {color:#fff;}
 .event_button:hover {color:#0ff;}
 .event_button:active {color:#0ff;}
+
+.owl-page{
+	visibility: hidden;
+}
+.image_box{
+	background-repeat: repeat-x;
+	background-size:contain;
+}
+.phone_sub_title{
+	color: white;
+}

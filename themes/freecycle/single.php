@@ -450,7 +450,6 @@
 	</script>
 
 
-
 	<div id="content">
 		<div class="padder">
 
@@ -621,8 +620,22 @@
 									$i++;
 								}
 							?>
-
 						</div>
+						<?php
+							$image_src = wp_get_attachment_image_src($attachment->ID,array(100,150));
+							global $wpdb;
+							$sql = "SELECT b.update_time FROM $wpdb->book_link b WHERE b.post_id = $post->ID";
+							$rows = $wpdb->get_results($sql);
+							if(!$rows){
+								$sql = "INSERT INTO $wpdb->book_link(post_id,image_src,update_time)VALUES('$post->ID','$image_src[0]',now())";
+								$rows = $wpdb->query($sql);
+							} else { 
+								$sql = "UPDATE $wpdb->book_link SET update_time = now() WHERE post_id = $post->ID";
+								$rows = $wpdb->query($sql);
+							}
+ 							$sql = "SELECT b.post_id, b.image_src,b.update_time FROM $wpdb->book_link b";
+							$rows = $wpdb->get_results($sql);
+						?>
 
 							<p class="postmetadata"><?php the_tags( '<span class="tags">' . __( 'Tags: ', 'buddypress' ), ', ', '</span>' ); ?>&nbsp;</p>
 
