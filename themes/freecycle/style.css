@@ -985,7 +985,7 @@ h3#latest-topic{
 }
 .entry {
 	width: 100%;
-	height: 120px;
+	height: 150px;
 	position: relative;
 }
 
@@ -1001,8 +1001,8 @@ h3#latest-topic{
 }
 
 .posts-row .post {
-	width: 45%;
-	height: 120px;
+	width: 150px;
+	height: 150px;
 	margin: 0px 0px 10px 0px;
 	padding: 5px 5px 5px 5px;
 	float: left;
@@ -4160,21 +4160,11 @@ div.grobal_nav_div_sp ul li a span {
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
 }
+
 div.post-content div.entry img{
-	width: 30%;
-	height: auto;
+	width: 100%;
+	height: 100%;
 	float: left;
-}
-div.post-content div.entry img.attachment-thumbnail:hover{
-	opacity: 0.6;
-	transition: 0.2s;
-}
-div.post-content div.entry img.attachment-full{
-	width: 80%;
-	height: auto;
-	float: left;
-	padding: 5%;
-	border: 2px solid;
 }
 div.post-content div.entry p{
 	padding:10px;
