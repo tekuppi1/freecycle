@@ -2959,7 +2959,7 @@ function fc_messages_pagination_count() {
 	echo sprintf( _n( '%1$s件目から%2$s件目まで表示(%3$s件中)', '%1$s件目から%2$s件目まで表示(%3$s件中)', $total, 'buddypress' ), $from_num, $to_num, number_format_i18n( $total ) ); ?><?php
 }
 
-function show_all_item(){
-	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."all-item.php";
+function show_all_items(){
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."all-items.php";
 }
-add_shortcode('show_all_item', 'show_all_item');
+add_shortcode('show_all_items', 'show_all_items');

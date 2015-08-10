@@ -57,10 +57,8 @@
 
 			<?php else : ?>
 
-				<h2 class="center"><?php _e( 'Not Found', 'buddypress' ); ?></h2>
-				<p class="center"><?php _e( 'Sorry, but you are looking for something that isn\'t here.', 'buddypress' ); ?></p>
-
-				<!-- <?php get_search_form(); ?> -->
+				<h2 class="center"><?php _e( '商品が見つかりませんでした', 'buddypress' ); ?></h2>
+				<p class="center"><?php _e( 'お探しの商品は見つかりませんでした。', 'buddypress' ); ?></p>
 
 			<?php endif; ?>
             <?php  pagenation($page, $items_query->max_num_pages); ?>
@@ -70,6 +68,10 @@
 
 <?php
     function pagenation($page, $max_num_pages){
+        if($page > $max_num_pages){
+            return;
+        }
+        //ページレンジ設定
         if($max_num_pages - $page < 3){
             $range = $max_num_pages;
         }else{
@@ -80,6 +82,7 @@
         }
 
         $back = true;
+        $top = "";
         //ページネーション表示
         echo '<div id="pagenations">';
         for($i = $page - 1; $i <= $range; $i++){
@@ -90,25 +93,34 @@
             }
             //Back
             if($back == true){
-                echo '<div class="pagenation-char" ><a href="'.home_url().'/all-item/'.$i.'">< Back</a></div>';
+                echo_pagenation_link("pagenation-char", "all-items", 1, "<< Top");
+                echo_pagenation_link("pagenation-char", "all-items", $i, "<");
                 $back = false;
             }
             if($page == $i){
-                echo '<div class="pagenation" ><span>'.$i.'</span></div>';
+                echo_pagenation_span("pagenation", $i);
             }else{
-                echo '<div class="pagenation" ><a href="'.home_url().'/all-item/'.$i.'">'.$i.'</a></div>';
+                echo_pagenation_link("pagenation", "all-items", $i, $i);
             }
         }
 
         //Next & Last
         $next = $page + 1;
         if($next <= $max_num_pages){
-            echo '<div class="pagenation-char" ><a href="'.home_url().'/all-item/'.$next.'">Next ></a></div>';
-            echo '<div class="pagenation-char" ><a href="'.home_url().'/all-item/'.$max_num_pages.'">Last >></a></div>';
+            echo_pagenation_link("pagenation-char", "all-items", $next, ">");
+            echo_pagenation_link("pagenation-char", "all-items", $max_num_pages, "Last >>");
         }else{
-            echo '<div class="pagenation-char" ><span>Next ></span></div>';
-            echo '<div class="pagenation-char" ><span>Last >></span></div>';
+            echo_pagenation_span("pagenation-char", ">");
+            echo_pagenation_span("pagenation-char", "Last >>");
         }
         echo "</div>";
+    }
+
+    function echo_pagenation_link($html_class, $link, $page, $value){
+        echo '<div class="'. $html_class .'" ><a href="'.home_url().'/' . $link . '/'.$page.'">'. $value .'</a></div>';
+    }
+
+    function echo_pagenation_span($html_class, $value){
+        echo '<div class="' . $html_class . '" ><span>' . $value .'</span></div>';
     }
  ?>
