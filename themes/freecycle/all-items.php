@@ -13,6 +13,8 @@
 ?>
 <h4 id="post-list-h4">商品一覧(<?php echo $items_query->found_posts;?>件)
 		</h4>
+        <?php get_search_form(); ?>
+
 		<div class="page" id="blog-latest" role="main">
 
 			<?php if ( $items_query->have_posts() ) : ?>
