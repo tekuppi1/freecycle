@@ -338,69 +338,96 @@ function onChangeMainCategory(formID){
 }
 
 function displayImages(){
-/*
 	jQuery.ajax({
 		type: "POST",
-		url: '<!--?php echo admin_url('admin-ajax.php'); ?-->',
+		url: '<?php echo admin_url('admin-ajax.php'); ?>',
 		data: {
 			"action" : "top_images",
 			"req" : "top_page"	// 一覧ページには取引相手確定済の記事を表示しない。
 		},
 		success: function(data){
 			var image_urls = JSON.parse(data);
+			var id = image_urls[0];
+			var url = image_urls[1];
 			var elm;
-			for(var i = 0; i < image_urls.length; i++){
-				/*ここにリンクを(8/7)
+			for(var i = 0; i < id.length; i++){
 				elm = 
-					"<a href='' class='top_sumnail'>\
-					<img src='" + image_urls[i] +  "' class='attachment-100x150 wp-post-image' height='100' width='100'></a>";
-				jQuery("#top_image").append(elm);
+					"<a href='<?php echo home_url(); ?>/archives/"+id[i]+"' class='image_link'><img src='"+url[i]+"' height='100'></a>";
+	
+				jQuery("#top_image1").append(elm);
 			}
-			jQuery("#top_image").owlCarousel({
-				autoPlay: 2500,
-				items : 5,
-				itemsTablet : [768, 3],
-				itemsMobile : [481, 3],
-				rewindSpeed : 1000,
-			});
-		}
-	});*/
-<?php
-	global $wpdb;
-	$sql = "SELECT b.post_id, b.image_src,b.update_time FROM $wpdb->book_link b ORDER BY b.update_time DESC";
-	$rows = $wpdb->get_results($sql);
-	if($rows){
-   foreach ($rows as $row) {
-			echo ("
-				elm = \"<a href='".home_url()."/archives/$row->post_id' class='top_sumnail'>\
-				<img src='$row->image_src' class='attachment-100x150 wp-post-image' height='100' width='100'></a>\" \n"
-			);
-			echo ("jQuery('#top_image').append(elm); \n");
-		 	echo ("jQuery('#top_image2').append(elm); \n");
-	 }
+		jQuery("#top_image1").owlCarousel({
+			items : 6,
+			itemsDesktop : [1199,6],
+			itemsDesktopSmall : [980,5],
+			itemsTablet : [768, 4],
+			itemsMobile : [481, 3],
+			autoPlay: 3700,
+			slideSpeed : 1000,
+			paginationSpeed : 1000,
+			rewindSpeed : 1000,
+		});
 	}
-?>
-	jQuery("#top_image").owlCarousel({
-		items : 5,
-		itemsDesktop : [1199,5],
-    itemsDesktopSmall : [980,5],
-		itemsTablet : [768, 3],
-		itemsMobile : [481, 3],
-		autoPlay: 800,
-		slideSpeed : 1000,
-		paginationSpeed : 1000,
-		rewindSpeed : 1500,
 	});
+	jQuery.ajax({
+		type: "POST",
+		url: '<?php echo admin_url('admin-ajax.php'); ?>',
+		data: {
+			"action" : "top_images",
+			"req" : "top_page"	// 一覧ページには取引相手確定済の記事を表示しない。
+		},
+		success: function(data){
+			var image_urls = JSON.parse(data);
+			var id = image_urls[0];
+			var url = image_urls[1];
+			var elm;
+			for(var i = 0; i < id.length; i++){
+				elm = 
+					"<a href='<?php echo home_url(); ?>/archives/"+id[i]+"' class='image_link'><img src='"+url[i]+"' height='100'></a>";
+				jQuery("#top_image2").append(elm);
+			}
 		jQuery("#top_image2").owlCarousel({
-		items : 5,
-		itemsDesktop : [1199,5],
-    itemsDesktopSmall : [980,5],
-		itemsTablet : [768, 2],
-		itemsMobile : [481, 3],
-		autoPlay: 600,
-		slideSpeed : 1000,
-		paginationSpeed : 1000,
-		rewindSpeed : 1500,
+			items : 6,
+			itemsDesktop : [1199,6],
+			itemsDesktopSmall : [980,5],
+			itemsTablet : [768, 4],
+			itemsMobile : [481, 3],
+			autoPlay: 3600,
+			slideSpeed : 1000,
+			paginationSpeed : 1000,
+			rewindSpeed : 1000,
+		});
+		}
+	});
+	jQuery.ajax({
+		type: "POST",
+		url: '<?php echo admin_url('admin-ajax.php'); ?>',
+		data: {
+			"action" : "top_images",
+			"req" : "top_page"	// 一覧ページには取引相手確定済の記事を表示しない。
+		},
+		success: function(data){
+			var image_urls = JSON.parse(data);
+			var id = image_urls[0];
+			var url = image_urls[1];
+			var elm;
+			for(var i = 0; i < id.length; i++){
+				elm = 
+					"<a href='<?php echo home_url(); ?>/archives/"+id[i]+"' class='image_link'><img src='"+url[i]+"' height='100'></a>";
+				jQuery("#top_image3").append(elm);
+			}
+		jQuery("#top_image3").owlCarousel({
+			items : 6,
+			itemsDesktop : [1199,6],
+			itemsDesktopSmall : [980,5],
+			itemsTablet : [768, 4],
+			itemsMobile : [481, 3],
+			autoPlay: 3500,
+			slideSpeed : 1000,
+			paginationSpeed : 1000,
+			rewindSpeed : 1000,
+		});
+		}
 	});
 }
 

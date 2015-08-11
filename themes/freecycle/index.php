@@ -98,10 +98,13 @@
 	<hr class="hr-posts-row">
 	<div class="phone_sub_title" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_t.bmp'); ?>); ">こんな本が出品されてます！</div>
 	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
-	<div id="top_image"></div>
+	<div id="top_image1"></div>
 	</div>
 	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
 	<div id="top_image2"></div>
+	</div>
+	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
+	<div id="top_image3"></div>
 	</div>
 	
 	<div class="index_profile">

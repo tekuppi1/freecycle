@@ -4216,15 +4216,25 @@ div.index_profile{
 
 .owl-page{
 	visibility: hidden;
+	height: 0px;
 }
 .image_box{
 	background-repeat: repeat-x;
 	background-size:contain;
 }
-#top_image{
-
-}
 .phone_sub_title{
 	color: white;
 	padding:10px;
 }
+.image_link{
+	max-height: 100px;
+	max-width:  100px;
+	height: auto;
+	width: auto;
+}
+.image_link img{
+	box-shadow: 10px 10px 10px -5px rgba(0, 0, 0, 0.8);
+}
+#top_image1{padding: 10px;}
+#top_image2{padding: 10px;}
+#top_image3{padding: 10px;}
