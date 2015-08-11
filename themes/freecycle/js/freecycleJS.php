@@ -376,6 +376,7 @@ function displayImages(){
 				<img src='$row->image_src' class='attachment-100x150 wp-post-image' height='100' width='100'></a>\" \n"
 			);
 			echo ("jQuery('#top_image').append(elm); \n");
+		 	echo ("jQuery('#top_image2').append(elm); \n");
 	 }
 	}
 ?>
@@ -386,6 +387,17 @@ function displayImages(){
 		itemsTablet : [768, 3],
 		itemsMobile : [481, 3],
 		autoPlay: 800,
+		slideSpeed : 1000,
+		paginationSpeed : 1000,
+		rewindSpeed : 1500,
+	});
+		jQuery("#top_image2").owlCarousel({
+		items : 5,
+		itemsDesktop : [1199,5],
+    itemsDesktopSmall : [980,5],
+		itemsTablet : [768, 2],
+		itemsMobile : [481, 3],
+		autoPlay: 600,
 		slideSpeed : 1000,
 		paginationSpeed : 1000,
 		rewindSpeed : 1500,

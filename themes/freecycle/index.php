@@ -96,9 +96,12 @@
 	</div><!-- #icon -->
 
 	<hr class="hr-posts-row">
-	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack.bmp'); ?>); ">
-	<div class="phone_sub_title">こんな本が出品されてます！</div>
+	<div class="phone_sub_title" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_t.bmp'); ?>); ">こんな本が出品されてます！</div>
+	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
 	<div id="top_image"></div>
+	</div>
+	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
+	<div id="top_image2"></div>
 	</div>
 	
 	<div class="index_profile">

@@ -4221,6 +4221,10 @@ div.index_profile{
 	background-repeat: repeat-x;
 	background-size:contain;
 }
+#top_image{
+
+}
 .phone_sub_title{
 	color: white;
+	padding:10px;
 }
