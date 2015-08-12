@@ -4213,3 +4213,20 @@ div.index_profile{
 .event_button:visited {color:#fff;}
 .event_button:hover {color:#0ff;}
 .event_button:active {color:#0ff;}
+
+.zoom_image{
+	width: 30%;
+	height: auto;
+	float: left;
+}
+.zoom_image:hover{
+	opacity: 0.6;
+	transition: 0.2s;
+}
+.zoom_in_image{
+	width: 80%;
+	height: auto;
+ 	float: left;
+	padding: 5%;
+	border: 2px solid;
+}
