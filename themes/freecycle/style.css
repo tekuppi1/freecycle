@@ -4224,49 +4224,49 @@ div.index_profile{
 .event_button:hover {color:#0ff;}
 .event_button:active {color:#0ff;}
 
+/*ページネーション系*/
 div#pagenations{
-   margin-top:10px;
+   margin: 10px auto 0 auto;
+   width:99%;
 }
-div#pagenations div.pagenation{
-   margin: 6px 2px;
-   float:left;
+div.pagenation div{
+	width: 32%;
+	line-height: 2;
+	margin-top: 10px;
 }
-div#pagenations div.pagenation-char{
-   margin: 6px 2px;
-   float:left;
-}
-div#pagenations div.pagenation span{
-   font-size: 12px;
-   padding:6px 14px;
-   text-decoration: none;
-   color:#33333;
-   background-color: #FBA848;
-}
-div#pagenations .pagenation a{
-   font-size: 12px;
-   padding:6px 14px;
-   text-decoration: none;
-   color:white;
-   background-color: #FBA848;
-}
-div#pagenations div.pagenation-char a{
-   font-size: 12px;
-   padding:6px 10px;
-   text-decoration: none;
-   color:white;
-   background-color: #FBA848;
-}
-div#pagenations div.pagenation-char span{
-   font-size: 12px;
-   padding:6px 10px;
-   text-decoration: none;
-   color:#33333;
-   background-color: #FBA848;
-}
-div#all-item{
-	margin-top: 20px;
-	font-size: 15px;
-}
-div#all-item a{
+div.pagenation div a{
+	display: block;
+	text-align: center;
 	text-decoration: none;
+	color:white;
+    background-color: #FBA848;
+}
+div.pagenation div span{
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color:#33333;
+    background-color: #FBA848;
+}
+div.pagenation_back{
+	float:left;
+}
+div.pagenation_next{
+	float:right;
+}
+#pagenation_number{
+	width:32%;
+	margin: 15px 0 0 7px;
+}
+.pagenation_top{
+	width: 90%;
+	margin: 0 auto;
+	line-height: 2;
+}
+.pagenation_top a{
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color:white;
+    background-color: #FBA848;
 }

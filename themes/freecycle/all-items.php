@@ -71,51 +71,42 @@
 <?php
     function pagenation($page, $max_num_pages){
         if($page > $max_num_pages){
+            echo_pagenation_link("pagenation_top", "all-items", 1, "商品トップへ");
             return;
         }
-        //ページレンジ設定
-        if($max_num_pages - $page < 3){
-            $range = $max_num_pages;
-        }else{
-            $range = $page + 3;
-        }
-        if(empty($page)){
-            $page = 1;
-        }
 
-        $back = true;
-        $top = "";
-        //ページネーション表示
-        echo '<div id="pagenations">';
-        for($i = $page - 1; $i <= $range; $i++){
-            //１ページ目の時
-            if($i == 0){
-                $back = false;
-                continue;
-            }
-            //Back
-            if($back == true){
-                echo_pagenation_link("pagenation-char", "all-items", 1, "<< Top");
-                echo_pagenation_link("pagenation-char", "all-items", $i, "<");
-                $back = false;
-            }
-            if($page == $i){
-                echo_pagenation_span("pagenation", $i);
-            }else{
-                echo_pagenation_link("pagenation", "all-items", $i, $i);
-            }
-        }
-
-        //Next & Last
         $next = $page + 1;
-        if($next <= $max_num_pages){
-            echo_pagenation_link("pagenation-char", "all-items", $next, ">");
-            echo_pagenation_link("pagenation-char", "all-items", $max_num_pages, "Last >>");
+        $back = $page - 1;
+        echo '<div class="pagenation">';
+        //back
+        if($page == 1){
+            echo_pagenation_span("pagenation_back", "< 戻る");
         }else{
-            echo_pagenation_span("pagenation-char", ">");
-            echo_pagenation_span("pagenation-char", "Last >>");
+            echo_pagenation_link("pagenation_back", "all-items", $back, "< 戻る");
         }
-        echo "</div>";
+
+        //pages
+        pagenation_select_number($page, $max_num_pages);
+
+        //next
+        if($page == $max_num_pages){
+            echo_pagenation_span("pagenation_next", "次へ >");
+        }else{
+            echo_pagenation_link("pagenation_next", "all-items", $next, "次へ >");
+        }
+        echo '</div>';
+    }
+
+    function pagenation_select_number($page, $max_num_pages){
+        echo '<select id="pagenation_number" onChange="top.location.href=value" >';
+        for($i = 1; $i <= $max_num_pages; $i++){
+            if($i == $page){
+                echo '<option value="'.home_url().'/all-items/'. $i .'" selected>'.$i.'</option>';
+            }else{
+                echo '<option value="'.home_url().'/all-items/'. $i .'">'.$i.'</option>';
+            }
+        }
+        echo '</select>';
     }
 
     function echo_pagenation_link($html_class, $link, $page, $value){
