@@ -23,7 +23,7 @@
 			update_user_meta($user_ID, 'is_twitter_popup_displayed', 1);
 			include_once "js/fcTwitterDialog.js.php";
 		}
-		// if first login 
+		// if first login
 		if(!get_user_meta($user_ID, "is_first_login_page_displayed")){
 			add_todo_first_new_entry($user_ID);
 			add_todo_first_giveme($user_ID);
@@ -119,6 +119,7 @@
 					　		<li class="grobal_nav"><a href="http://texchg.com/how-to-use">How to use</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/review">利用者の声</a></li>
 							<?php } ?>
+							<li class="grobal_nav" ><a href="<?php echo home_url(); ?>/all-items/1" >商品一覧</a></li>
 							<li class="grobal_nav" ><a href="<?php echo home_url(); ?>/search-page" >検索</a></li>
 					　		<li class="grobal_nav"><a href="<?php echo home_url(); ?>/howtouse">ヘルプ</a></li>
 					</ul>
@@ -194,6 +195,7 @@
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/how-to-use">How to use</a></li>
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/review">利用者の声</a></li>
 							<?php } ?>
+					　		<li class="grobal_nav blue_navi" ><a href="<?php echo home_url(); ?>/all-items/1" >商品一覧</a></li>
 					　		<li class="grobal_nav blue_navi" ><a href="<?php echo home_url(); ?>/search-page" >検索</a></li>
 					　		<li class="grobal_nav blue_navi"><a href="<?php echo home_url(); ?>/howtouse">ヘルプ</a></li>
 					</ul>
@@ -204,7 +206,7 @@
 		<?php if(is_archive() || is_search() || is_single()){ ?>
 	<div id="search-23" class="widget widget_search"><!-- 検索バー -->
 				<form role="search" method="get" id="searchform_main" action="<?php echo home_url(); ?>">
-						<div id="searchform_text"> 
+						<div id="searchform_text">
 					  			<input type="text" id="searchtext" name="s" id="s" value="<?php if(isset($_GET['s'])){ echo $_GET['s']; } ?>"/>
 					  	</div>
 							<div id="searchform_pulldown">
@@ -215,12 +217,11 @@
 							</div>
 							<div id="searchform_submit">
 								<input type="submit" id="searchsubmit" value="検索" />
-							</div> 
-						</div> 
+							</div>
+						</div>
 				</form>
 	</div><!-- 検索バー -->
 </div><!-- header_form -->
 		<!--<hr class="line-search"> -->
 		<?php } ?>
 		<div id="container">
-
