@@ -60,6 +60,7 @@ MESSAGE_SECTION;
 
 	<?php
 	echo "</select>";
+	echo '<input type = "button" value = "プロフィール確認"  onclick ="   linkToOthersprofile('.$last_post_id.');" >';
 	echo_map_section($last_post_id);
 	echo_message_section($last_post_id);
 	?>
@@ -88,12 +89,11 @@ MESSAGE_SECTION;
 				<?php
 				$last_post_id = $giveme->post_id;
 				?>
-		<input type = "button" value = "プロフィール確認"  onclick ="   linkToOthersprofile();" >
 		<select id='postID_<?php echo $last_post_id;?>'>
 		<?php
 				echo '<option label="-- 選択 --" value="" >';
 			}
-				echo '<option name="sendto_user_' . $giveme->post_id . '" value="' . $giveme->user_id . '">' . $giveme->display_name . '</option>';
+				echo '<option name="sendto_user_' . $giveme->post_id . '" value="' . $giveme->user_id . '" data-nicename = "'.$giveme->user_nicename.'">' . $giveme->display_name . '</option>';
 		}
 		?>
 
@@ -102,6 +102,7 @@ MESSAGE_SECTION;
 	</div> <!-- 取引相手 -->
 	<?php
 	echo "</select>";
+	echo '<input type = "button" value = "プロフィール確認"  onclick ="   linkToOthersprofile('.$last_post_id.');" >';
 	echo_map_section($last_post_id);
 	echo_message_section($last_post_id);
 	?>

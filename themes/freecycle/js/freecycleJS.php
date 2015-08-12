@@ -363,14 +363,14 @@ function displayImages(){
 	});
 }
 
-function linkToOthersprofile(){
-			var othersname = jQuery("#postID_<?php echo $last_post_id;?> option:selected").text();
-			if(othersname == ""){
-
-			}else{
-				location.href = "<?php echo home_url(); ?>"+"/members/"+othersname;
+function linkToOthersprofile(itemID){
+			var displayname = jQuery("#postID_"+itemID+"  option:selected").text();
+			var nicename = jQuery("#postID_"+itemID+" option:selected").data('nicename');
+			if(displayname != ""){
+				location.href = "<?php echo home_url(); ?>"+"/members/"+nicename;
 			}
 }
+
 
 
 </script>
