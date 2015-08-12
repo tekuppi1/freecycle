@@ -52,6 +52,7 @@
 				<?php $count++; ?>
 				<?php endwhile; ?>
         <?php if($is_closed == false): ?>
+                </div><!-- posts-row -->
         <hr class="hr-posts-row">
         <?php endif; ?>
 
