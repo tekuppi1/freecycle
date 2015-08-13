@@ -450,7 +450,6 @@
 	</script>
 
 
-
 	<div id="content">
 		<div class="padder">
 
@@ -621,7 +620,6 @@
 									$i++;
 								}
 							?>
-
 						</div>
 
 							<p class="postmetadata"><?php the_tags( '<span class="tags">' . __( 'Tags: ', 'buddypress' ), ', ', '</span>' ); ?>&nbsp;</p>

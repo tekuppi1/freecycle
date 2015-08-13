@@ -4170,7 +4170,7 @@ div.post-content div.entry p{
 	padding:10px;
 	clear:both;
 }
-<<<<<<< HEAD
+
 div.index_profile{
 	margin:10px;
 	padding:10px 0px;
@@ -4213,6 +4213,31 @@ div.index_profile{
 .event_button:visited {color:#fff;}
 .event_button:hover {color:#0ff;}
 .event_button:active {color:#0ff;}
+
+.owl-page{
+	visibility: hidden;
+	height: 0px;
+}
+.image_box{
+	background-repeat: repeat-x;
+	background-size:contain;
+}
+.phone_sub_title{
+	color: white;
+	padding:10px;
+}
+.image_link{
+	max-height: 100px;
+	max-width:  100px;
+	height: auto;
+	width: auto;
+}
+.image_link img{
+	box-shadow: 10px 10px 10px -5px rgba(0, 0, 0, 0.8);
+}
+#top_image1{padding: 10px;}
+#top_image2{padding: 10px;}
+#top_image3{padding: 10px;}
 
 .zoom_image{
 	width: 30%;

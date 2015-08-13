@@ -2914,6 +2914,7 @@ function get_item_image_urls_on_toppage(){
 			'post_type' => 'post'
 		);
 	$rand_items = new WP_Query($args);
+	$image_id = array();
 	$image_urls = array();
 	foreach ($rand_items->posts as $rand_item) {
 		$arg = array(
@@ -2927,10 +2928,12 @@ function get_item_image_urls_on_toppage(){
 		//$childがとれたかどうかチェック
 		$image = array_shift($child);
 		if(!empty($image) && !empty($image->guid)){
+			array_push($image_id,$rand_item->ID);
 			array_push($image_urls, $image->guid);
 		}
 	}
-	echo json_encode($image_urls);
+	$image_info = array($image_id, $image_urls);
+	echo json_encode($image_info);
 	die;
 }
 
