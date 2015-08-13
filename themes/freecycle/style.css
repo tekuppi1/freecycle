@@ -4170,7 +4170,7 @@ div.post-content div.entry p{
 	padding:10px;
 	clear:both;
 }
-<<<<<<< HEAD
+
 div.index_profile{
 	margin:10px;
 	padding:10px 0px;
@@ -4238,3 +4238,20 @@ div.index_profile{
 #top_image1{padding: 10px;}
 #top_image2{padding: 10px;}
 #top_image3{padding: 10px;}
+
+.zoom_image{
+	width: 30%;
+	height: auto;
+	float: left;
+}
+.zoom_image:hover{
+	opacity: 0.6;
+	transition: 0.2s;
+}
+.zoom_in_image{
+	width: 80%;
+	height: auto;
+ 	float: left;
+	padding: 5%;
+	border: 2px solid;
+}

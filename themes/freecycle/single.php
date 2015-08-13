@@ -598,11 +598,11 @@
 							if($attachments){
 								$i=0;
 								foreach($attachments as $attachment){
-									echo "<span onclick=zoom(";
+									echo "<div class='zoom_image'  onclick=zoom(";
 									echo $i;
 									echo ")>";
 									echo wp_get_attachment_image( $attachment->ID,'thumbnail');
-									echo "</span>";
+									echo "</div>";
                 	$i++;
 								}
 							}
@@ -612,7 +612,7 @@
 							<?php
 								$i=0;
 								foreach($attachments as $attachment){
-									echo "<div id=zoom";
+									echo "<div class='zoom_in_image' id=zoom";
 									echo $i;
 									echo " style='display: none;'>";
 									echo wp_get_attachment_image( $attachment->ID,'full');
