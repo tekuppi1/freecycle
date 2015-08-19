@@ -96,17 +96,23 @@
 	</div><!-- #icon -->
 
 	<hr class="hr-posts-row">
-
-	<div id="top_image_box">
-	<div class="phone_sub_title">こんな本が出品されてます！</div>
-	<div id="top_image"></div>
+	<div class="phone_sub_title" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_t.bmp'); ?>); ">こんな本が出品されてます！</div>
+	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
+	<div id="top_image1"></div>
+	</div>
+	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
+	<div id="top_image2"></div>
+	</div>
+	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
+	<div id="top_image3"></div>
+	</div>
 	
 	<div class="index_profile">
 		<?php bp_loggedin_user_avatar( 'type=thumb&width=30&height=30' ); ?>
 		<span class="user-nicename"><?php echo bp_core_get_userlink( bp_loggedin_user_id() ); ?></span>
 			<a class="button logout" href="<?php echo wp_logout_url( wp_guess_url() ); ?>"><?php _e( 'Log Out', 'buddypress' ); ?></a>
 	</div>
-	</div>
+	
 
 <!-- SlideImageScript -->
 		<!-- jQuery library -->
@@ -120,8 +126,8 @@
 		jQuery(function() {
 			$('#top_slide').bxSlider({
 				auto:true,
-				pause: 6500,
-				speed: 700,
+				pause: 6000,
+				speed: 1000,
 				captions: true,
 				infiniteLoop: false,
 				hideControlOnEnd: true,

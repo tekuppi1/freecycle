@@ -985,7 +985,7 @@ h3#latest-topic{
 }
 .entry {
 	width: 100%;
-	height: 120px;
+	height: 150px;
 	position: relative;
 }
 
@@ -1001,8 +1001,8 @@ h3#latest-topic{
 }
 
 .posts-row .post {
-	width: 45%;
-	height: 120px;
+	width: 150px;
+	height: 150px;
 	margin: 0px 0px 10px 0px;
 	padding: 5px 5px 5px 5px;
 	float: left;
@@ -4160,27 +4160,17 @@ div.grobal_nav_div_sp ul li a span {
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
 }
+
 div.post-content div.entry img{
-	width: 30%;
-	height: auto;
+	width: 100%;
+	height: 100%;
 	float: left;
-}
-div.post-content div.entry img.attachment-thumbnail:hover{
-	opacity: 0.6;
-	transition: 0.2s;
-}
-div.post-content div.entry img.attachment-full{
-	width: 80%;
-	height: auto;
-	float: left;
-	padding: 5%;
-	border: 2px solid;
 }
 div.post-content div.entry p{
 	padding:10px;
 	clear:both;
 }
-<<<<<<< HEAD
+
 div.index_profile{
 	margin:10px;
 	padding:10px 0px;
@@ -4269,4 +4259,47 @@ div.pagenation_next{
 	text-decoration: none;
 	color:white;
     background-color: #FBA848;
+}
+
+
+.owl-page{
+	visibility: hidden;
+	height: 0px;
+}
+.image_box{
+	background-repeat: repeat-x;
+	background-size:contain;
+}
+.phone_sub_title{
+	color: white;
+	padding:10px;
+}
+.image_link{
+	max-height: 100px;
+	max-width:  100px;
+	height: auto;
+	width: auto;
+}
+.image_link img{
+	box-shadow: 10px 10px 10px -5px rgba(0, 0, 0, 0.8);
+}
+#top_image1{padding: 10px;}
+#top_image2{padding: 10px;}
+#top_image3{padding: 10px;}
+
+.zoom_image{
+	width: 30%;
+	height: auto;
+	float: left;
+}
+.zoom_image:hover{
+	opacity: 0.6;
+	transition: 0.2s;
+}
+.zoom_in_image{
+	width: 80%;
+	height: auto;
+ 	float: left;
+	padding: 5%;
+	border: 2px solid;
 }
