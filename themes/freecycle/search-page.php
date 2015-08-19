@@ -35,6 +35,8 @@
    }
 ?>
 
+<div id="all-item"><a href="<?php echo home_url();?>/all-item/1">>> 商品一覧はこちら</a></div>
+
 <script>
    function switchDisplay(id){
       jQuery("#sub_category_" + id).toggle(800);
