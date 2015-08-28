@@ -299,7 +299,7 @@ function topSlide(){
 	});
 }
 
-var categories = jQuery.parseJSON('<?php echo get_freecycle_category_JSON(array('hide_empty' => 0)); ?>');
+//var categories = jQuery.parseJSON('<?php echo get_freecycle_category_JSON(array('hide_empty' => 0)); ?>');
 
 /**
 *	formID
