@@ -4296,7 +4296,7 @@ div.grobal_nav_div_sp ul li a span {
 	position: absolute;
 	margin: 3% auto;
 	padding-right: 1em;
-	text-align: center; 
+	text-align: center;
 	color: #FF9900
 }
 .BlackBoard .box1{
@@ -4447,6 +4447,54 @@ div.index_profile{
 .event_button:visited {color:#fff;}
 .event_button:hover {color:#0ff;}
 .event_button:active {color:#0ff;}
+
+/*ページネーション系*/
+div#pagenations{
+   margin: 10px auto 0 auto;
+   width:99%;
+}
+div.pagenation div{
+	width: 32%;
+	line-height: 2;
+	margin-top: 10px;
+}
+div.pagenation div a{
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color:white;
+    background-color: #FBA848;
+}
+div.pagenation div span{
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color:#33333;
+    background-color: #FBA848;
+}
+div.pagenation_back{
+	float:left;
+}
+div.pagenation_next{
+	float:right;
+}
+#pagenation_number{
+	width:32%;
+	margin: 15px 0 0 7px;
+}
+.pagenation_top{
+	width: 90%;
+	margin: 0 auto;
+	line-height: 2;
+}
+.pagenation_top a{
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color:white;
+    background-color: #FBA848;
+}
+
 
 .owl-page{
 	visibility: hidden;
