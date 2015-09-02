@@ -299,7 +299,7 @@ function topSlide(){
 	});
 }
 
-var categories = jQuery.parseJSON('<?php echo get_freecycle_category_JSON(array('hide_empty' => 0)); ?>');
+//var categories = jQuery.parseJSON('<?php echo get_freecycle_category_JSON(array('hide_empty' => 0)); ?>');
 
 /**
 *	formID
@@ -338,6 +338,37 @@ function onChangeMainCategory(formID){
 }
 
 function displayImages(){
+		jQuery.ajax({
+		type: "POST",
+		url: '<?php echo admin_url('admin-ajax.php'); ?>',
+		data: {
+			"action" : "top_images",
+			"req" : "top_page"	// 一覧ページには取引相手確定済の記事を表示しない。
+		},
+		success: function(data){
+			var image_urls = JSON.parse(data);
+			var id = image_urls[0];
+			var url = image_urls[1];
+			var elm;
+			for(var i = 0; i < id.length; i++){
+				elm = 
+					"<a href='<?php echo home_url(); ?>/archives/"+id[i]+"' class='image_link'><img src='"+url[i]+"' height='100'></a>";
+	
+				jQuery("#top_image").append(elm);
+			}
+		jQuery("#top_image").owlCarousel({
+			items : 6,
+			itemsDesktop : [1199,6],
+			itemsDesktopSmall : [980,5],
+			itemsTablet : [768, 4],
+			itemsMobile : [481, 3],
+			autoPlay: 3700,
+			slideSpeed : 1000,
+			paginationSpeed : 1000,
+			rewindSpeed : 1000,
+		});
+	}
+	});
 	jQuery.ajax({
 		type: "POST",
 		url: '<?php echo admin_url('admin-ajax.php'); ?>',
