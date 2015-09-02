@@ -859,9 +859,9 @@ a#detail_texchange{
 }
 	
 .app_banner{
-	margin-top: 20px;
+	margin-top: 10px;
 	width: 100%;
-	height: 40px;
+	height: 35px;
 	text-align: center;
 }
 .app_banner img{
@@ -2272,9 +2272,9 @@ a#detail_texchange{
 }
 	
 .app_banner{
-	margin-top: 20px;
+	margin-top: 10px;
 	width: 100%;
-	height: 40px;
+	height: 35px;
 	text-align: center;
 }
 .app_banner img{
@@ -3597,9 +3597,9 @@ a#detail_texchange{
 }
 
 .app_banner{
-	margin-top: 20px;
+	margin-top: 5px;
 	width: 80%;
-	height: 40px;
+	height: 35px;
 	text-align: center;
 }
 .app_banner img{
@@ -4038,7 +4038,7 @@ div a#logo_top img{
 }
 
 #top_block_login{
-	top: 10%;
+	top: 2em;
 }
 
 #top_block_login p{
@@ -4268,7 +4268,7 @@ div.grobal_nav_div_sp ul li a span {
 }
 
 #top_block_login{
-	top: 15%;
+	/*top: 10%;*/
 }
 
 #top_block_login p{
