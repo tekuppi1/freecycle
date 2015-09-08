@@ -1,10 +1,11 @@
 <?php
+
 function echo_map_section($last_post_id){
 	global $user_ID;
 	$map_indexes = get_trade_map_indexes();
 	$mylocation = get_user_meta($user_ID, "default_trade_location", true);
 echo <<<MAP_SECTION
-	<span class="label">取引場所:</span>
+	<span class="labels">2.取引場所を選ぶ</span></br>
 MAP_SECTION;
 	if(!$mylocation){
 		echo "<p>標準取引場所を設定すると、取引場所を選択する手間が省けます。<a href='".
@@ -36,9 +37,9 @@ function echo_message_section($last_post_id){
 	$uri = get_stylesheet_directory_uri();
 	echo <<<MESSAGE_SECTION
 	</p>
-						<span class="label">メッセージ : </span>例 今週は水曜から金曜の午後に名古屋大学にいるので、大学周辺でよければその時間に渡せます！ご都合いかがですか？</p>
+						<span class="labels">3.メッセージを書く</span></br>例 今週は水曜から金曜の午後に名古屋大学にいるので、大学周辺でよければその時間に渡せます！ご都合いかがですか？</p>
 						<textarea id="message_$last_post_id" name="message_$last_post_id" class="trade_message" rows=3 cols=30></textarea></br>
-						<input type="button" value="確定" onClick="callOnConfirmGiveme($last_post_id)">
+						<input type="button" class="decision" value="取引内容を確定する" onClick="callOnConfirmGiveme($last_post_id)">
 					</div><!-- #post_(id) -->
 				</div>
 MESSAGE_SECTION;
@@ -50,7 +51,7 @@ MESSAGE_SECTION;
 	くださいリクエストがきている商品はありません。
 	<?php }?>
 	<?php
-		$givemes = get_giveme_from_others_list();
+		$givemes = get_giveme_from_others_list("post_id,insert_timestamp");
 		$last_post_id = "";
 		foreach($givemes as $giveme){
 			$post = get_post($giveme->post_id);
@@ -59,8 +60,9 @@ MESSAGE_SECTION;
 	?>
 
 	<?php
-	echo "</select>";
-	echo '<input type = "button" value = "プロフィール確認"  onclick ="   linkToOthersprofile('.$last_post_id.');" >';
+	echo "</select></br>";
+	echo '<input type="button" class="profilebutton" id="profile_'.$last_post_id.'" value="↑プロフィール確認" onclick="linkToOthersProfile('.$last_post_id.');" disabled="disabled"></br>';
+	echo '上のボタンを押すと、選ぼうとしている取引相手のプロフィールを、確認することができます。</br>';
 	echo_map_section($last_post_id);
 	echo_message_section($last_post_id);
 	?>
@@ -85,15 +87,24 @@ MESSAGE_SECTION;
 							</div>
 						</div><!-- post-content -->
 					</div><!-- post名 -->
-		<span class="label">取引相手:</span>
-				<?php
-				$last_post_id = $giveme->post_id;
-				?>
-		<select id='postID_<?php echo $last_post_id;?>'>
+				
+		<span class="labels">1.取引相手を選ぶ</span></br>
+
 		<?php
-				echo '<option label="-- 選択 --" value="" >';
+			$last_post_id = $giveme->post_id;
+
+		?>
+		<select id='postID_<?php echo $last_post_id;?>' onchange="switchProfileButtonDisabled(<?php echo $last_post_id; ?>);">
+		<?php
+				echo '<option label=" -- 取引相手(くださいされた日) -- " value="" data-nicename="">';
 			}
-				echo '<option name="sendto_user_' . $giveme->post_id . '" value="' . $giveme->user_id . '" data-nicename = "'.$giveme->user_nicename.'">' . $giveme->display_name . '</option>';
+				echo '<option name="sendto_user_' . $giveme->post_id . '" value="' . $giveme->user_id . '" data-nicename = "'.$giveme->user_nicename.'">';
+				if (mb_strlen($giveme->display_name) > 10) {
+					echo mb_substr($giveme->display_name,0,10).'...';
+				}else{
+					echo $giveme->display_name;
+				}
+				echo '('.date('Y/n/j',strtotime($giveme->insert_timestamp)).')</option>';
 		}
 		?>
 
@@ -101,8 +112,9 @@ MESSAGE_SECTION;
 		<?php if($last_post_id != ""){ ?>
 	</div> <!-- 取引相手 -->
 	<?php
-	echo "</select>";
-	echo '<input type = "button" value = "プロフィール確認"  onclick ="   linkToOthersprofile('.$last_post_id.');" >';
+	echo "</select></br>";
+	echo '<input type="button" class="profilebutton" id="profile_'.$last_post_id.'" value="↑プロフィール確認" onclick="linkToOthersProfile('.$last_post_id.');" disabled="disabled"></br>';
+	echo '上のボタンを押すと、選ぼうとしている取引相手のプロフィールを、確認することができます。</br>';
 	echo_map_section($last_post_id);
 	echo_message_section($last_post_id);
 	?>

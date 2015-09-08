@@ -363,14 +363,21 @@ function displayImages(){
 	});
 }
 
-function linkToOthersprofile(itemID){
-			var displayname = jQuery("#postID_"+itemID+"  option:selected").text();
+function linkToOthersProfile(itemID){
 			var nicename = jQuery("#postID_"+itemID+" option:selected").data('nicename');
-			if(displayname != ""){
+			if(nicename != ""){
 				location.href = "<?php echo home_url(); ?>"+"/members/"+nicename;
 			}
 }
 
-
+function switchProfileButtonDisabled(itemID){
+			var nicename = jQuery("#postID_"+itemID+" option:selected").data('nicename');
+			var buttonID = "profile_"+itemID;
+			if(nicename.length > 0){
+				jQuery('#'+buttonID).removeAttr('disabled');
+			}else{
+				jQuery('#'+buttonID).attr('disabled','disabled');
+			}
+}
 
 </script>

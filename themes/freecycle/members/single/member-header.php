@@ -19,24 +19,24 @@
 	function callOnConfirmGiveme(postID){
 		onConfirmGiveme(postID, "<?php echo admin_url('admin-ajax.php'); ?>");
 	}
-	
+
 	function callOnNewEntry(){
-        
+
 		disableButtons();
 		if(jQuery("#field_1").val().length == 0){
-			swal({   
-				title: "商品名が未入力です。",  
-				type: "error",    
-			}); 			
+			swal({
+				title: "商品名が未入力です。",
+				type: "error",
+			});
 			enableButtons();
 			return false;
 		}
 
 		if(jQuery("#field_2").val().length == 0){
 			swal({
-				title: "商品説明が未入力です。",  
-				type: "error",    
-			}); 
+				title: "商品説明が未入力です。",
+				type: "error",
+			});
 			enableButtons();
 			return false;
 		}
@@ -44,9 +44,9 @@
 		var mainCategory = jQuery('[name=main_category]').val();
 		if(mainCategory == ""){
 			swal({
-				title: "大学名が未入力です。",  
-				type: "error",    
-			}); 
+				title: "大学名が未入力です。",
+				type: "error",
+			});
 			enableButtons();
 			return false;
 		}
@@ -54,13 +54,13 @@
 		var subCategory = jQuery('[name=subcategory]').val();
 		if(subCategory == ""){
 			swal({
-				title: "学部が未入力です。",  
-				type: "error",    
-			}); 
+				title: "学部が未入力です。",
+				type: "error",
+			});
 			enableButtons();
 			return false;
 		}
-		
+
 		var isAttachedFlg = false;
 		for (var i = jQuery(".multi").length - 1; i >= 0; i--) {
 			var fileName = jQuery(".multi").get(i).value;
@@ -68,21 +68,21 @@
 				isAttachedFlg = true;
 			}
 			if(fileName && !fileName.match(/\.(jpeg|jpg|png)$/i)){
-				swal({   
+				swal({
 					title: "不正なファイルです。",
 					text: ".jpeg,.jpg,.png ファイルのみアップロードできます。",
-					// type: "error",    
-				}); 
+					// type: "error",
+				});
 				enableButtons();
 				return false;
 			}
 		}
 
 		if(!isAttachedFlg){
-			swal({   
-				title: "写真を添付してください。",  
-				type: "error",    
-			}); 
+			swal({
+				title: "写真を添付してください。",
+				type: "error",
+			});
 			enableButtons();
 			return false;
 		}
@@ -102,7 +102,7 @@
 			<p style='font-size:75%;'>写真は一枚目のみ表示されています。</p>\
             </div>\
 		");
-		
+
 		var file = jQuery('[name="upload_attachment[]"]').prop('files')[0];
 		var fileReader = new FileReader();
 		fileReader.onload = function(event){
@@ -140,7 +140,7 @@
         enableButtons();
         callOnNewEntryToChangeCSS();
 	}
-    
+
     function callOnNewEntryToChangeCSS(){
         jQuery(".ui-dialog-titlebar-close").hide();
         jQuery('.ui-widget-overlay').css('background','#FFFFFF');
@@ -150,7 +150,7 @@
         jQuery('.btn-enter').css('background','#228b22');
         jQuery('.btn-enter').css('border','#66FF66');
     }
-    
+
     function callOnNewEntryFinish(){
             var form = jQuery("#newentry").get()[0];
 			var fd = new FormData(form);
@@ -163,10 +163,10 @@
 				mimeType:"multipart/form-data",
 				data: fd,
 				success: function(permalink){
-					swal({   
-						title: "商品を出品しました。",  
-						type: "success",    
-					}); 
+					swal({
+						title: "商品を出品しました。",
+						type: "success",
+					});
 					// reload new entry page
 					enableButtons();
 					location.href = "<?php echo bp_loggedin_user_domain(); ?>" + "new_entry/#newentry";
@@ -226,10 +226,10 @@
 				enableButtons();
 			},
 			error: function(){
-				swal({   
-					title: "登録できませんでした。しばらくしてからもう一度おためしください。",  
-					type: "error",    
-				}); 
+				swal({
+					title: "登録できませんでした。しばらくしてからもう一度おためしください。",
+					type: "error",
+				});
 			}
 		});
 	}
@@ -253,10 +253,10 @@
 				enableButtons();
 			},
 			error: function(){
-				swal({   
-					title: "削除できませんでした。しばらくしてからもう一度おためしください。",  
-					type: "error",    
-				}); 
+				swal({
+					title: "削除できませんでした。しばらくしてからもう一度おためしください。",
+					type: "error",
+				});
 				enableButtons();
 			}
 		});
@@ -276,10 +276,10 @@
 				enableButtons();
 			},
 			error: function(){
-				swal({   
-					title: "削除できませんでした。しばらくしてからもう一度おためしください。",  
-					type: "error",    
-				}); 
+				swal({
+					title: "削除できませんでした。しばらくしてからもう一度おためしください。",
+					type: "error",
+				});
 				enableButtons();
 			}
 		});
@@ -378,7 +378,7 @@
 											mapelm.setAttribute("lng", lng); // longitude
 										}
 									});
-								}								
+								}
 							}
 						}
 						input.onchange = _create_callback(shownMap, input, marker, maps[i]);
@@ -422,7 +422,7 @@
 	<a href="<?php bp_displayed_user_link(); ?>">
 		<?php bp_displayed_user_avatar( 'type=full' ); ?>
 	</a>
-	
+
 </div><!-- #item-header-avatar -->
 
 <div id="item-header-content">
@@ -436,14 +436,14 @@
 	<?php endif; ?>
 
 	<span class="activity"><?php bp_last_activity( bp_displayed_user_id() ); ?></span>
-	
+
 	<!-- display when loggin user page -->
 	<?php if($user_ID == bp_displayed_user_id()){ ?>
-	
+
 	<div id="points-info">
-		<h3 class="show-points">使用可能ポイント:<?php echo get_usable_point($user_ID); ?>p <br>(仮払ポイント:<?php echo get_temp_used_point($user_ID); ?>p)</h3>	
+		<h3 class="show-points">使用可能ポイント:<?php echo get_usable_point($user_ID); ?>p <br>(仮払ポイント:<?php echo get_temp_used_point($user_ID); ?>p)</h3>
 	</div>
-	
+
 	<?php } ?>
 	<h5 class="show-points">評価平均:<?php echo number_format(get_average_score(bp_displayed_user_id()),2); ?>(件数:<?php echo get_count_evaluation(bp_displayed_user_id()); ?>件)</h5>
 	<?php do_action( 'bp_before_member_header_meta' ); ?>
@@ -474,7 +474,7 @@
 		 do_action( 'bp_profile_header_meta' );
 
 		 ?>
-		 
+
 	</div><!-- #item-meta -->
 
 </div><!-- #item-header-content -->
@@ -495,7 +495,7 @@
 				<?php echo $todo_item->message; ?>
 				<div class="todo-info">
 					<ul>
-					<?php 
+					<?php
 							$deal_user_ID = deal_user($todo_item->item_id ,$user_ID);
 							if($deal_user_ID){
 								$deal_user = get_userdata($deal_user_ID)->display_name;
@@ -507,7 +507,7 @@
 				</div>
 			</div>
 		<hr>
-	<?php 
+	<?php
 			}
 		}
 	?>
