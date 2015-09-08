@@ -70,6 +70,7 @@ MESSAGE_SECTION;
 	<?php
 	echo "</select></br>";
 	echo '<input type="button" class="profilebutton" id="profile_'.$last_post_id.'" value="↑プロフィール確認" onclick="linkToOthersProfile('.$last_post_id.');" disabled="disabled"></br>';
+	echo '<script>switchProfileButtonDisabled('.$last_post_id.');</script>';
 	echo '上のボタンを押すと、選ぼうとしている取引相手のプロフィールを、確認することができます。</br>';
 	echo_map_section($last_post_id);
 	echo_message_section($last_post_id);
@@ -122,6 +123,7 @@ MESSAGE_SECTION;
 	<?php
 	echo "</select></br>";
 	echo '<input type="button" class="profilebutton" id="profile_'.$last_post_id.'" value="↑プロフィール確認" onclick="linkToOthersProfile('.$last_post_id.');" disabled="disabled"></br>';
+	echo '<script>switchProfileButtonDisabled('.$last_post_id.');</script>';
 	echo '上のボタンを押すと、選ぼうとしている取引相手のプロフィールを、確認することができます。</br>';
 	echo_map_section($last_post_id);
 	echo_message_section($last_post_id);
