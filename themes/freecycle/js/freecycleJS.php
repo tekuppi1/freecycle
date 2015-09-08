@@ -369,6 +369,8 @@ function displayImages(){
 		});
 	}
 	});
+}
+function displayImages1(){
 	jQuery.ajax({
 		type: "POST",
 		url: '<?php echo admin_url('admin-ajax.php'); ?>',
@@ -400,6 +402,9 @@ function displayImages(){
 		});
 	}
 	});
+	return true;
+}
+function displayImages2(){
 	jQuery.ajax({
 		type: "POST",
 		url: '<?php echo admin_url('admin-ajax.php'); ?>',
@@ -430,6 +435,9 @@ function displayImages(){
 		});
 		}
 	});
+	return true;
+}
+function displayImages3(){
 	jQuery.ajax({
 		type: "POST",
 		url: '<?php echo admin_url('admin-ajax.php'); ?>',
@@ -460,6 +468,7 @@ function displayImages(){
 		});
 		}
 	});
+	return true;
 }
 
 </script>
