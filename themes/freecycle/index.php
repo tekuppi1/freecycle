@@ -6,12 +6,22 @@
 
 <?php get_header(); ?>
 <?php
-	$xml_massage = get_stylesheet_directory_uri()."/xml/message.xml";
+	$xml_setting = get_stylesheet_directory_uri()."/xml/setting.xml";
+	$xmlData_setting = simplexml_load_file($xml_setting);
+	$setting = $xmlData_setting->obj->item[0];
+	if(($setting->event)=="true"){
+		$xml_massage = get_stylesheet_directory_uri()."/xml/event.xml";
+		$texbanTitle = $setting->event_title;
+	}else{
+		$xml_massage = get_stylesheet_directory_uri()."/xml/message.xml";
+		$texbanTitle = $setting->message_title;
+	}
 	$xml_texp = get_stylesheet_directory_uri()."/xml/texp.xml";
 	$xmlData_massage = simplexml_load_file($xml_massage);//xmlを読み込む
 	$xmlData_texp = simplexml_load_file($xml_texp);
 ?>
 	<div class="BlackBoard" style="position: relative;">
+		<div class="title"><?php echo($texbanTitle); ?></div>
 		<div class="box1">
 			<?php 
 				$num = mt_rand(0,$xmlData_massage->obj->item->count()-1);
@@ -27,8 +37,15 @@
 			?>
 		</div>
 		<?php $num = mt_rand(0,$xmlData_texp->obj->item->count()-1);
-			echo("<div class=\"box2\"><span class=\"white\">".$xmlData_texp->obj->item[$num]."</span></div>");
-			echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/blackboard1.bmp" width="100%"/>');
+			if(($setting->event)=="true")
+				echo("<div class=\"box2\"><a href=\"$setting->event_url\" class='event_button'>$setting->texp</a></div>");
+			else
+				echo("<div class=\"box2\"><span class=\"white\">".$xmlData_texp->obj->item[$num]."</span></div>");
+
+			if(($setting->event)=="true")
+				echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/texban_none.png" width="100%"/>');
+			else
+				echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/texban.png" width="100%"/>');
 		?>
 	</div>
 
@@ -79,11 +96,23 @@
 	</div><!-- #icon -->
 
 	<hr class="hr-posts-row">
-
-	<div id="top_image_box">
-	<div class="phone_sub_title">こんな本が出品されてます！</div>
-	<div id="top_image"></div>
+	<div class="phone_sub_title" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_t.bmp'); ?>); ">こんな本が出品されてます！</div>
+	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
+	<div id="top_image1"></div>
 	</div>
+	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
+	<div id="top_image2"></div>
+	</div>
+	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
+	<div id="top_image3"></div>
+	</div>
+	
+	<div class="index_profile">
+		<?php bp_loggedin_user_avatar( 'type=thumb&width=30&height=30' ); ?>
+		<span class="user-nicename"><?php echo bp_core_get_userlink( bp_loggedin_user_id() ); ?></span>
+			<a class="button logout" href="<?php echo wp_logout_url( wp_guess_url() ); ?>"><?php _e( 'Log Out', 'buddypress' ); ?></a>
+	</div>
+	
 
 <!-- SlideImageScript -->
 		<!-- jQuery library -->
@@ -97,8 +126,8 @@
 		jQuery(function() {
 			$('#top_slide').bxSlider({
 				auto:true,
-				pause: 6500,
-				speed: 700,
+				pause: 6000,
+				speed: 1000,
 				captions: true,
 				infiniteLoop: false,
 				hideControlOnEnd: true,

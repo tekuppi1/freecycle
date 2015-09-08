@@ -13,6 +13,12 @@
 
 			<div id="site-generator" role="contentinfo">
 				<?php do_action( 'bp_dtheme_credits' ); ?>
+				<a href="<?php echo home_url(); ?>/contact">お問い合わせ</a>・
+				<a href="<?php echo home_url(); ?>/request">不具合報告・改善要望</a>・
+				<a href="<?php echo home_url(); ?>/guideline">ガイドライン</a><br>
+				<a href="<?php echo home_url(); ?>/disclaimer">免責事項</a>・
+				<a href="<?php echo home_url(); ?>/privacy-policy">個人情報保護方針</a>
+				<br><br>
 				<p>
 				<?php printf( __( 'Copyright  <a href="%1$s">てくすちぇんじ</a>.', 'buddypress' ),  'http://texchg.com' ); ?>
 				</p>

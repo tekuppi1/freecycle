@@ -50,6 +50,7 @@
 		 */
 		function onGiveme(){
 			disableButtons();
+			var firstGivemeText = "";
 			swal({   
 				title: "くださいリクエストをします。",   
 				text: "よろしいですか？",     
@@ -72,7 +73,10 @@
 						},
 						success: function(msg){
 							switchGiveme();
-							swal(msg);
+							swal({
+								title : msg,
+								html: true
+							});
 							enableButtons();
 						}
 					});
@@ -360,7 +364,10 @@
 		}
 
 		function afterFinish(){
+			// show a bidder evaluation form
 			jQuery("#finish").replaceWith('<div id="evaluation">落札者の評価:</br><select name="score" id="score"><option value="invalid" selected>--選択--</option><option value="5" >とても良い</option><option value="4" >良い</option><option value="3" >普通</option><option value="2" >悪い</option><option value="1" >とても悪い</option></select></br>コメント(任意 100字以内)</br><textarea name="trade_comment" id="trade_comment" rows="5" cols="40"></textarea></br><input type="button" id="evaluation" value="評価する" onClick="onBidderEvaluation();"></div>');
+			// hide a cancel trading link
+			jQuery('#cancelTradeFromExhibitor').hide();
 		}
 
 		function updateComment(commentID, updatedComment){
@@ -441,7 +448,6 @@
 		}
 
 	</script>
-
 
 
 	<div id="content">
@@ -592,11 +598,11 @@
 							if($attachments){
 								$i=0;
 								foreach($attachments as $attachment){
-									echo "<span onclick=zoom(";
+									echo "<div class='zoom_image'  onclick=zoom(";
 									echo $i;
 									echo ")>";
 									echo wp_get_attachment_image( $attachment->ID,'thumbnail');
-									echo "</span>";
+									echo "</div>";
                 	$i++;
 								}
 							}
@@ -606,7 +612,7 @@
 							<?php
 								$i=0;
 								foreach($attachments as $attachment){
-									echo "<div id=zoom";
+									echo "<div class='zoom_in_image' id=zoom";
 									echo $i;
 									echo " style='display: none;'>";
 									echo wp_get_attachment_image( $attachment->ID,'full');
@@ -614,7 +620,6 @@
 									$i++;
 								}
 							?>
-
 						</div>
 
 							<p class="postmetadata"><?php the_tags( '<span class="tags">' . __( 'Tags: ', 'buddypress' ), ', ', '</span>' ); ?>&nbsp;</p>

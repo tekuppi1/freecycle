@@ -10,7 +10,15 @@ MAP_SECTION;
 	if(!$mylocation){
 		echo "<p>標準取引場所を設定すると、取引場所を選択する手間が省けます。<a href='".
 			bp_displayed_user_domain() . bp_get_settings_slug() . "/detail'>こちらから設定してください。</a></p>";
-		$mylocation = get_default_map()->map_id;
+		$default_location = get_default_map();
+		if($default_location){
+			// if the system default map is set
+			$mylocation = $default_location->map_id;
+		}else{
+			// if the system default map is not set
+			echo "<p><b>Notice:</b> デフォルトの取引場所が設定されていないため地図が表示できません。</p>";
+			return;
+		}
 	};
 echo <<<MAP_SECTION
 	<select name="map_search" id="map_search_$last_post_id">
