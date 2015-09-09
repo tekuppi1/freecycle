@@ -776,7 +776,7 @@ function new_entry(){
 	}else{
 	// failure
 	}
-	
+
 	echo $msg;
 	die;
 }
@@ -1961,7 +1961,7 @@ function create_wanted_item_detail($item){
 	$return .= '<img src="' . $item->image_url . '" style="float:left; width:113px; height:160px; overflow:hidden">';
 
 	$return .= '<div id="title_'. $item->wanted_item_id .'"><strong>' . $item->item_name . '</strong></div>';
-	$return .= '<div>ほしがっている人:<a href="' . home_url() . '/members/' . get_user_by('id', $item->user_id)->user_nicename .'">'. get_user_by('id', $item->user_id)->display_name . '</a>さん';
+	$return .= '<div>ほしがっている人:<a href="' . bp_core_get_user_domain($item->user_id) .'">'. get_user_by('id', $item->user_id)->display_name . '</a>さん';
 	if($item->count > 1){
 		$return .= ' ほか' . $item->count . '人';
 	}
@@ -2568,9 +2568,7 @@ function change_todo_modified($todo_ID){
  */
 function add_todo_confirm_bidder($item_ID){
 	$user_ID = get_post($item_ID)->post_author;
-	$user_login_name = get_user_by('id', $user_ID)->user_login;
-
-	add_todo($user_ID, $item_ID, '<a href = "' . home_url() . '/members/' . $user_login_name . '/giveme/giveme-from-others/#post_'.$item_ID.'">
+	add_todo($user_ID, $item_ID, '<a href = "' . bp_core_get_user_domain($user_ID) . 'giveme/giveme-from-others/#post_'.$item_ID.'">
 		あなたの商品に「ください」がされました。取引相手を確定させてください</a>');
 }
 
@@ -2592,15 +2590,9 @@ function add_todo_finish_trade($item_ID){
  * @param {int} $thread_ID 取引相手確定メッセージのid
  */
 function add_todo_dealing($item_ID, $thread_ID){
-	global $table_prefix;
-	global $wpdb;
-
 	$user_ID = get_bidder_id($item_ID);
-	$user = get_user_by('id', $user_ID);
-	$user_login_name = $user->user_login;
-
 	add_todo($user_ID, $item_ID,
-		'<a href = "'. home_url() . '/members/' . $user_login_name .'/messages/view/' .$thread_ID. '" onClick="todo_dealing('.$user_ID.','.$item_ID.')">
+		'<a href = "'. bp_core_get_user_domain($user_ID) .'messages/view/' .$thread_ID. '" onClick="todo_dealing('.$user_ID.','.$item_ID.')">
 			くださいリクエストが承認されました。承認メッセージに返信してください</a>');
 }
 
@@ -2610,7 +2602,6 @@ function add_todo_dealing($item_ID, $thread_ID){
  * @param {int} $item_ID 取引商品ＩＤ
  */
 function add_todo_evaluate_bidder($user_ID, $item_ID){
-
 	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">落札者を評価してください</a>');
 }
 
@@ -2619,9 +2610,7 @@ function add_todo_evaluate_bidder($user_ID, $item_ID){
  * @param {int} $item_ID 取引商品ＩＤ
  */
 function add_todo_evaluate_exhibitor($item_ID){
-
 	$user_ID = get_bidder_id($item_ID);
-
 	add_todo($user_ID, $item_ID, '<a href = "'. home_url() . '/archives/' . $item_ID .'">出品者を評価してください</a>');
 }
 
@@ -2630,9 +2619,7 @@ function add_todo_evaluate_exhibitor($item_ID){
  * 新規出品を行うTODO※初回ログイン時
  */
 function add_todo_first_new_entry($user_ID){
-	$user = get_user_by("id", $user_ID);
-	$user_login_name = $user->user_login;
-	add_todo($user_ID, TODOID_NEWENTRY, '<div class="todo-tutorial">チュートリアル</div><a href = "' . home_url() .'/members/'. $user_login_name .'/new_entry/#mypage">新規出品をしてみよう</a><div class="todo-tutorial-comment">テクスチェンジではあなたの本を求めている人がたくさんいます！！<br>不要な本を出品してみましょう！</div>' );
+	add_todo($user_ID, TODOID_NEWENTRY, '<div class="todo-tutorial">チュートリアル</div><a href = "' . bp_core_get_user_domain($user_ID) .'new_entry/#mypage">新規出品をしてみよう</a><div class="todo-tutorial-comment">テクスチェンジではあなたの本を求めている人がたくさんいます！！<br>不要な本を出品してみましょう！</div>' );
 }
 
 /**
@@ -2646,9 +2633,7 @@ function add_todo_first_giveme($user_ID){
  * 大学・学部入力TODO※初回ログイン時
  */
 function add_todo_first_category($user_ID){
-	$user = get_user_by("id", $user_ID);
-	$user_login_name = $user->user_login;
-	add_todo($user_ID, TODOID_CATEGORY, '<div class="todo-tutorial">チュートリアル</div><a href = "' . home_url() .'/members/' . $user_login_name .'/profile/edit/group/1/#mypage" >大学・学部名の入力をお願いします</a>');
+	add_todo($user_ID, TODOID_CATEGORY, '<div class="todo-tutorial">チュートリアル</div><a href = "' . bp_core_get_user_domain($user_ID) .'profile/edit/group/1/#mypage" >大学・学部名の入力をお願いします</a>');
 }
 /**
  * POSTされた、ユーザーIDと商品ＩＤをもつTODOを消す関数
@@ -2962,4 +2947,7 @@ function fc_messages_pagination_count() {
 	echo sprintf( _n( '%1$s件目から%2$s件目まで表示(%3$s件中)', '%1$s件目から%2$s件目まで表示(%3$s件中)', $total, 'buddypress' ), $from_num, $to_num, number_format_i18n( $total ) ); ?><?php
 }
 
-
+function show_all_items(){
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."all-items.php";
+}
+add_shortcode('show_all_items', 'show_all_items');
