@@ -97,7 +97,7 @@
 
 	<hr class="hr-posts-row">
 	<div class="phone_sub_title" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_t.bmp'); ?>); ">こんな本が出品されてます！</div>
-	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
+	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?> ); ">
 	<div id="top_image1"></div>
 	</div>
 	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
@@ -124,7 +124,7 @@
 		<link rel="stylesheet" href="wp-content/themes/freecycle/js/owl-carousel/owl.theme.css">
 	<script>
 		jQuery(function() {
-			$('#top_slide').bxSlider({
+			jQuery('#top_slide').bxSlider({
 				auto:true,
 				pause: 6000,
 				speed: 1000,
@@ -134,7 +134,9 @@
 				autoDelay: 3000,
 				controls: true
 			});
-			displayImages();
+			displayImages1();
+			displayImages2();
+			displayImages3();
 		});
 	</script>
 <!-- SlideImageScript -->
