@@ -217,6 +217,8 @@ textarea{
 
 
 
+
+
 /*-----------FAQ------------*/
 h2.pagetitle{
 	font: normal 1.4em/1.4 "メイリオ", Meiryo,
@@ -316,6 +318,33 @@ input[type="button"]:hover{
 	background: orange;
 }
 
+.decision{
+	background: -moz-linear-gradient(top,#ffcc00,#ffcc00 5%,#ff8b00 5%,#ff8c00 95%,#ff2c00 95%,#ff0000) !important;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ffcc00), color-stop(0.05,#ffcc00), color-stop(0.05,#ff8c00), color-stop(0.95,#ff2c00), color-stop(0.95,#ff0000), to(#ff0000)) !important;
+	width: 170px !important;
+	height: 33px !important;
+	margin:15px 0px 0px 0px !important;
+	color: white !important;
+	/*background-color: #ff8c00 !important; */
+	font-size: 17px !important; 
+	font-weight: lighter !important;
+	font-family: alba super !important;
+	border: 0px solid white !important;
+}
+
+.profilebutton{
+	width:175px !important;
+	height:33px !important;
+	margin:15px 0px 8px 0px !important;
+}
+
+span.labels{
+	font-size:20px;
+	font-weight: bold;
+	color:orange;
+	display:block;
+	margin:20px 0px -20px 0px;
+}
 
 /*ヘッダー部分*/
 
@@ -1812,6 +1841,34 @@ input[type="button"]:hover{
 	background: orange;
 }
 
+.decision{
+	background: -moz-linear-gradient(top,#ff0000,#ff0000 5%,#ff8b00 5%,#ff8c00 95%,#ff2c00 95%,#ff0000) !important;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), color-stop(0.05,#fff000), color-stop(0.05,#ff8c00), color-stop(0.95,#ff2c00), color-stop(0.95,#ff0000), to(#ff0000)) !important;
+	width: 170px !important;
+	height: 33px !important;
+	margin:15px 0px 0px 0px !important;
+	color: white !important;
+	/*background-color: #ff8c00 !important; */
+	font-size: 17px !important; 
+	font-weight: bold !important;
+	font-family: alba super !important;
+	border: 0px solid white !important;
+}
+
+.profilebutton{
+	width: 147px !important; 
+	height: 30px !important;
+	margin:15px 0px 8px 0px !important;
+}
+
+span.labels{
+	font-size:20px;
+	font-weight: bold;
+	color:orange;
+	display:block;
+	margin:20px 0px -15px 0px;
+}
+
 
 /*ヘッダー部分*/
 
@@ -2877,6 +2934,8 @@ input[type="button" ][disabled="true"]:hover{
 	color: #fff !important;
 }
 
+
+
 @charset: utf-8;
 
 * {
@@ -2992,6 +3051,8 @@ textarea{
 	width: 100%;
 }
 
+
+
 /*img{
 	width: 200;
 	height: 200;
@@ -3102,6 +3163,35 @@ input[type="button"]{
 input[type="button"]:hover{
 	background: orange;
 }
+
+.decision{
+	 background: -moz-linear-gradient(top,#ff0000,#ff0000 5%,#ff8b00 5%,#ff8c00 95%,#ff2c00 95%,#ff0000) !important;
+	 background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), color-stop(0.05,#fff000), color-stop(0.05,#ff8c00), color-stop(0.95,#ff2c00), color-stop(0.95,#ff0000), to(#ff0000)) !important;
+	width: 170px !important;
+	height: 33px !important;
+	margin:15px 0px 0px 0px !important;
+	color: white !important;
+	/*background-color: #ff8c00 !important; */
+	font-size: 17px !important; 
+	font-weight: bold !important;
+	font-family: alba super !important;
+	border: 0px solid white !important;
+}
+
+.profilebutton{
+	width: 145px !important; 
+	height: 30px !important;
+	margin:15px 0px 8px 0px !important;
+}
+
+span.labels{
+	font-size:20px;
+	font-weight: bold;
+	color:orange;
+	display:block;
+	margin:20px 0px -15px 0px;
+}
+
 
 /*ヘッダー部分*/
 

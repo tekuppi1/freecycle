@@ -8,7 +8,7 @@
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php bp_head(); ?>
 		<?php wp_head(); ?>
-		<?php include_once "js/freecycleJS.php" ?>
+		<?php include_once "js/freecycleJS.php"; ?>
 		<?php
 		$user_ID = get_current_user_id();
 		// if facebook dialog has not be shown before, show it

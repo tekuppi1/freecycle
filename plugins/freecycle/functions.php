@@ -2035,19 +2035,19 @@ function giveme_from_others_link () {
 /**
  * くださいリクエストが来ている記事の一覧を取得します。
  */
-function get_giveme_from_others_list(){
+function get_giveme_from_others_list($orderby="post_id"){
 	global $wpdb;
 	global $table_prefix;
 	global $user_ID;
 	$givemes = $wpdb->get_results($wpdb->prepare("
-		SELECT " . $table_prefix . "fmt_user_giveme.post_id, display_name, user_nicename, " . $table_prefix . "fmt_user_giveme.user_id
+		SELECT " . $table_prefix . "fmt_user_giveme.post_id, display_name, user_nicename, " . $table_prefix . "fmt_user_giveme.user_id," . $table_prefix . "fmt_user_giveme.insert_timestamp
 		FROM " . $table_prefix . "fmt_user_giveme, " . $table_prefix . "posts, " . $wpdb->users . ", " . $table_prefix . "fmt_giveme_state
 		WHERE " . $table_prefix . "fmt_user_giveme.post_id = " . $table_prefix . "posts.ID
 		AND " . $table_prefix . "fmt_user_giveme.post_id = " . $table_prefix . "fmt_giveme_state.post_id
 		AND " . $table_prefix . "fmt_user_giveme.user_id = " . $wpdb->users .".ID
 		AND " . $table_prefix . "fmt_giveme_state.confirmed_flg = 0
 		AND " . $table_prefix . "posts.post_author = %d
-		ORDER BY post_id",
+		ORDER BY $orderby",
 		$user_ID));
 
 	return $givemes;
