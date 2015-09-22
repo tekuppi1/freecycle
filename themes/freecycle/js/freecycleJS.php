@@ -285,20 +285,6 @@ function todo_dealing(user_ID, item_ID){
 		});
 	}
 
-//トップページのスライドショー表示
-function topSlide(){
-	jQuery('#top_slide').bxSlider({
-		auto:true,
-		pause: 6500,
-		speed: 700,
-		captions: true,
-		infiniteLoop: false,
-		hideControlOnEnd: true,
-		autoDelay: 3000,
-		controls: true
-	});
-}
-
 var categories = jQuery.parseJSON('<?php echo get_freecycle_category_JSON(array('hide_empty' => 0)); ?>');
 
 /**
@@ -351,9 +337,8 @@ function displayImages(){
 			var url = image_urls[1];
 			var elm;
 			for(var i = 0; i < id.length; i++){
-				elm = 
+				elm =
 					"<a href='<?php echo home_url(); ?>/archives/"+id[i]+"' class='image_link'><img src='"+url[i]+"' height='100'></a>";
-	
 				jQuery("#top_image").append(elm);
 			}
 		jQuery("#top_image").owlCarousel({
@@ -384,9 +369,8 @@ function displayImages1(){
 			var url = image_urls[1];
 			var elm;
 			for(var i = 0; i < id.length; i++){
-				elm = 
+				elm =
 					"<a href='<?php echo home_url(); ?>/archives/"+id[i]+"' class='image_link'><img src='"+url[i]+"' height='100'></a>";
-	
 				jQuery("#top_image1").append(elm);
 			}
 		jQuery("#top_image1").owlCarousel({
@@ -451,7 +435,7 @@ function displayImages3(){
 			var url = image_urls[1];
 			var elm;
 			for(var i = 0; i < id.length; i++){
-				elm = 
+				elm =
 					"<a href='<?php echo home_url(); ?>/archives/"+id[i]+"' class='image_link'><img src='"+url[i]+"' height='100'></a>";
 				jQuery("#top_image3").append(elm);
 			}
