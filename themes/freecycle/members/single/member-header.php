@@ -427,6 +427,10 @@
 
 
 </script>
+<?php
+   get_search_form();
+?>
+
 <div id="item-header-avatar">
 
 	<a href="<?php bp_displayed_user_link(); ?>">
