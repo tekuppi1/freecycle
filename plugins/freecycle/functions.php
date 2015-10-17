@@ -34,7 +34,7 @@ require_once('map/freecycle-map.php');
 require_once('trade-log/freecycle-trade-log.php');
 
 // 定数定義
-define("SIGNATURE", "\n" ."配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchg@gmail.com");
+define("SIGNATURE", "\n\n\n配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchg@gmail.com");
 
 //写真を自動で回転して縦にする
 function edit_images_before_upload($file)
