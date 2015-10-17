@@ -235,6 +235,14 @@ function giveme(){
 	//todoリストに追加
 	if(!isGiveme($postID)){
 		add_todo_confirm_bidder($postID);
+
+		// くださいをメール通知
+		$exhibiter_email = get_userdata_from_postID($postID)->user_email;
+		$subject = "あなたの出品された本にくださいがなされました。";
+		$bidder_nicename = get_user_by('id', $userID)->user_nicename;
+		$message = "「" . get_the_title($postID) . "」に対して、" . $bidder_nicename . "さんがくださいしました。";
+		wp_mail($exhibiter_email, $subject, $message);
+
 	}
 
 	//if first giveme
@@ -2951,3 +2959,13 @@ function show_all_items(){
 	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."all-items.php";
 }
 add_shortcode('show_all_items', 'show_all_items');
+
+/**
+*	商品IDから、ユーザーデータを取得する関数
+*	@param{int} $postID 商品ID
+*/
+function get_userdata_from_postID($postID){
+	$userID = get_post($postID)->post_author;
+	$user_data = get_userdata($userID);
+	return $user_data;
+}
