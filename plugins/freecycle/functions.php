@@ -33,6 +33,9 @@ require_once('categories/freecycle-categories.php');
 require_once('map/freecycle-map.php');
 require_once('trade-log/freecycle-trade-log.php');
 
+// 定数定義
+define("SIGNATURE", "\n" ."配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchg@gmail.com");
+
 //写真を自動で回転して縦にする
 function edit_images_before_upload($file)
 {
@@ -238,11 +241,13 @@ function giveme(){
 
 		// くださいをメール通知
 		$exhibiter_email = get_userdata_from_postID($postID)->user_email;
-		$subject = "あなたの出品された本にくださいがなされました。";
-		$bidder_nicename = get_user_by('id', $userID)->user_nicename;
-		$message = "「" . get_the_title($postID) . "」に対して、" . $bidder_nicename . "さんがくださいしました。";
+		$subject = "【TexChange】あなたの出品された本にくださいがなされました";
+		$bidder_name = get_user_by('id', $userID)->display_name;
+		$postURL = get_post($postID)->guid;
+		$message = "「" . get_the_title($postID) . "」に対して、" . $bidder_name . "さんがくださいしました。\n" .
+					 "以下にアクセスして、商品の受け渡しを行ってください。 \n" .
+					 "URL: " . $postURL . "\n" . SIGNATURE;
 		wp_mail($exhibiter_email, $subject, $message);
-
 	}
 
 	//if first giveme
