@@ -245,7 +245,7 @@ function giveme(){
 		$bidder_name = get_user_by('id', $userID)->display_name;
 		$postURL = get_post($postID)->guid;
 		$message = "「" . get_the_title($postID) . "」に対して、" . $bidder_name . "さんがくださいしました。\n" .
-					 "以下にアクセスして、商品の受け渡しを行ってください。 \n" .
+					 "以下からログインの後、マイページから商品の受け渡しを行ってください。 \n" .
 					 "URL: " . $postURL . "\n" . SIGNATURE;
 		wp_mail($exhibiter_email, $subject, $message);
 	}
@@ -347,11 +347,11 @@ function cancelGiveme(){
 
 			// くださいキャンセルをメール通知
 			$exhibiter_email = get_userdata_from_postID($postID)->user_email;
-			$subject = "【TexChange】あなたの出品された本にくださいがキャンセルされました";
+			$subject = "【TexChange】あなたの出品された本へのくださいがキャンセルされました";
 			$bidder_name = get_user_by('id', $userID)->display_name;
 			$postURL = get_post($postID)->guid;
 			$message = "「" . get_the_title($postID) . "」に対しての、" . $bidder_name . "さんのくださいはキャンセルされました。\n" .
-						 "あなたの出品された本が欲しい人が現れるまで少々お待ちください。 \n" .SIGNATURE;
+						 "あなたの出品された本が欲しい人が現れるまで、少々お待ちください。 \n" .SIGNATURE;
 			wp_mail($exhibiter_email, $subject, $message);
 		}
 	die;
