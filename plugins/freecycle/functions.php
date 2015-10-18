@@ -34,7 +34,7 @@ require_once('map/freecycle-map.php');
 require_once('trade-log/freecycle-trade-log.php');
 
 // 定数定義
-define("SIGNATURE", "\n\n\n配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchg@gmail.com");
+define("SIGNATURE", "\n\n\n配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchange.ag@gmail.com");
 
 //写真を自動で回転して縦にする
 function edit_images_before_upload($file)
@@ -344,6 +344,15 @@ function cancelGiveme(){
 		//todoリストstatus="finished"
 		if($current_giveme == 0){
 			cancel_todo($postID);
+
+			// くださいキャンセルをメール通知
+			$exhibiter_email = get_userdata_from_postID($postID)->user_email;
+			$subject = "【TexChange】あなたの出品された本にくださいがキャンセルされました";
+			$bidder_name = get_user_by('id', $userID)->display_name;
+			$postURL = get_post($postID)->guid;
+			$message = "「" . get_the_title($postID) . "」に対しての、" . $bidder_name . "さんのくださいはキャンセルされました。\n" .
+						 "あなたの出品された本が欲しい人が現れるまで少々お待ちください。 \n" .SIGNATURE;
+			wp_mail($exhibiter_email, $subject, $message);
 		}
 	die;
 }
