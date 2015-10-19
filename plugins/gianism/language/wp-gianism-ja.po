@@ -422,7 +422,7 @@ msgstr "リフレッシュトークン"
 #: app/service/twitter.php:337
 #, php-format
 msgid "You have message \"%1$s\" on %2$s. %3$s"
-msgstr "%2$sにメッセージ\"%1$s\"が届いています。 %3$s"
+msgstr "%2$sに新着通知\"%1$s\"が届いています。 %3$s"
 
 #: templates/advanced.php:9
 msgid "Create Facebook page tab"
