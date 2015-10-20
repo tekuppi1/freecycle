@@ -2,6 +2,7 @@
 languages/
 upgrade/
 uploads/
+debug.txt
 
 #plugins
 plugins/*.php

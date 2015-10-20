@@ -2983,3 +2983,78 @@ function get_userdata_from_postID($postID){
 	$user_data = get_userdata($userID);
 	return $user_data;
 }
+
+/**
+*	任意の期間の新規登録者数を返す関数
+* @param {array} $options 検索条件
+*	count: trueなら検索結果の件数を返します
+*	period_from: 日付範囲検索の開始日付
+* 	period_to: 日付範囲検索の終了日付
+* @return {int/array} $result 検索結果
+*	$options['count'] = true のとき int
+*	それ以外のとき array[usersオブジェクト]
+*/
+function get_new_register_log($options){
+	return get_data_within_the_period($options, "users", "user_registered");
+}
+
+/**
+*	任意の期間の出品商品を返す関数
+* @param {array} $options 検索条件
+*	count: trueなら検索結果の件数を返します
+*	period_from: 日付範囲検索の開始日付
+* 	period_to: 日付範囲検索の終了日付
+* @return {int/array} $result 検索結果
+*	$options['count'] = true のとき int
+*	それ以外のとき array[postsオブジェクト]
+*/
+function get_posts_log($options){
+	return get_data_within_the_period($options, "posts", "post_date");
+}
+
+/**
+*	任意の期間の情報を返す関数
+* @param {array} $options 検索条件
+*	count: trueなら検索結果の件数を返します
+*	period_from: 日付範囲検索の開始日付
+* 	period_to: 日付範囲検索の終了日付
+* @return {int/array} $result 検索結果
+*	$options['count'] = true のとき int
+*	それ以外のとき array[テーブルオブジェクト]
+*/
+function get_data_within_the_period($options, $table, $timing){
+	global $wpdb, $table_prefix;
+	$sql;
+	$result;
+	$where = [];
+	$bind_values = [];
+
+	if(isset($options['count']) && $options['count']){
+		$sql = "SELECT count(*) FROM {$table_prefix}{$table} ";
+	}else{
+		$sql = "SELECT * FROM {$table_prefix}{$table} ";
+	}
+
+	// 日付範囲検索条件構築部分
+	if(isset($options['period_from'])){
+		array_push($where, $timing ." >= %s");
+		array_push($bind_values, $options['period_from']);
+	}
+
+	if(isset($options['period_to'])){
+		array_push($where, $timing . " <= %s");
+		array_push($bind_values, $options['period_to']);
+	}
+
+	if(count($where) > 0){
+		$sql .= 'WHERE ' . implode($where, ' and ');
+	}
+
+	if(isset($options['count']) && $options['count']){
+		$result = $wpdb->get_var($wpdb->prepare($sql, $bind_values));
+	}else{
+		$result = $wpdb->get_results($wpdb->prepare($sql, $bind_values));
+	}
+
+	return $result;
+}
