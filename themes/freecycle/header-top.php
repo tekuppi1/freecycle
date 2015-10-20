@@ -19,16 +19,8 @@
 		<?php include_once "wp-content/themes/freecycle/js/freecycleJS.php" ?>
 		<?php
 		wp_register_script(
-			'flexSliderScript',
-			get_stylesheet_directory_uri() . '/js/jquery.flexslider-min.js'
-		);
-		wp_register_script(
 			'tooltipsterScript',
 			get_stylesheet_directory_uri() . '/js/tooltipster-master/js/jquery.tooltipster.min.js'
-		);
-		wp_register_style(
-			'flexSliderStyle',
-			get_stylesheet_directory_uri() . '/style/flexslider.css'
 		);
 		wp_register_style(
 			'tooltipsterStyle',
@@ -37,19 +29,10 @@
 		wp_register_style(
 			'tooltipsterStyle-noir',
 			get_stylesheet_directory_uri() . '/js/tooltipster-master/css/themes/tooltipster-noir.css'
-		);	
-		wp_enqueue_script('flexSliderScript');
-		wp_enqueue_style('flexSliderStyle');
+		);
 		wp_enqueue_script('tooltipsterScript');
 		wp_enqueue_style('tooltipsterStyle');
 		?>
-		<script src="<?php echo home_url(); ?>/wp-content/themes/freecycle/js/owl-carousel/owl.carousel.js"></script>
-		<link rel="stylesheet" href="<?php echo home_url(); ?>/wp-content/themes/freecycle/js/owl-carousel/owl.carousel.css">
-		<link rel="stylesheet" href="<?php echo home_url(); ?>/wp-content/themes/freecycle/js/owl-carousel/owl.theme.css">
-		<!-- bxSlider Javascript file -->
-		<script src="wp-content/themes/freecycle/js/jquery.bxslider.min.js"></script>
-		<!-- bxSlider CSS file -->
-		<link href="wp-content/themes/freecycle/style/jquery.bxslider.css" rel="stylesheet" />
 	</head>
 
 	<body <?php body_class(); ?> id="top_page">
@@ -58,4 +41,3 @@
 		<div id="header_menu_top">
 			<a id="logo_top" href="<?php echo home_url(); ?>" title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"><img src="<?php echo get_stylesheet_directory_uri() ?>/images/texchange_header_b_logosize_2.png" alt="ヘッダー"></a>
 		</div><!-- header -->
-
