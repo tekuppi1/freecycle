@@ -254,7 +254,7 @@ msgstr "Twitterでログイン"
 #: ../sdks/twitter/twitter_controller.php:352
 #, php-format
 msgid "You have message \"%1$s\" on %2$s. %3$s"
-msgstr "%2$sにメッセージ\"%1$s\"が届いています。 %3$s"
+msgstr "%2$s新着通知\n\n\"%1$s\"\nが届きました。 \n%3$s"
 
 #: ../sdks/yahoo/yahoo_controller.php:97
 #, php-format
