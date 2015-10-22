@@ -15,6 +15,7 @@ plugins/buddypress-translations
 plugins/contact-form-7
 plugins/json-api
 plugins/taxonomy-terms-order
+plugins/gianism/
 
 #themes
 themes/*.php
