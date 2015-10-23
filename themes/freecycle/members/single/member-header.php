@@ -428,7 +428,7 @@
 
 </script>
 <?php
-   get_search_form();
+   // get_search_form();
 ?>
 
 <div id="item-header-avatar">
@@ -491,6 +491,9 @@
 		 
 	</div><!-- #item-meta -->
 </div><!-- #item-header-content -->
+<?php
+   // get_search_form();
+?>
 	<?php
 		global $user_ID;
 		$todo_asc_list = get_todo_list($user_ID, "unfinished");

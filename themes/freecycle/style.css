@@ -416,6 +416,76 @@ div.grobal_nav_div_sp{
 
 
 
+#searchform_text{
+/*float:right;*/
+border: solid 1px #ffc90e;
+overflow: hidden;
+}
+
+#searchtext{
+  /*background-color: #ffffff;*/
+  border: 0 !important;
+  /*height: 27px !important; */
+  width: 80%!important;
+  padding: 0px 10px !important; 
+  /*position: relative !important; */
+  margin:0px !important;
+  /*float:left;*/
+  /*left: 5px !important;
+  top: 0 !important; 
+  margin-right: auto !important;*/
+}
+#searchsubmit{
+  /*background-color: pink;*/
+  border: 0 !important;
+  padding: 0 !important;
+  /*width: 20% !important;*/
+  height: 29px !important; 
+  border-radius: 0px !important;
+  /*position: relative !important;*/
+  /*left: 324px !important; */
+  /*top: 0px !important;*/
+  /*margin:0 auto !important;*/
+  background: url("images/search_icon3.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-indent: 100%;
+  float:left;
+	/*overflow: hidden;*/
+}
+
+#searchtext:focus{
+  background:#ffffcc;
+}
+#searchsubmit:focus{
+  opacity: 0.5;
+}
+
+select[name="seachform_itemstatus"]{
+	margin:5px 0px 0px 0px;
+	height:30px;
+	width: 84px;
+	border: white;
+	background-color: #eeeeee;
+	font-size: 12px;
+	font-weight: thin !important;
+	font-family: sans-serif !important;
+}
+
+select[name="seachform_itemstatus"]:hover{
+	background-color: #dcdcdc;
+}
+
+
+
+
+
+
+
+
+
+
+
 /*---------------------------------------------------
 				キャッチコピー
 ------------------------------------------------------*/
@@ -476,10 +546,13 @@ a#header_entry_button{
 /* ヘッダーフォーム */
 
 div.header_form{
-	background-color: lightcyan;
+	/*background-color: lightcyan;*/
 	padding: 5px 0 0 5px;
 	border-radius: 4px;
-	margin-bottom: 20px;
+	margin-bottom: 0px;
+	height: 30px !important;
+	background-color: #ffffff !important; 
+	position: relative;
 }
 
 form[name=login-form]{
@@ -703,13 +776,13 @@ nav li:last-child a {
 }
 
 #searchform_main{
-	display: block;
+	/*display: block;
 	margin: 0 auto;
 	padding: 8px 9px 6px 9px;
 	border-radius: 10px;
 	width: 95%;
 	height: 55px;
-	clear: both;
+	clear: both;*/
 
 	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
@@ -738,6 +811,8 @@ nav li:last-child a {
 		sans-serif;
 	color: black;
 	float: left;
+
+	
 }
 
 #searchsubmit:hover{
@@ -772,8 +847,8 @@ nav li:last-child a {
 }
 
 #searchform_submit{
-	float: right;
-	width: 65%;
+	/*float: right;
+	width: 65%;*/
 }
 
 /*
@@ -1859,6 +1934,125 @@ header a img#user_icon{
 	margin: 20px 0px 0 0;
 }
 
+/*#searchform_pulldown {
+    position: absolute;
+    display: block;
+    top: -1px;
+    left: 0;
+    height: 35px;
+    width: auto;
+    font-family: arial,sans-serif;
+    outline: 0;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    visibility: visible;
+    border: 0;
+    line-height: 35px;
+}
+
+select{
+    border-radius: 0px;
+    border-color: rgb(169, 169, 169);
+}
+
+#search-23.nav-right {
+    min-width: 0;
+}
+
+.nav-right {
+    position: relative;
+    height: 35px;
+}
+
+.nav-left,.nav-right {
+    position: relative;
+    height: 35px;
+}
+
+.nav-left {
+    position: relative;
+    float: left;
+    width: auto;
+    display: inline-block;
+}
+*/
+
+
+/*試作検索フォーム*/
+#searchform_main{
+  /*margin: 0 !important; 
+  /*background-color: white;*/
+}
+#searchform_main {
+  /*position: relative !important; 
+  /*background-color: #ffa500 !important;
+  width:100% !important;*/
+}
+#searchform_text{
+float:right;
+border: solid 1px #ffc90e;
+/*width: 50%;*/
+}
+
+#searchtext{
+  /*background-color: #ffffff;*/
+  border: 0 !important;
+  height: 27px !important; 
+  /*width: 200px!important;*/
+  padding: 0px 10px !important; 
+  /*position: relative !important; */
+  /*margin:0 auto !important;*/
+  float:left;
+  /*left: 5px !important;
+  top: 0 !important; 
+  margin-right: auto !important;*/
+}
+#searchsubmit{
+  /*background-color: pink;*/
+  border: 0 !important;
+  padding: 0 !important;
+  width: 45px !important;
+  height: 27px !important; 
+  border-radius: 0px !important;
+  /*position: relative !important;*/
+  /*left: 324px !important; */
+  /*top: 0px !important;*/
+  /*margin:0 auto !important;*/
+  background: url("images/search_icon3.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-indent: 100%;
+  /*float:right;*/
+	/*overflow: hidden;*/
+}
+
+#searchtext:focus{
+  background:#ffffcc;
+}
+#searchsubmit:focus{
+  opacity: 0.5;
+}
+
+select[name="seachform_itemstatus"]{
+	margin:5px 0px 0px 0px;
+	height:30px;
+	width: 84px;
+	border: white;
+	background-color: #eeeeee;
+	font-size: 12px;
+	font-weight: thin !important;
+	font-family: sans-serif !important;
+}
+
+select[name="seachform_itemstatus"]:hover{
+	background-color: #dcdcdc;
+}
+
+
 
 
 
@@ -1927,10 +2121,13 @@ div.header_img_navi{
 /* ヘッダーフォーム */
 
 div.header_form{
-	background-color: lightcyan;
+	/*background-color: lightcyan;*/
 	padding: 0 0 5px;
 	border-radius: 4px;
-	margin-bottom: 20px;
+	margin-bottom: 0px;
+	height: 30px !important;
+	background-color: #ffffff !important; 
+	position: relative;
 }
 
 form#header-login-form{
@@ -2089,16 +2286,15 @@ div.header_img_navi_contents{
 }
 
 #searchform_main{
-	display: block;
+	/*display: block;
 	margin: 0 auto;
 	padding: 5px;
 	border-radius: 10px;
-	width: 95%;
+	width: 95% !important;
 	height: 55px;
 	clear: both;
-
-
-	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+	background-color: white;
+	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
 }
@@ -2124,7 +2320,7 @@ div.header_img_navi_contents{
 
 /*div#searchform_submit{
 	width: 70px;
-}*/
+}
 
 #searchform_pulldown{
 	padding: 3px;
@@ -3143,6 +3339,65 @@ header a img#user_icon{
 	margin: 30px 30px 0 0;
 }
 
+#searchform_text{
+float:right;
+border: solid 1px #ffc90e;
+}
+
+#searchtext{
+  /*background-color: #ffffff;*/
+  border: 0 !important;
+  height: 27px !important; 
+  /*width: 200px!important;*/
+  padding: 0px 10px !important; 
+  /*position: relative !important; */
+  /*margin:0 auto !important;*/
+  float:left;
+  /*left: 5px !important;
+  top: 0 !important; 
+  margin-right: auto !important;*/
+}
+#searchsubmit{
+  /*background-color: pink;*/
+  border: 0 !important;
+  padding: 0 !important;
+  width: 45px !important;
+  height: 27px !important; 
+  border-radius: 0px !important;
+  /*position: relative !important;*/
+  /*left: 324px !important; */
+  /*top: 0px !important;*/
+  /*margin:0 auto !important;*/
+  background: url("images/search_icon3.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-indent: 100%;
+  float:right;
+	/*overflow: hidden;*/
+}
+
+#searchtext:focus{
+  background:#ffffcc;
+}
+#searchsubmit:focus{
+  opacity: 0.5;
+}
+
+select[name="seachform_itemstatus"]{
+	margin:5px 0px 0px 0px;
+	height:30px;
+	width: 84px;
+	border: white;
+	background-color: #eeeeee;
+	font-size: 12px;
+	font-weight: thin !important;
+	font-family: sans-serif !important;
+}
+
+select[name="seachform_itemstatus"]:hover{
+	background-color: #dcdcdc;
+}
+
 
 
 
@@ -3211,11 +3466,14 @@ div#must_checkbox{
 
 /* ヘッダーフォーム */
 div.header_form{
-	background-color: lightcyan;
+	/*background-color: lightcyan;*/
 	padding: 0 0 5px;
 	border-radius: 4px;
 	width: 100%;
-	margin: 0 0 30px 0;
+	margin: 0 0 0px 0;
+	height: 30px !important;
+	background-color: #ffffff !important; 
+	position: relative;
 }
 
 form[name=login-form]{
@@ -3387,7 +3645,7 @@ div.grobal_nav_div  li a:hover{
 
 
 #searchform_main{
-	display: block;
+	/*display: block;
 	margin: 0 auto;
 	padding: 5px 8px 5px 8px;
 	border-radius: 10px;
@@ -3396,7 +3654,7 @@ div.grobal_nav_div  li a:hover{
 	clear: both;
 
 
-	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
 }
@@ -3430,7 +3688,7 @@ div.grobal_nav_div  li a:hover{
 }
 
 #searchtext{
-	margin: auto;
+	margin: 0 auto !important;
 	display: block;
 	padding: 0;
 	width: 60%;
@@ -3451,7 +3709,7 @@ div.grobal_nav_div  li a:hover{
 }
 
 #searchform_submit{
-	float: left;
+	/*float: left;*/
 }
 
 #blog-search h2.pagetitle{
