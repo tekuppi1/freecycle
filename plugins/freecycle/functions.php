@@ -33,6 +33,9 @@ require_once('categories/freecycle-categories.php');
 require_once('map/freecycle-map.php');
 require_once('trade-log/freecycle-trade-log.php');
 
+// 定数定義
+define("SIGNATURE", "\n\n\n配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchange.ag@gmail.com");
+
 //写真を自動で回転して縦にする
 function edit_images_before_upload($file)
 {
@@ -235,6 +238,16 @@ function giveme(){
 	//todoリストに追加
 	if(!isGiveme($postID)){
 		add_todo_confirm_bidder($postID);
+
+		// くださいをメール通知
+		$exhibiter_email = get_userdata_from_postID($postID)->user_email;
+		$subject = "【TexChange】あなたの出品された本にくださいがなされました";
+		$bidder_name = get_user_by('id', $userID)->display_name;
+		$postURL = get_post($postID)->guid;
+		$message = "「" . get_the_title($postID) . "」に対して、" . $bidder_name . "さんがくださいしました。\n" .
+					 "以下からログインの後、マイページから商品の受け渡しを行ってください。 \n" .
+					 "URL: " . $postURL . "\n" . SIGNATURE;
+		wp_mail($exhibiter_email, $subject, $message);
 	}
 
 	//if first giveme
@@ -331,6 +344,15 @@ function cancelGiveme(){
 		//todoリストstatus="finished"
 		if($current_giveme == 0){
 			cancel_todo($postID);
+
+			// くださいキャンセルをメール通知
+			$exhibiter_email = get_userdata_from_postID($postID)->user_email;
+			$subject = "【TexChange】あなたの出品された本へのくださいがキャンセルされました";
+			$bidder_name = get_user_by('id', $userID)->display_name;
+			$postURL = get_post($postID)->guid;
+			$message = "「" . get_the_title($postID) . "」に対しての、" . $bidder_name . "さんのくださいはキャンセルされました。\n" .
+						 "あなたの出品された本が欲しい人が現れるまで、少々お待ちください。 \n" .SIGNATURE;
+			wp_mail($exhibiter_email, $subject, $message);
 		}
 	die;
 }
@@ -2951,3 +2973,88 @@ function show_all_items(){
 	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."all-items.php";
 }
 add_shortcode('show_all_items', 'show_all_items');
+
+/**
+*	商品IDから、ユーザーデータを取得する関数
+*	@param{int} $postID 商品ID
+*/
+function get_userdata_from_postID($postID){
+	$userID = get_post($postID)->post_author;
+	$user_data = get_userdata($userID);
+	return $user_data;
+}
+
+/**
+*	任意の期間の新規登録者数を返す関数
+* @param {array} $options 検索条件
+*	count: trueなら検索結果の件数を返します
+*	period_from: 日付範囲検索の開始日付
+* 	period_to: 日付範囲検索の終了日付
+* @return {int/array} $result 検索結果
+*	$options['count'] = true のとき int
+*	それ以外のとき array[usersオブジェクト]
+*/
+function get_new_register_log($options){
+	return get_data_within_the_period($options, "users", "user_registered");
+}
+
+/**
+*	任意の期間の出品商品を返す関数
+* @param {array} $options 検索条件
+*	count: trueなら検索結果の件数を返します
+*	period_from: 日付範囲検索の開始日付
+* 	period_to: 日付範囲検索の終了日付
+* @return {int/array} $result 検索結果
+*	$options['count'] = true のとき int
+*	それ以外のとき array[postsオブジェクト]
+*/
+function get_posts_log($options){
+	return get_data_within_the_period($options, "posts", "post_date");
+}
+
+/**
+*	任意の期間の情報を返す関数
+* @param {array} $options 検索条件
+*	count: trueなら検索結果の件数を返します
+*	period_from: 日付範囲検索の開始日付
+* 	period_to: 日付範囲検索の終了日付
+* @return {int/array} $result 検索結果
+*	$options['count'] = true のとき int
+*	それ以外のとき array[テーブルオブジェクト]
+*/
+function get_data_within_the_period($options, $table, $timing){
+	global $wpdb, $table_prefix;
+	$sql;
+	$result;
+	$where = [];
+	$bind_values = [];
+
+	if(isset($options['count']) && $options['count']){
+		$sql = "SELECT count(*) FROM {$table_prefix}{$table} ";
+	}else{
+		$sql = "SELECT * FROM {$table_prefix}{$table} ";
+	}
+
+	// 日付範囲検索条件構築部分
+	if(isset($options['period_from'])){
+		array_push($where, $timing ." >= %s");
+		array_push($bind_values, $options['period_from']);
+	}
+
+	if(isset($options['period_to'])){
+		array_push($where, $timing . " <= %s");
+		array_push($bind_values, $options['period_to']);
+	}
+
+	if(count($where) > 0){
+		$sql .= 'WHERE ' . implode($where, ' and ');
+	}
+
+	if(isset($options['count']) && $options['count']){
+		$result = $wpdb->get_var($wpdb->prepare($sql, $bind_values));
+	}else{
+		$result = $wpdb->get_results($wpdb->prepare($sql, $bind_values));
+	}
+
+	return $result;
+}
