@@ -416,31 +416,38 @@ div.grobal_nav_div_sp{
 
 
 
-#searchform_text{
+#searchform_bar{
 /*float:right;*/
 border: solid 1px #ffc90e;
-overflow: hidden;
+/*overflow: hidden;*/
+display: flex;
+display: -moz-flex;
+display: -o-flex;
+display: -webkit-flex;
+display: -ms-flex;
+flex-direction:row;
+-moz-flex-direction:row;
+-o-flex-direction:row;
+-webkit-flex-direction:row;
+-ms-flex-direction:row;
 }
 
 #searchtext{
   /*background-color: #ffffff;*/
   border: 0 !important;
-  /*height: 27px !important; */
-  width: 80%!important;
-  padding: 0px 10px !important; 
+  height: 25px !important; 
+  width: 100%!important;
+  padding: 0px 5px!important; 
   /*position: relative !important; */
-  margin:0px !important;
+  margin:0px 0px 0px 0px !important;
   /*float:left;*/
-  /*left: 5px !important;
-  top: 0 !important; 
-  margin-right: auto !important;*/
 }
 #searchsubmit{
   /*background-color: pink;*/
   border: 0 !important;
   padding: 0 !important;
-  /*width: 20% !important;*/
-  height: 29px !important; 
+  width: 41px !important;
+  height: 25px !important; 
   border-radius: 0px !important;
   /*position: relative !important;*/
   /*left: 324px !important; */
@@ -450,7 +457,7 @@ overflow: hidden;
   background-size: contain;
   background-repeat: no-repeat;
   text-indent: 100%;
-  float:left;
+  float:right;
 	/*overflow: hidden;*/
 }
 
@@ -476,6 +483,18 @@ select[name="seachform_itemstatus"]:hover{
 	background-color: #dcdcdc;
 }
 
+#searchform_text{
+	height: 25px;
+}
+
+/*#searchform_submit{
+	float: left;
+}
+*/
+/*.searchform{
+	display:inline;
+}
+*/
 
 
 
@@ -1992,21 +2011,31 @@ select{
   /*background-color: #ffa500 !important;
   width:100% !important;*/
 }
-#searchform_text{
+#searchform_bar{
 float:right;
 border: solid 1px #ffc90e;
 /*width: 50%;*/
+display: flex;
+display: -moz-flex;
+display: -o-flex;
+display: -webkit-flex;
+display: -ms-flex;
+flex-direction:row;
+-moz-flex-direction:row;
+-o-flex-direction:row;
+-webkit-flex-direction:row;
+-ms-flex-direction:row;
 }
 
 #searchtext{
   /*background-color: #ffffff;*/
   border: 0 !important;
   height: 27px !important; 
-  /*width: 200px!important;*/
-  padding: 0px 10px !important; 
+  width: 100%!important;
+  padding: 0px !important; 
   /*position: relative !important; */
   /*margin:0 auto !important;*/
-  float:left;
+  /*float:left;*/
   /*left: 5px !important;
   top: 0 !important; 
   margin-right: auto !important;*/
@@ -3339,20 +3368,30 @@ header a img#user_icon{
 	margin: 30px 30px 0 0;
 }
 
-#searchform_text{
+#searchform_bar{
 float:right;
 border: solid 1px #ffc90e;
+display: flex;
+display: -moz-flex;
+display: -o-flex;
+display: -webkit-flex;
+display: -ms-flex;
+flex-direction:row;
+-moz-flex-direction:row;
+-o-flex-direction:row;
+-webkit-flex-direction:row;
+-ms-flex-direction:row;
 }
 
 #searchtext{
   /*background-color: #ffffff;*/
   border: 0 !important;
   height: 27px !important; 
-  /*width: 200px!important;*/
+  width: 100%!important;
   padding: 0px 10px !important; 
   /*position: relative !important; */
   /*margin:0 auto !important;*/
-  float:left;
+  /*float:left;*/
   /*left: 5px !important;
   top: 0 !important; 
   margin-right: auto !important;*/
@@ -3372,7 +3411,7 @@ border: solid 1px #ffc90e;
   background-size: contain;
   background-repeat: no-repeat;
   text-indent: 100%;
-  float:right;
+  /*float:right;*/
 	/*overflow: hidden;*/
 }
 
