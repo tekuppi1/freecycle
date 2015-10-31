@@ -1,7 +1,7 @@
-<h3>キーワード検索</h3>
+<!-- <h3>キーワード検索</h3> -->
 
 <?php
-   get_search_form();
+   // get_search_form();
 ?>
 
 <h3>カテゴリ検索</h3>
