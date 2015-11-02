@@ -8,7 +8,7 @@
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php bp_head(); ?>
 		<?php wp_head(); ?>
-		<?php include_once "js/freecycleJS.php" ?>
+		<?php include_once "js/freecycleJS.php"; ?>
 		<?php
 		$user_ID = get_current_user_id();
 		// if facebook dialog has not be shown before, show it
@@ -35,16 +35,8 @@
 		?>
 		<?php
 		wp_register_script(
-			'flexSliderScript',
-			get_stylesheet_directory_uri() . '/js/jquery.flexslider-min.js'
-		);
-		wp_register_script(
 			'tooltipsterScript',
 			get_stylesheet_directory_uri() . '/js/tooltipster-master/js/jquery.tooltipster.min.js'
-		);
-		wp_register_style(
-			'flexSliderStyle',
-			get_stylesheet_directory_uri() . '/style/flexslider.css'
 		);
 		wp_register_style(
 			'tooltipsterStyle',
@@ -62,8 +54,6 @@
 			'sweetalertStyle',
 			get_stylesheet_directory_uri() . '/lib/sweetalert-master/lib/sweet-alert.css'
 		);
-		wp_enqueue_script('flexSliderScript');
-		wp_enqueue_style('flexSliderStyle');
 		wp_enqueue_script('tooltipsterScript');
 		wp_enqueue_style('tooltipsterStyle');
 		wp_enqueue_script('sweetalertScript');
@@ -71,18 +61,6 @@
 		?>
 	<script>
 	jQuery(document).ready(function(){
-		jQuery("#header_copy").flexslider({
-			animation: "fade",
-			controlNav: false,
-			directionNav: false,
-			prevText: "",
-			nextText: "",
-			auto: true,
-			intval: 5,
-			start: function(slider){
-				jQuery("#slide_body").css("display", "block");
-			}
-		});
 		jQuery('.tooltip').tooltipster({theme: "tooltipster-noir"});
 	});
 	// Google Analytics tracking code
@@ -153,20 +131,7 @@
 
 				<?php if(!is_user_logged_in()){ ?>
 				<div id="header_copy">
-					<ul id="slide_body" class="slides" style="display:none">
-						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_4.jpg" alt="slide_4" width="640px">
-						</li>
-						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_1.jpg" alt="slide_1" width="640px">
-						</li>
-						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_2.jpg" alt="slide_2" width="640px">
-						</li>
-						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_3.jpg" alt="slide_3" width="640px">
-						</li>
-					</ul>
+					<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_1.jpg" width="640px">
 				</div>
 				<div id="entry_login_form_pc">
 					<a href="<?php echo home_url(); ?>/register#signup_form" class="entry_buttons" id="entry_form">新規登録</a>
