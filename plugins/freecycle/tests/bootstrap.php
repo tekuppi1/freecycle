@@ -1,6 +1,6 @@
 <?php
 $_tests_dir = getenv('WP_TESTS_DIR');
-//if ( !$_tests_dir ) $_tests_dir = '/tmp/wordpress-tests-lib';
+if ( !$_tests_dir ) die("Please set WP_TESTS_DIR.\n");
 require_once $_tests_dir . '/includes/functions.php';
 
 // The BP_TESTS_DIR constant is a helpful shorthand for accessing assets later
@@ -8,9 +8,9 @@ require_once $_tests_dir . '/includes/functions.php';
 // tests may be located in a non-standard location.
 if (getenv( 'BP_TESTS_DIR' ) ) {
     define( 'BP_TESTS_DIR', getenv('BP_TESTS_DIR'));
+}else{
+    die("Please set BP_TESTS_DIR.\n");
 }
-echo WP_TESTS_DIR;
-echo BP_TESTS_DIR;
 
 // Checking for the existence of tests/bootstrap.php ensures that your version
 // of BuddyPress supports this kind of automated testing
