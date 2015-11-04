@@ -3058,3 +3058,10 @@ function get_data_within_the_period($options, $table, $timing){
 
 	return $result;
 }
+
+//HTML特殊文字をエスケープする関数 
+function escape_html_special_chars($text, $charset = 'utf-8'){
+	$ngwords = array("<", ">", ";");
+	$nongtext = str_replace($ngwords, "", $text);
+	return htmlspecialchars($nongtext, ENT_QUOTES, $charset);
+} 
