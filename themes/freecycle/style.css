@@ -326,7 +326,7 @@ input[type="button"]:hover{
 	margin:15px 0px 0px 0px !important;
 	color: white !important;
 	/*background-color: #ff8c00 !important; */
-	font-size: 17px !important; 
+	font-size: 17px !important;
 	font-weight: lighter !important;
 	font-family: alba super !important;
 	border: 0px solid white !important;
@@ -880,13 +880,13 @@ a#login_form{
 	font-size: 1.5em;
 	padding: 10px;
 }
-	
+
 a#detail_texchange{
 	font-size: 0.7em;
 	text-align: right;
 	margin-top: 10px;
 }
-	
+
 .app_banner{
 	margin-top: 10px;
 	width: 100%;
@@ -1401,7 +1401,7 @@ div.header_img_navi_contents{
 	position: relative;
 	top: 0;
 }
-	
+
 #top_article1{
 	background: url("images/top_bg1.bmp");
 	background-size: cover;
@@ -1492,7 +1492,7 @@ div a#logo_top img{
 	font-weight: bold;
 	line-height: 1.5em;
 }
-	
+
 .top_sub_article{
 	width: 100%;
 	margin:0 auto;
@@ -1500,7 +1500,7 @@ div a#logo_top img{
 	font-size: 15px;
 	text-align: center;
 	line-height: 1.8em;
-	font-weight: bold; 
+	font-weight: bold;
 	text-shadow: 3px  3px 10px #fff, -3px  3px 10px #fff, 3px -3px 10px #fff, -3px -3px 10px #fff;
 }
 
@@ -1604,6 +1604,26 @@ div a#logo_top img{
 	padding-left: 10px;
 }
 
+/*リニューアルページ*/
+.re-box{
+	position: absolute;
+	top: 26%;
+	padding-left: 12%;
+}
+.re-box2{
+	position: absolute;
+	top: 47%;
+	padding-left: 17%;
+}
+.bird-comment{
+	position: absolute;
+	bottom: 13%;
+	padding-left: 19%;
+}
+.texban{
+	width: 100%;
+	height: auto;
+}
 }
 
 /****************************スマホスタイルの終了****************************************************/
@@ -1849,14 +1869,14 @@ input[type="button"]:hover{
 	margin:15px 0px 0px 0px !important;
 	color: white !important;
 	/*background-color: #ff8c00 !important; */
-	font-size: 17px !important; 
+	font-size: 17px !important;
 	font-weight: bold !important;
 	font-family: alba super !important;
 	border: 0px solid white !important;
 }
 
 .profilebutton{
-	width: 147px !important; 
+	width: 147px !important;
 	height: 30px !important;
 	margin:15px 0px 8px 0px !important;
 }
@@ -2328,7 +2348,7 @@ a#detail_texchange{
 	text-align: right;
 	margin-top: 10px;
 }
-	
+
 .app_banner{
 	margin-top: 10px;
 	width: 100%;
@@ -2728,7 +2748,7 @@ ul#menu-footer_menu li a{
 	background-repeat: no-repeat;
 	padding:30px;
 }
-	
+
 
 div a#logo_top img{
 	width: 60%;
@@ -2801,7 +2821,7 @@ div a#logo_top img{
 	font-weight: bold;
 	line-height: 1.5em;
 }
-	
+
 .top_sub_article{
 	width: 100%;
 	margin:0 auto;
@@ -2811,7 +2831,7 @@ div a#logo_top img{
 	font-size: 15px;
 	text-align: center;
 	line-height: 1.8em;
-	font-weight: bold; 
+	font-weight: bold;
 	text-shadow: 3px  3px 10px #fff, -3px  3px 10px #fff, 3px -3px 10px #fff, -3px -3px 10px #fff;
 }
 
@@ -2909,6 +2929,26 @@ div a#logo_top img{
 	height: 35px;
 	line-height: 35px;
 	padding-left: 10px;
+}
+
+.re-box{
+	position: absolute;
+	top: 29%;
+	padding-left: 12%;
+}
+.re-box2{
+	position: absolute;
+	top: 46%;
+	padding-left: 17%;
+}
+.bird-comment{
+	position: absolute;
+	bottom: 13%;
+	padding-left: 19%;
+}
+.texban{
+	width: 100%;
+	height: auto;
 }
 
 }
@@ -3172,14 +3212,14 @@ input[type="button"]:hover{
 	margin:15px 0px 0px 0px !important;
 	color: white !important;
 	/*background-color: #ff8c00 !important; */
-	font-size: 17px !important; 
+	font-size: 17px !important;
 	font-weight: bold !important;
 	font-family: alba super !important;
 	border: 0px solid white !important;
 }
 
 .profilebutton{
-	width: 145px !important; 
+	width: 145px !important;
 	height: 30px !important;
 	margin:15px 0px 8px 0px !important;
 }
@@ -3673,7 +3713,7 @@ a#login_form{
 	font-size: 2.5em;
 	padding: 25px;
 }
-	
+
 a#app_form{
 	width: 39%;
 	font-size: 1.2em;
@@ -4057,8 +4097,8 @@ ul#menu-footer_menu li a{
 
 #top_page{
 	padding: 0 0;
-	width: 100%;
-	margin: 0 0;
+	width: 700px;
+	margin: 0 auto;
 	max-width: none;
 }
 
@@ -4083,7 +4123,7 @@ ul#menu-footer_menu li a{
 	background-repeat: no-repeat;
 	padding:30px;
 }
-	
+
 div a#logo_top img{
 	width: 30%;
 	height: 100%;
@@ -4149,7 +4189,7 @@ div a#logo_top img{
 	font-weight: bold;
 	line-height: 1.5em;
 }
-	
+
 .top_sub_article{
 	width: 100%;
 	margin:0 auto;
@@ -4159,7 +4199,7 @@ div a#logo_top img{
 	font-size: 20px;
 	text-align: center;
 	line-height: 1.8em;
-	font-weight: bold; 
+	font-weight: bold;
 	text-shadow: 3px  3px 10px #fff, -3px  3px 10px #fff, 3px -3px 10px #fff, -3px -3px 10px #fff;
 }
 
@@ -4169,7 +4209,7 @@ div a#logo_top img{
 .top_blue{color : #0079c2;}
 .title_green{color : #069051;}
 .top_green{color : #069051;}
-		
+
 .enh{
 	font-size: 30px;
 	line-height: 1.5em;
@@ -4270,6 +4310,26 @@ div a#logo_top img{
 	height: 25px;
 	line-height: 25px;
 	padding-left: 10px;
+}
+
+.re-box{
+	position: absolute;
+	top: 29%;
+	padding-left: 12%;
+}
+.re-box2{
+	position: absolute;
+	top: 48%;
+	padding-left: 17%;
+}
+.bird-comment{
+	position: absolute;
+	bottom: 13%;
+	padding-left: 22%;
+}
+.texban{
+	width: 100%;
+	height: auto;
 }
 
 }
@@ -4380,6 +4440,7 @@ div.grobal_nav_div_sp ul li a span {
 }
 .BlackBoard{
 	width: 100%;
+	position: relative;
 }
 .BlackBoard div{
 	line-height: 1.5;
@@ -4629,4 +4690,65 @@ div.pagenation_next{
  	float: left;
 	padding: 5%;
 	border: 2px solid;
+}
+
+.ad-bookfair{
+	width: 100%;
+	background-color: #FDF5E6;
+	padding: 10px 0;
+}
+
+/* twitterボタン風 */
+.tw-botton{
+	background-color: #00acee;
+	padding: 7px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 1px #444444;
+}
+.tw-botton a{
+	color: white;
+}
+
+
+/* カード */
+.card{
+	width:80%;
+	margin: 0 auto;
+	background-color: white;
+	border-radius: 2px;
+	text-align: center;
+	box-shadow: 2px 2px  1px #444444;
+
+}
+.card-title{
+	padding: 15px 0 7px 0;
+}
+.card-title span{
+	font-size: 16px;
+	font-weight: bolder;
+}
+.card-content{
+	width: 90%;
+	padding: 5px;
+	margin: 0 auto;
+}
+.card-content span{
+	font-size: 13px;
+}
+.card-images img{
+	margin:10px 3px;
+}
+.card-images .portrait{
+	width: 100px;
+	height: 120px;
+}
+.card-images .landscape{
+	width: 120px;
+	height: 100px;
+}
+.card-content table{
+	width: 100%;
+}
+.card-content table,tr,th{
+	border: 1px black solid;
 }
