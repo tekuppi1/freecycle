@@ -79,7 +79,7 @@
 				echo('<img src="'.get_stylesheet_directory_uri().'/images/mypage.png" width="100%"/>');
 			echo('</a>');
 			/******/
-			echo('<a href="'.bp_loggedin_user_domain().'new_entry/normal/">' );
+			echo('<!--a href="'.bp_loggedin_user_domain().'new_entry/normal/"-->' );
 			echo('<img src="'.get_stylesheet_directory_uri().'/images/icon1.png" width="50%"/></a>');
 			/******/
 			echo('<a href="'.bp_loggedin_user_domain().'messages/">' );

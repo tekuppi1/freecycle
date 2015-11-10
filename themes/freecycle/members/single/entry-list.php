@@ -74,7 +74,7 @@ function show_entry_list($user_ID, $mode){
 	}else{
 ?>
 	<p>出品がまだありません。</p>
-	<p><a href="<?php echo get_new_entry_url(); ?>">こちらから出品してみましょう！</a></p>
+	<!--p><a href="<?php echo get_new_entry_url(); ?>">こちらから出品してみましょう！</a></p-->
 <?php
 	}
 }
