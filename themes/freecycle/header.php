@@ -8,7 +8,7 @@
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php bp_head(); ?>
 		<?php wp_head(); ?>
-		<?php include_once "js/freecycleJS.php" ?>
+		<?php include_once "js/freecycleJS.php"; ?>
 		<?php
 		$user_ID = get_current_user_id();
 		// if facebook dialog has not be shown before, show it
@@ -23,7 +23,7 @@
 			update_user_meta($user_ID, 'is_twitter_popup_displayed', 1);
 			include_once "js/fcTwitterDialog.js.php";
 		}
-		// if first login 
+		// if first login
 		if(!get_user_meta($user_ID, "is_first_login_page_displayed")){
 			add_todo_first_new_entry($user_ID);
 			add_todo_first_giveme($user_ID);
@@ -35,16 +35,8 @@
 		?>
 		<?php
 		wp_register_script(
-			'flexSliderScript',
-			get_stylesheet_directory_uri() . '/js/jquery.flexslider-min.js'
-		);
-		wp_register_script(
 			'tooltipsterScript',
 			get_stylesheet_directory_uri() . '/js/tooltipster-master/js/jquery.tooltipster.min.js'
-		);
-		wp_register_style(
-			'flexSliderStyle',
-			get_stylesheet_directory_uri() . '/style/flexslider.css'
 		);
 		wp_register_style(
 			'tooltipsterStyle',
@@ -62,8 +54,6 @@
 			'sweetalertStyle',
 			get_stylesheet_directory_uri() . '/lib/sweetalert-master/lib/sweet-alert.css'
 		);
-		wp_enqueue_script('flexSliderScript');
-		wp_enqueue_style('flexSliderStyle');
 		wp_enqueue_script('tooltipsterScript');
 		wp_enqueue_style('tooltipsterStyle');
 		wp_enqueue_script('sweetalertScript');
@@ -71,18 +61,6 @@
 		?>
 	<script>
 	jQuery(document).ready(function(){
-		jQuery("#header_copy").flexslider({
-			animation: "fade",
-			controlNav: false,
-			directionNav: false,
-			prevText: "",
-			nextText: "",
-			auto: true,
-			intval: 5,
-			start: function(slider){
-				jQuery("#slide_body").css("display", "block");
-			}
-		});
 		jQuery('.tooltip').tooltipster({theme: "tooltipster-noir"});
 	});
 	// Google Analytics tracking code
@@ -119,6 +97,7 @@
 					　		<li class="grobal_nav"><a href="http://texchg.com/how-to-use">How to use</a></li>
 					　		<li class="grobal_nav"><a href="http://texchg.com/review">利用者の声</a></li>
 							<?php } ?>
+							<li class="grobal_nav" ><a href="<?php echo home_url(); ?>/all-items/1" >商品一覧</a></li>
 							<li class="grobal_nav" ><a href="<?php echo home_url(); ?>/search-page" >検索</a></li>
 					　		<li class="grobal_nav"><a href="<?php echo home_url(); ?>/howtouse">ヘルプ</a></li>
 					</ul>
@@ -148,20 +127,7 @@
 
 				<?php if(!is_user_logged_in()){ ?>
 				<div id="header_copy">
-					<ul id="slide_body" class="slides" style="display:none">
-						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_4.jpg" alt="slide_4" width="640px">
-						</li>
-						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_1.jpg" alt="slide_1" width="640px">
-						</li>
-						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_2.jpg" alt="slide_2" width="640px">
-						</li>
-						<li>
-							<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_3.jpg" alt="slide_3" width="640px">
-						</li>
-					</ul>
+					<img src="<?php echo get_stylesheet_directory_uri() ?>/images/slide_1.jpg" width="640px">
 				</div>
 				<div id="entry_login_form_pc">
 					<a href="<?php echo home_url(); ?>/register#signup_form" class="entry_buttons" id="entry_form">新規登録</a>
@@ -194,6 +160,7 @@
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/how-to-use">How to use</a></li>
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/review">利用者の声</a></li>
 							<?php } ?>
+					　		<li class="grobal_nav blue_navi" ><a href="<?php echo home_url(); ?>/all-items/1" >商品一覧</a></li>
 					　		<li class="grobal_nav blue_navi" ><a href="<?php echo home_url(); ?>/search-page" >検索</a></li>
 					　		<li class="grobal_nav blue_navi"><a href="<?php echo home_url(); ?>/howtouse">ヘルプ</a></li>
 					</ul>
@@ -204,7 +171,7 @@
 		<?php if(is_archive() || is_search() || is_single()){ ?>
 	<div id="search-23" class="widget widget_search"><!-- 検索バー -->
 				<form role="search" method="get" id="searchform_main" action="<?php echo home_url(); ?>">
-						<div id="searchform_text"> 
+						<div id="searchform_text">
 					  			<input type="text" id="searchtext" name="s" id="s" value="<?php if(isset($_GET['s'])){ echo $_GET['s']; } ?>"/>
 					  	</div>
 							<div id="searchform_pulldown">
@@ -215,12 +182,11 @@
 							</div>
 							<div id="searchform_submit">
 								<input type="submit" id="searchsubmit" value="検索" />
-							</div> 
-						</div> 
+							</div>
+						</div>
 				</form>
 	</div><!-- 検索バー -->
 </div><!-- header_form -->
 		<!--<hr class="line-search"> -->
 		<?php } ?>
 		<div id="container">
-

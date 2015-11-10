@@ -19,7 +19,7 @@
 	function callOnConfirmGiveme(postID){
 		onConfirmGiveme(postID, "<?php echo admin_url('admin-ajax.php'); ?>");
 	}
-	
+
 	function onClickSearchWantedBook(){
 		disableButtons();
 		jQuery('#search_result').html('<div align=center><img src="<?php echo get_stylesheet_directory_uri() ?>/images/ajax-loader.gif"></div>');
@@ -70,10 +70,10 @@
 				enableButtons();
 			},
 			error: function(){
-				swal({   
-					title: "登録できませんでした。しばらくしてからもう一度おためしください。",  
-					type: "error",    
-				}); 
+				swal({
+					title: "登録できませんでした。しばらくしてからもう一度おためしください。",
+					type: "error",
+				});
 			}
 		});
 	}
@@ -97,10 +97,10 @@
 				enableButtons();
 			},
 			error: function(){
-				swal({   
-					title: "削除できませんでした。しばらくしてからもう一度おためしください。",  
-					type: "error",    
-				}); 
+				swal({
+					title: "削除できませんでした。しばらくしてからもう一度おためしください。",
+					type: "error",
+				});
 				enableButtons();
 			}
 		});
@@ -120,10 +120,10 @@
 				enableButtons();
 			},
 			error: function(){
-				swal({   
-					title: "削除できませんでした。しばらくしてからもう一度おためしください。",  
-					type: "error",    
-				}); 
+				swal({
+					title: "削除できませんでした。しばらくしてからもう一度おためしください。",
+					type: "error",
+				});
 				enableButtons();
 			}
 		});
@@ -231,7 +231,7 @@
 											mapelm.setAttribute("lng", lng); // longitude
 										}
 									});
-								}								
+								}
 							}
 						}
 						input.onchange = _create_callback(shownMap, input, marker, maps[i]);
@@ -276,7 +276,7 @@
 	<a href="<?php bp_displayed_user_link(); ?>">
 		<?php bp_displayed_user_avatar( 'type=full' ); ?>
 	</a>
-	
+
 </div><!-- #item-header-avatar -->
 
 <div id="item-header-content">
@@ -290,14 +290,14 @@
 	<?php endif; ?>
 
 	<span class="activity"><?php bp_last_activity( bp_displayed_user_id() ); ?></span>
-	
+
 	<!-- display when loggin user page -->
 	<?php if($user_ID == bp_displayed_user_id()){ ?>
-	
+
 	<div id="points-info">
-		<h3 class="show-points">使用可能ポイント:<?php echo get_usable_point($user_ID); ?>p <br>(仮払ポイント:<?php echo get_temp_used_point($user_ID); ?>p)</h3>	
+		<h3 class="show-points">使用可能ポイント:<?php echo get_usable_point($user_ID); ?>p <br>(仮払ポイント:<?php echo get_temp_used_point($user_ID); ?>p)</h3>
 	</div>
-	
+
 	<?php } ?>
 	<h5 class="show-points">評価平均:<?php echo number_format(get_average_score(bp_displayed_user_id()),2); ?>(件数:<?php echo get_count_evaluation(bp_displayed_user_id()); ?>件)</h5>
 	<?php do_action( 'bp_before_member_header_meta' ); ?>
@@ -328,7 +328,7 @@
 		 do_action( 'bp_profile_header_meta' );
 
 		 ?>
-		 
+
 	</div><!-- #item-meta -->
 </div><!-- #item-header-content -->
 	<?php
@@ -340,14 +340,14 @@
 	?>
 <h3 style="width:100%;margin-top:30px;">next actionが<?php echo $todo_list_count;?>件あります。</h3>
 <ul id="todo-list">
-	<?php 
+	<?php
 			foreach($todo_list as $todo_item):
 	?>
 			<li class="todo-item">
 				<div class="todo-date"><?php echo date("Y年m月d日 A g:i",strtotime($todo_item->created)); ?></div>
 				<?php echo $todo_item->message; ?>
 				<div class="todo-info">
-					<?php 
+					<?php
 							if(($todo_item->item_id) > 0 ){
 								$deal_user_ID = deal_user($todo_item->item_id ,$user_ID);
 								if($deal_user_ID){
@@ -359,7 +359,7 @@
 					?>
 				</div>
 			</li>
-	<?php 
+	<?php
 			endforeach;
 		endif;
 	?>
