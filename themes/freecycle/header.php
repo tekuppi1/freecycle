@@ -91,7 +91,7 @@
 					<ul class="navi" >
 					　		<?php if(is_user_logged_in()){ ?>
 					　		<li class="grobal_nav_important_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>" >マイページ</a></li>
-					　		<li class="grobal_nav" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
+					　		<!--li class="grobal_nav" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li-->
 					　		<li class="grobal_nav"><a href="<?php echo bp_loggedin_user_domain(); ?>messages" >メッセージ</a></li>
 					　		<?php }else{ ?>
 					　		<li class="grobal_nav"><a href="http://texchg.com/how-to-use">How to use</a></li>
@@ -154,7 +154,7 @@
 							?>
 							</a>
 							</li>
-					　		<li class="grobal_nav blue_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li>
+					　		<!--li class="grobal_nav blue_navi" ><a href="<?php echo bp_loggedin_user_domain(); ?>new_entry/normal/" >新規出品</a></li-->
 						 	<li class="grobal_nav blue_navi"><a href="<?php echo bp_loggedin_user_domain(); ?>messages">メッセージ</a></li>
 					　		<?php }else{ ?>
 					　		<li class="grobal_nav blue_navi"><a href="http://texchg.com/how-to-use">How to use</a></li>
