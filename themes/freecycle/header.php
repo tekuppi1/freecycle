@@ -173,27 +173,5 @@
 
 <div class="header_form">
 		<?php if(is_archive() || is_search() || is_single()){ ?>
-	<!-- <div id="search-23" class="widget widget_search"><!-- 検索バー  -->
-				<!-- <form role="search" method="get" id="searchform_main" action="<?php echo home_url(); ?>">
-						<div id="searchform_text">
-					  			<input type="text" id="searchtext" name="s" id="s" value="<?php if(isset($_GET['s'])){ echo $_GET['s']; } ?>"/>
-					  	</div>
-							<div id="searchform_pulldown">
-								<select name="seachform_itemstatus">
-									<option value="all">すべて</option>
-									<option value="givemeable">ください可能</option>
-								</select>
-							</div>
-							<div id="searchform_submit">
-								<input type="submit" id="searchsubmit" value="検索" />
-							</div>
-						</div>
-				</form>
-	</div><!-- 検索バー  --> 
-<!--/div><!-- header_form -->
-		<!--<hr class="line-search"> -->
-		 <?php
-   // get_search_form();
-?>
 		<?php } ?>
 		<div id="container">
