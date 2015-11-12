@@ -1,5 +1,109 @@
 <?php get_header(); ?>
 
+<script type="text/javascript">
+function onDeletePost(){
+	swal({   
+		title: "取り消した出品は復活できません。",   
+		text: "よろしいですか？",   
+		type: "warning",   
+		showCancelButton: true,   
+		confirmButtonColor: "#DD6B55",   
+		confirmButtonText: "はい",   
+		cancelButtonText: "いいえ",   
+		closeOnConfirm: true,   
+		closeOnCancel: true 
+	},
+	function(isConfirm){
+		if (isConfirm) {
+				jQuery.ajax({
+				type: "POST",
+				url: '<?php echo admin_url('admin-ajax.php'); ?>',
+				data: {
+					"action": "delete_post",
+					"postID": "<?php echo $post->ID ?>",
+					"userID": "<?php echo $user_ID ?>"
+				},
+				success: function(msg){
+					swal({   
+						title: "商品を取り消しました。", 
+						type: "success",   
+						showCancelButton: false,   
+						confirmButtonColor: "#AEDEF4", 
+						confirmButtonText: "OK",      
+						closeOnConfirm: true
+					},
+					function(){
+						location.href = "<?php echo home_url(); ?>";
+					});
+				},
+				false: function(msg){
+					swal({   
+						title: "商品を取り消しに失敗しました。",  
+						type: "error",   
+						showCancelButton: false,   
+						confirmButtonColor: "#AEDEF4", 
+						confirmButtonText: "OK",      
+						closeOnConfirm: true
+					}); 
+				}
+			});
+		}else{return false;}
+		});
+}
+function onEdit(itemStatus){
+	//表示内容の削除
+	var content = document.getElementById("post-content-edit");
+	while(content.firstChild){
+		content.removeChild(content.firstChild);
+	}
+
+	//編集内容の表示
+	var templete = document.getElementById("edit");
+	var newNode = templete.cloneNode(true);
+	newNode.style.display = '';
+	newNode.id = 'edit_content';
+	content.appendChild(newNode);
+
+	//隠していた編集内容の削除
+	while(templete.firstChild){
+		templete.removeChild(templete.firstChild);
+	}
+
+	//出品物の状態を保持
+	var statusLabel = {
+		"verygood" : 0,
+		"good"     : 1,
+		"bad"      : 2
+	};
+	var targetOption = document.getElementById("eval" + statusLabel[itemStatus]);
+	targetOption.setAttribute("selected", "selected");
+	}
+function onUpdateEdit(){
+			var form = jQuery("#edit_form")[0];
+			var fd = new FormData(form);
+			fd.append("action", "edit_item");
+			jQuery.ajax({
+				type : "POST",
+				url: "<?php echo admin_url('admin-ajax.php'); ?>",
+				processData: false,
+				contentType: false,
+				mimeType: "multipart/form-data",
+				data: fd,
+				success : function(msg){
+					location.reload();
+				}
+			});
+		}
+function zoom(i){
+	switch(i){
+		case 0:jQuery("#zoom1").hide();jQuery("#zoom2").hide();jQuery("#zoom0").show();break;
+		case 1:jQuery("#zoom2").hide();jQuery("#zoom0").hide();jQuery("#zoom1").show();break;
+		case 2:jQuery("#zoom0").hide();jQuery("#zoom1").hide();jQuery("#zoom2").show();break;
+	}
+}
+	
+</script>
+
 	<div id="content">
 		<div class="padder">
 
