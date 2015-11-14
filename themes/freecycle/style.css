@@ -565,12 +565,12 @@ a#header_entry_button{
 /* ヘッダーフォーム */
 
 div.header_form{
-	/*background-color: lightcyan;*/
-	padding: 5px 0 0 5px;
+	background-color: lightcyan;
+	/*padding: 5px 0 0 5px;*/
 	border-radius: 4px;
 	margin-bottom: 0px;
-	height: 30px !important;
-	background-color: #ffffff !important; 
+	/*height: 30px !important;*/
+	/*background-color: #ffffff !important; */
 	position: relative;
 }
 
@@ -791,7 +791,7 @@ nav li:last-child a {
 }*/
 
 #search-23{
-	padding-top:2px;
+	/*padding-top:2px;*/
 }
 
 #searchform_text{
@@ -1966,6 +1966,7 @@ header a img#user_icon{
 #searchform_bar{
 float:right;
 border: solid 1px #ffc90e;
+height:27px;
 display: flex;
 display: -moz-flex;
 display: -o-flex;
@@ -1983,6 +1984,7 @@ flex-direction:row;
   height: 27px !important; 
   width: 100%!important;
   padding: 0px 0px 0px 5px !important; 
+  margin-bottom: 10px;
 }
 #searchsubmit{
   border: 0 !important;
@@ -2083,11 +2085,12 @@ div.header_img_navi{
 
 div.header_form{
 	background-color: lightcyan;
-	padding: 0 0 5px;
+	/*padding: 0 0 5px;*/
 	border-radius: 4px;
 	margin-bottom: 0px;
-	height: 30px !important;
-	background-color: #ffffff !important; 
+	margin-top: 9px;
+	/*height: 30px !important;*/
+	/*background-color: #ffffff !important; */
 	position: relative;
 }
 
@@ -2242,7 +2245,7 @@ div.header_img_navi_contents{
 /*サーチバー*/
 
 #search-23{
-	padding-top:2px;
+	/*padding-top:2px;*/
 	margin-top: 5px;
 }
 
@@ -3034,7 +3037,6 @@ body{
 	background-color: #fff;
 	background-image: none;
 	width: 700px;
-	height:300%;
 	padding: 10px 50px;
 }
 
@@ -3429,13 +3431,13 @@ div#must_checkbox{
 
 /* ヘッダーフォーム */
 div.header_form{
-	/*background-color: lightcyan;*/
-	padding: 0 0 5px;
+	background-color: lightcyan;
+	/*padding: 0 0 5px;*/
 	border-radius: 4px;
 	width: 100%;
 	margin: 0 0 0px 0;
-	height: 30px !important;
-	background-color: #ffffff !important; 
+	/*height: 30px !important;*/
+	/*background-color: #ffffff !important; */
 	position: relative;
 }
 
@@ -3602,7 +3604,7 @@ div.grobal_nav_div  li a:hover{
 /*サーチバー*/
 
 #search-23{
-	padding-top:2px;
+	/*padding-top:2px;*/
 	margin-top: 7px;
 }
 
