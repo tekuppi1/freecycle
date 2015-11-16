@@ -1,11 +1,3 @@
-<?php
-	global $current_user;
-	get_currentuserinfo();
-	if(!is_user_logged_in() || $current_user->user_level != ADMIN_LEVEL){
-		header('Location:' . home_url() . '/renewal.php');
-		exit();
-	}
-?>
 <?php get_header(); ?>
 
 <?php
