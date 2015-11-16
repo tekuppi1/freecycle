@@ -1,10 +1,5 @@
-<?php
-	if(!is_user_logged_in()){
-		header('Location:' . home_url() . '/top-page.php');
-	}
-?>
-
 <?php get_header(); ?>
+
 <?php
 	$xml_setting = get_stylesheet_directory_uri()."/xml/setting.xml";
 	$xmlData_setting = simplexml_load_file($xml_setting);
@@ -79,7 +74,7 @@
 				echo('<img src="'.get_stylesheet_directory_uri().'/images/mypage.png" width="100%"/>');
 			echo('</a>');
 			/******/
-			echo('<a href="'.bp_loggedin_user_domain().'new_entry/normal/">' );
+			echo('<!--a href="'.bp_loggedin_user_domain().'new_entry/normal/"-->' );
 			echo('<img src="'.get_stylesheet_directory_uri().'/images/icon1.png" width="50%"/></a>');
 			/******/
 			echo('<a href="'.bp_loggedin_user_domain().'messages/">' );

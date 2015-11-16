@@ -35,6 +35,7 @@ require_once('trade-log/freecycle-trade-log.php');
 
 // 定数定義
 define("SIGNATURE", "\n\n\n配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchange.ag@gmail.com");
+define("ADMIN_LEVEL", 10);
 
 //写真を自動で回転して縦にする
 function edit_images_before_upload($file)
@@ -753,54 +754,6 @@ function fcl_media_sideload_image($file, $post_id, $desc = null) {
  */
 function validate_filename($filename){
 	return str_replace('%', '', $filename);
-}
-
-/**
- * 新規出品時に呼ばれる関数
- */
-function new_entry(){
-	global $bp;
-	$exhibitor_id = $_POST['exhibitor_id'];
-	$msg = "";
-
-	$insert_id = exhibit(array(
-		'exhibitor_id' => $exhibitor_id,
-		'item_name' => $_POST['field_1'],
-		'item_description' => $_POST['field_2'],
-		'item_category' => isset($_POST['subcategory'])?$_POST['subcategory']:"1",
-		'tags' => $_POST['field_4']
-	));
-
-	if($insert_id){
-		// success
-		// add custom field
-		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
-		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$exhibitor_id), true);
-		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$exhibitor_id), true);
-		$msg = "商品を出品しました。";
-
-		if($_POST['wanted_item_id']){
-			add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);
-		}
-
-		// image upload
-		global $post;
-		upload_itempictures($insert_id);
-
-		// if first new entry
-		if(!get_user_meta($exhibitor_id, "is_first_new_entry")){
-			$todo_row = get_todo_row($exhibitor_id, TODOID_NEWENTRY);
-			$todoID = $todo_row->todo_id;
-			change_todo_status_finished($todoID);
-			update_user_meta($exhibitor_id, "is_first_new_entry", 1);
-			$msg = '<div class="first-todo-header">チュートリアル</div><div class="first-todo-title">【新規出品をしてみよう】</div><div class="first-todo-complete">Complete!!</div>';
-		}
-	}else{
-	// failure
-	}
-
-	echo $msg;
-	die;
 }
 
 function exhibit_to_wanted(){
@@ -1619,6 +1572,7 @@ function my_setup_nav() {
 			'item_css_id' => 'finished'
 		) );
 
+		/*
 		bp_core_new_nav_item( array(
 			'name' => __( '新規出品', 'buddypress' ),
 			'slug' => 'new_entry',
@@ -1647,6 +1601,7 @@ function my_setup_nav() {
 			'screen_function' => 'to_wanted_list_link',
 			'item_css_id' => 'new-entry'
 		) );
+		*/
 
 		$giveme_name;
 		if(get_count_giveme_from_others() > 0){
