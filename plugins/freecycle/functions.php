@@ -35,7 +35,6 @@ require_once('trade-log/freecycle-trade-log.php');
 
 // 定数定義
 define("SIGNATURE", "\n\n\n配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchange.ag@gmail.com");
-define("ADMIN_LEVEL", 10);
 
 //写真を自動で回転して縦にする
 function edit_images_before_upload($file)
