@@ -443,11 +443,6 @@ div.grobal_nav_div_sp{
 	margin: 0;
 }
 
-
-.search{
-	width: 100%;
-}
-
 #searchform_bar{
 border: solid 1px #ffc90e;
 display: flex;
@@ -3313,7 +3308,7 @@ header a img#user_icon{
 }
 
 #searchform_bar{
-/*float:right;*/
+float: right;
 border: solid 1px #ffc90e;
 display: flex;
 display: -moz-flex;
