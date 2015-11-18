@@ -32,6 +32,7 @@ require_once('functions.kses.php');
 require_once('categories/freecycle-categories.php');
 require_once('map/freecycle-map.php');
 require_once('trade-log/freecycle-trade-log.php');
+require_once('members/loader.php');
 
 // 定数定義
 define("SIGNATURE", "\n\n\n配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchange.ag@gmail.com");
@@ -3014,9 +3015,9 @@ function get_data_within_the_period($options, $table, $timing){
 	return $result;
 }
 
-//HTML特殊文字をエスケープする関数 
+//HTML特殊文字をエスケープする関数
 function escape_html_special_chars($text, $charset = 'utf-8'){
 	$ngwords = array("<", ">", ";");
 	$nongtext = str_replace($ngwords, "", $text);
 	return htmlspecialchars($nongtext, ENT_QUOTES, $charset);
-} 
+}
