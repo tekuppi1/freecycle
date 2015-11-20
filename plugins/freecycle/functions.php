@@ -33,6 +33,7 @@ require_once('functions.kses.php');
 require_once('categories/freecycle-categories.php');
 require_once('map/freecycle-map.php');
 require_once('trade-log/freecycle-trade-log.php');
+require_once('members/loader.php');
 
 // 定数定義
 define("SIGNATURE", "\n\n\n配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchange.ag@gmail.com");

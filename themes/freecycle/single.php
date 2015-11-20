@@ -2,16 +2,16 @@
 
 <script type="text/javascript">
 function onDeletePost(){
-	swal({   
-		title: "取り消した出品は復活できません。",   
-		text: "よろしいですか？",   
-		type: "warning",   
-		showCancelButton: true,   
-		confirmButtonColor: "#DD6B55",   
-		confirmButtonText: "はい",   
-		cancelButtonText: "いいえ",   
-		closeOnConfirm: true,   
-		closeOnCancel: true 
+	swal({
+		title: "取り消した出品は復活できません。",
+		text: "よろしいですか？",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "はい",
+		cancelButtonText: "いいえ",
+		closeOnConfirm: true,
+		closeOnCancel: true
 	},
 	function(isConfirm){
 		if (isConfirm) {
@@ -24,27 +24,27 @@ function onDeletePost(){
 					"userID": "<?php echo $user_ID ?>"
 				},
 				success: function(msg){
-					swal({   
-						title: "商品を取り消しました。", 
-						type: "success",   
-						showCancelButton: false,   
-						confirmButtonColor: "#AEDEF4", 
-						confirmButtonText: "OK",      
+					swal({
+						title: "商品を取り消しました。",
+						type: "success",
+						showCancelButton: false,
+						confirmButtonColor: "#AEDEF4",
+						confirmButtonText: "OK",
 						closeOnConfirm: true
 					},
 					function(){
-						location.href = "<?php echo home_url(); ?>";
+						location.href = "<?php echo_entry_list_url(); ?>";
 					});
 				},
 				false: function(msg){
-					swal({   
-						title: "商品を取り消しに失敗しました。",  
-						type: "error",   
-						showCancelButton: false,   
-						confirmButtonColor: "#AEDEF4", 
-						confirmButtonText: "OK",      
+					swal({
+						title: "商品を取り消しに失敗しました。",
+						type: "error",
+						showCancelButton: false,
+						confirmButtonColor: "#AEDEF4",
+						confirmButtonText: "OK",
 						closeOnConfirm: true
-					}); 
+					});
 				}
 			});
 		}else{return false;}
@@ -101,7 +101,7 @@ function zoom(i){
 		case 2:jQuery("#zoom0").hide();jQuery("#zoom1").hide();jQuery("#zoom2").show();break;
 	}
 }
-	
+
 </script>
 
 	<div id="content">
@@ -133,7 +133,7 @@ function zoom(i){
 						?>
 						</div>
 						<div>
-							<?php 
+							<?php
 								$sub_category = get_the_category();
 								if($sub_category[0]->term_id == '1'):
 									echo "カテゴリ:未設定";
@@ -142,7 +142,7 @@ function zoom(i){
 								?>
 	 							大学: <?php echo $main_category->cat_name;?> <br>
 	 							学部: <?php echo $sub_category[0]->cat_name; ?>
- 							<?php endif; ?>	
+ 							<?php endif; ?>
 						</div>
 						<?php
 						/*
@@ -322,7 +322,7 @@ function zoom(i){
 	<label>商品説明</label><br><textarea rows="5" cols="40" name="item_content" ><?php remove_filter('the_content', 'wpautop'); the_content(); ?></textarea></br>
 	<label>カテゴリ</label></br>
 	<select name="main_category" onChange="onChangeMainCategory(1)">
-	<?php 
+	<?php
 		$sub_category = get_the_category();
 		$main;
 		$sub;
@@ -341,7 +341,7 @@ function zoom(i){
 			<option value="1">-- 学部 --</option>
 			<?php output_sub_category($item_main_category_name,$sub); ?>
 			</select><br>
-	
+
 	<label>写真</label><br>
 		<input type="file" class="multi" name="upload_attachment[]" ></br>
 		<input type="file" class="multi" name="upload_attachment[]" ></br>
