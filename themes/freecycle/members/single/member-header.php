@@ -271,6 +271,7 @@
 
 
 </script>
+
 <div id="item-header-avatar">
 
 	<a href="<?php bp_displayed_user_link(); ?>">
@@ -331,6 +332,7 @@
 
 	</div><!-- #item-meta -->
 </div><!-- #item-header-content -->
+
 	<?php
 		global $user_ID;
 		$todo_asc_list = get_todo_list($user_ID, "unfinished");

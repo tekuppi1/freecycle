@@ -1,3 +1,11 @@
+<?php
+global $current_user;
+get_currentuserinfo();
+if(!is_user_logged_in() || $current_user->user_level != ADMIN_LEVEL){
+	header('Location:' . home_url() . '/renewal.php');
+	exit();
+}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 
@@ -106,6 +114,9 @@
 
 
 <div class="header_img_navi">
+	<?php
+   get_search_form();
+?>
 
 				<div class="header_img_navi_contents">
 					<?php if(get_option('use-topics') === 'on' && is_home()){ ?>
@@ -123,6 +134,7 @@
 					<?php
 								}
 						} ?>
+						
 				</div>
 
 				<?php if(!is_user_logged_in()){ ?>
@@ -169,24 +181,5 @@
 
 <div class="header_form">
 		<?php if(is_archive() || is_search() || is_single()){ ?>
-	<div id="search-23" class="widget widget_search"><!-- 検索バー -->
-				<form role="search" method="get" id="searchform_main" action="<?php echo home_url(); ?>">
-						<div id="searchform_text">
-					  			<input type="text" id="searchtext" name="s" id="s" value="<?php if(isset($_GET['s'])){ echo $_GET['s']; } ?>"/>
-					  	</div>
-							<div id="searchform_pulldown">
-								<select name="seachform_itemstatus">
-									<option value="all">すべて</option>
-									<option value="givemeable">ください可能</option>
-								</select>
-							</div>
-							<div id="searchform_submit">
-								<input type="submit" id="searchsubmit" value="検索" />
-							</div>
-						</div>
-				</form>
-	</div><!-- 検索バー -->
-</div><!-- header_form -->
-		<!--<hr class="line-search"> -->
 		<?php } ?>
 		<div id="container">
