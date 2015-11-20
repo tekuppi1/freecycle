@@ -3049,3 +3049,14 @@ function escape_html_special_chars($text, $charset = 'utf-8'){
 	$nongtext = str_replace($ngwords, "", $text);
 	return htmlspecialchars($nongtext, ENT_QUOTES, $charset);
 }
+
+
+/**
+	*運営用ページ
+	*/
+
+function admin_page(){
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/admin/admin_function.php";
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/admin/admin_top.php";
+}
+add_shortcode('admin_page', 'admin_page');
