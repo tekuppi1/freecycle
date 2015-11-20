@@ -3049,3 +3049,24 @@ function escape_html_special_chars($text, $charset = 'utf-8'){
 	$nongtext = str_replace($ngwords, "", $text);
 	return htmlspecialchars($nongtext, ENT_QUOTES, $charset);
 }
+
+/* 本の冊数系関数*/
+function count_books($post_ID){
+	$book_counts = get_post_custom_values('book_count', $post_ID);
+	//meta key:'book_count'とpost_idでunique
+	return $book_counts[0];
+}
+
+function increace_book_count($post_ID, $num){
+	update_book_count($post_ID, $num);
+}
+
+function decreace_book_count($post_ID, $num){
+	update_book_count($post_ID, -$num);
+}
+
+function update_book_count($post_ID, $num){
+	$count = count_books($post_ID);
+	$count += $num;
+	return update_post_meta($post_ID, 'book_count', $count);
+}
