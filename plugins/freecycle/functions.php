@@ -3060,3 +3060,13 @@ function admin_page(){
 	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/admin/admin_top.php";
 }
 add_shortcode('admin_page', 'admin_page');
+
+/*検索結果を返す*/
+function get_search_json(){
+	$str = $_POST['str'];
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/admin/ajax_function.php";
+	ajax_func($str);
+	//echo json_encode($json);
+}
+add_action('wp_ajax_nopriv_get_search_json', 'get_search_json');
+add_action('wp_ajax_get_search_json', 'get_search_json');

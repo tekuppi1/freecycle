@@ -51,8 +51,8 @@ function get_catgories_list(){
 ?>
 
 <?php
-/**管理者用検索フォーム**/
-function admin_search_form(){ 
+/**管理者用検索フォーム(old)**/
+function admin_search_form_old(){ 
 ?>
 <!----------------------------->
 <style type="text/css">
@@ -83,6 +83,67 @@ function admin_search_form(){
 			<div style="clear:both;">
 		<!-- 検索バー -->          
 		</form>
+<?php } 
+/**管理者用検索フォーム(old)**/
+?>
+			
+<?php
+/**管理者用検索フォーム**/
+function admin_search_form(){ 
+?>
+<!----------------------------->
+<style type="text/css">
+.ad_input{
+	float : left;
+	height  :calc( 27px - 4px );
+	width : 100px;
+}
+#searchsubmit{
+	border: 0 !important;
+	padding: 0 !important;
+	margin-left : 0px;
+	margin-right :auto;
+	width: 45px !important;
+	height: 27px !important;
+	border-radius: 0px !important;
+	background-size: contain;
+	background-repeat: no-repeat;
+	text-indent: 100%;
+}
+</style>
+<!----------------------------->
+<form id="ad_search_form">
+    	<div>
+				<div>
+				<!--input class="ad_search" type="submit" id="searchsubmit" style="float:right;"/-->
+				<input class="ad_search" id="searchsubmit" style="float:right;"/></div>
+				<input type="text" placeholder="検索" class="ad_input" name="s" id="s" value="<?php if(isset($_GET['s'])){ echo escape_html_special_chars($_GET['s']); } ?>" style="float:right;"/>
+    	</div>
+			<div style="clear:both;">
+		<!-- 検索バー -->          
+		</form>
+			
+<script type="text/javascript">
+var ajaxurl = '<?php echo admin_url( 'admin-ajax.php'); ?>';
+jQuery(function() {
+	var $Inputs = jQuery("#ad_search_form").find("#searchsubmit");
+	$Inputs.on("click",function(){
+	console.log("ajax");
+	jQuery.ajax({
+		type: "POST",
+		url: ajaxurl,
+		data: {
+			'str' : jQuery(".ad_input").val(),
+			'action' : 'get_search_json',
+		},
+		success: function(json){
+			jQuery(".grid_center").empty();
+			jQuery(".grid_center").append(json);
+		}
+	});
+	});
+});
+</script>
 <?php } 
 /**管理者用検索フォーム**/
 ?>
@@ -125,7 +186,6 @@ function admin_item_list(){
 	color : #FFF;
 	border-radius : 5px;
 	text-align: center;
-	margin-top : 40px;
 	margin-left : auto;
 }
 .ad_pagenation{
@@ -170,18 +230,14 @@ jQuery(function(){
 <!--表示-->	
 <!---------------------------------------------------------------------------------------------->
 <div class="grid">
-<!---div id="post-<?php the_ID(); ?>" <?php post_class(); ?> class="entry-on-index"-->
-	<!--div class="ad-post-content"-->
-		<div class="colm1">
-			<a href="<?php the_permalink(); ?>" class="post-img-contents"><?php the_post_thumbnail(array(100, 100)) ?></a>
-		</div>
-		<!------------------------------------->
-		<div class="colm2">
-			<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
-			<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-			<div class="ad_cancel">取消</div>
-		</div>
-	<!--/div-->
+<div class="colm1">
+	<a href="<?php the_permalink(); ?>" class="post-img-contents"><?php the_post_thumbnail(array(100, 100)) ?></a>
+</div>
+<!------------------------------------->
+<div class="colm2">
+		<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+		<div class="ad_cancel">取消</div>
+</div>
 </div>
 <!---------------------------------------------------------------------------------------------->
 	
