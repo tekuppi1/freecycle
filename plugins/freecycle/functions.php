@@ -815,6 +815,9 @@ function exhibit_from_app(){
 	$item_name = isset($_POST['item_name'])?$_POST['item_name']:"";
 	$image_url = isset($_POST['image_url'])?$_POST['image_url']:"";
 	$category = isset($_POST['category'])?$_POST['category']:"";
+	$ISBN = isset($_POST['ISBN'])?$_POST['ISBN']:"";
+	$author = isset($_POST['author'])?$_POST['author']:"";
+	$price = isset($_POST['price'])?$_POST['price']:"";
 
 	if($current_user_id === 0){
 		echo "ログインされていないため出品できません。";
@@ -837,7 +840,10 @@ function exhibit_from_app(){
 		'image_url' => $image_url,
 		'department' => xprofile_get_field_data('学部', $current_user_id),
 		'course' => xprofile_get_field_data('学科', $current_user_id),
-		'item_category' => $category
+		'item_category' => $category,
+		'ISBN' => $ISBN,
+		'author' => $author,
+		'price' => $price
 	));
 
 	if($insert_id !== 0){
@@ -1844,23 +1850,26 @@ function exhibit(array $args){
 	'post_type' => 'post' // entry type name
 	);
 
-	if($args['exhibitor_id'] !== null){
+	/**
+	 * postの属性をセットします。
+	 */
+	if(isset($args['exhibitor_id'])){
 		$post['post_author'] = $args['exhibitor_id'];
 	}
 
-	if($args['item_name'] !== null){
+	if(isset($args['item_name'])){
 		$post['post_title'] = strip_tags($args['item_name']);
 	}
 
-	if($args['item_description'] !== null){
+	if(isset($args['item_description'])){
 		$post['post_content'] = htmlentities($args['item_description'], ENT_QUOTES, 'UTF-8');
 	}
 
-	if($args['item_category'] !== null){
+	if(isset($args['item_category'])){
 		$post['post_category'] = array($args['item_category']);
 	}
 
-	if($args['tags'] !== null){
+	if(isset($args['tags'])){
 		$post['tags_input'] = str_replace(array(" ", "　"), array("," ,",") , $args['tags']);
 	}
 
@@ -1870,23 +1879,35 @@ function exhibit(array $args){
 		return $insert_id;
 	}
 
-	if($args['department'] !== null){
+	if(isset($args['department'])){
 		add_post_meta($insert_id, "department", $args['department'], true);
 	}
 
-	if($args['course'] !== null){
+	if(isset($args['course'])){
 		add_post_meta($insert_id, "course", $args['course'], true);
 	}
 
-	if($args['item_status'] !== null){
+	if(isset($args['item_status'])){
 		add_post_meta($insert_id, "item_status", $args['item_status'], true);
 	}
 
-	if($args['asin'] !== null){
+	if(isset($args['asin']) && $args['asin'] !== null){
 		add_post_meta($insert_id, "asin", $args['asin'], true);
 	}
 
-	if($args['image_url'] !== null){
+	if(isset($args['ISBN'])){
+		add_post_meta($insert_id, "ISBN", $args['ISBN'], true);
+	}
+
+	if(isset($args['author'])){
+		add_post_meta($insert_id, "author", $args['author'], true);
+	}
+
+	if(isset($args['price'])){
+		add_post_meta($insert_id, "price", $args['price'], true);
+	}
+
+	if(isset($args['image_url'])){
 		// attach_idはinsert_id+1になる。
 		// fcl_media_sideload_image は attach_idを返さないのでこれ以上の実装方法が見つからない。汗
 		fcl_media_sideload_image($args['image_url'] ,$insert_id);
