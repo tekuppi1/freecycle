@@ -23,6 +23,7 @@ add_action('wp_ajax_nopriv_exhibit_from_app', 'exhibit_from_app');
 add_action('wp_ajax_register_app_information', 'register_app_information');
 add_action('wp_ajax_cancel_trade_from_exhibitor', 'cancel_trade_from_exhibitor');
 add_action('wp_ajax_cancel_trade_from_bidder', 'cancel_trade_from_bidder');
+add_action('wp_ajax_get_login_user_info', 'get_login_user_info');
 add_action('user_register', 'on_user_added');
 add_action('delete_user', 'on_user_deleted');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
@@ -32,6 +33,7 @@ require_once('functions.kses.php');
 require_once('categories/freecycle-categories.php');
 require_once('map/freecycle-map.php');
 require_once('trade-log/freecycle-trade-log.php');
+require_once('members/loader.php');
 
 // 定数定義
 define("SIGNATURE", "\n\n\n配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchange.ag@gmail.com");
@@ -813,6 +815,9 @@ function exhibit_from_app(){
 	$item_name = isset($_POST['item_name'])?$_POST['item_name']:"";
 	$image_url = isset($_POST['image_url'])?$_POST['image_url']:"";
 	$category = isset($_POST['category'])?$_POST['category']:"";
+	$ISBN = isset($_POST['ISBN'])?$_POST['ISBN']:"";
+	$author = isset($_POST['author'])?$_POST['author']:"";
+	$price = isset($_POST['price'])?$_POST['price']:"";
 
 	if($current_user_id === 0){
 		echo "ログインされていないため出品できません。";
@@ -835,7 +840,10 @@ function exhibit_from_app(){
 		'image_url' => $image_url,
 		'department' => xprofile_get_field_data('学部', $current_user_id),
 		'course' => xprofile_get_field_data('学科', $current_user_id),
-		'item_category' => $category
+		'item_category' => $category,
+		'ISBN' => $ISBN,
+		'author' => $author,
+		'price' => $price
 	));
 
 	if($insert_id !== 0){
@@ -1842,23 +1850,26 @@ function exhibit(array $args){
 	'post_type' => 'post' // entry type name
 	);
 
-	if($args['exhibitor_id'] !== null){
+	/**
+	 * postの属性をセットします。
+	 */
+	if(isset($args['exhibitor_id'])){
 		$post['post_author'] = $args['exhibitor_id'];
 	}
 
-	if($args['item_name'] !== null){
+	if(isset($args['item_name'])){
 		$post['post_title'] = strip_tags($args['item_name']);
 	}
 
-	if($args['item_description'] !== null){
+	if(isset($args['item_description'])){
 		$post['post_content'] = htmlentities($args['item_description'], ENT_QUOTES, 'UTF-8');
 	}
 
-	if($args['item_category'] !== null){
+	if(isset($args['item_category'])){
 		$post['post_category'] = array($args['item_category']);
 	}
 
-	if($args['tags'] !== null){
+	if(isset($args['tags'])){
 		$post['tags_input'] = str_replace(array(" ", "　"), array("," ,",") , $args['tags']);
 	}
 
@@ -1868,23 +1879,35 @@ function exhibit(array $args){
 		return $insert_id;
 	}
 
-	if($args['department'] !== null){
+	if(isset($args['department'])){
 		add_post_meta($insert_id, "department", $args['department'], true);
 	}
 
-	if($args['course'] !== null){
+	if(isset($args['course'])){
 		add_post_meta($insert_id, "course", $args['course'], true);
 	}
 
-	if($args['item_status'] !== null){
+	if(isset($args['item_status'])){
 		add_post_meta($insert_id, "item_status", $args['item_status'], true);
 	}
 
-	if($args['asin'] !== null){
+	if(isset($args['asin']) && $args['asin'] !== null){
 		add_post_meta($insert_id, "asin", $args['asin'], true);
 	}
 
-	if($args['image_url'] !== null){
+	if(isset($args['ISBN'])){
+		add_post_meta($insert_id, "ISBN", $args['ISBN'], true);
+	}
+
+	if(isset($args['author'])){
+		add_post_meta($insert_id, "author", $args['author'], true);
+	}
+
+	if(isset($args['price'])){
+		add_post_meta($insert_id, "price", $args['price'], true);
+	}
+
+	if(isset($args['image_url'])){
 		// attach_idはinsert_id+1になる。
 		// fcl_media_sideload_image は attach_idを返さないのでこれ以上の実装方法が見つからない。汗
 		fcl_media_sideload_image($args['image_url'] ,$insert_id);
@@ -2319,18 +2342,32 @@ function endsWith($haystack, $needle){
 function bp_dtheme_header_style() {
 	$header_image = get_header_image();
 ?>
-	<style type="text/css">
-		<?php if ( !empty( $header_image ) ) : ?>
-			#header { background-image: url(<?php echo $header_image ?>); }
-		<?php endif; ?>
+    <style type="text/css">
+        <?php if ( !empty( $header_image)): ?> #header {
+            background-image: url(<?php echo $header_image ?>);
+        }
 
-		<?php if ( 'blank' == get_header_textcolor() ) { ?>
-		#header h1, #header #desc { display: none; }
-		<?php } else { ?>
-		#header h1 a, #desc { color:#<?php header_textcolor(); ?>; }
-		<?php } ?>
-	</style>
-<?php
+        <?php endif;
+        ?> <?php if ( 'blank'==get_header_textcolor()) {
+            ?> #header h1,
+            #header #desc {
+                display: none;
+            }
+            <?php
+        }
+
+        else {
+            ?> #header h1 a,
+            #desc {
+                color: #<?php header_textcolor();
+                ?>;
+            }
+            <?php
+        }
+
+        ?>
+    </style>
+    <?php
 }
 
 /**
@@ -2350,52 +2387,53 @@ function bp_dtheme_blog_comments( $comment, $args, $depth ) {
 		$avatar_size = 25;
 	?>
 
-	<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
-		<div class="comment-avatar-box">
-			<div class="avb">
-				<a href="<?php echo get_comment_author_url(); ?>" rel="nofollow">
-					<?php if ( $comment->user_id ) : ?>
-						<?php echo bp_core_fetch_avatar( array( 'item_id' => $comment->user_id, 'width' => $avatar_size, 'height' => $avatar_size, 'email' => $comment->comment_author_email ) ); ?>
-					<?php else : ?>
-						<?php echo get_avatar( $comment, $avatar_size ); ?>
-					<?php endif; ?>
-				</a>
-			</div>
-		</div>
+        <li <?php comment_class(); ?> id="comment-
+            <?php comment_ID(); ?>">
+                <div class="comment-avatar-box">
+                    <div class="avb">
+                        <a href="<?php echo get_comment_author_url(); ?>" rel="nofollow">
+                            <?php if ( $comment->user_id ) : ?>
+                                <?php echo bp_core_fetch_avatar( array( 'item_id' => $comment->user_id, 'width' => $avatar_size, 'height' => $avatar_size, 'email' => $comment->comment_author_email ) ); ?>
+                                    <?php else : ?>
+                                        <?php echo get_avatar( $comment, $avatar_size ); ?>
+                                            <?php endif; ?>
+                        </a>
+                    </div>
+                </div>
 
-		<div class="comment-content">
-			<div class="comment-meta">
-				<p>
-					<?php
+                <div class="comment-content">
+                    <div class="comment-meta">
+                        <p>
+                            <?php
 						/* translators: 1: comment author url, 2: comment author name, 3: comment permalink, 4: comment date/timestamp*/
 						printf( __( '<a href="%1$s" rel="nofollow">%2$s</a> said on <a href="%3$s"><span class="time-since">%4$s</span></a>', 'buddypress' ), get_comment_author_url(), get_comment_author(), get_comment_link(), get_comment_date() );
 					?>
-				</p>
-			</div>
+                        </p>
+                    </div>
 
-			<div class="comment-entry">
-				<?php if ( $comment->comment_approved == '0' ) : ?>
-				 	<em class="moderate"><?php _e( 'Your comment is awaiting moderation.', 'buddypress' ); ?></em>
-				<?php endif; ?>
+                    <div class="comment-entry">
+                        <?php if ( $comment->comment_approved == '0' ) : ?>
+                            <em class="moderate"><?php _e( 'Your comment is awaiting moderation.', 'buddypress' ); ?></em>
+                            <?php endif; ?>
 
-				<?php comment_text(); ?>
-			</div>
+                                <?php comment_text(); ?>
+                    </div>
 
-			<div class="comment-options">
-					<?php if ( comments_open() ) : ?>
-						<?php comment_reply_link( array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ); ?>
-					<?php endif; ?>
+                    <div class="comment-options">
+                        <?php if ( comments_open() ) : ?>
+                            <?php comment_reply_link( array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ); ?>
+                                <?php endif; ?>
 
-					<?php if ( $user_ID == $comment->user_id ) : ?>
-						<?php //printf( '<a class="button comment-edit-link bp-secondary-action" href="%1$s" title="%2$s">%3$s</a> ', get_update_comment_link( $comment->comment_ID ), esc_attr__( 'Edit comment', 'buddypress' ), __( 'Edit', 'buddypress' ) ); ?>
-						<?php printf( '<a class="button comment-edit-link bp-secondary-action edit-button" onClick="%1$s" title="%2$s">%3$s</a> ', 'onClickEditCommentButton('. $comment->comment_ID .')', esc_attr__( 'Edit comment', 'buddypress' ), __( 'Edit', 'buddypress' ) ); ?>
-					<?php endif; ?>
+                                    <?php if ( $user_ID == $comment->user_id ) : ?>
+                                        <?php //printf( '<a class="button comment-edit-link bp-secondary-action" href="%1$s" title="%2$s">%3$s</a> ', get_update_comment_link( $comment->comment_ID ), esc_attr__( 'Edit comment', 'buddypress' ), __( 'Edit', 'buddypress' ) ); ?>
+                                            <?php printf( '<a class="button comment-edit-link bp-secondary-action edit-button" onClick="%1$s" title="%2$s">%3$s</a> ', 'onClickEditCommentButton('. $comment->comment_ID .')', esc_attr__( 'Edit comment', 'buddypress' ), __( 'Edit', 'buddypress' ) ); ?>
+                                                <?php endif; ?>
 
-			</div>
+                    </div>
 
-		</div>
+                </div>
 
-<?php
+                <?php
 }
 
 function render(){
@@ -2921,7 +2959,8 @@ function fc_messages_pagination_count() {
 	$total = bp_core_number_format( $messages_template->total_thread_count );
 
 	// オーバーライド部分
-	echo sprintf( _n( '%1$s件目から%2$s件目まで表示(%3$s件中)', '%1$s件目から%2$s件目まで表示(%3$s件中)', $total, 'buddypress' ), $from_num, $to_num, number_format_i18n( $total ) ); ?><?php
+	echo sprintf( _n( '%1$s件目から%2$s件目まで表示(%3$s件中)', '%1$s件目から%2$s件目まで表示(%3$s件中)', $total, 'buddypress' ), $from_num, $to_num, number_format_i18n( $total ) ); ?>
+                    <?php
 }
 
 function show_all_items(){
@@ -3014,9 +3053,20 @@ function get_data_within_the_period($options, $table, $timing){
 	return $result;
 }
 
-//HTML特殊文字をエスケープする関数 
+/* show the user name logging in on the top of the display */
+function get_login_user_info() {
+    global $current_user;
+    get_currentuserinfo();
+    echo json_encode($current_user);
+    die;
+}
+
+// filter and if the information is hooked with the condition of first argument, jump to the second argument
+add_action('wp_ajax_get_login_user_info', 'get_login_user_info');
+
+//HTML特殊文字をエスケープする関数
 function escape_html_special_chars($text, $charset = 'utf-8'){
 	$ngwords = array("<", ">", ";");
 	$nongtext = str_replace($ngwords, "", $text);
 	return htmlspecialchars($nongtext, ENT_QUOTES, $charset);
-} 
+}
