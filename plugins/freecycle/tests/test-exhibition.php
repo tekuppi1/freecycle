@@ -1,7 +1,7 @@
 <?php
 
 class ExhibitionTest extends WP_UnitTestCase {
-	private $exhibitor_name = "exhibitor";
+	private $exhibitor_name = "exhibit";
 
 	/**
 	 * テスト開始前の下準備を行います

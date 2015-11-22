@@ -42,12 +42,12 @@ class BookCountTest extends WP_UnitTestCase {
          $this->assertEquals($count - $this->DECREMENT_NUM, count_books($this->postID));
      }
 
-     /**
+    /**
      * テスト開始後の後始末を行います
      */
-     function tearDown(){
-         global $wpdb, $table_prefix;
-         //postmetaテーブルを掃除
-         $wpdb->delete($table_prefix . 'postmeta', array('post_id' =>$this->postID, 'meta_key'=> 'book_count'));
-     }
+    function tearDown(){
+        global $wpdb, $table_prefix;
+        // fmt_points テーブルを掃除
+        $wpdb->delete($table_prefix . "fmt_points", array("user_id"=>get_user_by("login", $this->user_name)->ID));
+    }
 }
