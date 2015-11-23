@@ -140,9 +140,11 @@ function zoom(i){
 								else:
 									$main_category = get_category($sub_category[0]->parent);
 								?>
-	 							大学: <?php echo $main_category->cat_name;?> <br>
-	 							学部: <?php echo $sub_category[0]->cat_name; ?>
+	 							大学: <?php echo $main_category->cat_name;?> 学部: <?php echo $sub_category[0]->cat_name; ?><br/>
  							<?php endif; ?>
+							著者: <?php echo get_post_meta($post->ID, "author", true)?get_post_meta($post->ID, "author", true):"データがありません"; ?><br/>
+							Amazon価格: <?php echo get_post_meta($post->ID, "price", true)?get_post_meta($post->ID, "price", true):"データがありません"; ?><br/>
+							在庫数:  <?php echo count_books($post->ID)?count_books($post->ID):0; ?>冊<br/>
 						</div>
 						<?php
 						/*
