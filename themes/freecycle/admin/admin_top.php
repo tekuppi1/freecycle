@@ -1,6 +1,5 @@
-
 <?php
-	get_catgories_list();
+	//get_catgories_list();
   admin_search_form();
 	echo '<hr>';
 	admin_item_list();

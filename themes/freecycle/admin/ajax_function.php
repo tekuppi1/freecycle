@@ -24,7 +24,8 @@ foreach( $posts as $key => $post ) {
 	$html .= "<div class=\"grid\">";
 	$html .= "<div class=\"colm1\">";
 	$html .= "<a href=\"".$returnObj[$key]['permalink']."\" class=\"post-img-contents\">";
-	$html .= "<img width=\"100\" height=\"100\" src=\" ".$returnObj[$key]['image'][0]." \" class=\"attachment-100x100 wp-post-image\">";
+	if($returnObj[$key]['image']!=null)
+		$html .= "<img width=\"100\" height=\"100\" src=\" ".$returnObj[$key]['image'][0]." \" class=\"attachment-100x100 wp-post-image\">";
 	$html .= "</a>";
 	$html .= "</div>";
 	$html .= "<!------------------------------------->";

@@ -3091,3 +3091,8 @@ function get_search_json(){
 }
 add_action('wp_ajax_nopriv_get_search_json', 'get_search_json');
 add_action('wp_ajax_get_search_json', 'get_search_json');
+
+function admin_styles() {
+    wp_enqueue_style( 'admin', "/wp-content/themes/freecycle/admin/admin_style.css");
+}
+add_action( 'wp_enqueue_scripts', 'admin_styles');
