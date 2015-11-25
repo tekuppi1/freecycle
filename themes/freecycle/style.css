@@ -4839,12 +4839,12 @@ div.pagenation_next{
 /* カード */
 .card{
 	width:80%;
-	margin: 0 auto;
+	margin: 20px auto;
 	background-color: white;
 	border-radius: 2px;
 	text-align: center;
 	box-shadow: 2px 2px  1px #444444;
-
+	padding-top: 5px;
 }
 .card-title{
 	padding: 15px 0 7px 0;
