@@ -1841,6 +1841,18 @@ function has_todo_in_entry_list(){
  */
 function exhibit(array $args){
 	$insert_id;
+
+	// 同じISBNを持つ商品が既に存在するか検索。
+	if(isset($args['ISBN'])){
+		$p = get_post_by_ISBN($args['ISBN']);
+		if(!empty($p)){
+			// 存在する場合はその商品の冊数をインクリメントし、
+			// その商品の id を insert_id として返して処理終了。
+			increace_book_count($p->ID, 1);
+			return $p->ID;
+		}
+	}
+
 	$post = array(
 	'comment_status' => 'open', // open comment
 	'ping_status' => 'closed', // pinback, trackback off
@@ -1913,6 +1925,9 @@ function exhibit(array $args){
 		fcl_media_sideload_image($args['image_url'] ,$insert_id);
 		update_post_meta($insert_id,'_thumbnail_id',$insert_id + 1);
 	}
+
+	// increment book count
+	increace_book_count($insert_id, 1);
 
 	// add point on exhibition
 	add_got_points($args['exhibitor_id'], get_option('exhibition-point'));
@@ -3069,4 +3084,43 @@ function escape_html_special_chars($text, $charset = 'utf-8'){
 	$ngwords = array("<", ">", ";");
 	$nongtext = str_replace($ngwords, "", $text);
 	return htmlspecialchars($nongtext, ENT_QUOTES, $charset);
+}
+
+/* 本の冊数系関数*/
+function count_books($post_ID){
+	$book_counts = get_post_custom_values('book_count', $post_ID);
+	//meta key:'book_count'とpost_idでunique
+	return $book_counts[0];
+}
+
+function increace_book_count($post_ID, $num){
+	update_book_count($post_ID, $num);
+}
+
+function decreace_book_count($post_ID, $num){
+	update_book_count($post_ID, -$num);
+}
+
+function update_book_count($post_ID, $num){
+	$count = count_books($post_ID);
+	$count += $num;
+	return update_post_meta($post_ID, 'book_count', $count);
+}
+
+
+// ISBN の値から本のデータを取って返します。
+function get_post_by_ISBN($isbn){
+	$posts = get_posts(array(
+			'meta_key' => 'ISBN',
+			'meta_value' => $isbn
+		));
+
+	if(sizeof($posts) === 0){
+		return array(); // 検索結果が無いときは空オブジェクトを返す
+	}else if(sizeof($posts) === 1){
+		return $posts[0];
+	}else if(sizeof($posts) > 1){
+		error_log("There are multiple posts having same ISBN ".$isbn, 0); // ISBNの重複が発生しているのでエラーを出力
+		return $posts[0];
+	}
 }
