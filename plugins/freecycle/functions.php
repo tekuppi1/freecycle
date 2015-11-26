@@ -3086,6 +3086,32 @@ function escape_html_special_chars($text, $charset = 'utf-8'){
 	return htmlspecialchars($nongtext, ENT_QUOTES, $charset);
 }
 
+
+/**
+	*運営用ページ
+	*/
+
+function admin_page(){
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/admin/admin_function.php";
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/admin/admin_top.php";
+}
+add_shortcode('admin_page', 'admin_page');
+
+/*検索結果を返す*/
+function get_search_json(){
+	$str = $_POST['str'];
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/admin/ajax_function.php";
+	ajax_func($str);
+	//echo json_encode($json);
+}
+add_action('wp_ajax_nopriv_get_search_json', 'get_search_json');
+add_action('wp_ajax_get_search_json', 'get_search_json');
+
+function admin_styles() {
+    wp_enqueue_style( 'admin', "/wp-content/themes/freecycle/admin/admin_style.css");
+}
+add_action( 'wp_enqueue_scripts', 'admin_styles');
+
 /* 本の冊数系関数*/
 function count_books($post_ID){
 	$book_counts = get_post_custom_values('book_count', $post_ID);
