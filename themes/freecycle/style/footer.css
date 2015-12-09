@@ -1,7 +1,7 @@
 /*フッター*/
 #footer_menu{
 	position:relative; 
-	height: 250px;
+	height: 270px;
 	/*padding : 5px 5px 5px 10px;*/
 	background-color: #09aa04;
 	border-top: 3px solid #ffa64d;
@@ -37,15 +37,15 @@
 #footer_menu hr{
 	margin: 0px;
 	border: 0px solid #ffffff;
-	border-bottom: 2px dotted rgba(255, 255, 255, 0.3);
+	border-bottom: 2px dotted rgba(255, 255, 255, 0.5);
 	background: none;
+	margin-bottom: 3px;
 }
 #footer_bottom{
 	position:absolute; 
 	bottom: 3px;
-	/*right: 30px;*/
-	/*left: 10px;*/
-	width: 100%;
+	width: 96%;
+	padding-left:2%;
 }
 #footer_bottom	img{}
 
