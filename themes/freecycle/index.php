@@ -115,9 +115,9 @@
 		<link rel="stylesheet" href="wp-content/themes/freecycle/js/owl-carousel/owl.theme.css">
 	<script>
 		jQuery(function() {
-			displayImages1();
-			displayImages2();
-			displayImages3();
+			//displayImages1();
+			//displayImages2();
+			//displayImages3();
 		});
 	</script>
 <!-- SlideImageScript -->

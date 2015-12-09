@@ -3108,9 +3108,19 @@ add_action('wp_ajax_nopriv_get_search_json', 'get_search_json');
 add_action('wp_ajax_get_search_json', 'get_search_json');
 
 function admin_styles() {
-    wp_enqueue_style( 'admin', "/wp-content/themes/freecycle/admin/admin_style.css");
+    wp_enqueue_style( 'admin', "/wp-content/themes/freecycle/admin/styles/admin_style.css");
 }
 add_action( 'wp_enqueue_scripts', 'admin_styles');
+
+/**
+	*ヘッダー
+	*/
+function header_styles() {
+	wp_enqueue_style( 'header', "/wp-content/themes/freecycle/style/header.css");
+	wp_enqueue_style( 'footer', "/wp-content/themes/freecycle/style/footer.css");
+}
+add_action( 'wp_enqueue_scripts', 'header_styles');
+
 
 /* 本の冊数系関数*/
 function count_books($post_ID){
