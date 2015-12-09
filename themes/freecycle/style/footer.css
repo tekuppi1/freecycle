@@ -1,0 +1,83 @@
+/*フッター*/
+#footer_menu{
+	position:relative; 
+	height: 250px;
+	/*padding : 5px 5px 5px 10px;*/
+	background-color: #09aa04;
+	border-top: 3px solid #ffa64d;
+	box-shadow: 0px 0px -2px -2px rgba(0,0,0,0.2);
+	color: white;
+}
+#footer_menu a{
+	color: white;
+	/*font-size : small;*/
+}
+#footer_left{
+	position:absolute; 
+	top: 10px;
+	left: 10px;
+	width: 90%;
+	font-size: 12px;
+}
+#footer_left div{
+	height: 16px;
+	font-size: 14px;
+	font-weight: bolder;
+	display: table-cell;
+	vertical-align: middle;
+}
+#footer_left ul{
+	margin: 8px 0;
+}
+#footer_left li {
+	margin-bottom: 1px;
+	margin-left: 40px;
+	list-style-image:url("../images/header/bookpic1.png") ;
+}
+#footer_menu hr{
+	margin: 0px;
+	border: 0px solid #ffffff;
+	border-bottom: 2px dotted rgba(255, 255, 255, 0.3);
+	background: none;
+}
+#footer_bottom{
+	position:absolute; 
+	bottom: 3px;
+	/*right: 30px;*/
+	/*left: 10px;*/
+	width: 100%;
+}
+#footer_bottom	img{}
+
+#footer_bottom #footer_text{
+ height: auto;
+ width: 100%;
+ float: left;
+}
+#footer_text #text_right{
+	float: left;
+	width: 49%;
+}
+#footer_text #text_left{
+	float: right;
+	width: 49%;
+}
+
+#footer_logo_icon{
+	float: right;
+	height: 40px;
+	width: 120px;
+	background-image: url(../images/header/logo_w.png);
+	z-index: 5;
+	background-repeat: no-repeat;
+	background-size:contain;
+}
+
+#copyright{
+	width: auto;
+	position:absolute;
+  bottom: 0;
+}
+#copyright a{
+	text-decoration: none;
+}
