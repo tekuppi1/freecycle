@@ -1,0 +1,68 @@
+/*トップページ*/
+#huruhon{
+	height: auto;
+	background: #93f7bd;
+}
+#huruhon img{
+	width: 100%;
+	height: auto;
+}
+
+#index_searchform{
+	float: right;
+	width: 80%;
+	height: 50px;
+	padding-top: 10px;
+	padding-right: 10px;
+}
+
+#searchbox{
+	height: 	500px;
+	background: #FFF;
+		color: #09aa04;
+}
+#searchbox img{
+	float: left;
+	height: 80px;
+}
+#searchbox .clear{
+	width: 100%;
+	clear: both;
+}
+#searchbox .category{
+	width: 300px;
+	float: left;
+	padding: 20px;
+}
+#searchbox .category .main{
+	margin: 0px;
+	margin-left: 90px;
+	margin-right: 20px;
+	padding-top: 20px;
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 1px solid #ffa64d;
+}
+#searchbox .category .sub{
+	margin: 0px;
+	margin-left: 100px;
+	margin-right: 10px;
+	margin-top: 5px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+#index_title{
+	width: 100px;
+	margin:0 0 10px 0;
+	padding:3px 8px;
+	border-width:0 0 0 8px;
+	border-color: #b9ff6a;
+	border-style:solid;
+	background:#09aa04;
+	color:#EBF7FA;
+	line-height:140%;
+	font-weight:bold;
+	text-align: center;
+	margin-top: 25px;
+}
