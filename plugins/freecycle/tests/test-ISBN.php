@@ -6,10 +6,8 @@ class ISBNTest extends WP_UnitTestCase {
 
     /**
 	 * テスト開始前の下準備を行います。
-     * この処理に記入された処理は、テストケース群実行前に一度だけ呼ばれます。
-     * 各テストケースの実行前に一度ずつ実行したい処理には setUp 関数を使ってください。
 	 */
-    public static function setUpBeforeClass(){
+    function setUp(){
         wp_create_user(self::USER_NAME, self::USER_PASS);
         wp_set_current_user(get_user_by('login', self::USER_NAME)->ID);
     }
@@ -57,10 +55,8 @@ class ISBNTest extends WP_UnitTestCase {
 
     /**
      * テスト後の処理を行います。
-     * この処理に記入された処理は、テストケース群実行後に一度だけ呼ばれます。
-     * 各テストケースの実行後に一度ずつ実行したい処理には tearDown 関数を使ってください。
      */
-    public static function tearDownAfterClass(){
+    function tearDown(){
         global $wpdb, $table_prefix;
         // fmt_points テーブルを掃除
         $wpdb->delete($table_prefix . "fmt_points", array("user_id"=>get_user_by("login", self::USER_NAME)->ID));
