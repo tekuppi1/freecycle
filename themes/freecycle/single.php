@@ -102,6 +102,69 @@ function zoom(i){
 	}
 }
 
+// 取引完了関数
+function onFinish(postID){
+	swal({
+		title: "取引を完了します。",
+		text: "よろしいですか？",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "はい",
+		cancelButtonText: "いいえ",
+		closeOnConfirm: true,
+		closeOnCancel: true
+	},
+	function(isConfirm){
+		if (isConfirm) {
+			jQuery.ajax({
+				type: "POST",
+				url: '<?php echo admin_url('admin-ajax.php'); ?>',
+				data: {
+					"action": "finish_trade",
+					"post_id": postID
+				},
+				success: function(res){
+					var result = JSON.parse(res);
+					if(result.error === "true"){
+						swal({
+							title: "取引完了に失敗しました。",
+							text: result.message,
+							type: "error",
+							showCancelButton: false,
+							confirmButtonColor: "#AEDEF4",
+							confirmButtonText: "OK",
+							closeOnConfirm: true
+						});
+					}else{
+						swal({
+							title: "取引を完了しました。",
+							type: "success",
+							showCancelButton: false,
+							confirmButtonColor: "#AEDEF4",
+							confirmButtonText: "OK",
+							closeOnConfirm: true
+						},
+						function(){
+							location.reload();
+						});
+					}
+				},
+				false: function(){
+					swal({
+						title: "取引完了に失敗しました。",
+						text: "システム管理者に連絡してください。",
+						type: "error",
+						showCancelButton: false,
+						confirmButtonColor: "#AEDEF4",
+						confirmButtonText: "OK",
+						closeOnConfirm: true
+					});
+				}
+			});
+		}else{return false;}
+	});
+}
+
 </script>
 
 	<div id="content">
@@ -145,6 +208,11 @@ function zoom(i){
 							著者: <?php echo get_post_meta($post->ID, "author", true)?get_post_meta($post->ID, "author", true):"データがありません"; ?><br/>
 							Amazon価格: <?php echo get_post_meta($post->ID, "price", true)?number_format(get_post_meta($post->ID, "price", true))."円":"データがありません"; ?><br/>
 							在庫数:  <?php echo count_books($post->ID)?count_books($post->ID):0; ?>冊<br/>
+						</div>
+						<div>
+							<?php if(current_user_can('administrator')) { ?>
+								<input type="button" id="finish" value="取引完了" onClick="onFinish(<?php echo $post->ID ?>);" <?php echo count_books($post->ID)>0?:"disabled" ?>/>
+							<?php } ?>
 						</div>
 						<?php
 						/*
