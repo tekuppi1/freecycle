@@ -2951,3 +2951,13 @@ function show_all_items(){
 	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."all-items.php";
 }
 add_shortcode('show_all_items', 'show_all_items');
+
+// 古本市の開始日時、終了日時、開催場所の情報を取ってくる関数
+function select_bookfair_info(){
+	global $table_prefix;
+	global $wpdb;
+	$bookfair_info = $wpdb->get_results($wpdb->prepare(
+					"SELECT * FROM ".$table_prefix."fmt_book_fair"));
+
+	return $bookfair_info;
+}
