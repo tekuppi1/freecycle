@@ -225,7 +225,7 @@ function onFinish(postID){
 							<?php printf( __( '%1$s <span></span>', 'buddypress' ), get_the_date()); ?>
 							<!-- edit entry is not available -->
 							<!-- <span class="post-utility alignright"><?php edit_post_link( __( 'Edit this entry', 'buddypress' ) ); ?></span> -->
-							<?php if($user_ID == $authordata->ID && !isGiveme($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onDeletePost();">出品取り消し</a></span><?php } ?>
+							<?php if(current_user_can('administrator')){ ?><span class="post-utility alignright"><a href="javaScript:onDeletePost();">出品取り消し</a></span><?php } ?>
 							<?php if(current_user_can('administrator')){ ?><span class="post-utility alignright"><a href='javaScript:onEdit("<?php echo $item_status[0]; ?>");'>編集</a></span><?php } ?>
 						</p>
 
