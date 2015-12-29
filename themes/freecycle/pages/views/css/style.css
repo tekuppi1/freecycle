@@ -1,0 +1,539 @@
+body{
+	margin:0px;
+	background-color:#d7f9b0;
+	background-image: url(../image/back.png);
+}
+
+/*ヘッダー*/
+#header_menu{
+	padding : 5px 5px 5px 10px;
+	background-color: #09aa04;
+	border-bottom: 3px solid #ffa64d;
+	box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.2);
+}
+.dropmenu{
+  *zoom: 1;
+  list-style-type: none;
+  width: 100%;
+	height: auto;
+	margin: 0px;
+  padding: 0;
+}
+.dropmenu:before, .dropmenu:after{
+  content: "";
+  display: table;
+}
+.dropmenu:after{
+  clear: both;
+}
+.dropmenu li{
+  position: relative;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.dropmenu li a{
+  display: block;
+  margin: 0;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  text-decoration: none;
+}
+.dropmenu li ul{
+  list-style: none;
+  position: absolute;
+  z-index: 9999;
+  top: 70%;
+  right: 0;
+  margin: 0;
+  padding: 0;
+	background-color: #FFF;
+}
+.dropmenu li ul li{
+  width: 150px;
+}
+.dropmenu li ul li a{
+  padding: 10px 6px;
+  text-align: left;
+	color: #333;
+}
+#dropmenu li ul li{
+	overflow: hidden;
+	height: 0;
+	transition: .2s;
+}
+#dropmenu li:hover #home_icon{
+	overflow: visible;
+	border: 1px solid rgba(20, 210, 255,0);
+  box-shadow: 0 -5px 20px rgba(255, 255, 255, 0.5);
+}
+#dropmenu li:hover ul{
+	overflow: visible;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 1px 0 rgba(255,255,255,1);
+}
+#dropmenu li:hover ul li{
+	overflow: visible;
+	height: 100%;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 1px 0 rgba(255,255,255,1);
+}
+
+#logo{
+	width: auto;
+	float: left;
+}
+#logo_icon{
+	height: 50px;
+}
+#home_icon_li{
+	height: auto;
+	width:25%;
+	float: right;
+}
+#home_icon{
+	height:auto;
+	width:50px;
+}
+#check{
+	font-size: 12px;
+}
+#check img{
+	width: 90%;
+	padding: 2px;
+}
+#menu_button{
+	float: right;
+}
+#menu_button #menu_button_a{
+	text-align: center;
+	vertical-align: middle;
+	height:50px;
+}
+
+#col{
+	background:#fff;
+	height: 500px;
+	margin: 20px 5px;
+	box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.2);
+}
+@media screen and (min-width: 800px) {
+#col{
+	width: 800px;
+	margin: 20px auto;
+}
+}
+
+/*フッター*/
+#footer_menu{
+	position:relative; 
+	height: 200px;
+	padding : 5px 5px 5px 10px;
+	background-color: #09aa04;
+	border-top: 3px solid #ffa64d;
+	box-shadow: 0px 0px -2px -2px rgba(0,0,0,0.2);
+	color: white;
+}
+#footer_logo_icon{
+	height: 50px;
+}
+#footer_left{
+	position:absolute; 
+	top: 10px;
+	width: 90%;
+	font-size: 12px;
+}
+#footer_left div{
+	height: 16px;
+	font-size: 14px;
+	font-weight: bolder;
+	display: table-cell;
+	vertical-align: middle;
+}
+#footer_left ul{
+	margin: 8px 0;
+}
+#footer_left li {
+	margin-bottom: 5px;
+	list-style-image:url("../image/bookpic1.png") ;
+}
+#footer_left hr{
+	border: 0px solid #ffffff;
+	border-bottom: 2px dotted rgba(255, 255, 255, 0.3);
+}
+#footer_right{
+	position:absolute; 
+	bottom: 10px;
+	right: 10px;
+}
+#footer_right	img{
+	float : right;
+}
+
+/*トップページ*/
+#huruhon{
+	height: auto;
+	background: #93f7bd;
+}
+#huruhon img{
+	width: 100%;
+}
+#head{
+	width: 100%;
+	background-color: #ffa64d;
+	color: #FFF;
+	font-size: 12px;
+}
+#searchbox{
+	height: 	500px;
+	background: #FFF;
+		color: #09aa04;
+}
+#searchbox img{
+	float: left;
+	height: 80px;
+}
+#searchbox .clear{
+	width: 100%;
+	clear: both;
+}
+#searchbox .category{
+	width: 300px;
+	float: left;
+	padding: 20px;
+}
+#searchbox .category .main{
+	margin: 0px;
+	margin-left: 90px;
+	margin-right: 10px;
+	padding-top: 20px;
+	font-size: 20px;
+	font-weight: bold;
+	border-bottom: 1px solid #ffa64d;
+}
+#searchbox .category .sub{
+	margin: 0px;
+	margin-left: 100px;
+	margin-right: 10px;
+	margin-top: 5px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+#searchbox .cat{
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 20px;
+	font-size: 24px;
+}
+#searchbox .cat div{
+	/*border: 1px solid #fff; */
+}
+#searchbox .cat .main{
+	position:relative;
+	width: 100%;
+	text-align:center;
+	padding: 20px 0px;
+	margin-top: 50px;
+	margin-bottom: 6px;
+	background-color: #09aa04;
+	color: #FFF;
+	background-image: -webkit-linear-gradient(top, #06c400,#059a00);
+	background-image: linear-gradient(to bottom, #06c400,#059a00);
+	border-radius: 4px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+	border: 1px solid #059a00;
+}
+#searchbox .cat .main:hover {
+	border:1px solid #059a00;
+	background-image: -webkit-linear-gradient(top, #06c400,#059a00);
+	background-image: linear-gradient(to bottom, #06c400,#059a00);
+}
+#searchbox .cat .main:active {
+	background: #09aa04;
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, .2);
+	text-shadow: 0 1px 1px rgba(255, 255, 255, .5);
+}
+#searchbox .cat .sub{
+	position:relative;
+	width: 48%;
+	text-align:center;
+	padding: 20px 0;
+	margin: 0 1%;
+	background-color: #ff4d4d;
+	color: #FFF;
+	/*box-shadow:0px 10px 2px #b73a70;*/
+	background-image: -webkit-linear-gradient(top, #ff7bb4,#ff5aa1);
+	background-image: linear-gradient(to bottom, #ff7bb4,#ff5aa1);
+	border-radius: 4px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+	/*border: 1px solid #059a00;*/
+	font-size: 16px;
+}
+#searchbox .cat .sub:active {
+	background: #e04387;
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, .2);
+	text-shadow: 0 1px 1px rgba(255, 255, 255, .5);
+}
+
+.triangle{
+    display:inline-block;
+		position:absolute; 
+		right: 0px;
+		margin-left: 5px;
+		vertical-align: middle;
+    border-top: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #FFF;
+}
+.triangle12{
+	  display:inline-block;
+		position:absolute; 
+		right: 0px;
+		margin-left: 5px;
+		vertical-align: middle;
+		border-top: 12px solid transparent;
+		border-right: 12px solid transparent;
+		border-bottom: 12px solid transparent;
+		border-left: 12px solid #FFF;
+}
+
+
+/*商品ぺージ*/
+.grid_center{
+	position: relative;
+	width: 100%;
+  max-width: 799px;
+  margin: 0 auto;   /*全体の中央寄せ*/
+}
+
+.grid{
+	width: 100%;
+	border-bottom:3px solid #ccc;
+}
+.entry_img{
+	width: 100px;
+}
+
+.colm1{
+	float:left;
+	margin: 5px;
+	vertical-align:center;
+}
+.colm2{
+	position: relative;
+	height : 150px;
+	margin-left: 110px;
+	/*top : 10px;*/
+	bottom : 5px;
+}
+.colm3{
+	position: absolute;
+	width: 50%;
+	height: 50%;
+	bottom: 0px;
+}
+.colm_fotter{
+	clear: both;
+}
+
+.title{
+	position: absolute;
+	width: 100%;
+	font-size: 24px;
+	text-align: center;
+	top : 2px;
+}
+.title p{
+	white-space: nowrap;
+	width: 95%;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+}
+.explanation{
+	position: absolute;
+	width: 100%;
+	word-wrap: break-word; 
+	top : 50px;
+}
+.explanation p{
+	white-space: nowrap;
+	width: 95%;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+}
+.stock{
+	position: absolute;
+	width: 80%;
+	bottom: 40px;
+}
+.stock div{
+	margin: auto;
+	vertical-align: center;
+	text-align: center;
+	color: red;
+	font-weight: bold;
+}
+.genre{
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	padding: 3px;
+}
+.genre div{
+	width: 80%;
+	padding: 5px 0px;
+	border-radius: 30px;
+	background-color:blue;
+	color: white;
+	vertical-align: center;
+	text-align: center;
+}
+.reser{
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	width:  50%;
+	height: 30%;
+	padding: 3px;
+}
+.reser div{
+	width: 90%;
+	height: 100%;
+	background:#000;
+	color: #fff;
+	vertical-align: center;
+	text-align: center;
+}
+
+/*検索フォーム*/
+#searchform_bar{
+	border: solid 1px #ffc90e;
+	height: 24px;
+	width: auto;
+}
+
+#searchtext{
+	border:0px;
+  height: 100% !important;
+  width: calc(100% - 43px) !important;
+	vertical-align:top;
+	padding: 0px;
+	padding-left: 3px;
+}
+#searchsubmit{
+	float: right;
+  border: 0 !important;
+  padding: 0 !important;
+  width: 40px !important;
+  height: 24px !important; 
+  border-radius: 0px !important;
+  background: url("./image/search_icon3.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-indent: 100%;
+}
+
+/**/
+.all_view{
+	width: 100%;
+	height: 100%;
+	position :relative;
+}
+.fa_button{
+	position: fixed;
+	bottom : 20px;
+	right: 20px;
+	padding: 10px;
+	border-radius: 100%;
+	background-color: #c90101;
+	z-index: 10;
+	color: white;
+	border: 0 solid #000;
+	box-shadow: 1px 3px 5px #535353;
+	/*********************************/
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer */
+	-khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+	-webkit-user-select: none; /* Chrome, Safari, and Opera */
+	-webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+	cursor: pointer;
+}
+.fa_main{
+  width: 80px;
+	height : 80px;
+	font-size: 20px;
+	line-height: 80px;
+	opacity: 0.9;
+}
+.fa_main:active{
+	animation-name: rippleAnimation;
+	animation-timing-function: ease-out;
+	animation-iteration-count: infinite;
+	animation-duration: 1s;
+	-webkit-animation-name: rippleAnimation;
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-duration: 1s;
+	-moz-animation-name: rippleAnimation;
+	-moz-animation-timing-function: ease-out;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-duration: 1s;
+}
+.fa_main .search_text{
+	font-size: 20px;
+}
+.fa_sub{
+	position: fixed;
+	width: 60px;
+	height : 60px;
+	text-align: center;
+	line-height: 60px;
+	z-index: 1;
+	opacity: 0;
+	background-color: #4169e1;
+	font-size: 12px;
+}
+
+.fake{
+	position:relative;
+}
+
+.bookinfo{
+	position:relative;
+	margin: 0 auto;
+	width: 80%;
+	height: 359px;
+}
+
+.booktitle{
+	margin-top: 10px;
+	padding:10px 20px ;
+	background-color: aliceblue;
+	text-align: center;
+}
+
+.bookauthor{
+	margin:0px 30px 30px 0px;
+	padding:10px 20px ;
+	background-color: aliceblue;
+	text-align: center;
+}
+	
+}
+@keyframes rippleAnimation {
+	0% {transform: scale(1, 1);opacity: 1;}
+	100% {transform: scale(4,4);opacity: 0;}
+}
+@-webkit-keyframes rippleAnimation {
+	0% {-webkit-transform: scale(1, 1);opacity: 1;}
+	100% {-webkit-transform: scale(4,4);opacity: 0;}
+}
+@-moz-keyframes rippleAnimation {
+	0% {-moz-transform: scale(1, 1);opacity: 1;}
+	100% {-moz-transform: scale(4,4);opacity: 0;}
+}
