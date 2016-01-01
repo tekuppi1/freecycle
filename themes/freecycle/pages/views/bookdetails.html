@@ -19,7 +19,7 @@
 			<ul>
 			<li>予約確認<br><br>
 				<span id="check">あなたの<br>予約している本は
-					<img src="image/search_icon3.png">○○です<br></span></li>
+					<img src="image/search_icon3.png" width="50px">○○です<br></span></li>
 			<li><a href="">予約キャンセル</a></li>
 			<li><a href="">検索</a></li>
 			<li><a href="">商品一覧</a></li>
@@ -31,29 +31,36 @@
 <!-------個別商品情報-------->	
 <div class="fake">
 	<div class="bookinfo">
-		<div class="booktitle">タイトル名</div>
-		<div class="bookauthor">著者名</div>
-		<img src="" width="50%" height="100px"alt="本の写真">
+		<p class="booktitle">タイトル名</p>
+		<p class="bookauthor">著者名</p>
+		<img class="picture" src="/image/sc.png" width="50%" height="50%" alt="本の写真">
+		<div class="fake">
+			<table class="booksubinfo">
+				<tr>
+				<th class="normal">カテゴリー</th><td class="normal">ナゴヤ大学/情報文化学部</td>
+				</tr>
 
-		<table class="booksubinfo"
-			<tr>
-			<th>カテゴリー</th><th>ナゴヤ大学/情報文化学部</th>
-			</tr>
-					<tr>
-					<th>ポイント数</th><th>1pt</th>
-					</tr>
-							<tr>
-							<th>元値</th><th>20000</th>
-							</tr>
-									<tr>
-									<th></th><th>残り三冊</th>
-									</tr>
-		</table>
+				<tr>
+				<th class="normal">ポイント数</th><td class="normal">20pt</td>
+				</tr>
+
+				<tr>
+				<th class="normal">元値</th><td class="normal">20000</td>
+				</tr>
+
+				<tr>
+				<th class="empty"></th><td class="normal">残り三冊</td>
+				</tr>
+				
+			</table>
+		</div>
 	</div>
 </div>
-<div class="bookbutton">
+<div class="reserve">
+	<span class="this">この商品を</span><a class="button" href="#">予約する</a>
 	
 
+</div>	
 	
 <div class="plus">
 <P>補足情報</P>	
