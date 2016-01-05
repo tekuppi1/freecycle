@@ -2987,7 +2987,7 @@ function get_bookfair_info_after_today(){
 	$bookfair_info = $wpdb->get_results($wpdb->prepare("
 		SELECT " . $table_prefix . "fmt_book_fair.bookfair_id, start_datetime, end_datetime, venue  
 		FROM " . $table_prefix . "fmt_book_fair	
-		WHERE " . $table_prefix . "fmt_book_fair.start_datetime >= current_timestamp"
+		WHERE " . $table_prefix . "fmt_book_fair.end_datetime >= current_timestamp"
 		,null
 		));
 
@@ -3016,7 +3016,7 @@ function get_bookfair_info_all_you_want($show_number){
 	$bookfair_info = $wpdb->get_results($wpdb->prepare("
 		SELECT " . $table_prefix . "fmt_book_fair.bookfair_id, start_datetime, end_datetime ,venue  
 		FROM " . $table_prefix . "fmt_book_fair	
-		WHERE " . $table_prefix . "fmt_book_fair.start_datetime >= current_timestamp
+		WHERE " . $table_prefix . "fmt_book_fair.end_datetime >= current_timestamp
 		ORDER BY start_datetime
 		LIMIT %d"
 		,$show_number
