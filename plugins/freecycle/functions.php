@@ -3161,3 +3161,16 @@ function get_post_by_ISBN($isbn){
 		return $posts[0];
 	}
 }
+//固定ページ追加しまーす
+
+function book_detail(){
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."pages/views/bookdetails.php";
+	var_dump(get_stylesheet_directory().DIRECTORY_SEPARATOR);
+}
+add_shortcode('book_detail','book_detail');
+
+function detail_styles() {
+    wp_enqueue_style( 'style', "/wp-content/themes/freecycle/pages/styles/style.css");
+	wp_enqueue_style( 'fontello', "/wp-content/themes/freecycle/pages/styles/fontello.css");
+}
+add_action( 'wp_enqueue_scripts', 'detail_styles');

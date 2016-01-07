@@ -1,30 +1,27 @@
 
-<?php get_header(); ?>
-
 <!-------個別商品情報-------->	
 <div class="fake">
 	<div class="bookinfo">
-		<p class="booktitle">タイトル名</p>
-		<p class="bookauthor">著者名</p>
-		<img class="picture" src="/image/sc.png" width="50%" height="50%" alt="本の写真">
+		<p class="booktitle">商品名: <?php echo get_the_title(); ?></p>
+		<p class="bookauthor">著者: <?php echo get_post_meta($post->ID, "author", true)?get_post_meta($post->ID, "author", true):"データがありません"; ?></p>
+		<img class="picture" src="/wp-content/themes/freecycle/pages/views/image/sc.png" width="50%" height="50%" alt="本の写真">
 		<div class="fake">
 			<table class="booksubinfo">
 				<tr>
-				<th class="normal">カテゴリー</th><td class="normal">ナゴヤ大学/情報文化学部</td>
+					<th class="normal">カテゴリー</th><td class="normal">?????</td>
 				</tr>
 
 				<tr>
-				<th class="normal">ポイント数</th><td class="normal">20pt</td>
+				<th class="normal">ポイント数</th><td class="normal">？？？？？？？？</td>
 				</tr>
 
 				<tr>
-				<th class="normal">元値</th><td class="normal">20000</td>
+				<th class="normal">Amazon価格</th><td class="normal"><?php echo get_post_meta($post->ID, "price", true)?number_format(get_post_meta($post->ID, "price", true))."円":"データがありません"; ?></td>
 				</tr>
 
 				<tr>
-				<th class="empty"></th><td class="normal">残り三冊</td>
-				</tr>
-				
+				<th class="normal">残り冊数</th><td class="normal"><?php echo count_books($post->ID)?count_books($post->ID):0; ?>冊</td>
+				</tr>	
 			</table>
 		</div>
 	</div>
@@ -36,7 +33,8 @@
 </div>	
 	
 <div class="plus">
-<P>補足情報</P>	
+<P >補足情報：<?php remove_filter('the_content', 'wpautop'); the_content(); ?></P>	
 </div>	
 	
-<?php get_footer(); ?>
+ </body>
+</html>

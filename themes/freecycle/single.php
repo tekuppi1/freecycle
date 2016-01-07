@@ -167,34 +167,81 @@ function onFinish(postID){
 
 </script>
 
+<div class="fake" id="blog-single" role="main">
+	
+	<?php do_action( 'bp_before_blog_single_post' ); ?>
+	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+	
+	<div class="bookinfo">
+		<p class="booktitle">商品名: <?php echo get_the_title(); ?></p>
+		<p class="bookauthor">著者: <?php echo get_post_meta($post->ID, "author", true)?get_post_meta($post->ID, "author", true):"データがありません"; ?></p>
+		<img class="picture" src="/wp-content/themes/freecycle/pages/views/image/sc.png" width="50%" height="50%" alt="本の写真">
+		<div class="fake">
+			<table class="booksubinfo">
+				<tr>
+					<th class="normal">カテゴリー</th><td class="normal">関数をいれたらえらーがでてしまう</td>
+				</tr>
+
+				<tr>
+				<th class="normal">ポイント数</th><td class="normal">アマゾン価格をどうにかしてポイント化すればいいと思った</td>
+				</tr>
+
+				<tr>
+				<th class="normal">Amazon価格</th><td class="normal"><?php echo get_post_meta($post->ID, "price", true)?number_format(get_post_meta($post->ID, "price", true))."円":"データがありません"; ?></td>
+				</tr>
+
+				<tr>
+				<th class="normal">残り冊数</th><td class="normal"><?php echo count_books($post->ID)?count_books($post->ID):0; ?>冊</td>
+				</tr>	
+			</table>
+		</div>
+	</div>
+</div>
+<div class="reserve">
+	<span class="this">この商品を</span><a class="button" href="#">予約する</a>
+	
+
+</div>	
+	
+<div class="plus">
+	<P>補足情報：→なぜ本の名前になってしまうの大丈夫？∧改行とかどうするんだろう<?php remove_filter('the_content', 'wpautop'); the_content(); ?></P>	
+</div>	
+	
+	<?php endwhile; else: ?>
+
+		<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>
+
+	<?php endif; ?>
+
+	<?php do_action( 'bp_after_blog_single_post' ); ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php /*
 	<div id="content">
 		<div class="padder">
 
-			<?php do_action( 'bp_before_blog_single_post' ); ?>
 
 					<div class="page" id="blog-single" role="main">
 
 						<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-
 							<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-
-						<div class="author-box" >
-						<?php echo get_avatar( get_the_author_meta( 'user_email' ), '50' ); ?>
-						<p><?php printf( _x( 'by %s', 'Post written by...', 'buddypress' ), str_replace( '<a href=', '<a rel="author" href=', bp_core_get_userlink( $post->post_author ) ) ); ?></p>
-						</div>
-
-
+								
 					<div class="post-content" id="post-content-edit">
 						<h2 class="posttitle"><?php the_title(); ?></h2>
 
 
-						<div class="item_status">状態:
-						<?php
-							$item_status = get_post_custom_values("item_status");
-							echo get_display_item_status($item_status["0"]);
-						?>
-						</div>
 						<div>
 							<?php
 								$sub_category = get_the_category();
@@ -214,12 +261,13 @@ function onFinish(postID){
 								<input type="button" id="finish" value="取引完了" onClick="onFinish(<?php echo $post->ID ?>);" <?php echo count_books($post->ID)>0?:"disabled" ?>/>
 							<?php } ?>
 						</div>
-						<?php
+				<?php
 						/*
 						  display finish button or giveme button
 						  if watching user doesn't log in, button is not shown
 						 */
 						?>
+					<?php /*
 						<p class="date">
 							<!-- <span></span>がないと次の<span>がイタリックになる -->
 							<?php printf( __( '%1$s <span></span>', 'buddypress' ), get_the_date()); ?>
@@ -270,32 +318,27 @@ function onFinish(postID){
 
 							<p class="postmetadata"><?php the_tags( '<span class="tags">' . __( 'Tags: ', 'buddypress' ), ', ', '</span>' ); ?>&nbsp;</p>
 
-						<div class="alignleft"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'buddypress' ) . '</span> %title' ); ?></div>
-						<div class="alignright"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'buddypress' ) . '</span>' ); ?></div>
+						
 					</div>
 
 				</div>
 
-			<?php if(is_user_logged_in()) {
-						comments_template();
-					}
-			?>
 
 			<?php endwhile; else: ?>
 
 				<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>
 
 			<?php endif; ?>
-
-
+		
 		</div>
 
 		<?php do_action( 'bp_after_blog_single_post' ); ?>
-
+				
 
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
+	*/ ?>
 
 	<div id="edit" style="display : none">
 	<form id="edit_form" method="post" enctype="multipart/form-data">
@@ -342,7 +385,5 @@ function onFinish(postID){
 	<input type="button" value="編集完了" onClick="onUpdateEdit();">
 	</form>
 	</div><!-- hidden_content -->
-
-	<?php get_sidebar(); ?>
 
 <?php get_footer(); ?>

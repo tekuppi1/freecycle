@@ -4878,3 +4878,148 @@ div.pagenation_next{
 .card-content table,tr,th{
 	border: 1px black solid;
 }
+
+/***************
+商品個別ページ
+****************/
+
+.fake {
+	position: relative;
+}
+
+.bookinfo {
+	position: relative;
+	margin: 0 auto;
+	width: 80%;
+	height: auto;
+}
+
+.booktitle {
+	margin-top: 10px;
+	margin-bottom: 0px;
+	width: 80%;
+	padding: 10px 20px;
+	text-align: center;
+}
+
+.bookauthor {
+	margin: 0px 0px 10px 0px;
+	width: 80%;
+	padding: 10px 20px;
+	text-align: center;
+}
+
+.picture {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.booksubinfo {
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+	width: 80%;
+	empty-cells: hide;
+}
+
+.normal{
+	border: 2px solid #5ddd82;
+	border-collapse: collapse;
+	background-color: aliceblue;
+	font-weight: normal;
+	text-align: center;
+	padding: 6px;
+}
+
+.empty{
+	border: 0px solid #5ddd82;
+}
+
+.reserve{
+	width: 80%;
+	height: auto;
+	margin-top: 20px;
+	margin-right:auto;
+	margin-left: auto;
+	padding-left: 20%;
+	text-align: center;
+}
+
+.this{
+	margin-right: 10px;
+	
+}
+.button {
+	display: inline-block;
+	width: 150px;
+	height: auto;
+	text-align: center;
+	text-decoration: none;
+	line-height: 50px;
+	outline: none;
+	background-color: #333;
+	border: 2px solid #333;
+	color: #fff;
+}
+.button::before,
+.button::after {
+	position: absolute;
+	z-index: -1;
+	display: block;
+	content: '';
+}
+.button,
+.button::before,
+.button::after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+
+.button:hover {
+	background-color: #fff;
+	border-color: #59b1eb;
+	color: #59b1eb;
+}
+
+.plus{
+	text-align: center;
+}
+
+@keyframes rippleAnimation {
+	0% {
+		transform: scale(1, 1);
+		opacity: 1;
+	}
+	
+	100% {
+		transform: scale(4, 4);
+		opacity: 0;
+	}
+}
+@-webkit-keyframes rippleAnimation {
+	0% {
+		-webkit-transform: scale(1, 1);
+		opacity: 1;
+	}
+	
+	100% {
+		-webkit-transform: scale(4, 4);
+		opacity: 0;
+	}
+}
+@-moz-keyframes rippleAnimation {
+	0% {
+		-moz-transform: scale(1, 1);
+		opacity: 1;
+	}
+	
+	100% {
+		-moz-transform: scale(4, 4);
+		opacity: 0;
+	}
+}

@@ -578,14 +578,11 @@ body {
 	background-color: #4169e1;
 	font-size: 12px;
 }
-
+/*商品個別ページ*/
 .fake {
 	position: relative;
 }
 
-.fake{
-	
-}
 .bookinfo {
 	position: relative;
 	margin: 0 auto;
@@ -683,6 +680,10 @@ body {
 	background-color: #fff;
 	border-color: #59b1eb;
 	color: #59b1eb;
+}
+
+.plus{
+	text-align: center;
 }
 
 @keyframes rippleAnimation {
