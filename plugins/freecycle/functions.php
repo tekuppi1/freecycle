@@ -2984,12 +2984,11 @@ function get_bookfair_info_of_date($bookfair_year,$bookfair_month){
 function get_bookfair_info_after_today(){
 	global $wpdb;
 	global $table_prefix;
-	$bookfair_info = $wpdb->get_results($wpdb->prepare("
+	$bookfair_info = $wpdb->get_results("
 		SELECT " . $table_prefix . "fmt_book_fair.bookfair_id, start_datetime, end_datetime, venue  
 		FROM " . $table_prefix . "fmt_book_fair	
 		WHERE " . $table_prefix . "fmt_book_fair.end_datetime >= current_timestamp"
-		,null
-		));
+		);
 
 	return $bookfair_info;
 
@@ -3029,11 +3028,10 @@ function get_bookfair_info_all_you_want($show_number){
 function get_bookfair_info_of_all(){
 	global $wpdb;
 	global $table_prefix;
-	$bookfair_info = $wpdb->get_results($wpdb->prepare("
+	$bookfair_info = $wpdb->get_results("
 		SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
 		FROM " . $table_prefix . "fmt_book_fair	"
-		,null
-		));
+		);
 
 	return $bookfair_info;
 }
