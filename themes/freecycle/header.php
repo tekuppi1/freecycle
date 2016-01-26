@@ -225,35 +225,3 @@
 		<!--<hr class="line-search"> -->
 		<?php } ?>
 		<div id="container">
-<?php
-				echo '↓get_bookfair_info_by_id</br>';
-				$get_bookfair_info_by_id = get_bookfair_info_by_id('1');
-				var_dump($get_bookfair_info_by_id);
-				echo '</br>';
-
-				echo '↓get_bookfair_info_of_date</br>';
-				$get_bookfair_info_of_date = get_bookfair_info_of_date(2016,1);
-				var_dump($get_bookfair_info_of_date);
-				echo '</br>';
-
-				echo '↓get_bookfair_info_by_venue</br>';
-				$get_bookfair_info_by_venue = get_bookfair_info_by_venue('図書館前');
-				var_dump($get_bookfair_info_by_venue);
-				echo '</br>';
-
-				echo '↓get_bookfair_info_all_you_want</br>';
-				$get_bookfair_info_all_you_want = get_bookfair_info_all_you_want(3);
-				var_dump($get_bookfair_info_all_you_want);
-				echo '</br>';
-
-				echo '↓get_bookfair_info_after_today</br>';
-				$get_bookfair_info_after_today = get_bookfair_info_after_today();
-				var_dump($get_bookfair_info_after_today);
-				echo '</br>';
-
-				echo '↓get_bookfair_info_of_all</br>';
-				$get_bookfair_info_of_all = get_bookfair_info_of_all();
-				var_dump($get_bookfair_info_of_all);
-				echo '</br>';
-
-			?>
