@@ -2956,9 +2956,10 @@ add_shortcode('show_all_items', 'show_all_items');
 function get_bookfair_info_by_id($bookfair_id){
 	global $wpdb;
 	global $table_prefix;
-	$bookfair_info = $wpdb->get_results($wpdb->prepare("
-		SELECT " . $table_prefix . "fmt_book_fair.start_datetime, end_datetime, venue  
-		FROM " . $table_prefix . "fmt_book_fair	
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
+		FROM " . $table_prefix . "fmt_book_fair";
+	$bookfair_info = $wpdb->get_results($wpdb->prepare(
+		$sql."	
 		WHERE " . $table_prefix . "fmt_book_fair.bookfair_id = %d"
 		,$bookfair_id
 		));
@@ -2970,9 +2971,10 @@ function get_bookfair_info_by_id($bookfair_id){
 function get_bookfair_info_of_date($bookfair_year,$bookfair_month){
 	global $wpdb;
 	global $table_prefix;
-	$bookfair_info = $wpdb->get_results($wpdb->prepare("
-		SELECT " . $table_prefix . "fmt_book_fair.bookfair_id, start_datetime, end_datetime, venue  
-		FROM " . $table_prefix . "fmt_book_fair	
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
+		FROM " . $table_prefix . "fmt_book_fair";
+	$bookfair_info = $wpdb->get_results($wpdb->prepare(
+		$sql."	
 		WHERE year(start_datetime) = %d && month(start_datetime) = %d"
 		,$bookfair_year,$bookfair_month
 		));
@@ -2984,9 +2986,10 @@ function get_bookfair_info_of_date($bookfair_year,$bookfair_month){
 function get_bookfair_info_after_today(){
 	global $wpdb;
 	global $table_prefix;
-	$bookfair_info = $wpdb->get_results("
-		SELECT " . $table_prefix . "fmt_book_fair.bookfair_id, start_datetime, end_datetime, venue  
-		FROM " . $table_prefix . "fmt_book_fair	
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
+		FROM " . $table_prefix . "fmt_book_fair";
+	$bookfair_info = $wpdb->get_results(
+		$sql."
 		WHERE " . $table_prefix . "fmt_book_fair.end_datetime >= current_timestamp"
 		);
 
@@ -2998,9 +3001,10 @@ function get_bookfair_info_after_today(){
 function get_bookfair_info_by_venue($bookfair_venue){
 	global $wpdb;
 	global $table_prefix;
-	$bookfair_info = $wpdb->get_results($wpdb->prepare("
-		SELECT " . $table_prefix . "fmt_book_fair.bookfair_id, start_datetime, end_datetime,venue
-		FROM " . $table_prefix . "fmt_book_fair	
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
+		FROM " . $table_prefix . "fmt_book_fair";
+	$bookfair_info = $wpdb->get_results($wpdb->prepare(
+		$sql."	
 		WHERE " . $table_prefix . "fmt_book_fair.venue = %s"
 		,$bookfair_venue
 		));
@@ -3012,9 +3016,10 @@ function get_bookfair_info_by_venue($bookfair_venue){
 function get_bookfair_info_all_you_want($show_number){
 	global $wpdb;
 	global $table_prefix;
-	$bookfair_info = $wpdb->get_results($wpdb->prepare("
-		SELECT " . $table_prefix . "fmt_book_fair.bookfair_id, start_datetime, end_datetime ,venue  
-		FROM " . $table_prefix . "fmt_book_fair	
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
+		FROM " . $table_prefix . "fmt_book_fair";
+	$bookfair_info = $wpdb->get_results($wpdb->prepare(
+		$sql."	
 		WHERE " . $table_prefix . "fmt_book_fair.end_datetime >= current_timestamp
 		ORDER BY start_datetime
 		LIMIT %d"
@@ -3024,14 +3029,21 @@ function get_bookfair_info_all_you_want($show_number){
 	return $bookfair_info;
 } 
 
+function set_sql_of_select_from_bookfair_table(){
+	global $set_sql_of_select_from_bookfair_table;
+	$set_sql_of_select_from_bookfair_table = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
+		FROM " . $table_prefix . "fmt_book_fair";
+	
+}
+
 // すべての古本市の、古本市ID、開始日時、終了日時、開催場所、を取ってくる
 function get_bookfair_info_of_all(){
 	global $wpdb;
 	global $table_prefix;
-	$bookfair_info = $wpdb->get_results("
-		SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
-		FROM " . $table_prefix . "fmt_book_fair	"
-		);
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
+		FROM " . $table_prefix . "fmt_book_fair";
+	$bookfair_info = $wpdb->get_results($sql);
 
 	return $bookfair_info;
 }
+
