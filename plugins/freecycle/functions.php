@@ -3029,13 +3029,6 @@ function get_bookfair_info_all_you_want($show_number){
 	return $bookfair_info;
 } 
 
-function set_sql_of_select_from_bookfair_table(){
-	global $set_sql_of_select_from_bookfair_table;
-	$set_sql_of_select_from_bookfair_table = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
-		FROM " . $table_prefix . "fmt_book_fair";
-	
-}
-
 // すべての古本市の、古本市ID、開始日時、終了日時、開催場所、を取ってくる
 function get_bookfair_info_of_all(){
 	global $wpdb;
