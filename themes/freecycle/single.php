@@ -164,6 +164,18 @@ function onFinish(postID){
 		}else{return false;}
 	});
 }
+//とりあえずアマゾン価格からポイントを表示する関数?
+//例外処理とかが不明,テンプレートタグを他で使うには？入れる場所は？
+function point(){
+	var origin =<?php get_post_meta($post->ID, "price", true); ?>;
+	origin = origin/1000;
+	if(origin>=2){
+		<?php echo number_format(origin)."pt"; ?>
+	}else{
+		<?php echo "1pt"; ?>
+	}	
+	
+}
 
 </script>
 
@@ -179,7 +191,13 @@ function onFinish(postID){
 		<div class="fake">
 			<table class="booksubinfo">
 				<tr>
-					<th class="normal">カテゴリー</th><td class="normal">関数をいれたらえらーがでてしまう</td>
+					<th class="normal">カテゴリー</th><td class="normal"><?php
+								$sub_category = get_the_category();
+								if($sub_category[0]->term_id == '1'):
+									echo "カテゴリ:未設定";
+								else:
+									$main_category = get_category($sub_category[0]->parent);
+								?><?php endif; ?></td>
 				</tr>
 
 				<tr>
