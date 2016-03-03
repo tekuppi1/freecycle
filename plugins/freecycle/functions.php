@@ -8,7 +8,7 @@ add_action('wp_ajax_cancelGiveme', 'cancelGiveme');
 add_action('wp_ajax_confirmGiveme', 'confirmGiveme');
 add_action('wp_ajax_exhibiter_evaluation', 'exhibiter_evaluation');
 add_action('wp_ajax_bidder_evaluation', 'bidder_evaluation');
-add_action('wp_ajax_finish', 'finish');
+add_action('wp_ajax_finish_trade', 'finish_trade_by_ajax');
 add_action('wp_ajax_new_entry', 'new_entry');
 add_action('wp_ajax_delete_post', 'delete_post');
 add_action('wp_ajax_update_comment', 'update_comment');
@@ -531,44 +531,40 @@ function bidder_evaluation(){
 
 /**
  * 取引完了時に呼ばれる関数。
+ * @param $id{int} 商品のID
+ * @return {boolean} 正常終了時true, 異常時false
  */
-function finish(){
-	global $wpdb;
-	global $table_prefix;
-	$postID = $_POST['postID'];
-	$userID = $_POST['userID'];
-
-	// 記事の状態を取引完了済に変更
-	$wpdb->query($wpdb->prepare("
-		UPDATE " . $table_prefix . "fmt_giveme_state
-		SET update_timestamp = current_timestamp,
-		finished_flg = 1
-		WHERE post_id = %d",
-		$postID));
-
-	//todoリストの状態をfinishedにする-exhibiter
-	$todo_row = get_todo_row($userID, $postID);
-	$todoID = $todo_row->todo_id;
-	change_todo_status_finished($todoID);
-
-
-	//todoリストの状態をfinishedにする-bidder
-	$deal = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."fmt_trade_history
-		   	WHERE post_id=%d",
-		   	$postID));
-	$bidder_userID = $deal->bidder_id;
-	$todo_row = get_todo_row($bidder_userID, $postID);
-	$todoID = $todo_row->todo_id;
-	change_todo_status_finished($todoID);
-
-	//todoリストに追加
-	add_todo_evaluate_bidder($userID, $postID);
-	add_todo_evaluate_exhibitor($postID);
-
-
-
-	die;
+function finish_trade($id){
+	// 冊数が1冊以上あれば減らす
+	if(count_books($id) > 0){
+		decreace_book_count($id, 1);
+		return true;
+	}else{
+		return false;
+	}
 }
+	function finish_trade_by_ajax(){
+		// 管理者以外が処理しようとした場合エラー
+		if(!current_user_can("administrator")){
+			echo '{"error":"true", "message":"権限がありません。"}';
+			die;
+		}
+
+		// IDが指定されてない場合エラー
+		if(!isset($_REQUEST["post_id"])){
+			echo '{"error":"true", "message":"IDを指定してください。"}';
+			die;
+		}
+		$id = $_REQUEST["post_id"];
+		$result = finish_trade($id);
+		if($result){
+			echo '{"error":"false", "message":"取引を完了しました！"}';
+			die;
+		}else{
+			echo '{"error":"true", "message":"取引が完了できませんでした。管理者に報告してください。"}';
+			die;
+		}
+	}
 
 function set_giveme_flg($post_id, $val){
 	global $wpdb;
@@ -978,10 +974,15 @@ function delete_post(){
         die;
 	}
 	$author = $item->post_author;
-	if($user_ID == $author){
-		wp_delete_post($postID);
-		// minus point on delete post
-		add_got_points($author, -1 * get_option('exhibition-point'));
+	if(current_user_can('administrator')){
+		$count = count_books($postID);
+		if($count <= 1){
+			// 在庫数が1冊以下なら出品ごと消す
+			wp_delete_post($postID);
+		}else{
+			// 在庫数が2冊以上なら、冊数のみ減らしておく
+			decreace_book_count($postID, 1);
+		}
 	}
 	die;
 }

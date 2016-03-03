@@ -102,6 +102,69 @@ function zoom(i){
 	}
 }
 
+// 取引完了関数
+function onFinish(postID){
+	swal({
+		title: "取引を完了します。",
+		text: "よろしいですか？",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "はい",
+		cancelButtonText: "いいえ",
+		closeOnConfirm: true,
+		closeOnCancel: true
+	},
+	function(isConfirm){
+		if (isConfirm) {
+			jQuery.ajax({
+				type: "POST",
+				url: '<?php echo admin_url('admin-ajax.php'); ?>',
+				data: {
+					"action": "finish_trade",
+					"post_id": postID
+				},
+				success: function(res){
+					var result = JSON.parse(res);
+					if(result.error === "true"){
+						swal({
+							title: "取引完了に失敗しました。",
+							text: result.message,
+							type: "error",
+							showCancelButton: false,
+							confirmButtonColor: "#AEDEF4",
+							confirmButtonText: "OK",
+							closeOnConfirm: true
+						});
+					}else{
+						swal({
+							title: "取引を完了しました。",
+							type: "success",
+							showCancelButton: false,
+							confirmButtonColor: "#AEDEF4",
+							confirmButtonText: "OK",
+							closeOnConfirm: true
+						},
+						function(){
+							location.reload();
+						});
+					}
+				},
+				false: function(){
+					swal({
+						title: "取引完了に失敗しました。",
+						text: "システム管理者に連絡してください。",
+						type: "error",
+						showCancelButton: false,
+						confirmButtonColor: "#AEDEF4",
+						confirmButtonText: "OK",
+						closeOnConfirm: true
+					});
+				}
+			});
+		}else{return false;}
+	});
+}
+
 </script>
 
 	<div id="content">
@@ -146,97 +209,24 @@ function zoom(i){
 							Amazon価格: <?php echo get_post_meta($post->ID, "price", true)?number_format(get_post_meta($post->ID, "price", true))."円":"データがありません"; ?><br/>
 							在庫数:  <?php echo count_books($post->ID)?count_books($post->ID):0; ?>冊<br/>
 						</div>
+						<div>
+							<?php if(current_user_can('administrator')) { ?>
+								<input type="button" id="finish" value="取引完了" onClick="onFinish(<?php echo $post->ID ?>);" <?php echo count_books($post->ID)>0?:"disabled" ?>/>
+							<?php } ?>
+						</div>
 						<?php
 						/*
 						  display finish button or giveme button
 						  if watching user doesn't log in, button is not shown
 						 */
 						?>
-
-						<!-- when login user is author -->
-						<?php if($user_ID == $authordata->ID){
-								if(isFinish($post->ID)){
-									if(isBidderEvaluated($post->ID)){ ?>
-							<!-- when status is finish -->
-									この商品は評価済です。
-								<?php }else{ ?>
-
-								<div id="evaluation">
-									落札者の評価:</br>
-									<select name="score" id="score">
-										<option value="invalid" selected>--選択--</option>
-										<option value="5" >とても良い</option>
-										<option value="4" >良い</option>
-										<option value="3" >普通</option>
-										<option value="2" >悪い</option>
-										<option value="1" >とても悪い</option>
-									</select>
-									</br>
-									コメント(任意 100字以内)</br>
-									<textarea name="trade_comment" id="trade_comment" rows="5" cols="40"></textarea></br>
-									<input type="button" id="evaluation" value="評価する" onClick="onBidderEvaluation();">
-								</div>
-
-								<?php } ?>
-							<?php }elseif(isConfirm($post->ID)){ ?>
-							<!-- when status is confirm -->
-
-						<input type="button" id="finish" value="取引完了" onClick="onFinish();">
-							<?php }elseif(isGiveme($post->ID)){ ?>
-							<!-- when status is giveme -->
-						<a href="<?php echo get_giveme_from_others_url(); ?>">取引相手を確定させてください。</a>
-							<?php }else{ ?>
-									この商品は「ください」待ちです。<br>
-									<input type="button" id="edit" value="編集" onClick='onEdit("<?php echo $item_status[0]; ?>");'>
-						<?php     } ?>
-
-						<!-- when login user is not author -->
-						<?php }elseif(!is_user_logged_in()){?>
-						<!-- information is hidden for un-login users -->
-						<?php }elseif(isConfirm($post->ID)){
-								if(get_bidder_id($post->ID) == $user_ID){
-									if(isExhibiterEvaluated($post->ID)){ ?>
-										この商品は評価済です。
-								<?php }elseif(isFinish($post->ID)){ ?>
-								<div id="evaluation">
-									出品者の評価:</br>
-									<select name="score" id="score">
-										<option value="invalid" selected>--選択--</option>
-										<option value="5" >とても良い</option>
-										<option value="4" >良い</option>
-										<option value="3" >普通</option>
-										<option value="2" >悪い</option>
-										<option value="1" >とても悪い</option>
-									</select>
-									</br>
-									コメント(任意 100字以内 改行も1文字と数えます)</br>
-									<textarea name="trade_comment" id="trade_comment" rows="5" cols="40"></textarea></br>
-									<input type="button" id="evaluation" value="評価する" onClick="onExhibiterEvaluation();">
-								</div>
-								<?php }else{ ?>
-									取引完了待ちです。
-								<?php } ?>
-							<?php }else{ ?>
-									この商品は取引相手が決まったため、「ください」はできません
-							<?php } ?>
-						<?php }elseif(is_user_logged_in()){
-								if(doneGiveme($post->ID, $user_ID)){ ?>
-						<!--input type="button" id="cancelGiveme" value="ください取消" onClick="onCancelGiveme();"-->
-							<?php }elseif(get_usable_point($user_ID) > 0){ ?>
-						<!--input type="button" id="giveme" value="ください" onClick="onGiveme();"-->
-							<?php }else{ ?>
-						使用可能なポイントが無いため「ください」できません。
-							<?php } ?>
-						<?php } ?>
-
 						<p class="date">
 							<!-- <span></span>がないと次の<span>がイタリックになる -->
 							<?php printf( __( '%1$s <span></span>', 'buddypress' ), get_the_date()); ?>
 							<!-- edit entry is not available -->
 							<!-- <span class="post-utility alignright"><?php edit_post_link( __( 'Edit this entry', 'buddypress' ) ); ?></span> -->
-							<?php if($user_ID == $authordata->ID && !isGiveme($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onDeletePost();">出品取り消し</a></span><?php } ?>
-							<?php if($user_ID == $authordata->ID && isConfirm($post->ID) && !isFinish($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onCancelTradeFromExhibitor();" id="cancelTradeFromExhibitor">取引キャンセル</a></span><?php } ?>
-							<?php if($user_ID == get_bidder_id($post->ID) && isConfirm($post->ID) && !isFinish($post->ID)){ ?><span class="post-utility alignright"><a href="javaScript:onCancelTradeFromBidder();" id="cancelTradeFromBidder">取引キャンセル</a></span><?php } ?>
+							<?php if(current_user_can('administrator')){ ?><span class="post-utility alignright"><a href="javaScript:onDeletePost();">出品取り消し</a></span><?php } ?>
+							<?php if(current_user_can('administrator')){ ?><span class="post-utility alignright"><a href='javaScript:onEdit("<?php echo $item_status[0]; ?>");'>編集</a></span><?php } ?>
 						</p>
 
 						<div class="entry">
