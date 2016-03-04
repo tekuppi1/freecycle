@@ -19,162 +19,6 @@
 	function callOnConfirmGiveme(postID){
 		onConfirmGiveme(postID, "<?php echo admin_url('admin-ajax.php'); ?>");
 	}
-	
-	function callOnNewEntry(){
-        
-		disableButtons();
-		if(jQuery("#field_1").val().length == 0){
-			swal({   
-				title: "商品名が未入力です。",  
-				type: "error",    
-			}); 			
-			enableButtons();
-			return false;
-		}
-
-		if(jQuery("#field_2").val().length == 0){
-			swal({
-				title: "商品説明が未入力です。",  
-				type: "error",    
-			}); 
-			enableButtons();
-			return false;
-		}
-
-		var mainCategory = jQuery('[name=main_category]').val();
-		if(mainCategory == ""){
-			swal({
-				title: "大学名が未入力です。",  
-				type: "error",    
-			}); 
-			enableButtons();
-			return false;
-		}
-
-		var subCategory = jQuery('[name=subcategory]').val();
-		if(subCategory == ""){
-			swal({
-				title: "学部が未入力です。",  
-				type: "error",    
-			}); 
-			enableButtons();
-			return false;
-		}
-		
-		var isAttachedFlg = false;
-		for (var i = jQuery(".multi").length - 1; i >= 0; i--) {
-			var fileName = jQuery(".multi").get(i).value;
-			if(fileName){
-				isAttachedFlg = true;
-			}
-			if(fileName && !fileName.match(/\.(jpeg|jpg|png)$/i)){
-				swal({   
-					title: "不正なファイルです。",
-					text: ".jpeg,.jpg,.png ファイルのみアップロードできます。",
-					// type: "error",    
-				}); 
-				enableButtons();
-				return false;
-			}
-		}
-
-		if(!isAttachedFlg){
-			swal({   
-				title: "写真を添付してください。",  
-				type: "error",    
-			}); 
-			enableButtons();
-			return false;
-		}
-
-    jQuery("#newentry").after("\
-        	<div id='dialog'>\
-            <table border='1'>\
-            <tr style='font-size:150%;'><td align='center'><b>商品名</b></td><td><b>"+jQuery('#field_1').val()+"</b></td></tr>\
-            <tr><td  align='center'>商品説明</td><td>"+jQuery('#field_2').val()+"</td></tr>\
-            <tr><td  align='center'>カテゴリ</td><td>"
-                +jQuery('[name=main_category] option:selected').text()+" "
-                +jQuery('[name=subcategory] option:selected').text()+"</td></tr>\
-            <tr><td  align='center'>状態</td><td>"+jQuery('[name=item_status] option:selected').text()+"</td></tr>\
-            <tr><td  align='center'>タグ</td><td>"+jQuery('#field_4').val()+"</td></tr>\
-            <tr><td  align='center'>写真</td><td><img id='picture1' width='50px'><img id='picture2' width='50px'><img id='picture3' width='50px'></td></tr>\
-            </table>\
-			<p style='font-size:75%;'>写真は一枚目のみ表示されています。</p>\
-            </div>\
-		");
-		
-		var file = jQuery('[name="upload_attachment[]"]').prop('files')[0];
-		var fileReader = new FileReader();
-		fileReader.onload = function(event){
-			jQuery("#picture1").attr('src', event.target.result);
-		};
-		fileReader.readAsDataURL(file);
-
-        jQuery('#dialog').dialog({
-          modal: true,
-          title: "こちらを新しく出品します",
-          draggable: false,
-          show: "fade",
-          hide: "fade",
-          buttons:[
-            {
-                text:'出品',
-                class:'btn-enter',
-                click: function() {
-                    jQuery(this).dialog('close');
-					jQuery('#dialog').remove();
-                    callOnNewEntryFinish();
-                }
-            },{
-                text:'キャンセル',
-                class:'btn-close',
-                click: function() {
-					jQuery('#dialog').remove();
-                    jQuery(this).dialog('close');
-                }
-          }
-        ]});
-        jQuery(document).on("click", ".ui-widget-overlay", function(){
-            jQuery(this).prev().find(".ui-dialog-content").dialog("close");
-        });
-        enableButtons();
-        callOnNewEntryToChangeCSS();
-	}
-    
-    function callOnNewEntryToChangeCSS(){
-        jQuery(".ui-dialog-titlebar-close").hide();
-        jQuery('.ui-widget-overlay').css('background','#FFFFFF');
-        jQuery('.ui-widget-overlay').css('opacity','0.7');
-        jQuery('.btn-close').css('background','#EA5549');
-        jQuery('.btn-close').css('border','#FF6666');
-        jQuery('.btn-enter').css('background','#228b22');
-        jQuery('.btn-enter').css('border','#66FF66');
-    }
-    
-    function callOnNewEntryFinish(){
-            var form = jQuery("#newentry").get()[0];
-			var fd = new FormData(form);
-			var firstEntryText = "";
-			fd.append("action", "new_entry");
-			jQuery.ajax({
-				type: "POST",
-				url: "<?php echo admin_url('admin-ajax.php'); ?>",
-				processData: false,
-				contentType: false,
-				mimeType:"multipart/form-data",
-				data: fd,
-				success: function(msg){
-					swal({   
-						title: msg,
-						html: true
-					}); 
-					// reload new entry page
-					enableButtons();
-					jQuery("input[type='text'], input[type='file'], textarea").val("");
-					jQuery('select[name="item_status"] option').attr("selected", false);
-				}
-			});
-    }
 
 	function onClickSearchWantedBook(){
 		disableButtons();
@@ -226,10 +70,10 @@
 				enableButtons();
 			},
 			error: function(){
-				swal({   
-					title: "登録できませんでした。しばらくしてからもう一度おためしください。",  
-					type: "error",    
-				}); 
+				swal({
+					title: "登録できませんでした。しばらくしてからもう一度おためしください。",
+					type: "error",
+				});
 			}
 		});
 	}
@@ -253,10 +97,10 @@
 				enableButtons();
 			},
 			error: function(){
-				swal({   
-					title: "削除できませんでした。しばらくしてからもう一度おためしください。",  
-					type: "error",    
-				}); 
+				swal({
+					title: "削除できませんでした。しばらくしてからもう一度おためしください。",
+					type: "error",
+				});
 				enableButtons();
 			}
 		});
@@ -276,10 +120,10 @@
 				enableButtons();
 			},
 			error: function(){
-				swal({   
-					title: "削除できませんでした。しばらくしてからもう一度おためしください。",  
-					type: "error",    
-				}); 
+				swal({
+					title: "削除できませんでした。しばらくしてからもう一度おためしください。",
+					type: "error",
+				});
 				enableButtons();
 			}
 		});
@@ -387,7 +231,7 @@
 											mapelm.setAttribute("lng", lng); // longitude
 										}
 									});
-								}								
+								}
 							}
 						}
 						input.onchange = _create_callback(shownMap, input, marker, maps[i]);
@@ -427,12 +271,13 @@
 
 
 </script>
+
 <div id="item-header-avatar">
 
 	<a href="<?php bp_displayed_user_link(); ?>">
 		<?php bp_displayed_user_avatar( 'type=full' ); ?>
 	</a>
-	
+
 </div><!-- #item-header-avatar -->
 
 <div id="item-header-content">
@@ -446,14 +291,14 @@
 	<?php endif; ?>
 
 	<span class="activity"><?php bp_last_activity( bp_displayed_user_id() ); ?></span>
-	
+
 	<!-- display when loggin user page -->
 	<?php if($user_ID == bp_displayed_user_id()){ ?>
-	
+
 	<div id="points-info">
-		<h3 class="show-points">使用可能ポイント:<?php echo get_usable_point($user_ID); ?>p <br>(仮払ポイント:<?php echo get_temp_used_point($user_ID); ?>p)</h3>	
+		<h3 class="show-points">使用可能ポイント:<?php echo get_usable_point($user_ID); ?>p <br>(仮払ポイント:<?php echo get_temp_used_point($user_ID); ?>p)</h3>
 	</div>
-	
+
 	<?php } ?>
 	<h5 class="show-points">評価平均:<?php echo number_format(get_average_score(bp_displayed_user_id()),2); ?>(件数:<?php echo get_count_evaluation(bp_displayed_user_id()); ?>件)</h5>
 	<?php do_action( 'bp_before_member_header_meta' ); ?>
@@ -484,9 +329,10 @@
 		 do_action( 'bp_profile_header_meta' );
 
 		 ?>
-		 
+
 	</div><!-- #item-meta -->
 </div><!-- #item-header-content -->
+
 	<?php
 		global $user_ID;
 		$todo_asc_list = get_todo_list($user_ID, "unfinished");
@@ -496,14 +342,14 @@
 	?>
 <h3 style="width:100%;margin-top:30px;">next actionが<?php echo $todo_list_count;?>件あります。</h3>
 <ul id="todo-list">
-	<?php 
+	<?php
 			foreach($todo_list as $todo_item):
 	?>
 			<li class="todo-item">
 				<div class="todo-date"><?php echo date("Y年m月d日 A g:i",strtotime($todo_item->created)); ?></div>
 				<?php echo $todo_item->message; ?>
 				<div class="todo-info">
-					<?php 
+					<?php
 							if(($todo_item->item_id) > 0 ){
 								$deal_user_ID = deal_user($todo_item->item_id ,$user_ID);
 								if($deal_user_ID){
@@ -515,7 +361,7 @@
 					?>
 				</div>
 			</li>
-	<?php 
+	<?php
 			endforeach;
 		endif;
 	?>

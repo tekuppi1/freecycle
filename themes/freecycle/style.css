@@ -217,6 +217,8 @@ textarea{
 
 
 
+
+
 /*-----------FAQ------------*/
 h2.pagetitle{
 	font: normal 1.4em/1.4 "メイリオ", Meiryo,
@@ -316,6 +318,33 @@ input[type="button"]:hover{
 	background: orange;
 }
 
+.decision{
+	background: -moz-linear-gradient(top,#ffcc00,#ffcc00 5%,#ff8b00 5%,#ff8c00 95%,#ff2c00 95%,#ff0000) !important;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ffcc00), color-stop(0.05,#ffcc00), color-stop(0.05,#ff8c00), color-stop(0.95,#ff2c00), color-stop(0.95,#ff0000), to(#ff0000)) !important;
+	width: 170px !important;
+	height: 33px !important;
+	margin:15px 0px 0px 0px !important;
+	color: white !important;
+	/*background-color: #ff8c00 !important; */
+	font-size: 17px !important;
+	font-weight: lighter !important;
+	font-family: alba super !important;
+	border: 0px solid white !important;
+}
+
+.profilebutton{
+	width:175px !important;
+	height:33px !important;
+	margin:15px 0px 8px 0px !important;
+}
+
+span.labels{
+	font-size:20px;
+	font-weight: bold;
+	color:orange;
+	display:block;
+	margin:20px 0px -20px 0px;
+}
 
 /*ヘッダー部分*/
 
@@ -414,7 +443,65 @@ div.grobal_nav_div_sp{
 	margin: 0;
 }
 
+#searchform_bar{
+border: solid 1px #ffc90e;
+display: flex;
+display: -moz-flex;
+display: -o-flex;
+display: -webkit-flex;
+display: -ms-flex;
+flex-direction:row;
+-moz-flex-direction:row;
+-o-flex-direction:row;
+-webkit-flex-direction:row;
+-ms-flex-direction:row;
+}
 
+#searchtext{
+  border: 0 !important;
+  height: 25px !important; 
+  width: 100%!important;
+  padding: 0px 5px!important; 
+  margin:0px 0px 0px 0px !important;
+}
+#searchsubmit{
+  border: 0 !important;
+  padding: 0 !important;
+  width: 41px !important;
+  height: 25px !important; 
+  border-radius: 0px !important;
+  background: url("images/search_icon3.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-indent: 100%;
+  float:right;
+}
+
+#searchtext:focus{
+  background:#ffffcc;
+}
+#searchsubmit:focus{
+  opacity: 0.5;
+}
+
+select[name="seachform_itemstatus"]{
+	margin:5px 0px 0px 0px;
+	height:30px;
+	width: 84px;
+	border: white;
+	background-color: #eeeeee;
+	font-size: 12px;
+	font-weight: thin !important;
+	font-family: sans-serif !important;
+}
+
+select[name="seachform_itemstatus"]:hover{
+	background-color: #dcdcdc;
+}
+
+#searchform_text{
+	height: 25px;
+}
 
 /*---------------------------------------------------
 				キャッチコピー
@@ -477,9 +564,12 @@ a#header_entry_button{
 
 div.header_form{
 	background-color: lightcyan;
-	padding: 5px 0 0 5px;
+	/*padding: 5px 0 0 5px;*/
 	border-radius: 4px;
-	margin-bottom: 20px;
+	margin-bottom: 0px;
+	/*height: 30px !important;*/
+	/*background-color: #ffffff !important; */
+	position: relative;
 }
 
 form[name=login-form]{
@@ -699,21 +789,7 @@ nav li:last-child a {
 }*/
 
 #search-23{
-	padding-top:2px;
-}
-
-#searchform_main{
-	display: block;
-	margin: 0 auto;
-	padding: 8px 9px 6px 9px;
-	border-radius: 10px;
-	width: 95%;
-	height: 55px;
-	clear: both;
-
-	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
-    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
-    box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
+	/*padding-top:2px;*/
 }
 
 #searchform_text{
@@ -738,6 +814,8 @@ nav li:last-child a {
 		sans-serif;
 	color: black;
 	float: left;
+
+	
 }
 
 #searchsubmit:hover{
@@ -769,11 +847,6 @@ nav li:last-child a {
 #searchform_pulldown{
 	float: left;
 	width: 30%;
-}
-
-#searchform_submit{
-	float: right;
-	width: 65%;
 }
 
 /*
@@ -851,13 +924,13 @@ a#login_form{
 	font-size: 1.5em;
 	padding: 10px;
 }
-	
+
 a#detail_texchange{
 	font-size: 0.7em;
 	text-align: right;
 	margin-top: 10px;
 }
-	
+
 .app_banner{
 	margin-top: 10px;
 	width: 100%;
@@ -1372,7 +1445,7 @@ div.header_img_navi_contents{
 	position: relative;
 	top: 0;
 }
-	
+
 #top_article1{
 	background: url("images/top_bg1.bmp");
 	background-size: cover;
@@ -1463,7 +1536,7 @@ div a#logo_top img{
 	font-weight: bold;
 	line-height: 1.5em;
 }
-	
+
 .top_sub_article{
 	width: 100%;
 	margin:0 auto;
@@ -1471,7 +1544,7 @@ div a#logo_top img{
 	font-size: 15px;
 	text-align: center;
 	line-height: 1.8em;
-	font-weight: bold; 
+	font-weight: bold;
 	text-shadow: 3px  3px 10px #fff, -3px  3px 10px #fff, 3px -3px 10px #fff, -3px -3px 10px #fff;
 }
 
@@ -1499,6 +1572,7 @@ div a#logo_top img{
 
 #top_image_box{
 	width : 100%;
+	height: 125px;
 	background-color: white;
 }
 
@@ -1574,6 +1648,26 @@ div a#logo_top img{
 	padding-left: 10px;
 }
 
+/*リニューアルページ*/
+.re-box{
+	position: absolute;
+	top: 26%;
+	padding-left: 12%;
+}
+.re-box2{
+	position: absolute;
+	top: 47%;
+	padding-left: 17%;
+}
+.bird-comment{
+	position: absolute;
+	bottom: 13%;
+	padding-left: 19%;
+}
+.texban{
+	width: 100%;
+	height: auto;
+}
 }
 
 /****************************スマホスタイルの終了****************************************************/
@@ -1811,6 +1905,34 @@ input[type="button"]:hover{
 	background: orange;
 }
 
+.decision{
+	background: -moz-linear-gradient(top,#ff0000,#ff0000 5%,#ff8b00 5%,#ff8c00 95%,#ff2c00 95%,#ff0000) !important;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), color-stop(0.05,#fff000), color-stop(0.05,#ff8c00), color-stop(0.95,#ff2c00), color-stop(0.95,#ff0000), to(#ff0000)) !important;
+	width: 170px !important;
+	height: 33px !important;
+	margin:15px 0px 0px 0px !important;
+	color: white !important;
+	/*background-color: #ff8c00 !important; */
+	font-size: 17px !important;
+	font-weight: bold !important;
+	font-family: alba super !important;
+	border: 0px solid white !important;
+}
+
+.profilebutton{
+	width: 147px !important;
+	height: 30px !important;
+	margin:15px 0px 8px 0px !important;
+}
+
+span.labels{
+	font-size:20px;
+	font-weight: bold;
+	color:orange;
+	display:block;
+	margin:20px 0px -15px 0px;
+}
+
 
 /*ヘッダー部分*/
 
@@ -1859,9 +1981,63 @@ header a img#user_icon{
 	margin: 20px 0px 0 0;
 }
 
+#searchform_bar{
+border: solid 1px #ffc90e;
+margin: 0 auto;
+/*float: right;*/
+display: flex;
+display: -moz-flex;
+display: -o-flex;
+display: -webkit-flex;
+display: -ms-flex;
+flex-direction:row;
+-moz-flex-direction:row;
+-o-flex-direction:row;
+-webkit-flex-direction:row;
+-ms-flex-direction:row;
+}
 
+#searchtext{
+  border: 0 !important;
+  height: 27px !important; 
+  width: 100% !important;
+  padding: 0px 0px 0px 5px !important; 
+  }
 
+#searchsubmit{
+  border: 0 !important;
+  padding: 0 !important;
+  width: 45px !important;
+  height: 27px !important; 
+  border-radius: 0px !important;
+  background: url("images/search_icon3.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-indent: 100%;
+  /*right: 0;*/
+  }
 
+#searchtext:focus{
+  background:#ffffcc;
+}
+#searchsubmit:focus{
+  opacity: 0.5;
+}
+
+select[name="seachform_itemstatus"]{
+	margin:5px 0px 0px 0px;
+	height:30px;
+	width: 84px;
+	border: white;
+	background-color: #eeeeee;
+	font-size: 12px;
+	font-weight: thin !important;
+	font-family: sans-serif !important;
+}
+
+select[name="seachform_itemstatus"]:hover{
+	background-color: #dcdcdc;
+}
 
 
 /*header #logo{
@@ -1928,9 +2104,13 @@ div.header_img_navi{
 
 div.header_form{
 	background-color: lightcyan;
-	padding: 0 0 5px;
+	/*padding: 0 0 5px;*/
 	border-radius: 4px;
-	margin-bottom: 20px;
+	margin-bottom: 0px;
+	margin-top: 9px;
+	/*height: 30px !important;*/
+	/*background-color: #ffffff !important; */
+	position: relative;
 }
 
 form#header-login-form{
@@ -2084,23 +2264,22 @@ div.header_img_navi_contents{
 /*サーチバー*/
 
 #search-23{
-	padding-top:2px;
+	/*padding-top:2px;*/
 	margin-top: 5px;
 }
 
 #searchform_main{
-	display: block;
+	/*display: block;*/
 	margin: 0 auto;
-	padding: 5px;
-	border-radius: 10px;
-	width: 95%;
-	height: 55px;
-	clear: both;
-
-
-	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
-    -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
-    box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
+	/*padding: 5px;*/
+	/*border-radius: 10px;*/
+	/*width: 95% !important;*/
+	/*height: 55px;*/
+	/*clear: both;*/
+	background-color: white;
+	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
+    /*-moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
+    /*box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
 }
 
 #searchsubmit{
@@ -2120,35 +2299,6 @@ div.header_img_navi_contents{
 
 #searchsubmit:hover{
 	color: orange;
-}
-
-/*div#searchform_submit{
-	width: 70px;
-}*/
-
-#searchform_pulldown{
-	padding: 3px;
-}
-
-#searchtext{
-	margin: auto;
-	display: block;
-	padding: 0;
-	margin-bottom: 3px;
-	width: 99%;
-	height: 20px;
-}
-
-#searchform{
-	display: none;
-}
-
-#searchform_pulldown{
-	float: left;
-}
-
-#searchform_submit{
-	float: right;
 }
 
 #blog-search h2.pagetitle{
@@ -2270,7 +2420,7 @@ a#detail_texchange{
 	text-align: right;
 	margin-top: 10px;
 }
-	
+
 .app_banner{
 	margin-top: 10px;
 	width: 100%;
@@ -2670,7 +2820,7 @@ ul#menu-footer_menu li a{
 	background-repeat: no-repeat;
 	padding:30px;
 }
-	
+
 
 div a#logo_top img{
 	width: 60%;
@@ -2743,7 +2893,7 @@ div a#logo_top img{
 	font-weight: bold;
 	line-height: 1.5em;
 }
-	
+
 .top_sub_article{
 	width: 100%;
 	margin:0 auto;
@@ -2753,7 +2903,7 @@ div a#logo_top img{
 	font-size: 15px;
 	text-align: center;
 	line-height: 1.8em;
-	font-weight: bold; 
+	font-weight: bold;
 	text-shadow: 3px  3px 10px #fff, -3px  3px 10px #fff, 3px -3px 10px #fff, -3px -3px 10px #fff;
 }
 
@@ -2782,6 +2932,7 @@ div a#logo_top img{
 
 #top_image_box{
 	width : 100%;
+	height: 125px;
 	background-color: white;
 }
 
@@ -2852,6 +3003,26 @@ div a#logo_top img{
 	padding-left: 10px;
 }
 
+.re-box{
+	position: absolute;
+	top: 29%;
+	padding-left: 12%;
+}
+.re-box2{
+	position: absolute;
+	top: 46%;
+	padding-left: 17%;
+}
+.bird-comment{
+	position: absolute;
+	bottom: 13%;
+	padding-left: 19%;
+}
+.texban{
+	width: 100%;
+	height: auto;
+}
+
 }
 /*---------------------------------------タブレットここまで！！！------------------------------------------------------------------------------------------------*/
 
@@ -2874,6 +3045,8 @@ input[type="button" ][disabled="true"]:hover{
 	border: inset;
 	color: #fff !important;
 }
+
+
 
 @charset: utf-8;
 
@@ -2903,7 +3076,7 @@ body{
 	background-color: #fff;
 	background-image: none;
 	width: 700px;
-	padding: 10px 50px;
+	/*padding: 10px 50px;*/
 }
 
 input{
@@ -2989,6 +3162,8 @@ textarea{
 .trade_message{
 	width: 100%;
 }
+
+
 
 /*img{
 	width: 200;
@@ -3101,6 +3276,35 @@ input[type="button"]:hover{
 	background: orange;
 }
 
+.decision{
+	 background: -moz-linear-gradient(top,#ff0000,#ff0000 5%,#ff8b00 5%,#ff8c00 95%,#ff2c00 95%,#ff0000) !important;
+	 background: -webkit-gradient(linear, left top, left bottom, from(#ff0000), color-stop(0.05,#fff000), color-stop(0.05,#ff8c00), color-stop(0.95,#ff2c00), color-stop(0.95,#ff0000), to(#ff0000)) !important;
+	width: 170px !important;
+	height: 33px !important;
+	margin:15px 0px 0px 0px !important;
+	color: white !important;
+	/*background-color: #ff8c00 !important; */
+	font-size: 17px !important;
+	font-weight: bold !important;
+	font-family: alba super !important;
+	border: 0px solid white !important;
+}
+
+.profilebutton{
+	width: 145px !important;
+	height: 30px !important;
+	margin:15px 0px 8px 0px !important;
+}
+
+span.labels{
+	font-size:20px;
+	font-weight: bold;
+	color:orange;
+	display:block;
+	margin:20px 0px -15px 0px;
+}
+
+
 /*ヘッダー部分*/
 
 header{
@@ -3141,6 +3345,61 @@ header a img#user_icon{
 	height: 55px;
 	float: right;
 	margin: 30px 30px 0 0;
+}
+
+#searchform_bar{
+float: right;
+border: solid 1px #ffc90e;
+display: flex;
+display: -moz-flex;
+display: -o-flex;
+display: -webkit-flex;
+display: -ms-flex;
+flex-direction:row;
+-moz-flex-direction:row;
+-o-flex-direction:row;
+-webkit-flex-direction:row;
+-ms-flex-direction:row;
+}
+
+#searchtext{
+  border: 0 !important;
+  height: 27px !important; 
+  width: 100%!important;
+  padding: 0px 0px 0px 5px !important; 
+  }
+#searchsubmit{
+  border: 0 !important;
+  padding: 0 !important;
+  width: 45px !important;
+  height: 27px !important; 
+  border-radius: 0px !important;
+  background: url("images/search_icon3.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-indent: 100%;
+  }
+
+#searchtext:focus{
+  background:#ffffcc;
+}
+#searchsubmit:focus{
+  opacity: 0.5;
+}
+
+select[name="seachform_itemstatus"]{
+	margin:5px 0px 0px 0px;
+	height:30px;
+	width: 84px;
+	border: white;
+	background-color: #eeeeee;
+	font-size: 12px;
+	font-weight: thin !important;
+	font-family: sans-serif !important;
+}
+
+select[name="seachform_itemstatus"]:hover{
+	background-color: #dcdcdc;
 }
 
 
@@ -3212,10 +3471,13 @@ div#must_checkbox{
 /* ヘッダーフォーム */
 div.header_form{
 	background-color: lightcyan;
-	padding: 0 0 5px;
+	/*padding: 0 0 5px;*/
 	border-radius: 4px;
 	width: 100%;
-	margin: 0 0 30px 0;
+	margin: 0 0 0px 0;
+	/*height: 30px !important;*/
+	/*background-color: #ffffff !important; */
+	position: relative;
 }
 
 form[name=login-form]{
@@ -3381,13 +3643,13 @@ div.grobal_nav_div  li a:hover{
 /*サーチバー*/
 
 #search-23{
-	padding-top:2px;
+	/*padding-top:2px;*/
 	margin-top: 7px;
 }
 
 
 #searchform_main{
-	display: block;
+	/*display: block;
 	margin: 0 auto;
 	padding: 5px 8px 5px 8px;
 	border-radius: 10px;
@@ -3396,7 +3658,7 @@ div.grobal_nav_div  li a:hover{
 	clear: both;
 
 
-	/*-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
+	-webkit-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 1px 2px 4px rgba(0,0,0,.5);
     box-shadow: 1px 2px 4px rgba(0,0,0,.5);*/
 }
@@ -3430,7 +3692,7 @@ div.grobal_nav_div  li a:hover{
 }
 
 #searchtext{
-	margin: auto;
+	margin: 0 auto !important;
 	display: block;
 	padding: 0;
 	width: 60%;
@@ -3447,10 +3709,6 @@ div.grobal_nav_div  li a:hover{
 }
 
 #searchform_pulldown{
-	float: left;
-}
-
-#searchform_submit{
 	float: left;
 }
 
@@ -3539,7 +3797,7 @@ div#entry_login_form_pc{
 	background: #fff;
 	display: inline-block;
 	position: relative;
-	top: -20px;
+	top: -4px;
 	right: -10px;
 	width: 260px;
 	/*height: 244px;*/
@@ -3581,7 +3839,7 @@ a#login_form{
 	font-size: 2.5em;
 	padding: 25px;
 }
-	
+
 a#app_form{
 	width: 39%;
 	font-size: 1.2em;
@@ -3965,8 +4223,8 @@ ul#menu-footer_menu li a{
 
 #top_page{
 	padding: 0 0;
-	width: 100%;
-	margin: 0 0;
+	width: 700px;
+	margin: 0 auto;
 	max-width: none;
 }
 
@@ -3991,7 +4249,7 @@ ul#menu-footer_menu li a{
 	background-repeat: no-repeat;
 	padding:30px;
 }
-	
+
 div a#logo_top img{
 	width: 30%;
 	height: 100%;
@@ -4057,7 +4315,7 @@ div a#logo_top img{
 	font-weight: bold;
 	line-height: 1.5em;
 }
-	
+
 .top_sub_article{
 	width: 100%;
 	margin:0 auto;
@@ -4067,7 +4325,7 @@ div a#logo_top img{
 	font-size: 20px;
 	text-align: center;
 	line-height: 1.8em;
-	font-weight: bold; 
+	font-weight: bold;
 	text-shadow: 3px  3px 10px #fff, -3px  3px 10px #fff, 3px -3px 10px #fff, -3px -3px 10px #fff;
 }
 
@@ -4077,7 +4335,7 @@ div a#logo_top img{
 .top_blue{color : #0079c2;}
 .title_green{color : #069051;}
 .top_green{color : #069051;}
-		
+
 .enh{
 	font-size: 30px;
 	line-height: 1.5em;
@@ -4105,6 +4363,7 @@ div a#logo_top img{
 
 #top_image_box{
 	width : 100%;
+	height: 125px;
 }
 
 #top_image{
@@ -4177,6 +4436,26 @@ div a#logo_top img{
 	height: 25px;
 	line-height: 25px;
 	padding-left: 10px;
+}
+
+.re-box{
+	position: absolute;
+	top: 29%;
+	padding-left: 12%;
+}
+.re-box2{
+	position: absolute;
+	top: 48%;
+	padding-left: 17%;
+}
+.bird-comment{
+	position: absolute;
+	bottom: 13%;
+	padding-left: 22%;
+}
+.texban{
+	width: 100%;
+	height: auto;
 }
 
 }
@@ -4287,6 +4566,7 @@ div.grobal_nav_div_sp ul li a span {
 }
 .BlackBoard{
 	width: 100%;
+	position: relative;
 }
 .BlackBoard div{
 	line-height: 1.5;
@@ -4536,4 +4816,65 @@ div.pagenation_next{
  	float: left;
 	padding: 5%;
 	border: 2px solid;
+}
+
+.ad-bookfair{
+	width: 100%;
+	background-color: #FDF5E6;
+	padding: 10px 0;
+}
+
+/* twitterボタン風 */
+.tw-botton{
+	background-color: #00acee;
+	padding: 7px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 1px #444444;
+}
+.tw-botton a{
+	color: white;
+}
+
+
+/* カード */
+.card{
+	width:80%;
+	margin: 20px auto;
+	background-color: white;
+	border-radius: 2px;
+	text-align: center;
+	box-shadow: 2px 2px  1px #444444;
+	padding-top: 5px;
+}
+.card-title{
+	padding: 15px 0 7px 0;
+}
+.card-title span{
+	font-size: 16px;
+	font-weight: bolder;
+}
+.card-content{
+	width: 90%;
+	padding: 5px;
+	margin: 0 auto;
+}
+.card-content span{
+	font-size: 13px;
+}
+.card-images img{
+	margin:10px 3px;
+}
+.card-images .portrait{
+	width: 100px;
+	height: 120px;
+}
+.card-images .landscape{
+	width: 120px;
+	height: 100px;
+}
+.card-content table{
+	width: 100%;
+}
+.card-content table,tr,th{
+	border: 1px black solid;
 }

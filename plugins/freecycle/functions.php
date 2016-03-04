@@ -8,7 +8,7 @@ add_action('wp_ajax_cancelGiveme', 'cancelGiveme');
 add_action('wp_ajax_confirmGiveme', 'confirmGiveme');
 add_action('wp_ajax_exhibiter_evaluation', 'exhibiter_evaluation');
 add_action('wp_ajax_bidder_evaluation', 'bidder_evaluation');
-add_action('wp_ajax_finish', 'finish');
+add_action('wp_ajax_finish_trade', 'finish_trade_by_ajax');
 add_action('wp_ajax_new_entry', 'new_entry');
 add_action('wp_ajax_delete_post', 'delete_post');
 add_action('wp_ajax_update_comment', 'update_comment');
@@ -23,6 +23,7 @@ add_action('wp_ajax_nopriv_exhibit_from_app', 'exhibit_from_app');
 add_action('wp_ajax_register_app_information', 'register_app_information');
 add_action('wp_ajax_cancel_trade_from_exhibitor', 'cancel_trade_from_exhibitor');
 add_action('wp_ajax_cancel_trade_from_bidder', 'cancel_trade_from_bidder');
+add_action('wp_ajax_get_login_user_info', 'get_login_user_info');
 add_action('user_register', 'on_user_added');
 add_action('delete_user', 'on_user_deleted');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
@@ -32,6 +33,11 @@ require_once('functions.kses.php');
 require_once('categories/freecycle-categories.php');
 require_once('map/freecycle-map.php');
 require_once('trade-log/freecycle-trade-log.php');
+require_once('members/loader.php');
+
+// 定数定義
+define("SIGNATURE", "\n\n\n配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchange.ag@gmail.com");
+define("ADMIN_LEVEL", 10);
 
 //写真を自動で回転して縦にする
 function edit_images_before_upload($file)
@@ -235,6 +241,16 @@ function giveme(){
 	//todoリストに追加
 	if(!isGiveme($postID)){
 		add_todo_confirm_bidder($postID);
+
+		// くださいをメール通知
+		$exhibiter_email = get_userdata_from_postID($postID)->user_email;
+		$subject = "【TexChange】あなたの出品された本にくださいがなされました";
+		$bidder_name = get_user_by('id', $userID)->display_name;
+		$postURL = get_post($postID)->guid;
+		$message = "「" . get_the_title($postID) . "」に対して、" . $bidder_name . "さんがくださいしました。\n" .
+					 "以下からログインの後、マイページから商品の受け渡しを行ってください。 \n" .
+					 "URL: " . $postURL . "\n" . SIGNATURE;
+		wp_mail($exhibiter_email, $subject, $message);
 	}
 
 	//if first giveme
@@ -331,6 +347,15 @@ function cancelGiveme(){
 		//todoリストstatus="finished"
 		if($current_giveme == 0){
 			cancel_todo($postID);
+
+			// くださいキャンセルをメール通知
+			$exhibiter_email = get_userdata_from_postID($postID)->user_email;
+			$subject = "【TexChange】あなたの出品された本へのくださいがキャンセルされました";
+			$bidder_name = get_user_by('id', $userID)->display_name;
+			$postURL = get_post($postID)->guid;
+			$message = "「" . get_the_title($postID) . "」に対しての、" . $bidder_name . "さんのくださいはキャンセルされました。\n" .
+						 "あなたの出品された本が欲しい人が現れるまで、少々お待ちください。 \n" .SIGNATURE;
+			wp_mail($exhibiter_email, $subject, $message);
 		}
 	die;
 }
@@ -506,44 +531,40 @@ function bidder_evaluation(){
 
 /**
  * 取引完了時に呼ばれる関数。
+ * @param $id{int} 商品のID
+ * @return {boolean} 正常終了時true, 異常時false
  */
-function finish(){
-	global $wpdb;
-	global $table_prefix;
-	$postID = $_POST['postID'];
-	$userID = $_POST['userID'];
-
-	// 記事の状態を取引完了済に変更
-	$wpdb->query($wpdb->prepare("
-		UPDATE " . $table_prefix . "fmt_giveme_state
-		SET update_timestamp = current_timestamp,
-		finished_flg = 1
-		WHERE post_id = %d",
-		$postID));
-
-	//todoリストの状態をfinishedにする-exhibiter
-	$todo_row = get_todo_row($userID, $postID);
-	$todoID = $todo_row->todo_id;
-	change_todo_status_finished($todoID);
-
-
-	//todoリストの状態をfinishedにする-bidder
-	$deal = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".$table_prefix."fmt_trade_history
-		   	WHERE post_id=%d",
-		   	$postID));
-	$bidder_userID = $deal->bidder_id;
-	$todo_row = get_todo_row($bidder_userID, $postID);
-	$todoID = $todo_row->todo_id;
-	change_todo_status_finished($todoID);
-
-	//todoリストに追加
-	add_todo_evaluate_bidder($userID, $postID);
-	add_todo_evaluate_exhibitor($postID);
-
-
-
-	die;
+function finish_trade($id){
+	// 冊数が1冊以上あれば減らす
+	if(count_books($id) > 0){
+		decreace_book_count($id, 1);
+		return true;
+	}else{
+		return false;
+	}
 }
+	function finish_trade_by_ajax(){
+		// 管理者以外が処理しようとした場合エラー
+		if(!current_user_can("administrator")){
+			echo '{"error":"true", "message":"権限がありません。"}';
+			die;
+		}
+
+		// IDが指定されてない場合エラー
+		if(!isset($_REQUEST["post_id"])){
+			echo '{"error":"true", "message":"IDを指定してください。"}';
+			die;
+		}
+		$id = $_REQUEST["post_id"];
+		$result = finish_trade($id);
+		if($result){
+			echo '{"error":"false", "message":"取引を完了しました！"}';
+			die;
+		}else{
+			echo '{"error":"true", "message":"取引が完了できませんでした。管理者に報告してください。"}';
+			die;
+		}
+	}
 
 function set_giveme_flg($post_id, $val){
 	global $wpdb;
@@ -733,54 +754,6 @@ function validate_filename($filename){
 	return str_replace('%', '', $filename);
 }
 
-/**
- * 新規出品時に呼ばれる関数
- */
-function new_entry(){
-	global $bp;
-	$exhibitor_id = $_POST['exhibitor_id'];
-	$msg = "";
-
-	$insert_id = exhibit(array(
-		'exhibitor_id' => $exhibitor_id,
-		'item_name' => $_POST['field_1'],
-		'item_description' => $_POST['field_2'],
-		'item_category' => isset($_POST['subcategory'])?$_POST['subcategory']:"1",
-		'tags' => $_POST['field_4']
-	));
-
-	if($insert_id){
-		// success
-		// add custom field
-		add_post_meta($insert_id, "item_status", $_POST["item_status"], true);
-		add_post_meta($insert_id, "department", xprofile_get_field_data('学部' ,$exhibitor_id), true);
-		add_post_meta($insert_id, "course", xprofile_get_field_data('学科' ,$exhibitor_id), true);
-		$msg = "商品を出品しました。";
-
-		if($_POST['wanted_item_id']){
-			add_post_meta($insert_id, "wanted_item_id", $_POST['wanted_item_id'], true);
-		}
-
-		// image upload
-		global $post;
-		upload_itempictures($insert_id);
-
-		// if first new entry
-		if(!get_user_meta($exhibitor_id, "is_first_new_entry")){
-			$todo_row = get_todo_row($exhibitor_id, TODOID_NEWENTRY);
-			$todoID = $todo_row->todo_id;
-			change_todo_status_finished($todoID);
-			update_user_meta($exhibitor_id, "is_first_new_entry", 1);
-			$msg = '<div class="first-todo-header">チュートリアル</div><div class="first-todo-title">【新規出品をしてみよう】</div><div class="first-todo-complete">Complete!!</div>';
-		}
-	}else{
-	// failure
-	}
-
-	echo $msg;
-	die;
-}
-
 function exhibit_to_wanted(){
 	$exhibitor_id = $_POST['exhibitor_id'];
 	$asin = $_POST['asin'];
@@ -838,6 +811,9 @@ function exhibit_from_app(){
 	$item_name = isset($_POST['item_name'])?$_POST['item_name']:"";
 	$image_url = isset($_POST['image_url'])?$_POST['image_url']:"";
 	$category = isset($_POST['category'])?$_POST['category']:"";
+	$ISBN = isset($_POST['ISBN'])?$_POST['ISBN']:"";
+	$author = isset($_POST['author'])?$_POST['author']:"";
+	$price = isset($_POST['price'])?$_POST['price']:"";
 
 	if($current_user_id === 0){
 		echo "ログインされていないため出品できません。";
@@ -860,7 +836,10 @@ function exhibit_from_app(){
 		'image_url' => $image_url,
 		'department' => xprofile_get_field_data('学部', $current_user_id),
 		'course' => xprofile_get_field_data('学科', $current_user_id),
-		'item_category' => $category
+		'item_category' => $category,
+		'ISBN' => $ISBN,
+		'author' => $author,
+		'price' => $price
 	));
 
 	if($insert_id !== 0){
@@ -995,10 +974,15 @@ function delete_post(){
         die;
 	}
 	$author = $item->post_author;
-	if($user_ID == $author){
-		wp_delete_post($postID);
-		// minus point on delete post
-		add_got_points($author, -1 * get_option('exhibition-point'));
+	if(current_user_can('administrator')){
+		$count = count_books($postID);
+		if($count <= 1){
+			// 在庫数が1冊以下なら出品ごと消す
+			wp_delete_post($postID);
+		}else{
+			// 在庫数が2冊以上なら、冊数のみ減らしておく
+			decreace_book_count($postID, 1);
+		}
 	}
 	die;
 }
@@ -1597,6 +1581,7 @@ function my_setup_nav() {
 			'item_css_id' => 'finished'
 		) );
 
+		/*
 		bp_core_new_nav_item( array(
 			'name' => __( '新規出品', 'buddypress' ),
 			'slug' => 'new_entry',
@@ -1625,6 +1610,7 @@ function my_setup_nav() {
 			'screen_function' => 'to_wanted_list_link',
 			'item_css_id' => 'new-entry'
 		) );
+		*/
 
 		$giveme_name;
 		if(get_count_giveme_from_others() > 0){
@@ -1856,6 +1842,18 @@ function has_todo_in_entry_list(){
  */
 function exhibit(array $args){
 	$insert_id;
+
+	// 同じISBNを持つ商品が既に存在するか検索。
+	if(isset($args['ISBN'])){
+		$p = get_post_by_ISBN($args['ISBN']);
+		if(!empty($p)){
+			// 存在する場合はその商品の冊数をインクリメントし、
+			// その商品の id を insert_id として返して処理終了。
+			increace_book_count($p->ID, 1);
+			return $p->ID;
+		}
+	}
+
 	$post = array(
 	'comment_status' => 'open', // open comment
 	'ping_status' => 'closed', // pinback, trackback off
@@ -1865,23 +1863,26 @@ function exhibit(array $args){
 	'post_type' => 'post' // entry type name
 	);
 
-	if($args['exhibitor_id'] !== null){
+	/**
+	 * postの属性をセットします。
+	 */
+	if(isset($args['exhibitor_id'])){
 		$post['post_author'] = $args['exhibitor_id'];
 	}
 
-	if($args['item_name'] !== null){
+	if(isset($args['item_name'])){
 		$post['post_title'] = strip_tags($args['item_name']);
 	}
 
-	if($args['item_description'] !== null){
+	if(isset($args['item_description'])){
 		$post['post_content'] = htmlentities($args['item_description'], ENT_QUOTES, 'UTF-8');
 	}
 
-	if($args['item_category'] !== null){
+	if(isset($args['item_category'])){
 		$post['post_category'] = array($args['item_category']);
 	}
 
-	if($args['tags'] !== null){
+	if(isset($args['tags'])){
 		$post['tags_input'] = str_replace(array(" ", "　"), array("," ,",") , $args['tags']);
 	}
 
@@ -1891,28 +1892,43 @@ function exhibit(array $args){
 		return $insert_id;
 	}
 
-	if($args['department'] !== null){
+	if(isset($args['department'])){
 		add_post_meta($insert_id, "department", $args['department'], true);
 	}
 
-	if($args['course'] !== null){
+	if(isset($args['course'])){
 		add_post_meta($insert_id, "course", $args['course'], true);
 	}
 
-	if($args['item_status'] !== null){
+	if(isset($args['item_status'])){
 		add_post_meta($insert_id, "item_status", $args['item_status'], true);
 	}
 
-	if($args['asin'] !== null){
+	if(isset($args['asin']) && $args['asin'] !== null){
 		add_post_meta($insert_id, "asin", $args['asin'], true);
 	}
 
-	if($args['image_url'] !== null){
+	if(isset($args['ISBN'])){
+		add_post_meta($insert_id, "ISBN", $args['ISBN'], true);
+	}
+
+	if(isset($args['author'])){
+		add_post_meta($insert_id, "author", $args['author'], true);
+	}
+
+	if(isset($args['price'])){
+		add_post_meta($insert_id, "price", $args['price'], true);
+	}
+
+	if(isset($args['image_url'])){
 		// attach_idはinsert_id+1になる。
 		// fcl_media_sideload_image は attach_idを返さないのでこれ以上の実装方法が見つからない。汗
 		fcl_media_sideload_image($args['image_url'] ,$insert_id);
 		update_post_meta($insert_id,'_thumbnail_id',$insert_id + 1);
 	}
+
+	// increment book count
+	increace_book_count($insert_id, 1);
 
 	// add point on exhibition
 	add_got_points($args['exhibitor_id'], get_option('exhibition-point'));
@@ -2035,19 +2051,19 @@ function giveme_from_others_link () {
 /**
  * くださいリクエストが来ている記事の一覧を取得します。
  */
-function get_giveme_from_others_list(){
+function get_giveme_from_others_list($orderby="post_id"){
 	global $wpdb;
 	global $table_prefix;
 	global $user_ID;
 	$givemes = $wpdb->get_results($wpdb->prepare("
-		SELECT " . $table_prefix . "fmt_user_giveme.post_id, display_name, user_nicename, " . $table_prefix . "fmt_user_giveme.user_id
+		SELECT " . $table_prefix . "fmt_user_giveme.post_id, display_name, user_nicename, " . $table_prefix . "fmt_user_giveme.user_id," . $table_prefix . "fmt_user_giveme.insert_timestamp
 		FROM " . $table_prefix . "fmt_user_giveme, " . $table_prefix . "posts, " . $wpdb->users . ", " . $table_prefix . "fmt_giveme_state
 		WHERE " . $table_prefix . "fmt_user_giveme.post_id = " . $table_prefix . "posts.ID
 		AND " . $table_prefix . "fmt_user_giveme.post_id = " . $table_prefix . "fmt_giveme_state.post_id
 		AND " . $table_prefix . "fmt_user_giveme.user_id = " . $wpdb->users .".ID
 		AND " . $table_prefix . "fmt_giveme_state.confirmed_flg = 0
 		AND " . $table_prefix . "posts.post_author = %d
-		ORDER BY post_id",
+		ORDER BY $orderby",
 		$user_ID));
 
 	return $givemes;
@@ -2342,18 +2358,32 @@ function endsWith($haystack, $needle){
 function bp_dtheme_header_style() {
 	$header_image = get_header_image();
 ?>
-	<style type="text/css">
-		<?php if ( !empty( $header_image ) ) : ?>
-			#header { background-image: url(<?php echo $header_image ?>); }
-		<?php endif; ?>
+    <style type="text/css">
+        <?php if ( !empty( $header_image)): ?> #header {
+            background-image: url(<?php echo $header_image ?>);
+        }
 
-		<?php if ( 'blank' == get_header_textcolor() ) { ?>
-		#header h1, #header #desc { display: none; }
-		<?php } else { ?>
-		#header h1 a, #desc { color:#<?php header_textcolor(); ?>; }
-		<?php } ?>
-	</style>
-<?php
+        <?php endif;
+        ?> <?php if ( 'blank'==get_header_textcolor()) {
+            ?> #header h1,
+            #header #desc {
+                display: none;
+            }
+            <?php
+        }
+
+        else {
+            ?> #header h1 a,
+            #desc {
+                color: #<?php header_textcolor();
+                ?>;
+            }
+            <?php
+        }
+
+        ?>
+    </style>
+    <?php
 }
 
 /**
@@ -2373,52 +2403,53 @@ function bp_dtheme_blog_comments( $comment, $args, $depth ) {
 		$avatar_size = 25;
 	?>
 
-	<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
-		<div class="comment-avatar-box">
-			<div class="avb">
-				<a href="<?php echo get_comment_author_url(); ?>" rel="nofollow">
-					<?php if ( $comment->user_id ) : ?>
-						<?php echo bp_core_fetch_avatar( array( 'item_id' => $comment->user_id, 'width' => $avatar_size, 'height' => $avatar_size, 'email' => $comment->comment_author_email ) ); ?>
-					<?php else : ?>
-						<?php echo get_avatar( $comment, $avatar_size ); ?>
-					<?php endif; ?>
-				</a>
-			</div>
-		</div>
+        <li <?php comment_class(); ?> id="comment-
+            <?php comment_ID(); ?>">
+                <div class="comment-avatar-box">
+                    <div class="avb">
+                        <a href="<?php echo get_comment_author_url(); ?>" rel="nofollow">
+                            <?php if ( $comment->user_id ) : ?>
+                                <?php echo bp_core_fetch_avatar( array( 'item_id' => $comment->user_id, 'width' => $avatar_size, 'height' => $avatar_size, 'email' => $comment->comment_author_email ) ); ?>
+                                    <?php else : ?>
+                                        <?php echo get_avatar( $comment, $avatar_size ); ?>
+                                            <?php endif; ?>
+                        </a>
+                    </div>
+                </div>
 
-		<div class="comment-content">
-			<div class="comment-meta">
-				<p>
-					<?php
+                <div class="comment-content">
+                    <div class="comment-meta">
+                        <p>
+                            <?php
 						/* translators: 1: comment author url, 2: comment author name, 3: comment permalink, 4: comment date/timestamp*/
 						printf( __( '<a href="%1$s" rel="nofollow">%2$s</a> said on <a href="%3$s"><span class="time-since">%4$s</span></a>', 'buddypress' ), get_comment_author_url(), get_comment_author(), get_comment_link(), get_comment_date() );
 					?>
-				</p>
-			</div>
+                        </p>
+                    </div>
 
-			<div class="comment-entry">
-				<?php if ( $comment->comment_approved == '0' ) : ?>
-				 	<em class="moderate"><?php _e( 'Your comment is awaiting moderation.', 'buddypress' ); ?></em>
-				<?php endif; ?>
+                    <div class="comment-entry">
+                        <?php if ( $comment->comment_approved == '0' ) : ?>
+                            <em class="moderate"><?php _e( 'Your comment is awaiting moderation.', 'buddypress' ); ?></em>
+                            <?php endif; ?>
 
-				<?php comment_text(); ?>
-			</div>
+                                <?php comment_text(); ?>
+                    </div>
 
-			<div class="comment-options">
-					<?php if ( comments_open() ) : ?>
-						<?php comment_reply_link( array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ); ?>
-					<?php endif; ?>
+                    <div class="comment-options">
+                        <?php if ( comments_open() ) : ?>
+                            <?php comment_reply_link( array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ); ?>
+                                <?php endif; ?>
 
-					<?php if ( $user_ID == $comment->user_id ) : ?>
-						<?php //printf( '<a class="button comment-edit-link bp-secondary-action" href="%1$s" title="%2$s">%3$s</a> ', get_update_comment_link( $comment->comment_ID ), esc_attr__( 'Edit comment', 'buddypress' ), __( 'Edit', 'buddypress' ) ); ?>
-						<?php printf( '<a class="button comment-edit-link bp-secondary-action edit-button" onClick="%1$s" title="%2$s">%3$s</a> ', 'onClickEditCommentButton('. $comment->comment_ID .')', esc_attr__( 'Edit comment', 'buddypress' ), __( 'Edit', 'buddypress' ) ); ?>
-					<?php endif; ?>
+                                    <?php if ( $user_ID == $comment->user_id ) : ?>
+                                        <?php //printf( '<a class="button comment-edit-link bp-secondary-action" href="%1$s" title="%2$s">%3$s</a> ', get_update_comment_link( $comment->comment_ID ), esc_attr__( 'Edit comment', 'buddypress' ), __( 'Edit', 'buddypress' ) ); ?>
+                                            <?php printf( '<a class="button comment-edit-link bp-secondary-action edit-button" onClick="%1$s" title="%2$s">%3$s</a> ', 'onClickEditCommentButton('. $comment->comment_ID .')', esc_attr__( 'Edit comment', 'buddypress' ), __( 'Edit', 'buddypress' ) ); ?>
+                                                <?php endif; ?>
 
-			</div>
+                    </div>
 
-		</div>
+                </div>
 
-<?php
+                <?php
 }
 
 function render(){
@@ -2944,7 +2975,8 @@ function fc_messages_pagination_count() {
 	$total = bp_core_number_format( $messages_template->total_thread_count );
 
 	// オーバーライド部分
-	echo sprintf( _n( '%1$s件目から%2$s件目まで表示(%3$s件中)', '%1$s件目から%2$s件目まで表示(%3$s件中)', $total, 'buddypress' ), $from_num, $to_num, number_format_i18n( $total ) ); ?><?php
+	echo sprintf( _n( '%1$s件目から%2$s件目まで表示(%3$s件中)', '%1$s件目から%2$s件目まで表示(%3$s件中)', $total, 'buddypress' ), $from_num, $to_num, number_format_i18n( $total ) ); ?>
+                    <?php
 }
 
 function show_all_items(){
@@ -3040,3 +3072,179 @@ function get_bookfair_info_of_all(){
 	return $bookfair_info;
 }
 
+/**
+*	商品IDから、ユーザーデータを取得する関数
+*	@param{int} $postID 商品ID
+*/
+function get_userdata_from_postID($postID){
+	$userID = get_post($postID)->post_author;
+	$user_data = get_userdata($userID);
+	return $user_data;
+}
+
+/**
+*	任意の期間の新規登録者数を返す関数
+* @param {array} $options 検索条件
+*	count: trueなら検索結果の件数を返します
+*	period_from: 日付範囲検索の開始日付
+* 	period_to: 日付範囲検索の終了日付
+* @return {int/array} $result 検索結果
+*	$options['count'] = true のとき int
+*	それ以外のとき array[usersオブジェクト]
+*/
+function get_new_register_log($options){
+	return get_data_within_the_period($options, "users", "user_registered");
+}
+
+/**
+*	任意の期間の出品商品を返す関数
+* @param {array} $options 検索条件
+*	count: trueなら検索結果の件数を返します
+*	period_from: 日付範囲検索の開始日付
+* 	period_to: 日付範囲検索の終了日付
+* @return {int/array} $result 検索結果
+*	$options['count'] = true のとき int
+*	それ以外のとき array[postsオブジェクト]
+*/
+function get_posts_log($options){
+	return get_data_within_the_period($options, "posts", "post_date");
+}
+
+/**
+*	任意の期間の情報を返す関数
+* @param {array} $options 検索条件
+*	count: trueなら検索結果の件数を返します
+*	period_from: 日付範囲検索の開始日付
+* 	period_to: 日付範囲検索の終了日付
+* @return {int/array} $result 検索結果
+*	$options['count'] = true のとき int
+*	それ以外のとき array[テーブルオブジェクト]
+*/
+function get_data_within_the_period($options, $table, $timing){
+	global $wpdb, $table_prefix;
+	$sql;
+	$result;
+	$where = [];
+	$bind_values = [];
+
+	if(isset($options['count']) && $options['count']){
+		$sql = "SELECT count(*) FROM {$table_prefix}{$table} ";
+	}else{
+		$sql = "SELECT * FROM {$table_prefix}{$table} ";
+	}
+
+	// 日付範囲検索条件構築部分
+	if(isset($options['period_from'])){
+		array_push($where, $timing ." >= %s");
+		array_push($bind_values, $options['period_from']);
+	}
+
+	if(isset($options['period_to'])){
+		array_push($where, $timing . " <= %s");
+		array_push($bind_values, $options['period_to']);
+	}
+
+	if(count($where) > 0){
+		$sql .= 'WHERE ' . implode($where, ' and ');
+	}
+
+	if(isset($options['count']) && $options['count']){
+		$result = $wpdb->get_var($wpdb->prepare($sql, $bind_values));
+	}else{
+		$result = $wpdb->get_results($wpdb->prepare($sql, $bind_values));
+	}
+
+	return $result;
+}
+
+/* show the user name logging in on the top of the display */
+function get_login_user_info() {
+    global $current_user;
+    get_currentuserinfo();
+    echo json_encode($current_user);
+    die;
+}
+
+// filter and if the information is hooked with the condition of first argument, jump to the second argument
+add_action('wp_ajax_get_login_user_info', 'get_login_user_info');
+
+//HTML特殊文字をエスケープする関数
+function escape_html_special_chars($text, $charset = 'utf-8'){
+	$ngwords = array("<", ">", ";");
+	$nongtext = str_replace($ngwords, "", $text);
+	return htmlspecialchars($nongtext, ENT_QUOTES, $charset);
+}
+
+
+/**
+	*運営用ページ
+	*/
+
+function admin_page(){
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/admin/admin_function.php";
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/admin/admin_top.php";
+}
+add_shortcode('admin_page', 'admin_page');
+
+/*検索結果を返す*/
+function get_search_json(){
+	$str = $_POST['str'];
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/admin/ajax_function.php";
+	ajax_func($str);
+	//echo json_encode($json);
+}
+add_action('wp_ajax_nopriv_get_search_json', 'get_search_json');
+add_action('wp_ajax_get_search_json', 'get_search_json');
+
+function admin_styles() {
+    wp_enqueue_style( 'admin', "/wp-content/themes/freecycle/admin/styles/admin_style.css");
+}
+add_action( 'wp_enqueue_scripts', 'admin_styles');
+
+/**
+	*ヘッダー
+	*/
+function header_styles() {
+	wp_enqueue_style( 'header', "/wp-content/themes/freecycle/style/header.css");
+	wp_enqueue_style( 'footer', "/wp-content/themes/freecycle/style/footer.css");
+}
+add_action( 'wp_enqueue_scripts', 'header_styles');
+
+
+/* 本の冊数系関数*/
+function count_books($post_ID){
+	$book_counts = get_post_custom_values('book_count', $post_ID);
+	//meta key:'book_count'とpost_idでunique
+	return $book_counts[0];
+}
+
+function increace_book_count($post_ID, $num){
+	update_book_count($post_ID, $num);
+}
+
+function decreace_book_count($post_ID, $num){
+	update_book_count($post_ID, -$num);
+}
+
+function update_book_count($post_ID, $num){
+	$count = count_books($post_ID);
+	$count += $num;
+	return update_post_meta($post_ID, 'book_count', $count);
+}
+
+// ISBN の値から本のデータを取って返します。
+function get_post_by_ISBN($isbn){
+	$posts = get_posts(array(
+			'meta_key' => 'ISBN',
+			'meta_value' => $isbn
+		));
+
+	if(sizeof($posts) === 0){
+		return array(); // 検索結果が無いときは空オブジェクトを返す
+	}else if(sizeof($posts) === 1){
+		return $posts[0];
+	}else if(sizeof($posts) > 1){
+		error_log("There are multiple posts having same ISBN ".$isbn, 0); // ISBNの重複が発生しているのでエラーを出力
+		return $posts[0];
+	}
+}

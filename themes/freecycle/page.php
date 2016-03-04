@@ -1,4 +1,10 @@
-<?php get_header(); ?>
+<?php 
+function delete_searchform($text){
+	$ngwords = 'get_search_form();';
+	str_replace($ngwords, "", $text);
+} 
+delete_searchform(get_header()); 
+?>
 
 	<div id="content">
 		<div class="padder">

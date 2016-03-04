@@ -1,0 +1,71 @@
+
+.ad_categories{
+    width: auto;
+		float : left;
+		margin-right : 10px;
+}
+.main_categories.ad_{
+		width : auto;
+		line-height: 25px;
+		height: auto;
+	  padding: 0 20px 0 10px;
+}
+/*==========================================================*/
+.ad_input{
+	float : left;
+	height  :calc( 27px - 4px );
+	width : 100px;
+}
+#searchsubmit{
+	border: 0 !important;
+	padding: 0 !important;
+	margin-left : 0px;
+	margin-right :auto;
+	width: 45px !important;
+	height: 27px !important;
+	border-radius: 0px !important;
+	background-size: contain;
+	background-repeat: no-repeat;
+	text-indent: 100%;
+}
+/*==========================================================*/
+.ad-post-content{
+	width : 150px;
+}
+.grid_center{
+	position: relative;
+ 	max-width: 700px;
+  margin: 0 auto;   /*全体の中央寄せ*/
+}
+.grid{
+		width: 300px;
+	/*margin:10px;*/
+	border-bottom:1px solid #ccc;
+}
+.colm1{
+	float:left;
+	/*margin: 3px;*/
+}
+.colm2{
+	margin-top: 10px;
+	margin-left: 110px;
+	height: 110px;
+	width :150px;
+}
+.ad_cancel{
+	width : 30px;
+	padding : 2px;
+	background-color:#ff2029;
+	color : #FFF;
+	border-radius : 5px;
+	text-align: center;
+	margin-left : auto;
+}
+.ad_pagenation{
+	width : 90%;
+}
+/*==========================================================*/
+.edit-link {
+  display: none;
+ }
+

@@ -1,0 +1,1170 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Gianism\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-06-24 00:18+0900\n"
+"PO-Revision-Date: 2013-06-24 00:19+0900\n"
+"Last-Translator: Takahashi Fumiki <info@takahashifumiki.com>\n"
+"Language-Team: Hametuha inc. <info@hametuha.co.jp>\n"
+"Language: ja_JP\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../WP_Gianism.php:208 ../WP_Gianism.php:210
+msgid "Messages"
+msgstr "メッセージ"
+
+#: ../WP_Gianism.php:211
+msgid "Message"
+msgstr "メッセージ"
+
+#: ../WP_Gianism.php:228
+#, php-format
+msgid "Message to %s"
+msgstr "%sさんへのメッセージ"
+
+#: ../WP_Gianism.php:243
+msgid "Delete"
+msgstr "削除"
+
+#: ../WP_Gianism.php:251 ../WP_Gianism.php:404
+msgid "No message."
+msgstr "メッセージはありません。"
+
+#: ../WP_Gianism.php:299
+msgid "Option updated."
+msgstr "設定が更新されました。"
+
+#: ../WP_Gianism.php:301
+msgid "Option failed to update."
+msgstr "設定を更新できませんでした。"
+
+#: ../WP_Gianism.php:311 ../WP_Gianism.php:349 ../templates/setting.php:17
+msgid "External Service"
+msgstr "外部サービス連携"
+
+#: ../WP_Gianism.php:402
+msgid "You really delete this message?"
+msgstr "このメッセージを削除しますか？"
+
+#: ../WP_Gianism.php:403
+msgid "You cannot delete this message."
+msgstr "このメッセージを削除できません。"
+
+#: ../WP_Gianism.php:653
+msgid ""
+"Connect user accounts with major web services like Facebook, twitter, etc. "
+"Stand on the shoulders of giants!"
+msgstr ""
+"ユーザーアカウントをFacebookやTwitterなどのwebサービスと接続します。巨人の肩"
+"に乗りましょう！"
+
+#: ../sdks/facebook/facebook_controller.php:97
+#: ../sdks/facebook/facebook_controller.php:133
+#: ../sdks/facebook/facebook_controller.php:148
+#: ../sdks/google/google_controller.php:79
+#: ../sdks/mixi/mixi_controller.php:137 ../sdks/mixi/mixi_controller.php:182
+#: ../sdks/twitter/twitter_controller.php:117
+#: ../sdks/twitter/twitter_controller.php:120
+#: ../sdks/twitter/twitter_controller.php:123
+#: ../sdks/twitter/twitter_controller.php:183
+msgid "Oops, Failed to Authenticate."
+msgstr "おや、認証できませんでした。"
+
+#: ../sdks/facebook/facebook_controller.php:127
+#, php-format
+msgid "Welcome!, %s"
+msgstr "ようこそ、%sさん！"
+
+#: ../sdks/facebook/facebook_controller.php:129
+#: ../sdks/facebook/facebook_controller.php:209
+#: ../sdks/google/google_controller.php:107
+#: ../sdks/mixi/mixi_controller.php:150
+#: ../sdks/twitter/twitter_controller.php:114
+#: ../sdks/yahoo/yahoo_controller.php:195
+#, php-format
+msgid "Mm...? This %s account seems to be connected to another account."
+msgstr "...この%sアカウントはすでに別のアカウントに接続されています。"
+
+#: ../sdks/facebook/facebook_controller.php:136
+#: ../sdks/facebook/facebook_controller.php:220
+msgid "Cannot get Facebook ID."
+msgstr "Facebook IDを取得できません。"
+
+#: ../sdks/facebook/facebook_controller.php:143
+#: ../sdks/google/google_controller.php:118
+#, php-format
+msgid "Disconected your %s account."
+msgstr "%sアカウントを切断しました。"
+
+#: ../sdks/facebook/facebook_controller.php:212
+msgid "Cannot get e-mail."
+msgstr "メールアドレスを取得できません。"
+
+#: ../sdks/facebook/facebook_controller.php:212
+#: ../sdks/facebook/facebook_controller.php:220
+msgid "Please try again later."
+msgstr "時間をおいてからもう一度試してみてください。"
+
+#: ../sdks/facebook/facebook_controller.php:273
+#: ../sdks/google/google_controller.php:199
+#: ../sdks/mixi/mixi_controller.php:295
+#: ../sdks/twitter/twitter_controller.php:220
+#: ../sdks/yahoo/yahoo_controller.php:264
+msgid "Connect"
+msgstr "コネクト"
+
+#: ../sdks/facebook/facebook_controller.php:274
+#, php-format
+msgid ""
+"Connecting with Facebook account, you can log in %s via Facebook account."
+msgstr ""
+"Facebookアカウントに接続すると、%sにFacebookアカウントでログインできるように"
+"なります。"
+
+#: ../sdks/facebook/facebook_controller.php:282
+#: ../sdks/google/google_controller.php:191
+#: ../sdks/mixi/mixi_controller.php:284
+#: ../sdks/twitter/twitter_controller.php:203
+#: ../sdks/yahoo/yahoo_controller.php:256
+msgid "Disconnect"
+msgstr "切断"
+
+#: ../sdks/facebook/facebook_controller.php:283
+msgid "Your account is already connected with Facebook account."
+msgstr "あなたのアカウントはすでにFacebookアカウントに接続されています。"
+
+#: ../sdks/facebook/facebook_controller.php:284
+#: ../sdks/google/google_controller.php:193
+#: ../sdks/mixi/mixi_controller.php:291
+#: ../sdks/twitter/twitter_controller.php:211
+#: ../sdks/yahoo/yahoo_controller.php:258
+msgid "You really disconnect this account?"
+msgstr "アカウントを切断しますか？"
+
+#: ../sdks/facebook/facebook_controller.php:290
+msgid "Facebook"
+msgstr "Facebook"
+
+#: ../sdks/facebook/facebook_controller.php:316
+msgid "Log in with Facebook"
+msgstr "Facebookでログイン"
+
+#: ../sdks/google/google_controller.php:104
+#: ../sdks/mixi/mixi_controller.php:152
+#, php-format
+msgid "Welcom, %s!"
+msgstr "ようこそ、%s！"
+
+#: ../sdks/google/google_controller.php:156
+#: ../sdks/yahoo/yahoo_controller.php:219
+#, php-format
+msgid "Welcome, %1$s! You are now logged in with %2$s."
+msgstr "ようこそ、%1$sさん！ %2$sでログインしました。"
+
+#: ../sdks/google/google_controller.php:192
+#, php-format
+msgid "Your account is already connected with Google &lt;%s&gt;."
+msgstr ""
+"あなたのアカウントはすでにGoogleアカウント &lt;%s&gt;に接続されています。"
+
+#: ../sdks/google/google_controller.php:200
+#: ../sdks/mixi/mixi_controller.php:297
+#: ../sdks/twitter/twitter_controller.php:221
+#: ../sdks/yahoo/yahoo_controller.php:266
+#, php-format
+msgid "Connecting %1$s account, you can log in %2$s via %1$s account."
+msgstr ""
+"%1$sアカウントに接続すると、%2$sに%1$sアカウントでログインできるようになりま"
+"す。"
+
+#: ../sdks/google/google_controller.php:206
+msgid "Google"
+msgstr "Google"
+
+#: ../sdks/google/google_controller.php:227
+msgid "Login with Google"
+msgstr "Googleでログイン"
+
+#: ../sdks/mixi/mixi_controller.php:103
+#: ../sdks/twitter/twitter_controller.php:130
+msgid "Disconnect now :("
+msgstr "切断なう :("
+
+#: ../sdks/mixi/mixi_controller.php:169 ../sdks/mixi/mixi_controller.php:231
+#: ../sdks/mixi/mixi_controller.php:237
+msgid "Failed to get mixi ID."
+msgstr "mixi IDの取得に失敗しました。"
+
+#: ../sdks/mixi/mixi_controller.php:172 ../sdks/mixi/mixi_controller.php:234
+msgid "Invalid access token."
+msgstr "無効なアクセストークンです。"
+
+#: ../sdks/mixi/mixi_controller.php:218
+#: ../sdks/twitter/twitter_controller.php:112
+#, php-format
+msgid "Welcome, %s!"
+msgstr "ようこそ、%sさん！"
+
+#: ../sdks/mixi/mixi_controller.php:259
+msgid "Login with mixi"
+msgstr "mixiでログイン"
+
+#: ../sdks/mixi/mixi_controller.php:285
+#: ../sdks/twitter/twitter_controller.php:205
+#, php-format
+msgid ""
+"Your account is already connected with %1$s <a target=\"_blank\" href=\"%2$s"
+"\">%3$s</a> ."
+msgstr ""
+"あなたのアカウントはすでに%1$s<a target=\"_blank\" href=\"%2$s\">%3$s</a>に接"
+"続済みです。"
+
+#: ../sdks/mixi/mixi_controller.php:285
+msgid "View Profile"
+msgstr "プロフィールを見る"
+
+#: ../sdks/mixi/mixi_controller.php:289
+#: ../sdks/twitter/twitter_controller.php:209
+#, php-format
+msgid ""
+"Your e-mail address is pseudo &quot;%1$s&quot; and cannot be sent a mail "
+"for. If you disconnect %2$s account, you may not be able to log in %3$s. "
+"Please change it to available e-mail address."
+msgstr ""
+"あなたのメールアドレスは仮のもの&quot;%1$s&quot;で、メールを受信することがで"
+"きません。%2$sアカウントを切断すると、%3$sにログインできなくなるかもしれませ"
+"ん。その前にメールアドレスを有効なものに変更してください。"
+
+#: ../sdks/twitter/twitter_controller.php:227
+msgid "Twitter"
+msgstr "Twitter"
+
+#: ../sdks/twitter/twitter_controller.php:254
+msgid "Login with Twitter"
+msgstr "Twitterでログイン"
+
+#: ../sdks/twitter/twitter_controller.php:352
+#, php-format
+msgid "You have message \"%1$s\" on %2$s. %3$s"
+msgstr "%2$s新着通知\n\n\"%1$s\"\nが届きました。 \n%3$s"
+
+#: ../sdks/yahoo/yahoo_controller.php:97
+#, php-format
+msgid "Your accont is now disconnected from %s."
+msgstr "あなたのアカウントは%sから切断されました。"
+
+#: ../sdks/yahoo/yahoo_controller.php:137
+#: ../sdks/yahoo/yahoo_controller.php:160
+#: ../sdks/yahoo/yahoo_controller.php:162
+#: ../sdks/yahoo/yahoo_controller.php:164
+#: ../sdks/yahoo/yahoo_controller.php:176
+#: ../sdks/yahoo/yahoo_controller.php:226
+#: ../sdks/yahoo/yahoo_controller.php:228
+#: ../sdks/yahoo/yahoo_controller.php:230
+msgid "Cannot connect with Yahoo! JAPAN. Please try again later."
+msgstr "Yahoo! JAPANに接続できません。時間をあけてもう一度試してください。"
+
+#: ../sdks/yahoo/yahoo_controller.php:150
+msgid "Ooops, another account uses same Yahoo! ID."
+msgstr "おや、他のユーザーがこのYahoo! IDを使っているようです。"
+
+#: ../sdks/yahoo/yahoo_controller.php:155
+#, php-format
+msgid "Welcome, %s! Your account is now connected with Yahoo! JAPAN."
+msgstr "ようこそ、%sさん！　あなたのアカウントはYahoo! JAPANに接続されました。"
+
+#: ../sdks/yahoo/yahoo_controller.php:201
+msgid "Sorry, but cannot create account. Please try again later."
+msgstr ""
+"申し訳ありませんが、アカウントを作成できませんでした。後ほどお試しください。"
+
+#: ../sdks/yahoo/yahoo_controller.php:257
+#, php-format
+msgid "Your account is already connected with %1$s."
+msgstr "あなたのアカウントはすでに%1$sに接続されています。"
+
+#: ../sdks/yahoo/yahoo_controller.php:271
+msgid "Yahoo! JAPAN"
+msgstr "Yahoo! JAPAN"
+
+#: ../sdks/yahoo/yahoo_controller.php:289
+msgid "Log in with Yahoo! JAPAN"
+msgstr "Yahoo! JAPANでログイン"
+
+#: ../templates/advanced.php:2
+msgid "Create Facebook page tab"
+msgstr "Facebookページタブを作成する"
+
+#: ../templates/advanced.php:4
+msgid ""
+"<a href=\"https://developers.facebook.com/docs/appsonfacebook/pagetabs/"
+"\">Page tab</a> is page which you can add to your facebook page. If you "
+"create Facebook Web application and connect it with Gianism, you can assign "
+"WordPress page to page tab."
+msgstr ""
+"<a href=\"https://developers.facebook.com/docs/appsonfacebook/pagetabs/\">"
+"ページタブ</a>はFacebookページに追加できるページです。Facebookアプリケーショ"
+"ンを作成し、それをGianismと接続した場合は、WordPressページをページタブとして"
+"割り当てることができます。"
+
+#: ../templates/advanced.php:6
+#, php-format
+msgid ""
+"You can assign page tab <a href=\"%s\">here</a>. But it is not sufficient, "
+"because page tab itself should be assigned on <a href=\"https://developers."
+"facebook.com/apps\">Facebook Develpers</a>. You can intergrate your "
+"WordPress page to Facebook tab there."
+msgstr ""
+"ページタブの割当は<a href=\"%s\">こちら</a>で行えます。ただし、これだけでは十"
+"分ではありません。ページタブ自体は<a href=\"https://developers.facebook.com/"
+"apps\">Facebook Develpers</a>でも割り当てなくてはいけないからです。WordPress"
+"ページとFacebookページタブの統合はそこで行います。"
+
+#: ../templates/advanced.php:8
+msgid ""
+"<strong>Note:</strong> Page tab will be embedded in Facebook and should have "
+"fixed width(520px or 810px). Be careful to your theme layout. If you would "
+"like to see how it looks, please visit and check <a href=\"https://www."
+"facebook.com/TakahashiFumiki.Page/app_264573556888294\">plugin authors "
+"Facebook page tab</a>."
+msgstr ""
+"<strong>注意:</strong> ページタブはFacebookに埋め込まれ、固定幅（520pxか"
+"810px）で表示されます。テーマレイアウトに注意してください。どのように表示され"
+"るか知りたい場合は、<a href=\"https://www.facebook.com/TakahashiFumiki.Page/"
+"app_264573556888294\">プラグイン作者のFacebookページタブ</a>を見て確認してく"
+"ださい。"
+
+#: ../templates/advanced.php:10
+msgid ""
+"Now you have completed connecting WordPress page to Facebook page tab. "
+"Several utility functions are available. For example, assume that you have "
+"page template named <code>page-facebook.php</code> and edit like below."
+msgstr ""
+"これでWordPressページとFacebookページタブの接続が完了しました。いくつかの便利"
+"な関数が利用できます。たとえば、<code>page-facebook.php</code>というテンプ"
+"レートを持っている場合は、このように編集できます。"
+
+#: ../templates/advanced.php:51
+msgid "Get publish permission of Facebook account"
+msgstr "Facebookアカウントのpublish permissionを取得する"
+
+#: ../templates/advanced.php:53
+msgid "You can get permission to publish information to user's Facebook wall."
+msgstr ""
+"ユーザーのFacebookウォールに情報をパブリッシュする許可を得ることができます。"
+
+#: ../templates/advanced.php:55
+msgid ""
+"For example, display link to post action &quot;read an article&quot; to "
+"Facebook wall."
+msgstr ""
+"たとえば、Facebookウォールに&quot;記事を読んだ&quot;というアクションをポスト"
+"するリンクを表示します。"
+
+#: ../templates/advanced.php:70
+msgid "URL which user will be redirected"
+msgstr "ユーザーがリダイレクトされるURL"
+
+#: ../templates/advanced.php:71
+msgid "Action name fired after authentication"
+msgstr "認証後に実行されるアクション名"
+
+#: ../templates/advanced.php:72
+msgid "Additional arguments passed to hook function"
+msgstr "フック関数に渡される追加の引数"
+
+#: ../templates/advanced.php:76
+msgid ""
+"If user click this link, he will be redirected to Facebook and see "
+"permission dialog. After authentication, the aciton you registered will be "
+"fired. Now hook on it and execute publication."
+msgstr ""
+"ユーザーがこのリンクをクリックすると、Facebookにリダイレクトされ、許可を求め"
+"る画面が表示されます。認証後、あなたが登録したアクションが実行されます。それ"
+"ではフックを登録し、パブリッシュしてみましょう。"
+
+#: ../templates/advanced.php:110
+msgid "Register action hook which you registered above."
+msgstr "上で登録したアクションにフックを登録します。"
+
+#: ../templates/advanced.php:111
+msgid "This funciton will be executed after authentication"
+msgstr "この関数は認証後に実行されます"
+
+#: ../templates/advanced.php:112
+msgid "Check if argument is propery passed and if post exists."
+msgstr "引数が適切に渡されており、投稿が存在するかチェックする"
+
+#: ../templates/advanced.php:113
+msgid "Read an artcile."
+msgstr "記事を読みました。"
+
+#: ../templates/advanced.php:114
+msgid "Do error handling if you wish."
+msgstr "必要ならエラーハンドリング"
+
+#: ../templates/advanced.php:115
+msgid "This funcion been executed, user will be redirected."
+msgstr "この関数が実行されたあと、ユーザーはリダイレクトされます。"
+
+#: ../templates/advanced.php:119
+#, php-format
+msgid ""
+"<strong>Note:</strong> <code>$facebook</code> object is instance of Facebook "
+"class which is part of Facebook PHP SDK. To know what you can do with it, "
+"read the <a href=\"%s\">documentation</a>."
+msgstr ""
+"<strong>※</strong> <code>$facebook</code>オブジェクトはFacebookクラスのインス"
+"タンスであり、Facebook PHP SDKの一部です。より詳しくは<a href=\"%s\">ドキュメ"
+"ンテーション</a>を読んでください。"
+
+#: ../templates/advanced.php:123
+msgid "Make tweet with your account"
+msgstr "アカウントからツイートする"
+
+#: ../templates/advanced.php:125
+msgid "You can make tweet by registered application's account."
+msgstr "登録したアプリケーションのアカウントでつぶやくことができます。"
+
+#: ../templates/advanced.php:132
+msgid "Hello, my followers. I updated new post."
+msgstr "フォロワーの皆さん、こんにちは。新しい投稿を公開しました。"
+
+#: ../templates/advanced.php:136
+msgid ""
+"This function itself makes no sense, but you can use some hook to make auto "
+"post."
+msgstr ""
+"この関数自体では意味を持ちませんが、自動つぶやきをするためにフックを使うこと"
+"ができます。"
+
+#: ../templates/advanced.php:167
+#, php-format
+msgid "%1$s pulbished %2$s. Please visit %3$s"
+msgstr "%1$s が %2$sを公開しました。URLはこちら %3$s"
+
+#: ../templates/advanced.php:171
+msgid ""
+"<strong>Note:</strong> Currently, only twitter application's account(thus, "
+"admin's twitter account) can tweet."
+msgstr ""
+"<strong>注意:</strong> いまのところ、twitterアプリケーションのアカウント（お"
+"そらく管理者のtwitterアカウント）だけがつぶやけます。"
+
+#: ../templates/advanced.php:174
+msgid "Save additional infomration"
+msgstr "追加の情報を保存する"
+
+#: ../templates/advanced.php:177
+msgid ""
+"Gianism uses only user name or ID and email(if possible) which are required "
+"on creating WordPress user account. but in some cases, you may need "
+"additional information provided from SNS."
+msgstr ""
+"GianismはWordPressのユーザーアカウントを作成するために必要なユーザー名やID、"
+"メール（可能であれば）だけを利用します。しかし、ときにはSNSから提供される追加"
+"の情報が必要なときもあるでしょう。"
+
+#: ../templates/advanced.php:178
+msgid ""
+"For example, Facebook provides various information like educationla "
+"background, friends and so on."
+msgstr "たとえば、Facebookは学歴やフレンドなどの様々な情報を提供してくれます。"
+
+#: ../templates/advanced.php:204
+msgid "Save additional information on SNS connection."
+msgstr "SNS接続時に追加情報を保存する"
+
+#: ../templates/advanced.php:208
+msgid ""
+"Data structure is different by service. For more detail, read documentation "
+"or make thread on <a href=\"http://wordpress.org/support/plugin/gianism"
+"\">WordPress.org</a>."
+msgstr ""
+"データ構造はサービスごとに異なります。詳しくはドキュメントを見るか、<a href="
+"\"http://wordpress.org/support/plugin/gianism\">WordPress.org</a>でスレッドを"
+"立ててください。"
+
+#: ../templates/advanced.php:210
+msgid ""
+"<strong>Note:</strong> information about user is different by service, so "
+"you shouldn't relay on specific service. Facebook provides educationla "
+"background or sex, but twitter doesn't."
+msgstr ""
+"<strong>注意：</strong> ユーザーの情報はサービスごとに異なるため、特定のサー"
+"ビスに依存すべきではありません。Facebookは学歴や性別を提供してくれますが、"
+"twitterは提供していません。"
+
+#: ../templates/customize.php:1
+msgid "Change Login Button"
+msgstr "ログインボタンを変更する"
+
+#: ../templates/customize.php:3
+msgid ""
+"You can change the appearance of login button. Available hooks are below:"
+msgstr "ログインボタンの外観を変更できます。利用できるフックは以下の通りです。"
+
+#: ../templates/customize.php:14
+msgid "You can customize Facebook login button like this"
+msgstr "Facebookボタンをこのようにカスタマイズできます。"
+
+#: ../templates/customize.php:27
+msgid "Change Redirect"
+msgstr "リダイレクト先を変更する"
+
+#: ../templates/customize.php:30
+msgid "You can hook on redirect URL after user logged in."
+msgstr "ユーザーがログインした後のリダイレクトをカスタマイズできます。"
+
+#: ../templates/customize.php:40
+msgid "Now you can get redirect URL."
+msgstr "これでリダイレクトURLが取得できます"
+
+#: ../templates/customize.php:42
+msgid "Not specified, $url is null."
+msgstr "指定されていなければ$urlはNULLです。"
+
+#: ../templates/customize.php:51
+msgid ""
+"<strong>Note:</strong> Redirect occurs on various situations. If you are not "
+"enough aware of WordPress URL process, some troubles might occurs."
+msgstr ""
+"<strong>※:</strong> リダイレクトは様々なシチュエーションで行われます。もしあ"
+"なたがWordPressのURL処理について詳しくない場合、トラブルの原因になることがあ"
+"ります。"
+
+#: ../templates/customize.php:56
+msgid "Controll login button display"
+msgstr "ログインボタンの表示をカスタマイズ"
+
+#: ../templates/customize.php:58
+msgid ""
+"By default, all login buttons of each services are displayed on both login "
+"screen and register screen. You can turn it off on admin screen. Besides it, "
+"you can controll it with filter hook."
+msgstr ""
+"デフォルトでは、すべてのログインボタンはログイン画面と新規登録画面に表示され"
+"ます。これは管理画面から切り替えができますが、フィルターフックでもコントロー"
+"ルできます。"
+
+#: ../templates/customize.php:96
+msgid "Display login button as you like"
+msgstr "好きな場所にログインボタンを表示する"
+
+#: ../templates/customize.php:98
+msgid "You can display social login buttons anywhere."
+msgstr "ソーシャルログインボタンはどこにでも表示できます。"
+
+#: ../templates/how-to-setup.php:4
+#, php-format
+msgid "Last Updated: %s"
+msgstr "最終更新日: %s"
+
+#: ../templates/how-to-setup.php:10
+msgid ""
+"First of all, Facebook account is required. If you don't have one, create it "
+"at <a href=\"https://www.facebook.com\">facebook.com</a>"
+msgstr ""
+"まずFacebookアカウントが必要です。持っていない場合は <a href=\"https://www."
+"facebook.com\">facebook.com</a>で作成してください。"
+
+#: ../templates/how-to-setup.php:12
+msgid "Create App on Facebook developers"
+msgstr "Facebook Developersでアプリを作成する"
+
+#: ../templates/how-to-setup.php:14
+msgid ""
+"Gianism refers user's Facebook credential as Facebook app. Go to <a href="
+"\"https://developers.facebook.com\">Facebook developers</a> and sign up as "
+"developer. On registeration flow, you will have to enter mobile phone number "
+"or credit card number."
+msgstr ""
+"GianismはユーザーのFacebook認証情報をFacebookアプリとして参照します。<a href="
+"\"https://developers.facebook.com\">Facebook developers</a>へ行き、開発者とし"
+"て登録してください。登録の過程で携帯電話の番号かクレジットカード番号を求めら"
+"れます。"
+
+#: ../templates/how-to-setup.php:16
+#, php-format
+msgid ""
+"Authenticated as developer, go to <a href=\"https://developers.facebook.com/"
+"apps\">Apps</a> and create new App. You can enter name as you like, but the "
+"same name as WordPress site name <code>%s</code> is recommended for "
+"usability."
+msgstr ""
+"開発者として登録したら、<a href=\"https://developers.facebook.com/apps\">アプ"
+"リ</a>へ移動し、新しいアプリを作成してください。好きな名前を入力することがで"
+"きますが、ユーザーを混乱させないためにWordPressサイト名 <code>%s</code>と同じ"
+"にすることをお勧めします。"
+
+#: ../templates/how-to-setup.php:18
+msgid ""
+"Though App credential is available for various usage(iOS app, Android app, "
+"Page tab, etc), minimum requirments are like below."
+msgstr ""
+"アプリケーションの認証は様々な形（iOSアプリ、Androidアプリ、ページタブなど）"
+"で利用できますが、最低必要なのは以下の設定です。"
+
+#: ../templates/how-to-setup.php:24
+msgid ""
+"App name. Blog name is recommended. User will see this name on "
+"authentication screen."
+msgstr ""
+"アプリ名。ブログ名をお勧めします。ユーザーは認証画面でこの名前を目にします。"
+
+#: ../templates/how-to-setup.php:25 ../templates/how-to-setup.php:32
+#: ../templates/how-to-setup.php:39 ../templates/how-to-setup.php:46
+#: ../templates/how-to-setup.php:53
+#, php-format
+msgid "e.g. %s"
+msgstr "例: %s"
+
+#: ../templates/how-to-setup.php:31
+msgid "Unique string which identifies your app."
+msgstr "あなたのアプリを特定するための一意な文字列"
+
+#: ../templates/how-to-setup.php:36
+msgid "Contact mail address"
+msgstr "問い合わせメールアドレス"
+
+#: ../templates/how-to-setup.php:38
+msgid ""
+"Contact mail address. It will be displayed on authentication screen on "
+"Facebook."
+msgstr "問い合わせ先メールアドレス。Facebookの認証画面で表示されます。"
+
+#: ../templates/how-to-setup.php:45
+msgid "Your domain."
+msgstr "あなたのドメイン。"
+
+#: ../templates/how-to-setup.php:52
+msgid "On development environment or test flight, turn sandbox ON."
+msgstr "開発環境やテストで利用している場合はサンドボックスをONにしてください。"
+
+#: ../templates/how-to-setup.php:53
+msgid "OFF"
+msgstr "オフ"
+
+#: ../templates/how-to-setup.php:59
+msgid "You can activate several connection types, but below is required."
+msgstr "接続タイプは幾つか選べますが、以下が必須です。"
+
+#: ../templates/how-to-setup.php:65
+msgid "Enter App ID and App secret"
+msgstr "App IDとApp secretの入力"
+
+#: ../templates/how-to-setup.php:67
+#, php-format
+msgid ""
+"Once you create Facebook App, App ID and App secret will be provided. Now "
+"you can enter it on <a href=\"%s\">WordPress Admin screen</a>."
+msgstr ""
+"Facebookアプリを作成したら、App IDとApp secretが提供されます。それではこれを"
+"<a href=\"%s\">WordPress管理画面</a>から入力してください。"
+
+#: ../templates/how-to-setup.php:71
+msgid ""
+"First of all, your twitter account is required. If you don't have one, "
+"create it at <a href=\"https://twitter.com\">twitter</a>"
+msgstr ""
+"まずtwitterアカウントが必要です。持っていない場合は<a href=\"https://twitter."
+"com\">twitter</a>で作成してください。"
+
+#: ../templates/how-to-setup.php:73
+msgid "Create twitter application"
+msgstr "twitterアプリケーションを作成する"
+
+#: ../templates/how-to-setup.php:75
+msgid ""
+"Go to <a href=\"https://dev.twitter.com\">Twitter Developer</a> and sign in "
+"with your twitter account. Then go to <a href=\"https://dev.twitter.com/apps"
+"\">My Applications</a> and click <code>Create new application</code>."
+msgstr ""
+"<a href=\"https://dev.twitter.com\">Twitter Developer</a>へ行き、twitterアカ"
+"ウントでログインしてください。その後、<a href=\"https://dev.twitter.com/apps"
+"\">My Applications</a>へ移動し、<code>Create new application</code>をクリック"
+"してください。"
+
+#: ../templates/how-to-setup.php:77
+#, php-format
+msgid ""
+"In Application detail section, enter appilcation name(same as <code>%s</"
+"code> recommended), description and Website. If you are not bot, enter "
+"reCaptha and creation flow will be done :)"
+msgstr ""
+"Application detailの項目で、アプリケーション名（<code>%s</code>をお勧めしま"
+"す）、詳細とWebサイトを入力してください。あなたがボットでない限り、reCapthaを"
+"入力すれば登録は終わりです :)"
+
+#: ../templates/how-to-setup.php:79
+msgid ""
+"Now you have new application. Go to your new app's detail page. On "
+"<code>Settings</code> tab, various information can be editted. Besides the "
+"required informations, you had better to upload Application icon which will "
+"be displayed on authentication screen."
+msgstr ""
+"これで新しいアプリケーションが作成されました。アプリの詳細ページに移動してく"
+"ださい。<code>Settings</code>タブで様々な情報を編集可能です。必須項目に加え、"
+"アプリケーションアイコンもアップロードした方がよいでしょう。これは認証画面で"
+"表示されます。"
+
+#: ../templates/how-to-setup.php:81
+msgid ""
+"Futhermore, take care of application access type. Default is <code>readonly</"
+"code> and it's sufficient. Users tend to avoid strong access like <code>Read "
+"and Write</code>."
+msgstr ""
+"さらに、アプリケーションのaccess typeにも注意してください。初期値は"
+"<code>readonly</code>で、これは十分な権限です。ユーザーは<code>Read and "
+"Write</code>のように強い権限を要求するアプリを避ける傾向にあります。"
+
+#: ../templates/how-to-setup.php:83
+msgid "Now you have finished setting application up."
+msgstr "これでアプリケーションの設定が終わりました。"
+
+#: ../templates/how-to-setup.php:85
+msgid "Enter app information"
+msgstr "アプリ情報を入力する"
+
+#: ../templates/how-to-setup.php:87
+msgid "Gianism requires 5 informations. "
+msgstr "Ginismは5つの情報を要求します。"
+
+#: ../templates/how-to-setup.php:89
+msgid ""
+"You can get them at <a href=\"https://dev.twitter.com/apps\">your "
+"application's detail page</a>."
+msgstr ""
+"これらは<a href=\"https://dev.twitter.com/apps\">アプリの詳細ページ</a>で取得"
+"できます。"
+
+#: ../templates/how-to-setup.php:93
+msgid ""
+"Google API system is very complex, but don't be afraid. Anyway if you don't "
+"have Google account, go to <a hreF=\"https://www.google.com/accounts/"
+"NewAccount\">Create Google account</a> and get it."
+msgstr ""
+"Google APIのシステムはとても複雑ですが、恐れることはありません。とにかく、"
+"Googleアカウントを持っていない場合は<a hreF=\"https://www.google.com/"
+"accounts/NewAccount\">Googleアカウントの作成</a>へ行き、取得してください。"
+
+#: ../templates/how-to-setup.php:95
+msgid "Create new Project"
+msgstr "新しいプロジェクトを作る"
+
+#: ../templates/how-to-setup.php:97
+msgid ""
+"Go to <a href=\"https://code.google.com/apis/console\">Google API Console</"
+"a> and select <code>Create...</code> from pulldown."
+msgstr ""
+"<a href=\"https://code.google.com/apis/console\">Google API Console</a>へ移動"
+"し、プルダウンから<code>Create...</code>を選んでください。"
+
+#: ../templates/how-to-setup.php:99
+msgid ""
+"On project page, go to <code>API Access</code> menu in sidebar. You can get "
+"<code>Client ID</code> and <code>Client secret</code>."
+msgstr ""
+"プロジェクトページからサイドバーの<code>API Access</code>メニューへ移動しま"
+"す。そこで<code>Client ID</code>と<code>Client secret</code>を取得できます。"
+
+#: ../templates/how-to-setup.php:101
+#, php-format
+msgid ""
+"Besiteds credential informations, you have to save <coce>Redirect URIs</"
+"code>. Click <code>Edit settings...</code> and enter redirect URI. "
+"Typically, your blog home URL <code>%s</code>. If you force SSL on login, "
+"make it to start with <code>https</code>."
+msgstr ""
+"認証情報に加え、<coce>Redirect URIs</code>を保存する必要があります。"
+"<code>Edit settings...</code>をクリックし、リダイレクトURIを入力してくださ"
+"い。多くの場合、あなたのブログURL <code>%s</code>です。もしログイン時にSSLを"
+"必須にしている場合は<code>https</code>からはじめるようにしてください。"
+
+#: ../templates/how-to-setup.php:103
+msgid "Enter API Information"
+msgstr "API情報を入力"
+
+#: ../templates/how-to-setup.php:105
+#, php-format
+msgid ""
+"Input and save 3 informations(Client ID, Client Secret and Redirect URI) on "
+"<a href=\"%s\">WordPress admin screen</a>."
+msgstr ""
+"3つの情報(Client ID, Client Secret, Redirect URI)を<a href=\"%s\">WordPress管"
+"理画面</a>で入力してください。"
+
+#: ../templates/how-to-setup.php:109
+msgid ""
+"Yahoo! JAPAN account is required. If you don't have one, create it at <a "
+"href=\"https://e.developer.yahoo.co.jp/dashboard/\">Yahoo! JAPAN Developer "
+"Center</a>."
+msgstr ""
+"Yahoo! JAPANアカウントが必須です。持っていない場合は<a href=\"https://e."
+"developer.yahoo.co.jp/dashboard/\">Yahoo! JAPANディベロッパーネットワーク</a>"
+"で作成してください。"
+
+#: ../templates/how-to-setup.php:112
+msgid ""
+"<strong>Note:</strong> Yahoo! JAPAN is different from Yahoo! and is Japanese "
+"domestic service."
+msgstr ""
+"<strong>注意：</strong> Yahoo! JAPANはYahoo!とは異なり、日本国内のサービスで"
+"す。"
+
+#: ../templates/how-to-setup.php:115
+msgid "Create applicaiton"
+msgstr "アプリケーションの作成"
+
+#: ../templates/how-to-setup.php:117
+msgid ""
+"Log in to Yahoo! JAPAN developer network and clik <a href=\"https://e."
+"developer.yahoo.co.jp/register\" target=\"_blank\">Register</a> to fill "
+"required information below."
+msgstr ""
+"Yahoo! JAPAN ディベロッパーネットワークにログインし、<a href=\"https://e."
+"developer.yahoo.co.jp/register\" target=\"_blank\">登録</a>をクリックして必要"
+"な情報を埋めてください。"
+
+#: ../templates/how-to-setup.php:122
+msgid "Application Type"
+msgstr "アプリケーションの種類"
+
+#: ../templates/how-to-setup.php:123
+msgid "Server side application"
+msgstr "サーバーサイドアプリケーション"
+
+#: ../templates/how-to-setup.php:126
+msgid "Contact email address"
+msgstr "問い合わせメールアドレス"
+
+#: ../templates/how-to-setup.php:127
+msgid "Choose from pull down."
+msgstr "プルダウンから選択してください。"
+
+#: ../templates/how-to-setup.php:130
+msgid "Application name"
+msgstr "アプリケーション名"
+
+#: ../templates/how-to-setup.php:131
+#, php-format
+msgid "Same as the blog name <code>%s</code> is the best."
+msgstr "ブログ名<code>%s</code>と同じにするのがベストです。"
+
+#: ../templates/how-to-setup.php:134
+msgid "Site URL"
+msgstr "サイトURL"
+
+#: ../templates/how-to-setup.php:135
+#, php-format
+msgid "Use root URI of your site <code>%s</code>."
+msgstr "サイトのルートURL<code>%s</code>を使ってください。"
+
+#: ../templates/how-to-setup.php:140 ../templates/how-to-setup.php:166
+msgid "Input credentials"
+msgstr "認証情報の入力"
+
+#: ../templates/how-to-setup.php:142
+msgid ""
+"After registeration, you will redirect to application detail. There you can "
+"get <strong>application ID</strong> and <strong>secret key</strong>."
+msgstr ""
+"登録が終わると、アプリケーションの詳細に移動します。そこで<strong>アプリケー"
+"ション ID</strong> と <strong>シークレット</strong>を取得できます。"
+
+#: ../templates/how-to-setup.php:144
+#, php-format
+msgid "Besides them, you must enter callback URL. This must be <code>%s</code>"
+msgstr ""
+"加えて、コールバックURLを入力する必要があります。これは<code>%s</code>でなく"
+"てはなりません。"
+
+#: ../templates/how-to-setup.php:146
+msgid ""
+"Now come back to WP admin panel, enter application ID and secret key. That's "
+"all done."
+msgstr ""
+"それではWP管理画面に戻り、アプリケーションIDとシークレットを入力してくださ"
+"い。これですべて完了です。"
+
+#: ../templates/how-to-setup.php:150
+msgid ""
+"mixi account is required. If you don't have one, create it at <a href="
+"\"http://developer.mixi.co.jp/\">mixi Developer Center</a>."
+msgstr ""
+"mixiアカウントが必須です。持っていない場合は<a href=\"http://developer.mixi."
+"co.jp/\">mixi Developer Center</a>で作成してください。"
+
+#: ../templates/how-to-setup.php:152
+msgid "Create mixi applicaiton"
+msgstr "mixiアプリケーションの作成"
+
+#: ../templates/how-to-setup.php:154
+msgid ""
+"Log in to <a href=\"http://developer.mixi.co.jp/\">Partner Dashboard</a> and "
+"clik <code>mixi Graph API</code>."
+msgstr ""
+"<a href=\"http://developer.mixi.co.jp/\">Partner Dashboard</a>にログインし、"
+"<code>mixi Graph API</code>をクリックしてください。"
+
+#: ../templates/how-to-setup.php:162
+#, php-format
+msgid "Create new service. Redirect URL should be <code>%s</code>."
+msgstr "新しいサービスを作成します。Redirect URLは<code>%s</code>です。"
+
+#: ../templates/how-to-setup.php:168
+msgid ""
+"Get <code>Consumer Key</code> and <code>Consumer Secret</code> at service "
+"detail page, and save it."
+msgstr ""
+"<code>Consumer Key</code>と<code>Consumer Secret</code>をサービス詳細ページで"
+"取得したら、それを保存します。"
+
+#: ../templates/setting.php:21 ../templates/setting.php:87
+#: ../templates/setting.php:136 ../templates/setting.php:180
+#: ../templates/setting.php:223 ../templates/setting.php:268
+msgid "How to set up"
+msgstr "設定方法"
+
+#: ../templates/setting.php:22 ../templates/setting.php:333
+msgid "Customize"
+msgstr "カスタマイズ"
+
+#: ../templates/setting.php:23 ../templates/setting.php:113
+msgid "Advanced Usage"
+msgstr "上級者向け使用法"
+
+#: ../templates/setting.php:36
+msgid "Index"
+msgstr "目次"
+
+#: ../templates/setting.php:40
+msgid ""
+"Have some questions? Go to <a href=\"http://wordpress.org/support/plugin/"
+"gianism\">support forum</a> and create thread."
+msgstr ""
+"わからないことがありましたか？ <a href=\"http://wordpress.org/support/plugin/"
+"gianism\">サポートフォーラム</a>でスレッドを立ててください。"
+
+#: ../templates/setting.php:43
+#, php-format
+msgid ""
+"If you find this plugin usefull, don't hesitate to buy me some present from "
+"<a href=\"%s\">my wishlist</a>."
+msgstr ""
+"プラグインが便利だと思ったら、<a href=\"%s\">ウィッシュリスト</a>からプレゼン"
+"トをいただけると嬉しいです。"
+
+#: ../templates/setting.php:75
+msgid "Connect with Facebook"
+msgstr "Facebookと接続"
+
+#: ../templates/setting.php:79 ../templates/setting.php:128
+#: ../templates/setting.php:172 ../templates/setting.php:215
+#: ../templates/setting.php:260
+msgid "Enable"
+msgstr "有効"
+
+#: ../templates/setting.php:83 ../templates/setting.php:132
+#: ../templates/setting.php:176 ../templates/setting.php:219
+#: ../templates/setting.php:264
+msgid "Disable"
+msgstr "無効"
+
+#: ../templates/setting.php:86 ../templates/setting.php:135
+#: ../templates/setting.php:179 ../templates/setting.php:222
+#: ../templates/setting.php:267
+#, php-format
+msgid ""
+"You have to create %1$s App <a target=\"_blank\" href=\"%2$s\">here</a> to "
+"get required infomation."
+msgstr ""
+"必要な情報を取得するには<a target=\"_blank\" href=\"%2$s\">ここ</a>で%1$sアプ"
+"リケーションを作成する必要があります。"
+
+#: ../templates/setting.php:87 ../templates/setting.php:136
+#: ../templates/setting.php:180 ../templates/setting.php:223
+#: ../templates/setting.php:268
+#, php-format
+msgid "See detail at <a href=\"%1$s\">%2$s</a>."
+msgstr "詳細はこちら：<a href=\"%1$s\">%2$s</a>"
+
+#: ../templates/setting.php:92
+msgid "App ID"
+msgstr "App ID"
+
+#: ../templates/setting.php:98
+msgid "App Secret"
+msgstr "アプリの秘訣"
+
+#: ../templates/setting.php:104
+msgid "Facebook Fan Gate"
+msgstr "Facebookファンゲート"
+
+#: ../templates/setting.php:107
+msgid "No Fan Gate"
+msgstr "ファンゲートを使わない"
+
+#: ../templates/setting.php:113
+#, php-format
+msgid ""
+"If you have fan page and use WordPress page as it, specify it here. Some "
+"functions are available. For details, see <strong>%s</strong>"
+msgstr ""
+"ファンページを持っていて、WordPressページを割り当てている場合、ここで指定して"
+"ください。幾つかの関数を利用できます。詳細はこちら: <strong>%s</strong>"
+
+#: ../templates/setting.php:124 ../templates/setting.php:168
+#: ../templates/setting.php:211 ../templates/setting.php:256
+#, php-format
+msgid "Connect with %s"
+msgstr "%sと接続"
+
+#: ../templates/setting.php:141
+msgid "Screen Name"
+msgstr "スクリーン名"
+
+#: ../templates/setting.php:145
+msgid "Consumer Key"
+msgstr "Consumer Key"
+
+#: ../templates/setting.php:149
+msgid "Consumer Secret"
+msgstr "Consumer Secret"
+
+#: ../templates/setting.php:153 ../templates/setting.php:298
+msgid "Access Token"
+msgstr "Access Token"
+
+#: ../templates/setting.php:157
+msgid "Access token secret"
+msgstr "Access token secret"
+
+#: ../templates/setting.php:186 ../templates/setting.php:274
+msgid "Client ID"
+msgstr "Client ID"
+
+#: ../templates/setting.php:190 ../templates/setting.php:232
+#: ../templates/setting.php:278
+msgid "Client Secret"
+msgstr "Client Secret"
+
+#: ../templates/setting.php:194 ../templates/setting.php:198
+#: ../templates/setting.php:282 ../templates/setting.php:287
+msgid "Redirect URI"
+msgstr "リダイレクトURI"
+
+#: ../templates/setting.php:198 ../templates/setting.php:241
+#: ../templates/setting.php:287
+#, php-format
+msgid "Please set %1$s to %2$s on <a target=\"_blank\" href=\"%4$s\">%3$s</a>."
+msgstr ""
+"<a target=\"_blank\" href=\"%4$s\">%3$s</a>で%1$sを%2$sに設定してください。"
+
+#: ../templates/setting.php:228
+msgid "Application ID"
+msgstr "アプリケーションID"
+
+#: ../templates/setting.php:236 ../templates/setting.php:241
+msgid "Callback URI"
+msgstr "コールバックURL"
+
+#: ../templates/setting.php:241
+msgid "Yahoo! JAPAN Developer Network"
+msgstr "Yahoo! JAPAN ディベロッパーネットワーク"
+
+#: ../templates/setting.php:294
+msgid "Token"
+msgstr "トークン"
+
+#: ../templates/setting.php:302
+msgid "Refresh Token"
+msgstr "リフレッシュトークン"
+
+#: ../templates/setting.php:304
+msgid "Your refresh token is invalid. Please reset it from link below."
+msgstr "リフレッシュトークンが無効です。下のリンクから再設定してください。"
+
+#: ../templates/setting.php:308
+msgid ""
+"If you want to send a message via mixi to your use who has only pseudo mail"
+"(@pseudo.mixi.jp), set up auth information by login to mixi from the link "
+"below as your account by which messages will be sent . Do not forget to "
+"check &quot;Always allow&quot;. <strong>Notice: </strong>You can send "
+"message to only your friend."
+msgstr ""
+"仮のメールアドレス（@pseudo.mixi.jp）しか持っていないユーザーにmixiメッセージ"
+"を送りたい場合は、下のリンクからメッセージの送信者として利用したいアカウント"
+"でログインしてください。&quot;常に許可する&quot;にチェックを入れるのを忘れな"
+"いでください。<strong>注意：</strong> メッセージはともだちにのみ送れます。"
+
+#: ../templates/setting.php:310
+msgid "Auth on mixi"
+msgstr "mixiで認証"
+
+#: ../templates/setting.php:318
+msgid "Display Setting"
+msgstr "表示設定"
+
+#: ../templates/setting.php:322
+msgid "Login screen"
+msgstr "ログイン画面"
+
+#: ../templates/setting.php:326
+msgid "Show all button on Login screen."
+msgstr "すべてのボタンをログイン画面に表示する。"
+
+#: ../templates/setting.php:330
+msgid "Do not show login button."
+msgstr "ログインボタンを表示しない。"
+
+#: ../templates/setting.php:333
+#, php-format
+msgid ""
+"You can output login button manually. See detail at <a href=\"%2$s\">%1$s</"
+"a>."
+msgstr ""
+"ログインボタンは手動で表示できます。詳しくは<a href=\"%2$s\">%1$s</a>を見てく"
+"ださい。"
+
+#~ msgid ""
+#~ "Please set %1$s to %2$s on %3$s. If you use SSL on login, replace it's "
+#~ "http with https."
+#~ msgstr ""
+#~ "%3$sで%2$sを%1$sに設定してください。ログインにSSLを使っている場合、httpを"
+#~ "httpsに置き換えてください。"
+
+#~ msgid "Please set %1$s to %2$s on %3$s."
+#~ msgstr "%3$sで%1$sを%2$sに設定してください。"
+
+#~ msgid "WP Gianism setting"
+#~ msgstr "WP Gianism設定"
+
+#~ msgid "Social Connect"
+#~ msgstr "ソーシャルコネクト"
+
+#~ msgid "Your account was successfully connected with Facebook"
+#~ msgstr "あなたのアカウントはFacebookと接続されました。"
+
+#~ msgid "You need to log in %s"
+#~ msgstr "%sにログインする必要があります"
+
+#~ msgid ""
+#~ "This email address is registered. You can log in <a href=\"%s\">here</a>."
+#~ msgstr ""
+#~ "このメールアドレスは登録されています。<a href=\"%s\">ここ</a>からログイン"
+#~ "してください。"
+
+#~ msgid ""
+#~ "Failed to create account. Try to register with mail address and password."
+#~ msgstr ""
+#~ "アカウントの作成に失敗しました。メールアドレスとパスワードで登録してくださ"
+#~ "い。"
