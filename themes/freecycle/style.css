@@ -1121,6 +1121,26 @@ div .post-content {
 	margin: 9px;
 	border: none;
 }
+	
+.booknam{
+	position: relative;
+	margin: 0px auto;
+	width: 65%;
+	height: auto;
+	text-align: center;
+}
+.authornam{
+	position: relative;
+	margin: 0px auto;
+	width: 65%;
+	text-align: center;
+}
+	
+.shashin{
+	position: relative;
+	margin: 0 auto;
+	z-index: 2;
+}
 
 /*
 	for amazon like layout end
@@ -4802,9 +4822,10 @@ div.pagenation_next{
 #top_image3{padding: 10px;}
 
 .zoom_image{
-	width: 30%;
+	position: relative;
+	width: auto;
 	height: auto;
-	float: left;
+	
 }
 .zoom_image:hover{
 	opacity: 0.6;
@@ -4897,44 +4918,81 @@ div.pagenation_next{
 .booktitle {
 	margin-top: 10px;
 	margin-bottom: 0px;
+	margin-left: auto;
+	margin-right: auto;
 	width: 80%;
 	padding: 10px 20px;
 	text-align: center;
 }
 
 .bookauthor {
-	margin: 0px 0px 10px 0px;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
 	width: 80%;
 	padding: 10px 20px;
 	text-align: center;
 }
 
-.picture {
+.shashin{
+	position: relative;
+	margin: 0 auto;
+	padding-right:auto;
+	padding-left: auto;
+	width:50%;
+	z-index: 2;
+}
+.attachment-thumbnail{
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 }
-
 .booksubinfo {
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: auto;
-	border-collapse: collapse;
+	position: relative;
+	margin:-20px auto 0 auto;
+	padding-top: 25px;
+	padding-bottom: 10px;
 	width: 80%;
-	empty-cells: hide;
+	text-align: center;
+	z-index: 1;
+	background-color: #66CA3B;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px
 }
 
 .normal{
-	border: 2px solid #5ddd82;
-	border-collapse: collapse;
 	background-color: aliceblue;
-	font-weight: normal;
 	text-align: center;
 	padding: 6px;
+	width:auto;
+	height:auto;
 }
 
-.empty{
-	border: 0px solid #5ddd82;
+
+.under{
+	margin:auto auto 0px auto;
+	padding-top: 30px;
+	padding-bottom: 10px;
+	position: relative;
+	width: 80%;
+	text-align: center;
+	z-index: 1;
+}
+
+.sub{
+	width: auto;
+	height: auto;
+	}
+
+.first{
+	width:30%;
+	text-align: left;
+	margin-right: 10px;	
+}
+.second{
+	width:70%;
+	text-align: left;
 }
 
 .reserve{
@@ -4988,6 +5046,8 @@ div.pagenation_next{
 
 .plus{
 	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 20px;
 }
 
 @keyframes rippleAnimation {

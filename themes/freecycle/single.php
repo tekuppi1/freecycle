@@ -187,32 +187,67 @@ function point(){
 	<div class="bookinfo">
 		<p class="booktitle">商品名: <?php echo get_the_title(); ?></p>
 		<p class="bookauthor">著者: <?php echo get_post_meta($post->ID, "author", true)?get_post_meta($post->ID, "author", true):"データがありません"; ?></p>
-		<img class="picture" src="/wp-content/themes/freecycle/pages/views/image/sc.png" width="50%" height="50%" alt="本の写真">
-		<div class="fake">
-			<table class="booksubinfo">
-				<tr>
-					<th class="normal">カテゴリー</th><td class="normal"><?php
+		<div class="shashin">
+			<?php
+							$args = array(
+								'post_type' => 'attachment',
+								'post_parent' => $post->ID
+							);
+							//define size
+							$size = array(200, 200);
+							$attachments = array_reverse(get_posts($args));
+							if($attachments){
+								$i=0;
+								foreach($attachments as $attachment){
+									echo "<div class='zoom_image'  onclick=zoom(";
+									echo $i;
+									echo ")>";
+									echo wp_get_attachment_image( $attachment->ID,'thumbnail');
+									echo "</div>";
+                	$i++;
+								}
+							}
+							?>
+							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
+							<?php
+								$i=0;
+								foreach($attachments as $attachment){
+									echo "<div class='zoom_in_image' id=zoom";
+									echo $i;
+									echo " style='display: none;'>";
+									echo wp_get_attachment_image( $attachment->ID,'full');
+									echo "</div>";
+									$i++;
+								}
+							?>
+		</div>
+		
+			<div class="booksubinfo">
+				<div>
+					<span class="first">カテゴリー</span><span class="second"><?php
 								$sub_category = get_the_category();
 								if($sub_category[0]->term_id == '1'):
 									echo "カテゴリ:未設定";
 								else:
 									$main_category = get_category($sub_category[0]->parent);
-								?><?php endif; ?></td>
-				</tr>
+								?><?php endif; ?></span>
+				</div>
 
-				<tr>
-				<th class="normal">ポイント数</th><td class="normal">アマゾン価格をどうにかしてポイント化すればいいと思った</td>
-				</tr>
+				<div>
+					<span class="first">ポイント数</span><span class="second">
+						<?php echo get_post_meta($post->ID,"price",true)/1000  ; ?>
+					</span>
+				</div>
 
-				<tr>
-				<th class="normal">Amazon価格</th><td class="normal"><?php echo get_post_meta($post->ID, "price", true)?number_format(get_post_meta($post->ID, "price", true))."円":"データがありません"; ?></td>
-				</tr>
+				<div>
+				<sapn class="first">Amazon価格</span><span class="second"><?php echo get_post_meta($post->ID, "price", true)?number_format(get_post_meta($post->ID, "price", true))."円":"データがありません"; ?></span>
+				</div>
 
-				<tr>
-				<th class="normal">残り冊数</th><td class="normal"><?php echo count_books($post->ID)?count_books($post->ID):0; ?>冊</td>
-				</tr>	
-			</table>
-		</div>
+				<div>
+				<span class="first">残り冊数</span><span class="second"><?php echo count_books($post->ID)?count_books($post->ID):0; ?>冊</span>
+				</div>	
+			</div>
+		
 	</div>
 </div>
 <div class="reserve">
@@ -222,7 +257,7 @@ function point(){
 </div>	
 	
 <div class="plus">
-	<P>補足情報：→なぜ本の名前になってしまうの大丈夫？∧改行とかどうするんだろう<?php remove_filter('the_content', 'wpautop'); the_content(); ?></P>	
+	<P>補足情報：<?php remove_filter('the_content', 'wpautop'); the_content(); ?></P>	
 </div>	
 	
 	<?php endwhile; else: ?>
