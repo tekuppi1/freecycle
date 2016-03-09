@@ -30,7 +30,7 @@
 	</div> -->
 	
 	<div id="footer_bottom">
-		<hr>
+		<!-- <hr> -->
 		<div id="footer_text">
 			<div id="text_right"><div id="footer_logo_icon" alt="フッター"></div></div>
 			<div id="text_left"><div id="copyright">© 2014-2015 <a href="<?php echo home_url(); ?>">Texchange</a></div></div>
