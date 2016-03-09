@@ -14,9 +14,9 @@
 	
 <?php do_action( 'bp_dtheme_credits' ); ?>
 	
-<!--フッター------------------->
+<!-- ↓フッター -->
 <div id="footer_menu" role="contentinfo">
-	<div id="footer_left">
+	<!-- <div id="footer_left">
 		<div>テクスチェンジについて</div>
 		<ul>
 			<li>利用規約</li>
@@ -27,7 +27,7 @@
 			<li><a href="<?php echo home_url(); ?>/privacy-policy">個人情報保護方針</a></li>
 			<li>運営団体</li>
 		</ul>
-	</div>
+	</div> -->
 	
 	<div id="footer_bottom">
 		<hr>
@@ -37,7 +37,7 @@
 		</div>
 	</div>
 </div>
-<!--フッター------------------->
+<!--　↑フッター　-->
 
 <?php do_action( 'bp_footer' ); ?>
 </div><!-- #footer -->
