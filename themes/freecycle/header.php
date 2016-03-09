@@ -19,7 +19,7 @@ if(!is_user_logged_in() || $current_user->user_level != ADMIN_LEVEL){
 <body <?php body_class(); ?> id="bp-default">
 <?php do_action( 'bp_before_header' ); ?>
 	
-<!-- ↓ヘッダー-->
+<!-- ↓ヘッダー -->
 <div id="header_menu_ber" role=”banner”>
 	<ul id="dropmenu" class="dropmenu">
 		<li id="logo">
@@ -37,7 +37,7 @@ if(!is_user_logged_in() || $current_user->user_level != ADMIN_LEVEL){
 		</li> -->
 	</ul>
 </div>
-<!--　↑ヘッダー-->
+<!-- ↑　ヘッダー -->
 
 <?php if(is_archive() || is_search() || is_single()){ ?>
 <?php } ?>
