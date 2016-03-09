@@ -19,11 +19,11 @@ if(!is_user_logged_in() || $current_user->user_level != ADMIN_LEVEL){
 <body <?php body_class(); ?> id="bp-default">
 <?php do_action( 'bp_before_header' ); ?>
 	
-<!--ヘッダー------------------->
+<!-- ↓ヘッダー-->
 <div id="header_menu_ber" role=”banner”>
 	<ul id="dropmenu" class="dropmenu">
 		<li id="logo">
-			<a title="ホーム"><div id="logo_icon" alt="ロゴ"></div></a>
+			<a title="ホーム"	href="<?php echo get_home_url(); ?>"><div id="logo_icon" alt="ロゴ"></div></a>
 		</li>
 		<li id="menu_button"><a id="menu_button_a"><div id="home_icon" alt="ホーム"></div></a>
 			<ul>
@@ -37,7 +37,7 @@ if(!is_user_logged_in() || $current_user->user_level != ADMIN_LEVEL){
 		</li>
 	</ul>
 </div>
-<!--ヘッダー------------------->
+<!--　↑ヘッダー-->
 
 <?php if(is_archive() || is_search() || is_single()){ ?>
 <?php } ?>
