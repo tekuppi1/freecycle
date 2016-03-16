@@ -94,12 +94,14 @@ function onUpdateEdit(){
 				}
 			});
 		}
-function zoom(i){
+  /*これが拡大の機能でしょう
+  function zoom(i){
 	switch(i){
 		case 0:jQuery("#zoom1").hide();jQuery("#zoom2").hide();jQuery("#zoom0").show();break;
 		case 1:jQuery("#zoom2").hide();jQuery("#zoom0").hide();jQuery("#zoom1").show();break;
 		case 2:jQuery("#zoom0").hide();jQuery("#zoom1").hide();jQuery("#zoom2").show();break;
 	}
+	*/
 }
 
 // 取引完了関数
@@ -164,18 +166,7 @@ function onFinish(postID){
 		}else{return false;}
 	});
 }
-//とりあえずアマゾン価格からポイントを表示する関数?
-//例外処理とかが不明,テンプレートタグを他で使うには？入れる場所は？
-function point(){
-	var origin =<?php get_post_meta($post->ID, "price", true); ?>;
-	origin = origin/1000;
-	if(origin>=2){
-		<?php echo number_format(origin)."pt"; ?>
-	}else{
-		<?php echo "1pt"; ?>
-	}	
-	
-}
+
 
 </script>
 
@@ -208,7 +199,7 @@ function point(){
 								}
 							}
 							?>
-							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
+							<?php /* wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
 							<?php
 								$i=0;
 								foreach($attachments as $attachment){
@@ -219,7 +210,7 @@ function point(){
 									echo "</div>";
 									$i++;
 								}
-							?>
+						*/	?>
 		</div>
 		
 			<div class="booksubinfo">
@@ -229,13 +220,21 @@ function point(){
 								if($sub_category[0]->term_id == '1'):
 									echo "カテゴリ:未設定";
 								else:
-									$main_category = get_category($sub_category[0]->parent);
-								?><?php endif; ?></span>
+									echo $sub_category[0]->name;
+							?><?php endif; ?>
+					</span>
 				</div>
 
 				<div>
-					<span class="first">ポイント数</span><span class="second">
-						<?php echo get_post_meta($post->ID,"price",true)/1000  ; ?>
+					<span class="first">ポイント数</span><span class="second"><?php
+							$fake_pt = get_post_meta($post->ID,"price",true)/1000;
+							if($fake_pt<1){
+								$true_pt = 1;
+							}else{
+								$true_pt = (int)$fake_pt; 
+							}
+							echo $true_pt;
+						?>
 					</span>
 				</div>
 
@@ -250,9 +249,11 @@ function point(){
 		
 	</div>
 </div>
+
+<?php /*予約機能はまだ未定
 <div class="reserve">
 	<span class="this">この商品を</span><a class="button" href="#">予約する</a>
-	
+	*/?>
 
 </div>	
 	
