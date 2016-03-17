@@ -94,12 +94,14 @@ function onUpdateEdit(){
 				}
 			});
 		}
-function zoom(i){
+  /*これが拡大の機能でしょう
+  function zoom(i){
 	switch(i){
 		case 0:jQuery("#zoom1").hide();jQuery("#zoom2").hide();jQuery("#zoom0").show();break;
 		case 1:jQuery("#zoom2").hide();jQuery("#zoom0").hide();jQuery("#zoom1").show();break;
 		case 2:jQuery("#zoom0").hide();jQuery("#zoom1").hide();jQuery("#zoom2").show();break;
 	}
+	*/
 }
 
 // 取引完了関数
@@ -165,36 +167,135 @@ function onFinish(postID){
 	});
 }
 
+
 </script>
 
+<div class="fake" id="blog-single" role="main">
+	
+	<?php do_action( 'bp_before_blog_single_post' ); ?>
+	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+	
+	<div class="bookinfo">
+		<p class="booktitle">商品名: <?php echo get_the_title(); ?></p>
+		<p class="bookauthor">著者: <?php echo get_post_meta($post->ID, "author", true)?get_post_meta($post->ID, "author", true):"データがありません"; ?></p>
+		<div class="shashin">
+			<?php
+							$args = array(
+								'post_type' => 'attachment',
+								'post_parent' => $post->ID
+							);
+							//define size
+							$size = array(200, 200);
+							$attachments = array_reverse(get_posts($args));
+							if($attachments){
+								$i=0;
+								foreach($attachments as $attachment){
+									echo "<div class='zoom_image'  onclick=zoom(";
+									echo $i;
+									echo ")>";
+									echo wp_get_attachment_image( $attachment->ID,'thumbnail');
+									echo "</div>";
+                	$i++;
+								}
+							}
+							?>
+							<?php /* wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
+							<?php
+								$i=0;
+								foreach($attachments as $attachment){
+									echo "<div class='zoom_in_image' id=zoom";
+									echo $i;
+									echo " style='display: none;'>";
+									echo wp_get_attachment_image( $attachment->ID,'full');
+									echo "</div>";
+									$i++;
+								}
+						*/	?>
+		</div>
+		
+			<div class="booksubinfo">
+				<div>
+					<span class="first">カテゴリー</span><span class="second"><?php
+								$sub_category = get_the_category();
+								if($sub_category[0]->term_id == '1'):
+									echo "カテゴリ:未設定";
+								else:
+									echo $sub_category[0]->name;
+							?><?php endif; ?>
+					</span>
+				</div>
+
+				<div>
+					<span class="first">ポイント数</span><span class="second"><?php
+							$fake_pt = get_post_meta($post->ID,"price",true)/1000;
+							if($fake_pt<1){
+								$true_pt = 1;
+							}else{
+								$true_pt = (int)$fake_pt; 
+							}
+							echo $true_pt;
+						?>
+					</span>
+				</div>
+
+				<div>
+				<sapn class="first">Amazon価格</span><span class="second"><?php echo get_post_meta($post->ID, "price", true)?number_format(get_post_meta($post->ID, "price", true))."円":"データがありません"; ?></span>
+				</div>
+
+				<div>
+				<span class="first">残り冊数</span><span class="second"><?php echo count_books($post->ID)?count_books($post->ID):0; ?>冊</span>
+				</div>	
+			</div>
+		
+	</div>
+</div>
+
+<?php /*予約機能はまだ未定
+<div class="reserve">
+	<span class="this">この商品を</span><a class="button" href="#">予約する</a>
+	*/?>
+
+</div>	
+	
+<div class="plus">
+	<P>補足情報：<?php remove_filter('the_content', 'wpautop'); the_content(); ?></P>	
+</div>	
+	
+	<?php endwhile; else: ?>
+
+		<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>
+
+	<?php endif; ?>
+
+	<?php do_action( 'bp_after_blog_single_post' ); ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php /*
 	<div id="content">
 		<div class="padder">
 
-			<?php do_action( 'bp_before_blog_single_post' ); ?>
 
 					<div class="page" id="blog-single" role="main">
 
 						<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-
 							<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-
-						<div class="author-box" >
-						<?php echo get_avatar( get_the_author_meta( 'user_email' ), '50' ); ?>
-						<p><?php printf( _x( 'by %s', 'Post written by...', 'buddypress' ), str_replace( '<a href=', '<a rel="author" href=', bp_core_get_userlink( $post->post_author ) ) ); ?></p>
-						</div>
-
-
+								
 					<div class="post-content" id="post-content-edit">
 						<h2 class="posttitle"><?php the_title(); ?></h2>
 
 
-						<div class="item_status">状態:
-						<?php
-							$item_status = get_post_custom_values("item_status");
-							echo get_display_item_status($item_status["0"]);
-						?>
-						</div>
 						<div>
 							<?php
 								$sub_category = get_the_category();
@@ -214,12 +315,13 @@ function onFinish(postID){
 								<input type="button" id="finish" value="取引完了" onClick="onFinish(<?php echo $post->ID ?>);" <?php echo count_books($post->ID)>0?:"disabled" ?>/>
 							<?php } ?>
 						</div>
-						<?php
+				<?php
 						/*
 						  display finish button or giveme button
 						  if watching user doesn't log in, button is not shown
 						 */
 						?>
+					<?php /*
 						<p class="date">
 							<!-- <span></span>がないと次の<span>がイタリックになる -->
 							<?php printf( __( '%1$s <span></span>', 'buddypress' ), get_the_date()); ?>
@@ -270,32 +372,27 @@ function onFinish(postID){
 
 							<p class="postmetadata"><?php the_tags( '<span class="tags">' . __( 'Tags: ', 'buddypress' ), ', ', '</span>' ); ?>&nbsp;</p>
 
-						<div class="alignleft"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'buddypress' ) . '</span> %title' ); ?></div>
-						<div class="alignright"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'buddypress' ) . '</span>' ); ?></div>
+						
 					</div>
 
 				</div>
 
-			<?php if(is_user_logged_in()) {
-						comments_template();
-					}
-			?>
 
 			<?php endwhile; else: ?>
 
 				<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>
 
 			<?php endif; ?>
-
-
+		
 		</div>
 
 		<?php do_action( 'bp_after_blog_single_post' ); ?>
-
+				
 
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
+	*/ ?>
 
 	<div id="edit" style="display : none">
 	<form id="edit_form" method="post" enctype="multipart/form-data">
@@ -342,7 +439,5 @@ function onFinish(postID){
 	<input type="button" value="編集完了" onClick="onUpdateEdit();">
 	</form>
 	</div><!-- hidden_content -->
-
-	<?php get_sidebar(); ?>
 
 <?php get_footer(); ?>
