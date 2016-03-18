@@ -41,4 +41,5 @@ if(!is_user_logged_in() || $current_user->user_level != ADMIN_LEVEL){
 
 <?php if(is_archive() || is_search() || is_single()){ ?>
 <?php } ?>
+
 <div id="header_container">

@@ -1,124 +1,233 @@
 <?php get_header(); ?>
 
+<!--
+	style sheet : style/index.css
+-->
+
+
+<!--広告-->
+<div id="huruhon">
+	<img src=" <?php echo get_stylesheet_directory_uri() ?>/images/index/huru.png" alt="古本市の宣伝">
+</div>
+<!--広告-->
+
+<!------------------------------------------------------>
+<!--カテゴリ検索-->
+<!------------------------------------------------------>
+<div>
+<ul id=index_category_search>
 <?php
-	$xml_setting = get_stylesheet_directory_uri()."/xml/setting.xml";
-	$xmlData_setting = simplexml_load_file($xml_setting);
-	$setting = $xmlData_setting->obj->item[0];
-	if(($setting->event)=="true"){
-		$xml_massage = get_stylesheet_directory_uri()."/xml/event.xml";
-		$texbanTitle = $setting->event_title;
-	}else{
-		$xml_massage = get_stylesheet_directory_uri()."/xml/message.xml";
-		$texbanTitle = $setting->message_title;
+	$main_categories = get_categories(array("parent" => 0,"hide_empty" => 0,"exclude" => 1));
+  foreach((array)$main_categories as $main_category){
+ 		$main_name = $main_category->name;
+ 		$main_slug = $main_category->slug;
+		echo "<a href='". home_url()."/archives/category/".$main_slug."'><li>$main_name</li></a>";
 	}
-	$xml_texp = get_stylesheet_directory_uri()."/xml/texp.xml";
-	$xmlData_massage = simplexml_load_file($xml_massage);//xmlを読み込む
-	$xmlData_texp = simplexml_load_file($xml_texp);
+?>		
+</ul>
+</div>
+<script>
+jQuery(window).on('load resize', function(){
+	var a = jQuery('body');
+	var b = jQuery('#index_category_search li');
+	var count = b.length;
+	if(a.width() > 450)
+		b.width(((a.width()-1)/count)-2);
+	else
+		b.width((a.width()/2)-2);
+});
+</script>
+<!------------------------------------------------------>
+<!--div id="head">Textbook for FREE</div-->
+<!------------------------------------------------------>
+<!--サーチフォーム検索-->
+<!------------------------------------------------------>
+<li class="index_wire">
+<div class="index_title">ワード検索</div>
+<div id="index_searchform">
+<form role="search" method="get" id="searchform_index" action="<?php echo home_url(); ?>">
+<input type="text" placeholder="ほしい本を検索する" name="s" value=""/>
+<input type="submit" value="検索"/>    
+</form>
+</div>
+<div style="clear:both"></div>
+</li>
+
+<!------------------------------------------------------>
+<!--サムネイル表示-->
+<!------------------------------------------------------>
+<li class="index_wire thum">
+	<div class="index_title">PICK UP!<span class="index_title_small">おすすめ</span></div>
+<?php
+$i =0;
+$args = array( 'posts_per_page' => 100, 'paged' => $page, 'orderby' => 'rand');
+$posts = get_posts( $args );
+foreach( $posts as $key => $post ) {
+  if($i>3) break;else $i++;
+	$post_thumbnail_id = get_post_thumbnail_id( $post->ID );
+	$image = wp_get_attachment_image_src( $post_thumbnail_id,'medium');
+	$returnObj[$key] = array(
+		'post_title' => $post->post_title,
+		'permalink' => get_permalink( $post->ID ),
+		'genre' => $post->post_category,
+		'image' => $image
+	);
+	if($returnObj[$key]['image']!=null){
+		$image_src = $returnObj[$key]['image'][0];
+	} else {
+		$image_src = get_stylesheet_directory_uri().'/images/index/NotImage.png';
+	}
 ?>
-	<div class="BlackBoard" style="position: relative;">
-		<div class="title"><?php echo($texbanTitle); ?></div>
-		<div class="box1">
-			<?php
-				$num = mt_rand(0,$xmlData_massage->obj->item->count()-1);
-				$node = $xmlData_massage->obj->item[$num];
-				echo("<span class=\"yellow\">".$node->from."さん");
-				if(($node->fromrank)!="null")echo("(✩".$node->fromrank.")");
-				echo("</span>から　");
-				echo("<span class=\"yellow\">".$node->to."さん");
-				if(($node->torank)!="null")echo("(✩".$node->torank.")");
-				echo("</span>へ<br>");
-				if(($node->title)!="null")echo("<span class=\"pink\">「".$node->title."」</span><br>");
-				if(($node->text)!="null")echo("<span class=\"comment\">".$node->text."</span><br>");
-			?>
-		</div>
-		<?php $num = mt_rand(0,$xmlData_texp->obj->item->count()-1);
-			if(($setting->event)=="true")
-				echo("<div class=\"box2\"><a href=\"$setting->event_url\" class='event_button'>$setting->texp</a></div>");
-			else
-				echo("<div class=\"box2\"><span class=\"white\">".$xmlData_texp->obj->item[$num]."</span></div>");
-
-			if(($setting->event)=="true")
-				echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/texban_none.png" width="100%"/>');
-			else
-				echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/texban.png" width="100%"/>');
-		?>
+<div class="index_archive_grid">
+	<a href="<? echo $returnObj[$key]['permalink']; ?>">
+		<img class="index_archive_entry_img" src="<? echo $image_src ?>">
+	</a>
+	<div class="index_archive_cat"><span><?php echo get_category($returnObj[$key]['genre'][0])->cat_name ?></span></div>
+	<div class="index_archive_title">
+		<a href="<?php echo $returnObj[$key]['permalink']; ?>"><?php echo $returnObj[$key]['post_title'] ?></a>
 	</div>
+</div>
+<?php
+}
+?>
+</li>
+<script>
+jQuery(window).on('load resize', function(){
+	var count = jQuery('.thum').length;
+	jQuery('.thum').width((jQuery('body').width())-32-20);
+	
+	var a = jQuery('.thum');
+	var b = jQuery('.index_archive_entry_img');
+	var c = jQuery('.index_archive_title');
+	var count = b.length;
+	var _width;
+	if(a.width() > 450){
+		_width =(((a.width()/4))-15);
+	}else{
+		_width =(((a.width()/2))-15);
+	}
+	b.width(_width);
+	b.height(_width*1.2);
+	c.width(_width);
+});
+</script>
+	
 
-	<br>
+<!------------------------------------------------------>
+<!--サムネイル表示(カテゴリ別)-->
+<!------------------------------------------------------>
+<?php
+	$categories = get_categories('parent=0');
+	foreach($categories as $category){
+?>
+<li class="index_wire thum2">
+<a href="<?php echo get_category_link( $category->term_id ); ?>" class="index_title_link">
+	<div class="index_title back_subcolor"><?php echo $category->cat_name; ?></div>
+</a>	
+<?php
+$i =0;
+$args = array( 'posts_per_page' => 100, 'paged' => $page, 'orderby' => 'rand', 'category'=> '$category->term_id');
+$posts = get_posts( $args );
+foreach( $posts as $key => $post ) {
+  if($i>4) break;else $i++;
+	$post_thumbnail_id = get_post_thumbnail_id( $post->ID );
+	$image = wp_get_attachment_image_src( $post_thumbnail_id,'medium');
+	$returnObj[$key] = array(
+		'post_title' => $post->post_title,
+		'permalink' => get_permalink( $post->ID ),
+		'genre' => $post->post_category,
+		'image' => $image
+	);
+	if($returnObj[$key]['image']!=null){
+		$image_src = $returnObj[$key]['image'][0];
+	} else {
+		$image_src = get_stylesheet_directory_uri().'/images/index/NotImage.png';
+	}
+?>
+<div class="index_archive_grid">
+	<a href="<? echo $returnObj[$key]['permalink']; ?>">
+		<img class="index_archive_entry_img2 <?php if($i==1)echo "big"; ?>" src="<? echo $image_src ?>">
+	</a>
+</div>
+<?php
+}
+echo "</li>" ;															 
+}
+?>
+<script>
+jQuery(window).on('load resize', function(){
+	var a = jQuery('body');
+	var b = jQuery('.thum2');
+	var count = b.length;
+	if(a.width() > 500){
+		b.width((a.width()/2)-32-20);
+	} else {
+		b.width((a.width())-32-20);
+	}
+	
+	var a = jQuery('.thum2');
+	var b = jQuery('.index_archive_entry_img2');
+	var count = b.length;
+	var _width;
+	if(a.width() > 270){
+		_width =(((a.width()/4))-10);
+	}else{
+		_width =(((a.width()/2))-10);
+	}
+	b.width(_width);
+	b.height(_width*1.2)
+	
+	var b = jQuery('.big');
+	if(a.width() > 270){
+		_width =(((a.width()/2))-20);
+	}else{
+		_width =(((a.width()))-20);
+	}
+	b.width(_width);
+	b.height(_width*1.3)
+});
+</script>
 
-	<div id="app_logo">
-		<div>スマホアプリはこちらから<br>
-			<a href="https://itunes.apple.com/jp/app/tekusuchenji/id913755762?mt=8&uo=4"
-				 target="itunes_store"
-				 style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/htmlResources/assets/ja_jp//images/web/linkmaker/badge_appstore-lrg.png)
-				 no-repeat;width:135px;height:45px;
-				 @media only screen{background-image:url(https://linkmaker.itunes.apple.com/htmlResources/assets/ja_jp//images/web/linkmaker/badge_appstore-lrg.svg);}"
-			></a>
-			<a href="https://play.google.com/store/apps/details?id=com.texchg">
-				<img
-					alt="Android app on Google Play"
-					src="https://developer.android.com/images/brand/ja_app_rgb_wo_45.png"
-				/>
-			</a>
-		</div>
+<!------------------------------------------------------>
+<!--サーチフォーム検索-->
+<!------------------------------------------------------
+<li class="index_wire">
+<div class="index_title">カテゴリ検索</div>
+<div id="searchbox">
+	<div class="category">
+		<img src="<?php echo get_stylesheet_directory_uri() ?>/images/index/a.png">
+		<p class="main">法学部</p>
 	</div>
+	<div class="clear"></div>
+	<div class="category">
+		<img src="<?php echo get_stylesheet_directory_uri() ?>/images/index/b.png">
+		<p class="main">経済学部</p>
+	</div>
+	<div class="clear"></div>
+	<div class="category">
+		<img src="<?php echo get_stylesheet_directory_uri() ?>/images/index/c.png">
+		<p class="main">外国語学部</p>
+		<p class="sub">英米学科</p>
+		<p class="sub">スペイン・ラテンアメリカ学科</p>
+		<p class="sub">フランス学科</p>
+		<p class="sub">ドイツ学科</p>
+		<p class="sub">アジア学科</p>
+	</div>
+	<div class="clear"></div>
+</div>
+</li>
+<div class="clear"></div>
+<!--カテゴリ検索-->
+	
+<!------------------------------------------------------>
+<div style="clear:both"></div>
+<!------------------------------------------------------>
+<!--ログアウト処理-->
+<div class="index_profile">
+	<?php bp_loggedin_user_avatar( 'type=thumb&width=30&height=30' ); ?>
+	<span class="user-nicename"><?php echo bp_core_get_userlink( bp_loggedin_user_id() ); ?></span>
+	<a class="button logout" href="<?php echo wp_logout_url( wp_guess_url() ); ?>"><?php _e( 'Log Out', 'buddypress' ); ?></a>
+</div>
+<!--ログアウト処理-->
 
-	<div id="icon">
-		<?php
-			/******/
-			global $user_ID;
-			echo('<a href="'.bp_loggedin_user_domain().'">' );
-			if(get_todo_list_count($user_ID) > 0)
-				echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/mypage_.png" width="100%"/>');
-			else
-				echo('<img src="'.get_stylesheet_directory_uri().'/images/mypage.png" width="100%"/>');
-			echo('</a>');
-			/******/
-			echo('<!--a href="'.bp_loggedin_user_domain().'new_entry/normal/"-->' );
-			echo('<img src="'.get_stylesheet_directory_uri().'/images/icon1.png" width="50%"/></a>');
-			/******/
-			echo('<a href="'.bp_loggedin_user_domain().'messages/">' );
-			if(messages_get_unread_count() > 0)
-				echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/icon2_.png" width="50%"/>');
-			else
-				echo('<img alt="" src="'.get_stylesheet_directory_uri().'/images/icon2.png" width="50%"/>');
-			echo('</a>');
-			/******/
-			echo('<a href='.home_url().'/howtouse><img alt="" src="'.get_stylesheet_directory_uri().'/images/icon3.png" width="50%"/></a>');
-			/******/
-			echo('<a href='.home_url().'/search-page><img alt="" src="'.get_stylesheet_directory_uri().'/images/icon4.png" width="50%"/></a>');
-		?>
-	</div><!-- #icon -->
-
-	<hr class="hr-posts-row">
-	<div class="phone_sub_title" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_t.bmp'); ?>); ">こんな本が出品されてます！</div>
-	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?> ); ">
-	<div id="top_image1"></div>
-	</div>
-	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
-	<div id="top_image2"></div>
-	</div>
-	<div id="top_image_box" class="image_box" style="background-image: url(<?php echo(get_stylesheet_directory_uri().'/images/booklack_b.bmp'); ?>); ">
-	<div id="top_image3"></div>
-	</div>
-	<div class="index_profile">
-		<?php bp_loggedin_user_avatar( 'type=thumb&width=30&height=30' ); ?>
-		<span class="user-nicename"><?php echo bp_core_get_userlink( bp_loggedin_user_id() ); ?></span>
-			<a class="button logout" href="<?php echo wp_logout_url( wp_guess_url() ); ?>"><?php _e( 'Log Out', 'buddypress' ); ?></a>
-	</div>
-
-<!-- SlideImageScript -->
-		<!-- jQuery library -->
-		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script src="wp-content/themes/freecycle/js/owl-carousel/owl.carousel.js"></script>
-		<link rel="stylesheet" href="wp-content/themes/freecycle/js/owl-carousel/owl.carousel.css">
-		<link rel="stylesheet" href="wp-content/themes/freecycle/js/owl-carousel/owl.theme.css">
-	<script>
-		jQuery(function() {
-			//displayImages1();
-			//displayImages2();
-			//displayImages3();
-		});
-	</script>
-<!-- SlideImageScript -->
 <?php get_footer(); ?>

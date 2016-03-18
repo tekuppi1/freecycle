@@ -1,8 +1,11 @@
-</div> <!-- #container -->
-
+</div>
 <?php do_action( 'bp_after_container' ); ?>
 <?php do_action( 'bp_before_footer'   ); ?>
+</div>
+<!--コンテンツ------------------->
 
+
+<!--フッター------------------->
 <div id="footer">
 <!-- <div id="pagetop_link"><a href="#logo">Go to pagetop</a></div> -->
 <?php if ( is_active_sidebar( 'first-footer-widget-area' ) || is_active_sidebar( 'second-footer-widget-area' ) || is_active_sidebar( 'third-footer-widget-area' ) || is_active_sidebar( 'fourth-footer-widget-area' ) ) : ?>
@@ -40,7 +43,8 @@
 <!--　↑フッター　-->
 
 <?php do_action( 'bp_footer' ); ?>
-</div><!-- #footer -->
+</div>
+<!--フッター------------------->
 <?php do_action( 'bp_after_footer' ); ?>
 <?php wp_footer(); ?>
 </body>

@@ -3202,11 +3202,12 @@ function admin_styles() {
 add_action( 'wp_enqueue_scripts', 'admin_styles');
 
 /**
-	*ヘッダー
+	*css読み込み
 	*/
 function header_styles() {
 	wp_enqueue_style( 'header', "/wp-content/themes/freecycle/style/header.css");
 	wp_enqueue_style( 'footer', "/wp-content/themes/freecycle/style/footer.css");
+	wp_enqueue_style( 'index', "/wp-content/themes/freecycle/style/index.css");
 }
 add_action( 'wp_enqueue_scripts', 'header_styles');
 
