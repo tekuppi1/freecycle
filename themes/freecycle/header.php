@@ -1,15 +1,9 @@
-<?php
+﻿<?php
 global $current_user;
 get_currentuserinfo();
 
 include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/head.php";
 
-// DELETE TEMPORARILY
-// because of unable to login from smartphone apps
-if(!is_user_logged_in() || $current_user->user_level != ADMIN_LEVEL){
-	header('Location:' . home_url() . '/renewal.php');
-	exit();
-}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
