@@ -233,7 +233,7 @@ function onFinish(postID){
 							}else if($fake_pt>=2){
 								$true_pt = 2; 
 							}else{
-								$true_pt = "不明";
+								$true_pt = 1;
 							}
 							echo $true_pt;
 						?>
