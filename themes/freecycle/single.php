@@ -228,10 +228,12 @@ function onFinish(postID){
 				<div>
 					<span class="first">ポイント数</span><span class="second"><?php
 							$fake_pt = get_post_meta($post->ID,"price",true)/1000;
-							if($fake_pt<1){
+							if($fake_pt<2){
 								$true_pt = 1;
+							}else if($fake_pt>=2){
+								$true_pt = 2; 
 							}else{
-								$true_pt = (int)$fake_pt; 
+								$true_pt = "不明";
 							}
 							echo $true_pt;
 						?>
