@@ -126,7 +126,7 @@ jQuery(window).on('load resize', function(){
 </a>	
 <?php
 $i =0;
-$args = array( 'posts_per_page' => 100, 'paged' => $page, 'orderby' => 'rand', 'category'=> '$category->term_id');
+$args = array( 'posts_per_page' => 100, 'paged' => $page, 'orderby' => 'rand', 'category'=> $category->term_id);
 $posts = get_posts( $args );
 foreach( $posts as $key => $post ) {
   if($i>4) break;else $i++;
