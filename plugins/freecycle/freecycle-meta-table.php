@@ -18,15 +18,13 @@ class FreecycleMetaTable {
 		$this->fmt_wanted_list = $wpdb->prefix . 'fmt_wanted_list';
 		$this->fmt_todo = $wpdb->prefix . 'todo';
 		$this->fmt_trade_maps = $wpdb->prefix . 'fmt_trade_maps';
-		$this->fmt_book_fair = $wpdb->prefix . 'fmt_book_fair';
-		$this->fmt_reservation = $wpdb->prefix . 'fmt_reservation';
 	}
-
-
+	
+	
 	function fmt_activate(){
 		global $wpdb;
 		//DB version
-		$fmt_db_version = '1.088888888';
+		$fmt_db_version = '1.09';
 		//current DB version
 		$installed_ver = get_option( 'fmt_meta_version' );
 			// if versions are different tables are created
@@ -46,7 +44,7 @@ class FreecycleMetaTable {
 						";
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 				dbDelta($sql);
-
+			
 				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_points . "` (
 						`insert_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 						`update_timestamp` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
