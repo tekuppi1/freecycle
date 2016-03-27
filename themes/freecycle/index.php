@@ -23,7 +23,7 @@
  		$main_slug = $main_category->slug;
 		echo "<a href='". home_url()."/archives/category/".$main_slug."'><li>$main_name</li></a>";
 	}
-?>		
+?>
 </ul>
 </div>
 <script>
@@ -47,7 +47,7 @@ jQuery(window).on('load resize', function(){
 <div id="index_searchform">
 <form role="search" method="get" id="searchform_index" action="<?php echo home_url(); ?>">
 <input type="text" placeholder="ほしい本を検索する" name="s" value=""/>
-<input type="submit" value="検索"/>    
+<input type="submit" value="検索"/>
 </form>
 </div>
 <div style="clear:both"></div>
@@ -79,8 +79,8 @@ foreach( $posts as $key => $post ) {
 	}
 ?>
 <div class="index_archive_grid">
-	<a href="<? echo $returnObj[$key]['permalink']; ?>">
-		<img class="index_archive_entry_img" src="<? echo $image_src ?>">
+	<a href="<?php echo $returnObj[$key]['permalink']; ?>">
+		<img class="index_archive_entry_img" src="<?php echo $image_src ?>">
 	</a>
 	<div class="index_archive_cat"><span><?php echo get_category($returnObj[$key]['genre'][0])->cat_name ?></span></div>
 	<div class="index_archive_title">
@@ -95,7 +95,7 @@ foreach( $posts as $key => $post ) {
 jQuery(window).on('load resize', function(){
 	var count = jQuery('.thum').length;
 	jQuery('.thum').width((jQuery('body').width())-32-20);
-	
+
 	var a = jQuery('.thum');
 	var b = jQuery('.index_archive_entry_img');
 	var c = jQuery('.index_archive_title');
@@ -111,7 +111,7 @@ jQuery(window).on('load resize', function(){
 	c.width(_width);
 });
 </script>
-	
+
 
 <!------------------------------------------------------>
 <!--サムネイル表示(カテゴリ別)-->
@@ -123,7 +123,7 @@ jQuery(window).on('load resize', function(){
 <li class="index_wire thum2">
 <a href="<?php echo get_category_link( $category->term_id ); ?>" class="index_title_link">
 	<div class="index_title back_subcolor"><?php echo $category->cat_name; ?></div>
-</a>	
+</a>
 <?php
 $i =0;
 $args = array( 'posts_per_page' => 100, 'paged' => $page, 'orderby' => 'rand', 'category'=> $category->term_id);
@@ -145,13 +145,13 @@ foreach( $posts as $key => $post ) {
 	}
 ?>
 <div class="index_archive_grid">
-	<a href="<? echo $returnObj[$key]['permalink']; ?>">
-		<img class="index_archive_entry_img2 <?php if($i==1)echo "big"; ?>" src="<? echo $image_src ?>">
+	<a href="<?php echo $returnObj[$key]['permalink']; ?>">
+		<img class="index_archive_entry_img2 <?php if($i==1)echo "big"; ?>" src="<?php echo $image_src ?>">
 	</a>
 </div>
 <?php
 }
-echo "</li>" ;															 
+echo "</li>" ;
 }
 ?>
 <script>
@@ -164,7 +164,7 @@ jQuery(window).on('load resize', function(){
 	} else {
 		b.width((a.width())-32-20);
 	}
-	
+
 	var a = jQuery('.thum2');
 	var b = jQuery('.index_archive_entry_img2');
 	var count = b.length;
@@ -176,7 +176,7 @@ jQuery(window).on('load resize', function(){
 	}
 	b.width(_width);
 	b.height(_width*1.2)
-	
+
 	var b = jQuery('.big');
 	if(a.width() > 270){
 		_width =(((a.width()/2))-20);
@@ -218,7 +218,7 @@ jQuery(window).on('load resize', function(){
 </li>
 <div class="clear"></div>
 <!--カテゴリ検索-->
-	
+
 <!------------------------------------------------------>
 <div style="clear:both"></div>
 <!------------------------------------------------------>
