@@ -34,6 +34,7 @@ require_once('categories/freecycle-categories.php');
 require_once('map/freecycle-map.php');
 require_once('trade-log/freecycle-trade-log.php');
 require_once('members/loader.php');
+require_once('app/app.php');
 
 // 定数定義
 define("SIGNATURE", "\n\n\n配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchange.ag@gmail.com");
@@ -2865,6 +2866,17 @@ function upload_itempictures($itemID){
 	}
 }
 
+function get_categories_tree(){
+	$result = [];
+	$main_categories = get_main_categories();
+	foreach ($main_categories as $main_category) {
+		$subcategories = get_sub_categories($main_category->term_id);
+		$main_category->subcategories = $subcategories;
+		array_push($result, $main_category);
+	}
+	return $result;
+}
+
 /**
 * 親カテゴリを出力する関数
 * @param {string} $item_main_category_name 親カテゴリ名
@@ -2987,37 +2999,37 @@ add_shortcode('show_all_items', 'show_all_items');
 function get_bookfair_info_by_id($bookfair_id){
 	global $wpdb;
 	global $table_prefix;
-	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue
 		FROM " . $table_prefix . "fmt_book_fair";
 	$bookfair_info = $wpdb->get_results($wpdb->prepare(
-		$sql."	
+		$sql."
 		WHERE " . $table_prefix . "fmt_book_fair.bookfair_id = %d"
 		,$bookfair_id
 		));
 
 	return $bookfair_info;
-} 
+}
 
 // 引数の年と月に開催される古本市の、古本市id、開始日時、終了日時、開催場所、を取ってくる
 function get_bookfair_info_of_date($bookfair_year,$bookfair_month){
 	global $wpdb;
 	global $table_prefix;
-	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue
 		FROM " . $table_prefix . "fmt_book_fair";
 	$bookfair_info = $wpdb->get_results($wpdb->prepare(
-		$sql."	
+		$sql."
 		WHERE year(start_datetime) = %d && month(start_datetime) = %d"
 		,$bookfair_year,$bookfair_month
 		));
 
 	return $bookfair_info;
-} 
+}
 
 // 今日の日付を含めてこれから開催されるすべての古本市の,古本市ID、開催日時、終了日時、開催場所、を取ってくる
 function get_bookfair_info_after_today(){
 	global $wpdb;
 	global $table_prefix;
-	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue
 		FROM " . $table_prefix . "fmt_book_fair";
 	$bookfair_info = $wpdb->get_results(
 		$sql."
@@ -3032,25 +3044,25 @@ function get_bookfair_info_after_today(){
 function get_bookfair_info_by_venue($bookfair_venue){
 	global $wpdb;
 	global $table_prefix;
-	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue
 		FROM " . $table_prefix . "fmt_book_fair";
 	$bookfair_info = $wpdb->get_results($wpdb->prepare(
-		$sql."	
+		$sql."
 		WHERE " . $table_prefix . "fmt_book_fair.venue = %s"
 		,$bookfair_venue
 		));
 
 	return $bookfair_info;
-} 
+}
 
 //　引数の数だけ、開催日が近い順に、開催する古本市の,古本市id、開始日時、終了日時、開催場所、を取ってくる
 function get_bookfair_info_all_you_want($show_number){
 	global $wpdb;
 	global $table_prefix;
-	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue
 		FROM " . $table_prefix . "fmt_book_fair";
 	$bookfair_info = $wpdb->get_results($wpdb->prepare(
-		$sql."	
+		$sql."
 		WHERE " . $table_prefix . "fmt_book_fair.end_datetime >= current_timestamp
 		ORDER BY start_datetime
 		LIMIT %d"
@@ -3058,13 +3070,13 @@ function get_bookfair_info_all_you_want($show_number){
 		));
 
 	return $bookfair_info;
-} 
+}
 
 // すべての古本市の、古本市ID、開始日時、終了日時、開催場所、を取ってくる
 function get_bookfair_info_of_all(){
 	global $wpdb;
 	global $table_prefix;
-	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue  
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue
 		FROM " . $table_prefix . "fmt_book_fair";
 	$bookfair_info = $wpdb->get_results($sql);
 
