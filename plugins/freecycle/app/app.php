@@ -17,6 +17,8 @@ add_action('wp_ajax_echo_posts_data_json', 'echo_posts_data_json');
 add_action('wp_ajax_nopriv_echo_posts_data_json', 'echo_posts_data_json');
 add_action('wp_ajax_echo_thumbnail_url', 'echo_thumbnail_url');
 add_action('wp_ajax_nopriv_echo_thumbnail_url', 'echo_thumbnail_url');
+add_action('wp_ajax_echo_tc_custom_properties', 'echo_tc_custom_properties');
+add_action('wp_ajax_nopriv_echo_tc_custom_properties', 'echo_tc_custom_properties');
 
 /**
  * 認証用のnonceを取得します。
@@ -102,6 +104,35 @@ function get_thumbnail_url($post_id){
 	function echo_thumbnail_url(){
 		$post_id = isset($_REQUEST["post_id"])?$_REQUEST["post_id"]:0;
 		echo get_thumbnail_url($post_id);
+		die;
+	}
+
+/**
+ * テクスチェンジ独自のカスタムプロパティをまとめて返します。
+ */
+
+function get_tc_custom_properties($post_id){
+	$rtn = new stdClass();
+	$rtn->post_id = $post_id;
+
+	// アルファベット順にしておくとわかりやすい
+	$rtn->asin = get_post_meta($post_id, "asin", true);
+	$rtn->author = get_post_meta($post_id, "author", true);
+	$rtn->book_count = get_post_meta($post_id, "book_count", true);
+	$rtn->course = get_post_meta($post_id, "course", true);
+	$rtn->department = get_post_meta($post_id, "department", true);
+	$rtn->ISBN = get_post_meta($post_id, "ISBN", true);
+	$rtn->item_status = get_post_meta($post_id, "item_status", true);
+	$rtn->price = get_post_meta($post_id, "price", true);
+	$rtn->wanted_item_id = get_post_meta($post_id, "wanted_item_id", true);
+
+	return $rtn;
+}
+
+	function echo_tc_custom_properties(){
+		if(isset($_REQUEST["post_id"])){
+			echo json_encode(get_tc_custom_properties($_REQUEST["post_id"]));
+		}
 		die;
 	}
 ?>
