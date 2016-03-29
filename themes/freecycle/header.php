@@ -33,6 +33,11 @@ include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/head.php";
 </div>
 <!-- ↑　ヘッダー -->
 
+<!-- ↓検索フォーム -->
+<div id="header_searchform">
+	<?php get_search_form(); ?>
+</div>
+
 <?php if(is_archive() || is_search() || is_single()){ ?>
 <?php } ?>
 
