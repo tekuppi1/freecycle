@@ -42,7 +42,7 @@ jQuery(window).on('load resize', function(){
 <!------------------------------------------------------>
 <!--サーチフォーム検索-->
 <!------------------------------------------------------>
-<li class="index_wire">
+<!-- <li class="index_wire">
 <div class="index_title">ワード検索</div>
 <div id="index_searchform">
 <form role="search" method="get" id="searchform_index" action="<?php echo home_url(); ?>">
@@ -51,7 +51,7 @@ jQuery(window).on('load resize', function(){
 </form>
 </div>
 <div style="clear:both"></div>
-</li>
+</li> -->
 
 <!------------------------------------------------------>
 <!--サムネイル表示-->
