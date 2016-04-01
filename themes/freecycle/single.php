@@ -176,6 +176,14 @@ function onFinish(postID){
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 	
 	<div class="bookinfo">
+		<?php $sub_category = get_the_category();?>
+		<div class="category_tree">
+			<a href=" <?php echo home_url();?> ">ホーム</a>&raquo;
+			  <?php echo get_category_parents( $sub_category[0]->term_id, true, ' &raquo; ' ); ?>
+		</div>
+		<div class="">
+			
+		</div>
 		<p class="booktitle">商品名: <?php echo get_the_title(); ?></p>
 		<p class="bookauthor">著者: <?php echo get_post_meta($post->ID, "author", true)?get_post_meta($post->ID, "author", true):"データがありません"; ?></p>
 		<div class="shashin">
@@ -216,12 +224,12 @@ function onFinish(postID){
 			<div class="booksubinfo">
 				<div>
 					<span class="first">カテゴリー</span><span class="second"><?php
-								$sub_category = get_the_category();
 								if($sub_category[0]->term_id == '1'):
 									echo "カテゴリ:未設定";
 								else:
 									echo $sub_category[0]->name;
 							?><?php endif; ?>
+					
 					</span>
 				</div>
 
