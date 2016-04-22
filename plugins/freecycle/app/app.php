@@ -19,6 +19,8 @@ add_action('wp_ajax_echo_thumbnail_url', 'echo_thumbnail_url');
 add_action('wp_ajax_nopriv_echo_thumbnail_url', 'echo_thumbnail_url');
 add_action('wp_ajax_echo_tc_custom_properties', 'echo_tc_custom_properties');
 add_action('wp_ajax_nopriv_echo_tc_custom_properties', 'echo_tc_custom_properties');
+add_action('wp_ajax_nopriv_get_thumbnail_url', 'get_thumbnail_url');
+add_action('wp_ajax_get_thumbnail_url', 'get_thumbnail_url');
 
 /**
  * 認証用のnonceを取得します。
@@ -91,19 +93,31 @@ function echo_posts_data_json(){
 function get_thumbnail_url($post_id){
 	$post_thumbnail_id = get_post_thumbnail_id($post_id);
 	if(!$post_thumbnail_id){
-		return get_stylesheet_directory_uri().'/images/index/NotImage.png';
+        $post_id_and_thumbnail_url = array(
+            "ID"  => $post_id,
+            "URL" => get_stylesheet_directory_uri() . '/images/index/NotImage.png'
+        );
+		return $post_id_and_thumbnail_url;
 	}
 
 	$image = wp_get_attachment_image_src($post_thumbnail_id,'medium');
 	if(sizeof($image) > 0){
-		return $image[0];
+        $post_id_and_thumbnail_url = array(
+            "ID"  => $post_id,
+            "URL" => $image[0]
+        );
+		return $post_id_and_thumbnail_url;
 	}else{
-		return get_stylesheet_directory_uri().'/images/index/NotImage.png';
+        $post_id_and_thumbnail_url = array(
+            "ID"  => $post_id,
+            "URL" => get_stylesheet_directory_uri() . '/images/index/NotImage.png'
+        );
+		return $post_id_and_thumbnail_url;
 	}
 }
 	function echo_thumbnail_url(){
-		$post_id = isset($_REQUEST["post_id"])?$_REQUEST["post_id"]:0;
-		echo get_thumbnail_url($post_id);
+        $post_id = isset($_REQUEST["post_id"]) ? $_REQUEST["post_id"] : 0;
+        echo json_encode(get_thumbnail_url($post_id));
 		die;
 	}
 
