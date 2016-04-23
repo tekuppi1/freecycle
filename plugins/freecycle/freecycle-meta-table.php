@@ -24,7 +24,7 @@ class FreecycleMetaTable {
 	function fmt_activate(){
 		global $wpdb;
 		//DB version
-		$fmt_db_version = '1.09';
+		$fmt_db_version = '1.10';
 		//current DB version
 		$installed_ver = get_option( 'fmt_meta_version' );
 			// if versions are different tables are created
@@ -150,6 +150,7 @@ class FreecycleMetaTable {
 
 				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_reservation .
 				"`(
+						`reserve_id` int(8) NOT NULL AUTO_INCREMENT,
 						`item_id` int(11) NOT NULL,
 						`user_id` int(11) NOT NULL,
 						`bookfair_id` int(8) NOT NULL,
@@ -158,7 +159,7 @@ class FreecycleMetaTable {
 						`update_timestamp` timestamp NOT NULL DEFAULT
 						'0000-00-00 00:00:00',
 						`status` int(3) NOT NULL DEFAULT 0,
-						PRIMARY KEY (`item_id`, `user_id`, `bookfair_id`)
+						PRIMARY KEY (`reserve_id`,`item_id`, `user_id`, `bookfair_id`)
 						) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 						";
 				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
