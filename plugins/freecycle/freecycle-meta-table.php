@@ -24,7 +24,7 @@ class FreecycleMetaTable {
 	function fmt_activate(){
 		global $wpdb;
 		//DB version
-		$fmt_db_version = '1.10';
+		$fmt_db_version = '1.11';
 		//current DB version
 		$installed_ver = get_option( 'fmt_meta_version' );
 			// if versions are different tables are created
