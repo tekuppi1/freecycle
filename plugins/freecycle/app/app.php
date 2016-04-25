@@ -21,6 +21,8 @@ add_action('wp_ajax_echo_tc_custom_properties', 'echo_tc_custom_properties');
 add_action('wp_ajax_nopriv_echo_tc_custom_properties', 'echo_tc_custom_properties');
 add_action('wp_ajax_nopriv_get_thumbnail_url', 'get_thumbnail_url');
 add_action('wp_ajax_get_thumbnail_url', 'get_thumbnail_url');
+add_action('wp_ajax_nopriv_echo_the_category', 'echo_the_category');
+add_action('wp_ajax_echo_the_category', 'echo_the_category');
 
 /**
  * 認証用のnonceを取得します。
@@ -149,4 +151,16 @@ function get_tc_custom_properties($post_id){
 		}
 		die;
 	}
+
+/**
+ * 投稿IDを元にしてカテゴリ名称を返します。
+ * WordPress の標準関数を使っているので echo のメソッドしかありません。
+ */
+
+function echo_the_category(){
+	$post_id = isset($_REQUEST['post_id'])?$_REQUEST['post_id']:false;
+	echo json_encode(get_the_category($post_id));
+	die;
+}
+
 ?>
