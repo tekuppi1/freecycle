@@ -73,6 +73,8 @@ function echo_sub_categories_json(){
 function echo_posts_data_json(){
 	$query = new stdClass(); // create an empty object
 
+	$query->posts_per_page = 100;
+
 	if(isset($_REQUEST["keyword"])){
 		$query->s = $_REQUEST["keyword"];
 	}
