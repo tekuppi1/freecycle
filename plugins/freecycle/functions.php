@@ -3273,3 +3273,40 @@ function detail_styles() {
 	wp_enqueue_style( 'fontello', "/wp-content/themes/freecycle/pages/styles/fontello.css");
 }
 add_action( 'wp_enqueue_scripts', 'detail_styles');
+
+/*
+//予約件数を検索して返す,引数はユーザーID
+
+function reservation_count($user_ID){
+	global $wpdb;
+	$reserve_count = $wpdb->get_var( 
+		"SELECT COUNT(user_id) FROM".$table_prefix."fmt_reserve WHERE user_id="$user_ID
+		);
+	return $reserve_count;
+	}
+	
+//予約テーブルの、予約IDが一致する行を消す関数、引数は予約ID==引数の型判断必要かもしれない
+function delete_reservation($reserve_id){
+	global $wpdb;
+	$wpdb->prepare( 
+		"DELETE FROM".$table_prefix."fmt_reserve WHERE reserve_id=%s;",$reseve_id
+        )
+);
+	
+}
+
+//予約確認、管理者向け
+function confirm_reserve(){
+	global $wpdb;
+	$allreserve = $wpdb->get_results(
+		"
+		SELECT* FROM".$table_prefix."fmt_reserve
+		"
+	);
+	foreach ( $allreserve as $reservation ) 
+{
+	echo $reservation->post_title;
+}
+}
+
+*/
