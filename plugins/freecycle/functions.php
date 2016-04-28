@@ -3273,6 +3273,7 @@ function detail_styles() {
 	wp_enqueue_style( 'fontello', "/wp-content/themes/freecycle/pages/styles/fontello.css");
 }
 add_action( 'wp_enqueue_scripts', 'detail_styles');
+
 /*
 //予約件数を検索して返す,引数はユーザーID
 
