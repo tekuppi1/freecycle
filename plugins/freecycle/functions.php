@@ -3273,3 +3273,8 @@ function detail_styles() {
 	wp_enqueue_style( 'fontello', "/wp-content/themes/freecycle/pages/styles/fontello.css");
 }
 add_action( 'wp_enqueue_scripts', 'detail_styles');
+
+// fmt_reserveテーブルに古本市ID、予約ID、商品ID、予約した日付を入力する
+function insert_reserve_info(){
+	
+}
