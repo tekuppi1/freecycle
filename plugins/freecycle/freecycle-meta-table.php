@@ -8,7 +8,8 @@ class FreecycleMetaTable {
 	var $fmt_wanted_list;
 	var $fmt_todo;
 	var $fmt_trade_maps;
-
+	var $fmt_reserve;
+	
 	public function __construct(){
 		global $wpdb;
 		$this->fmt_giveme_state = $wpdb->prefix . 'fmt_giveme_state';
@@ -18,13 +19,16 @@ class FreecycleMetaTable {
 		$this->fmt_wanted_list = $wpdb->prefix . 'fmt_wanted_list';
 		$this->fmt_todo = $wpdb->prefix . 'todo';
 		$this->fmt_trade_maps = $wpdb->prefix . 'fmt_trade_maps';
+		$this->fmt_reserve = $wpdb->prefix . 'fmt_reserve';
+		
+		 register_activation_hook (__FILE__, array($this, 'cmt_activate'));
 	}
 	
 	
 	function fmt_activate(){
 		global $wpdb;
 		//DB version
-		$fmt_db_version = '1.10';
+		$fmt_db_version = '2';
 		//current DB version
 		$installed_ver = get_option( 'fmt_meta_version' );
 			// if versions are different tables are created
