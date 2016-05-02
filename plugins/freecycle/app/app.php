@@ -19,6 +19,8 @@ add_action('wp_ajax_echo_thumbnail_url', 'echo_thumbnail_url');
 add_action('wp_ajax_nopriv_echo_thumbnail_url', 'echo_thumbnail_url');
 add_action('wp_ajax_echo_tc_custom_properties', 'echo_tc_custom_properties');
 add_action('wp_ajax_nopriv_echo_tc_custom_properties', 'echo_tc_custom_properties');
+add_action('wp_ajax_echo_posts_data_json_with_image_url_custom_properties', 'echo_posts_data_json_with_image_url_custom_properties');
+add_action('wp_ajax_nopriv_echo_posts_data_json_with_image_url_custom_properties', 'echo_posts_data_json_with_image_url_custom_properties');
 add_action('wp_ajax_nopriv_get_thumbnail_url', 'get_thumbnail_url');
 add_action('wp_ajax_get_thumbnail_url', 'get_thumbnail_url');
 add_action('wp_ajax_nopriv_echo_the_category', 'echo_the_category');
@@ -63,6 +65,27 @@ function echo_sub_categories_json(){
 	die;
 }
 
+
+/**
+ * 出品情報の検索結果に、サムネイルURLと	カスタムプロパティを全て付与し、
+ * JSON 形式にコンバートして返します。
+ */
+
+function echo_posts_data_json_with_image_url_custom_properties(){
+	$posts = get_posts_data_json($_REQUEST);
+	foreach ($posts as $post) {
+		$post->image_url = get_thumbnail_url($post->ID)["URL"];
+		$post->category = get_the_category($post->ID);
+		$custom_properties = get_tc_custom_properties($post->ID);
+		foreach ($custom_properties as $key => $value) {
+			$post->{$key} = $value;
+		}
+	}
+	echo json_encode($posts);
+	die;
+}
+
+
 /**
  * 検索条件を受け取り、結果を JSON 形式で返します。
  * ほんとは検索条件を JSON で受け取りたいんですが HTTP 経由だとなぜかうまくいかないので
@@ -70,22 +93,25 @@ function echo_sub_categories_json(){
  * 送りたいパラメタが増えたら個別対応してください（ダサい）
  */
 
-function echo_posts_data_json(){
+function get_posts_data_json($args){
 	$query = new stdClass(); // create an empty object
 
 	$query->posts_per_page = 100;
 
-	if(isset($_REQUEST["keyword"])){
-		$query->s = $_REQUEST["keyword"];
+	if(isset($args["keyword"])){
+		$query->s = $args["keyword"];
 	}
 
-	if(isset($_REQUEST["category"])){
-		$query->cat = $_REQUEST["category"];
+	if(isset($args["category"])){
+		$query->cat = $args["category"];
 	}
 
 	$the_query = new WP_Query($query);
+	return $the_query->posts;
+}
 
-	echo json_encode($the_query->posts);
+function echo_posts_data_json(){
+	echo json_encode(get_posts_data_json($_REQUEST));
 	die;
 }
 
@@ -130,19 +156,17 @@ function get_thumbnail_url($post_id){
  */
 
 function get_tc_custom_properties($post_id){
-	$rtn = new stdClass();
-	$rtn->post_id = $post_id;
-
+	$rtn = [];
 	// アルファベット順にしておくとわかりやすい
-	$rtn->asin = get_post_meta($post_id, "asin", true);
-	$rtn->author = get_post_meta($post_id, "author", true);
-	$rtn->book_count = get_post_meta($post_id, "book_count", true);
-	$rtn->course = get_post_meta($post_id, "course", true);
-	$rtn->department = get_post_meta($post_id, "department", true);
-	$rtn->ISBN = get_post_meta($post_id, "ISBN", true);
-	$rtn->item_status = get_post_meta($post_id, "item_status", true);
-	$rtn->price = get_post_meta($post_id, "price", true);
-	$rtn->wanted_item_id = get_post_meta($post_id, "wanted_item_id", true);
+	$rtn["asin"] = get_post_meta($post_id, "asin", true);
+	$rtn["author"] = get_post_meta($post_id, "author", true);
+	$rtn["book_count"] = get_post_meta($post_id, "book_count", true);
+	$rtn["course"] = get_post_meta($post_id, "course", true);
+	$rtn["department"] = get_post_meta($post_id, "department", true);
+	$rtn["ISBN"] = get_post_meta($post_id, "ISBN", true);
+	$rtn["item_status"] = get_post_meta($post_id, "item_status", true);
+	$rtn["price"] = get_post_meta($post_id, "price", true);
+	$rtn["wanted_item_id"]= get_post_meta($post_id, "wanted_item_id", true);
 
 	return $rtn;
 }
