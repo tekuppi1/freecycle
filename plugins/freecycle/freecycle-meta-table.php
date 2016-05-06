@@ -30,7 +30,7 @@ class FreecycleMetaTable {
 	function fmt_activate(){
 		global $wpdb;
 		//DB version
-		$fmt_db_version = '2.1';
+		$fmt_db_version = '2.11';
 		//current DB version
 		$installed_ver = get_option( 'fmt_meta_version' );
 			// if versions are different tables are created
@@ -139,9 +139,11 @@ class FreecycleMetaTable {
 				$sql = "CREATE TABLE IF NOT EXISTS `" . $this->fmt_book_fair .
 				"` (
 						`bookfair_id` int(8) NOT NULL AUTO_INCREMENT,
-						`start_datetime` datetime NOT NULL DEFAULT
+						`starting_datetime` datetime NOT NULL DEFAULT
 						'0000-00-00 00:00:00',
-						`end_datetime` datetime NOT NULL DEFAULT
+						`ending_datetime` datetime NOT NULL DEFAULT
+						'0000-00-00 00:00:00',
+						`date` datetime NOT NULL DEFAULT
 						'0000-00-00 00:00:00',
 						`venue` varchar(50) NOT NULL,
 						`insert_timestamp` timestamp NOT NULL DEFAULT
