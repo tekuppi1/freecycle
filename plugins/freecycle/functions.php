@@ -29,8 +29,6 @@ add_action('delete_user', 'on_user_deleted');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 add_action('wp_ajax_get_bookfair_info_of_all_by_ajax', 'get_bookfair_info_of_all_by_ajax');
 add_action('wp_ajax_nopriv_get_bookfair_info_of_all_by_ajax', 'get_bookfair_info_of_all_by_ajax');
-add_action('wp_ajax_get_bookfair_info_by_id', 'get_bookfair_info_by_id');
-add_action('wp_ajax_nopriv_get_bookfair_info_by_id', 'get_bookfair_info_by_id');
 
 // load files
 require_once('functions.kses.php');
@@ -3037,7 +3035,7 @@ function get_bookfair_info_after_today(){
 		FROM " . $table_prefix . "fmt_book_fair";
 	$bookfair_info = $wpdb->get_results(
 		$sql."
-		WHERE " . $table_prefix . "fmt_book_fair.date >= current_timestamp"
+		WHERE " . $table_prefix . "fmt_book_fair.date >= current_date"
     );
 
 	return $bookfair_info;
@@ -3068,7 +3066,7 @@ function get_bookfair_info_all_you_want($show_number){
 	$bookfair_info = $wpdb->get_results(
         $wpdb->prepare(
             $sql .
-            "WHERE date >= current_timestamp " .
+            "WHERE date >= current_date " .
             "ORDER BY date " .
             "LIMIT %d",
             $show_number
@@ -3099,16 +3097,6 @@ function get_bookfair_info_of_all()
 
  	return $bookfair_info;
 }
-
-/* function get_bookfair_info_of_all(){ */
-/* 	global $wpdb; */
-/* 	global $table_prefix; */
-/* 	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue */
-/* 		FROM " . $table_prefix . "fmt_book_fair"; */
-/* 	$bookfair_info = $wpdb->get_results($sql); */
-
-/* 	return $bookfair_info; */
-/* } */
 
 /**
 *	商品IDから、ユーザーデータを取得する関数
