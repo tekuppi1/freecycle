@@ -29,8 +29,8 @@ add_action('delete_user', 'on_user_deleted');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 add_action('wp_ajax_get_bookfair_info_of_all_by_ajax', 'get_bookfair_info_of_all_by_ajax');
 add_action('wp_ajax_nopriv_get_bookfair_info_of_all_by_ajax', 'get_bookfair_info_of_all_by_ajax');
-add_action('wp_ajax_get_bookfair_info_after_today', 'get_bookfair_info_after_today');
-add_action('wp_ajax_nopriv_get_bookfair_info_after_today', 'get_bookfair_info_after_today');
+add_action('wp_ajax_get_bookfair_info_of_date', 'get_bookfair_info_of_date');
+add_action('wp_ajax_nopriv_get_bookfair_info_of_date', 'get_bookfair_info_of_date');
 
 // load files
 require_once('functions.kses.php');
@@ -3015,19 +3015,19 @@ add_shortcode('show_all_items', 'show_all_items');
 /* } */
 
 // 引数の年と月に開催される古本市の、古本市id、開始日時、終了日時、開催場所、を取ってくる
-/* function get_bookfair_info_of_date($bookfair_year,$bookfair_month){ */
-/* 	global $wpdb; */
-/* 	global $table_prefix; */
-/* 	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue */
-/* 		FROM " . $table_prefix . "fmt_book_fair"; */
-/* 	$bookfair_info = $wpdb->get_results($wpdb->prepare( */
-/* 		$sql." */
-/* 		WHERE year(start_datetime) = %d && month(start_datetime) = %d" */
-/* 		,$bookfair_year,$bookfair_month */
-/* 		)); */
+function get_bookfair_info_of_date($bookfair_year,$bookfair_month){
+	global $wpdb;
+	global $table_prefix;
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id, date, starting_time, ending_time, venue, classroom
+		FROM " . $table_prefix . "fmt_book_fair";
+	$bookfair_info = $wpdb->get_results($wpdb->prepare(
+		$sql."
+		WHERE year(date) = %d && month(date) = %d"
+		,$bookfair_year,$bookfair_month
+    ));
 
-/* 	return $bookfair_info; */
-/* } */
+	return $bookfair_info;
+}
 
 // 今日の日付を含めてこれから開催されるすべての古本市の,古本市ID、開催日時、終了日時、開催場所、を取ってくる
 function get_bookfair_info_after_today(){
