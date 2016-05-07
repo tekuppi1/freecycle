@@ -29,6 +29,8 @@ add_action('delete_user', 'on_user_deleted');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 add_action('wp_ajax_get_bookfair_info_of_all_by_ajax', 'get_bookfair_info_of_all_by_ajax');
 add_action('wp_ajax_nopriv_get_bookfair_info_of_all_by_ajax', 'get_bookfair_info_of_all_by_ajax');
+add_action('wp_ajax_get_bookfair_info_all_you_want', 'get_bookfair_info_all_you_want');
+add_action('wp_ajax_nopriv_get_bookfair_info_all_you_want', 'get_bookfair_info_all_you_want');
 
 // load files
 require_once('functions.kses.php');
@@ -3043,36 +3045,43 @@ add_shortcode('show_all_items', 'show_all_items');
 /* } */
 
 // 古本市開催場所から古本市id,古本市の開始日時、終了日時、開催場所、を取ってくる
-/* function get_bookfair_info_by_venue($bookfair_venue){ */
-/* 	global $wpdb; */
-/* 	global $table_prefix; */
-/* 	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue */
-/* 		FROM " . $table_prefix . "fmt_book_fair"; */
-/* 	$bookfair_info = $wpdb->get_results($wpdb->prepare( */
-/* 		$sql." */
-/* 		WHERE " . $table_prefix . "fmt_book_fair.venue = %s" */
-/* 		,$bookfair_venue */
-/* 		)); */
+function get_bookfair_info_by_venue($bookfair_venue){
+	global $wpdb;
+	global $table_prefix;
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,starting_time, ending_time, venue, classroom
+		FROM " . $table_prefix . "fmt_book_fair";
+	$bookfair_info = $wpdb->get_results($wpdb->prepare(
+		$sql."
+		WHERE " . $table_prefix . "fmt_book_fair.venue = %s"
+		, $bookfair_venue
+    ));
 
-/* 	return $bookfair_info; */
-/* } */
+    for ($i = 0; $i < count($bookfair_info); $i++)
+    {
+        echo json_encode($bookfair_info[$i]);
+    }
 
-//　引数の数だけ、開催日が近い順に、開催する古本市の,古本市id、開始日時、終了日時、開催場所、を取ってくる
-/* function get_bookfair_info_all_you_want($show_number){ */
-/* 	global $wpdb; */
-/* 	global $table_prefix; */
-/* 	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue */
-/* 		FROM " . $table_prefix . "fmt_book_fair"; */
-/* 	$bookfair_info = $wpdb->get_results($wpdb->prepare( */
-/* 		$sql." */
-/* 		WHERE " . $table_prefix . "fmt_book_fair.end_datetime >= current_timestamp */
-/* 		ORDER BY start_datetime */
-/* 		LIMIT %d" */
-/* 		,$show_number */
-/* 		)); */
+	return $bookfair_info;
+}
 
-/* 	return $bookfair_info; */
-/* } */
+//　引数の数だけ、開催日が近い順に、開催する古本市の, 古本市id、開始日時、終了日時、開催場所、を取ってくる
+function get_bookfair_info_all_you_want($show_number){
+	global $wpdb;
+    
+	$sql = "SELECT bookfair_id, date, starting_time, ending_time, venue, classroom " .
+         "FROM " . $wpdb->fmt_book_fair . " ";
+	$bookfair_info = $wpdb->get_results(
+        $wpdb->prepare(
+            $sql .
+            "WHERE date >= current_timestamp " .
+            "ORDER BY date " .
+            "LIMIT %d",
+            $show_number
+        )
+    );
+
+	return $bookfair_info;
+}
 
 // 古本市情報を、アプリに送る
 // Send bookfair information to the app
@@ -3087,8 +3096,8 @@ function get_bookfair_info_of_all()
  	global $wpdb;
 
  	$sql = $wpdb->prepare(
-	    "SELECT i.bookfair_id, i.date, i.starting_time, i.ending_time, 
-   	    i.venue, i.classroom FROM $wpdb->fmt_book_fair i"
+	    "SELECT i.bookfair_id, i.date, i.starting_time, i.ending_time, i.venue, i.classroom " .
+        "FROM $wpdb->fmt_book_fair i"
 	);
  	$bookfair_info = $wpdb->get_results($sql);
 
