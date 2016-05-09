@@ -271,6 +271,10 @@ function onFinish(postID){
 	<P>補足情報：<?php remove_filter('the_content', 'wpautop'); the_content(); ?></P>	
 </div>	
 	
+<div class="reserve_button">
+	<input type="button" value="予約する" onClick="showReserveConfirmForm()">
+</div>
+
 	<?php endwhile; else: ?>
 
 		<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>

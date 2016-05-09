@@ -472,4 +472,8 @@ function switchProfileButtonDisabled(itemID){
 			}
 }
 
+function showReserveConfirmForm(){
+
+}
+
 </script>
