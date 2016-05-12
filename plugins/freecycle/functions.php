@@ -3274,9 +3274,9 @@ function detail_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'detail_styles');
 
-/*
-//予約件数を検索して返す,引数はユーザーID
 
+//予約件数を検索して返す,引数はユーザーID
+/*
 function reservation_count($user_ID){
 	global $wpdb;
 	$reserve_count = $wpdb->get_var( 
@@ -3284,8 +3284,9 @@ function reservation_count($user_ID){
 		);
 	return $reserve_count;
 	}
-	
+*/	
 //予約テーブルの、予約IDが一致する行を消す関数、引数は予約ID==引数の型判断必要かもしれない
+/*
 function delete_reservation($reserve_id){
 	global $wpdb;
 	$wpdb->prepare( 
@@ -3294,8 +3295,9 @@ function delete_reservation($reserve_id){
 );
 	
 }
+*/
+//display reservation
 
-//予約確認、管理者向け
 function confirm_reserve(){
 	global $wpdb;
 	$allreserve = $wpdb->get_results(
@@ -3303,10 +3305,14 @@ function confirm_reserve(){
 		SELECT* FROM".$table_prefix."fmt_reserve
 		"
 	);
-	foreach ( $allreserve as $reservation ) 
-{
-	echo $reservation->post_title;
-}
+	foreach ( $allreserve as $reservation ) {
+	$bookfair_info = $wpdb->get_results($wpdb->prepare(
+		"SELECT " . $table_prefix . "fmt_book_fair.start_datetime
+		FROM " . $table_prefix . "fmt_book_fair
+		WHERE " . $table_prefix . "fmt_book_fair.venue = %s"
+		,$reservation->bookfair_id
+	);
+		echo '<div class >'$reservation->reserve_id;
+	}
 }
 
-*/
