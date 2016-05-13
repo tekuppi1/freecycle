@@ -276,33 +276,35 @@ function onFinish(postID){
 	<?php 	
     $reserve_infos = get_bookfair_info_all_you_want(1);	
 	$title = get_the_title();
-	$datetime = strtotime($reserve_infos["date"]);
-	$date = date('Y/m/d',$datetime);
-	$da = array_column($reserve_infos, 'date');
-	var_dump($da);
-	var_dump($reserve_infos['date']);
-	var_dump($datetime);
-	var_dump($date);
-	var_dump($reserve_infos);
+	
 	foreach($reserve_infos as $reserve_info){
-		var_dump($reserve_info['date']);
-	}
-
-	$time = $reserves_info->starting_time .' ~ '.$reserve_infos->ending_time;
-	$venue = array_column($reserve_infos, 'venue');
-	$room = array_column($reserve_infos, 'classroom');
+		$datetime = strtotime($reserve_info->date);
+		$date = date('Y/m/d',$datetime);
+		$starttime = strtotime($reserve_info->starting_time);
+		$start = date('H:i',$starttime);
+		$endtime = strtotime($reserve_info->ending_time);
+		$end = date('H:i',$endtime);
+		$time = $start .' ～ '.$end;
+		$venue = $reserve_info->venue;
+		$room = $reserve_info->classroom;
 echo <<< RESERVE
 		<input type="button" value="予約する" onClick="showReserveConfirmForm('{$title}','{$date}','{$time}','{$venue}','{$room}','{$true_pt}');">
 	</form>
 RESERVE;
+	}
 	?>
+
 </div>
 
-	<?php endwhile; else: ?>
+	<?php 
+	endwhile; else: 
+	?>
 
 		<p><?php _e( 'Sorry, no posts matched your criteria.', 'buddypress' ); ?></p>
 
-	<?php endif; ?>
+	<?php
+	 endif; 
+	 ?>
 
 	<?php do_action( 'bp_after_blog_single_post' ); ?>
 
