@@ -272,7 +272,30 @@ function onFinish(postID){
 </div>	
 	
 <div class="reserve_button">
-	<input type="button" value="予約する" onClick="showReserveConfirmForm()">
+	<form>
+	<?php 	
+    $reserve_infos = get_bookfair_info_all_you_want(1);	
+	$title = get_the_title();
+	$datetime = strtotime($reserve_infos["date"]);
+	$date = date('Y/m/d',$datetime);
+	$da = array_column($reserve_infos, 'date');
+	var_dump($da);
+	var_dump($reserve_infos['date']);
+	var_dump($datetime);
+	var_dump($date);
+	var_dump($reserve_infos);
+	foreach($reserve_infos as $reserve_info){
+		var_dump($reserve_info['date']);
+	}
+
+	$time = $reserves_info->starting_time .' ~ '.$reserve_infos->ending_time;
+	$venue = array_column($reserve_infos, 'venue');
+	$room = array_column($reserve_infos, 'classroom');
+echo <<< RESERVE
+		<input type="button" value="予約する" onClick="showReserveConfirmForm('{$title}','{$date}','{$time}','{$venue}','{$room}','{$true_pt}');">
+	</form>
+RESERVE;
+	?>
 </div>
 
 	<?php endwhile; else: ?>

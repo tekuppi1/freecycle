@@ -3059,12 +3059,12 @@ function get_bookfair_info_by_venue($bookfair_venue){
 function get_bookfair_info_all_you_want($show_number){
 	global $wpdb;
 	global $table_prefix;
-	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,starting_time, ending_time, date, venue, classroom
 		FROM " . $table_prefix . "fmt_book_fair";
 	$bookfair_info = $wpdb->get_results($wpdb->prepare(
 		$sql."
-		WHERE " . $table_prefix . "fmt_book_fair.end_datetime >= current_timestamp
-		ORDER BY start_datetime
+		WHERE " . $table_prefix . "fmt_book_fair.date >= current_timestamp
+		ORDER BY date
 		LIMIT %d"
 		,$show_number
 		));
