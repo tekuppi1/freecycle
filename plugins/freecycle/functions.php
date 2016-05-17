@@ -24,6 +24,7 @@ add_action('wp_ajax_register_app_information', 'register_app_information');
 add_action('wp_ajax_cancel_trade_from_exhibitor', 'cancel_trade_from_exhibitor');
 add_action('wp_ajax_cancel_trade_from_bidder', 'cancel_trade_from_bidder');
 add_action('wp_ajax_get_login_user_info', 'get_login_user_info');
+add_action('wp_ajax_insert_reserve_info_from_subwindow', 'insert_reserve_info_from_subwindow');
 add_action('user_register', 'on_user_added');
 add_action('delete_user', 'on_user_deleted');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
@@ -3011,7 +3012,7 @@ function get_bookfair_info_by_id($bookfair_id){
 }
 
 // 引数の年と月に開催される古本市の、古本市id、開始日時、終了日時、開催場所、を取ってくる
-function get_bookfair_info_of_date($bookfair_year,$bookfair_month){
+function get_bookfair_info_by_date_year($bookfair_year,$bookfair_month){
 	global $wpdb;
 	global $table_prefix;
 	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue
@@ -3020,6 +3021,21 @@ function get_bookfair_info_of_date($bookfair_year,$bookfair_month){
 		$sql."
 		WHERE year(start_datetime) = %d && month(start_datetime) = %d"
 		,$bookfair_year,$bookfair_month
+		));
+
+	return $bookfair_info;
+}
+
+// 引数の日付に開催される古本市の、古本市ID、大学、教室、を取ってくる
+function get_bookfair_info_of_the_day($starting_time){
+	global $wpdb;
+	global $table_prefix;
+	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,venue, classroom
+		FROM " . $table_prefix . "fmt_book_fair";
+	$bookfair_info = $wpdb->get_results($wpdb->prepare(
+		$sql."
+		WHERE starting_time = %d"
+		,$starting_time
 		));
 
 	return $bookfair_info;
@@ -3274,7 +3290,18 @@ function detail_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'detail_styles');
 
-// fmt_reserveテーブルに古本市ID、予約ID、商品ID、予約した日付を入力する
-function insert_reserve_info(){
-	
+// fmt_reserveテーブルに古本市ID、ユーザID、商品ID、予約した日付を入力する
+function insert_reserve_info($bookfair_id,$user_id,$item_id){
+	global $wpdb, $table_prefix;
+	$wpdb->query($wpdb->prepare("
+		INSERT INTO " . $table_prefix . "fmt_reserve
+		(item_id, user_id, bookfair_id, insert_timestamp)
+		VALUES (%d, %d, %d, current_timestamp)",
+		$item_id, $user_id, $bookfair_id));
+}
+
+// fmt_reserveテーブルに予約サブウインドウから入力する
+function insert_reserve_info_from_subwindow(){
+		$postID = $_POST['postID'];
+
 }

@@ -472,16 +472,51 @@ function switchProfileButtonDisabled(itemID){
 			}
 }
 
-function showReserveConfirmForm(title,date,time,venue,room,point){
+function showReserveConfirmForm(title,date,time,venue,room,point,bookfairID,postID){
 	var Win1=window.open('','Subwin','width=500,height=500,scrollbars=1,resizable=1,status=1');
 	if(navigator.appVersion.charAt(0)>=3){Win1.focus()};
 	Win1.document.clear();
 	Win1.document.write("<html><head><meta charset=utf-8'><title>予約内容確認</title></head>");
 	Win1.document.write('<body>');
-	Win1.document.write('<p><font>予約内容の確認</font></p><div>予約本タイトル：'+title+'</div><div>受取日：'+date+'</div><div>受け取り時間：'+time+'</div><div>受け取り場所：'+venue,room+'</div><div>必要ポイント数：'+point+'</div>');
-	Win1.document.write("<p align=center><form><input type=button value='予約確定' onClick='window.close()'></form></p>");
+	Win1.document.write('<p><font data-bookfairid="'+bookfairID+'">予約内容の確認</font></p><div data-bookid="'+postID+'">予約本タイトル：'+title+'</div><div class="reserve_bookfair_date">受取日：'+date+'</div><div>受け取り時間：'+time+'</div><div>受け取り場所：'+venue,room+'</div><div style="margin-bottom:10px">必要ポイント数：'+point+'(初回利用時はポイントの必要はありません)</div>本人確認のために学生番号を入力してください。</br>一般人の方はカタカナで名字を入力してください。<input type="text" class="user_id"/>');
+	Win1.document.write("<p align=center><form><input type=button value='予約確定' onClick='postReserveInfoByAjax();'></form></p>");
 	Win1.document.write("</body></html>");
 	Win1.document.close();
 }
+
+function postReserveInfoByAjax(){
+	jQuery.ajax({
+		type: "POST",
+		url: '<?php echo admin_url('admin-ajax.php'); ?>',
+		data: {
+			"action": "insert_reserve_info_from_subwindow",
+			"bookfair_id": jQuery('font').data('bookfairid'),
+			"user_id": jQuery('.user_id').val(),
+			"item_id":jQuery('div').data('bookid')
+		},
+			success: function(msg){
+				swal({
+					title: "予約内容受付を完了しました！",
+					text: "古本市でお待ちしております",
+					// type: "success",
+					showCancelButton: false,
+					confirmButtonColor: "#AEDEF4",
+					confirmButtonText: "OK",
+					closeOnConfirm: true
+				});
+			},
+			error:function(){
+				swal({
+					title: "予約に失敗しました、再度予約をお願いします",
+					type: "error",
+					showCancelButton: false,
+					confirmButtonColor: "#AEDEF4",
+					confirmButtonText: "OK",
+					closeOnConfirm: true
+				});
+			}
+		});
+	}
+
 
 </script>

@@ -168,6 +168,7 @@ function onFinish(postID){
 }
 
 
+
 </script>
 
 <div class="fake" id="blog-single" role="main">
@@ -276,7 +277,6 @@ function onFinish(postID){
 	<?php 	
     $reserve_infos = get_bookfair_info_all_you_want(1);	
 	$title = get_the_title();
-	
 	foreach($reserve_infos as $reserve_info){
 		$datetime = strtotime($reserve_info->date);
 		$date = date('Y/m/d',$datetime);
@@ -287,8 +287,10 @@ function onFinish(postID){
 		$time = $start .' ～ '.$end;
 		$venue = $reserve_info->venue;
 		$room = $reserve_info->classroom;
+		$bookfair_id = $reserve_info->bookfair_id;
+		$post_id = $post->ID;
 echo <<< RESERVE
-		<input type="button" value="予約する" onClick="showReserveConfirmForm('{$title}','{$date}','{$time}','{$venue}','{$room}','{$true_pt}');">
+		<input type="button" value="予約する" onClick="showReserveConfirmForm('{$title}','{$date}','{$time}','{$venue}','{$room}','{$true_pt}','{$bookfair_id}','{$post_id}');">
 	</form>
 RESERVE;
 	}
