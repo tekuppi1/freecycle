@@ -167,8 +167,6 @@ function onFinish(postID){
 	});
 }
 
-
-
 </script>
 
 <div class="fake" id="blog-single" role="main">

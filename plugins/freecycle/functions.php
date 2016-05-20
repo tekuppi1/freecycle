@@ -3302,6 +3302,9 @@ function insert_reserve_info($bookfair_id,$user_id,$item_id){
 
 // fmt_reserveテーブルに予約サブウインドウから入力する
 function insert_reserve_info_from_subwindow(){
-		$postID = $_POST['postID'];
+		$postID = $_POST['item_id'];
+		$userID = $_POST['user_id'];
+		$bookfairID = $_POST['item_id'];
 
+		insert_reserve_info($bookfairID,$userID,$postID);
 }
