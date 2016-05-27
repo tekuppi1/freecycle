@@ -1,0 +1,1 @@
+<?php confirm_reserve(); ?>

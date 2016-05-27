@@ -5050,6 +5050,12 @@ div.pagenation_next{
 	margin-bottom: 20px;
 }
 
+.resbox{
+	margin: 10px;
+	padding: 10px;
+	border: 2px solid #000090;
+	border-radius: 8px;
+}
 @keyframes rippleAnimation {
 	0% {
 		transform: scale(1, 1);

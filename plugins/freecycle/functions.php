@@ -3275,6 +3275,14 @@ function detail_styles() {
 add_action( 'wp_enqueue_scripts', 'detail_styles');
 
 
+
+//予約確認ページ
+function confirm_reservation(){
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/admin/confirm_reservation.php";
+//	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/admin/admin_top.php";
+}
+add_shortcode('confirm_reservation', 'confirm_reservation');
+
 //予約件数を検索して返す,引数はユーザーID
 /*
 function reservation_count($user_ID){
@@ -3300,19 +3308,24 @@ function delete_reservation($reserve_id){
 
 function confirm_reserve(){
 	global $wpdb;
+	global $table_prefix;
 	$allreserve = $wpdb->get_results(
-		"
-		SELECT* FROM".$table_prefix."fmt_reserve
-		"
+		"SELECT * FROM " . $table_prefix."fmt_reserve"
 	);
 	foreach ( $allreserve as $reservation ) {
 	$bookfair_info = $wpdb->get_results($wpdb->prepare(
-		"SELECT " . $table_prefix . "fmt_book_fair.start_datetime
+		"SELECT " . $table_prefix . "fmt_book_fair.date
 		FROM " . $table_prefix . "fmt_book_fair
-		WHERE " . $table_prefix . "fmt_book_fair.venue = %s"
-		,$reservation->bookfair_id
-	);
-		echo '<div class >'$reservation->reserve_id;
+		WHERE " . $table_prefix . "fmt_book_fair.bookfair_id = %s",$reservation->bookfair_id
+	));
+	$start= $bookfair_info[0]->date;
+	$time = strtotime("$start");
+		echo '<div class="resbox">';
+		echo '<div>ユーザーid：：',$reservation->user_id, '</div>';
+		echo '<div>本のタイトル：：',get_the_title($reservation->item_id), '</div>';
+		echo '<div>受け取り予定の古本市：：：',date("Y/m/d H:i",$time), '</div>';
+		echo '<div>予約id：：：',$reservation->reserve_id, '</div>';
+		echo '</div>';
 	}
 }
 
