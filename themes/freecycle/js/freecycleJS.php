@@ -478,7 +478,7 @@ function showReserveConfirmForm(title,date,time,venue,room,point,bookfairID,post
 	var Win1=window.open('','Subwin','width=500,height=500,scrollbars=1,resizable=1,status=1');
 	if(navigator.appVersion.charAt(0)>=3){Win1.focus()};
 	Win1.document.clear();
-	Win1.document.write('<html><head><meta charset="utf-8"><title>予約内容確認</title></head>');
+	Win1.document.write('<?php get_header(); ?>');
 	Win1.document.write('<?php include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."js/freecycleJS.php"; ?>')
 	Win1.document.write('<?php include_once WP_CONTENT_URL."/plugins/freecycle/functions.php"; ?>')
 	Win1.document.write('<body>');

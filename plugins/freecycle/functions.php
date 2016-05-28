@@ -3308,3 +3308,9 @@ function insert_reserve_info_from_subwindow(){
 
 		insert_reserve_info($bookfairID,$userID,$postID);
 }
+
+function reserve_form_for_users(){
+	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."pages/views/reserve_form_for_users.php";  
+}
+add_shortcode('reserve_form_for_users',  'reserve_form_for_users');
+
