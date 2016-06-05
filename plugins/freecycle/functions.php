@@ -3238,6 +3238,11 @@ function header_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'header_styles');
 
+function reserve_form_styles(){
+	wp_enqueue_style( 'reserve_form_for_users', "/wp-content/themes/freecycle/pages/styles/reserve_form_for_users.css");
+}
+add_action( 'wp_enqueue_scripts', 'reserve_form_styles');
+
 
 /* 本の冊数系関数*/
 function count_books($post_ID){

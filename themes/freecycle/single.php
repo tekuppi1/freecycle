@@ -271,29 +271,10 @@ function onFinish(postID){
 </div>	
 	
 <div class="reserve_button">
-	<form>
-	<?php 	
-    $reserve_infos = get_bookfair_info_all_you_want(1);	
-	$title = get_the_title();
-	foreach($reserve_infos as $reserve_info){
-		$datetime = strtotime($reserve_info->date);
-		$date = date('Y/m/d',$datetime);
-		$starttime = strtotime($reserve_info->starting_time);
-		$start = date('H:i',$starttime);
-		$endtime = strtotime($reserve_info->ending_time);
-		$end = date('H:i',$endtime);
-		$time = $start .' ～ '.$end;
-		$venue = $reserve_info->venue;
-		$room = $reserve_info->classroom;
-		$bookfair_id = $reserve_info->bookfair_id;
-		$post_id = $post->ID;
-echo <<< RESERVE
-		<input type="button" value="予約する" onClick="showReserveConfirmForm('{$title}','{$date}','{$time}','{$venue}','{$room}','{$true_pt}','{$bookfair_id}','{$post_id}');">
-	</form>
-RESERVE;
-	}
-	?>
-
+		<?php
+			$reserve_confirm_url=home_url()."/reserve_form_for_users";
+		?>
+		<input type="button" value="予約する" onclick="location.href='<?php echo $reserve_confirm_url; ?>'"/>
 </div>
 
 	<?php 
