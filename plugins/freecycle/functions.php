@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // TODO: 記事を投稿した時点で、初期テーブルにデータをインサートする
 
 // アクションフック登録
@@ -3296,7 +3296,7 @@ function detail_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'detail_styles');
 
-// fmt_reserveテーブルに古本市ID、予約ID、商品ID、予約した日付を入力する
+// fmt_reserveテーブルに古本市ID、予約ID、商品ID、ユーザID、予約した日付を入力する
 function insert_reserve_info(){
-	
+	echo "aaa";
 }
