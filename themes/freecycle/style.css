@@ -5009,7 +5009,7 @@ div.pagenation_next{
 	margin-right: 10px;
 	
 }
-.button {
+.reserve_delete {
 	display: inline-block;
 	width: 150px;
 	height: auto;
@@ -5021,16 +5021,16 @@ div.pagenation_next{
 	border: 2px solid #333;
 	color: #fff;
 }
-.button::before,
-.button::after {
+.reserve_delete::before,
+.reserve_delete::after {
 	position: absolute;
 	z-index: -1;
 	display: block;
 	content: '';
 }
-.button,
-.button::before,
-.button::after {
+.reserve_delete,
+.reserve_delete::before,
+.reserve_delete::after {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -5038,7 +5038,7 @@ div.pagenation_next{
 	transition: all .3s;
 }
 
-.button:hover {
+.reserve_delete:hover {
 	background-color: #fff;
 	border-color: #59b1eb;
 	color: #59b1eb;

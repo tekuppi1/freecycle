@@ -3284,26 +3284,26 @@ function confirm_reservation(){
 add_shortcode('confirm_reservation', 'confirm_reservation');
 
 //予約件数を検索して返す,引数はユーザーID
-/*
+
 function reservation_count($user_ID){
 	global $wpdb;
 	$reserve_count = $wpdb->get_var( 
-		"SELECT COUNT(user_id) FROM".$table_prefix."fmt_reserve WHERE user_id="$user_ID
+		"SELECT COUNT(user_id) FROM".$table_prefix."fmt_reserve WHERE user_id=",$user_ID
 		);
 	return $reserve_count;
 	}
-*/	
+
 //予約テーブルの、予約IDが一致する行を消す関数、引数は予約ID==引数の型判断必要かもしれない
-/*
+
 function delete_reservation($reserve_id){
+	$reserveID = $POST_['reserveID'];
 	global $wpdb;
 	$wpdb->prepare( 
 		"DELETE FROM".$table_prefix."fmt_reserve WHERE reserve_id=%s;",$reseve_id
-        )
-);
-	
+        );	
 }
-*/
+add_action('delete_reservation','delete_reservation');
+
 //display reservation
 
 function confirm_reserve(){
@@ -3324,7 +3324,9 @@ function confirm_reserve(){
 		echo '<div>ユーザーid：：',$reservation->user_id, '</div>';
 		echo '<div>本のタイトル：：',get_the_title($reservation->item_id), '</div>';
 		echo '<div>受け取り予定の古本市：：：',date("Y/m/d H:i",$time), '</div>';
-		echo '<div>予約id：：：',$reservation->reserve_id, '</div>';
+		$reserveID = $reservation->reserve_id;
+		echo '<div>予約id：：：',$reserveID, '</div>';
+		echo'<input type="button" class="reserve_delete" onclick="testt()" value="予約完了する">';
 		echo '</div>';
 	}
 }
