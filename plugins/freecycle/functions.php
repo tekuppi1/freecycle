@@ -3114,7 +3114,7 @@ function get_bookfair_info_of_all_by_ajax()
 function get_bookfair_info_of_all()
 {
  	global $wpdb;
-
+}
 //　引数の数だけ、開催日が近い順に、開催する古本市の,古本市id、開始日時、終了日時、開催場所、を取ってくる
 function get_bookfair_info_all_you_want($show_number){
 	global $wpdb;
@@ -3402,6 +3402,5 @@ function get_reserve_count_of_postid($post_id){
 		FROM " . $table_prefix . "fmt_reserve 
 		where item_id = %d";
 	$reserve_id = $wpdb->get_results($wpdb->prepare($sql, $post_id));
-
 	return count($reserve_id);
 }
