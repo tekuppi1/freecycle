@@ -622,9 +622,6 @@ body {
 	width: 80%;
 	empty-cells: hide;
 }
-.reserve_button{
-	text-align: center;
-}
 
 .normal{
 	border: 2px solid #5ddd82;

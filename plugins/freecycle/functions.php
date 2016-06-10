@@ -24,7 +24,7 @@ add_action('wp_ajax_register_app_information', 'register_app_information');
 add_action('wp_ajax_cancel_trade_from_exhibitor', 'cancel_trade_from_exhibitor');
 add_action('wp_ajax_cancel_trade_from_bidder', 'cancel_trade_from_bidder');
 add_action('wp_ajax_get_login_user_info', 'get_login_user_info');
-add_action('wp_ajax_insert_reserve_info_from_subwindow', 'insert_reserve_info_from_subwindow');
+add_action('wp_ajax_insert_reserve_info_by_ajax', 'insert_reserve_info_by_ajax');
 add_action('user_register', 'on_user_added');
 add_action('delete_user', 'on_user_deleted');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
@@ -3305,13 +3305,18 @@ function insert_reserve_info($bookfair_id,$user_id,$item_id){
 		$item_id, $user_id, $bookfair_id));
 }
 
-// fmt_reserveテーブルに予約サブウインドウから入力する
-function insert_reserve_info_from_subwindow(){
-		$postID = $_POST['item_id'];
-		$userID = $_POST['user_id'];
-		$bookfairID = $_POST['item_id'];
+// fmt_reserveテーブルに「予約を確定する」で入力する
+function insert_reserve_info_by_ajax(){
+		$postID = $_POST['postID'];
+		$userID = $_POST['userID'];
+		$bookfairID = $_POST['bookfairID'];
 
 		insert_reserve_info($bookfairID,$userID,$postID);
+}
+
+// user_nicenameを予約確認フォームから飛ばす
+function insert_user_nicename_by_ajax(){
+	
 }
 
 function reserve_form_for_users(){
@@ -3319,3 +3324,42 @@ function reserve_form_for_users(){
 }
 add_shortcode('reserve_form_for_users',  'reserve_form_for_users');
 
+
+// ↓予約システム第一弾用の関数
+// １．wp_usersのuser_nicenameに入力する
+function insert_user_nicename($user_nicename){
+	global $wpdb;
+	$wpdb->query($wpdb->prepare("
+		INSERT INTO wp_users
+		(user_nicename)
+		VALUES (%s)",
+		$user_nicename));
+}
+
+// 2.user_nicenameが一致するwp_usersの数を返す
+function get_user_count_of_nicename($user_nicename){
+	global $wpdb;
+	$sql = "SELECT ID FROM wp_users where user_nicename = %s";
+	$user_ID = $wpdb->get_results($wpdb->prepare($sql, $user_nicename));
+	return count($user_ID);
+}
+
+// 3.user_nicenameからuserIDを取り出す
+function get_user_id_by_nicename($user_nicename){
+	global $wpdb;
+	$sql = "SELECT ID FROM wp_users where user_nicename = %s";
+	$user_ID = $wpdb->get_var($wpdb->prepare($sql, $user_nicename));
+	return $user_ID;
+}
+
+// 4.商品IDが一致する予約レコードの数を返す
+function get_reserve_count_of_postid($post_id){
+	global $wpdb;
+	global $table_prefix;
+	$sql = "SELECT *
+		FROM " . $table_prefix . "fmt_reserve 
+		where item_id = %d";
+	$reserve_id = $wpdb->get_results($wpdb->prepare($sql, $post_id));
+
+	return count($reserve_id);
+}

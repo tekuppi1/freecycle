@@ -1,3 +1,14 @@
 p{
 	text-align: center;
 }
+
+.user_id_form{
+	text-align: center;
+	margin:5px;
+	width: 287px;
+}
+
+.reserve_button{
+	text-align: center;
+	padding: 2px !important;
+}
