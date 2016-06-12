@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # freecycle
 Project for TexChange (web service for students to get secondhand textbooks for FREE!)
 
@@ -27,6 +26,4 @@ Exhibit books from web brousers and a smartphone app. Via the app, exhibition is
 If you find a textbook you want, you can reserve and get it on a real event at campus!
 
 ほしい本が見つかったら、予約してキャンパスで行われる古本市で手に入れることができます。（開発中）
-=======
-# freecycle
->>>>>>> 634e681d7eff4a5aaa61670c26a5d5f13455f867
+===============================================================================================
