@@ -13,4 +13,4 @@ exit();
 
 // Delete option from options table
 delete_option( 'dynamic_to_top' );
-elete_transient( 'dynamic_to_top_transient_css' );
+delete_transient( 'dynamic_to_top_transient_css' );

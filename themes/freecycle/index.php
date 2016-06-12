@@ -63,7 +63,7 @@ $i =0;
 $args = array( 'posts_per_page' => 100, 'paged' => $page, 'orderby' => 'rand');
 $posts = get_posts( $args );
 foreach( $posts as $key => $post ) {
-  if($i>3) break;else $i++;
+  if($i>3) break; else $i++;
 	$post_thumbnail_id = get_post_thumbnail_id( $post->ID );
 	$image = wp_get_attachment_image_src( $post_thumbnail_id,'medium');
 	$returnObj[$key] = array(

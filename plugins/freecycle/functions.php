@@ -2,33 +2,51 @@
 // TODO: 記事を投稿した時点で、初期テーブルにデータをインサートする
 
 // アクションフック登録
+// 論理的なまとまりかどうかわかりませんが、とりあえずそれっぽいものを段落分けしておきました。
+// 分かる人は適切に改行しといてください。
 add_action('init', 'custom_init');
-add_action('wp_ajax_giveme', 'giveme');
-add_action('wp_ajax_cancelGiveme', 'cancelGiveme');
-add_action('wp_ajax_confirmGiveme', 'confirmGiveme');
-add_action('wp_ajax_exhibiter_evaluation', 'exhibiter_evaluation');
-add_action('wp_ajax_bidder_evaluation', 'bidder_evaluation');
-add_action('wp_ajax_finish_trade', 'finish_trade_by_ajax');
-add_action('wp_ajax_new_entry', 'new_entry');
-add_action('wp_ajax_delete_post', 'delete_post');
-add_action('wp_ajax_update_comment', 'update_comment');
-add_action('wp_ajax_search_wantedbook', 'search_wantedbook');
-add_action('wp_ajax_search_wantedlist', 'search_wantedlist');
-add_action('wp_ajax_nopriv_search_wantedlist', 'search_wantedlist');
-add_action('wp_ajax_add_wanted_item', 'add_wanted_item');
-add_action('wp_ajax_del_wanted_item_by_asin', 'del_wanted_item_by_asin');
-add_action('wp_ajax_exhibit_to_wanted', 'exhibit_to_wanted');
-add_action('wp_ajax_exhibit_from_app', 'exhibit_from_app');
-add_action('wp_ajax_nopriv_exhibit_from_app', 'exhibit_from_app');
-add_action('wp_ajax_register_app_information', 'register_app_information');
-add_action('wp_ajax_cancel_trade_from_exhibitor', 'cancel_trade_from_exhibitor');
-add_action('wp_ajax_cancel_trade_from_bidder', 'cancel_trade_from_bidder');
-add_action('wp_ajax_get_login_user_info', 'get_login_user_info');
-add_action('user_register', 'on_user_added');
-add_action('delete_user', 'on_user_deleted');
+
+add_action( 'wp_ajax_giveme'       , 'giveme' );
+add_action( 'wp_ajax_cancelGiveme' , 'cancelGiveme' );
+add_action( 'wp_ajax_confirmGiveme', 'confirmGiveme');
+
+add_action( 'wp_ajax_exhibiter_evaluation', 'exhibiter_evaluation' );
+add_action( 'wp_ajax_bidder_evaluation'   , 'bidder_evaluation' );
+
+add_action( 'wp_ajax_finish_trade', 'finish_trade_by_ajax' );
+
+add_action( 'wp_ajax_new_entry', 'new_entry' );
+
+add_action( 'wp_ajax_delete_post', 'delete_post' );
+
+add_action( 'wp_ajax_update_comment', 'update_comment' );
+
+add_action( 'wp_ajax_search_wantedbook'       , 'search_wantedbook' );
+add_action( 'wp_ajax_search_wantedlist'       , 'search_wantedlist' );
+add_action( 'wp_ajax_nopriv_search_wantedlist', 'search_wantedlist' );
+
+add_action( 'wp_ajax_add_wanted_item'        , 'add_wanted_item' );
+add_action( 'wp_ajax_del_wanted_item_by_asin', 'del_wanted_item_by_asin' );
+
+add_action( 'wp_ajax_exhibit_to_wanted', 'exhibit_to_wanted' );
+
+add_action( 'wp_ajax_exhibit_from_app'       , 'exhibit_from_app' );
+add_action( 'wp_ajax_nopriv_exhibit_from_app', 'exhibit_from_app' );
+
+add_action( 'wp_ajax_register_app_information', 'register_app_information' );
+
+add_action( 'wp_ajax_cancel_trade_from_exhibitor', 'cancel_trade_from_exhibitor' );
+add_action( 'wp_ajax_cancel_trade_from_bidder'   , 'cancel_trade_from_bidder' );
+
+add_action( 'wp_ajax_get_login_user_info', 'get_login_user_info' );
+
+add_action( 'user_register', 'on_user_added' );
+add_action( 'delete_user'  , 'on_user_deleted' );
+
+add_action( 'wp_ajax_get_bookfair_info_of_all_by_ajax'       , 'get_bookfair_info_of_all_by_ajax' );
+add_action( 'wp_ajax_nopriv_get_bookfair_info_of_all_by_ajax', 'get_bookfair_info_of_all_by_ajax' );
+
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
-add_action('wp_ajax_get_bookfair_info_of_all_by_ajax', 'get_bookfair_info_of_all_by_ajax');
-add_action('wp_ajax_nopriv_get_bookfair_info_of_all_by_ajax', 'get_bookfair_info_of_all_by_ajax');
 
 // load files
 require_once('functions.kses.php');
@@ -41,7 +59,7 @@ require_once('app/app.php');
 // 定数定義
 define("SIGNATURE", "\n\n\n配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchange.ag@gmail.com");
 
-//写真を自動で回転して縦にする
+// 写真を自動で回転して縦にする
 function edit_images_before_upload($file)
 {
 	if($file['type'] == 'image/jpeg')

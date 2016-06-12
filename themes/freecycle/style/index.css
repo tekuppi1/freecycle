@@ -41,12 +41,14 @@ li.index_wire{
 	-webkit-box-shadow: inset 1px 4px 9px -6px rgba(0, 0, 0, 0.5);
 	box-shadow: inset 1px 4px 9px -6px rgba(0,0,0,0.5);
 }
+
 #searchform_index input[type=text]:focus {
-   border:solid 1px #ffa64d;
-	 box-shadow:
-		 rgba(255, 166, 77, 0.5) 0px 0px 10px 0px,
-		 inset 1px 4px 9px -6px rgba(255, 166, 77, 0.5);
+    border:solid 1px #ffa64d;
+    box-shadow:
+    rgba(255, 166, 77, 0.5) 0px 0px 10px 0px,
+    inset 1px 4px 9px -6px rgba(255, 166, 77, 0.5);
 }
+
 #searchform_index input[type="submit"]{
 	height: 40px;
   font-size: 1.2em;
@@ -55,6 +57,7 @@ li.index_wire{
   color: #fff;
   border-style: none;
 }
+
 #searchform_index input:hover[type="submit"]{
   background-color: #ffaa55;
 }

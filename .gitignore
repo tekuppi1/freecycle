@@ -1,10 +1,10 @@
-#package
+# packages
 languages/
 upgrade/
 uploads/
 debug.txt
 
-#plugins
+# plugins
 plugins/*.php
 plugins/adminer
 plugins/akismet
@@ -21,7 +21,7 @@ plugins/gianism/language/*
 !plugins/gianism/language/wp-gianism-ja.mo
 !plugins/gianism/language/wp-gianism-ja.po
 
-#themes
+# themes
 themes/*.php
 themes/biz-vektor
 themes/twentythirteen
@@ -32,3 +32,11 @@ themes/bp-default
 themes/SliderResponsiveTheme
 themes/SliderResponsiveTheme-custom
 /index.php
+
+# emacs
+*~
+\#*\#
+\.\#*
+
+# OS X
+.DS_Store
