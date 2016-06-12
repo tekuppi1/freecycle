@@ -26,4 +26,3 @@ Exhibit books from web brousers and a smartphone app. Via the app, exhibition is
 If you find a textbook you want, you can reserve and get it on a real event at campus!
 
 ほしい本が見つかったら、予約してキャンパスで行われる古本市で手に入れることができます。（開発中）
-===============================================================================================
