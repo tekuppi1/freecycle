@@ -29,6 +29,9 @@ include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."/head.php";
 			<li><a href="">商品一覧</a></li>
 			</ul>
 		</li> -->
+		<li class="register_button">
+			<a href="<?php echo get_home_url()."/register"; ?>">新規会員登録はこちら</a>
+		</li>
 	</ul>
 </div>
 <!-- ↑　ヘッダー -->
