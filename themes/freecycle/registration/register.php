@@ -36,7 +36,7 @@
 					<!-- update label -->
 					<label for="signup_username">ログインユーザ名(半角英数)<?php _e( '(required)', 'buddypress' ); ?></label>
 					<?php do_action( 'bp_signup_username_errors' ); ?>
-					<input type="text" name="signup_username" id="signup_username" value="<?php bp_signup_username_value(); ?>" />
+					<input type="text" placeholder="学生：学生番号,一般：名字" name="signup_username" id="signup_username" value="<?php bp_signup_username_value(); ?>" />
 
 					<label for="signup_email"><?php _e( 'Email Address', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
 					<?php do_action( 'bp_signup_email_errors' ); ?>
