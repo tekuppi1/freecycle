@@ -77,6 +77,7 @@ foreach( $posts as $key => $post ) {
 	} else {
 		$image_src = get_stylesheet_directory_uri().'/images/index/NotImage.png';
 	}
+	if(count_books($post->ID)>0){
 ?>
 <div class="index_archive_grid">
 	<a href="<?php echo $returnObj[$key]['permalink']; ?>">
@@ -88,6 +89,7 @@ foreach( $posts as $key => $post ) {
 	</div>
 </div>
 <?php
+	}
 }
 ?>
 </li>
@@ -143,6 +145,7 @@ foreach( $posts as $key => $post ) {
 	} else {
 		$image_src = get_stylesheet_directory_uri().'/images/index/NotImage.png';
 	}
+	if(count_books($post->ID)>0){
 ?>
 <div class="index_archive_grid">
 	<a href="<?php echo $returnObj[$key]['permalink']; ?>">
@@ -150,6 +153,7 @@ foreach( $posts as $key => $post ) {
 	</a>
 </div>
 <?php
+	}
 }
 echo "</li>" ;
 }
