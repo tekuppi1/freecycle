@@ -35,6 +35,7 @@
 								<span class="index-item-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></span>
 							</div>
 						</div>
+						<?php $count++; ?>
 					</div>
 		<?php 
                 }
@@ -45,7 +46,6 @@
 		<!-- <hr class="hr-posts-row"> -->
 		<?php } ?>
 					<?php do_action( 'bp_after_blog_post' ); ?>
-				<?php $count++; ?>
 				<?php endwhile; ?>
 		<?php if(!$is_closed){ ?>
 			</div><!-- posts-row -->

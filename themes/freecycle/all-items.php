@@ -41,17 +41,17 @@
 								<span class="index-item-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></span>
 							</div>
 						</div><!-- post-content -->
-					</div><!-- post名 -->
-		<?php 
+        				<?php $count++; ?>
+                    </div><!-- post名 -->
+        <?php 
                 }
             if($count%$row == 0) {
-				$is_closed = true;
-		?>
-				</div><!-- posts-row -->
-		<!-- <hr class="hr-posts-row"> -->
-		<?php } ?>
-					<?php do_action( 'bp_after_blog_post' ); ?>
-				<?php $count++; ?>
+                $is_closed = true;
+        ?>
+                </div><!-- posts-row -->
+        <!-- <hr class="hr-posts-row"> -->
+        <?php } ?>
+                    <?php do_action( 'bp_after_blog_post' ); ?>
 				<?php endwhile; ?>
         <?php if($is_closed == false): ?>
                 </div><!-- posts-row -->
