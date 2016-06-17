@@ -41,14 +41,14 @@
 				$is_closed = true;
 		?>
 				</div><!-- posts-row -->
-		<hr class="hr-posts-row">
+		<!-- <hr class="hr-posts-row"> -->
 		<?php } ?>
 					<?php do_action( 'bp_after_blog_post' ); ?>
 				<?php $count++; ?>
 				<?php endwhile; ?>
 		<?php if(!$is_closed){ ?>
 			</div><!-- posts-row -->
-		<hr class="hr-posts-row">
+		<!-- <hr class="hr-posts-row"> -->
 		<?php } ?>
 				<?php bp_dtheme_content_nav( 'nav-below' ); ?>
 
