@@ -21,7 +21,9 @@
 				$is_closed = false;
 		?>
 				<div class="posts-row">
-		<?php } ?>
+		<?php }
+				if(count_books(get_the_ID())>0){ 
+		?>
 					<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 						<div class="post-content">
@@ -33,7 +35,9 @@
 							</div>
 						</div>
 					</div>
-		<?php if($count%$row == 0) {
+		<?php 
+				}
+			if($count%$row == 0) {
 				$is_closed = true;
 		?>
 				</div><!-- posts-row -->
