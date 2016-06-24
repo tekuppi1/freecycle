@@ -1,22 +1,22 @@
 <?php get_header(); ?>
 <?php
-$reserve_infos = get_bookfair_info_all_you_want(1);	
-	foreach($reserve_infos as $reserve_info){
-		$datetime = strtotime($reserve_info->date);
+$bookfair_infos = get_bookfair_info_all_you_want(1);	
+	foreach($bookfair_infos as $bookfair_info){
+		$datetime = strtotime($bookfair_info->date);
 		$date = date('Y/m/d',$datetime);
-		$starttime = strtotime($reserve_info->starting_time);
+		$starttime = strtotime($bookfair_info->starting_time);
 		$start = date('H:i',$starttime);
-		$endtime = strtotime($reserve_info->ending_time);
+		$endtime = strtotime($bookfair_info->ending_time);
 		$end = date('H:i',$endtime);
 		$time = $start .' ～ '.$end;
-		$venue = $reserve_info->venue;
-		$room = $reserve_info->classroom;
-		$bookfair_id = $reserve_info->bookfair_id;
+		$venue = $bookfair_info->venue;
+		$room = $bookfair_info->classroom;
+		$bookfair_id = $bookfair_info->bookfair_id;
 	}
 
 	$before_url=$_SERVER['HTTP_REFERER'];
 	$filename = strrchr( $before_url, "/" );// /postname.html
-	$post_id = substr( $filename, 1 );// postname.html
+	$post_id = (int)substr( $filename, 1 );// postname.html
 	$post = get_post($post_id);
 	$title = get_the_title($post);
 function get_point($post_id){
@@ -30,26 +30,29 @@ function get_point($post_id){
 	}
 	return $true_pt;
 }
-
+	global $current_user;
+    get_currentuserinfo();
+    $user_id = $current_user->ID;
+	$book_counts = count_books($post_id);
+ 	$book_count = (int)$book_counts;
+ 	$reserve_count = count(get_reserve_count_of_postid($post_id));
 	$point=get_point($post_id);
 ?>
 
 <script>
 // 予約確定ボタンを押した時の反応（予約内容を予約テーブルに挿入する）
 function postReserveInfo(){
-	var user_nicename = jQuery('#user_id').val();
-	if(user_nicename==""){
-         	swal("入力していない情報があります");
-    }else{
 		<?php
-			insert_user_nicename($user_nicename); 
-			$user_count = get_user_count_of_nicename($user_nicename);
-			if($user_count<1):
-				$user_id = get_user_id_by_nicename($user_nicename);
-			 	$reserve_count = get_reserve_count_of_postid($user_id);
-			 	$book_count = count_books($post_id);
-		?>
-			
+			if($reserve_count>=$book_count): ?>
+				swal({
+					title: "申し訳ありませんが、この本はすでに予約されています",
+					type: "error",
+					showCancelButton: false,
+					confirmButtonColor: "#AEDEF4",
+					confirmButtonText: "OK",
+					closeOnConfirm: true
+				});
+			<?php else: ?>
 	     	jQuery.ajax({
 				type: "POST",
 				url: '<?php echo admin_url('admin-ajax.php'); ?>',
@@ -57,7 +60,7 @@ function postReserveInfo(){
 					"action": "insert_reserve_info_by_ajax",
 					"bookfairID": <?php echo $bookfair_id; ?>,
 					"userID": <?php echo $user_id; ?>,
-					"postID": "<?php echo $post_id ?>"
+					"postID": <?php echo $post_id ?>
 				},
 				success: function(msg){
 					swal({	
@@ -70,7 +73,7 @@ function postReserveInfo(){
 						closeOnConfirm: true
 					},
 					function(){
-						jQuery('#user_id').val('');
+						jQuery("#reserve_button").prop("disabled",true);
 					});
 				},
 				false: function(msg){
@@ -84,26 +87,7 @@ function postReserveInfo(){
 					});
 	     		}			
 			});
-		<?php elseif($reserve_count=$book_count): ?>
-				swal({
-					title: "申し訳ございません。この本はすでに予約されています。",
-					type: "error",
-					showCancelButton: false,
-					confirmButtonColor: "#AEDEF4",
-					confirmButtonText: "OK",
-					closeOnConfirm: true
-				});
-		<?php else: ?>
-				swal({
-					title: "申し訳ございません。これ以上予約できません。",
-					type: "error",
-					showCancelButton: false,
-					confirmButtonColor: "#AEDEF4",
-					confirmButtonText: "OK",
-					closeOnConfirm: true
-				});
 		<?php endif; ?>
-	}
 }
 
 </script>
@@ -115,22 +99,11 @@ function postReserveInfo(){
 	<p>受け取り場所：<?php echo $venue.' '.$room; ?></p>
 	<p>必要ポイント数：<?php echo $point; ?></p>
 </div>
-<?php
-	var_dump(get_user_count_of_nicename('2015sc079'));
- 	var_dump(get_reserve_count_of_postid('43'));
- 	var_dump(count_books('43'));
- 	var_dump(get_user_id_by_nicename('2015sc079'));
-?>
 
 <div style="margin-top:10px;text-align:center;">
 	ポイントは、読み終わった本を持ってくるとためることができます
 </div>
 
-	↓本人確認のために入力をお願いします。本をお渡しするときに確認します。</br>
-<div class="user_id_form">
-	<input type="text" id="user_id" placeholder="学生：学生番号,一般：カタカナで名字"/>
-</div>
-
 <div class="reserve_button">
-		<input type="button" value="予約を確定する" onclick="postReserveInfo()"/>
+		<input id="reserve_button" type="button" value="予約を確定する" onclick="postReserveInfo()"/>
 </div>

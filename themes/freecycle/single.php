@@ -276,12 +276,40 @@ function onFinish(postID){
 </div>
 <?php } ?>
 	
-<div class="reserve_button">
-		<?php
-			$reserve_confirm_url=home_url()."/reserve_form_for_users";
-		?>
-		<input type="button" value="予約する" onclick="location.href='<?php echo $reserve_confirm_url; ?>'"/>
-</div>
+<?php 
+	$book_counts = count_books($post->ID);
+ 	$book_count = (int)$book_counts;
+ 	$reserve_count = count(get_reserve_count_of_postid($post->ID));
+	if(current_user_can('subscriber') && $reserve_count<$book_count){?>
+		<div class="reserve_button">
+			<?php
+				$reserve_confirm_url=home_url()."/reserve_form_for_users";
+			?>
+			<input type="button" value="予約する" onclick="location.href='<?php echo $reserve_confirm_url; ?>'"/>
+		</div>
+<?php 
+	}else if(!current_user_can('administrator') && $reserve_count>=$book_count){
+		echo "<div style='text-align:center;'>";
+		echo "この本はすでに予約されており、これ以上予約することができません。";
+		echo "</div>";
+	}else if(!is_user_logged_in()){
+		echo "<div style='text-align:center;'>";
+		echo "会員登録をすると、おひとりさま２冊まで本を予約をすることができます。";
+		echo "</div>";
+	}else if(current_user_can('administrator')){
+		echo "<div style='text-align:center;margin-top:5px;'>";
+		echo "この本は現在".$reserve_count."冊予約されています。</br>";
+		if($reserve_count>=$book_count){ ?>
+			<script>
+				jQuery("#finish").prop("disabled",true);
+			</script>
+<?php   
+			echo "取引完了ボタンは、予約一覧ページで押してください。";
+		 }
+		echo "</div>";
+	}
+
+ ?>
 
 	<?php 
 	endwhile; else: 
