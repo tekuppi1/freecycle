@@ -102,7 +102,7 @@ function onUpdateEdit(){
 		case 2:jQuery("#zoom0").hide();jQuery("#zoom1").hide();jQuery("#zoom2").show();break;
 	}
 	*/
-}
+
 
 // 取引完了関数
 function onFinish(postID){
@@ -270,6 +270,12 @@ function onFinish(postID){
 <div class="plus">
 	<P>補足情報：<?php remove_filter('the_content', 'wpautop'); the_content(); ?></P>	
 </div>	
+
+<?php if(current_user_can('administrator')) { ?>
+<div style="text-align:center;">
+	<input type="button" id="finish" value="取引完了" onClick="onFinish(<?php echo $post->ID ?>);" <?php echo count_books($post->ID)>0?:"disabled" ?>/>
+</div>
+<?php } ?>
 	
 	<?php endwhile; else: ?>
 

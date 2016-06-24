@@ -558,6 +558,9 @@ function finish_trade($id){
 	// 冊数が1冊以上あれば減らす
 	if(count_books($id) > 0){
 		decreace_book_count($id, 1);
+		$trade_count = get_post_meta($id,'trade_count',true);
+		$trade_count = $trade_count+1;
+		update_post_meta($id,'trade_count',$trade_count);
 		return true;
 	}else{
 		return false;
