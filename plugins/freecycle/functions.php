@@ -1,4 +1,10 @@
 <?php
+/**
+ * 関数等をぶっこんでおくと、どのファイルからでも使えるようになります。
+ * ただ行数が多くなり、読みにくい状況にあります。
+ * 複数のファイルに分割したいところです。
+ */
+
 // TODO: 記事を投稿した時点で、初期テーブルにデータをインサートする
 
 // アクションフック登録
@@ -48,13 +54,21 @@ add_action( 'wp_ajax_nopriv_get_bookfair_info_of_all_by_ajax', 'get_bookfair_inf
 
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 
-// load files
+/**
+ * load files
+ * functions.php がごちゃごちゃしてきたので、そろそろ関数を別ファイルに
+ * 分割し始めてもいいかもしれません。
+ * 例えば大杉は、予約状況を引っぱってくる関数等を lib/reservations.php に
+ * ぶっこんで、ここで読みこむことにしました。
+ * 今後の参考にしてください。
+ */
 require_once('functions.kses.php');
 require_once('categories/freecycle-categories.php');
 require_once('map/freecycle-map.php');
 require_once('trade-log/freecycle-trade-log.php');
 require_once('members/loader.php');
 require_once('app/app.php');
+require_once('lib/reservations.php');
 
 // 定数定義
 define("SIGNATURE", "\n\n\n配信元: TexChange(テクスチェンジ)\n"."URL: http://texchg.com \n" ."お問い合わせ：texchange.ag@gmail.com");

@@ -1,8 +1,8 @@
 <?php
-/*------------------------------------------------------------
-   Template Name: show_reservations 
-   Description: 予約情報確認画面のテンプレです。
- ------------------------------------------------------------*/
+/**
+ * Template Name: show_reservations 
+ * Description: 予約情報確認画面のテンプレです。
+ */
 ?>
 
 <?php
@@ -38,10 +38,12 @@ delete_searchform(get_header());
 					</div>
 				</div>
 
-				<!-- blog-page って領域の中に書いてるんだから、そりゃ初期位置は本文の中になるでしょうよ -->
+				<!-- blog-page って領域の中に書いてるんだから、そりゃこいつの初期位置は本文の中になるでしょうよ -->
 				<div class="a_reserved_book"></div>
-				
-      <?php endwhile; endif; ?>
+
+				<?php get_reservation_info(); ?>
+
+			<?php endwhile; endif; ?>
 
     </div> <!-- end page -->
 
