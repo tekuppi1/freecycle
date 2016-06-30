@@ -167,11 +167,14 @@ function onFinish(postID){
 	});
 }
 
+function testt(){
+	alert("ppp");
+}
 
 </script>
 
 <div class="fake" id="blog-single" role="main">
-	
+	<input type="button"  onclick="testt()" value="予約完了する">
 	<?php do_action( 'bp_before_blog_single_post' ); ?>
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 	

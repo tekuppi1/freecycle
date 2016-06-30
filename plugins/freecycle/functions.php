@@ -3284,7 +3284,6 @@ function confirm_reservation(){
 add_shortcode('confirm_reservation', 'confirm_reservation');
 
 //予約件数を検索して返す,引数はユーザーID
-
 function reservation_count($user_ID){
 	global $wpdb;
 	$reserve_count = $wpdb->get_var( 
@@ -3304,9 +3303,10 @@ function delete_reservation($reserve_id){
 }
 add_action('delete_reservation','delete_reservation');
 
+
 //display reservation
 
-function confirm_reserve(){
+/*function confirm_reserve(){
 	global $wpdb;
 	global $table_prefix;
 	$allreserve = $wpdb->get_results(
@@ -3330,4 +3330,4 @@ function confirm_reserve(){
 		echo '</div>';
 	}
 }
-
+*/

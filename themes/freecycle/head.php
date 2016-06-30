@@ -69,12 +69,7 @@ function head_load(){
 	ga('create', 'UA-58394320-1', 'auto');
 	ga('send', 'pageview');
 	
-		
-	});
 	
-	function testt(){
-	alert("ppp");
-}
 	</script>
 	</head>
 

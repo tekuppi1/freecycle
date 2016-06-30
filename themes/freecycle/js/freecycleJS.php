@@ -519,6 +519,7 @@ function onDeleteReserve(){
 			});
 		}else{return false;}
 		});
+}
 
 function testt(){
 	alert("ppp");
