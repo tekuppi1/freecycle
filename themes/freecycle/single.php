@@ -201,7 +201,7 @@ function onFinish(postID){
 									echo "<div class='zoom_image'  onclick=zoom(";
 									echo $i;
 									echo ")>";
-									echo wp_get_attachment_image( $attachment->ID,'thumbnail');
+									echo wp_get_attachment_image( $attachment->ID, 'thumbnail');
 									echo "</div>";
                 	$i++;
 								}
