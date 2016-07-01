@@ -2382,10 +2382,10 @@ add_shortcode('social_login_button','social_login_button');
 add_shortcode('show_wanted_list', 'show_wanted_list');
 
 function endsWith($haystack, $needle){
-    $length = (strlen($haystack) - strlen($needle));
-    // 文字列長が足りていない場合はFALSEを返します。
-    if($length < 0) return FALSE;
-    return strpos($haystack, $needle, $length) !== FALSE;
+  $length = (strlen($haystack) - strlen($needle));
+  // 文字列長が足りていない場合はFALSEを返します。
+  if($length < 0) return FALSE;
+  return strpos($haystack, $needle, $length) !== FALSE;
 }
 
 /**
@@ -2397,11 +2397,11 @@ function bp_dtheme_header_style() {
 ?>
     <style type="text/css">
         <?php if ( !empty( $header_image)): ?> #header {
-            background-image: url(<?php echo $header_image ?>);
+          background-image: url(<?php echo $header_image ?>);
         }
 
-        <?php endif;
-        ?> <?php if ( 'blank'==get_header_textcolor()) {
+        <?php endif; ?>
+		 <?php if ( 'blank'==get_header_textcolor()) {
             ?> #header h1,
             #header #desc {
                 display: none;
@@ -2416,21 +2416,21 @@ function bp_dtheme_header_style() {
                 ?>;
             }
             <?php
-        }
+						}
 
         ?>
     </style>
     <?php
 }
 
-/**
- * override default function
- * enable to edit comment on single page
- */
-function bp_dtheme_blog_comments( $comment, $args, $depth ) {
-	$GLOBALS['comment'] = $comment;
-	global $user_ID;
-
+		/**
+		 * override default function
+		 * enable to edit comment on single page
+		 */
+		function bp_dtheme_blog_comments( $comment, $args, $depth ) {
+			$GLOBALS['comment'] = $comment;
+			global $user_ID;
+			
 	if ( 'pingback' == $comment->comment_type )
 		return false;
 
@@ -2493,11 +2493,11 @@ function render(){
 	require_once get_stylesheet_directory().DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR.'setting.php';
 }
 
-function add_custom_menu() {
+								function add_custom_menu() {
     add_options_page('テクスチェンジ', 'テクスチェンジ', 'read', 'texchange', 'render');
 }
-add_action( 'admin_menu', 'add_custom_menu' );
-
+								add_action( 'admin_menu', 'add_custom_menu' );
+								
 
 /**
 	todoリスト系関数
@@ -3029,23 +3029,8 @@ function fc_messages_pagination_count() {
 
 function show_all_items(){
 	include_once get_stylesheet_directory().DIRECTORY_SEPARATOR."all-items.php";
-}
+										}
 add_shortcode('show_all_items', 'show_all_items');
-
-// 古本市idから古本市の開始日時、終了日時、開催場所を取ってくる
-/* function get_bookfair_info_by_id($bookfair_id){ */
-/* 	global $wpdb; */
-/* 	global $table_prefix; */
-/* 	$sql = "SELECT " . $table_prefix . "fmt_book_fair.bookfair_id,start_datetime, end_datetime, venue */
-/* 		FROM " . $table_prefix . "fmt_book_fair"; */
-/* 	$bookfair_info = $wpdb->get_results($wpdb->prepare( */
-/* 		$sql." */
-/* 		WHERE " . $table_prefix . "fmt_book_fair.bookfair_id = %d" */
-/* 		,$bookfair_id */
-/* 		)); */
-
-/* 	return $bookfair_info; */
-/* } */
 
 // 引数の年と月に開催される古本市の、古本市id、開始日時、終了日時、開催場所、を取ってくる
 /* function get_bookfair_info_of_date($bookfair_year,$bookfair_month){ */
@@ -3332,6 +3317,6 @@ function detail_styles() {
 add_action( 'wp_enqueue_scripts', 'detail_styles');
 
 // fmt_reserveテーブルに古本市ID、予約ID、商品ID、予約した日付を入力する
-function insert_reserve_info(){
-	
-}
+								function insert_reserve_info(){
+									
+										}

@@ -122,6 +122,7 @@ function echo_posts_data_json(){
 
 function get_thumbnail_url($post_id){
 	$post_thumbnail_id = get_post_thumbnail_id($post_id);
+	
 	if(!$post_thumbnail_id){
         $post_id_and_thumbnail_url = array(
             "ID"  => $post_id,
