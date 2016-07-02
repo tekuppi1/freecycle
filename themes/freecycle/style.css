@@ -3224,7 +3224,7 @@ h2.pagetitle{
  * どこに書くのが一番いいのかわかんなかった。
  * refactoring する際にはどっか別の場所にきれいにまとめるのがいいかも。
  */
-div.a_reserved_book {
+div.single_reservation {
 		width: 400px;
 		height: 100px;
 		background-color: #0DA006;

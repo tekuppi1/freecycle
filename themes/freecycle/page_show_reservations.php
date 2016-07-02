@@ -39,13 +39,13 @@ delete_searchform(get_header());
 				</div>
 
 				<!-- blog-page って領域の中に書いてるんだから、そりゃこいつの初期位置は本文の中になるでしょうよ -->
-				<div class="a_reserved_book"></div>
-
+				<!--div class="a_reserved_book"></div-->
+				
 				<?php
-				$reservation_info = get_reservation_info_by_current_user_id();
-
+				$reservation_info = get_reservation_info_by_current_user_id(); // wp_fmt_reserveテーブルの、ログインID のデータ全て
+				
 				foreach ($reservation_info as $key => $single_book_info) {
-					$post_id = $single_book_info->post_id;
+					$post_id = $single_book_info->item_id;
 					$book_title[$key] = get_the_title($post_id);
 					
 					$bookfair_id = $single_book_info->bookfair_id;
@@ -58,8 +58,9 @@ delete_searchform(get_header());
 					$attachment = array_reverse(get_posts($args));
 					$thumbnail_url[$key] = wp_get_attachment_image_url($attachment->ID, 'thumbnail');
 				}
-
-				echo '<div style="color: #red; height: 100px; width: 200px;"></div>';
+				
+				echo "<div class=\"single_reservation\">";
+				echo "</div>";
 				?>
 
 			<?php endwhile; endif; ?>

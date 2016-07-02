@@ -13,7 +13,7 @@ function get_reservation_info_by_current_user_id() {
 	$current_user = wp_get_current_user();
 
 	global $wpdb;
-	$query_whole_info = "SELECT * FROM wp_fmt_reserve" .
+	$query_whole_info = "SELECT * FROM wp_fmt_reserve " .
 											"WHERE wp_fmt_reserve.user_id = " . $current_user->ID;
 	$whole_info = $wpdb->get_results($query_whole_info);
 
@@ -24,7 +24,7 @@ function get_reservation_info_by_current_user_id() {
 function get_bookfair_info_by_bookfair_id($bookfair_id) {
 	global $wpdb;
 	global $table_prefix;
- 	$sql = "SELECT " . $table_prefix . "starting_time, ending_time, date, venue, classroom " .
+ 	$sql = "SELECT starting_time, ending_time, date, venue, classroom " .
 				 "FROM " . $table_prefix . "fmt_book_fair ";
  	$bookfair_info = $wpdb->get_results($wpdb->prepare(
  		$sql .
