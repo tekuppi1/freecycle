@@ -29,6 +29,7 @@ add_action('delete_user', 'on_user_deleted');
 remove_filter( 'bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
 add_action('wp_ajax_get_bookfair_info_of_all_by_ajax', 'get_bookfair_info_of_all_by_ajax');
 add_action('wp_ajax_nopriv_get_bookfair_info_of_all_by_ajax', 'get_bookfair_info_of_all_by_ajax');
+add_action('wp_ajax_nopriv_get_bookfair_info_of_all_by_ajax', 'get_bookfair_info_of_all_by_ajax');
 
 // load files
 require_once('functions.kses.php');
@@ -3302,4 +3303,13 @@ add_action( 'wp_enqueue_scripts', 'detail_styles');
 // fmt_reserveテーブルに古本市ID、予約ID、商品ID、予約した日付を入力する
 function insert_reserve_info(){
 	
+}
+
+// user id count
+function count_user_id($user_id){
+	global $wpdb;
+	global $table_prefix;
+	$sql = "SELECT * FROM " . $table_prefix . "fmt_reserve where user_id = ".$user_id;
+	$state = $wpdb->get_results($sql);
+	return $wpdb->num_rows;
 }
