@@ -3225,6 +3225,7 @@ h2.pagetitle{
  * refactoring する際にはどっか別の場所にきれいにまとめるのがいいかも。
  */
 div.single_reservation {
+		margin-top: 2em;
 		width: 400px;
 		height: 100px;
 		background-color: #0DA006;
