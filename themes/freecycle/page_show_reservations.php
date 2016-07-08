@@ -42,15 +42,24 @@ delete_searchform(get_header());
 				<!--div class="a_reserved_book"></div-->
 				
 				<?php
-				$reservation_info = get_reservation_info_by_current_user_id(); // wp_fmt_reserveテーブルの、ログインID のデータ全て
+				$whole_info_in_reserve = get_reservation_info_by_current_user_id(); // wp_fmt_reserveテーブルの、ログインID のデータ全て
+				$books_info = array();                                              // 1つの要素は、 1つの本に対応してるよ
+				
+				foreach ($whole_info_in_reserve as $single_book_info) {
+					$post_id    = $single_book_info->item_id;
+					$book_title = get_the_title($post_id);
 
-				// データを分析して、配列に格納してる
-				foreach ($reservation_info as $key => $single_book_info) {
-					$post_id = $single_book_info->item_id;
-					$book_titles[$key] = get_the_title($post_id);
+					// $bookfair_info を展開しときましょう。説明変数にもなるし
+					$bookfair_id   = $single_book_info->bookfair_id;
+					$bookfair_info = get_bookfair_info_by_bookfair_id($bookfair_id);
+					$starting_time = $bookfair_info[0];
+					$ending_time   = $bookfair_info[1];
+					$date          = $bookfair_info[2];
+					$venue         = $bookfair_info[3];
+					$classroom     = $bookfair_info[4];
 					
-					$bookfair_id = $single_book_info->bookfair_id;
-					$bookfair_info[$key] = get_bookfair_info_by_bookfair_id($bookfair_id);
+					$clear_single_book_info = array($book_title, $date, $starting_time, $ending_time, $venue, $classroom);
+					array_push($books_info, $clear_single_book_info);
 					
 					/*
 						 サムネイルを表示させるはず。。。確認はしてません。ほんと分かりません。
@@ -63,10 +72,10 @@ delete_searchform(get_header());
 					 */
 				}
 
-				foreach ($book_titles as $book_title) {
+				// 情報の表示
+				foreach ($books_info as $key => $single_book_info) {
 					echo "<div class=\"single_reservation\">";
-					echo "本のタイトル: " . $book_title;
-					var_dump($bookfair_info[0]);
+					echo "本のタイトル: " . $books_info[$key][0];
 					echo "</div>";
 				}
 				?>

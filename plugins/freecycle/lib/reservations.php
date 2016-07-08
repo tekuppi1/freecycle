@@ -13,11 +13,11 @@ function get_reservation_info_by_current_user_id() {
 	$current_user = wp_get_current_user();
 
 	global $wpdb;
-	$query_whole_info = "SELECT * FROM wp_fmt_reserve " .
-											"WHERE wp_fmt_reserve.user_id = " . $current_user->ID;
-	$whole_info = $wpdb->get_results($query_whole_info);
+	$query_whole_info_in_reserve = "SELECT * FROM wp_fmt_reserve " .
+																 "WHERE wp_fmt_reserve.user_id = " . $current_user->ID;
+	$whole_info_in_reserve = $wpdb->get_results($query_whole_info_in_reserve);
 
-	return $whole_info;
+	return $whole_info_in_reserve;
 }
 
 // 古本市id から古本市の開始日時、終了日時、開催場所を取ってくる
