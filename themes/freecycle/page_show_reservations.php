@@ -43,24 +43,32 @@ delete_searchform(get_header());
 				
 				<?php
 				$reservation_info = get_reservation_info_by_current_user_id(); // wp_fmt_reserveテーブルの、ログインID のデータ全て
-				
+
+				// データを分析して、配列に格納してる
 				foreach ($reservation_info as $key => $single_book_info) {
 					$post_id = $single_book_info->item_id;
-					$book_title[$key] = get_the_title($post_id);
+					$book_titles[$key] = get_the_title($post_id);
 					
 					$bookfair_id = $single_book_info->bookfair_id;
 					$bookfair_info[$key] = get_bookfair_info_by_bookfair_id($bookfair_id);
-
-					$args = array(
-						'post_type'   => 'attachment',
-						'post_parent' => $post_id,
-					);
-					$attachment = array_reverse(get_posts($args));
-					$thumbnail_url[$key] = wp_get_attachment_image_url($attachment->ID, 'thumbnail');
+					
+					/*
+						 サムネイルを表示させるはず。。。確認はしてません。ほんと分かりません。
+						 $args = array(
+						 'post_type'   => 'attachment',
+						 'post_parent' => $post_id,
+						 );
+						 $attachment = array_reverse(get_posts($args));
+						 $thumbnail_url[$key] = wp_get_attachment_image_url($attachment->ID, 'thumbnail');
+					 */
 				}
-				
-				echo "<div class=\"single_reservation\">";
-				echo "</div>";
+
+				foreach ($book_titles as $book_title) {
+					echo "<div class=\"single_reservation\">";
+					echo "本のタイトル: " . $book_title;
+					var_dump($bookfair_info[0]);
+					echo "</div>";
+				}
 				?>
 
 			<?php endwhile; endif; ?>
